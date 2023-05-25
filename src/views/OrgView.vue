@@ -19,7 +19,7 @@
     </div>
     <div class="h-100 w-100 org-main">
       <div class="container-fluid">
-        Hello Project
+        <ProjectDetailsView />
       </div>
     </div>
   </div>
@@ -27,10 +27,12 @@
 
 <script lang="ts">
 import ProjectSidebarItem from '@/components/ProjectSidebarItem.vue'
+import ProjectDetailsView from '@/views/ProjectDetailsView.vue'
 
 export default {
   components: {
-    ProjectSidebarItem
+    ProjectSidebarItem,
+    ProjectDetailsView
   },
   data() {
     return {
@@ -72,5 +74,6 @@ export default {
 .org-main {
   /* background-color: blue; */
   overflow-y: auto;
+  background-color: white;
 }
 </style>
