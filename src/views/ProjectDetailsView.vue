@@ -88,7 +88,13 @@
                 </p>
               </div>
               <div class="col-md-5">
-                <div class="d-flex flex-wrap">
+                <div class="row">
+                  <TextCard class="col-5 m-1" label="Revenue" text="$405,091.00" />
+                  <TextCard class="col-5 m-1" label="Overdue invoices" text="$12,787.00" />
+                  <TextCard class="col-5 m-1" label="Outstanding invoices" text="$245,988.00" />
+                  <TextCard class="col-5 m-1" label="Expenses" text="$30,156.00" />
+                </div>
+                <div class="d-flex flex-wrap mt-2">
                   <Tag tag="P2P Trading" />
                   <Tag tag="Deposits" />
                 </div>
@@ -109,10 +115,12 @@
 
 <script lang="ts">
 import Tag from '@/components/Tag.vue'
+import TextCard from '@/components/TextCard.vue'
 
 export default {
   components: {
-    Tag
+    Tag,
+    TextCard
   },
   data() {
     return {
