@@ -1,5 +1,5 @@
 <template>
-  <div class="org-button mx-auto">
+  <div class="org-button mx-auto" @click="onClick">
     <div class="d-flex" style="justify-content: space-around">
       <i class="bi bi-boxes"></i>
       <div>{{ name }}</div>
@@ -11,7 +11,13 @@
 <script lang="ts">
 export default {
   props: {
-    name: String
+    name: String,
+    guid: String
+  },
+  methods: {
+    onClick() {
+      this.$router.push(`/organizations/${this.guid}`)
+    }
   }
 }
 </script>

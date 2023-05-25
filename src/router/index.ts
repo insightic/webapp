@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import OrgsView from '../views/OrgsView.vue'
 import OrgView from '../views/OrgView.vue'
 
 const router = createRouter({
@@ -6,6 +7,11 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      name: 'organizations',
+      component: OrgsView
+    },
+    {
+      path: '/organizations/:guid',
       name: 'organization',
       component: OrgView
     }
