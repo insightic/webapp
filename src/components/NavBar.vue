@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgba(39, 50, 131, 0.8)">
+  <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">
         <div
@@ -42,3 +42,11 @@
     </div>
   </nav>
 </template>
+
+<style scoped>
+nav {
+  background-color: rgba(39, 50, 131, 0.8);
+  position: sticky;
+  top: 0;
+}
+</style>
