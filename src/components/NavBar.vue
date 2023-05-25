@@ -4,10 +4,10 @@
       <a class="navbar-brand" href="/">
         <div
           style="
-          border: 3px solid white;
-          border-radius: 5px;
+            border: 3px solid white;
+            border-radius: 5px;
             background-color: white;
-            background-image: url('/logo.png');
+            background-image: url('/webapp/logo.png');
             background-repeat: round;
             background-origin: content-box;
             width: 30px;
@@ -32,7 +32,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item active">
-            <a class="nav-link" href="/">Dashboard</a>
+            <a class="nav-link" href="/">Organizations</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Contact Us</a>
