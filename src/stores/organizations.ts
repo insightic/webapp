@@ -65,6 +65,16 @@ export const organizationsStore = defineStore('organizations', () => {
                                             value: "-11.42%"
                                         }
                                     ]
+                                },
+                                {
+                                    component: "PropDisplayTable",
+                                    title: "Important Events",
+                                    headers: ["Event", "Status", "Date"],
+                                    rows: [
+                                        ["Contract Upgrades (eIP 14)", "SUCCEEDED", "Aug 12, 2022"],
+                                        ["Move All Asset Price Oracles to Chainlink", "SUCCEEDED", "Sep 5, 2022"],
+                                        ["Update the Interest Rate Model", "SUCCEEDED", "Feb 19, 2023"]
+                                    ]
                                 }
                             ]
                         },
