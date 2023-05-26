@@ -29,7 +29,7 @@
     </div>
 
     <div class="mt-4 d-flex">
-        <Tag v-for="tag in project?.tags" :key="tag" :tag="tag" />
+      <Tag v-for="tag in project?.tags" :key="tag" :tag="tag" />
     </div>
 
     <div class="mt-4">
@@ -78,51 +78,9 @@
           role="tabpanel"
           aria-labelledby="overview-tab"
         >
-          <div class="mt-3 d-flex">
-            <div style="width: 250px; border-right: 1px solid #e0e0e0; height: 300px">
-              <div class="container-fluid">
-                <SubSidebarItem text="Business Model Analysis" :active="true" />
-                <SubSidebarItem text="Social Media Analysis" />
-                <SubSidebarItem text="On-Chain Data Analysis" />
-                <SubSidebarItem text="Team Background Analysis" />
-              </div>
-            </div>
-            <div class="w-100">
-              <div class="container-fluid">
-                <div>
-                  <div class="row">
-                    <div class="col-md-7">
-                      <h3>Business model & Value Proposition</h3>
-                      <p>
-                        Biswap is a trusted DEX platform on the BNB Chain Network with a Multi-type
-                        Referral Program and low trade fee starting from 0.1%. Biswap is the
-                        ecosystem that offers the best service and creates new standards in DeFi.
-                      </p>
-                      <h3>Customer Segments</h3>
-                      <p>
-                        Retail investors who need to swap tokens Institutiona funds who conduct AMM
-                        business VASPs who IDO.
-                      </p>
-                    </div>
-                    <div class="col-md-5">
-                      <div class="row">
-                        <TextCard class="col-5 m-1" label="Revenue" text="$405,091.00" />
-                        <TextCard class="col-5 m-1" label="Overdue invoices" text="$12,787.00" />
-                        <TextCard
-                          class="col-5 m-1"
-                          label="Outstanding invoices"
-                          text="$245,988.00"
-                        />
-                        <TextCard class="col-5 m-1" label="Expenses" text="$30,156.00" />
-                      </div>
-                      <div class="d-flex flex-wrap mt-2">
-                        <Tag tag="P2P Trading" />
-                        <Tag tag="Deposits" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          <div class="mt-3 row">
+            <div class="col-md-6 p-2" v-for="(prop, idx) in project?.props" :key="idx">
+              <AttrDisplayGroup :title="prop.title" />
             </div>
           </div>
         </div>
@@ -172,8 +130,8 @@
 
 <script lang="ts">
 import Tag from '@/components/Tag.vue'
-import SubSidebarItem from '@/components/SubSidebarItem.vue'
 import TextCard from '@/components/TextCard.vue'
+import AttrDisplayGroup from '@/components/AttrDisplayGroup.vue'
 import { organizationsStore } from '@/stores/organizations'
 import { mapStores } from 'pinia'
 
@@ -184,8 +142,8 @@ export default {
   },
   components: {
     Tag,
-    SubSidebarItem,
-    TextCard
+    TextCard,
+    AttrDisplayGroup
   },
   data() {
     return {

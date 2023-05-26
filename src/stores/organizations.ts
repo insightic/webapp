@@ -18,9 +18,32 @@ export const organizationsStore = defineStore('organizations', () => {
                     tags: ["DEX", "Liquidity Pool"],
                     status: "In Progress",
                     dueAt: "2023-05-25T00:00:00.000Z",
-                    props: {
-                        "Business model & Value Proposition": "Euler's business model revolves around providing decentralized lending and borrowing services on the Ethereum blockchain. It generates revenue through interest accrued on loans, with a portion held in reserves for bad debts. The model relies on the Euler Governance Token (EUL) for protocol management, enabling a decentralized approach. Euler offers a unique value proposition by enabling permissionless listings, asset tiering for risk management, tokenized debts, protected collateral, feeless flash loans, and risk-adjusted borrowing capacity. By leveraging decentralized price oracles, Euler ensures a secure and transparent experience for users, promoting capital efficiency and a user-centric approach."
-                    }
+                    props: [
+                        {
+                            title: "Business Model Analysis",
+                            attrs: [
+                                {
+                                    type: "card",
+                                    title: "Business model & Value Proposition",
+                                    text: "Euler's business model revolves around providing decentralized lending and borrowing services on the Ethereum blockchain. It generates revenue through interest accrued on loans, with a portion held in reserves for bad debts. The model relies on the Euler Governance Token (EUL) for protocol management, enabling a decentralized approach. Euler offers a unique value proposition by enabling permissionless listings, asset tiering for risk management, tokenized debts, protected collateral, feeless flash loans, and risk-adjusted borrowing capacity. By leveraging decentralized price oracles, Euler ensures a secure and transparent experience for users, promoting capital efficiency and a user-centric approach.",
+                                    tags: ["Business Model", "Value Proposition"],
+                                    regulations: [{
+                                        text: "",
+                                        href: ""
+                                    }]
+                                }
+                            ],
+                        },
+                        {
+                            title: "DAO Governance Analysis",
+                        },
+                        {
+                            title: "On-Chain Data Analysis",
+                        },
+                        {
+                            title: "Team Background Analysis",
+                        },
+                    ]
                 },
                 {
                     guid: "e262d5c2-16f8-47a0-8c70-4019514d137b",
