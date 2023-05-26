@@ -50,6 +50,26 @@ export const organizationsStore = defineStore('organizations', () => {
                         },
                         {
                             title: "On-Chain Data Analysis",
+                            props: [
+                                {
+                                    component: "PropDisplayKeyValue",
+                                    title: "Pools & Volume",
+                                    values: [
+                                        {
+                                            key: "Number of Pools",
+                                            value: "1555"
+                                        },
+                                        {
+                                            key: "TVL",
+                                            value: "$113,934"
+                                        },
+                                        {
+                                            key: "Changes",
+                                            value: "-11.42%"
+                                        }
+                                    ]
+                                }
+                            ]
                         },
                         {
                             title: "Team Background Analysis",
