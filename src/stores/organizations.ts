@@ -10,7 +10,7 @@ export const organizationsStore = defineStore('organizations', () => {
                 {
                     guid: "e262d5c2-16f8-47a0-8c70-4019514d137a",
                     name: "BiSwap LP",
-                    logo: "/logos/biswap.jpeg",
+                    logo: "/webapp/logos/biswap.jpeg",
                     description: "BiSwap LP is a liquidity pool for the BiSwap DEX",
                     url: "https://biswap.org",
                     status: "In Progress",
@@ -20,7 +20,7 @@ export const organizationsStore = defineStore('organizations', () => {
                 {
                     guid: "e262d5c2-16f8-47a0-8c70-4019514d137b",
                     name: "Wolf Game",
-                    logo: "/logos/wolfgame.jpeg",
+                    logo: "/webapp/logos/wolfgame.jpeg",
                     description: "Wolf Game is a game where you play as a wolf",
                     url: "https://wolf.game",
                     status: "In Progress",
@@ -30,7 +30,7 @@ export const organizationsStore = defineStore('organizations', () => {
                 {
                     guid: "e262d5c2-16f8-47a0-8c70-4019514d137c",
                     name: "Pool Together",
-                    logo: "/logos/pooltogether.jpeg",
+                    logo: "/webapp/logos/pooltogether.jpeg",
                     description: "Pool Together is a lottery game",
                     url: "https://pooltogether.com",
                     status: "In Progress",
@@ -40,7 +40,7 @@ export const organizationsStore = defineStore('organizations', () => {
                 {
                     guid: "e262d5c2-16f8-47a0-8c70-4019514d137d",
                     name: "Olympus",
-                    logo: "/logos/olympus.jpeg",
+                    logo: "/webapp/logos/olympus.jpeg",
                     description: "Olympus is a stablecoin",
                     url: "https://olympusdao.finance",
                     status: "In Progress",
@@ -50,7 +50,7 @@ export const organizationsStore = defineStore('organizations', () => {
                 {
                     guid: "e262d5c2-16f8-47a0-8c70-4019514d137e",
                     name: "Euler Finance",
-                    logo: "/logos/eulerfinance.png",
+                    logo: "/webapp/logos/eulerfinance.png",
                     description: "Euler Finance is a DeFi protocol",
                     url: "https://euler.finance",
                     status: "In Progress",
