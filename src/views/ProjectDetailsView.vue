@@ -12,6 +12,9 @@
           </div>
         </div>
         <div>
+          <a :href="project?.url">{{ project?.url }}</a>
+        </div>
+        <div>
           Created by
           <span style="color: rgba(39, 50, 131)"
             ><u>{{ project?.author }}</u></span
@@ -21,7 +24,12 @@
             ><u>{{ formatDate(project?.dueAt) }}</u></span
           >
         </div>
+        <div class="description">{{ project?.description }}</div>
       </div>
+    </div>
+
+    <div class="mt-4 d-flex">
+        <Tag v-for="tag in project?.tags" :key="tag" :tag="tag" />
     </div>
 
     <div class="mt-4">
@@ -218,10 +226,16 @@ export default {
 }
 
 .rating {
-    font-size: 1.5rem;
-    border: 2px solid rgb(39, 50, 131);
-    border-radius: 10px;
-    padding: 1px 20px 1px 20px;
+  font-size: 1.5rem;
+  border: 2px solid rgb(39, 50, 131);
+  border-radius: 10px;
+  padding: 1px 20px 1px 20px;
+}
+
+.description {
+  max-width: 420px;
+  color: rgb(135, 136, 141);
+  font-style: italic;
 }
 
 .nav-link {
