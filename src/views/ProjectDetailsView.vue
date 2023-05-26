@@ -19,6 +19,18 @@
         <li class="nav-item">
           <a
             class="nav-link active"
+            id="overview-tab"
+            data-bs-toggle="tab"
+            href="#overview"
+            role="tab"
+            aria-controls="overview"
+            aria-selected="true"
+            >Overview</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
             id="business-model-analysis-tab"
             data-bs-toggle="tab"
             href="#business-model-analysis"
@@ -68,39 +80,65 @@
       <div class="tab-content" id="myTabContent">
         <div
           class="tab-pane fade show active"
-          id="business-model-analysis"
+          id="overview"
           role="tabpanel"
-          aria-labelledby="business-model-analysis-tab"
+          aria-labelledby="overview-tab"
         >
-          <div class="mt-3">
-            <div class="row">
-              <div class="col-md-7">
-                <h3>Business model & Value Proposition</h3>
-                <p>
-                  Biswap is a trusted DEX platform on the BNB Chain Network with a Multi-type
-                  Referral Program and low trade fee starting from 0.1%. Biswap is the ecosystem
-                  that offers the best service and creates new standards in DeFi.
-                </p>
-                <h3>Customer Segments</h3>
-                <p>
-                  Retail investors who need to swap tokens Institutiona funds who conduct AMM
-                  business VASPs who IDO.
-                </p>
+          <div class="mt-3 d-flex">
+            <div style="width: 250px; border-right: 1px solid #e0e0e0; height: 300px">
+              <div class="container-fluid">
+                <SubSidebarItem text="Business Model Analysis" :active="true" />
+                <SubSidebarItem text="Social Media Analysis" />
+                <SubSidebarItem text="On-Chain Data Analysis" />
+                <SubSidebarItem text="Team Background Analysis" />
               </div>
-              <div class="col-md-5">
-                <div class="row">
-                  <TextCard class="col-5 m-1" label="Revenue" text="$405,091.00" />
-                  <TextCard class="col-5 m-1" label="Overdue invoices" text="$12,787.00" />
-                  <TextCard class="col-5 m-1" label="Outstanding invoices" text="$245,988.00" />
-                  <TextCard class="col-5 m-1" label="Expenses" text="$30,156.00" />
-                </div>
-                <div class="d-flex flex-wrap mt-2">
-                  <Tag tag="P2P Trading" />
-                  <Tag tag="Deposits" />
+            </div>
+            <div class="w-100">
+              <div class="container-fluid">
+                <div>
+                  <div class="row">
+                    <div class="col-md-7">
+                      <h3>Business model & Value Proposition</h3>
+                      <p>
+                        Biswap is a trusted DEX platform on the BNB Chain Network with a Multi-type
+                        Referral Program and low trade fee starting from 0.1%. Biswap is the
+                        ecosystem that offers the best service and creates new standards in DeFi.
+                      </p>
+                      <h3>Customer Segments</h3>
+                      <p>
+                        Retail investors who need to swap tokens Institutiona funds who conduct AMM
+                        business VASPs who IDO.
+                      </p>
+                    </div>
+                    <div class="col-md-5">
+                      <div class="row">
+                        <TextCard class="col-5 m-1" label="Revenue" text="$405,091.00" />
+                        <TextCard class="col-5 m-1" label="Overdue invoices" text="$12,787.00" />
+                        <TextCard
+                          class="col-5 m-1"
+                          label="Outstanding invoices"
+                          text="$245,988.00"
+                        />
+                        <TextCard class="col-5 m-1" label="Expenses" text="$30,156.00" />
+                      </div>
+                      <div class="d-flex flex-wrap mt-2">
+                        <Tag tag="P2P Trading" />
+                        <Tag tag="Deposits" />
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+        <div
+          class="tab-pane fade show"
+          id="business-model-analysis"
+          role="tabpanel"
+          aria-labelledby="business-model-analysis-tab"
+        >
+          <div class="mt-3"></div>
         </div>
         <div
           class="tab-pane fade"
@@ -222,11 +260,13 @@
 
 <script lang="ts">
 import Tag from '@/components/Tag.vue'
+import SubSidebarItem from '@/components/SubSidebarItem.vue'
 import TextCard from '@/components/TextCard.vue'
 
 export default {
   components: {
     Tag,
+    SubSidebarItem,
     TextCard
   },
   data() {

@@ -3,29 +3,23 @@
     <h1>Organizations</h1>
 
     <div class="org-buttons mx-auto">
-      <OrgButton
-        name="National University of Singapore"
-        guid="e262d5c2-16f8-47a0-8c70-4019514b137c"
-      />
-      <OrgButton
-        name="Nanyang Technological University"
-        guid="fe836aab-202f-4ba4-b128-afb86b918e31"
-      />
-      <OrgButton
-        name="Monetary Authority of Singapore"
-        guid="6f384b6a-3b1b-4f25-b514-844cdc67d52e"
-      />
+      <OrgButton v-for="org in organizationsStore.organizations" :key="org.guid" :name="org.name" :guid="org.guid" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import OrgButton from '@/components/OrgButton.vue'
+import { organizationsStore } from '@/stores/organizations';
+import { mapStores } from 'pinia';
 
 export default {
   components: {
     OrgButton
-  }
+  },
+  computed: {
+    ...mapStores(organizationsStore)
+  },
 }
 </script>
 
