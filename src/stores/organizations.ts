@@ -27,10 +27,16 @@ export const organizationsStore = defineStore('organizations', () => {
                                     title: "Business model & Value Proposition",
                                     text: "Euler's business model revolves around providing decentralized lending and borrowing services on the Ethereum blockchain. It generates revenue through interest accrued on loans, with a portion held in reserves for bad debts. The model relies on the Euler Governance Token (EUL) for protocol management, enabling a decentralized approach. Euler offers a unique value proposition by enabling permissionless listings, asset tiering for risk management, tokenized debts, protected collateral, feeless flash loans, and risk-adjusted borrowing capacity. By leveraging decentralized price oracles, Euler ensures a secure and transparent experience for users, promoting capital efficiency and a user-centric approach.",
                                     tags: ["Business Model", "Value Proposition"],
-                                    regulations: [{
-                                        text: "",
-                                        href: ""
-                                    }]
+                                    regulations: [
+                                        {
+                                            text: "ref1",
+                                            href: "https://en.adgm.thomsonreuters.com/rulebook/guidance-regulation-digital-securities-activities-adgm-24-february-2020"
+                                        },
+                                        {
+                                            text: "ref2",
+                                            href: "https://en.adgm.thomsonreuters.com/rulebook/guidance-regulation-digital-securities-activities-adgm-24-february-2020"
+                                        }
+                                    ]
                                 },
                                 {
                                     component: "AttrDisplayCard",
