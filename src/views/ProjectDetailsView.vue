@@ -80,7 +80,7 @@
         >
           <div class="mt-3 row">
             <div class="col-md-6 p-2" v-for="(prop, idx) in project?.props" :key="idx">
-              <AttrDisplayGroup :title="prop.title" :props="prop.props"/>
+              <PropDisplayGroup :title="prop.title" :props="prop.props"/>
             </div>
           </div>
         </div>
@@ -131,7 +131,7 @@
 <script lang="ts">
 import Tag from '@/components/Tag.vue'
 import TextCard from '@/components/TextCard.vue'
-import AttrDisplayGroup from '@/components/AttrDisplayGroup.vue'
+import PropDisplayGroup from '@/components/PropDisplayGroup.vue'
 import { organizationsStore } from '@/stores/organizations'
 import { mapStores } from 'pinia'
 
@@ -143,7 +143,7 @@ export default {
   components: {
     Tag,
     TextCard,
-    AttrDisplayGroup
+    PropDisplayGroup
   },
   data() {
     return {

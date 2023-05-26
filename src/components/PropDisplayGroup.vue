@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import AttrDisplayCard from './AttrDisplayCard.vue'
+import PropDisplayCard from './PropDisplayCard.vue'
 
 export default {
   props: {
@@ -21,7 +21,7 @@ export default {
     props: Array<{ component: String }>
   },
   components: {
-    AttrDisplayCard
+    PropDisplayCard
   }
 }
 </script>
