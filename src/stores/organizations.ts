@@ -9,8 +9,9 @@ export const organizationsStore = defineStore('organizations', () => {
             projects: [
                 {
                     guid: "e262d5c2-16f8-47a0-8c70-4019514d137a",
-                    name: "BiSwap LP",
                     logo: "/webapp/logos/biswap.jpeg",
+                    name: "BiSwap LP",
+                    rating: "B-",
                     description: "BiSwap LP is a liquidity pool for the BiSwap DEX",
                     url: "https://biswap.org",
                     status: "In Progress",
@@ -19,8 +20,9 @@ export const organizationsStore = defineStore('organizations', () => {
                 },
                 {
                     guid: "e262d5c2-16f8-47a0-8c70-4019514d137b",
-                    name: "Wolf Game",
                     logo: "/webapp/logos/wolfgame.jpeg",
+                    name: "Wolf Game",
+                    rating: "B-",
                     description: "Wolf Game is a game where you play as a wolf",
                     url: "https://wolf.game",
                     status: "In Progress",
@@ -29,8 +31,9 @@ export const organizationsStore = defineStore('organizations', () => {
                 },
                 {
                     guid: "e262d5c2-16f8-47a0-8c70-4019514d137c",
-                    name: "Pool Together",
                     logo: "/webapp/logos/pooltogether.jpeg",
+                    name: "Pool Together",
+                    rating: "B-",
                     description: "Pool Together is a lottery game",
                     url: "https://pooltogether.com",
                     status: "In Progress",
@@ -39,8 +42,9 @@ export const organizationsStore = defineStore('organizations', () => {
                 },
                 {
                     guid: "e262d5c2-16f8-47a0-8c70-4019514d137d",
-                    name: "Olympus",
                     logo: "/webapp/logos/olympus.jpeg",
+                    name: "Olympus",
+                    rating: "B-",
                     description: "Olympus is a stablecoin",
                     url: "https://olympusdao.finance",
                     status: "In Progress",
@@ -49,8 +53,9 @@ export const organizationsStore = defineStore('organizations', () => {
                 },
                 {
                     guid: "e262d5c2-16f8-47a0-8c70-4019514d137e",
-                    name: "Euler Finance",
                     logo: "/webapp/logos/eulerfinance.png",
+                    name: "Euler Finance",
+                    rating: "B-",
                     description: "Euler Finance is a DeFi protocol",
                     url: "https://euler.finance",
                     status: "In Progress",

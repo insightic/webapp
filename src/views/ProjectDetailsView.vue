@@ -1,11 +1,16 @@
 <template>
   <div class="container mt-5">
     <div class="d-flex">
-      <div style="margin-right: 18px;">
+      <div style="margin-right: 18px">
         <img :src="project?.logo" class="logo" />
       </div>
       <div class="align-self-center">
-        <h1>{{ project?.name }}</h1>
+        <div class="d-flex">
+          <h1 style="margin-right: 18px">{{ project?.name }}</h1>
+          <div class="rating align-self-center">
+            {{ project?.rating }}
+          </div>
+        </div>
         <div>
           Created by
           <span style="color: rgba(39, 50, 131)"
@@ -210,6 +215,13 @@ export default {
   border-radius: 50%;
   border: 3px solid rgba(39, 50, 131);
   padding: 7px;
+}
+
+.rating {
+    font-size: 1.5rem;
+    border: 2px solid rgb(39, 50, 131);
+    border-radius: 10px;
+    padding: 1px 20px 1px 20px;
 }
 
 .nav-link {
