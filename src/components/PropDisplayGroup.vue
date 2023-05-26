@@ -15,6 +15,7 @@
 <script lang="ts">
 import PropDisplayCard from './PropDisplayCard.vue'
 import PropDisplayKeyValue from './PropDisplayKeyValue.vue'
+import PropDisplayTable from './PropDisplayTable.vue'
 
 export default {
   props: {
@@ -23,7 +24,8 @@ export default {
   },
   components: {
     PropDisplayCard,
-    PropDisplayKeyValue
+    PropDisplayKeyValue,
+    PropDisplayTable
   }
 }
 </script>
