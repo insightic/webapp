@@ -1,15 +1,16 @@
 <template>
   <div class="d-flex p-2 project-sidebar-item" :class="{highlighted: highlighted}">
-    <div style="margin-right: 20px"><i class="bi bi-code-square"></i></div>
-    <div>{{ name }}</div>
+    <div style="margin-right: 20px"><img :src="logo" class="logo"/></div>
+    <div class="text">{{ name }}</div>
   </div>
 </template>
 
 <script lang="ts">
 export default {
   props: {
-    name: String,
     guid: String,
+    name: String,
+    logo: String,
     highlighted: Boolean
   }
 }
@@ -22,6 +23,19 @@ export default {
 
 .project-sidebar-item:hover {
     color: rgba(39, 50, 131);
+}
+
+.logo {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid rgba(39, 50, 131);
+    background-color: white;
+    padding: 3px;
+}
+
+.text {
+    line-height: 32px;
 }
 
 .highlighted {

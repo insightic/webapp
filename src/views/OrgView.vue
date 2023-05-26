@@ -11,8 +11,9 @@
         <ProjectSidebarItem
           v-for="project in projects"
           :key="project.guid"
-          :name="project.name"
           :guid="project.guid"
+          :name="project.name"
+          :logo="project.logo"
           :highlighted="project.guid == selectedProjectGuid"
           @click="selectedProjectGuid = project.guid"
         />
@@ -20,10 +21,8 @@
     </div>
     <div class="h-100 w-100 org-main">
       <div class="container-fluid">
-        <ProjectDetailsView v-if="selectedProjectGuid"/>
-        <div v-else>
-            Select a project to start!
-        </div>
+        <ProjectDetailsView v-if="selectedProjectGuid" />
+        <div v-else>Select a project to start!</div>
       </div>
     </div>
   </div>
