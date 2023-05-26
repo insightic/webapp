@@ -5,7 +5,13 @@
         <div class="mt-3" style="color: rgba(39, 50, 131); font-size: 1.2rem">Projects</div>
 
         <form class="form-inline my-2">
-          <input class="form-control" type="search" placeholder="Search..." aria-label="Search" />
+          <input
+            class="form-control"
+            type="search"
+            placeholder="Search..."
+            aria-label="Search"
+            v-model="searchValue"
+          />
         </form>
 
         <ProjectSidebarItem
@@ -41,6 +47,7 @@ export default {
   },
   data() {
     return {
+      searchValue: '',
       selectedProjectGuid: ''
     }
   },
@@ -51,8 +58,12 @@ export default {
       const organization = this.organizationsStore.organizations.find(
         (org) => org.guid === organizationGuid
       )
-      if (organization) return organization.projects
-      return []
+      if (!organization) return []
+      if (!this.searchValue) return organization.projects
+      const searchValue = this.searchValue.toLowerCase()
+      return organization.projects.filter((project) =>
+        project.name.toLowerCase().includes(searchValue)
+      )
     }
   }
 }

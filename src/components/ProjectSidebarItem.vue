@@ -1,7 +1,7 @@
 <template>
-  <div class="d-flex p-2 project-sidebar-item" :class="{highlighted: highlighted}">
+  <div class="d-flex p-2 project-sidebar-item">
     <div style="margin-right: 20px"><img :src="logo" class="logo"/></div>
-    <div class="text">{{ name }}</div>
+    <div class="text" :class="{highlighted: highlighted}">{{ name }}</div>
   </div>
 </template>
 
@@ -40,5 +40,6 @@ export default {
 
 .highlighted {
     color: rgba(39, 50, 131);
+    font-weight: bold;
 }
 </style>
