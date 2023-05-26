@@ -68,6 +68,24 @@ export const organizationsStore = defineStore('organizations', () => {
                                             value: "-11.42%"
                                         }
                                     ]
+                                },
+                                {
+                                    component: "PropDisplayKeyValue",
+                                    title: "Customer Persona",
+                                    values: [
+                                        {
+                                            key: "Number of Pools",
+                                            value: "1555"
+                                        },
+                                        {
+                                            key: "TVL",
+                                            value: "$113,934"
+                                        },
+                                        {
+                                            key: "Changes",
+                                            value: "-11.42%"
+                                        }
+                                    ]
                                 }
                             ]
                         },
