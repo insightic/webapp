@@ -47,6 +47,26 @@ export const organizationsStore = defineStore('organizations', () => {
                         },
                         {
                             title: "DAO Governance Analysis",
+                            props: [
+                                {
+                                    component: "PropDisplayKeyValue",
+                                    title: "Governance Monitoring",
+                                    values: [
+                                        {
+                                            key: "Number of Pools",
+                                            value: "1555"
+                                        },
+                                        {
+                                            key: "TVL",
+                                            value: "$113,934"
+                                        },
+                                        {
+                                            key: "Changes",
+                                            value: "-11.42%"
+                                        }
+                                    ]
+                                }
+                            ]
                         },
                         {
                             title: "On-Chain Data Analysis",
