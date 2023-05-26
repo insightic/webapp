@@ -16,8 +16,6 @@
 
 <script lang="ts">
 export default {
-  props: {
-    prop: Object
-  }
+  props: ['prop']
 }
 </script>

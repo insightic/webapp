@@ -27,9 +27,7 @@
 import Tag from '@/components/Tag.vue'
 
 export default {
-  props: {
-    prop: Object
-  },
+  props: ['prop'],
   components: {
     Tag
   }

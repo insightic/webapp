@@ -3,7 +3,7 @@
     <div class="card-header title">{{ title }}</div>
     <div class="card-body">
       <component
-        :is="prop['component']"
+        :is="prop?.component"
         v-for="(prop, idx) in props"
         :key="idx"
         :prop="prop"
@@ -18,10 +18,7 @@ import PropDisplayKeyValue from './PropDisplayKeyValue.vue'
 import PropDisplayTable from './PropDisplayTable.vue'
 
 export default {
-  props: {
-    title: String,
-    props: Array<{ component: String }>
-  },
+  props: ['title', 'props'],
   components: {
     PropDisplayCard,
     PropDisplayKeyValue,
