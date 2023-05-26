@@ -1,16 +1,21 @@
 <template>
   <div class="container mt-5">
-    <div>
-      <h1>{{ project?.name }}</h1>
-      <div>
-        Created by
-        <span style="color: rgba(39, 50, 131)"
-          ><u>{{ project?.author }}</u></span
-        >
-        on
-        <span style="color: rgba(39, 50, 131)"
-          ><u>{{ formatDate(project?.dueAt) }}</u></span
-        >
+    <div class="d-flex">
+      <div style="margin-right: 18px;">
+        <img :src="project?.logo" class="logo" />
+      </div>
+      <div class="align-self-center">
+        <h1>{{ project?.name }}</h1>
+        <div>
+          Created by
+          <span style="color: rgba(39, 50, 131)"
+            ><u>{{ project?.author }}</u></span
+          >
+          on
+          <span style="color: rgba(39, 50, 131)"
+            ><u>{{ formatDate(project?.dueAt) }}</u></span
+          >
+        </div>
       </div>
     </div>
 
@@ -199,6 +204,14 @@ export default {
 </script>
 
 <style scoped>
+.logo {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  border: 3px solid rgba(39, 50, 131);
+  padding: 7px;
+}
+
 .nav-link {
   color: rgb(135, 136, 141);
 }
