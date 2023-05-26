@@ -47,6 +47,23 @@ export const organizationsStore = defineStore('organizations', () => {
                         },
                         {
                             title: "Team Background Analysis",
+                            props: [
+                                {
+                                    component: "AttrDisplayCard",
+                                    title: "On-Chain Analysis",
+                                    text: "Biswap is a trusted DEX platform on the BNB Chain Network with a Multi-type Referral Program and low trade fee starting from 0.1%. Biswap is the ecosystem that offers the best service and creates new standards in DeFi."
+                                },
+                                {
+                                    component: "AttrDisplayCard",
+                                    title: "Twitter Analysis",
+                                    text: "Retail investors who need to swap tokens Institutiona funds who conduct AMM business VASPs who IDO"
+                                },
+                                {
+                                    component: "AttrDisplayCard",
+                                    title: "LinkedIn Analysis",
+                                    text: "Retail investors who need to swap tokens Institutiona funds who conduct AMM business VASPs who IDO"
+                                }
+                            ]
                         },
                     ]
                 },
