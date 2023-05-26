@@ -73,5 +73,17 @@ export const organizationsStore = defineStore('organizations', () => {
         },
     ])
 
-    return { organizations }
+    const findOrganization = (organizationGuid: string | undefined) => {
+        if (!organizationGuid) return undefined
+        return organizations.value.find(organization => organization.guid === organizationGuid)
+    }
+
+    const findProject = (organizationGuid: string | undefined, projectGuid: string | undefined) => {
+        if (!organizationGuid || !projectGuid) return undefined
+        const organization = findOrganization(organizationGuid)
+        if (!organization) return undefined
+        return organization.projects.find(project => project.guid === projectGuid)
+    }
+
+    return { organizations, findOrganization, findProject }
 })

@@ -27,7 +27,7 @@
     </div>
     <div class="h-100 w-100 org-main">
       <div class="container-fluid">
-        <ProjectDetailsView v-if="selectedProjectGuid" />
+        <ProjectDetailsView v-if="selectedProjectGuid" :organization-guid="organizationGuid" :project-guid="selectedProjectGuid"/>
         <div v-else>Select a project to start!</div>
       </div>
     </div>
@@ -53,11 +53,11 @@ export default {
   },
   computed: {
     ...mapStores(organizationsStore),
+    organizationGuid() {
+        return this.$route.params.organizationGuid as string
+    },
     projects() {
-      const organizationGuid = (this.$route.params.organizationGuid as string) || ''
-      const organization = this.organizationsStore.organizations.find(
-        (org) => org.guid === organizationGuid
-      )
+      const organization = this.organizationsStore.findOrganization(this.organizationGuid)
       if (!organization) return []
       if (!this.searchValue) return organization.projects
       const searchValue = this.searchValue.toLowerCase()

@@ -1,15 +1,15 @@
 <template>
   <div class="container mt-5">
     <div>
-      <h1>Wolf Game</h1>
+      <h1>{{ project?.name }}</h1>
       <div>
         Created by
         <span style="color: rgba(39, 50, 131)"
-          ><u>{{ author }}</u></span
+          ><u>{{ project?.author }}</u></span
         >
         on
         <span style="color: rgba(39, 50, 131)"
-          ><u>{{ formatDate(date) }}</u></span
+          ><u>{{ formatDate(project?.dueAt) }}</u></span
         >
       </div>
     </div>
@@ -156,8 +156,14 @@
 import Tag from '@/components/Tag.vue'
 import SubSidebarItem from '@/components/SubSidebarItem.vue'
 import TextCard from '@/components/TextCard.vue'
+import { organizationsStore } from '@/stores/organizations'
+import { mapStores } from 'pinia'
 
 export default {
+  props: {
+    organizationGuid: String,
+    projectGuid: String
+  },
   components: {
     Tag,
     SubSidebarItem,
@@ -169,8 +175,23 @@ export default {
       date: new Date()
     }
   },
+  computed: {
+    ...mapStores(organizationsStore),
+    organization() {
+      return this.organizationsStore.findOrganization(this.organizationGuid)
+    },
+    project() {
+      return this.organizationsStore.findProject(this.organizationGuid, this.projectGuid)
+    }
+  },
   methods: {
-    formatDate(date: Date) {
+    formatDate(date: Date | string | undefined) {
+      if (!date) {
+        return ''
+      }
+      if (typeof date === 'string') {
+        date = new Date(date)
+      }
       return date.toLocaleDateString()
     }
   }
