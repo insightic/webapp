@@ -14,12 +14,16 @@
           :name="project.name"
           :guid="project.guid"
           :highlighted="project.guid == selectedProjectGuid"
+          @click="selectedProjectGuid = project.guid"
         />
       </div>
     </div>
     <div class="h-100 w-100 org-main">
       <div class="container-fluid">
-        <ProjectDetailsView />
+        <ProjectDetailsView v-if="selectedProjectGuid"/>
+        <div v-else>
+            Select a project to start!
+        </div>
       </div>
     </div>
   </div>
@@ -28,6 +32,8 @@
 <script lang="ts">
 import ProjectSidebarItem from '@/components/ProjectSidebarItem.vue'
 import ProjectDetailsView from '@/views/ProjectDetailsView.vue'
+import { organizationsStore } from '@/stores/organizations'
+import { mapStores } from 'pinia'
 
 export default {
   components: {
@@ -36,26 +42,18 @@ export default {
   },
   data() {
     return {
-      selectedProjectGuid: '123',
-      projects: [
-        {
-          name: 'Wolf Game',
-          guid: '123',
-          highlighted: true
-        },
-        {
-          name: 'Pool Together',
-          guid: '456'
-        },
-        {
-          name: 'Olympus',
-          guid: '789'
-        },
-        {
-          name: 'Euler Finance',
-          guid: '101112'
-        }
-      ]
+      selectedProjectGuid: ''
+    }
+  },
+  computed: {
+    ...mapStores(organizationsStore),
+    projects() {
+      const organizationGuid = (this.$route.params.organizationGuid as string) || ''
+      const organization = this.organizationsStore.organizations.find(
+        (org) => org.guid === organizationGuid
+      )
+      if (organization) return organization.projects
+      return []
     }
   }
 }
@@ -68,11 +66,9 @@ export default {
 
 .org-sidebar {
   width: 300px;
-  /* background-color: red; */
   border-right: 1px solid #e0e0e0;
 }
 .org-main {
-  /* background-color: blue; */
   overflow-y: auto;
   background-color: white;
 }

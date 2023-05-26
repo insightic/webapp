@@ -11,7 +11,7 @@ const router = createRouter({
       component: OrgsView
     },
     {
-      path: '/organizations/:guid',
+      path: '/organizations/:organizationGuid',
       name: 'organization',
       component: OrgView
     }
