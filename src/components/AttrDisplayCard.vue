@@ -1,11 +1,18 @@
 <template>
-  <div class="card">
+  <div class="card my-2">
     <div class="card-body">
-      <h5 class="card-title">Special title treatment</h5>
+      <h5 class="card-title">{{ prop?.title }}</h5>
       <p class="card-text">
-        With supporting text below as a natural lead-in to additional content.
+        {{ prop?.text }}
       </p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
     </div>
   </div>
 </template>
+
+<script lang="ts">
+export default {
+  props: {
+    prop: Object
+  }
+}
+</script>

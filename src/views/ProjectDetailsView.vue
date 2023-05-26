@@ -80,7 +80,7 @@
         >
           <div class="mt-3 row">
             <div class="col-md-6 p-2" v-for="(prop, idx) in project?.props" :key="idx">
-              <AttrDisplayGroup :title="prop.title" />
+              <AttrDisplayGroup :title="prop.title" :props="prop.props"/>
             </div>
           </div>
         </div>

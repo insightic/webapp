@@ -2,7 +2,12 @@
   <div class="card">
     <div class="card-header title">{{ title }}</div>
     <div class="card-body">
-      <AttrDisplayCard />
+      <component
+        :is="prop['component']"
+        v-for="(prop, idx) in props"
+        :key="idx"
+        :prop="prop"
+      ></component>
     </div>
   </div>
 </template>
@@ -12,7 +17,8 @@ import AttrDisplayCard from './AttrDisplayCard.vue'
 
 export default {
   props: {
-    title: String
+    title: String,
+    props: Array<{ component: String }>
   },
   components: {
     AttrDisplayCard

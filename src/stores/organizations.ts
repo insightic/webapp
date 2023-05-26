@@ -21,9 +21,9 @@ export const organizationsStore = defineStore('organizations', () => {
                     props: [
                         {
                             title: "Business Model Analysis",
-                            attrs: [
+                            props: [
                                 {
-                                    type: "card",
+                                    component: "AttrDisplayCard",
                                     title: "Business model & Value Proposition",
                                     text: "Euler's business model revolves around providing decentralized lending and borrowing services on the Ethereum blockchain. It generates revenue through interest accrued on loans, with a portion held in reserves for bad debts. The model relies on the Euler Governance Token (EUL) for protocol management, enabling a decentralized approach. Euler offers a unique value proposition by enabling permissionless listings, asset tiering for risk management, tokenized debts, protected collateral, feeless flash loans, and risk-adjusted borrowing capacity. By leveraging decentralized price oracles, Euler ensures a secure and transparent experience for users, promoting capital efficiency and a user-centric approach.",
                                     tags: ["Business Model", "Value Proposition"],
@@ -31,6 +31,11 @@ export const organizationsStore = defineStore('organizations', () => {
                                         text: "",
                                         href: ""
                                     }]
+                                },
+                                {
+                                    component: "AttrDisplayCard",
+                                    title: "Customer Segments",
+                                    text: "Individuals and institutions cryptocurrency adopters: both lender and borrowers for various purposes, such as earning interest, leveraging trading positions, liquidity provision, or covering short-term expenses. Developers: Those looking to build applications, products, or services on top of Euler's protocol, leveraging its features such as tokenized debts and feeless flash loans. Flash loans applier. Governance participants: token holders who want to contribute to the platform's development and decision-making process by participating in governance proposals and voting."
                                 }
                             ],
                         },
