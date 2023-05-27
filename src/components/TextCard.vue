@@ -4,6 +4,7 @@
     <div class="text">
       <div style="position: absolute; top: 50%; transform: translate(0, -40%)">{{ text }}</div>
     </div>
+    <div class="label" style="position: absolute; bottom: 0; left: 0; right: 0; padding: 5px; text-align: center;">{{ footer }}</div>
   </div>
 </template>
 
@@ -11,7 +12,8 @@
 export default {
   props: {
     label: String,
-    text: String
+    text: String,
+    footer: String,
   }
 }
 </script>
@@ -25,7 +27,7 @@ export default {
 
 .label {
   color: rgb(135, 136, 141);
-  font-size: 0.7rem;
+  font-size: 0.6rem;
 }
 
 .text {
