@@ -18,7 +18,16 @@
       />
     </div>
     <div class="col-md-6">
-      <div class="h-100" style="background-color: red"></div>
+      <div class="h-100">
+        <form>
+          <select class="form-control">
+            <option selected>OlympusAuthority.sol</option>
+            <option value="1">sOlympusERC20.sol</option>
+            <option value="2">StandardBondingCalculator.sol</option>
+            <option value="3">Treasury.sol</option>
+          </select>
+        </form>
+      </div>
     </div>
     <div class="h-100 col-md-3" style="overflow-y: auto">
       <div class="my-2">
@@ -51,7 +60,7 @@
       <div class="my-2">
         <h5>Explanation</h5>
 
-        <div style="font-size: 0.85rem;">
+        <div style="font-size: 0.85rem">
           BiSwap is a decentralized exchange platform that allows users to easily swap BEP-20 tokens
           on the Binance Smart Chain network. The platform features a three-level referral system
           and low transaction fees (0.1%). Our mission is to become a leading platform for token
