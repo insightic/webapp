@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid row mb-2" style="height: 720px">
     <div class="h-100 col-md-3" style="overflow-y: auto">
-      <h5>White Paper</h5>
+      <StatusCardGroup />
       <StatusCard
         text="✅ [dex011]"
         footer="Tokens symbol is BSW"
@@ -125,12 +125,14 @@
 </template>
 
 <script lang="ts">
+import StatusCardGroup from '@/components/StatusCardGroup.vue'
 import StatusCard from '@/components/StatusCard.vue'
 import TextCard from '@/components/TextCard.vue'
 
 export default {
   props: ['project'],
   components: {
+    StatusCardGroup,
     StatusCard,
     TextCard
   }
