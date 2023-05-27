@@ -22,6 +22,7 @@ export default {
 .card {
   padding: 10px;
   border: 2px solid rgba(39, 50, 131);
+  box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.05);
   height: 96px;
 }
 
