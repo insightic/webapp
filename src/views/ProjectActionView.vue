@@ -2,13 +2,19 @@
   <div>
     <div class="row my-3">
       <div class="col-md-4">
-        <ActionCard title="Total Suggestion" status="17" changes="↑ 122" type="up" />
+        <ActionCard title="Total Suggestion" status="17" changes="↑ 122" type="up">
+          <i class="bi bi-search"></i>
+        </ActionCard>
       </div>
       <div class="col-md-4">
-        <ActionCard title="Completed" status="5" changes="↑ 5.4%" type="up" />
+        <ActionCard title="Completed" status="5" changes="↑ 5.4%" type="up">
+          <i class="bi bi-check2-circle"></i>
+        </ActionCard>
       </div>
       <div class="col-md-4">
-        <ActionCard title="Action Needed" status="8" changes="↓ 3.2%" type="down" />
+        <ActionCard title="Action Needed" status="8" changes="↓ 3.2%" type="down">
+          <i class="bi bi-info-circle"></i>
+        </ActionCard>
       </div>
     </div>
     <h4>Action</h4>
