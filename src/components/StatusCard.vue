@@ -1,11 +1,11 @@
 <template>
-  <div class="w-100 card my-2 py-3">
+  <div class="w-100 card my-2 py-3" @click="active = !active">
     <div class="px-2 text d-flex flex-column" style="text-align: center">
       <div>{{ text }}</div>
       <div style="color: rgb(135, 136, 141); font-size: 0.6rem">{{ footer }}</div>
     </div>
-    <hr />
-    <div class="px-2 text d-flex flex-column" style="text-align: left">
+    <hr v-if="active" />
+    <div v-if="active" class="px-2 text d-flex flex-column" style="text-align: left">
       <div class="d-flex">
         <i class="bi bi-file-earmark" style="margin-right: 5px"></i>
         <div>{{ desciptionTitle }}</div>
@@ -25,6 +25,11 @@ export default {
     footer: String,
     desciptionTitle: String,
     desciptionText: String
+  },
+  data() {
+    return {
+      active: false
+    }
   }
 }
 </script>
