@@ -1,8 +1,13 @@
 <template>
-  <div class="action-status-card p-3 my-2">
+  <div
+    class="action-status-card p-3 my-2"
+    :class="{ danger: type == 'danger', warn: type == 'warn', primary: type == 'primary' }"
+  >
     <div class="d-flex">
       <div style="margin-right: 15px; font-size: 1.5rem">
-        <i class="bi bi-info-circle"></i>
+        <i v-if="type == 'danger'" class="bi bi-exclamation-triangle"></i>
+        <i v-if="type == 'warn'" class="bi bi-info-circle"></i>
+        <i v-if="type == 'primary'" class="bi bi-check-circle"></i>
       </div>
       <div class="align-self-center">
         <div style="font-size: 0.9rem">
@@ -19,14 +24,26 @@
 
 <script lang="ts">
 export default {
-  props: ['title', 'text']
+  props: ['title', 'text', 'type']
 }
 </script>
 
 <style>
 .action-status-card {
   padding: 10px;
-  background-color: lightpink;
+  background-color: rgba(233, 233, 233, 0.5);
   border-radius: 10px;
+}
+
+.danger {
+  background-color: rgb(243, 210, 215, 0.5) !important;
+}
+
+.warn {
+  background-color: rgba(243, 233, 185, 0.5) !important;
+}
+
+.primary {
+  background-color: rgba(159, 193, 245, 0.5) !important;
 }
 </style>
