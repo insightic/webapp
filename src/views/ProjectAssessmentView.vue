@@ -1,49 +1,87 @@
 <template>
   <div class="container-fluid row mb-2" style="height: 720px">
-    <div class="h-100 col-md-2" style="overflow-y: auto">
+    <div class="h-100 col-md-3" style="overflow-y: auto">
       <h5>White Paper</h5>
-      <StatusCard text="✅ [dex011]" footer="Tokens symbol is BSW" />
-      <StatusCard text="✅ [dex012]" footer="BEP-20 standard" />
-      <StatusCard text="✅ [dex013]" footer="700000000" />
-      <StatusCard text="❌ [dex014]" footer="Is ERC20 Token Standard Implemented?" />
+      <StatusCard
+        text="✅ [dex011]"
+        footer="Tokens symbol is BSW"
+        desciption-title="Ticker Symbol: BSW"
+        desciption-text="contract BSWToken is BEP20('Biswap', 'BSW')"
+      />
+      <StatusCard
+        text="✅ [dex012]"
+        footer="BEP-20 standard"
+        desciption-title="Chain: BNB Chain (BEP-20)"
+        desciption-text="Contract BSWToken is BEP20('Biswap', 'BSW')"
+      />
+      <StatusCard
+        text="✅ [dex013]"
+        footer="700000000"
+        desciption-title="Max Supply: 700 000 000 BSW tokens"
+        desciption-text="The total token supply is 700,000,000"
+      />
+      <StatusCard
+        text="❌ [dex014]"
+        footer="Is ERC20 Token Standard Implemented?"
+        desciption-title="No, BEP-20 token standard is implemented which is specific to the Binance Smart Chain (BSC) ecosystem"
+        desciption-text="Yes, ERC20 token standards is implemented, inherits from the BiswapERC20 contract with ERC20 interface."
+      />
       <StatusCard
         text="✅ [dex015]"
         footer="How many types of Swap Fee Tiers are mentioned in code?"
+        desciption-title="N.A."
+        desciption-text="There is only one swapFee tier, which can be set by calling the `setSwapFee` function. The default value of the swapFee is 1."
       />
       <StatusCard
         text="✅ [dex016]"
         footer="What is the swap fee for a single token swap?"
+        desciption-title="The swap fee charged when someone makes a token swap on Biswap is 0.2% or 0.1%, depending on the trading pair. For most trading pairs, the fee is 0.2%, and for some specific pairs such as BUSD-USDT, USDC-USDT, and DAI-USDT, the fee is 0.1%."
+        desciption-text="The default swap fee is 1 basis point (0.01%)."
       />
       <StatusCard
         text="✅ [dex017]"
         footer="How much of the swap fee will be taken by developers by _mintFee()?"
+        desciption-title="Unspecfied in whitepaper, but this function mints new BSW tokens from the swap fee, which are distributed to stakeholders, including developers."
+        desciption-text="The amount of the fee is calculated based on the change in the product of the reserves, and is proportional to the square root of the product of the reserves. The proportion of the fee that is taken by the developers is set by the `devFee` variable, which is also initialized to 1 in the contract."
       />
       <StatusCard
         text="✅ [dex018]"
         footer="Is the code Applicable to AMM?"
+        desciption-title="The code presented in the excerpt is applicable to AMM (Automated Market Maker) protocol, which is used by the Biswap Exchange."
+        desciption-text="Yes, this code is applicable to Automated Market Maker (AMM) as it implements the core functionality of a DEX, including liquidity provision, token swaps, and fee collection."
       />
       <StatusCard
         text="✅ [dex019]"
         footer="Is trading pairs other than those with WBNB allowed?"
+        desciption-title="No clear answer but it does mention that users can swap eligible trading pairs and stake BSW to activate them in the Multi-Reward Pool to earn rewards in different tokens such as BSW, BNB, and BUSD."
+        desciption-text="The provided code does not explicitly mention WBNB. However, the Biswap DEX supports trading pairs between any two ERC20 tokens, not just WBNB."
       />
       <StatusCard
         text="✅ [dex0110]"
         footer="Is the smart contracts capable to prevent frontrunning attacks?"
+        desciption-title="N.A."
+        desciption-text='The Biswap smart contract does not have a built-in functionality to prevent frontrunning attacks. However, Biswap uses a mechanism called "time-weighted average price" (TWAP) to mitigate the impact of such attacks. This mechanism calculates the average price of a token over a certain period of time, making it more difficult for attackers to profit from short-term price movements.'
       />
       <StatusCard
         text="✅ [dex0111]"
         footer="Is on-chain or off-chain price feeds used for the token prices?"
+        desciption-title="N.A."
+        desciption-text="The Biswap smart contract does not use on-chain or off-chain price feeds for its token prices. Instead, it calculates the token prices based on the reserves of the tokens in the liquidity pool."
       />
       <StatusCard
         text="✅ [dex0112]"
         footer="Does the smart contract implement a decentralized governance mechanism?"
+        desciption-title="No clear answer but it does mention that users can swap eligible trading pairs and stake BSW to activate them in the Multi-Reward Pool to earn rewards in different tokens such as BSW, BNB, and BUSD."
+        desciption-text="No, the Biswap smart contract does not implement a decentralized governance mechanism."
       />
       <StatusCard
         text="✅ [dex0113]"
         footer="Is there a restriction on the maximum transaction amount or frequency for a given address?"
+        desciption-title="No clear answer but it does mention that users can swap eligible trading pairs and stake BSW to activate them in the Multi-Reward Pool to earn rewards in different tokens such as BSW, BNB, and BUSD."
+        desciption-text="The Biswap smart contract does not impose any restrictions on the maximum transaction amount or frequency for a given address."
       />
     </div>
-    <div class="col-md-7">
+    <div class="col-md-6">
       <div class="h-100" style="background-color: red"></div>
     </div>
     <div class="h-100 col-md-3" style="overflow-y: auto">
