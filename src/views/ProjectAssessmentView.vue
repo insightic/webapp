@@ -27,6 +27,9 @@
             <option value="3">Treasury.sol</option>
           </select>
         </form>
+
+        <MonacoEditor class="h-100" />
+        Hello
       </div>
     </div>
     <div class="h-100 col-md-3" style="overflow-y: auto">
@@ -74,12 +77,14 @@
 <script lang="ts">
 import StatusCardGroup from '@/components/StatusCardGroup.vue'
 import TextCard from '@/components/TextCard.vue'
+import MonacoEditor from '@/components/MonacoEditor.vue'
 
 export default {
   props: ['project'],
   components: {
     StatusCardGroup,
-    TextCard
+    TextCard,
+    MonacoEditor
   },
   data() {
     return {

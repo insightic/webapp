@@ -1,11 +1,31 @@
-<!-- <template>
+<template>
   <div class="editor" ref="dom"></div>
 </template>
 
-<script setup>
-import { onMounted, defineProps, ref } from 'vue'
+<script lang="ts">
 import * as monaco from 'monaco-editor'
 
+export default {
+  data(): { editor: monaco.editor.IStandaloneCodeEditor | null } {
+    return {
+      editor: null
+    }
+  },
+  mounted() {
+    console.log("??")
+    const jsonModel = monaco.editor.createModel('{}', 'json')
+    const dom = this.$refs.dom as HTMLElement
+    this.editor = monaco.editor.create(dom, {
+      model: jsonModel,
+      tabSize: 2,
+      automaticLayout: true,
+      scrollBeyondLastLine: false
+    })
+    console.log("??")
+  }
+}
+</script>
+<!-- 
 // import EditorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker'
 // import JsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker'
 
