@@ -1,9 +1,15 @@
 <template>
   <div>
     <div class="row my-3">
-      <div class="col-md-4"><ActionCard title="Total Suggestion" status="17" /></div>
-      <div class="col-md-4"><ActionCard title="Completed" status="5" /></div>
-      <div class="col-md-4"><ActionCard title="Action Needed" status="8" /></div>
+      <div class="col-md-4">
+        <ActionCard title="Total Suggestion" status="17" changes="↑ 122" type="up" />
+      </div>
+      <div class="col-md-4">
+        <ActionCard title="Completed" status="5" changes="↑ 5.4%" type="up" />
+      </div>
+      <div class="col-md-4">
+        <ActionCard title="Action Needed" status="8" changes="↓ 3.2%" type="down" />
+      </div>
     </div>
     <h4>Action</h4>
     <div class="row my-3">
