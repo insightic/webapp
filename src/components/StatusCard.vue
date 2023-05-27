@@ -1,5 +1,5 @@
 <template>
-  <div class="w-100 card my-2 py-3" @click="active = !active">
+  <div class="w-100 status-card my-2 py-3" @click="active = !active">
     <div class="px-2 text d-flex flex-column" style="text-align: center">
       <div>{{ text }}</div>
       <div style="color: rgb(135, 136, 141); font-size: 0.6rem">{{ footer }}</div>
@@ -35,11 +35,10 @@ export default {
 </script>
 
 <style scoped>
-.card {
+.status-card {
   cursor: pointer;
-  height: unset;
-  border: 2px solid rgba(39, 50, 131);
-  box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  border: 1px solid rgba(39, 50, 131) !important;
 }
 
 .text {

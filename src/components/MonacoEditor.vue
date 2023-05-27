@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="editor" ref="dom"></div>
 </template>
 
@@ -39,4 +39,4 @@ onMounted(() => {
 .editor {
   height: 100%;
 }
-</style>
+</style> -->

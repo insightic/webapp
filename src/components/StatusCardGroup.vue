@@ -1,14 +1,20 @@
 <template>
-  <div class="card-group p-2 w-100">
-    <div class="w-100" style="text-align: right">
-      <b>White Paper</b><i class="bi bi-arrow-bar-down" style="margin-left: 10px"></i>
+  <div class="status-card-group p-2 w-100 mb-2" :style="{ backgroundColor: backgroundColor }">
+    <div class="w-100" style="text-align: right; cursor: pointer" @click="active = !active">
+      {{ title }}
+      <i v-if="!active" class="bi bi-arrow-bar-down" style="margin-left: 10px"> </i>
+      <i v-if="active" class="bi bi-arrow-bar-up" style="margin-left: 10px"></i>
     </div>
-    <StatusCard
-      text="✅ [dex011]"
-      footer="Tokens symbol is BSW"
-      desciption-title="Ticker Symbol: BSW"
-      desciption-text="contract BSWToken is BEP20('Biswap', 'BSW')"
-    />
+    <div v-if="active">
+      <StatusCard
+        v-for="(status, idx) in statuses"
+        :key="idx"
+        :text="status.text"
+        :footer="status.footer"
+        :desciption-title="status.desciptionTitle"
+        :desciption-text="status.desciptionText"
+      />
+    </div>
   </div>
 </template>
 
@@ -16,17 +22,19 @@
 import StatusCard from './StatusCard.vue'
 
 export default {
-  props: ['statuses'],
+  props: ['title', 'statuses', 'backgroundColor'],
   components: {
     StatusCard
+  },
+  data() {
+    return { active: false }
   }
 }
 </script>
 
 <style scoped>
-.card-group {
-  cursor: pointer;
+.status-card-group {
   border-radius: 4px;
-  background-color: rgba(39, 50, 131, 0.1);
+  font-size: 0.85rem;
 }
 </style>
