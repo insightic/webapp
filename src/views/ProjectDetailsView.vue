@@ -92,6 +92,16 @@
             <ProjectAssessmentView :project="project" />
           </div>
         </div>
+        <div
+          class="tab-pane fade show"
+          id="actions"
+          role="tabpanel"
+          aria-labelledby="actions-tab"
+        >
+          <div class="mt-3">
+            <ProjectActionView :project="project" />
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -99,9 +109,9 @@
 
 <script lang="ts">
 import Tag from '@/components/Tag.vue'
-// import TextCard from '@/components/TextCard.vue'
 import ProjectOverviewView from './ProjectOverviewView.vue'
 import ProjectAssessmentView from './ProjectAssessmentView.vue'
+import ProjectActionView from './ProjectActionView.vue'
 import { organizationsStore } from '@/stores/organizations'
 import { mapStores } from 'pinia'
 
@@ -113,7 +123,8 @@ export default {
   components: {
     Tag,
     ProjectOverviewView,
-    ProjectAssessmentView
+    ProjectAssessmentView,
+    ProjectActionView
   },
   data() {
     return {
