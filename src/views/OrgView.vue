@@ -26,9 +26,24 @@
       </div>
     </div>
     <div class="h-100 w-100 org-main">
-      <div class="container-fluid">
-        <ProjectDetailsView v-if="selectedProjectGuid" :organization-guid="organizationGuid" :project-guid="selectedProjectGuid"/>
-        <div v-else>Select a project to start!</div>
+      <div v-if="selectedProjectGuid" class="container-fluid">
+        <ProjectDetailsView
+          :organization-guid="organizationGuid"
+          :project-guid="selectedProjectGuid"
+        />
+      </div>
+      <div v-else class="h-100 w-100">
+        <div style="text-align: center; margin-top: 15%">
+          <div style="font-size: 4rem; color: red">
+            <img
+              src="/logo-full.png"
+              style="width: 256px; filter: grayscale(100%); opacity: 0.3"
+            />
+          </div>
+          <div style="width: 100%; max-width: 320px; color: rgba(0, 0, 0, 0.5)" class="mx-auto">
+            AI-Powered Regulatory Assessment Solution for Digital Asset Innovation
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -54,7 +69,7 @@ export default {
   computed: {
     ...mapStores(organizationsStore),
     organizationGuid() {
-        return this.$route.params.organizationGuid as string
+      return this.$route.params.organizationGuid as string
     },
     projects() {
       const organization = this.organizationsStore.findOrganization(this.organizationGuid)
