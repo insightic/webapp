@@ -1,16 +1,27 @@
 <template>
-  <div v-html="highlightCode"></div>
+  <pre class="code-block">
+    <code class="line-numbers language-solidity">
+    {{ code }}
+  </code>
+  </pre>
 </template>
 
 <script lang="ts">
-import hljs from 'highlight.js'
+import Prism from 'prismjs'
 
 export default {
   props: ['code'],
-  computed: {
-    highlightCode() {
-      return hljs.highlightAuto(this.code).value
-    }
+  created() {
+    this.$nextTick(() => {
+      Prism.highlightAll()
+    })
   }
 }
 </script>
+
+<style scoped>
+.code-block {
+  font-size: 0.6rem;
+  max-height: 700px;
+}
+</style>
