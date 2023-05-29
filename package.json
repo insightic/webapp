@@ -13,8 +13,10 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.7",
+    "@types/highlightjs": "^9.12.2",
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.5",
+    "highlight.js": "^11.8.0",
     "monaco-editor": "^0.38.0",
     "pinia": "^2.0.36",
     "vue": "^3.3.2",

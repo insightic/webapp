@@ -28,8 +28,7 @@
           </select>
         </form>
 
-        <MonacoEditor class="h-100" />
-        Hello
+        <CodeView class="h-100" code="#include <stdio>\n\nint main(){}"/>
       </div>
     </div>
     <div class="h-100 col-md-3" style="overflow-y: auto">
@@ -77,14 +76,14 @@
 <script lang="ts">
 import StatusCardGroup from '@/components/StatusCardGroup.vue'
 import TextCard from '@/components/TextCard.vue'
-import MonacoEditor from '@/components/MonacoEditor.vue'
+import CodeView from '@/components/CodeView.vue'
 
 export default {
   props: ['project'],
   components: {
     StatusCardGroup,
     TextCard,
-    MonacoEditor
+    CodeView
   },
   data() {
     return {
