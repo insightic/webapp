@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 import BiSwap_LP from './sample_data/BiSwap_LP'
 import Wolf_Game from './sample_data/Wolf_Game'
 import Pool_Together from './sample_data/Pool_Together'
+import Olympus from './sample_data/Olympus'
 import EulerFinance from './sample_data/Euler_Finance'
 
 export const organizationsStore = defineStore('organizations', () => {
@@ -14,18 +15,7 @@ export const organizationsStore = defineStore('organizations', () => {
                 BiSwap_LP,
                 Wolf_Game,
                 Pool_Together,
-                {
-                    guid: "e262d5c2-16f8-47a0-8c70-4019514d137d",
-                    logo: "/webapp/logos/olympus.jpeg",
-                    name: "Olympus",
-                    url: "https://olympusdao.finance",
-                    author: "John Doe",
-                    rating: "B-",
-                    description: "Olympus is a stablecoin",
-                    tags: ["Stablecoin", "NFT"],
-                    status: "In Progress",
-                    dueAt: "2023-05-25T00:00:00.000Z",
-                },
+                Olympus,
                 EulerFinance
             ]
         },
