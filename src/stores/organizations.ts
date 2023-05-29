@@ -1,6 +1,7 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import BiSwap_LP from './sample_data/BiSwap_LP'
+import Wolf_Game from './sample_data/Wolf_Game'
 import EulerFinance from './sample_data/Euler_Finance'
 
 export const organizationsStore = defineStore('organizations', () => {
@@ -10,18 +11,7 @@ export const organizationsStore = defineStore('organizations', () => {
             name: "Team 1",
             projects: [
                 BiSwap_LP,
-                {
-                    guid: "e262d5c2-16f8-47a0-8c70-4019514d137b",
-                    logo: "/webapp/logos/wolfgame.jpeg",
-                    name: "Wolf Game",
-                    url: "https://wolf.game",
-                    author: "John Doe",
-                    rating: "B-",
-                    description: "Wolf Game is a game where you play as a wolf",
-                    tags: ["Game", "NFT"],
-                    status: "In Progress",
-                    dueAt: "2023-05-25T00:00:00.000Z",
-                },
+                Wolf_Game,
                 {
                     guid: "e262d5c2-16f8-47a0-8c70-4019514d137c",
                     logo: "/webapp/logos/pooltogether.jpeg",
