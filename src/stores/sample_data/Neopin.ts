@@ -42,6 +42,49 @@ export default {
             ],
         },
         {
+            title: "Security",
+            props: [
+                {
+                    component: "PropDisplayCard",
+                    title: "Smart Contract",
+                    text: "NPT is re-designed to be a multi-chain token that poses potential risks due to the increased complexity of the blockchain architecture. With multiple chains, the risk of smart contract vulnerabilities and bugs increase, which could lead to the loss of tokens or other potential security issues.<br/><br/>NPT deploying all tokens to a single address during contract deployment poses a risk of centralization. This method puts an enormous amount of trust in the contract deployer, who has the power to distribute tokens at their discretion. This central point of control may be prone to misuse or compromise, threatening the integrity and security of the entire system."
+                },
+                {
+                    component: "PropDisplayCard",
+                    title: "Code Integrity",
+                    text: `The deployed NPT smart contract code differs from the audited code.<br/>
+                    <a href='https://scope.klaytn.com/account/0xe06597d02a2c3aa7a9708de2cfa587b128bd3815?tabId=contractCode'>Deployed code on Klaytn</a><br/>
+                    <a href='https://etherscan.io/token/0x306ee01a6bA3b4a8e993fA2C1ADC7ea24462000c#code'>Deployed code on Ethereum</a><br/>
+                    <a href='https://polygonscan.com/address/0x306ee01a6ba3b4a8e993fa2c1adc7ea24462000c#code'>Deployed code on Polygon</a><br/>
+                    <a href='https://github.com/Neopin/neopin-audits/blob/master/Audit_Report_20220627_NPT_Staking_And_DEX_Swap_SlowMist.pdf'>Audited Code in Audit Report</a><br/>
+                    <br/>
+                    Multichain token smart contract is not audited.`
+                },
+                {
+                    component: "PropDisplayTable",
+                    title: "Audit Report",
+                    headers: ["Report", "Date", "By", "Coverage"],
+                    rows: [
+                        ["1", "Aug 2021", "CertiK", "Token"],
+                        ["2", "March 2022", "SlowMist", "Token + Lockup"]
+                    ]
+                },
+                {
+                    component: "PropDisplayCard",
+                    title: "",
+                    text: `Neopin's audit reports are outdated and infrequent.
+                    <br/>
+                    The audit reports conducted lack professional depth, potentially resulting in overlooked threats and weaknesses.<br/>
+                    <a href='https://github.com/Neopin/neopin-audits/tree/master'>Audit Reports</a>`
+                },
+                {
+                    component: "PropDisplayCard",
+                    title: "Code Library",
+                    text: `NPT token is using an old version of OpenZeppelin library v3.0.0 (<a href='https://github.com/OpenZeppelin/openzeppelin-contracts/releases/tag/v3.0.0'>Released</a> on Apr 2020). The library is out-of-date.`
+                },
+            ],
+        },
+        {
             title: "On-Chain Data Analysis",
             props: [
                 {
@@ -93,5 +136,29 @@ export default {
                 }
             ],
         },
+        {
+            title: "Social Media Analysis",
+            props: [
+                {
+                    component: "PropDisplayKeyValue",
+                    title: "Social Media",
+                    values: [
+                        {
+                            key: "Discord ",
+                            value: "To be crawled"
+                        },
+                        {
+                            key: "Twitter",
+                            value: "31,634 - ↑300% in 20 days"
+                        },
+                        {
+                            key: "Instagram",
+                            value: "To be crawled"
+                        }
+                    ]
+                }
+            ],
+        },
+
     ]
 }
