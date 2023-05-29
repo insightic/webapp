@@ -21,14 +21,13 @@
       <div class="h-100">
         <form>
           <select class="form-control">
-            <option selected>OlympusAuthority.sol</option>
-            <option value="1">sOlympusERC20.sol</option>
-            <option value="2">StandardBondingCalculator.sol</option>
-            <option value="3">Treasury.sol</option>
+            <option v-for="(file, idx) in contracts" :key="idx">
+              {{ file }}
+            </option>
           </select>
         </form>
 
-        <CodeView class="h-100" style="overflow-y: auto;" :code="BiswapERC20" />
+        <CodeView class="h-100" style="overflow-y: auto" :code="BiswapERC20" />
       </div>
     </div>
     <div class="h-100 col-md-3" style="overflow-y: auto">
@@ -186,6 +185,12 @@ export default {
             'The Biswap smart contract does not impose any restrictions on the maximum transaction amount or frequency for a given address.'
         }
       ]
+    }
+  },
+  computed: {
+    contracts() {
+      let contracts = this.project?.assessment?.contracts || {}
+      return Object.keys(contracts)
     }
   }
 }

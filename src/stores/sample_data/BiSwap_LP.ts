@@ -130,5 +130,13 @@ export default {
                 }
             ]
         },
-    ]
+    ],
+    assessment: {
+        contracts: {
+            "BSWToken.sol": "",
+            "BiswapERC20.sol": "",
+            "BiswapFactory.sol": "",
+            "BiswapPair.sol": ""
+        }
+    }
 }
