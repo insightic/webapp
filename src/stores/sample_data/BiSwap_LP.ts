@@ -51,35 +51,7 @@ export default {
                     component: "PropDisplayCard",
                     title: "Blog Analysis",
                     text: "Retail investors who need to swap tokens<br/>Institutiona funds who conduct AMM business<br/>VASPs who IDO"
-                },
-                // {
-                //     component: "PropDisplayKeyValue",
-                //     title: "Governance Monitoring",
-                //     values: [
-                //         {
-                //             key: "Number of Pools",
-                //             value: "1555"
-                //         },
-                //         {
-                //             key: "TVL",
-                //             value: "$113,934"
-                //         },
-                //         {
-                //             key: "Changes",
-                //             value: "-11.42%"
-                //         }
-                //     ]
-                // },
-                // {
-                //     component: "PropDisplayTable",
-                //     title: "Important Events",
-                //     headers: ["Event", "Status", "Date"],
-                //     rows: [
-                //         ["Contract Upgrades (eIP 14)", "SUCCEEDED", "Aug 12, 2022"],
-                //         ["Move All Asset Price Oracles to Chainlink", "SUCCEEDED", "Sep 5, 2022"],
-                //         ["Update the Interest Rate Model", "SUCCEEDED", "Feb 19, 2023"]
-                //     ]
-                // }
+                }
             ]
         },
         {
