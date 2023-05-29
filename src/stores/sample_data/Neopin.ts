@@ -1,3 +1,7 @@
+import NeopinToken from './contracts/NeopinToken.sol.txt?raw'
+import MultichainToken from './contracts/MultichainToken.sol.txt?raw'
+import MultichainNPT from './contracts/MultichainNPT.sol.txt?raw'
+
 export default {
     guid: "e262d5c2-16f8-47a0-8d10-4019514d137a",
     logo: "/webapp/logos/neopin.png",
@@ -160,5 +164,12 @@ export default {
             ],
         },
 
-    ]
+    ],
+    assessment: {
+        contracts: {
+            "NeopinToken.sol": NeopinToken,
+            "MultichainToken.sol": MultichainToken,
+            "MultichainNPT.sol": MultichainNPT,
+        }
+    }
 }
