@@ -1,3 +1,8 @@
+import Allegiance from './contracts/Allegiance.sol.txt?raw'
+import CaveGame from './contracts/CaveGame.sol.txt?raw'
+import FarmerGem from './contracts/FarmerGem.sol.txt?raw'
+import IControllable1155 from './contracts/IControllable1155.sol.txt?raw'
+
 export default {
     guid: "e262d5c2-16f8-47a0-8c70-4019514d137b",
     logo: "/webapp/logos/wolfgame.jpeg",
@@ -158,5 +163,13 @@ export default {
                 }
             ]
         },
-    ]
+    ],
+    assessment: {
+        contracts: {
+            "Allegiance.sol": Allegiance,
+            "CaveGame.sol": CaveGame,
+            "FarmerGem.sol": FarmerGem,
+            "IControllable1155.sol": IControllable1155
+        }
+    }
 }
