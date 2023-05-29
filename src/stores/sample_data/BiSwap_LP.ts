@@ -1,3 +1,8 @@
+import BSWToken from "./contracts/BSWToken.sol.txt?raw";
+import BiswapERC20 from "./contracts/BiswapERC20.sol.txt?raw";
+import BiswapFactory from "./contracts/BiswapFactory.sol.txt?raw";
+import BiswapPair from "./contracts/BiswapPair.sol.txt?raw";
+
 export default {
     guid: "e262d5c2-16f8-47a0-8c70-4019514d137a",
     logo: "/webapp/logos/biswap.jpeg",
@@ -133,10 +138,10 @@ export default {
     ],
     assessment: {
         contracts: {
-            "BSWToken.sol": "",
-            "BiswapERC20.sol": "",
-            "BiswapFactory.sol": "",
-            "BiswapPair.sol": ""
+            "BSWToken.sol": BSWToken,
+            "BiswapERC20.sol": BiswapERC20,
+            "BiswapFactory.sol": BiswapFactory,
+            "BiswapPair.sol": BiswapPair
         }
     }
 }

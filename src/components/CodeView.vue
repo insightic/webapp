@@ -15,6 +15,13 @@ export default {
     this.$nextTick(() => {
       Prism.highlightAll()
     })
+  },
+  watch: {
+    code() {
+      this.$nextTick(() => {
+        Prism.highlightAll()
+      })
+    }
   }
 }
 </script>

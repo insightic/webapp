@@ -20,14 +20,14 @@
     <div class="col-md-6">
       <div class="h-100">
         <form>
-          <select class="form-control">
+          <select class="form-control" @change="onContractChange(contract)" v-model="contract">
             <option v-for="(file, idx) in contracts" :key="idx">
               {{ file }}
             </option>
           </select>
         </form>
 
-        <CodeView class="h-100" style="overflow-y: auto" :code="BiswapERC20" />
+        <CodeView class="h-100" style="overflow-y: auto" :code="code" />
       </div>
     </div>
     <div class="h-100 col-md-3" style="overflow-y: auto">
@@ -76,7 +76,6 @@
 import StatusCardGroup from '@/components/StatusCardGroup.vue'
 import TextCard from '@/components/TextCard.vue'
 import CodeView from '@/components/CodeView.vue'
-import BiswapERC20 from '@/assets/BiswapERC20.sol.txt?raw'
 
 export default {
   props: ['project'],
@@ -87,7 +86,7 @@ export default {
   },
   data() {
     return {
-      BiswapERC20: BiswapERC20,
+      contract: '',
       statuses: [
         {
           text: '✅ [dex011]',
@@ -187,10 +186,22 @@ export default {
       ]
     }
   },
+  created() {
+    this.contract = this.contracts[0] || ''
+  },
   computed: {
     contracts() {
       let contracts = this.project?.assessment?.contracts || {}
       return Object.keys(contracts)
+    },
+    code() {
+      let contracts = this.project?.assessment?.contracts || {}
+      return contracts[this.contract] || ''
+    }
+  },
+  methods: {
+    onContractChange(contract: string | null) {
+      console.log('onContractChange', contract)
     }
   }
 }
