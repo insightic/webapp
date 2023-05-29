@@ -5,6 +5,7 @@ import Wolf_Game from './sample_data/Wolf_Game'
 import Pool_Together from './sample_data/Pool_Together'
 import Olympus from './sample_data/Olympus'
 import EulerFinance from './sample_data/Euler_Finance'
+import Neopin from './sample_data/Neopin'
 
 export const organizationsStore = defineStore('organizations', () => {
     const organizations = ref([
@@ -16,7 +17,8 @@ export const organizationsStore = defineStore('organizations', () => {
                 Wolf_Game,
                 Pool_Together,
                 Olympus,
-                EulerFinance
+                EulerFinance,
+                Neopin
             ]
         },
         {
@@ -27,7 +29,8 @@ export const organizationsStore = defineStore('organizations', () => {
                 Wolf_Game,
                 Pool_Together,
                 Olympus,
-                EulerFinance
+                EulerFinance,
+                Neopin
             ]
         },
         {
@@ -38,7 +41,8 @@ export const organizationsStore = defineStore('organizations', () => {
                 Wolf_Game,
                 Pool_Together,
                 Olympus,
-                EulerFinance
+                EulerFinance,
+                Neopin
             ]
         },
     ])
