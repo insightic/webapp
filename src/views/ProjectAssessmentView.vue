@@ -20,7 +20,7 @@
     <div class="col-md-6">
       <div class="h-100">
         <form>
-          <select class="form-control" @change="onContractChange(contract)" v-model="contract">
+          <select class="form-select" @change="onContractChange(contract)" v-model="contract">
             <option v-for="(file, idx) in contracts" :key="idx">
               {{ file }}
             </option>
