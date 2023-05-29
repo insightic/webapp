@@ -23,12 +23,22 @@ export const organizationsStore = defineStore('organizations', () => {
             guid: "e262d5c2-16f8-47a0-8c70-4019514b137d",
             name: "Team 2",
             projects: [
+                BiSwap_LP,
+                Wolf_Game,
+                Pool_Together,
+                Olympus,
+                EulerFinance
             ]
         },
         {
             guid: "e262d5c2-16f8-47a0-8c70-4019514b137e",
             name: "Team 3",
             projects: [
+                BiSwap_LP,
+                Wolf_Game,
+                Pool_Together,
+                Olympus,
+                EulerFinance
             ]
         },
     ])
