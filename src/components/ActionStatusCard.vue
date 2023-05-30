@@ -2,6 +2,7 @@
   <div
     class="action-status-card p-3 my-2"
     :class="{ danger: type == 'danger', warn: type == 'warn', primary: type == 'primary' }"
+    style="cursor: pointer"
   >
     <div class="d-flex">
       <div style="margin-right: 15px; font-size: 1.5rem">
@@ -16,7 +17,7 @@
         <div style="font-size: 0.8rem; margin-top: 6px">
           {{ text }}
         </div>
-        <div style="font-size: 0.8rem; margin-top: 10px; cursor: pointer"><u>Details</u></div>
+        <div style="font-size: 0.8rem; margin-top: 10px"><u>Details</u></div>
       </div>
     </div>
   </div>
