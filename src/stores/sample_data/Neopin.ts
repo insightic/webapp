@@ -154,25 +154,14 @@ export default {
             title: "Social Media Analysis",
             props: [
                 {
-                    component: "PropDisplayKeyValue",
+                    component: "PropDisplayTable",
                     title: "Social Media",
-                    values: [
-                        {
-                            key: "Telegram",
-                            value: "2,129 - ↓50% in 60 days"
-                        },
-                        {
-                            key: "Discord",
-                            value: "To be crawled"
-                        },
-                        {
-                            key: "Twitter",
-                            value: "31,634 - ↑300% in 20 days"
-                        },
-                        {
-                            key: "Instagram",
-                            value: "To be crawled"
-                        }
+                    headers: ["Platform", "#members/followers", "Remarks"],
+                    rows: [
+                        ["Telegram", "2,129", "↓50% in 60 days"],
+                        ["Discord", "-", "-"],
+                        ["Twitter", "31,634", "↑300% in 20 days"],
+                        ["Instagram", "-", "-"]
                     ]
                 }
             ],
