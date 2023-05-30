@@ -6,7 +6,7 @@ export default {
     author: "John Doe",
     rating: "B-",
     description: "Euler Finance is a DeFi protocol",
-    tags: ["DeFi", "NFT"],
+    tags: ["Loan", "P2P Trading", "Collateral Control", "Deposits", "Risk Management", "DAO", "Flashloan", "Price Oracle"],
     status: "In Progress",
     dueAt: "2023-05-25T00:00:00.000Z",
     overviewView: [

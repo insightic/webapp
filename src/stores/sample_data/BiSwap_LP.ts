@@ -11,7 +11,7 @@ export default {
     author: "John Doe",
     rating: "B-",
     description: "BiSwap LP is a liquidity pool for the BiSwap DEX",
-    tags: ["P2P Trading", "Deposits"],
+    tags: ["P2P Trading", "Deposits", "DEX"],
     status: "In Progress",
     dueAt: "2023-05-25T00:00:00.000Z",
     overviewView: [
@@ -22,7 +22,7 @@ export default {
                     component: "PropDisplayCard",
                     title: "Business model & Value Proposition",
                     text: "Biswap is a trusted DEX platform on the BNB Chain Network with a Multi-type Referral Program and low trade fee starting from 0.1%. Biswap is the ecosystem that offers the best service and creates new standards in DeFi.",
-                    tags: ["P2P Trading", "Deposits"],
+                    tags: ["P2P Trading", "Deposits", "DEX"],
                     regulations: [
                         {
                             text: "https://www.1.com",

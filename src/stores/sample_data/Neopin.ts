@@ -10,7 +10,7 @@ export default {
     author: "John Doe",
     rating: "D",
     description: "Neopin is a blockchain-based project that employs a CeDeFi model, primarily focusing on incentivizing user activities with its native token, NPT, but is reported to exhibit operational, tokenomic, and auditing risks.",
-    tags: ["P2P Trading", "Deposits"],
+    tags: ["DeFi", "Wallet", "Staking", "Multi-chain", "CeDeFi"],
     status: "In Progress",
     dueAt: "2023-05-25T00:00:00.000Z",
     overviewView: [
