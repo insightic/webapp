@@ -1,9 +1,9 @@
 <template>
   <div
-    v-if="visible"
-    class="modal"
+    class="modal fade"
+    :class="{ show: visible, hidden: !visible }"
     tabindex="-1"
-    style="display: block !important; background-color: rgba(0, 0, 0, 0.5)"
+    style="display: block; background-color: rgba(0, 0, 0, 0.5)"
   >
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
@@ -80,3 +80,9 @@ export default {
   props: ['title', 'description', 'actions', 'tasks', 'visible']
 }
 </script>
+
+<style scoped>
+.hidden {
+  visibility: hidden;
+}
+</style>
