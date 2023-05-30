@@ -9,7 +9,7 @@ export default {
     tags: ["Pool", "NFT"],
     status: "In Progress",
     dueAt: "2023-05-25T00:00:00.000Z",
-    overview: [
+    overviewView: [
         {
             title: "Business Model Analysis",
             props: [
