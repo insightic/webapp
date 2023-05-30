@@ -11,7 +11,7 @@ export const organizationsStore = defineStore('organizations', () => {
     const organizations = ref([
         {
             guid: "e262d5c2-16f8-47a0-8c70-4019514b137c",
-            name: "Team 1",
+            name: "Team 1 - DeFi",
             projects: [
                 BiSwap_LP,
                 Wolf_Game,
@@ -23,7 +23,7 @@ export const organizationsStore = defineStore('organizations', () => {
         },
         {
             guid: "e262d5c2-16f8-47a0-8c70-4019514b137d",
-            name: "Team 2",
+            name: "Team 2 - Infra",
             projects: [
                 BiSwap_LP,
                 Wolf_Game,
@@ -35,7 +35,7 @@ export const organizationsStore = defineStore('organizations', () => {
         },
         {
             guid: "e262d5c2-16f8-47a0-8c70-4019514b137e",
-            name: "Team 3",
+            name: "Team 3 - DAO",
             projects: [
                 BiSwap_LP,
                 Wolf_Game,

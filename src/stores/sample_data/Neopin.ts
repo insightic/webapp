@@ -6,10 +6,10 @@ export default {
     guid: "e262d5c2-16f8-47a0-8d10-4019514d137a",
     logo: "/webapp/logos/neopin.png",
     name: "Neopin",
-    url: "https://biswap.org",
+    url: "https://neopin.io/",
     author: "John Doe",
-    rating: "B",
-    description: "Neopin is a liquidity pool for the BiSwap DEX",
+    rating: "D",
+    description: "Neopin is a blockchain-based project that employs a CeDeFi model, primarily focusing on incentivizing user activities with its native token, NPT, but is reported to exhibit operational, tokenomic, and auditing risks.",
     tags: ["P2P Trading", "Deposits"],
     status: "In Progress",
     dueAt: "2023-05-25T00:00:00.000Z",
@@ -21,7 +21,7 @@ export default {
                     component: "PropDisplayCard",
                     title: "Business model & Value Proposition",
                     text: "NEOPIN is a hybrid financial platform blending centralized finance (CeFi) and decentralized finance (DeFi) to connect traditional finance and Web3 markets. By leveraging the stability, security, and regulatory compliance of CeFi and the transparency and accessibility of DeFi, NEOPIN aims to resolve trust and security issues present in both financial sectors. The platform uses its native NEOPIN token (NPT) and allows users to participate in liquidity pools, earning rewards for their contributions through features like staking, swap, and yield farming. NEOPIN is also exploring additional products, including Play-to-Earn games, Stake-to-Earn, Mine-to-Earn, and NFT services, while prioritizing security and regulatory compliance with systems like KYC and AML.",
-                    tags: ["DeFi", "Wallet", "Staking", "Multi-chain"],
+                    tags: ["DeFi", "Wallet", "Staking", "Multi-chain", "CeDeFi"],
                     regulations: [
                         {
                             text: "ref1",
@@ -141,6 +141,16 @@ export default {
             ],
         },
         {
+            title: "Team Analysis",
+            props: [
+                {
+                    component: "PropDisplayCard",
+                    title: "Background",
+                    text: "Neopin team is anonymous."
+                }
+            ],
+        },
+        {
             title: "Social Media Analysis",
             props: [
                 {
@@ -148,7 +158,11 @@ export default {
                     title: "Social Media",
                     values: [
                         {
-                            key: "Discord ",
+                            key: "Telegram",
+                            value: "2,129 - ↓50% in 60 days"
+                        },
+                        {
+                            key: "Discord",
                             value: "To be crawled"
                         },
                         {
