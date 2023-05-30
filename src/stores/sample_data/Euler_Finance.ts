@@ -149,54 +149,39 @@ export default {
     actionsView: {
         actions: [
             {
-                title: 'Require 1 or more security audit report',
-                text: 'Suggest the VASP to submit at least another security audit report within 45 days...',
+                title: 'The DAO voting is highly centralized.',
+                text: '10 votings events are led by a single address (> 50% weight). Request the VASP t...',
                 type: 'danger'
             },
             {
-                title: 'Code has not been updates for long time',
-                text: 'Suggest the VASP to link Github account or submit a new code base.',
+                title: 'The DAO voting is highly centralized.',
+                text: 'Request the VASP to conduct KYC for addresses, unless reducing their voting weig...',
+                type: 'danger'
+            },
+            {
+                title: 'Core contract has been modified recently.',
+                text: 'Suggest the VASP to submit at least two security audit reports that covers the u...',
+                type: 'danger'
+            },
+            {
+                title: 'A new developer address added.',
+                text: 'Request the VASP to conduct KYC for the new developer. No contract modification ...',
                 type: 'warn'
-            },
-            {
-                title: 'Risky wallets interaction',
-                text: 'The deployed contract has attracted many newly wallets. Require VASP to validate...',
-                type: 'primary'
-            },
-            {
-                title: 'Code has high similarity to Uniswap',
-                text: 'Suggest the VASP to further clarify the differences for not violating Business S...',
-                type: 'danger'
-            },
-            {
-                title: 'High botting rate',
-                text: "Suggest to review the VASP's solution on bot detection and IP restriction.",
-                type: 'warn'
-            },
-            {
-                title: 'Core contract has been modified recently',
-                text: 'Dangerous to update the core smart contract code. The audit reports may not be s...',
-                type: 'primary'
-            },
-            {
-                title: 'Orderbook Spoofing',
-                text: 'There is a high chance that the order book design has no restriction on spoofing...',
-                type: 'danger'
             }
         ],
         tasks: [
             {
-                title: 'Require 1 or more security audit report',
+                title: 'Add security audit report',
                 text: 'Suggest the VASP to submit at least another security audit report within 45 days...',
                 type: 'danger'
             },
             {
-                title: 'Code has not been updates for long time',
+                title: 'Update code and whitepapers',
                 text: 'Suggest the VASP to link Github account or submit a new code base.',
                 type: 'warn'
             },
             {
-                title: 'Risky wallets interaction',
+                title: 'Check the interaction of the wallets',
                 text: 'The deployed contract has attracted many newly wallets. Require VASP to validate...',
                 type: 'primary'
             }
