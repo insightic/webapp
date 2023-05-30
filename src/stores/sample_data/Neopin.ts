@@ -165,7 +165,7 @@ export default {
         },
 
     ],
-    assessment: {
+    assessmentView: {
         contracts: {
             "NeopinToken.sol": NeopinToken,
             "MultichainToken.sol": MultichainToken,

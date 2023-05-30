@@ -191,11 +191,11 @@ export default {
   },
   computed: {
     contracts() {
-      let contracts = this.project?.assessment?.contracts || {}
+      let contracts = this.project?.assessmentView?.contracts || {}
       return Object.keys(contracts)
     },
     code() {
-      let contracts = this.project?.assessment?.contracts || {}
+      let contracts = this.project?.assessmentView?.contracts || {}
       return contracts[this.contract] || ''
     }
   },

@@ -164,7 +164,7 @@ export default {
             ]
         },
     ],
-    assessment: {
+    assessmentView: {
         contracts: {
             "Allegiance.sol": Allegiance,
             "CaveGame.sol": CaveGame,
