@@ -6,7 +6,7 @@
           style="
             border: 3px solid white;
             border-radius: 5px;
-            background-color: white;
+            background-color: transparent;
             background-image: url('/webapp/logo.png');
             background-repeat: round;
             background-origin: content-box;
