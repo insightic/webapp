@@ -113,25 +113,34 @@ export default {
             props: [
                 {
                     component: "PropDisplayCard",
-                    title: "On-Chain Analysis",
-                    text: "Biswap is a trusted DEX platform on the BNB Chain Network with a Multi-type Referral Program and low trade fee starting from 0.1%. Biswap is the ecosystem that offers the best service and creates new standards in DeFi.",
-                    tags: ["P2P Trading", "Deposits"],
-                    regulations: [
+                    title: "Overview",
+                    text: "The Biswap team is a diverse group of professionals with a wide range of skills and experiences."
+                },
+                {
+                    component: "PropDisplayCard",
+                    title: "Background",
+                    text: "BiSwap team is anonymous."
+                },
+                {
+                    title: "Team",
+                    values: [
                         {
-                            text: "https://www.1.com",
-                            href: "https://www.1.com"
+                            key: "CEO | EK",
+                            value: "More than 7 years in the crypto industry. Strong analytic and management skills."
+                        },
+                        {
+                            key: "Product Manager | Kevin",
+                            value: "Extensive 11+ years of work experience in product development. More than 7 years in the crypto space."
+                        },
+                        {
+                            key: "Product Owner | Miles",
+                            value: "Great 5 years of experience and professional vision in Product Management."
+                        },
+                        {
+                            key: "Head of IT | Nick",
+                            value: "More than 6 years of experience as a backend & front-end developer and more than 4 years of experience in the field of solidity programming."
                         }
                     ]
-                },
-                {
-                    component: "PropDisplayCard",
-                    title: "Twitter Analysis",
-                    text: "Retail investors who need to swap tokens<br/>Institutiona funds who conduct AMM business<br/>VASPs who IDO"
-                },
-                {
-                    component: "PropDisplayCard",
-                    title: "LinkedIn Analysis",
-                    text: "Retail investors who need to swap tokens<br/>Institutiona funds who conduct AMM business<br/>VASPs who IDO"
                 }
             ]
         },

@@ -123,25 +123,40 @@ export default {
             props: [
                 {
                     component: "PropDisplayCard",
-                    title: "On-Chain Analysis",
-                    text: "Biswap is a trusted DEX platform on the BNB Chain Network with a Multi-type Referral Program and low trade fee starting from 0.1%. Biswap is the ecosystem that offers the best service and creates new standards in DeFi.",
-                    tags: ["P2P Trading", "Deposits"],
-                    regulations: [
+                    title: "Overview",
+                    text: "Euler is a team of software engineers and quantitative analysts specialising in the research and development of financial applications."
+                },
+                {
+                    component: "PropDisplayKeyValue",
+                    title: "Team",
+                    values: [
                         {
-                            text: "https://www.1.com",
-                            href: "https://www.1.com"
+                            key: "CEO",
+                            value: "Michael Bentley https://twitter.com/euler_mab"
+                        },
+                        {
+                            key: "Marketing",
+                            value: "Alicia Katz https://twitter.com/aliciakatz"
+                        },
+                        {
+                            key: "Research",
+                            value: "river0x https://twitter.com/river0x_"
+                        },
+                        {
+                            key: "Engineer",
+                            value: "Lee https://twitter.com/lmount_"
                         }
                     ]
                 },
                 {
                     component: "PropDisplayCard",
-                    title: "Twitter Analysis",
-                    text: "Retail investors who need to swap tokens<br/>Institutiona funds who conduct AMM business<br/>VASPs who IDO"
-                },
+                    title: "LinkedIn Analysis",
+                    text: "to be updated"
+                }
                 {
                     component: "PropDisplayCard",
-                    title: "LinkedIn Analysis",
-                    text: "Retail investors who need to swap tokens<br/>Institutiona funds who conduct AMM business<br/>VASPs who IDO"
+                    title: "Twitter Analysis",
+                    text: "to be updated"
                 }
             ]
         }

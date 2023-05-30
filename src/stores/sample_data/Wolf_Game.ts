@@ -136,33 +136,6 @@ export default {
                 }
             ]
         },
-        {
-            title: "Team Background Analysis",
-            props: [
-                {
-                    component: "PropDisplayCard",
-                    title: "On-Chain Analysis",
-                    text: "Biswap is a trusted DEX platform on the BNB Chain Network with a Multi-type Referral Program and low trade fee starting from 0.1%. Biswap is the ecosystem that offers the best service and creates new standards in DeFi.",
-                    tags: ["P2P Trading", "Deposits"],
-                    regulations: [
-                        {
-                            text: "https://www.1.com",
-                            href: "https://www.1.com"
-                        }
-                    ]
-                },
-                {
-                    component: "PropDisplayCard",
-                    title: "Twitter Analysis",
-                    text: "Retail investors who need to swap tokens<br/>Institutiona funds who conduct AMM business<br/>VASPs who IDO"
-                },
-                {
-                    component: "PropDisplayCard",
-                    title: "LinkedIn Analysis",
-                    text: "Retail investors who need to swap tokens<br/>Institutiona funds who conduct AMM business<br/>VASPs who IDO"
-                }
-            ]
-        },
     ],
     assessmentView: {
         whitepaper: [
