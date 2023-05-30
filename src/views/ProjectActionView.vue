@@ -38,7 +38,12 @@
     <h4>Task</h4>
     <div class="row my-3">
       <div class="col-md-4" v-for="(status, idx) in tasks" :key="idx">
-        <ActionStatusCard :title="status.title" :text="status.text" :type="status.type" />
+        <ActionStatusCard
+          :title="status.title"
+          :text="status.text"
+          :type="status.type"
+          @click="showModal(status.title, status.text)"
+        />
       </div>
     </div>
   </div>

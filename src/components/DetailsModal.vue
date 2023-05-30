@@ -28,8 +28,8 @@
 
             <div class="mx-auto mt-4" style="max-width: 400px">
               <div class="form-check my-2">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                <label class="form-check-label" for="flexCheckDefault">
+                <input class="form-check-input" type="checkbox" value="" />
+                <label class="form-check-label">
                   <span style="font-size: 0.9rem">Email to VASP applicant</span> <br />
                   <span style="font-size: 0.8rem; color: rgb(135, 136, 141)"
                     >Send an email to the applicants</span
@@ -37,8 +37,8 @@
                 </label>
               </div>
               <div class="form-check my-2">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                <label class="form-check-label" for="flexCheckDefault">
+                <input class="form-check-input" type="checkbox" value="" />
+                <label class="form-check-label">
                   <span style="font-size: 0.9rem">Add to watchlist</span> <br />
                   <span style="font-size: 0.8rem; color: rgb(135, 136, 141)"
                     >Get notified when there is updates</span
@@ -46,8 +46,8 @@
                 </label>
               </div>
               <div class="form-check my-2">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                <label class="form-check-label" for="flexCheckDefault">
+                <input class="form-check-input" type="checkbox" value="" />
+                <label class="form-check-label">
                   <span style="font-size: 0.9rem">Feedback to internal regulator consultants</span>
                   <br />
                   <span style="font-size: 0.8rem; color: rgb(135, 136, 141)"
