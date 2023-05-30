@@ -122,6 +122,7 @@ export default {
                     text: "BiSwap team is anonymous."
                 },
                 {
+                    component: "PropDisplayKeyValue",
                     title: "Team",
                     values: [
                         {
