@@ -7,7 +7,7 @@
       :description="modalDescription"
     />
 
-    <div class="row my-3">
+    <!-- <div class="row my-3">
       <div class="col-md-4">
         <ActionCard title="Total Suggestion" status="17" changes="↑ 122" type="up">
           <i class="bi bi-search"></i>
@@ -23,7 +23,7 @@
           <i class="bi bi-info-circle"></i>
         </ActionCard>
       </div>
-    </div>
+    </div> -->
     <h4>Action</h4>
     <div class="row my-3">
       <div class="col-md-4" v-for="(status, idx) in actions" :key="idx">
@@ -51,14 +51,14 @@
 
 <script lang="ts">
 import ActionStatusCard from '@/components/ActionStatusCard.vue'
-import ActionCard from '@/components/ActionCard.vue'
+// import ActionCard from '@/components/ActionCard.vue'
 import DetailsModal from '@/components/DetailsModal.vue'
 
 export default {
   props: ['project'],
   components: {
     ActionStatusCard,
-    ActionCard,
+    // ActionCard,
     DetailsModal
   },
   data() {
