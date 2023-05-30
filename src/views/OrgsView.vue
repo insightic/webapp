@@ -1,6 +1,6 @@
 <template>
   <div class="org-card mx-auto">
-    <h1>Organizations</h1>
+    <h1>Teams</h1>
 
     <div class="org-buttons mx-auto">
       <OrgButton v-for="org in organizationsStore.organizations" :key="org.guid" :name="org.name" :guid="org.guid" />
