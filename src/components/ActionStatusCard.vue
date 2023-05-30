@@ -15,7 +15,7 @@
           <b>{{ title }}</b>
         </div>
         <div style="font-size: 0.8rem; margin-top: 6px">
-          {{ text }}
+          {{ shortText(text) }}
         </div>
         <div style="font-size: 0.8rem; margin-top: 10px"><u>Details</u></div>
       </div>
@@ -25,7 +25,12 @@
 
 <script lang="ts">
 export default {
-  props: ['title', 'text', 'type']
+  props: ['title', 'text', 'type'],
+  methods: {
+    shortText(text: string) {
+      return text.length > 70 ? text.substring(0, 70) + '...' : text
+    }
+  }
 }
 </script>
 

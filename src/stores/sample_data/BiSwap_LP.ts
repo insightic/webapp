@@ -335,7 +335,7 @@ export default {
         actions: [
             {
                 title: 'Require 1 or more security audit report',
-                text: 'Suggest the VASP to submit at least another security audit report within 45 days...',
+                text: 'Suggest the VASP to submit at least another security audit report within 45 days.',
                 type: 'danger'
             },
             {
@@ -345,12 +345,12 @@ export default {
             },
             {
                 title: 'Risky wallets interaction',
-                text: 'The deployed contract has attracted many newly wallets. Require VASP to validate...',
+                text: 'The deployed contract has attracted many newly wallets. Require VASP to validate their users.',
                 type: 'primary'
             },
             {
                 title: 'Code has high similarity to Uniswap',
-                text: 'Suggest the VASP to further clarify the differences for not violating Business S...',
+                text: 'Suggest the VASP to further clarify the differences for not violating Business Source License.',
                 type: 'danger'
             },
             {
@@ -360,12 +360,12 @@ export default {
             },
             {
                 title: 'Core contract has been modified recently',
-                text: 'Dangerous to update the core smart contract code. The audit reports may not be s...',
+                text: 'Dangerous to update the core smart contract code. The audit reports may not be sufficient.',
                 type: 'primary'
             },
             {
                 title: 'Orderbook Spoofing',
-                text: 'There is a high chance that the order book design has no restriction on spoofing...',
+                text: 'There is a high chance that the order book design has no restriction on spoofing.',
                 type: 'danger'
             }
         ],
