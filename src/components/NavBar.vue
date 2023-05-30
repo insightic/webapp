@@ -4,8 +4,8 @@
       <a class="navbar-brand" href="/">
         <div
           style="
-            border: 3px solid white;
-            border-radius: 5px;
+            border: 0px solid white;
+            border-radius: 0px;
             background-color: transparent;
             background-image: url('/webapp/logo.png');
             background-repeat: round;
