@@ -152,7 +152,7 @@ export default {
                     component: "PropDisplayCard",
                     title: "LinkedIn Analysis",
                     text: "to be updated"
-                }
+                },
                 {
                     component: "PropDisplayCard",
                     title: "Twitter Analysis",
