@@ -266,6 +266,36 @@ export default {
                 desciptionText: "contract BSWToken is BEP20('Biswap', 'BSW')"
             }
         ],
+        codeQuality: [
+            {
+                label: "Maintainability",
+                text: "A",
+                footer: "Created by SonarCube"
+            },
+            {
+                label: "Test Coverage",
+                text: "80%",
+                footer: "Created by Jest"
+            },
+            {
+                label: "Performance",
+                text: "B",
+                footer: "Created by GPT"
+            }
+        ],
+        securityAnalysis: [
+            {
+                label: "Score",
+                text: "80/100",
+                footer: "Created by Hacken"
+            },
+            {
+                label: "Audits",
+                text: "85/100",
+                footer: "Created by Verazt"
+            }
+        ],
+        explanation: "BiSwap is a decentralized exchange platform that allows users to easily swap BEP-20 tokens on the Binance Smart Chain network. The platform features a three-level referral system and low transaction fees (0.1%). Our mission is to become a leading platform for token swaps in the DeFi space by offering fast, secure, and easy-to-use services."
     },
     actionsView: {
         actions: [
