@@ -37,28 +37,28 @@ export default {
                 }
             ],
         },
-        {
-            title: "Social Media Analysis",
-            props: [
-                {
-                    component: "PropDisplayCard",
-                    title: "Twitter Analysis",
-                    text: "Biswap is a trusted DEX platform on the BNB Chain Network with a Multi-type Referral Program and low trade fee starting from 0.1%. Biswap is the ecosystem that offers the best service and creates new standards in DeFi.",
-                    tags: ["P2P Trading", "Deposits"],
-                    regulations: [
-                        {
-                            text: "https://www.1.com",
-                            href: "https://www.1.com"
-                        }
-                    ]
-                },
-                {
-                    component: "PropDisplayCard",
-                    title: "Blog Analysis",
-                    text: "Retail investors who need to swap tokens<br/>Institutiona funds who conduct AMM business<br/>VASPs who IDO"
-                }
-            ]
-        },
+        // {
+        //     title: "Social Media Analysis",
+        //     props: [
+        //         {
+        //             component: "PropDisplayCard",
+        //             title: "Twitter Analysis",
+        //             text: "Biswap is a trusted DEX platform on the BNB Chain Network with a Multi-type Referral Program and low trade fee starting from 0.1%. Biswap is the ecosystem that offers the best service and creates new standards in DeFi.",
+        //             tags: ["P2P Trading", "Deposits"],
+        //             regulations: [
+        //                 {
+        //                     text: "https://www.1.com",
+        //                     href: "https://www.1.com"
+        //                 }
+        //             ]
+        //         },
+        //         {
+        //             component: "PropDisplayCard",
+        //             title: "Blog Analysis",
+        //             text: "Retail investors who need to swap tokens<br/>Institutiona funds who conduct AMM business<br/>VASPs who IDO"
+        //         }
+        //     ]
+        // },
         {
             title: "On-Chain Data Analysis",
             props: [
@@ -122,25 +122,14 @@ export default {
                     text: "BiSwap team is anonymous."
                 },
                 {
-                    component: "PropDisplayKeyValue",
+                    component: "PropDisplayTable",
                     title: "Team",
-                    values: [
-                        {
-                            key: "CEO | EK",
-                            value: "More than 7 years in the crypto industry. Strong analytic and management skills."
-                        },
-                        {
-                            key: "Product Manager | Kevin",
-                            value: "Extensive 11+ years of work experience in product development. More than 7 years in the crypto space."
-                        },
-                        {
-                            key: "Product Owner | Miles",
-                            value: "Great 5 years of experience and professional vision in Product Management."
-                        },
-                        {
-                            key: "Head of IT | Nick",
-                            value: "More than 6 years of experience as a backend & front-end developer and more than 4 years of experience in the field of solidity programming."
-                        }
+                    headers: ["Role", "Name", "Description"],
+                    rows: [
+                        ["CEO", "EK", "More than 7 years in the crypto industry. Strong analytic and management skills."],
+                        ["Product Manager", "Kevin", "Extensive 11+ years of work experience in product development. More than 7 years in the crypto space."],
+                        ["Product Owner", "Miles", "Great 5 years of experience and professional vision in Product Management."],
+                        ["Head of IT", "Nick", "More than 6 years of experience as a backend & front-end developer and more than 4 years of experience in the field of solidity programming."]
                     ]
                 }
             ]
@@ -150,7 +139,7 @@ export default {
         whitepaper: [
             {
                 text: '✅ [dex011]',
-                footer: 'Tokens symbol is BSW',
+                footer: 'Tokens symbol',
                 desciptionTitle: 'Ticker Symbol: BSW',
                 desciptionText: "contract BSWToken is BEP20('Biswap', 'BSW')"
             },
@@ -162,7 +151,7 @@ export default {
             },
             {
                 text: '✅ [dex013]',
-                footer: '700000000',
+                footer: 'Max Supply of Token',
                 desciptionTitle: 'Max Supply: 700 000 000 BSW tokens',
                 desciptionText: 'The total token supply is 700,000,000'
             },
@@ -175,15 +164,15 @@ export default {
                     'Yes, ERC20 token standards is implemented, inherits from the BiswapERC20 contract with ERC20 interface.'
             },
             {
-                text: '✅ [dex015]',
-                footer: 'How many types of Swap Fee Tiers are mentioned in code?',
+                text: '❌ [dex015]',
+                footer: 'How many types of Swap Fee Tiers are mentioned?',
                 desciptionTitle: 'N.A.',
                 desciptionText:
                     'There is only one swapFee tier, which can be set by calling the `setSwapFee` function. The default value of the swapFee is 1.'
             },
             {
                 text: '✅ [dex016]',
-                footer: 'What is the swap fee for a single token swap?',
+                footer: 'Swap fee for a single token swap?',
                 desciptionTitle:
                     'The swap fee charged when someone makes a token swap on Biswap is 0.2% or 0.1%, depending on the trading pair. For most trading pairs, the fee is 0.2%, and for some specific pairs such as BUSD-USDT, USDC-USDT, and DAI-USDT, the fee is 0.1%.',
                 desciptionText: 'The default swap fee is 1 basis point (0.01%).'
@@ -213,7 +202,7 @@ export default {
                     'The provided code does not explicitly mention WBNB. However, the Biswap DEX supports trading pairs between any two ERC20 tokens, not just WBNB.'
             },
             {
-                text: '✅ [dex0110]',
+                text: '❌ [dex0110]',
                 footer: 'Is the smart contracts capable to prevent frontrunning attacks?',
                 desciptionTitle: 'N.A.',
                 desciptionText:
