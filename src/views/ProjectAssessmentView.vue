@@ -40,26 +40,20 @@
         </div>
       </div>
 
-      <div class="my-2">
+      <div class="my-2" v-if="securityAnalysis.length > 0">
         <h5>Security Analysis</h5>
         <div class="row">
-          <div class="col-md-6 p-1">
-            <TextCard label="Score" text="80/100" footer="Created by Hacken" />
-          </div>
-          <div class="col-md-6 p-1">
-            <TextCard label="Audits" text="85/100" footer="Created by Verazt" />
+          <div class="col-md-6 p-1" v-for="(chunk, idx) in securityAnalysis" :key="idx">
+            <TextCard :label="chunk.label" :text="chunk.text" :footer="chunk.footer" />
           </div>
         </div>
       </div>
 
-      <div class="my-2">
+      <div class="my-2" v-if="explanation">
         <h5>Explanation</h5>
 
         <div style="font-size: 0.85rem">
-          BiSwap is a decentralized exchange platform that allows users to easily swap BEP-20 tokens
-          on the Binance Smart Chain network. The platform features a three-level referral system
-          and low transaction fees (0.1%). Our mission is to become a leading platform for token
-          swaps in the DeFi space by offering fast, secure, and easy-to-use services.
+          {{ explanation }}
         </div>
       </div>
     </div>
@@ -106,6 +100,12 @@ export default {
     },
     codeQuality() {
       return this.project?.assessmentView?.codeQuality || []
+    },
+    securityAnalysis() {
+      return this.project?.assessmentView?.securityAnalysis || []
+    },
+    explanation() {
+      return this.project?.assessmentView?.explanation || ''
     }
   },
   methods: {
