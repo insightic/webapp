@@ -19,13 +19,13 @@
     </div>
     <h4>Action</h4>
     <div class="row my-3">
-      <div class="col-md-4" v-for="(status, idx) in project?.actionsView.actions" :key="idx">
+      <div class="col-md-4" v-for="(status, idx) in actions" :key="idx">
         <ActionStatusCard :title="status.title" :text="status.text" :type="status.type" />
       </div>
     </div>
     <h4>Task</h4>
     <div class="row my-3">
-      <div class="col-md-4" v-for="(status, idx) in project?.actionsView.tasks" :key="idx">
+      <div class="col-md-4" v-for="(status, idx) in tasks" :key="idx">
         <ActionStatusCard :title="status.title" :text="status.text" />
       </div>
     </div>
@@ -41,6 +41,14 @@ export default {
   components: {
     ActionStatusCard,
     ActionCard
+  },
+  computed: {
+    actions() {
+      return this.project?.actionsView?.actions || []
+    },
+    tasks() {
+      return this.project?.actionsView?.tasks || []
+    }
   }
 }
 </script>
