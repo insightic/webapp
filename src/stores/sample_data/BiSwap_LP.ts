@@ -315,6 +315,20 @@ export default {
                 footer: "Created by Verazt"
             }
         ],
+        codeSimilarity: [
+            {
+                label: "UniSwap",
+                text: "63%",
+            },
+            {
+                label: "PancakeSwap",
+                text: "49%",
+            },
+            {
+                label: "ParaSwap",
+                text: "29%",
+            }
+        ],
         explanation: "BiSwap is a decentralized exchange platform that allows users to easily swap BEP-20 tokens on the Binance Smart Chain network. The platform features a three-level referral system and low transaction fees (0.1%). Our mission is to become a leading platform for token swaps in the DeFi space by offering fast, secure, and easy-to-use services."
     },
     actionsView: {

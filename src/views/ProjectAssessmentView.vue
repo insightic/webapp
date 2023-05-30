@@ -50,6 +50,16 @@
       </div>
 
       <div class="my-2" v-if="explanation">
+        <h5>Code Similarity</h5>
+
+        <div class="row">
+          <div class="col-md-12 p-1" v-for="(chunk, idx) in codeSimilarity" :key="idx">
+            <TextCard :label="chunk.label" :text="chunk.text" :footer="chunk.footer" />
+          </div>
+        </div>
+      </div>
+
+      <div class="my-2" v-if="explanation">
         <h5>Explanation</h5>
 
         <div style="font-size: 0.85rem">
@@ -103,6 +113,9 @@ export default {
     },
     securityAnalysis() {
       return this.project?.assessmentView?.securityAnalysis || []
+    },
+    codeSimilarity() {
+      return this.project?.assessmentView?.codeSimilarity || []
     },
     explanation() {
       return this.project?.assessmentView?.explanation || ''
