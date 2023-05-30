@@ -31,17 +31,11 @@
       </div>
     </div>
     <div class="h-100 col-md-3" style="overflow-y: auto">
-      <div class="my-2">
+      <div class="my-2" v-if="codeQuality.length > 0">
         <h5>Code Quality</h5>
         <div class="row">
-          <div class="col-md-6 p-1">
-            <TextCard label="Maintainability" text="A" footer="Created by SonarCube" />
-          </div>
-          <div class="col-md-6 p-1">
-            <TextCard label="Test Coverage" text="80%" footer="Created by Jest" />
-          </div>
-          <div class="col-md-6 p-1">
-            <TextCard label="Performance" text="B" footer="Created by GPT" />
+          <div class="col-md-6 p-1" v-for="(chunk, idx) in codeQuality" :key="idx">
+            <TextCard :label="chunk.label" :text="chunk.text" :footer="chunk.footer" />
           </div>
         </div>
       </div>
@@ -109,6 +103,9 @@ export default {
     code() {
       let contracts = this.project?.assessmentView?.contracts || {}
       return contracts[this.contract] || ''
+    },
+    codeQuality() {
+      return this.project?.assessmentView?.codeQuality || []
     }
   },
   methods: {

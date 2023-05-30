@@ -285,7 +285,24 @@ export default {
             "BiswapERC20.sol": BiswapERC20,
             "BiswapFactory.sol": BiswapFactory,
             "BiswapPair.sol": BiswapPair
-        }
+        },
+        codeQuality: [
+            {
+                label: "Maintainability",
+                text: "A",
+                footer: "Created by SonarCube"
+            },
+            {
+                label: "Test Coverage",
+                text: "80%",
+                footer: "Created by Jest"
+            },
+            {
+                label: "Performance",
+                text: "B",
+                footer: "Created by GPT"
+            }
+        ]
     },
     actionsView: {
         actions: [
