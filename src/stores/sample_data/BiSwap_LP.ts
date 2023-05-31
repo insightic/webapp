@@ -156,12 +156,12 @@ export default {
                 desciptionText: 'The total token supply is 700,000,000'
             },
             {
-                text: '❌ [dex014]',
+                text: '✅ [dex014]',
                 footer: 'Is ERC20 Token Standard Implemented?',
                 desciptionTitle:
                     'No, BEP-20 token standard is implemented which is specific to the Binance Smart Chain (BSC) ecosystem',
                 desciptionText:
-                    'Yes, ERC20 token standards is implemented, inherits from the BiswapERC20 contract with ERC20 interface.'
+                    'No, BEP20 token standards is implemented, inherits from the BiswapERC20 contract with ERC20 interface.'
             },
             {
                 text: '❌ [dex015]',
@@ -233,42 +233,42 @@ export default {
                     'The Biswap smart contract does not impose any restrictions on the maximum transaction amount or frequency for a given address.'
             }
         ],
-        regulations: [
-            {
-                text: '✅ [dex011]',
-                footer: 'Tokens symbol is BSW',
-                desciptionTitle: 'Ticker Symbol: BSW',
-                desciptionText: "contract BSWToken is BEP20('Biswap', 'BSW')"
-            },
-            {
-                text: '✅ [dex012]',
-                footer: 'BEP-20 standard',
-                desciptionTitle: 'Chain: BNB Chain (BEP-20)',
-                desciptionText: "Contract BSWToken is BEP20('Biswap', 'BSW')"
-            },
-            {
-                text: '✅ [dex013]',
-                footer: '700000000',
-                desciptionTitle: 'Max Supply: 700 000 000 BSW tokens',
-                desciptionText: 'The total token supply is 700,000,000'
-            },
-            {
-                text: '❌ [dex014]',
-                footer: 'Is ERC20 Token Standard Implemented?',
-                desciptionTitle:
-                    'No, BEP-20 token standard is implemented which is specific to the Binance Smart Chain (BSC) ecosystem',
-                desciptionText:
-                    'Yes, ERC20 token standards is implemented, inherits from the BiswapERC20 contract with ERC20 interface.'
-            }
-        ],
-        industryStandard: [
-            {
-                text: '✅ [dex011]',
-                footer: 'Tokens symbol is BSW',
-                desciptionTitle: 'Ticker Symbol: BSW',
-                desciptionText: "contract BSWToken is BEP20('Biswap', 'BSW')"
-            }
-        ],
+        // regulations: [
+        //     {
+        //         text: '✅ [dex011]',
+        //         footer: 'Tokens symbol is BSW',
+        //         desciptionTitle: 'Ticker Symbol: BSW',
+        //         desciptionText: "contract BSWToken is BEP20('Biswap', 'BSW')"
+        //     },
+        //     {
+        //         text: '✅ [dex012]',
+        //         footer: 'BEP-20 standard',
+        //         desciptionTitle: 'Chain: BNB Chain (BEP-20)',
+        //         desciptionText: "Contract BSWToken is BEP20('Biswap', 'BSW')"
+        //     },
+        //     {
+        //         text: '✅ [dex013]',
+        //         footer: '700000000',
+        //         desciptionTitle: 'Max Supply: 700 000 000 BSW tokens',
+        //         desciptionText: 'The total token supply is 700,000,000'
+        //     },
+        //     {
+        //         text: '❌ [dex014]',
+        //         footer: 'Is ERC20 Token Standard Implemented?',
+        //         desciptionTitle:
+        //             'No, BEP-20 token standard is implemented which is specific to the Binance Smart Chain (BSC) ecosystem',
+        //         desciptionText:
+        //             'Yes, ERC20 token standards is implemented, inherits from the BiswapERC20 contract with ERC20 interface.'
+        //     }
+        // ],
+        // industryStandard: [
+        //     {
+        //         text: '✅ [dex011]',
+        //         footer: 'Tokens symbol is BSW',
+        //         desciptionTitle: 'Ticker Symbol: BSW',
+        //         desciptionText: "contract BSWToken is BEP20('Biswap', 'BSW')"
+        //     }
+        // ],
         contracts: {
             "BSWToken.sol": BSWToken,
             "BiswapERC20.sol": BiswapERC20,
