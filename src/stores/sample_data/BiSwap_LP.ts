@@ -25,7 +25,7 @@ export default {
                     tags: ["P2P Trading", "Deposits", "DEX"],
                     regulations: [
                         {
-                            text: "https://www.1.com",
+                            text: "Ref1",
                             href: "https://www.1.com"
                         }
                     ]
