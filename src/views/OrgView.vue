@@ -1,28 +1,37 @@
 <template>
   <div class="d-flex org">
-    <div class="h-100 org-sidebar">
-      <div class="container">
-        <div class="mt-3" style="color: rgba(39, 50, 131); font-size: 1.2rem">Projects</div>
 
-        <form class="form-inline my-2">
-          <input
-            class="form-control"
-            type="search"
-            placeholder="Search..."
-            aria-label="Search"
-            v-model="searchValue"
+    <div class="sideIcon" >
+      <div class="h-100 org-sidebar" >
+        <div class="container sidebar-container">
+          <div class="mt-3" style="color: rgba(39, 50, 131); font-size: 1.2rem">Projects</div>
+
+          <form class="form-inline my-2">
+            <input
+              class="form-control"
+              type="search"
+              placeholder="Search..."
+              aria-label="Search"
+              v-model="searchValue"
+            />
+          </form>
+
+          <ProjectSidebarItem
+            v-for="project in projects"
+            :key="project.guid"
+            :guid="project.guid"
+            :name="project.name"
+            :logo="project.logo"
+            :highlighted="project.guid == selectedProjectGuid"
+            @click="selectedProjectGuid = project.guid"
           />
-        </form>
-
-        <ProjectSidebarItem
-          v-for="project in projects"
-          :key="project.guid"
-          :guid="project.guid"
-          :name="project.name"
-          :logo="project.logo"
-          :highlighted="project.guid == selectedProjectGuid"
-          @click="selectedProjectGuid = project.guid"
-        />
+        </div>
+      </div>
+      <div class="openbtn">
+        <button class="toggleBtn" @click="toggleSidebar">
+          <i v-if="sideWidth == '0px'" class="bi bi-chevron-double-right"></i>
+          <i v-else class="bi bi-chevron-double-left"></i>
+        </button>
       </div>
     </div>
     <div class="h-100 w-100 org-main">
@@ -63,7 +72,13 @@ export default {
   data() {
     return {
       searchValue: '',
-      selectedProjectGuid: ''
+      selectedProjectGuid: '',
+      sideWidth: '0px',
+    }
+  },
+  methods: {
+    toggleSidebar() {
+      this.sideWidth = this.sideWidth === '0px' ? '250px' : '0px'
     }
   },
   computed: {
@@ -89,12 +104,59 @@ export default {
   height: calc(100vh - 56px);
 }
 
+.sideIcon {
+  /* width: v-bind('sideWidth'); */
+  transition: width 0.5s;
+}
+
+.openbtn {
+  display: block;
+  position: fixed;
+  top: 50%;
+  margin-left: v-bind('sideWidth');
+  transition: margin-left 0.5s;
+}
+
+.toggleBtn {
+  background-color: #E9F2F8;
+  color: rgba(39, 50, 131);
+  font-size: 1.2rem;
+  width: 20px;
+  border-radius: 0px 5px 5px 0px; 
+  padding: 0px;
+}
+
+.toggleBtn > i {
+  font-size: 15px;
+  margin: 0
+}
+
 .org-sidebar {
-  width: 300px;
+  width: v-bind('sideWidth');
   border-right: 1px solid #e0e0e0;
+  transition: width 0.5s;
+  background-color: #E9F2F8;
 }
 .org-main {
   overflow-y: auto;
   background-color: white;
 }
+
+@media (min-width: 576px) { 
+  .openbtn {
+    margin-left: v-bind('sideWidth');
+  }
+}
+
+@media (min-width: 768px) { 
+  .openbtn {
+    display: none;
+  }
+
+  .org-sidebar {
+    display: block;
+    width: 250px;
+  }
+}
+
 </style>

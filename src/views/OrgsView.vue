@@ -30,15 +30,24 @@ export default {
   max-width: 720px;
   width: 80%;
   margin-top: 70px;
-  padding: 50px;
+  padding: 50px 20px;
   border: 3px solid rgb(16, 16, 16, 0.3);
   border-radius: 3px;
 }
 
 .org-buttons {
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin: 50px 20px;
   width: 80%;
   max-width: 420px;
+}
+
+@media (min-width: 576px) { 
+  .org-card {
+    padding: 50px
+  }
+
+  .org-buttons {
+    margin: 50px auto;
+  }
 }
 </style>

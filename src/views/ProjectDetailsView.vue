@@ -28,7 +28,7 @@
       </div>
     </div>
 
-    <div class="mt-4 d-flex">
+    <div class="mt-4 d-flex flex-wrap">
       <Tag v-for="tag in project?.tags" :key="tag" :tag="tag" />
     </div>
 

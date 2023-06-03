@@ -1,6 +1,47 @@
 <template>
-  <div class="container-fluid row mb-2" style="height: 720px">
-    <div class="h-100 col-md-3" style="overflow-y: auto">
+  <div class="assessment container-fluid row mb-2" style="height: 720px">
+
+    <!-- for sm screen -->
+    <div class="sm-stat col-md-12 col-lg-3" style="overflow-y: auto">
+      <div class="my-2" v-if="codeQuality.length > 0">
+        <h5>Code Quality</h5>
+        <div class="row">
+          <div class="col-md-6 p-1" v-for="(chunk, idx) in codeQuality" :key="idx">
+            <TextCard :label="chunk.label" :text="chunk.text" :footer="chunk.footer" />
+          </div>
+        </div>
+      </div>
+
+      <div class="my-2" v-if="securityAnalysis.length > 0">
+        <h5>Security Analysis</h5>
+        <div class="row">
+          <div class="col-md-6 p-1" v-for="(chunk, idx) in securityAnalysis" :key="idx">
+            <TextCard :label="chunk.label" :text="chunk.text" :footer="chunk.footer" />
+          </div>
+        </div>
+      </div>
+
+      <div class="my-2" v-if="explanation">
+        <h5>Code Similarity</h5>
+
+        <div class="row">
+          <div class="col-md-12 p-1" v-for="(chunk, idx) in codeSimilarity" :key="idx">
+            <TextCard :label="chunk.label" :text="chunk.text" :footer="chunk.footer" />
+          </div>
+        </div>
+      </div>
+
+      <div class="my-2" v-if="explanation">
+        <h5>Explanation</h5>
+
+        <div style="font-size: 0.85rem">
+          {{ explanation }}
+        </div>
+      </div>
+    </div>
+    <!--  -->
+
+    <div class="col-md-12 col-lg-3" style="overflow-y: auto">
       <StatusCardGroup
         title="Whitepaper (10/50 passed)"
         :statuses="whitepaper"
@@ -17,7 +58,7 @@
         backgroundColor="rgba(227,251,233)"
       />
     </div>
-    <div class="col-md-6">
+    <div class="col-md-12 col-lg-6">
       <div class="h-100">
         <form>
           <select class="form-select" @change="onContractChange(contract)" v-model="contract">
@@ -30,7 +71,7 @@
         <CodeView class="h-100" style="overflow-y: auto" :code="code" />
       </div>
     </div>
-    <div class="h-100 col-md-3" style="overflow-y: auto">
+    <div class="stat col-md-12 col-lg-3" style="overflow-y: auto">
       <div class="my-2" v-if="codeQuality.length > 0">
         <h5>Code Quality</h5>
         <div class="row">
@@ -128,3 +169,36 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .sm-stat {
+    display: block;
+  }
+
+  .stat {
+    display: none;
+  }
+
+  .assessment > div {
+    height: unset;
+  }
+
+@media (min-width: 768px) { 
+  .sm-stat {
+    display: none;
+  }
+
+  .stat {
+    display: block;
+  }
+
+}
+
+@media (min-width: 992px) {
+  .assessment > div {
+    height: 100%;
+  }
+}
+
+</style>
+

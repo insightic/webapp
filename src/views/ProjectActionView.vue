@@ -26,7 +26,7 @@
     </div> -->
     <h4>Action</h4>
     <div class="row my-3">
-      <div class="col-md-4" v-for="(status, idx) in actions" :key="idx">
+      <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" v-for="(status, idx) in actions" :key="idx">
         <ActionStatusCard
           :title="status.title"
           :text="status.text"
@@ -37,7 +37,7 @@
     </div>
     <h4>Task</h4>
     <div class="row my-3">
-      <div class="col-md-4" v-for="(status, idx) in tasks" :key="idx">
+      <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" v-for="(status, idx) in tasks" :key="idx">
         <ActionStatusCard
           :title="status.title"
           :text="status.text"
