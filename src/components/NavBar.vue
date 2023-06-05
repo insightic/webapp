@@ -32,7 +32,10 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item active">
-            <a class="nav-link" href="/webapp">Teams</a>
+            <a class="nav-link" href="/webapp/">Teams</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/webapp/login">Log In</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Contact Us</a>
