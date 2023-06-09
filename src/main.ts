@@ -11,6 +11,7 @@ import './assets/main.css'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import { useAuthStore } from './stores/auth'
 
 import App from './App.vue'
 
@@ -21,5 +22,13 @@ const app = createApp(App)
 
 app.use(createPinia())
 app.use(router)
+
+// Try to refresh token at startup
+try {
+    const authStore = useAuthStore()
+    await authStore.refreshToken()
+} catch (error) {
+    console.log(error)
+}
 
 app.mount('#app')

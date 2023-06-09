@@ -3,24 +3,45 @@
     <form @submit.prevent="login">
       <h2 class="mb-3">Login</h2>
       <div class="input">
-        <label for="email">Email address</label>
+        <label for="email">Username</label>
         <input
           class="form-control"
           type="text"
           name="email"
-          placeholder="email@adress.com"
+          placeholder="guest123"
           v-model = "email"
         />
       </div>
       <div class="input">
         <label for="password">Password</label>
+        <div class="passwordBox">
+          <input
+          v-if='showPassword'
+          class="form-control pw"
+          type="text"
+          name="password"
+          placeholder="password123"
+          v-model = "password"
+        />
         <input
-          class="form-control"
+          v-else
+          class="form-control pw"
           type="password"
           name="password"
           placeholder="password123"
           v-model = "password"
         />
+
+        <span class="toggle" @click="toggleShow">
+          {{ showPassword ? 'Hide' : 'Show' }} Password
+        </span>
+        </div>
+
+
+      </div>
+      <!-- check error and show in red -->
+      <div class="error" v-if="error != '' || error == null">
+        {{ error }}
       </div>
       <div class="alternative-option mt-4">
         Don't have an account? <span @click="moveToRegister">Register</span>
@@ -28,19 +49,7 @@
       <button type="submit" class="mt-4 btn-pers" id="login_button">
         Login
       </button>
-      <div
-        class="alert alert-warning alert-dismissible fade show mt-5 d-none"
-        role="alert"
-        id="alert_1"
-      >
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="alert"
-          aria-label="Close"
-        ></button>
-      </div>
+
     </form>
   </div>
 </template>
@@ -48,25 +57,40 @@
 <script lang="ts">
 import OrgButton from '@/components/OrgButton.vue'
 import { organizationsStore } from '@/stores/organizations';
+import { useAuthStore } from '@/stores/auth.js';
 import { mapStores } from 'pinia';
 
 export default {
+  setup() {
+    const userStore = useAuthStore();
+    return { userStore };
+  },
   data() {
     return {
       email: '',
       password: '',
+      error:'',
+      showPassword: false,
     };
   },
   computed: {
-    ...mapStores(organizationsStore)
+    ...mapStores(organizationsStore),
+
   },
   methods: {
-    login(submitEvent: Event) {
-      alert(`Email: ${this.email} Password: ${this.password}`);
+    toggleShow() {
+      this.showPassword = !this.showPassword;
+    },
+    async login() {
+      const info = await this.userStore.logIn(this.email, this.password);
+      if (info !== 'success' || info !== null ) {
+        this.error = "Please check your email and password";
+      }
     },
     moveToRegister() {
       this.$router.push("/register");
     },
+
   },
 }
 </script>
@@ -87,6 +111,31 @@ export default {
   margin: 50px 20px;
   width: 80%;
   max-width: 420px;
+}
+
+.error {
+  color: lightcoral;
+  font-size: 0.8rem;
+  margin: 10px 0;
+  font-weight: 600;
+}
+
+.passwordBox {
+  display: flex;
+}
+
+.toggle {
+  font-size: 0.8rem;
+  cursor: pointer;
+  background-color: #fff;
+  color: #000;
+  width: 80px;
+  text-align: center;
+  border-radius: 0px 5px 5px 0px;
+}
+
+.pw {
+  border-radius: 5px 0px 0px 5px;
 }
 
 @media (min-width: 576px) { 
