@@ -118,10 +118,10 @@
 
         </div>
         <div class="nav-btn mt-5 d-flex align-items-center justify-content-center">
-            <button type="submit" :class="{ 'bg-gray-400 pointer-events-none': isLoading }" class="btn btn-outline-primary me-3">
+            <button type="button" @click="steps = 4" :class="{ 'bg-gray-400 pointer-events-none': isLoading }" class="btn btn-outline-primary me-3">
                 <div v-show="isLoading"
                     class="animate-spin w-5 h-5 rounded-full border-2 border-l-white/20 border-t-white/20"></div>
-                <p class="mb-0" v-show="!isLoading" >Submit</p>
+                <p class="mb-0" v-show="!isLoading">Submit</p>
             </button>
         </div>
     </div>
@@ -155,7 +155,7 @@ export default {
       email: null,
       phone: null,
       birth: null,
-      show: true,
+      show: false,
     }
   },
   methods: {
