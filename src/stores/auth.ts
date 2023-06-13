@@ -39,14 +39,14 @@ export const useAuthStore = defineStore("auth", {
             // store user details and jwt in local storage to keep user logged in between page refreshes
             const info = {
               username: username,
-              token: user.payload.token,
-              expire: user.payload.expire
+              token: user.payload.Token,
+              expire: user.payload.Expire
             }
             
             localStorage.setItem('user', JSON.stringify(info));
             this.user = info
             router.push(this.returnUrl || '/');
-            console.log(info);
+
             
             // start refresh token timer
             this.startRefreshTokenTimer();
@@ -64,7 +64,7 @@ export const useAuthStore = defineStore("auth", {
 
     async refreshToken() {
       if (!this.user) return;
-      const newToken = await apiWrapper.get(`${baseUrl}/auth/refresh_token`, null);
+      const newToken = await apiWrapper.get(`${baseUrl}/auth/refreshToken`, null);
       const newInfo = {
         'username': this.user.username,
         'token': newToken.token,

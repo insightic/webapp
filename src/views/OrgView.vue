@@ -4,6 +4,7 @@
     <div class="sideIcon" >
       <div class="h-100 org-sidebar" >
         <div class="container sidebar-container">
+          <div class="sidenav-btn mt-3 mb-5 fs-6" @click="create=!create">Create Project</div>
           <div class="mt-3" style="color: rgba(39, 50, 131); font-size: 1.2rem">Projects</div>
 
           <form class="form-inline my-2">
@@ -23,7 +24,7 @@
             :name="project.name"
             :logo="project.logo"
             :highlighted="project.guid == selectedProjectGuid"
-            @click="selectedProjectGuid = project.guid"
+            @click="selectedProjectGuid = project.guid; create = false"
           />
         </div>
       </div>
@@ -35,7 +36,10 @@
       </div>
     </div>
     <div class="h-100 w-100 org-main">
-      <div v-if="selectedProjectGuid" class="container-fluid">
+      <div v-if="create" class="container-fluid">
+        <CreateProjectView />
+      </div>
+      <div v-else-if="selectedProjectGuid" class="container-fluid">
         <ProjectDetailsView
           :organization-guid="organizationGuid"
           :project-guid="selectedProjectGuid"
@@ -63,17 +67,20 @@ import ProjectSidebarItem from '@/components/ProjectSidebarItem.vue'
 import ProjectDetailsView from '@/views/ProjectDetailsView.vue'
 import { organizationsStore } from '@/stores/organizations'
 import { mapStores } from 'pinia'
+import CreateProjectView from '@/views/createProjectView.vue'
 
 export default {
   components: {
     ProjectSidebarItem,
-    ProjectDetailsView
+    ProjectDetailsView,
+    CreateProjectView
   },
   data() {
     return {
       searchValue: '',
       selectedProjectGuid: '',
       sideWidth: '0px',
+      create: true
     }
   },
   methods: {
@@ -140,6 +147,11 @@ export default {
 .org-main {
   overflow-y: auto;
   background-color: white;
+}
+
+.sidenav-btn {
+  color: rgba(39, 50, 131);
+  cursor: pointer;
 }
 
 @media (min-width: 576px) { 
