@@ -4,7 +4,6 @@ import OrgsView from '../views/OrgsView.vue'
 import OrgView from '../views/OrgView.vue'
 import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
-import CreateProjectView from '../views/CreateProjectView.vue'
 import { useAuthStore } from '@/stores/auth';
 
 const router = createRouter({
@@ -22,11 +21,6 @@ const router = createRouter({
       component: RegisterView,
       meta: { guest: true }
     },
-    // {
-    //   path: '/create-project',
-    //   name: 'create-project',
-    //   component: CreateProjectView,
-    // },
     {
       path: '/',
       name: 'organizations',

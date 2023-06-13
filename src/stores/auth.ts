@@ -71,8 +71,6 @@ export const useAuthStore = defineStore("auth", {
         'expire': newToken.expire
       }
       localStorage.setItem('user', JSON.stringify(newInfo));
-      // this.user.token = newToken.token
-      // this.user.expire = newToken.expire
       this.startRefreshTokenTimer();
     },
 
