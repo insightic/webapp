@@ -3,7 +3,7 @@ import { RouterLink } from 'vue-router'
 </script>
 
 <template>
-  <div>
+  <div class="container">
     <div class="mx-auto my-5 login py-3 px-5">
       <div>
         <img class="logo" src="/logo.png" />

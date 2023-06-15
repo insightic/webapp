@@ -5,11 +5,11 @@
         <div
           style="
             border: 0px solid white;
-            border-radius: 0px;
-            background-color: transparent;
-            background-image: url('/webapp/logo.png');
-            background-repeat: round;
-            background-origin: content-box;
+            border-radius: 4px;
+            padding: 5px;
+            background-color: white;
+            background-image: url('/logo.png');
+            background-size: cover;
             width: 30px;
             height: 30px;
           "
@@ -58,28 +58,26 @@
 </template>
 
 <script lang="ts">
-import { useAuthStore } from '@/stores/auth';
+import { useAuthStore } from '@/stores/auth'
 
 export default {
   data() {
-    return {
-    };
+    return {}
   },
   methods: {
-      logout (){
-        useAuthStore().logout();
-      },
-      refresh (){
-        useAuthStore().refreshToken();
-      }
+    logout() {
+      useAuthStore().logout()
+    },
+    refresh() {
+      useAuthStore().refreshToken()
+    }
   },
   computed: {
     isLoggedIn() {
-      return useAuthStore().user !== null;
-    },
-  },
-};
-
+      return useAuthStore().user !== null
+    }
+  }
+}
 </script>
 
 <style scoped>

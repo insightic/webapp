@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import VueRouter from "vue-router";
+import TeamsView from '../views/TeamsView.vue'
 import OrgsView from '../views/OrgsView.vue'
 import OrgView from '../views/OrgView.vue'
 import LoginView from '../views/LoginView.vue'
@@ -20,6 +20,11 @@ const router = createRouter({
       name: 'register',
       component: RegisterView,
       meta: { guest: true }
+    },
+    {
+      path: '/teams',
+      name: 'teams',
+      component: TeamsView,
     },
     {
       path: '/',
