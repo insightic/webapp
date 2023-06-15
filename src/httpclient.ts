@@ -23,30 +23,51 @@ class HttpClient {
         return headers
     }
 
-    public async get<T>(url: string): Promise<Response<T> | null> {
+    public async get<T>(url: string, autoRefresh: boolean = true): Promise<Response<T> | null> {
         url = this.absoluteUrl(url)
         try {
             const resp = await axios.get<Response<T>>(url, { headers: this._headers() })
             return resp?.data
         } catch (e: any) {
-            const data = e?.response?.data
+            const data = e?.response?.data as Response<T>
+            if (autoRefresh && data.code == 401) {
+                const tokenResp = await this.refreshToken()
+                return tokenResp?.code == 200 ? await this.get<T>(url, false) : data
+            }
             return data
         }
     }
 
-    public async post<T>(url: string, data: any): Promise<Response<T> | null> {
+    public async post<T>(url: string, data: any = null, autoRefresh: boolean = true): Promise<Response<T> | null> {
         url = this.absoluteUrl(url)
         try {
             const resp = await axios.post<Response<T>>(url, data, { headers: this._headers() })
             return resp?.data
         } catch (e: any) {
-            const data = e?.response?.data
+            const data = e?.response?.data as Response<T>
+            if (autoRefresh && data.code == 401) {
+                const tokenResp = await this.refreshToken()
+                return tokenResp?.code == 200 ? await this.post<T>(url, data, false) : data
+            }
             return data
         }
     }
 
     public async login(username: string, password: string): Promise<Response<{ Token: string }> | null> {
         const resp = await this.post<{ Token: string }>('/auth/login', { username, password })
+        if (resp?.code === 200) {
+            resp.payload.Token && (this._token = resp.payload.Token)
+        }
+        return resp
+    }
+
+    public async logout() {
+        await this.post<null>('/auth/logout')
+        this._token = ""
+    }
+
+    public async refreshToken(): Promise<Response<{ Token: string }> | null> {
+        const resp = await this.get<{ Token: string }>('/auth/refreshToken')
         if (resp?.code === 200) {
             resp.payload.Token && (this._token = resp.payload.Token)
         }
