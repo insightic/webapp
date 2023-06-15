@@ -1,5 +1,20 @@
 <script setup lang="ts">
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
+import httpClient from '@/httpclient'
+
+let username: string
+let password: string
+
+const router = useRouter()
+
+async function login(username: string, password: string) {
+  const resp = await httpClient.login(username, password)
+  if (resp?.code == 200) {
+    router.push('/teams')
+  } else {
+    alert('Login failed')
+  }
+}
 </script>
 
 <template>
@@ -18,15 +33,21 @@ import { RouterLink } from 'vue-router'
       <form>
         <div class="form-group my-3">
           <label class="mb-2">Username</label>
-          <input type="text" class="form-control" />
+          <input type="text" class="form-control" v-model="username" />
         </div>
 
         <div class="form-group my-3">
           <label class="mb-2">Password</label>
-          <input type="password" class="form-control" />
+          <input type="password" class="form-control" v-model="password" />
         </div>
 
-        <button type="submit" class="mt-3 w-100 btn btn-lg btn-primary">Login</button>
+        <button
+          type="button"
+          class="mt-3 w-100 btn btn-lg btn-primary"
+          @click="login(username, password)"
+        >
+          Login
+        </button>
 
         <div
           class="mt-5 d-flex justify-content-between mb-2"
