@@ -1,23 +1,61 @@
-<script setup lang="ts">
-import NavBar from '@/components/NavBar.vue'
-</script>
-
 <template>
   <NavBar />
 
-  <div class="container">
-    <div class="mx-auto my-5 teams py-3 px-5">
-        <h1 class="my-3">Teams</h1>
+  <div class="my-5">
+    <div class="team-card mx-auto">
+      <h1 class="mb-5">Teams</h1>
+
+      <div class="teams mx-auto">
+        <TeamComponent
+          v-for="team in organizationsStore.organizations"
+          :key="team.guid"
+          :name="team.name"
+          :guid="team.guid"
+        />
+      </div>
+
+      <div class="w-100 text-center mb-3">
+        <button type="submit" class="mx-auto mt-3 btn btn-primary">
+          &nbsp;&nbsp; + CREATE A NEW TEAM &nbsp;&nbsp;
+        </button>
+      </div>
     </div>
   </div>
 </template>
 
+<script lang="ts">
+import NavBar from '@/components/NavBar.vue'
+import TeamComponent from '@/components/TeamComponent.vue'
+import { organizationsStore } from '@/stores/organizations'
+import { mapStores } from 'pinia'
+
+export default {
+  components: {
+    NavBar,
+    TeamComponent
+  },
+  computed: {
+    ...mapStores(organizationsStore)
+  },
+  mounted() {
+    console.log(this.organizationsStore.organizations)
+  }
+}
+</script>
+
 <style scoped>
-.teams {
-  width: 100%;
+.team-card {
+  background-color: rgba(39, 50, 131, 0.8);
+  color: whitesmoke;
   max-width: 720px;
-  background-color: rgba(86, 161, 208, 0.15);
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  width: 80%;
+  padding: 20px 20px;
+  border: 3px solid rgb(16, 16, 16, 0.3);
+  border-radius: 3px;
+}
+
+.teams {
+  width: 80%;
+  max-width: 420px;
 }
 </style>

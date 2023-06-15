@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import TeamsView from '../views/TeamsView.vue'
-import OrgsView from '../views/OrgsView.vue'
 import OrgView from '../views/OrgView.vue'
 import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
@@ -27,12 +26,6 @@ const router = createRouter({
       component: TeamsView,
     },
     {
-      path: '/',
-      name: 'organizations',
-      component: OrgsView,
-      meta: { requiresAuth: true }
-    },
-    {
       path: '/organizations/:organizationGuid',
       name: 'organization',
       component: OrgView,
@@ -41,30 +34,30 @@ const router = createRouter({
   ]
 })
 
-router.beforeEach((to, from, next) => {
-  const userStore = useAuthStore();
-  if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (localStorage.getItem('user') != null) {
-      next();
-      return;
-    }
-    next("/login");
-  } else {
-    next();
-  }
-});
+// router.beforeEach((to, from, next) => {
+//   const userStore = useAuthStore();
+//   if (to.matched.some((record) => record.meta.requiresAuth)) {
+//     if (localStorage.getItem('user') != null) {
+//       next();
+//       return;
+//     }
+//     next("/login");
+//   } else {
+//     next();
+//   }
+// });
 
-router.beforeEach((to, from, next) => {
-  const userStore = useAuthStore();
-  if (to.matched.some((record) => record.meta.guest)) {
-    if (localStorage.getItem('user') != null) {
-      next("/");
-      return;
-    }
-    next();
-  } else {
-    next();
-  }
-});
+// router.beforeEach((to, from, next) => {
+//   const userStore = useAuthStore();
+//   if (to.matched.some((record) => record.meta.guest)) {
+//     if (localStorage.getItem('user') != null) {
+//       next("/");
+//       return;
+//     }
+//     next();
+//   } else {
+//     next();
+//   }
+// });
 
 export default router
