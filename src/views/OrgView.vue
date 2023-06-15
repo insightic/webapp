@@ -67,7 +67,7 @@ import ProjectSidebarItem from '@/components/ProjectSidebarItem.vue'
 import ProjectDetailsView from '@/views/ProjectDetailsView.vue'
 import { organizationsStore } from '@/stores/organizations'
 import { mapStores } from 'pinia'
-import CreateProjectView from '@/views/createProjectView.vue'
+import CreateProjectView from '@/components/CreateProjectView.vue'
 
 export default {
   components: {
