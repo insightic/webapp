@@ -13,17 +13,18 @@
         <Transition name="smooth" mode="out-in">
           <div v-if="show1" class="form-content">
             <div class="row mx-2 my-4">
-              <label class="col-2 text-end align-self-center" for="name">
+              <label class="col-2 col-md-3 col-sm-4 text-end align-self-center" for="name">
+                Project Name
                 <span class="text-danger">*</span>
-                Project Name</label>
-              <input type="text" class="form-controls col-10" id="name" v-model="name">
+              </label>
+              <input type="text" class="form-controls col-10 col-md-9 col-sm-8" id="name" v-model="name">
             </div> 
 
             <div class="row mx-2 my-4">
-              <label class="col-2 text-end align-self-center" for="projectType">
-                <span class="text-danger">*</span>
-              Project Type</label>
-              <select class="form-controls col-10" id="projectType" v-model="projectType">
+              <label class="col-2 col-md-3 col-sm-4 text-end align-self-center" for="projectType">
+              Project Type
+              <span class="text-danger">*</span></label>
+              <select class="form-controls col-10 col-md-9 col-sm-8" id="projectType" v-model="projectType">
                 <option value="" disabled>Please select a project type</option>
                 <option value="Type 1">DEX</option>
                 <option value="Type 2">NFT</option>
@@ -33,17 +34,19 @@
             </div> 
 
             <div class="row mx-2 my-4">
-              <label class="col-2 text-end align-self-top" for="desc">
+              <label class="col-2 col-md-3 col-sm-4 text-end align-self-top" for="desc">
+                Description
                 <span class="text-danger">*</span>
-                Description</label>
-                <textarea class="form-controls col-10" id="desc" rows="3" v-model="desc"></textarea>
+              </label>
+                <textarea class="form-controls col-10 col-md-9 col-sm-8" id="desc" rows="3" v-model="desc"></textarea>
             </div> 
 
             <div class="row m-2">
-              <label class="col-2 text-end align-self-center" for="projectOnChainAddress">
+              <label class="col-2 col-md-3 col-sm-4 text-end align-self-center" for="projectOnChainAddress">
+                Project On Chain Address
                 <span class="text-danger">*</span>
-                Project On Chain Address</label>
-              <input type="text" class="form-controls col-10" id="projectOnChainAddress" v-model="projectOnChainAddress">
+              </label>
+              <input type="text" class="form-controls col-10 col-md-9 col-sm-8" id="projectOnChainAddress" v-model="projectOnChainAddress">
             </div> 
           </div>
         </Transition>
@@ -61,45 +64,51 @@
           <div v-if="show2" class="form-content">
 
             <div class="row mx-2 my-4">
-              <label class="col-2 text-end align-self-center" for="founder">
+              <label class="col-2 col-md-3 col-sm-4 text-end align-self-center" for="founder">
+                Founder
                 <span class="text-danger">*</span>
-                Founder</label>
-              <input type="text" class="form-controls col-10" id="founder" v-model="founder">
+              </label>
+              <input type="text" class="form-controls col-10 col-md-9 col-sm-8" id="founder" v-model="founder">
             </div> 
 
             <div class="row mx-2 my-4">
-              <label class="col-2 text-end align-self-center" for="teamName">
+              <label class="col-2 col-md-3 col-sm-4 text-end align-self-center" for="teamName">
+                Team Name
                 <span class="text-danger">*</span>
-                Team Name</label>
-              <input type="text" class="form-controls col-10" id="teamName" v-model="teamName">
+              </label>
+              <input type="text" class="form-controls col-10 col-md-9 col-sm-8" id="teamName" v-model="teamName">
             </div> 
 
             <div class="row mx-2 my-4">
-              <label class="col-2 text-end align-self-center" for="officeAddress">
+              <label class="col-2 col-md-3 col-sm-4 text-end align-self-center" for="officeAddress">
+                Office Address
                 <span class="text-danger">*</span>
-                Office Address</label>
-              <input type="text" class="form-controls col-10" id="officeAddress" v-model="officeAddress">
+              </label>
+              <input type="text" class="form-controls col-10 col-md-9 col-sm-8" id="officeAddress" v-model="officeAddress">
             </div> 
 
             <div class="row mx-2 my-4">
-              <label class="col-2 text-end align-self-center" for="companyEmail">
+              <label class="col-2 col-md-3 col-sm-4 text-end align-self-center" for="companyEmail">
+                Company Email Address
                 <span class="text-danger">*</span>
-                Company Email Address</label>
-              <input type="text" class="form-controls col-10" id="companyEmail" v-model="companyEmail">
+              </label>
+              <input type="text" class="form-controls col-10 col-md-9 col-sm-8" id="companyEmail" v-model="companyEmail">
             </div> 
 
             <div class="row mx-2 my-4">
-              <label class="col-2 text-end align-self-center" for="onChainAddress">
+              <label class="col-2 col-md-3 col-sm-4 text-end align-self-center" for="onChainAddress">
+                On Chain Address
                 <span class="text-danger">*</span>
-                On Chain Address</label>
-              <input type="text" class="form-controls col-10" id="onChainAddress" v-model="onChainAddress">
+              </label>
+              <input type="text" class="form-controls col-10 col-md-9 col-sm-8" id="onChainAddress" v-model="onChainAddress">
             </div> 
 
             <div class="row m-2">
-              <label class="col-2 text-end align-self-start" for="onChainAddress">
+              <label class="col-2 col-md-3 col-sm-4 text-end align-self-start" for="onChainAddress">
+                Team Members
                 <span class="text-danger">*</span>
-                Team Members</label>
-                <div class='col-10'>
+              </label>
+                <div class='col-10 col-md-9 col-sm-8'>
                   <div class="mb-2"
                   v-for="(member, counter) in teamMembers"
                   v-bind:key="counter">
@@ -136,11 +145,12 @@
           <div v-if="show3" class="form-content">
             <div class="row mx-2 my-4">
               <label class="col-1 text-end align-self-center" for="github">
+                Github
                 <span class="text-danger">*</span>
-                Github</label>
+              </label>
               <input type="text" class="form-controls col-4" id="github" v-model="github">
               
-              <label class="col-2 text-end align-self-center" for="telegram">
+              <label class="col-2 col-md-3 col-sm-4 text-end align-self-center" for="telegram">
                 Telegram</label>
               <input type="text" class="form-controls col-4" id="telegram" v-model="telegram">
             </div> 
@@ -150,7 +160,7 @@
                 Discord</label>
               <input type="text" class="form-controls col-4" id="discord" v-model="discord">
             
-              <label class="col-2 text-end align-self-center" for="twitter">
+              <label class="col-2 col-md-3 col-sm-4 text-end align-self-center" for="twitter">
                 Twitter</label>
               <input type="text" class="form-controls col-4" id="twitter" v-model="twitter">
             </div> 
@@ -169,20 +179,21 @@
         <Transition name="smooth" mode="out-in">
           <div v-if="show4" class="form-content">
             <div class="row m-2">
-              <label class="col-2 text-end align-self-center" for="companyEmail">
+              <label class="col-2 col-md-3 col-sm-4 text-end align-self-center" for="companyEmail">
+                Repository Link
                 <span class="text-danger">*</span>
-                Repository Link</label>
-              <input type="text" class="form-controls col-10" id="repo" v-model="repo">
+              </label>
+              <input type="text" class="form-controls col-10 col-md-9 col-sm-8" id="repo" v-model="repo">
             </div> 
 
             <div class="row m-2">
-              <label for="document" class="col-2 text-end align-self-center">Whitepaper</label>
-              <input type="file" class="form-controls col-10" id="document" @change="handleFileUpload">
+              <label for="document" class="col-2 col-md-3 col-sm-4 text-end align-self-center">Whitepaper</label>
+              <input type="file" class="form-controls col-10 col-md-9 col-sm-8" id="document" @change="handleFileUpload">
             </div> 
 
             <div class="row m-2">
-              <label for="document" class="col-2 text-end align-self-center">Code Files</label>
-              <input type="file" class="form-controls col-10" id="document" @change="handleFileUpload">
+              <label for="document" class="col-2 col-md-3 col-sm-4 text-end align-self-center">Code Files</label>
+              <input type="file" class="form-controls col-10 col-md-9 col-sm-8" id="document" @change="handleFileUpload">
             </div> 
 
           </div>
