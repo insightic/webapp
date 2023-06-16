@@ -36,6 +36,12 @@ const router = createRouter({
       name: 'team',
       component: TeamView,
       meta: { requiresAuth: true }
+    },
+    {
+      path: '/teams/:teamID/:teamSubView',
+      name: 'teamSubView',
+      component: TeamView,
+      meta: { requiresAuth: true }
     }
   ]
 })

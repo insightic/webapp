@@ -3,40 +3,65 @@
 
   <div class="d-flex flex-grow-1">
     <div class="sidebar p-3">
-        <h5 class="mb-4">Team</h5>
+      <h5 class="mb-4">Team</h5>
 
-        <div class="sidebar-button d-flex my-2">
-            <i class="bi bi-box" style="margin-right: 18px;"></i>
+      <SideBarButtonComponent
+        name="Projects"
+        icon="bi-box"
+        :selected="teamSubView == 'projects'"
+        @click="clickSideBar('projects')"
+      />
 
-            <div>Projects</div>
-        </div>
+      <SideBarButtonComponent
+        name="Profile"
+        icon="bi-diagram-3"
+        :selected="teamSubView == 'profile'"
+        @click="clickSideBar('profile')"
+      />
 
-       
-        <div class="sidebar-button d-flex my-2">
-            <i class="bi bi-diagram-3" style="margin-right: 18px;"></i>
+      <hr style="color: rgba(0, 0, 0, 0.2)" />
 
-            <div>Profile</div>
-        </div>
-
-        <hr style="color: rgba(0, 0, 0, 0.2);"/>
-
-        <button
-          type="button"
-          class="mt-3 w-100 btn btn-outline-danger"
-        >
-          Logout
-        </button>
+      <button type="button" class="mt-3 w-100 btn btn-outline-danger">Logout</button>
     </div>
-    <div class="flex-grow-1 p-3">Main</div>
+    <div class="flex-grow-1 p-3">
+      <component :is="teamSubViewComponent" />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import NavBar from '@/components/NavBar.vue'
+import SideBarButtonComponent from '@/components/SideBarButtonComponent.vue'
+import TeamProjectsView from '@/views/teamSubViews/TeamProjectsView.vue'
+import TeamProfileView from '@/views/teamSubViews/TeamProfileView.vue'
 
 export default {
   components: {
-    NavBar
+    NavBar,
+    SideBarButtonComponent,
+    TeamProjectsView,
+    TeamProfileView
+  },
+  created() {
+    if (!this.teamSubView) this.$router.replace(`/teams/${this.teamID}/projects`)
+  },
+  computed: {
+    teamID() {
+      return this.$route.params.teamID
+    },
+    teamSubView() {
+      return this.$route.params.teamSubView
+    },
+    teamSubViewComponent() {
+      if (this.teamSubView == 'projects') return TeamProjectsView
+      if (this.teamSubView == 'profile') return TeamProfileView
+      return null
+    }
+  },
+  methods: {
+    clickSideBar(subView: string) {
+      this.$router.push(`/teams/${this.teamID}/${subView}`)
+    }
   }
 }
 </script>
@@ -50,6 +75,6 @@ export default {
 }
 
 .sidebar-button {
-    cursor: pointer;
+  cursor: pointer;
 }
 </style>

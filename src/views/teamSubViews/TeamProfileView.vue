@@ -1,0 +1,3 @@
+<template>
+    Team Profile
+</template>
