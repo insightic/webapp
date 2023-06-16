@@ -9,12 +9,12 @@
         <LoadingComponent />
       </div>
      
-      <div class="teams mx-auto">
+      <div class="teams mx-auto" v-else>
         <TeamComponent
           v-for="team in teamsStore.teams"
           :key="team.ID"
           :name="team.Name"
-          :guid="team.ID"
+          :id="team.ID"
         />
       </div>
 
