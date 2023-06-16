@@ -48,6 +48,12 @@ const router = createRouter({
       name: 'projectView',
       component: ProjectView,
       meta: { requiresAuth: true }
+    },
+    {
+      path: '/projects/:projectID/:projectSubView',
+      name: 'projectSubView',
+      component: ProjectView,
+      meta: { requiresAuth: true }
     }
   ]
 })

@@ -93,8 +93,4 @@ export default {
   transition: width 0.5s;
   background-color: #e9f2f8;
 }
-
-.sidebar-button {
-  cursor: pointer;
-}
 </style>
