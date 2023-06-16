@@ -26,8 +26,8 @@ const router = createRouter({
       component: TeamsView,
     },
     {
-      path: '/organizations/:organizationGuid',
-      name: 'organization',
+      path: '/teams/:organizationGuid',
+      name: 'team',
       component: OrgView,
       meta: { requiresAuth: true }
     }
