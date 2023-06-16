@@ -6,17 +6,12 @@
       <h5 class="mb-4">Team</h5>
 
       <SideBarButtonComponent
-        name="Projects"
-        icon="bi-box"
-        :selected="teamSubView == 'projects'"
-        @click="clickSideBar('projects')"
-      />
-
-      <SideBarButtonComponent
-        name="Profile"
-        icon="bi-diagram-3"
-        :selected="teamSubView == 'profile'"
-        @click="clickSideBar('profile')"
+        v-for="(subView, idx) in subViews"
+        :key="idx"
+        :name="subView.name"
+        :icon="subView.icon"
+        :selected="teamSubView == subView.name.toLocaleLowerCase()"
+        @click="clickSideBar(subView.name.toLocaleLowerCase())"
       />
 
       <hr style="color: rgba(0, 0, 0, 0.2)" />
@@ -24,7 +19,7 @@
       <button type="button" class="mt-3 w-100 btn btn-outline-danger">Logout</button>
     </div>
     <div class="flex-grow-1 p-3">
-      <component :is="teamSubViewComponent" />
+      <component :is="subViews.filter(v => v.name.toLocaleLowerCase() == teamSubView)[0].component" />
     </div>
   </div>
 </template>
@@ -33,17 +28,47 @@
 import NavBar from '@/components/NavBar.vue'
 import SideBarButtonComponent from '@/components/SideBarButtonComponent.vue'
 import TeamProjectsView from '@/views/teamSubViews/TeamProjectsView.vue'
+import TeamUsersView from '@/views/teamSubViews/TeamUsersView.vue'
 import TeamProfileView from '@/views/teamSubViews/TeamProfileView.vue'
+import TeamBillingView from '@/views/teamSubViews/TeamBillingView.vue'
 
 export default {
   components: {
     NavBar,
     SideBarButtonComponent,
     TeamProjectsView,
-    TeamProfileView
+    TeamUsersView,
+    TeamProfileView,
+    TeamBillingView
   },
   created() {
     if (!this.teamSubView) this.$router.replace(`/teams/${this.teamID}/projects`)
+  },
+  data() {
+    return {
+      subViews: [
+        {
+          name: 'Projects',
+          icon: 'bi-box',
+          component: TeamProjectsView
+        },
+        {
+          name: 'Users',
+          icon: 'bi-people',
+          component: TeamUsersView
+        },
+        {
+          name: 'Profile',
+          icon: 'bi-diagram-3',
+          component: TeamProfileView
+        },
+        {
+          name: 'Billing',
+          icon: 'bi-receipt',
+          component: TeamBillingView
+        }
+      ]
+    }
   },
   computed: {
     teamID() {
@@ -52,11 +77,6 @@ export default {
     teamSubView() {
       return this.$route.params.teamSubView
     },
-    teamSubViewComponent() {
-      if (this.teamSubView == 'projects') return TeamProjectsView
-      if (this.teamSubView == 'profile') return TeamProfileView
-      return null
-    }
   },
   methods: {
     clickSideBar(subView: string) {
