@@ -3,7 +3,6 @@ import TeamsView from '@/views/TeamsView.vue'
 import TeamView from '@/views/TeamView.vue'
 import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
-import { useAuthStore } from '@/stores/auth';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,6 +27,12 @@ const router = createRouter({
     {
       path: '/teams/:teamID',
       name: 'team',
+      component: TeamView,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/teams/:teamID/:teamSubView',
+      name: 'teamSubView',
       component: TeamView,
       meta: { requiresAuth: true }
     }
