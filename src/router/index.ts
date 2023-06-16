@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import TeamsView from '@/views/TeamsView.vue'
 import TeamView from '@/views/TeamView.vue'
+import ProjectView from '@/views/ProjectView.vue'
 import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
-import { useAuthStore } from '@/stores/auth';
 import CreateTeamView from '@/views/CreateTeamView.vue';
 
 const router = createRouter({
@@ -41,6 +41,12 @@ const router = createRouter({
       path: '/teams/:teamID/:teamSubView',
       name: 'teamSubView',
       component: TeamView,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/projects/:projectID/',
+      name: 'projectView',
+      component: ProjectView,
       meta: { requiresAuth: true }
     }
   ]
