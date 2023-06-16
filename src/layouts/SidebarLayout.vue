@@ -16,6 +16,14 @@
 
       <hr style="color: rgba(0, 0, 0, 0.2)" />
 
+      <button
+        v-if="backButtonPath"
+        type="button"
+        class="mt-3 w-100 btn btn-outline-primary"
+        @click="back()"
+      >
+        {{ backButtonName }}
+      </button>
       <button type="button" class="mt-3 w-100 btn btn-outline-danger">Logout</button>
     </div>
     <div class="flex-grow-1 p-3">
@@ -43,7 +51,9 @@ export default {
   props: {
     name: { type: String, required: true },
     subViews: { type: Array<SubView>, required: true },
-    defaultSubView: { type: String, required: true }
+    defaultSubView: { type: String, required: true },
+    backButtonName: { type: String },
+    backButtonPath: { type: String }
   },
   computed: {
     tabName(): string {
@@ -57,6 +67,9 @@ export default {
   methods: {
     clickSideBar(view: string) {
       this.$router.push({ query: { tab: view } })
+    },
+    back() {
+      this.$router.push(this.backButtonPath!)
     }
   }
 }

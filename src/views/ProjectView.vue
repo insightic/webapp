@@ -1,5 +1,5 @@
 <template>
-  <SidebarLayout name="Project" :sub-views="subViews" default-sub-view="Details" />
+  <SidebarLayout name="Project" :sub-views="subViews" default-sub-view="Details" back-button-name="Return to organizations" back-button-path="/"/>
 </template>
 
 <script lang="ts">
