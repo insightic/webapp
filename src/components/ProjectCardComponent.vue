@@ -1,6 +1,6 @@
 <template>
   <div class="m-3 project-card p-3">
-    <div v-if="project">
+    <div v-if="project" @click="click(project!.ID)">
       <div class="d-flex">
         <h4 class="align-self-center">{{ project!.Name }}</h4>
         <div class="flex-grow-1"></div>
@@ -51,7 +51,10 @@ export default {
     project: { type: Object as PropType<Project> }
   },
   methods: {
-    formatDateTime
+    formatDateTime,
+    click(projectID: number) {
+      this.$router.push(`/projects/${projectID}`)
+    }
   }
 }
 </script>
