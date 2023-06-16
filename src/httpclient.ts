@@ -10,7 +10,7 @@ class HttpClient {
         if (this._token) return this._token
         const token = localStorage.getItem('token')
         if (token) this.token = token
-        return this.token
+        return this._token
     }
 
     public set token(token: string) {
