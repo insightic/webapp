@@ -61,10 +61,9 @@ class HttpClient {
         }
     }
 
-    public async isAuthorized(): Promise<boolean> {
+    public isAuthorized(): boolean {
         if (!this.token) return false
-        const resp = await this.get('/teams')
-        return resp?.code === 200
+        return true
     }
 
     public async login(username: string, password: string): Promise<Response<{ Token: string }> | null> {
