@@ -53,7 +53,7 @@ export default {
       this.$router.push('/teams/create-team')
     }
   },
-  async mounted() {
+  async created() {
     await teamsStore().getTeams()
     this.loading = false
   }

@@ -22,7 +22,7 @@ export const teamsStore = defineStore('teams', {
                 this.teams = resp.payload
                 return this.teams
             }
-            return []
+            return this.teams
         }
     }
 })
