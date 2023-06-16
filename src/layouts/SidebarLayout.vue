@@ -1,5 +1,5 @@
 <template>
-  <NavBar />
+  <NavBarComponent />
 
   <div class="d-flex flex-md-row flex-column-reverse flex-grow-1">
     <div class="sidebar p-3">
@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import NavBar from '@/components/NavBar.vue'
+import NavBarComponent from '@/components/NavBarComponent.vue'
 import SideBarButtonComponent from '@/components/SideBarButtonComponent.vue'
 
 export interface SubView {
@@ -45,7 +45,7 @@ export interface SubView {
 
 export default {
   components: {
-    NavBar,
+    NavBarComponent,
     SideBarButtonComponent
   },
   props: {

@@ -31,25 +31,8 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="/webapp/">Teams</a>
-          </li>
-          <li v-if="isLoggedIn" class="nav-item">
-            <a class="nav-link" @click="logout">Log Out</a>
-          </li>
-          <div v-else class="d-flex">
-            <li class="nav-item">
-              <a class="nav-link" href="/webapp/register">Register</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/webapp/login">Login</a>
-            </li>
-          </div>
           <li class="nav-item">
             <a class="nav-link" href="#">Contact Us</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" @click="refresh">Refresh Token</a>
           </li>
         </ul>
       </div>
