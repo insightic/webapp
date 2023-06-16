@@ -12,11 +12,11 @@
 export default {
   props: {
     name: String,
-    guid: String
+    id: Number
   },
   methods: {
     onClick() {
-      this.$router.push(`/teams/${this.guid}`)
+      this.$router.push(`/teams/${this.id}`)
     }
   }
 }

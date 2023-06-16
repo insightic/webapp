@@ -7,10 +7,10 @@
 
       <div class="teams mx-auto">
         <TeamComponent
-          v-for="team in organizationsStore.organizations"
-          :key="team.guid"
-          :name="team.name"
-          :guid="team.guid"
+          v-for="team in teamsStore.teams"
+          :key="team.ID"
+          :name="team.Name"
+          :guid="team.ID"
         />
       </div>
 
@@ -26,7 +26,7 @@
 <script lang="ts">
 import NavBar from '@/components/NavBar.vue'
 import TeamComponent from '@/components/TeamComponent.vue'
-import { organizationsStore } from '@/stores/organizations'
+import { teamsStore } from '@/stores/teams'
 import { mapStores } from 'pinia'
 
 export default {
@@ -35,10 +35,10 @@ export default {
     TeamComponent
   },
   computed: {
-    ...mapStores(organizationsStore)
+    ...mapStores(teamsStore)
   },
-  mounted() {
-    console.log(this.organizationsStore.organizations)
+  async mounted() {
+    await teamsStore().getTeams()
   }
 }
 </script>
