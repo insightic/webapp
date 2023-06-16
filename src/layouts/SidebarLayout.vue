@@ -1,7 +1,7 @@
 <template>
   <NavBar />
 
-  <div class="d-flex flex-grow-1">
+  <div class="d-flex flex-md-row flex-column-reverse flex-grow-1">
     <div class="sidebar p-3">
       <h5 class="mb-4">{{ name }}</h5>
 
@@ -20,7 +20,7 @@
     </div>
     <div class="flex-grow-1 p-3">
       <h1>{{ selectedTab.name }}</h1>
-      <component :is="{...selectedTab.component}" />
+      <component :is="{ ...selectedTab.component }" />
     </div>
   </div>
 </template>
@@ -64,9 +64,14 @@ export default {
 
 <style scoped>
 .sidebar {
-  width: 280px;
+  width: 100%;
   border-right: 1px solid #e0e0e0;
-  transition: width 0.5s;
   background-color: #e9f2f8;
+}
+
+@media (min-width: 768px) {
+  .sidebar {
+    width: 300px;
+  }
 }
 </style>
