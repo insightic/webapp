@@ -6,11 +6,11 @@
       <h5 class="mb-4">{{ name }}</h5>
 
       <SideBarButtonComponent
-        v-for="(subView, idx) in subViews"
+        v-for="(subView, idx) in subViews.filter((v) => !v.hidden)"
         :key="idx"
         :name="subView.name"
         :icon="subView.icon"
-        :selected="subView.name == tabName"
+        :selected="subView.name == subViewName"
         @click="clickSideBar(subView.name)"
       />
 
@@ -27,8 +27,8 @@
       <button type="button" class="mt-3 w-100 btn btn-outline-danger">Logout</button>
     </div>
     <div class="flex-grow-1 p-3">
-      <h1>{{ selectedTab.name }}</h1>
-      <component :is="{ ...selectedTab.component }" />
+      <h1>{{ selectSubView.name }}</h1>
+      <component :is="{ ...selectSubView.component }" />
     </div>
   </div>
 </template>
@@ -40,6 +40,7 @@ import SideBarButtonComponent from '@/components/SideBarButtonComponent.vue'
 export interface SubView {
   name: string
   icon: string
+  hidden?: boolean
   component: any
 }
 
@@ -56,12 +57,12 @@ export default {
     backButtonPath: { type: String }
   },
   computed: {
-    tabName(): string {
+    subViewName(): string {
       const tab = this.$route.query.tab || this.defaultSubView
       return tab.toString()
     },
-    selectedTab(): SubView {
-      return this.subViews.filter((v) => v.name == this.tabName)[0]
+    selectSubView(): SubView {
+      return this.subViews.filter((v) => v.name == this.subViewName)[0]
     }
   },
   methods: {

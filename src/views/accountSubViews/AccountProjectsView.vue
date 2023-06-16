@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex flex-wrap">
-    <ProjectCardComponent />
+    <ProjectCardComponent @click="createProject()" />
     <ProjectCardComponent v-for="project in projects" :key="project.ID" :project="project" />
   </div>
 </template>
@@ -14,6 +14,9 @@ export default {
   components: {
     ProjectCardComponent
   },
+  async created() {
+    await projectsStore().getProjects()
+  },
   computed: {
     ...mapStores(projectsStore),
     projects() {
@@ -23,8 +26,10 @@ export default {
       return this.$route.params.organizationID as string
     }
   },
-  async created() {
-    await projectsStore().getProjects()
+  methods: {
+    createProject() {
+      this.$router.push({ query: { tab: 'Create Project' } })
+    }
   }
 }
 </script>

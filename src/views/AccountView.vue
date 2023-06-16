@@ -13,7 +13,7 @@ import AccountCreateProjectView from '@/views/accountSubViews/AccountCreateProje
 
 export default {
   components: {
-    SidebarLayout,
+    SidebarLayout
   },
   data() {
     return {
@@ -24,9 +24,10 @@ export default {
           component: AccountProjectsView
         },
         {
-          name: 'CreateProject',
+          name: 'Create Project',
           icon: 'bi-plus-circle',
-          component: AccountCreateProjectView
+          component: AccountCreateProjectView,
+          hidden: true
         },
         {
           name: 'Users',
