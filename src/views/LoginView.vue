@@ -11,14 +11,14 @@ const router = useRouter()
 onMounted(async () => {
   const isAuthorized = await httpClient.isAuthorized()
   if (isAuthorized) {
-    router.push('/teams')
+    router.push('/')
   }
 })
 
 async function login(username: string, password: string) {
   const resp = await httpClient.login(username, password)
   if (resp?.code == 200) {
-    router.push('/teams')
+    router.push('/')
   } else {
     alert('Login failed')
   }

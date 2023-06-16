@@ -16,8 +16,8 @@ export const projectsStore = defineStore('projects', {
         }
     },
     actions: {
-        async getProjects(teamID: number | string): Promise<{ [key: number]: Project }> {
-            const resp = await httpclient.get<Project[]>(`/teams/${teamID}/projects`)
+        async getProjects(): Promise<{ [key: number]: Project }> {
+            const resp = await httpclient.get<Project[]>(`/projects`)
             if (resp?.code === 200) {
                 for(const project of resp.payload) {
                     this.projects[project.ID] = project
