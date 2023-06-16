@@ -13,7 +13,7 @@ import CreateProjectView from '@/views/organizationSubViews/CreateProjectView.vu
 
 export default {
   components: {
-    SidebarLayout
+    SidebarLayout,
   },
   data() {
     return {
