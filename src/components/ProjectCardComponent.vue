@@ -31,7 +31,7 @@
       </div>
     </div>
 
-    <div v-else class="text-center">
+    <div v-else class="text-center" @click="toCreateProject">
       <div class="my-5">
         <i class="bi bi-plus-lg" style="font-size: 6rem"></i>
       </div>
@@ -51,7 +51,10 @@ export default {
     project: { type: Object as PropType<Project> }
   },
   methods: {
-    formatDateTime
+    formatDateTime,
+    toCreateProject() {
+      this.$router.push('/teams/' + this.$route.params.teamID + '/create%20project')
+    }
   }
 }
 </script>

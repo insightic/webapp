@@ -31,6 +31,7 @@ import TeamProjectsView from '@/views/teamSubViews/TeamProjectsView.vue'
 import TeamUsersView from '@/views/teamSubViews/TeamUsersView.vue'
 import TeamProfileView from '@/views/teamSubViews/TeamProfileView.vue'
 import TeamBillingView from '@/views/teamSubViews/TeamBillingView.vue'
+import CreateProjectView from '@/views/teamSubViews/CreateProjectView.vue'
 
 export default {
   components: {
@@ -39,7 +40,8 @@ export default {
     TeamProjectsView,
     TeamUsersView,
     TeamProfileView,
-    TeamBillingView
+    TeamBillingView,
+    CreateProjectView
   },
   created() {
     if (!this.teamSubView) this.$router.replace(`/teams/${this.teamID}/projects`)
@@ -51,6 +53,11 @@ export default {
           name: 'Projects',
           icon: 'bi-box',
           component: TeamProjectsView
+        },
+        {
+          name: 'Create Project',
+          icon: 'bi-plus-circle',
+          component: CreateProjectView
         },
         {
           name: 'Users',

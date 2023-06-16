@@ -4,7 +4,7 @@ import TeamView from '@/views/TeamView.vue'
 import ProjectView from '@/views/ProjectView.vue'
 import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
-import CreateTeamView from '@/views/CreateTeamView.vue';
+import CreateTeamView from '@/views/CreateTeamView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
