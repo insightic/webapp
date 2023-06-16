@@ -5,6 +5,10 @@
     <div class="team-card mx-auto">
       <h1 class="mb-5">Teams</h1>
 
+      <div class="text-center my-3" v-if="loading">
+        <LoadingComponent />
+      </div>
+     
       <div class="teams mx-auto">
         <TeamComponent
           v-for="team in teamsStore.teams"
@@ -25,6 +29,7 @@
 
 <script lang="ts">
 import NavBar from '@/components/NavBar.vue'
+import LoadingComponent from '@/components/LoadingComponent.vue'
 import TeamComponent from '@/components/TeamComponent.vue'
 import { teamsStore } from '@/stores/teams'
 import { mapStores } from 'pinia'
@@ -32,13 +37,20 @@ import { mapStores } from 'pinia'
 export default {
   components: {
     NavBar,
+    LoadingComponent,
     TeamComponent
+  },
+  data() {
+    return {
+      loading: true
+    }
   },
   computed: {
     ...mapStores(teamsStore)
   },
   async mounted() {
     await teamsStore().getTeams()
+    this.loading = false
   }
 }
 </script>
