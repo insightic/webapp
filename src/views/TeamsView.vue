@@ -19,7 +19,7 @@
       </div>
 
       <div class="w-100 text-center mb-3">
-        <button type="submit" class="mx-auto mt-3 btn btn-primary">
+        <button type="submit" class="mx-auto mt-3 btn btn-primary" @click="toTeam">
           &nbsp;&nbsp; + CREATE A NEW TEAM &nbsp;&nbsp;
         </button>
       </div>
@@ -47,6 +47,11 @@ export default {
   },
   computed: {
     ...mapStores(teamsStore)
+  },
+  methods: {
+    toTeam () {
+      this.$router.push('/teams/create-team')
+    }
   },
   async mounted() {
     await teamsStore().getTeams()
