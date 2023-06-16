@@ -1,9 +1,8 @@
 <template>
   <h3>Projects</h3>
 
-  <button type="button" class="btn btn-primary my-3">Create New Project</button>
-
-  <div class="d-flex">
+  <div class="d-flex flex-wrap">
+    <ProjectCardComponent />
     <ProjectCardComponent v-for="project in projects" :key="project.ID" :project="project" />
   </div>
 </template>
