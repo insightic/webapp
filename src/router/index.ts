@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import TeamsView from '@/views/TeamsView.vue'
-import TeamView from '@/views/TeamView.vue'
+import OrganizationView from '@/views/OrganizationView.vue'
 import ProjectView from '@/views/ProjectView.vue'
 import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
@@ -13,48 +12,22 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: LoginView,
-      meta: { guest: true }
     },
     {
       path: '/register',
       name: 'register',
       component: RegisterView,
-      meta: { guest: true }
     },
     {
-      path: '/teams',
-      name: 'teams',
-      component: TeamsView,
+      path: '/',
+      name: 'organizationView',
+      component: OrganizationView,
     },
     {
-      path: '/teams/create-team',
-      name: 'createTeam',
-      component: CreateTeamView,
-    },
-    {
-      path: '/teams/:teamID',
-      name: 'team',
-      component: TeamView,
-      meta: { requiresAuth: true }
-    },
-    {
-      path: '/teams/:teamID/:teamSubView',
-      name: 'teamSubView',
-      component: TeamView,
-      meta: { requiresAuth: true }
-    },
-    {
-      path: '/projects/:projectID/',
+      path: '/projects/:projectID',
       name: 'projectView',
       component: ProjectView,
-      meta: { requiresAuth: true }
     },
-    {
-      path: '/projects/:projectID/:projectSubView',
-      name: 'projectSubView',
-      component: ProjectView,
-      meta: { requiresAuth: true }
-    }
   ]
 })
 

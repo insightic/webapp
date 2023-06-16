@@ -1,6 +1,4 @@
 <template>
-  <h3>Projects</h3>
-
   <div class="d-flex flex-wrap">
     <ProjectCardComponent />
     <ProjectCardComponent v-for="project in projects" :key="project.ID" :project="project" />
@@ -21,13 +19,12 @@ export default {
     projects() {
       return Object.values(this.projectsStore.projects)
     },
-    teamID(): string {
-      return this.$route.params.teamID as string
+    organizationID(): string {
+      return this.$route.params.organizationID as string
     }
   },
   async created() {
-    if (!this.teamID) this.$router.replace(`/teams/${this.teamID}/projects`)
-    await projectsStore().getProjects(this.teamID)
+    await projectsStore().getProjects(this.organizationID)
   }
 }
 </script>

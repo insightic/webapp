@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar-button d-flex my-2" :class="{'sidebar-button-selected': selected}">
+  <div class="sidebar-button d-flex" :class="{'sidebar-button-selected': selected}">
     <i class="bi" :class="icon" style="margin-right: 18px"></i>
 
     <div>{{ name }}</div>
@@ -19,6 +19,8 @@ export default {
 <style scoped>
 .sidebar-button {
   cursor: pointer;
+  font-size: 1.05rem;
+  margin: 15px 0px;
 }
 
 .sidebar-button:hover {
