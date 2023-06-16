@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
 import httpClient from '@/httpclient'
 
@@ -6,6 +7,13 @@ let username: string
 let password: string
 
 const router = useRouter()
+
+onMounted(async () => {
+  const isAuthorized = await httpClient.isAuthorized()
+  if (isAuthorized) {
+    router.push('/teams')
+  }
+})
 
 async function login(username: string, password: string) {
   const resp = await httpClient.login(username, password)

@@ -7,7 +7,15 @@ class HttpClient {
     private _token: string = ""
 
     public get token(): string {
-        return this._token
+        if (this._token) return this._token
+        const token = localStorage.getItem('token')
+        if (token) this.token = token
+        return this.token
+    }
+
+    public set token(token: string) {
+        this._token = token
+        localStorage.setItem('token', token)
     }
 
     public absoluteUrl(url: string): string {
@@ -53,23 +61,29 @@ class HttpClient {
         }
     }
 
+    public async isAuthorized(): Promise<boolean> {
+        if (!this.token) return false
+        const resp = await this.get('/teams')
+        return resp?.code === 200
+    }
+
     public async login(username: string, password: string): Promise<Response<{ Token: string }> | null> {
-        const resp = await this.post<{ Token: string }>('/auth/login', { username, password })
+        const resp = await this.post<{ Token: string }>('/auth/login', { username, password }, false)
         if (resp?.code === 200) {
-            resp.payload.Token && (this._token = resp.payload.Token)
+            resp.payload.Token && (this.token = resp.payload.Token)
         }
         return resp
     }
 
     public async logout() {
-        await this.post<null>('/auth/logout')
+        await this.post<null>('/auth/logout', false)
         this._token = ""
     }
 
     public async refreshToken(): Promise<Response<{ Token: string }> | null> {
-        const resp = await this.get<{ Token: string }>('/auth/refreshToken')
+        const resp = await this.get<{ Token: string }>('/auth/refreshToken', false)
         if (resp?.code === 200) {
-            resp.payload.Token && (this._token = resp.payload.Token)
+            resp.payload.Token && (this.token = resp.payload.Token)
         }
         return resp
     }
