@@ -1,3 +1,3 @@
 <template>
-    <h3>Validations</h3>
+   <div>Here comes with validations</div>
 </template>
