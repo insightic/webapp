@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import OrganizationView from '@/views/OrganizationView.vue'
+import AccountView from '@/views/AccountView.vue'
 import ProjectView from '@/views/ProjectView.vue'
 import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
@@ -19,8 +19,8 @@ const router = createRouter({
     },
     {
       path: '/',
-      name: 'organizationView',
-      component: OrganizationView,
+      name: 'AccountView',
+      component: AccountView,
     },
     {
       path: '/projects/:projectID',

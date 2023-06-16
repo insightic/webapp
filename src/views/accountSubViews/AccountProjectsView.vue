@@ -24,7 +24,7 @@ export default {
     }
   },
   async created() {
-    await projectsStore().getProjects(this.organizationID)
+    await projectsStore().getProjects()
   }
 }
 </script>

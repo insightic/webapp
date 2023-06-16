@@ -254,7 +254,6 @@
                 type="file"
                 class="form-controls col-10 col-md-9 col-sm-8"
                 id="document"
-                @change="handleFileUpload"
               />
             </div>
 
@@ -266,7 +265,6 @@
                 type="file"
                 class="form-controls col-10 col-md-9 col-sm-8"
                 id="document"
-                @change="handleFileUpload"
               />
             </div>
           </div>
@@ -281,7 +279,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   setup() {},
   data() {
@@ -357,7 +355,7 @@ export default {
         role: ''
       })
     },
-    deleteMember(counter) {
+    deleteMember(counter: number) {
       this.teamMembers.splice(counter, 1)
     }
   }
