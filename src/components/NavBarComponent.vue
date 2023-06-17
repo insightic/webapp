@@ -41,26 +41,7 @@
 </template>
 
 <script lang="ts">
-import { useAuthStore } from '@/stores/auth'
-
-export default {
-  data() {
-    return {}
-  },
-  methods: {
-    logout() {
-      useAuthStore().logout()
-    },
-    refresh() {
-      useAuthStore().refreshToken()
-    }
-  },
-  computed: {
-    isLoggedIn() {
-      return useAuthStore().user !== null
-    }
-  }
-}
+export default {}
 </script>
 
 <style scoped>
