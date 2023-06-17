@@ -25,7 +25,9 @@
         >
           {{ backButtonName }}
         </button>
-        <button type="button" class="mt-3 w-100 btn btn-outline-danger">Logout</button>
+        <button type="button" class="mt-3 w-100 btn btn-outline-danger" @click="logout()">
+          Logout
+        </button>
       </div>
 
       <div class="main flex-grow-1 p-3">
@@ -39,6 +41,7 @@
 <script lang="ts">
 import NavBarComponent from '@/components/NavBarComponent.vue'
 import SideBarButtonComponent from '@/components/SideBarButtonComponent.vue'
+import httpclient from '@/httpclient'
 
 export interface SubView {
   name: string
@@ -61,7 +64,7 @@ export default {
   },
   computed: {
     subViewName(): string {
-      const tab = this.$route.query.tab || this.defaultSubView
+      const tab = this.$route.query.view || this.defaultSubView
       return tab.toString()
     },
     selectSubView(): SubView {
@@ -70,10 +73,14 @@ export default {
   },
   methods: {
     clickSideBar(view: string) {
-      this.$router.push({ query: { tab: view } })
+      this.$router.push({ query: { view: view } })
     },
     back() {
       this.$router.push(this.backButtonPath!)
+    },
+    async logout() {
+      await httpclient.logout()
+      this.$router.push('/login')
     }
   }
 }
@@ -95,6 +102,10 @@ export default {
   width: 100%;
   border-right: 1px solid #e0e0e0;
   background-color: #e9f2f8;
+}
+
+.main {
+  min-height: 50vh;
 }
 
 @media (min-width: 768px) {

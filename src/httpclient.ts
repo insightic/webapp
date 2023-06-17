@@ -76,7 +76,7 @@ class HttpClient {
 
     public async logout() {
         await this.post<null>('/auth/logout', false)
-        this._token = ""
+        this.token = ""
     }
 
     public async refreshToken(): Promise<Response<{ Token: string }> | null> {

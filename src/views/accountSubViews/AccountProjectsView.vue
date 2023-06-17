@@ -28,7 +28,7 @@ export default {
   },
   methods: {
     createProject() {
-      this.$router.push({ query: { tab: 'Create Project' } })
+      this.$router.push({ query: { view: 'Create Project' } })
     }
   }
 }
