@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <NavBarComponent />
+  <div class="view">
+    <NavBarComponent class="navbar" />
 
-    <div class="d-flex flex-md-row flex-column-reverse flex-grow-1">
+    <div class="content d-flex flex-md-row flex-column-reverse">
       <div class="sidebar p-3">
         <h5 class="mb-4">{{ name }}</h5>
 
@@ -27,7 +27,8 @@
         </button>
         <button type="button" class="mt-3 w-100 btn btn-outline-danger">Logout</button>
       </div>
-      <div class="flex-grow-1 p-3">
+
+      <div class="main flex-grow-1 p-3">
         <h1>{{ selectSubView.name }}</h1>
         <component :is="{ ...selectSubView.component }" />
       </div>
@@ -79,6 +80,17 @@ export default {
 </script>
 
 <style scoped>
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.content {
+  margin-top: 56px;
+}
+
 .sidebar {
   width: 100%;
   border-right: 1px solid #e0e0e0;
@@ -86,8 +98,25 @@ export default {
 }
 
 @media (min-width: 768px) {
+  .view {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .content {
+    height: calc(100vh - 56px);
+  }
+
   .sidebar {
+    overflow: auto;
     width: 300px;
+  }
+
+  .main {
+    overflow: auto;
   }
 }
 </style>
