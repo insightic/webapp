@@ -33,6 +33,7 @@
       <div class="main flex-grow-1 p-3">
         <h1>{{ selectedSubView.name }}</h1>
         <component :is="selectedComponent" />
+        <div style="height: 120px"></div>
       </div>
     </div>
   </div>

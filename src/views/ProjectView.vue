@@ -1,11 +1,11 @@
 <template>
-  <SidebarLayout name="Project" :sub-views="subViews" default-sub-view="Details" back-button-name="Return to organizations" back-button-path="/"/>
+  <SidebarLayout name="Project" :sub-views="subViews" default-sub-view="Overview" back-button-name="Return to organizations" back-button-path="/"/>
 </template>
 
 <script lang="ts">
 import SidebarLayout from '@/layouts/SidebarLayout.vue'
 
-import ProjectDetailsView from '@/views/projectSubViews/ProjectDetailsView.vue'
+import ProjectOverviewView from '@/views/projectSubViews/ProjectOverviewView.vue'
 import ProjectSourceCodeView from '@/views/projectSubViews/ProjectSourceCodeView.vue'
 import ProjectValidationsView from '@/views/projectSubViews/ProjectValidationsView.vue'
 
@@ -17,9 +17,9 @@ export default {
     return {
       subViews: [
         {
-          name: 'Details',
+          name: 'Overview',
           icon: 'bi-info-circle',
-          component: ProjectDetailsView
+          component: ProjectOverviewView
         },
         {
           name: 'Source Code',
