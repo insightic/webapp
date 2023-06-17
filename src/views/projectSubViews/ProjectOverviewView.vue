@@ -2,7 +2,11 @@
   <div style="max-width: 960px">
     <SectionLayout title="Basic Information">
       <LabelInputComponent label="Project Name" type="text" />
-      <LabelInputComponent label="Project Type" type="text" />
+      <LabelInputComponent
+        label="Project Type"
+        type="text"
+        footnote="Please choose correct type of your project."
+      />
       <LabelTextareaComponent label="Project Description" />
       <LabelInputComponent label="Project On Chain Address" type="text" />
     </SectionLayout>

@@ -1,5 +1,5 @@
 <template>
-    <div class="my-3">
+    <div class="mb-2">
       <label class="form-label">{{ label }}</label>
       <textarea class="form-control" :placeholder="placeholder" :rows="rows"/>
     </div>
