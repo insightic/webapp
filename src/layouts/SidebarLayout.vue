@@ -31,14 +31,15 @@
       </div>
 
       <div class="main flex-grow-1 p-3">
-        <h1>{{ selectSubView.name }}</h1>
-        <component :is="{ ...selectSubView.component }" />
+        <h1>{{ selectedSubView.name }}</h1>
+        <component :is="selectedComponent" />
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
+import { toRaw, type Component } from 'vue'
 import NavBarComponent from '@/components/NavBarComponent.vue'
 import SideBarButtonComponent from '@/components/SideBarButtonComponent.vue'
 import httpclient from '@/httpclient'
@@ -47,7 +48,7 @@ export interface SubView {
   name: string
   icon: string
   hidden?: boolean
-  component: any
+  component: Component
 }
 
 export default {
@@ -67,8 +68,11 @@ export default {
       const tab = this.$route.query.view || this.defaultSubView
       return tab.toString()
     },
-    selectSubView(): SubView {
+    selectedSubView(): SubView {
       return this.subViews.filter((v) => v.name == this.subViewName)[0]
+    },
+    selectedComponent(): Component {
+      return toRaw(this.selectedSubView.component)
     }
   },
   methods: {
