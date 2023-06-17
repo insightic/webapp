@@ -1,34 +1,36 @@
 <template>
-  <NavBarComponent />
+  <div>
+    <NavBarComponent />
 
-  <div class="d-flex flex-md-row flex-column-reverse flex-grow-1">
-    <div class="sidebar p-3">
-      <h5 class="mb-4">{{ name }}</h5>
+    <div class="d-flex flex-md-row flex-column-reverse flex-grow-1">
+      <div class="sidebar p-3">
+        <h5 class="mb-4">{{ name }}</h5>
 
-      <SideBarButtonComponent
-        v-for="(subView, idx) in subViews.filter((v) => !v.hidden)"
-        :key="idx"
-        :name="subView.name"
-        :icon="subView.icon"
-        :selected="subView.name == subViewName"
-        @click="clickSideBar(subView.name)"
-      />
+        <SideBarButtonComponent
+          v-for="(subView, idx) in subViews.filter((v) => !v.hidden)"
+          :key="idx"
+          :name="subView.name"
+          :icon="subView.icon"
+          :selected="subView.name == subViewName"
+          @click="clickSideBar(subView.name)"
+        />
 
-      <hr style="color: rgba(0, 0, 0, 0.2)" />
+        <hr style="color: rgba(0, 0, 0, 0.2)" />
 
-      <button
-        v-if="backButtonPath"
-        type="button"
-        class="mt-3 w-100 btn btn-outline-primary"
-        @click="back()"
-      >
-        {{ backButtonName }}
-      </button>
-      <button type="button" class="mt-3 w-100 btn btn-outline-danger">Logout</button>
-    </div>
-    <div class="flex-grow-1 p-3">
-      <h1>{{ selectSubView.name }}</h1>
-      <component :is="{ ...selectSubView.component }" />
+        <button
+          v-if="backButtonPath"
+          type="button"
+          class="mt-3 w-100 btn btn-outline-primary"
+          @click="back()"
+        >
+          {{ backButtonName }}
+        </button>
+        <button type="button" class="mt-3 w-100 btn btn-outline-danger">Logout</button>
+      </div>
+      <div class="flex-grow-1 p-3">
+        <h1>{{ selectSubView.name }}</h1>
+        <component :is="{ ...selectSubView.component }" />
+      </div>
     </div>
   </div>
 </template>

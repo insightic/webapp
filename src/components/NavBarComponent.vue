@@ -66,7 +66,5 @@ export default {
 <style scoped>
 nav {
   background-color: rgba(39, 50, 131, 0.8);
-  position: sticky;
-  top: 0;
 }
 </style>
