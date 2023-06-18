@@ -1,4 +1,6 @@
 <template>
+  <div class="text-secondary mb-4">Showing all projects</div>
+
   <div class="d-flex flex-wrap">
     <ProjectCardComponent @click="createProject()" />
     <ProjectCardComponent v-for="project in projects" :key="project.ID" :project="project" />

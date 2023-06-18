@@ -2,7 +2,7 @@
   <div class="mb-2">
     <label class="form-label">{{ label }}</label>
     <input :type="type" class="form-control" :placeholder="placeholder" />
-    <label class="text-secondary" style="font-size: 0.8rem;" v-if="footnote">{{ footnote }}</label>
+    <label class="text-secondary small" v-if="footnote">{{ footnote }}</label>
   </div>
 </template>
 

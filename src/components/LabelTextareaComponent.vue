@@ -2,6 +2,7 @@
     <div class="mb-2">
       <label class="form-label">{{ label }}</label>
       <textarea class="form-control" :placeholder="placeholder" :rows="rows"/>
+      <label class="text-secondary small" v-if="footnote">{{ footnote }}</label>
     </div>
   </template>
   
@@ -10,7 +11,8 @@
     props: {
       label: { type: String, required: true },
       rows: { type: Number, default: 3 },
-      placeholder: { type: String }
+      placeholder: { type: String },
+      footnote: { type: String }
     }
   }
   </script>

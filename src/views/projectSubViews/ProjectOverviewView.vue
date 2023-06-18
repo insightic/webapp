@@ -1,4 +1,6 @@
 <template>
+  <div class="text-secondary mb-4">Project Overview</div>
+
   <div style="max-width: 960px">
     <SectionLayout title="Basic Information">
       <LabelInputComponent label="Project Name" type="text" />
@@ -13,10 +15,10 @@
 
     <SectionLayout title="Company Information">
       <div class="row">
-        <div class="col-6">
+        <div class="col-md-6">
           <LabelInputComponent label="Founder" type="text" />
         </div>
-        <div class="col-6">
+        <div class="col-md-6">
           <LabelInputComponent label="Team Name" type="text" />
         </div>
       </div>
