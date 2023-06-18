@@ -1,27 +1,23 @@
-name: GitHub Pages
+name: deploy to S3
 
-on:
-  push:
-    branches:
-      - main  # Set a branch to deploy
-  pull_request:
+on: [push]
 
 jobs:
   deploy:
-    permissions:
-      contents: write
     runs-on: ubuntu-22.04
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
       - run: npm install
       - run: npm run build
-      - run: mv dist/index.html dist/404.html
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        if: ${{ github.ref == 'refs/heads/main' }}
+        uses: jakejarvis/s3-sync-action@master
+        if: ${{ github.ref == 'refs/heads/dev' }}
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          args: --acl public-read --follow-symlinks --delete
+        env:
+          AWS_S3_BUCKET: staging-webapp-insightic
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          SOURCE_DIR: dist
