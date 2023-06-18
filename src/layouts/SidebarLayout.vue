@@ -17,6 +17,26 @@
 
         <hr style="color: rgba(0, 0, 0, 0.2)" />
 
+        <h5 class="mb-4">Support</h5>
+
+        <SideBarButtonComponent
+          name="Help Center"
+          icon="bi-info-circle"
+          right-icon="bi-box-arrow-up-right"
+        />
+
+        <SideBarButtonComponent
+          name="Terms & Conditions"
+          icon="bi-card-heading"
+          right-icon="bi-box-arrow-up-right"
+        />
+
+        <SideBarButtonComponent
+          name="Privacy Policy"
+          icon="bi-shield-lock"
+          right-icon="bi-box-arrow-up-right"
+        />
+
         <button
           v-if="backButtonPath"
           type="button"

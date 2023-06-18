@@ -1,17 +1,20 @@
 <template>
-  <div class="sidebar-button d-flex" :class="{'sidebar-button-selected': selected}">
-    <i class="bi" :class="icon" style="margin-right: 18px"></i>
+  <div class="sidebar-button d-flex" :class="{ 'sidebar-button-selected': selected }">
+    <i class="bi me-3" :class="icon"></i>
 
-    <div>{{ name }}</div>
+    <div class="me-2">{{ name }}</div>
+
+    <i class="bi" :class="rightIcon" v-if="rightIcon"></i>
   </div>
 </template>
 
 <script lang="ts">
 export default {
   props: {
-    selected: Boolean,
-    icon: String,
-    name: String
+    selected: { type: Boolean},
+    icon: { type: String, required: true },
+    rightIcon: { type: String },
+    name: { type: String, required: true }
   }
 }
 </script>
