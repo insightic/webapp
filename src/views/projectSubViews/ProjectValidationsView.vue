@@ -3,7 +3,7 @@
 
   <div style="max-width: 960px">
     <div class="card w-100" style="width: 18rem">
-      <div class="card-header"><b>20 validation runs</b></div>
+      <div class="card-header"><b>{{ jobs.length }} validation runs</b></div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item" v-for="job in jobs" :key="job.ID">
           <ValidationComponent

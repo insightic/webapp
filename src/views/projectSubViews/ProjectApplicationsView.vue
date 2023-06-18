@@ -1,71 +1,46 @@
 <template>
-    <div class="text-secondary mb-4">Showing all applications</div>
-  
-    <div style="max-width: 960px">
-      <div class="card w-100">
-        <div class="card-header"><b>20 validation runs</b></div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item" v-for="job in jobs" :key="job.ID">
-            <ValidationComponent
-              :total-rules="job.TotalRules"
-              :tested-rules="job.TestedRules"
-              :passed-rules="job.PassedRules"
-              :created-at="job.CreatedAt"
-            />
-          </li>
-        </ul>
-      </div>
+  <div class="text-secondary mb-4">Showing all applications</div>
+
+  <div style="max-width: 960px">
+    <div class="card w-100">
+      <div class="card-header"><b>{{ applications.length }} applications</b></div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" v-for="application in applications" :key="application.ID">
+          <ApplicationComponent :status="application.Status" />
+        </li>
+      </ul>
     </div>
-  </template>
-  
-  <script lang="ts">
-  import ValidationComponent from '@/components/ValidationComponent.vue'
-  
-  export default {
-    components: {
-      ValidationComponent
-    },
-    data() {
-      return {
-        jobs: [
-          {
-            ID: 3,
-            TotalRules: 100,
-            TestedRules: 100,
-            PassedRules: 100,
-            CreatedAt: '2023-03-21 10:21:10'
-          },
-          {
-            ID: 2,
-            TotalRules: 100,
-            TestedRules: 100,
-            PassedRules: 90,
-            CreatedAt: '2023-03-20 10:21:10'
-          },
-          {
-            ID: 1,
-            TotalRules: 100,
-            TestedRules: 100,
-            PassedRules: 100,
-            CreatedAt: '2023-03-19 10:21:10'
-          },
-          {
-            ID: 4,
-            TotalRules: 100,
-            TestedRules: 100,
-            PassedRules: 60,
-            CreatedAt: '2023-03-20 10:21:10'
-          },
-          {
-            ID: 5,
-            TotalRules: 100,
-            TestedRules: 50,
-            PassedRules: 40,
-            CreatedAt: '2023-03-20 10:21:10'
-          },
-        ]
-      }
+  </div>
+</template>
+
+<script lang="ts">
+import ApplicationComponent from '@/components/ApplicationComponent.vue'
+
+export default {
+  components: {
+    ApplicationComponent
+  },
+  data() {
+    return {
+      applications: [
+        {
+          ID: 0,
+          Status: 'approved'
+        },
+        {
+          ID: 1,
+          Status: 'pending'
+        },
+        {
+          ID: 2,
+          Status: 'pending'
+        },
+        {
+          ID: 3,
+          Status: 'rejected'
+        }
+      ]
     }
   }
-  </script>
-  
+}
+</script>
