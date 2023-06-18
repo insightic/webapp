@@ -2,7 +2,7 @@
     <div class="text-secondary mb-4">Showing all applications</div>
   
     <div style="max-width: 960px">
-      <div class="card w-100" style="width: 18rem">
+      <div class="card w-100">
         <div class="card-header"><b>20 validation runs</b></div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item" v-for="job in jobs" :key="job.ID">
