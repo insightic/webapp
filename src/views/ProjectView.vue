@@ -8,6 +8,7 @@ import SidebarLayout from '@/layouts/SidebarLayout.vue'
 import ProjectOverviewView from '@/views/projectSubViews/ProjectOverviewView.vue'
 import ProjectSourceCodeView from '@/views/projectSubViews/ProjectSourceCodeView.vue'
 import ProjectValidationsView from '@/views/projectSubViews/ProjectValidationsView.vue'
+import ProjectApplicationsView from '@/views/projectSubViews/ProjectApplicationsView.vue'
 
 export default {
   components: {
@@ -28,8 +29,13 @@ export default {
         },
         {
           name: 'Validations',
-          icon: 'bi-bar-chart-steps',
+          icon: 'bi-clipboard2-check',
           component: ProjectValidationsView
+        },
+        {
+          name: 'Applications',
+          icon: 'bi-file-text',
+          component: ProjectApplicationsView
         }
       ]
     }
