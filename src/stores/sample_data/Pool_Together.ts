@@ -1,6 +1,6 @@
 export default {
     guid: "e262d5c2-16f8-47a0-8c70-4019514d137c",
-    logo: "/webapp/logos/pooltogether.jpeg",
+    logo: "/logos/pooltogether.jpeg",
     name: "Pool Together",
     url: "https://pooltogether.com",
     author: "John Doe",

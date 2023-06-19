@@ -7,7 +7,7 @@
             border: 0px solid white;
             border-radius: 0px;
             background-color: transparent;
-            background-image: url('/webapp/logo.png');
+            background-image: url('/logo.png');
             background-repeat: round;
             background-origin: content-box;
             width: 30px;
@@ -32,7 +32,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item active">
-            <a class="nav-link" href="/webapp">Teams</a>
+            <a class="nav-link" href="/">Teams</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Contact Us</a>

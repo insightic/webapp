@@ -5,7 +5,7 @@ import IControllable1155 from './contracts/IControllable1155.sol.txt?raw'
 
 export default {
     guid: "e262d5c2-16f8-47a0-8c70-4019514d137b",
-    logo: "/webapp/logos/wolfgame.jpeg",
+    logo: "/logos/wolfgame.jpeg",
     name: "Wolf Game",
     url: "https://wolf.game",
     author: "John Doe",

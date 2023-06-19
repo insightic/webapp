@@ -1,6 +1,6 @@
 export default {
     guid: "e262d5c2-16f8-47a0-8c70-4019514d137d",
-    logo: "/webapp/logos/olympus.jpeg",
+    logo: "/logos/olympus.jpeg",
     name: "Olympus",
     url: "https://olympusdao.finance",
     author: "John Doe",
