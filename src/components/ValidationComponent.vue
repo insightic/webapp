@@ -14,8 +14,8 @@
       <div class="text-secondary small">{{ formatDateTime(createdAt) }}</div>
     </div>
     <div class="ms-auto">
-      <button type="button" class="btn btn-sm btn-outline-primary mx-2">View Report</button>
-      <button type="button" class="btn btn-sm btn-success mx-2" v-if="passedRules == totalRules">
+      <button type="button" class="btn btn-sm btn-outline-primary mx-2 my-1">View Report</button>
+      <button type="button" class="btn btn-sm btn-success mx-2 my-1" v-if="passedRules == totalRules">
         Submit
       </button>
     </div>
