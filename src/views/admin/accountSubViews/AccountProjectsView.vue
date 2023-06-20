@@ -1,19 +1,47 @@
 <template>
-  <div class="text-secondary mb-4">Showing all projects</div>
+  <div class="text-secondary mb-4 d-flex justify-content-between align-items-center">
+    <div>
+      Showing all projects
+    </div>
+    <div class="icon-btn">
+      <!-- show list -->
+      <i class="bi bi-list-ul me-3" style="font-size: 1.5rem" :style="view=='list'?'color:blue':'color:grey'" @click="view='list'"></i>
+      <!-- show card -->
+      <i class="bi bi-grid-3x3-gap me-3" style="font-size: 1.5rem" :style="view=='card' ?'color:blue':'color:grey'" @click="view='card'"></i>
+    </div>
+  </div>
 
-  <div class="d-flex flex-wrap">
+  <!-- card list -->
+  <div v-if="view=='card'" class="d-flex flex-wrap">
     <ProjectCardComponent v-for="project in projects" :key="project.ID" :project="project" :isAdmin="true"/>
+  </div>
+  
+  <!-- file list -->
+  <div v-if="view=='list'" class="d-flex flex-column w-100">
+    <ProjectListComponent :isHeader="true"  :isAdmin="true"/>
+    <ProjectListComponent v-for="project in projects" :key="project.ID" :project="project" :icon="icons[project.Name.toLowerCase() as keyof typeof icons]" :isAdmin="true"/>
   </div>
 </template>
 
 <script lang="ts">
 import ProjectCardComponent from '@/components/ProjectCardComponent.vue'
+import ProjectListComponent from '@/components/ProjectListComponent.vue'
 import { projectsStore } from '@/stores/projects'
 import { mapStores } from 'pinia'
 
 export default {
   components: {
-    ProjectCardComponent
+    ProjectCardComponent,
+    ProjectListComponent
+  },
+  data() {
+    return {
+      view: 'card',
+      icons: {
+        "wolfgame": 'https://nftnow.com/wp-content/uploads/2023/02/Screen-Shot-2023-02-02-at-11.33.07-AM.png',
+        "biswap": 'https://getcrypto.info/images/logos/biswap.png',
+      }
+    }
   },
   async created() {
     await projectsStore().getProjects()
@@ -29,3 +57,9 @@ export default {
   },
 }
 </script>
+
+<style>
+.icon-btn {
+  cursor: pointer;
+}
+</style>

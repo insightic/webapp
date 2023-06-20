@@ -24,6 +24,10 @@ async function login(username: string, password: string) {
     alert('Login failed')
   }
 }
+
+function handleSubmit() {
+  login(username, password)
+}
 </script>
 
 <template>
@@ -39,7 +43,7 @@ async function login(username: string, password: string) {
         New Here? <RouterLink to="/register" class="register-link">Create an Account</RouterLink>
       </div>
 
-      <form>
+      <form @submit.prevent="handleSubmit">
         <div class="form-group my-3">
           <label class="mb-2">Username</label>
           <input type="text" class="form-control" v-model="username" />
@@ -51,7 +55,7 @@ async function login(username: string, password: string) {
         </div>
 
         <button
-          type="button"
+          type="submit"
           class="mt-3 w-100 btn btn-lg btn-primary"
           @click="login(username, password)"
         >
