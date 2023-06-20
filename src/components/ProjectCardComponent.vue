@@ -48,7 +48,8 @@ import type { Project } from '@/stores/projects'
 
 export default {
   props: {
-    project: { type: Object as PropType<Project> }
+    project: { type: Object as PropType<Project> },
+    isAdmin: { type: Boolean, default: false }
   },
   methods: {
     formatDateTime,
@@ -56,7 +57,8 @@ export default {
       this.$router.push('/?tab=CreateProject' )
     },
     click(projectID: number) {
-      this.$router.push(`/projects/${projectID}`)
+      if (this.isAdmin) this.$router.push(`/admin/projects/${projectID}`)
+      else this.$router.push(`/projects/${projectID}`)
     }
   }
 }

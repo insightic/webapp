@@ -11,7 +11,7 @@ export default {
       return httpClient.isAuthorized()
     },
     isLoginView() {
-      return this.$route.path == '/login'
+      return this.$route.path == '/login' || this.$route.path == '/admin/login'
     },
     isRegisterView() {
       return this.$route.path == '/register'
@@ -23,8 +23,9 @@ export default {
   created() {
     if (this.isLoginView || this.isRegisterView) {
       this.isAuthorized && this.$router.push('/teams')
-    } else {
-      !this.isAuthorized && this.$router.push('/login')
+    }
+    else {
+      !this.isLoginView && !this.isAuthorized && this.$router.push('/admin/login')
     }
   }
 }

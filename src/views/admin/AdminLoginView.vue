@@ -1,27 +1,25 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { RouterLink, useRouter, useRoute } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 import httpClient from '@/httpclient'
 
 let username: string
 let password: string
 
 const router = useRouter()
-const route = useRoute()
 
 onMounted(async () => {
   const isAuthorized = await httpClient.isAuthorized()
-  if (isAuthorized && route.path !== '/admin/login') {
-    router.push('/')
+  if (isAuthorized) {
+    router.push('/admin/')
   }
 })
 
 async function login(username: string, password: string) {
   const resp = await httpClient.login(username, password)
   if (resp?.code == 200) {
-    router.push('/')
+    router.push('/admin/')
   } else {
-    alert(JSON.stringify(props))
     alert('Login failed')
   }
 }
@@ -34,10 +32,10 @@ async function login(username: string, password: string) {
         <img class="logo" src="/logo.png" />
       </div>
 
-      <h2 class="my-3 text-center">Sign In to Insightic</h2>
+      <h2 class="my-3 text-center">Sign In to Insightic (Admin)</h2>
 
       <div class="my-3 mb-5 text-center">
-        New Here? <RouterLink to="/register" class="register-link">Create an Account</RouterLink>
+        Not an Admin? <RouterLink to="/login" class="register-link">Login as User</RouterLink>
       </div>
 
       <form>
