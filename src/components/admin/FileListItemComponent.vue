@@ -20,14 +20,14 @@
       desc: { type: String, required: true },
       createdAt: { type: String, required: true },
       icon: { type: String, required: true },
-      isHeader: { type: Boolean, required: true }
+      isHeader: { type: String, required: true }
     },
     methods: {
       formatDateTime
     },
     computed: {
       bold() {
-        return this.isHeader ? '600' : '400';
+        return this.isHeader == 'true' ? '600' : '400';
       }
     }
   }

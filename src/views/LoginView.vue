@@ -21,7 +21,6 @@ async function login(username: string, password: string) {
   if (resp?.code == 200) {
     router.push('/')
   } else {
-    alert(JSON.stringify(props))
     alert('Login failed')
   }
 }
