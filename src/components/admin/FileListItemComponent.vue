@@ -19,8 +19,8 @@
       name: { type: String, required: true },
       desc: { type: String, required: true },
       createdAt: { type: String, required: true },
-      icon: { type: String, required: true },
-      isHeader: { type: String, required: true }
+      icon: { type: String },
+      isHeader: { type: String }
     },
     methods: {
       formatDateTime
