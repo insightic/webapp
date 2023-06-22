@@ -35,3 +35,8 @@ export async function getProjectJobs(projectID: number | string): Promise<Job[]>
     const resp = await httpclient.get<Job[]>(`/projects/${projectID}/jobs`)
     return resp?.payload || []
 }
+
+export async function createProjectJob(projectID: number | string): Promise<Job | null> {
+    const resp = await httpclient.post<Job>(`/projects/${projectID}/jobs`)
+    return resp?.payload || null
+}

@@ -22,6 +22,9 @@
 
 <script lang="ts">
 import ValidationComponent from '@/components/ValidationComponent.vue'
+
+import ProjectViewMixin from './ProjectViewMixin'
+
 import { getProjectJobs } from '@/api'
 import type { Job } from '@/api'
 
@@ -29,8 +32,9 @@ export default {
   components: {
     ValidationComponent
   },
+  mixins: [ProjectViewMixin],
   async created() {
-    this.jobs = await getProjectJobs(this.$route.params.projectID as string)
+    this.jobs = await getProjectJobs(this.projectID)
   },
   data() {
     return {
