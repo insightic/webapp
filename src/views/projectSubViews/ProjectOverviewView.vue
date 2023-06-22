@@ -45,7 +45,7 @@
       </div>
     </SectionLayout>
 
-    <button type="button" class="btn btn-primary">Save and Submit</button>
+    <button type="button" class="btn btn-primary" @click="submit()">Save and Submit</button>
   </div>
 </template>
 
@@ -55,11 +55,23 @@ import SectionLayout from '@/layouts/SectionLayout.vue'
 import LabelInputComponent from '@/components/LabelInputComponent.vue'
 import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
 
+import ProjectViewMixin from './ProjectViewMixin'
+
+import { createProjectJob } from '@/api'
+
 export default {
   components: {
     SectionLayout,
     LabelInputComponent,
     LabelTextareaComponent
+  },
+  mixins: [ProjectViewMixin],
+  methods: {
+    async submit() {
+      const job = await createProjectJob(this.projectID)
+      console.log(job)
+      this.$router.push({ query: { view: 'Validations' } })
+    }
   }
 }
 </script>

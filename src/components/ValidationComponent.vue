@@ -11,7 +11,7 @@
         {{ testedRules }}/{{ totalRules }} Rules Tested, and {{ passedRules }}/{{ totalRules }}
         Passed.
       </div>
-      <div class="text-secondary small">{{ formatDateTime(createdAt) }}</div>
+      <div class="text-secondary small">{{ formatDateTime(createdAt, true) }}</div>
     </div>
     <div class="ms-auto">
       <button type="button" class="btn btn-sm btn-outline-primary mx-2 my-1">View Report</button>

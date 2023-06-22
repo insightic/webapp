@@ -6,6 +6,7 @@
 import SidebarLayout from '@/layouts/SidebarLayout.vue'
 
 import ProjectOverviewView from '@/views/projectSubViews/ProjectOverviewView.vue'
+import ProjectKYCView from './projectSubViews/ProjectKYCView.vue'
 import ProjectSourceCodeView from '@/views/projectSubViews/ProjectSourceCodeView.vue'
 import ProjectValidationsView from '@/views/projectSubViews/ProjectValidationsView.vue'
 import ProjectApplicationsView from '@/views/projectSubViews/ProjectApplicationsView.vue'
@@ -21,6 +22,11 @@ export default {
           name: 'Overview',
           icon: 'bi-info-circle',
           component: ProjectOverviewView
+        },
+        {
+          name: 'KYC',
+          icon: 'bi-credit-card-2-front',
+          component: ProjectKYCView
         },
         {
           name: 'Source Code',
