@@ -87,7 +87,6 @@ export default {
 
 .project-image {
   aspect-ratio: 16/9;
-  background-color: red;
   background-image: url('/project-image.jpg');
   background-size: cover;
 }

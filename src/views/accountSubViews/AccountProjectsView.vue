@@ -24,9 +24,6 @@ export default {
     projects() {
       return Object.values(this.projectsStore.projects)
     },
-    organizationID(): string {
-      return this.$route.params.organizationID as string
-    }
   },
   methods: {
     createProject() {
