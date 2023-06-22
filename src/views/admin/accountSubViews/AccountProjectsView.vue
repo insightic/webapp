@@ -40,6 +40,10 @@ export default {
       icons: {
         "wolfgame": 'https://nftnow.com/wp-content/uploads/2023/02/Screen-Shot-2023-02-02-at-11.33.07-AM.png',
         "biswap": 'https://getcrypto.info/images/logos/biswap.png',
+        'pool together': 'https://avatars.githubusercontent.com/u/52546024?s=200&v=4',
+        'olympus': 'https://yt3.googleusercontent.com/pAzCW6e1kfAi2HOSS0B9DVCzn3Hi2ciYRNii2V6JtgJiLTiNsW-bRWZjfgOiqQf3sx_0QB2Ymg=s900-c-k-c0x00ffffff-no-rj',
+        'euler finance': 'https://storage.googleapis.com/subgraph-images/1656114240805euler-transparent.png',
+        'neopin': 'https://www.coinlore.com/img/neopin.png',
       }
     }
   },

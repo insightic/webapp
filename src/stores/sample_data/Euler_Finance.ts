@@ -1,6 +1,6 @@
 export default {
     guid: "e262d5c2-16f8-47a0-8c70-4019514d137e",
-    logo: "/webapp/logos/eulerfinance.png",
+    logo: "https://storage.googleapis.com/subgraph-images/1656114240805euler-transparent.png",
     name: "Euler Finance",
     url: "https://euler.finance",
     author: "John Doe",

@@ -127,6 +127,7 @@ export default {
   width: 100%;
   border-right: 1px solid #e0e0e0;
   background-color: #e9f2f8;
+  min-width: 300px;
 }
 
 .main {

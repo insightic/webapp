@@ -4,7 +4,7 @@ import MultichainNPT from './contracts/MultichainNPT.sol.txt?raw'
 
 export default {
     guid: "e262d5c2-16f8-47a0-8d10-4019514d137a",
-    logo: "/webapp/logos/neopin.png",
+    logo: "https://www.coinlore.com/img/neopin.png",
     name: "Neopin",
     url: "https://neopin.io/",
     author: "John Doe",
