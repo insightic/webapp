@@ -5,7 +5,7 @@ import IControllable1155 from './contracts/IControllable1155.sol.txt?raw'
 
 export default {
     guid: "e262d5c2-16f8-47a0-8c70-4019514d137b",
-    logo: "/webapp/logos/wolfgame.jpeg",
+    logo: "https://nftnow.com/wp-content/uploads/2023/02/Screen-Shot-2023-02-02-at-11.33.07-AM.png",
     name: "Wolf Game",
     url: "https://wolf.game",
     author: "John Doe",

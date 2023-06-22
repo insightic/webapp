@@ -66,6 +66,14 @@ class HttpClient {
         return true
     }
 
+    public async register(username: string, password: string): Promise<Response<{ Token: string }> | null> {
+        const resp = await this.post<{ Token: string }>('/accounts', { username, password }, false)
+        if (resp?.code === 200) {
+            alert("Registration successful. Please login to continue.")
+        }
+        return resp
+    }
+
     public async login(username: string, password: string): Promise<Response<{ Token: string }> | null> {
         const resp = await this.post<{ Token: string }>('/auth/login', { username, password }, false)
         if (resp?.code === 200) {

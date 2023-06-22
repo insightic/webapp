@@ -82,7 +82,7 @@ export default {
     subViews: { type: Array<SubView>, required: true },
     defaultSubView: { type: String, required: true },
     backButtonName: { type: String },
-    backButtonPath: { type: String }
+    backButtonPath: { type: String },
   },
   computed: {
     subViewName(): string {

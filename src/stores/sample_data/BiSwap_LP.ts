@@ -5,7 +5,7 @@ import BiswapPair from "./contracts/BiswapPair.sol.txt?raw";
 
 export default {
     guid: "e262d5c2-16f8-47a0-8c70-4019514d137a",
-    logo: "/webapp/logos/biswap.jpeg",
+    logo: "https://getcrypto.info/images/logos/biswap.png",
     name: "BiSwap LP",
     url: "https://biswap.org",
     author: "John Doe",
