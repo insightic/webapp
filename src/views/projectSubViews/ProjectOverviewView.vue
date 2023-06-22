@@ -70,6 +70,7 @@ export default {
     async submit() {
       const job = await createProjectJob(this.projectID)
       console.log(job)
+      this.$router.push({ query: { view: 'Validations' } })
     }
   }
 }

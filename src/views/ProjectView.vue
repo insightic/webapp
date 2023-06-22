@@ -25,7 +25,7 @@ export default {
         },
         {
           name: 'KYC',
-          icon: 'bi-code-slash',
+          icon: 'bi-credit-card-2-front',
           component: ProjectKYCView
         },
         {

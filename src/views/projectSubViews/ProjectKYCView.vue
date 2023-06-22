@@ -39,11 +39,14 @@
       </div>
     </SectionLayout>
     <SectionLayout title="Organization Chart">
-        <LabelInputComponent label="Please follow the screenshot below to clearly illustrate the share distribution" type="file" />
-        <img src="/org-chart.png" class="my-2" style="max-width: 320px;"/>
+      <LabelInputComponent
+        label="Please follow the screenshot below to clearly illustrate the share distribution"
+        type="file"
+      />
+      <img src="/org-chart.png" class="my-2" style="max-width: 320px" />
     </SectionLayout>
 
-    <button type="button" class="btn btn-primary">Save and Submit</button>
+    <button type="button" class="btn btn-primary" @click="submit()">Save and Submit</button>
   </div>
 </template>
 
@@ -51,10 +54,22 @@
 import SectionLayout from '@/layouts/SectionLayout.vue'
 import LabelInputComponent from '@/components/LabelInputComponent.vue'
 
+import ProjectViewMixin from './ProjectViewMixin'
+
+import { createProjectJob } from '@/api'
+
 export default {
   components: {
     SectionLayout,
     LabelInputComponent
+  },
+  mixins: [ProjectViewMixin],
+  methods: {
+    async submit() {
+      const job = await createProjectJob(this.projectID)
+      console.log(job)
+      this.$router.push({ query: { view: 'Validations' } })
+    }
   }
 }
 </script>
