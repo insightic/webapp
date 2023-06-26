@@ -15,12 +15,67 @@
 
         <Transition name="smooth" mode="out-in">
 
-          <div v-if="show1" class="form-content ms-3">
-            <LabelInputComponent label="Project Name" type="text" v-model:field="name" :required="true"/>
-            <LabelSelectComponent label="Project Type" :options="['DEX', 'NFT', 'Stable Coin']" v-model:field="projectType" :required="true"/>
-            <LabelTextareaComponent label="Description" type="text" v-model:field="desc" :required="true"/>
-            <LabelInputComponent label="Project On Chain Address" type="text" v-model:field="projectOnChainAddress" :required="true"/>
+          <div v-if="show1" class="form-content">
+            <LabelInputComponent label="Project Name" type="text" v-model:field="name" />
+            <div class="row mx-2 my-4">
+              <label class="col-2 col-md-3 col-sm-4 text-end align-self-center" for="name">
+                Project Name
+                <span class="text-danger">*</span>
+              </label>
+              <input
+                type="text"
+                class="form-controls col-10 col-md-9 col-sm-8"
+                id="name"
+                v-model="name"
+              />
+            </div>
 
+            <div class="row mx-2 my-4">
+              <label class="col-2 col-md-3 col-sm-4 text-end align-self-center" for="projectType">
+                Project Type
+                <span class="text-danger">*</span></label
+              >
+              <select
+                class="form-controls col-10 col-md-9 col-sm-8"
+                id="projectType"
+                v-model="projectType"
+              >
+                <option value="" disabled>Please select a project type</option>
+                <option value="Type 1">DEX</option>
+                <option value="Type 2">NFT</option>
+                <option value="Type 3">Stable Coin</option>
+                <!-- Add more options as needed -->
+              </select>
+            </div>
+
+            <div class="row mx-2 my-4">
+              <label class="col-2 col-md-3 col-sm-4 text-end align-self-top" for="desc">
+                Description
+                <span class="text-danger">*</span>
+              </label>
+              <textarea
+                class="form-controls col-10 col-md-9 col-sm-8"
+                id="desc"
+                rows="3"
+                v-model="desc"
+              ></textarea>
+            </div>
+
+            <div class="row m-2">
+              <label
+                class="col-2 col-md-3 col-sm-4 text-end align-self-center"
+                for="projectOnChainAddress"
+              >
+                Project On Chain Address
+                <span class="text-danger">*</span>
+              </label>
+              <input
+                type="text"
+                class="form-controls col-10 col-md-9 col-sm-8"
+                id="projectOnChainAddress"
+                v-model="projectOnChainAddress"
+              />
+            </div>
           </div>
         </Transition>
       </section>
@@ -37,20 +92,81 @@
         </div>
 
         <Transition name="smooth" mode="out-in">
-          <div v-if="show2" class="form-content ms-3">
+          <div v-if="show2" class="form-content">
+            <div class="row mx-2 my-4">
+              <label class="col-2 col-md-3 col-sm-4 text-end align-self-center" for="founder">
+                Founder
+                <span class="text-danger">*</span>
+              </label>
+              <input
+                type="text"
+                class="form-controls col-10 col-md-9 col-sm-8"
+                id="founder"
+                v-model="founder"
+              />
+            </div>
 
-            <LabelInputComponent label="Founder" type="text" v-model:field="founder" :required="true"/>
-            <LabelInputComponent label="Team Name" type="text" v-model:field="teamName" :required="true"/>
-            <LabelInputComponent label="Office Address" type="text" v-model:field="officeAddress" :required="true"/>
-            <LabelInputComponent label="Company Email Address" type="email" v-model:field="companyEmail" :required="true"/>
-            <LabelInputComponent label="On Chain Address" type="text" v-model:field="onChainAddress" :required="true"/>
+            <div class="row mx-2 my-4">
+              <label class="col-2 col-md-3 col-sm-4 text-end align-self-center" for="teamName">
+                Team Name
+                <span class="text-danger">*</span>
+              </label>
+              <input
+                type="text"
+                class="form-controls col-10 col-md-9 col-sm-8"
+                id="teamName"
+                v-model="teamName"
+              />
+            </div>
 
-            <div class="">
-              <label class="form-label" for="teamMembers">
+            <div class="row mx-2 my-4">
+              <label class="col-2 col-md-3 col-sm-4 text-end align-self-center" for="officeAddress">
+                Office Address
+                <span class="text-danger">*</span>
+              </label>
+              <input
+                type="text"
+                class="form-controls col-10 col-md-9 col-sm-8"
+                id="officeAddress"
+                v-model="officeAddress"
+              />
+            </div>
+
+            <div class="row mx-2 my-4">
+              <label class="col-2 col-md-3 col-sm-4 text-end align-self-center" for="companyEmail">
+                Company Email Address
+                <span class="text-danger">*</span>
+              </label>
+              <input
+                type="text"
+                class="form-controls col-10 col-md-9 col-sm-8"
+                id="companyEmail"
+                v-model="companyEmail"
+              />
+            </div>
+
+            <div class="row mx-2 my-4">
+              <label
+                class="col-2 col-md-3 col-sm-4 text-end align-self-center"
+                for="onChainAddress"
+              >
+                On Chain Address
+                <span class="text-danger">*</span>
+              </label>
+              <input
+                type="text"
+                class="form-controls col-10 col-md-9 col-sm-8"
+                id="onChainAddress"
+                v-model="onChainAddress"
+              />
+            </div>
+
+            <div class="row m-2">
+              <label class="col-2 col-md-3 col-sm-4 text-end align-self-start" for="onChainAddress">
                 Team Members
                 <span class="text-danger">*</span>
               </label>
-              <div class="">
+              <div class="col-10 col-md-9 col-sm-8">
                 <div class="mb-2" v-for="(member, counter) in teamMembers" v-bind:key="counter">
                   <label for="duration" class="me-2">{{ counter + 1 }}. Member Name</label>
                   <input type="text" class="me-5 rounded" v-model.lazy="member.name" required />
@@ -118,27 +234,38 @@
         </div>
 
         <Transition name="smooth" mode="out-in">
-          <div v-if="show4" class="form-content ms-3">
-            <LabelInputComponent label="Repository Link" type="text" v-model:field="repo" :required="true"/>
+          <div v-if="show4" class="form-content">
+            <div class="row m-2">
+              <label class="col-2 col-md-3 col-sm-4 text-end align-self-center" for="companyEmail">
+                Repository Link
+                <span class="text-danger">*</span>
+              </label>
+              <input
+                type="text"
+                class="form-controls col-10 col-md-9 col-sm-8"
+                id="repo"
+                v-model="repo"
+              />
+            </div>
 
-            <div class="mb-3">
-              <label for="document" class=""
+            <div class="row m-2">
+              <label for="document" class="col-2 col-md-3 col-sm-4 text-end align-self-center"
                 >Whitepaper</label
               >
               <input
                 type="file"
-                class="form-controls w-100"
+                class="form-controls col-10 col-md-9 col-sm-8"
                 id="document"
               />
             </div>
 
-            <div class="">
-              <label for="document" class=""
+            <div class="row m-2">
+              <label for="document" class="col-2 col-md-3 col-sm-4 text-end align-self-center"
                 >Code Files</label
               >
               <input
                 type="file"
-                class="form-controls w-100"
+                class="form-controls col-10 col-md-9 col-sm-8"
                 id="document"
               />
             </div>
@@ -157,14 +284,12 @@
 <script lang="ts">
 import LabelInputComponent from '@/components/LabelInputComponent.vue'
 import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
-import LabelSelectComponent from '@/components/LabelSelectComponent.vue'
 
 export default {
   setup() {},
   components: {
     LabelInputComponent,
-    LabelTextareaComponent,
-    LabelSelectComponent
+    LabelTextareaComponent
   },
   data() {
     return {

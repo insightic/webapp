@@ -147,13 +147,7 @@
           '6': 'e262d5c2-16f8-47a0-8d10-4019514d137a',
         }
         var projectGuid = mapping[this.$route.params.projectID as keyof typeof mapping]
-        // if (this.$route.params.projectID === '1') {
-        //   projectGuid = 'e262d5c2-16f8-47a0-8c70-4019514d137b'
-        // } else if (this.$route.params.projectID === '2') {
-        //   projectGuid = 'e262d5c2-16f8-47a0-8c70-4019514d137a'
-        // } else {
-        //   alert('Project not found')
-        // }
+
         return this.organizationsStore.findProject('e262d5c2-16f8-47a0-8c70-4019514b137c', projectGuid)
       }
     },
