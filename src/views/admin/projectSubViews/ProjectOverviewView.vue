@@ -61,7 +61,7 @@
 <script lang="ts">
 import SectionLayout from '@/layouts/SectionLayout.vue'
 
-import LabelInputComponent from '@/components/LabelInputComponent.vue'
+import LabelInputComponent from '@/components/admin/LabelInputComponent.vue'
 import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
 
 import { organizationsStore } from '@/stores/organizations'
