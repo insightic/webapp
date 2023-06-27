@@ -57,7 +57,78 @@
                 Founders
                 <span class="text-danger">*</span>
               </label>
+              <LabelInputComponent label="Number of Founders" type="text" v-model:field="numFounders" :required="true"/>
+              
               <div class="">
+                <div class="mb-4" v-for="(founder, counter) in founders2" v-bind:key="counter">
+                  <div class="d-flex">
+                    <div class="fw-bold">Founder {{ counter + 1 }}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <LabelInputComponent label="Name" type="text" v-model:field="founder.name" :required="true"/>
+                    </div>
+                    <div class="col-md-6">
+                      <LabelInputComponent label="Position within DLT Foundation" type="text" v-model:field="founder.position" :required="true"/>
+                    </div>
+                  </div>
+
+                  <LabelInputComponent label="KYC Verification" type="text" v-model:field="founder.kyc" :required="true"/>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <LabelInputComponent label="Twitter Account (URL)" type="text" v-model:field="founder.twitter" :required="true"/>
+                    </div>
+                    <div class="col-md-6">
+                      <LabelInputComponent label="LinkedIn Profile (URL)" type="text" v-model:field="founder.linkedin" :required="true"/>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <LabelInputComponent label="Email Address" type="text" v-model:field="founder.email" :required="true"/>
+                    </div>
+                    <div class="col-md-6">
+                      <LabelInputComponent label="Ethereum Address" type="text" v-model:field="founder.ethereum" :required="true"/>
+                    </div>
+                  </div>
+
+                  <div class="">
+                    <label for="document" class=""
+                      >CV</label
+                    >
+                    <input
+                      type="file"
+                      class="form-controls w-100"
+                      id="document"
+                    />
+                    <div class="text-secondary small">
+                      Brief CV or Biography (Please attach separate sheets if necessary)
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+              
+              <div class="mt-5">
+                <label class="form-label" for="teamMembers">
+                  Team Members
+                  <span class="text-danger">*</span>
+                </label>
+                <LabelInputComponent label="Number of Team Members" type="text" v-model:field="numTeamMembers" :required="true"/>
+
+                <div class="">
+                  <div class="mb-2" v-for="(member, counter) in teamMembers2" v-bind:key="counter">
+                    <label for="duration" class="me-2">{{ counter + 1 }}. Member - Name:</label>
+                    <input type="text" class="me-5 rounded" v-model.lazy="member.name" required />
+                    <label for="duration" class="me-2">Role:</label>
+                    <input type="text" class="me-2 rounded" v-model.lazy="member.role" required />
+                  </div>
+                </div>
+              </div>
+              
+              <!-- <div class="">
                 <div class="mb-2" v-for="(founder, counter) in founders" v-bind:key="counter">
                   <div class="d-flex">
                     <div class="fw-bold">Founder {{ counter + 1 }}</div>
@@ -130,7 +201,7 @@
                 <div class="w-50 d-flex justify-content-center">
                   <i class="bi bi-plus-circle add-btn" @click="addMember"></i>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </Transition>
@@ -148,7 +219,7 @@
         </div>
 
         <Transition name="smooth" mode="out-in">
-          <div v-if="show3" class="form-content">
+          <div v-if="show3" class="form-content ms-3">
             <LabelTextareaComponent label="Motivation of your DLT Foundation" 
               footnote="Please provide a detailed description of the objectives of your DLT Foundation (max. 5000 characters)" 
               type="text" v-model:field="objective" :required="true"/>
@@ -197,9 +268,9 @@
       </section>
 
       <!-- terms and conditions tickbox -->
-      <div class="px-3">
+      <div class="px-3 text-nowrap">
         <input type="checkbox" id="terms" name="terms" value="terms" ref="terms" class="me-2"/>
-        <label for="terms">
+        <label for="terms" class="text-wrap align-top">
           By submitting this form, I/we confirm that the provided information is true and accurate to the best of my/our knowledge.
         </label>
       </div>
@@ -256,6 +327,8 @@ export default {
       objective: '',
       motivation: '',
       assets: '',
+      numFounders: '',
+      numTeamMembers: ''
     }
   },
   computed: {
@@ -287,7 +360,34 @@ export default {
     },
     calcHeight() {
       return this.founders.length * 600 + this.teamMembers.length * 100 + 'px'
+    },
+    founders2() {
+      this.founders = []
+      for (let i = 0; i < parseInt(this.numFounders); i++) {
+        this.founders.push({
+          name: '',
+          position: '',
+          kyc: '',
+          twitter: '',
+          linkedin: '',
+          ethereum: '',
+          email: '',
+          cv: ''
+        })
+      }
+      return this.founders
+    },
+    teamMembers2() {
+      this.teamMembers = []
+      for (let i = 0; i < parseInt(this.numTeamMembers); i++) {
+        this.teamMembers.push({
+          name: '',
+          role: ''
+        })
+      }
+      return this.teamMembers
     }
+
   },
   methods: {
     save() {

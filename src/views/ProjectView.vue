@@ -10,7 +10,7 @@ import ProjectKYCView from './projectSubViews/ProjectKYCView.vue'
 import ProjectSourceCodeView from '@/views/projectSubViews/ProjectSourceCodeView.vue'
 import ProjectValidationsView from '@/views/projectSubViews/ProjectValidationsView.vue'
 import ProjectApplicationsView from '@/views/projectSubViews/ProjectApplicationsView.vue'
-import ProjectSettingsView from '@/views/projectSubViews/ProjectSettingsView.vue'
+import ProjectAutoAssessmentView from '@/views/projectSubViews/ProjectAutoAssessmentView.vue'
 
 export default {
   components: {
@@ -25,14 +25,14 @@ export default {
           component: ProjectOverviewView
         },
         {
+          name: 'Auto Assessment',
+          icon: 'bi-patch-question',
+          component: ProjectAutoAssessmentView
+        },
+        {
           name: 'KYC',
           icon: 'bi-credit-card-2-front',
           component: ProjectKYCView
-        },
-        {
-          name: 'Settings',
-          icon: 'bi-gear',
-          component: ProjectSettingsView
         },
         {
           name: 'Source Code',

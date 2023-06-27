@@ -7,7 +7,7 @@
       <!-- show list -->
       <i class="bi bi-list-ul me-3" style="font-size: 1.5rem" :style="view=='list'?'color:blue':'color:grey'" @click="view='list'"></i>
       <!-- show card -->
-      <i class="bi bi-grid-3x3-gap me-3" style="font-size: 1.5rem" :style="view=='card' ?'color:blue':'color:grey'" @click="view='card'"></i>
+      <i class="bi bi-grid-3x3-gap npmme-3" style="font-size: 1.5rem" :style="view=='card' ?'color:blue':'color:grey'" @click="view='card'"></i>
     </div>
   </div>
 
@@ -63,7 +63,7 @@ export default {
 </script>
 
 <style>
-.icon-btn {
+.icon-btn > i{
   cursor: pointer;
 }
 </style>

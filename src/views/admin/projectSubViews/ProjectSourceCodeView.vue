@@ -148,7 +148,7 @@ export default {
   border-radius: 5px;
 }
 
-.icon-btn {
+.icon-btn > i {
   cursor: pointer;
 }
 
