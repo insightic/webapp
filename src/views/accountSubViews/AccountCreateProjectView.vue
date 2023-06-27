@@ -220,7 +220,7 @@
 
         <Transition name="smooth" mode="out-in">
           <div v-if="show3" class="form-content ms-3">
-            <LabelTextareaComponent label="Motivation of your DLT Foundation" 
+            <LabelTextareaComponent label="Objectives of your DLT Foundation" 
               footnote="Please provide a detailed description of the objectives of your DLT Foundation (max. 5000 characters)" 
               type="text" v-model:field="objective" :required="true"/>
           </div>

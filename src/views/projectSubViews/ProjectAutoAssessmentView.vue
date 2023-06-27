@@ -306,7 +306,7 @@ tr:first-child td:first-child{
   border-top-left-radius: 10px;
 } */
 
-tr:last-child td:first-child{
+tbody:last-child tr:last-child td:first-child{
   border-bottom-left-radius: 10px;
 }
 
@@ -314,7 +314,7 @@ tr:last-child td:first-child{
   border-top-right-radius: 10px;
 } */
 
-tr:last-child td:last-child{
+tbody:last-child tr:last-child td:last-child{
   border-bottom-right-radius: 10px;
 }
 
