@@ -51,7 +51,7 @@
       </div>
 
       <div class="main flex-grow-1 p-3">
-        <h1>{{ selectedSubView.name }}</h1>
+        <h1>{{ selectedSubView?.name }}</h1>
         <component :is="selectedComponent" />
         <div style="height: 120px"></div>
       </div>
@@ -82,18 +82,25 @@ export default {
     subViews: { type: Array<SubView>, required: true },
     defaultSubView: { type: String, required: true },
     backButtonName: { type: String },
-    backButtonPath: { type: String },
+    backButtonPath: { type: String }
+  },
+  created() {
+    if (!this.selectedSubView) {
+      this.$router.push({ query: { view: this.defaultSubView } })
+    }
   },
   computed: {
     subViewName(): string {
       const tab = this.$route.query.view || this.defaultSubView
       return tab.toString()
     },
-    selectedSubView(): SubView {
-      return this.subViews.filter((v) => v.name == this.subViewName)[0]
+    selectedSubView(): SubView | null {
+      const views = this.subViews.filter((v) => v.name == this.subViewName)
+      return views[0]
     },
-    selectedComponent(): Component {
-      return toRaw(this.selectedSubView.component)
+    selectedComponent(): Component | null {
+      const component = this.selectedSubView?.component
+      return component ? toRaw(component) : null
     }
   },
   methods: {

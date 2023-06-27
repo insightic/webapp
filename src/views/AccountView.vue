@@ -7,6 +7,7 @@ import SidebarLayout from '@/layouts/SidebarLayout.vue'
 
 import AccountProjectsView from '@/views/accountSubViews/AccountProjectsView.vue'
 import AccountUsersView from '@/views/accountSubViews/AccountUsersView.vue'
+import AccountKYCView from '@/views/accountSubViews/AccountKYCView.vue'
 import AccountProfileView from '@/views/accountSubViews/AccountProfileView.vue'
 import AccountCreateProjectView from '@/views/accountSubViews/AccountCreateProjectView.vue'
 
@@ -32,6 +33,11 @@ export default {
           name: 'Users',
           icon: 'bi-people',
           component: AccountUsersView
+        },
+        {
+          name: 'KYC',
+          icon: 'bi-credit-card-2-front',
+          component: AccountKYCView
         },
         {
           name: 'Profile',
