@@ -4,7 +4,7 @@ export interface RuleParamDescription {
     Name: string
     Type: string
     Description: string
-    Required: string
+    Required: boolean
 }
 
 export interface RuleDescription {
