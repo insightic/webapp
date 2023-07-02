@@ -1,11 +1,39 @@
 import httpclient from "./httpclient"
 
+export interface RuleParamDescription {
+    Name: string
+    Type: string
+    Description: string
+    Required: string
+}
+
+export interface RuleDescription {
+    Name: string
+    Description: string
+    Params: RuleParamDescription[]
+}
+
+export async function getRuleTemplates(): Promise<RuleDescription[]> {
+    const resp = await httpclient.get<RuleDescription[]>(`/ruleTemplates`)
+    return resp?.payload || []
+}
+
 export interface Project {
     ID: number
     CreatedAt: string
     UpdatedAt: string
     DeletedAt: string | null
     Name: string
+}
+
+export async function getProjects(): Promise<Project[]> {
+    const resp = await httpclient.get<Project[]>(`/projects`)
+    return resp?.payload || []
+}
+
+export async function getProject(id: number | string): Promise<Project | null> {
+    const resp = await httpclient.get<Project>(`/projects/${id}`)
+    return resp?.payload || null
 }
 
 export interface Job {
@@ -19,16 +47,6 @@ export interface Job {
     RulesPassed: number
     RulesFailed: number
     RulesSkipped: number
-}
-
-export async function getProjects(): Promise<Project[]> {
-    const resp = await httpclient.get<Project[]>(`/projects`)
-    return resp?.payload || []
-}
-
-export async function getProject(id: number | string): Promise<Project | null> {
-    const resp = await httpclient.get<Project>(`/projects/${id}`)
-    return resp?.payload || null
 }
 
 export async function getProjectJobs(projectID: number | string): Promise<Job[]> {
