@@ -3,50 +3,123 @@
 
   <div class="d-flex w-100">
     <div style="max-width: 960px" class="pe-2 me-2" :class="commentPanel ? 'w-75 screen-height' : 'w-100'">
-      <SectionLayout title="Basic Information">
-        <LabelInputComponent label="Project Name" type="text" v-model:field="name" :disabled="true"/>
-        <LabelInputComponent
-          label="Project Type"
-          type="text"
-          v-model:field="projectType"
-          footnote="Please choose correct type of your project."
-          :disabled="true"
-        />
-        <LabelTextareaComponent label="Project Description" v-model:field="desc" :disabled="true"/>
-        <LabelInputComponent label="Project On Chain Address" type="text" :disabled="true"/>
-      </SectionLayout>
+    <SectionLayout title="Part A: DLT Foundation Details">
+      <LabelInputComponent label="DLT Foundation Name" type="text" v-model:field="name" :disabled="true"/>
 
-      <SectionLayout title="Company Information">
-        <div class="row">
-          <div class="col-md-6">
-            <LabelInputComponent label="Founder" type="text" :disabled="true"/>
-          </div>
-          <div class="col-md-6">
-            <LabelInputComponent label="Team Name" type="text" :disabled="true" />
-          </div>
-        </div>
-        <LabelInputComponent label="Email Address" type="email" :disabled="true"/>
-        <LabelTextareaComponent label="Company Address" :disabled="true"/>
-      </SectionLayout>
+      <LabelInputComponent label="Official Twitter Account (URL)" type="text" v-model:field="twitter" :disabled="true"/>
+            <LabelInputComponent label="Official Website (URL)" type="text" v-model:field="website" :disabled="true"/>
+            <LabelInputComponent label="Whitepaper (URL)" type="text" v-model:field="whitepaper" :disabled="true"/>
+            <div class="">
+              <label for="document" class=""
+                >Whitepaper (File)</label
+              >
+              <input
+                type="file"
+                class="form-controls w-100"
+                id="document"
+              />
+              <div class="text-secondary small">
+                Please attach a quality version of the whitepaper document.
+              </div>
+            </div>
+    </SectionLayout>
 
-      <SectionLayout title="Community">
-        <div class="row">
-          <div class="col-6">
-            <LabelInputComponent label="GitHub" type="text" :disabled="true"/>
-          </div>
-          <div class="col-6">
-            <LabelInputComponent label="Telegram" type="text" :disabled="true"/>
+    <SectionLayout title="Part B: Founder(s) Detail">
+      <div class="">
+        <label class="form-label" for="teamMembers">
+          Founders
+          <span class="text-danger">*</span>
+        </label>
+        <LabelInputComponent label="Number of Founders" type="text" v-model:field="numFounders" :disabled="true"/>
+        
+        <div class="">
+          <div class="mb-4" v-for="(founder, counter) in founders2" v-bind:key="counter">
+            <div class="d-flex">
+              <div class="fw-bold">Founder {{ counter + 1 }}</div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <LabelInputComponent label="Name" type="text" v-model:field="founder.name" :disabled="true"/>
+              </div>
+              <div class="col-md-6">
+                <LabelInputComponent label="Position within DLT Foundation" type="text" v-model:field="founder.position" :disabled="true"/>
+              </div>
+            </div>
+
+            <LabelInputComponent label="KYC Verification" type="text" v-model:field="founder.kyc" :disabled="true"/>
+
+            <div class="row">
+              <div class="col-md-6">
+                <LabelInputComponent label="Twitter Account (URL)" type="text" v-model:field="founder.twitter" :disabled="true"/>
+              </div>
+              <div class="col-md-6">
+                <LabelInputComponent label="LinkedIn Profile (URL)" type="text" v-model:field="founder.linkedin" :disabled="true"/>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <LabelInputComponent label="Email Address" type="text" v-model:field="founder.email" :disabled="true"/>
+              </div>
+              <div class="col-md-6">
+                <LabelInputComponent label="Ethereum Address" type="text" v-model:field="founder.ethereum" :disabled="true"/>
+              </div>
+            </div>
+
+            <div class="">
+              <label for="document" class=""
+                >CV</label
+              >
+              <input
+                type="file"
+                class="form-controls w-100"
+                id="document"
+              />
+              <div class="text-secondary small">
+                Brief CV or Biography (Please attach separate sheets if necessary)
+              </div>
+            </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-6">
-            <LabelInputComponent label="Discord" type="text" :disabled="true"/>
-          </div>
-          <div class="col-6">
-            <LabelInputComponent label="Twitter" type="text" :disabled="true"/>
+        
+        <div class="mt-5">
+          <label class="form-label" for="teamMembers">
+            Team Members
+            <span class="text-danger">*</span>
+          </label>
+          <LabelInputComponent label="Number of Team Members" type="text" v-model:field="numTeamMembers" :disabled="true"/>
+
+          <div class="">
+            <div class="mb-2" v-for="(member, counter) in teamMembers2" v-bind:key="counter">
+              <label for="duration" class="me-2">{{ counter + 1 }}. Member - Name:</label>
+              <input type="text" class="me-5 rounded" v-model.lazy="member.name" required />
+              <label for="duration" class="me-2">Role:</label>
+              <input type="text" class="me-2 rounded" v-model.lazy="member.role" required />
+            </div>
           </div>
         </div>
-      </SectionLayout>
+      </div>
+    </SectionLayout>
+
+    <SectionLayout title="Part C: Objectives of the DLT Foundation">
+      <LabelTextareaComponent label="Objectives of your DLT Foundation" 
+              footnote="Please provide a detailed description of the objectives of your DLT Foundation (max. 5000 characters)" 
+              type="text" v-model:field="objective" :disabled="true"/>
+    </SectionLayout>
+
+    
+    <SectionLayout title="Part D: Specific Purpose">
+      <LabelTextareaComponent label="Motivation of your DLT Foundation" 
+              footnote="If your DLT Foundation has been established for a specific purpose, please detail the purpose (max. 5000 characters)" 
+              type="text" v-model:field="motivation" :disabled="true"/>
+    </SectionLayout>
+
+    
+    <SectionLayout title="Part E: Initial Assets">
+      <LabelTextareaComponent label="Initial Assets of your DLT Foundation" 
+              footnote="Please provide a detailed description of the initial assets of your DLT Foundation (max. 5000 characters):" 
+              type="text" v-model:field="assets" :disabled="true"/>
+    </SectionLayout>
 
       <button type="button" class="btn btn-primary" @click="commentPanel = !commentPanel">Comment</button>
     </div>
@@ -90,34 +163,38 @@ export default {
     console.log(this.$route.params.projectID)
     var project = this.organizationsStore.findProject('e262d5c2-16f8-47a0-8c70-4019514b137c', projectGuid)
     this.name = project!.name
-    this.desc = project!.description
     console.log(project?.description)
 
   },
   data() {
     return {
-      name: 'Wolf',
-      projectType: '',
-      desc: '',
-      projectOnChainAddress: '',
-      founder: '',
-      teamName: '',
-      officeAddress: '',
-      companyEmail: '',
-      onChainAddress: '',
-      github: '',
-      telegram: '',
-      discord: '',
+      name: '',
       twitter: '',
-      repo: '',
+      website: '',
       whitepaper: '',
-      codeFiles: '',
       teamMembers: [
         {
           name: '',
           role: ''
         }
       ],
+      founders: [
+        {
+          name: '',
+          position: '',
+          kyc: '',
+          twitter: '',
+          linkedin: '',
+          ethereum: '',
+          email: '',
+          cv: ''
+        }
+      ],
+      objective: '',
+      motivation: '',
+      assets: '',
+      numFounders: '',
+      numTeamMembers: '',
       commentPanel: false,
       positions: {
         clientX: undefined || 0,
@@ -154,6 +231,32 @@ export default {
   },
   computed: {
     ...mapStores(organizationsStore),
+    founders2() {
+      this.founders = []
+      for (let i = 0; i < parseInt(this.numFounders); i++) {
+        this.founders.push({
+          name: '',
+          position: '',
+          kyc: '',
+          twitter: '',
+          linkedin: '',
+          ethereum: '',
+          email: '',
+          cv: ''
+        })
+      }
+      return this.founders
+    },
+    teamMembers2() {
+      this.teamMembers = []
+      for (let i = 0; i < parseInt(this.numTeamMembers); i++) {
+        this.teamMembers.push({
+          name: '',
+          role: ''
+        })
+      }
+      return this.teamMembers
+    }
   }
 }
 </script>

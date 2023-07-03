@@ -14,7 +14,7 @@
       <div class="text-secondary small">{{ formatDateTime(createdAt, true) }}</div>
     </div>
     <div class="ms-auto">
-      <button type="button" class="btn btn-sm btn-outline-primary mx-2 my-1">View Report</button>
+      <button type="button" class="btn btn-sm btn-outline-primary mx-2 my-1" @click="click(jobId)">View Report</button>
       <button type="button" class="btn btn-sm btn-success mx-2 my-1" v-if="passedRules == totalRules">
         Submit
       </button>
@@ -30,10 +30,14 @@ export default {
     totalRules: { type: Number, required: true },
     testedRules: { type: Number, required: true },
     passedRules: { type: Number, required: true },
-    createdAt: { type: String, required: true }
+    createdAt: { type: String, required: true },
+    jobId: { type: Number, required: true }
   },
   methods: {
-    formatDateTime
+    formatDateTime,
+    click(jobID: number) {
+      this.$router.push({path: `/projects/${this.$route.params.projectID}`, query: {rule:jobID, view: 'Report'}})
+    }
   }
 }
 </script>

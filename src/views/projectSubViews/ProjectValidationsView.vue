@@ -13,6 +13,7 @@
             :tested-rules="job.RulesPassed + job.RulesFailed + job.RulesSkipped"
             :passed-rules="job.RulesPassed"
             :created-at="job.CreatedAt"
+            :job-id="job.ID"
           />
         </li>
       </ul>

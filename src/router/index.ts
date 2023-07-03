@@ -6,6 +6,7 @@ import RegisterView from '@/views/RegisterView.vue'
 import AdminLoginView from '@/views/admin/AdminLoginView.vue'
 import AdminAccountView from '@/views/admin/AdminAccountView.vue'
 import AdminProjectView from '@/views/admin/AdminProjectView.vue'
+import ProjectAutoAssessmentView from '@/views/projectSubViews/ProjectAutoAssessmentView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,6 +30,11 @@ const router = createRouter({
     {
       path: '/projects/:projectID',
       name: 'projectView',
+      component: ProjectView,
+    },
+    {
+      path: '/projects/:projectID/:ruleID',
+      name: 'ruleReportView',
       component: ProjectView,
     },
     {

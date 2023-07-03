@@ -25,9 +25,10 @@ export default {
           component: ProjectOverviewView
         },
         {
-          name: 'Auto Assessment',
+          name: 'Report',
           icon: 'bi-patch-question',
-          component: ProjectAutoAssessmentView
+          component: ProjectAutoAssessmentView,
+          hidden: true,
         },
         {
           name: 'KYC',
@@ -48,7 +49,8 @@ export default {
           name: 'Applications',
           icon: 'bi-file-text',
           component: ProjectApplicationsView
-        }
+        },
+        
       ]
     }
   }
