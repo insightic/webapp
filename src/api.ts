@@ -78,6 +78,9 @@ export async function createProjectJob(projectID: number | string): Promise<Job 
 export interface JobRunResult {
     JobID: number
     RuleID: number
+    RuleName: string
+    RuleDescription: string
+    RuleParams: { [key: string]: any }
     Status: string
     ErrorMessage: string
     Output: string

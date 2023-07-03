@@ -89,7 +89,7 @@ export default {
         Name: this.name,
         Description: this.description,
         Method: this.method,
-        Params: this.params
+        Params: toRaw(this.params)
       }
       await createRule(rule)
       alert('Rule added!')
