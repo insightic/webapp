@@ -26,14 +26,8 @@ export interface Rule {
 }
 
 export async function getRules(): Promise<Rule[]> {
-    // const resp = await httpclient.get<Rule[]>(`/rules`)
-    // return resp?.payload || []
-    return [{
-        Name: "test",
-        Description: "test",
-        Method: "test",
-        Params: { "Field": "test" }
-    }]
+    const resp = await httpclient.get<Rule[]>(`/rules`)
+    return resp?.payload || []
 }
 
 export async function createRule(rule: Rule) {

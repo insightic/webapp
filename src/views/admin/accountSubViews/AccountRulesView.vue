@@ -6,10 +6,10 @@
   <table class="table">
     <thead class="thead-dark">
       <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Description</th>
-        <th scope="col">Method</th>
-        <th scope="col">Parameters</th>
+        <th scope="col" width="20%">Name</th>
+        <th scope="col" width="25%">Description</th>
+        <th scope="col" width="20%">Method</th>
+        <th scope="col" width="40%">Parameters</th>
       </tr>
     </thead>
     <tbody>
