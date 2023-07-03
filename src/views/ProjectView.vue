@@ -11,6 +11,7 @@ import ProjectSourceCodeView from '@/views/projectSubViews/ProjectSourceCodeView
 import ProjectValidationsView from '@/views/projectSubViews/ProjectValidationsView.vue'
 import ProjectApplicationsView from '@/views/projectSubViews/ProjectApplicationsView.vue'
 import ProjectAutoAssessmentView from '@/views/projectSubViews/ProjectAutoAssessmentView.vue'
+import ProjectAutoAssessmentView_Backup from './projectSubViews/ProjectAutoAssessmentView_Backup.vue'
 
 export default {
   components: {
@@ -50,7 +51,11 @@ export default {
           icon: 'bi-file-text',
           component: ProjectApplicationsView
         },
-        
+        {
+          name: 'Auto Assessment View (Example)',
+          icon: 'bi-patch-question',
+          component: ProjectAutoAssessmentView_Backup
+        },
       ]
     }
   }
