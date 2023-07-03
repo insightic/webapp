@@ -3,8 +3,8 @@ import { onMounted } from 'vue'
 import { RouterLink, useRouter, useRoute } from 'vue-router'
 import httpClient from '@/httpclient'
 
-const router = useRouter()
-const route = useRoute()
+router = useRouter()
+route = useRoute()
 
 onMounted(async () => {
   const isAuthorized = await httpClient.isAuthorized()
@@ -68,8 +68,8 @@ onMounted(async () => {
 
 <script lang="ts">
 
-const router = useRouter()
-const route = useRoute()
+let router = useRouter()
+let route = useRoute()
 
 export default {
   data() {

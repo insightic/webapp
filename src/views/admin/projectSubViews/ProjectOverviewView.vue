@@ -33,7 +33,7 @@
         <LabelInputComponent label="Number of Founders" type="text" v-model:field="numFounders" :disabled="true"/>
         
         <div class="">
-          <div class="mb-4" v-for="(founder, counter) in founders2" v-bind:key="counter">
+          <div class="mb-4" v-for="(founder, counter) in founders" v-bind:key="counter">
             <div class="d-flex">
               <div class="fw-bold">Founder {{ counter + 1 }}</div>
             </div>
@@ -90,7 +90,7 @@
           <LabelInputComponent label="Number of Team Members" type="text" v-model:field="numTeamMembers" :disabled="true"/>
 
           <div class="">
-            <div class="mb-2" v-for="(member, counter) in teamMembers2" v-bind:key="counter">
+            <div class="mb-2" v-for="(member, counter) in teamMembers" v-bind:key="counter">
               <label for="duration" class="me-2">{{ counter + 1 }}. Member - Name:</label>
               <input type="text" class="me-5 rounded" v-model.lazy="member.name" required />
               <label for="duration" class="me-2">Role:</label>
@@ -231,9 +231,11 @@ export default {
   },
   computed: {
     ...mapStores(organizationsStore),
-    founders2() {
+  },
+  watch: {
+    numFounders: function (val: string) {
       this.founders = []
-      for (let i = 0; i < parseInt(this.numFounders); i++) {
+      for (let i = 0; i < parseInt(val); i++) {
         this.founders.push({
           name: '',
           position: '',
@@ -245,17 +247,15 @@ export default {
           cv: ''
         })
       }
-      return this.founders
     },
-    teamMembers2() {
+    numTeamMembers: function (val: string) {
       this.teamMembers = []
-      for (let i = 0; i < parseInt(this.numTeamMembers); i++) {
+      for (let i = 0; i < parseInt(val); i++) {
         this.teamMembers.push({
           name: '',
           role: ''
         })
       }
-      return this.teamMembers
     }
   }
 }
@@ -266,12 +266,6 @@ export default {
   height: 75vh;
   overflow-y: scroll;
   overflow-x: hidden;
-}
-#draggable-container {
-  /* position: absolute;
-  z-index: 9;
-  right:0;
-  top:0; */
 }
 #draggable-header {
   z-index: 10;

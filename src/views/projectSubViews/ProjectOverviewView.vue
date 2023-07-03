@@ -32,7 +32,7 @@
         <LabelInputComponent label="Number of Founders" type="text" v-model:field="numFounders" :required="true"/>
         
         <div class="">
-          <div class="mb-4" v-for="(founder, counter) in founders2" v-bind:key="counter">
+          <div class="mb-4" v-for="(founder, counter) in founders" v-bind:key="counter">
             <div class="d-flex">
               <div class="fw-bold">Founder {{ counter + 1 }}</div>
             </div>
@@ -89,7 +89,7 @@
           <LabelInputComponent label="Number of Team Members" type="text" v-model:field="numTeamMembers" :required="true"/>
 
           <div class="">
-            <div class="mb-2" v-for="(member, counter) in teamMembers2" v-bind:key="counter">
+            <div class="mb-2" v-for="(member, counter) in teamMembers" v-bind:key="counter">
               <label for="duration" class="me-2">{{ counter + 1 }}. Member - Name:</label>
               <input type="text" class="me-5 rounded" v-model.lazy="member.name" required />
               <label for="duration" class="me-2">Role:</label>
@@ -129,7 +129,6 @@ import SectionLayout from '@/layouts/SectionLayout.vue'
 
 import LabelInputComponent from '@/components/LabelInputComponent.vue'
 import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
-import LabelSelectComponent from '@/components/LabelSelectComponent.vue'
 
 import ProjectViewMixin from './ProjectViewMixin'
 
@@ -144,7 +143,6 @@ export default {
     SectionLayout,
     LabelInputComponent,
     LabelTextareaComponent,
-    LabelSelectComponent
   },
   created() {
     const mapping = {
@@ -202,10 +200,12 @@ export default {
     }
   },
   computed: {
-    ...mapStores(organizationsStore),
-    founders2() {
+    ...mapStores(organizationsStore)
+  },
+  watch: {
+    numFounders: function (val: string) {
       this.founders = []
-      for (let i = 0; i < parseInt(this.numFounders); i++) {
+      for (let i = 0; i < parseInt(val); i++) {
         this.founders.push({
           name: '',
           position: '',
@@ -217,17 +217,15 @@ export default {
           cv: ''
         })
       }
-      return this.founders
     },
-    teamMembers2() {
+    numTeamMembers: function (val: string) {
       this.teamMembers = []
-      for (let i = 0; i < parseInt(this.numTeamMembers); i++) {
+      for (let i = 0; i < parseInt(val); i++) {
         this.teamMembers.push({
           name: '',
           role: ''
         })
       }
-      return this.teamMembers
     }
   }
 
