@@ -23,7 +23,6 @@
 
 <script lang="ts">
 import ValidationComponent from '@/components/ValidationComponent.vue'
-
 import ProjectViewMixin from './ProjectViewMixin'
 
 import { getProjectJobs } from '@/api'

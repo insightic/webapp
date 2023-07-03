@@ -74,3 +74,16 @@ export async function createProjectJob(projectID: number | string): Promise<Job 
     const resp = await httpclient.post<Job>(`/projects/${projectID}/jobs`)
     return resp?.payload || null
 }
+
+export interface JobRunResult {
+    JobID: number
+    RuleID: number
+    Status: string
+    ErrorMessage: string
+    Output: string
+}
+
+export async function getJobRunResults(projectID: number | string, jobID: number | string): Promise<JobRunResult[]> {
+    const resp = await httpclient.get<JobRunResult[]>(`/projects/${projectID}/jobs/${jobID}/results`)
+    return resp?.payload || []
+}

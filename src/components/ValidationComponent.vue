@@ -14,8 +14,14 @@
       <div class="text-secondary small">{{ formatDateTime(createdAt, true) }}</div>
     </div>
     <div class="ms-auto">
-      <button type="button" class="btn btn-sm btn-outline-primary mx-2 my-1" @click="click(jobId)">View Report</button>
-      <button type="button" class="btn btn-sm btn-success mx-2 my-1" v-if="passedRules == totalRules">
+      <button type="button" class="btn btn-sm btn-outline-primary mx-2 my-1" @click="click(jobId)">
+        View Report
+      </button>
+      <button
+        type="button"
+        class="btn btn-sm btn-success mx-2 my-1"
+        v-if="passedRules == totalRules"
+      >
         Submit
       </button>
     </div>
@@ -23,7 +29,7 @@
 </template>
 
 <script lang="ts">
-import { formatDateTime } from '@/helpers';
+import { formatDateTime } from '@/helpers'
 
 export default {
   props: {
@@ -36,7 +42,10 @@ export default {
   methods: {
     formatDateTime,
     click(jobID: number) {
-      this.$router.push({path: `/projects/${this.$route.params.projectID}`, query: {rule:jobID, view: 'Report'}})
+      this.$router.push({
+        path: `/projects/${this.$route.params.projectID}`,
+        query: { jobID: jobID, view: 'Report' }
+      })
     }
   }
 }
