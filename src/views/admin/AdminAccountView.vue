@@ -8,6 +8,7 @@ import SidebarLayout from '@/layouts/SidebarLayout.vue'
 import AccountProjectsView from '@/views/admin/accountSubViews/AccountProjectsView.vue'
 import AccountUsersView from '@/views/admin/accountSubViews/AccountUsersView.vue'
 import AccountProfileView from '@/views/admin/accountSubViews/AccountProfileView.vue'
+import AccountRulesView from './accountSubViews/AccountRulesView.vue'
 import AccountAddRuleView from '@/views/admin/accountSubViews/AccountAddRuleView.vue'
 
 export default {
@@ -28,9 +29,15 @@ export default {
           component: AccountUsersView
         },
         {
+          name: 'Rules',
+          icon: 'bi-braces-asterisk',
+          component: AccountRulesView
+        },
+        {
           name: 'Add Rule',
-          icon: 'bi-people',
-          component: AccountAddRuleView
+          icon: 'bi-braces-asterisk',
+          component: AccountAddRuleView,
+          hidden: true
         },
         {
           name: 'Profile',

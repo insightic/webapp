@@ -18,6 +18,28 @@ export async function getRuleTemplates(): Promise<RuleDescription[]> {
     return resp?.payload || []
 }
 
+export interface Rule {
+    Name: string
+    Description: string
+    Method: string
+    Params: { [key: string]: any }
+}
+
+export async function getRules(): Promise<Rule[]> {
+    // const resp = await httpclient.get<Rule[]>(`/rules`)
+    // return resp?.payload || []
+    return [{
+        Name: "test",
+        Description: "test",
+        Method: "test",
+        Params: { "Field": "test" }
+    }]
+}
+
+export async function createRule(rule: Rule) {
+    await httpclient.post(`/rules`, rule)
+}
+
 export interface Project {
     ID: number
     CreatedAt: string
