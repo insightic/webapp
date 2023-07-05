@@ -38,30 +38,30 @@
             </div>
             <div class="row">
               <div class="col-md-6">
-                <LabelInputComponent label="Name" type="text" v-model:field="founder.name" :required="true"/>
+                <LabelInputComponent label="Name" type="text" v-model:field="founder.Name" :required="true"/>
               </div>
               <div class="col-md-6">
-                <LabelInputComponent label="Position within DLT Foundation" type="text" v-model:field="founder.position" :required="true"/>
-              </div>
-            </div>
-
-            <LabelInputComponent label="KYC Verification" type="text" v-model:field="founder.kyc" :required="true"/>
-
-            <div class="row">
-              <div class="col-md-6">
-                <LabelInputComponent label="Twitter Account (URL)" type="text" v-model:field="founder.twitter" :required="true"/>
-              </div>
-              <div class="col-md-6">
-                <LabelInputComponent label="LinkedIn Profile (URL)" type="text" v-model:field="founder.linkedin" :required="true"/>
+                <LabelInputComponent label="Position within DLT Foundation" type="text" v-model:field="founder.Position" :required="true"/>
               </div>
             </div>
 
+            <LabelInputComponent label="KYC Verification" type="text" v-model:field="founder.Kyc" :required="true"/>
+
             <div class="row">
               <div class="col-md-6">
-                <LabelInputComponent label="Email Address" type="text" v-model:field="founder.email" :required="true"/>
+                <LabelInputComponent label="Twitter Account (URL)" type="text" v-model:field="founder.Twitter" :required="true"/>
               </div>
               <div class="col-md-6">
-                <LabelInputComponent label="Ethereum Address" type="text" v-model:field="founder.ethereum" :required="true"/>
+                <LabelInputComponent label="LinkedIn Profile (URL)" type="text" v-model:field="founder.Linkedin" :required="true"/>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <LabelInputComponent label="Email Address" type="text" v-model:field="founder.Email" :required="true"/>
+              </div>
+              <div class="col-md-6">
+                <LabelInputComponent label="Ethereum Address" type="text" v-model:field="founder.Ethereum" :required="true"/>
               </div>
             </div>
 
@@ -91,9 +91,9 @@
           <div class="">
             <div class="mb-2" v-for="(member, counter) in teamMembers" v-bind:key="counter">
               <label for="duration" class="me-2">{{ counter + 1 }}. Member - Name:</label>
-              <input type="text" class="me-5 rounded" v-model.lazy="member.name" required />
+              <input type="text" class="me-5 rounded" v-model.lazy="member.Name" required />
               <label for="duration" class="me-2">Role:</label>
-              <input type="text" class="me-2 rounded" v-model.lazy="member.role" required />
+              <input type="text" class="me-2 rounded" v-model.lazy="member.Role" required />
             </div>
           </div>
         </div>
@@ -132,10 +132,9 @@ import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
 
 import ProjectViewMixin from './ProjectViewMixin'
 
-import { createProjectJob } from '@/api'
+import { createProjectJob, getProject } from '@/api'
 import { organizationsStore } from '@/stores/organizations'
 import { mapStores } from 'pinia'
-
 
 
 export default {
@@ -144,7 +143,8 @@ export default {
     LabelInputComponent,
     LabelTextareaComponent,
   },
-  created() {
+  async created() {
+    const projectInfo = await getProject(this.$route.params.projectID as string)
     const mapping = {
       '1': 'e262d5c2-16f8-47a0-8c70-4019514d137b',
       '2': 'e262d5c2-16f8-47a0-8c70-4019514d137a',
@@ -153,12 +153,29 @@ export default {
       '5': 'e262d5c2-16f8-47a0-8c70-4019514d137e',
       '6': 'e262d5c2-16f8-47a0-8d10-4019514d137a',
     }
-    var projectGuid = mapping[this.$route.params.projectID as keyof typeof mapping]
-    console.log(this.$route.params.projectID)
-    var project = this.organizationsStore.findProject('e262d5c2-16f8-47a0-8c70-4019514b137c', projectGuid)
-    this.name = project!.name
-    console.log(project?.description)
+    if (!mapping[this.$route.params.projectID as keyof typeof mapping]) {
+      this.name = projectInfo?.Name ?? ''
+      this.twitter = projectInfo?.Twitter ?? ''
+      this.website = projectInfo?.Website ?? ''
+      this.whitepaper = projectInfo?.Whitepaper ?? ''
+      this.numFounders = projectInfo?.NumFounders.toString() ?? '0'
+      this.founders = JSON.parse(JSON.stringify(projectInfo?.Founders)) ?? []
+      this.numTeamMembers = projectInfo?.NumMembers.toString() ?? '0'
+      this.teamMembers = projectInfo?.Members ?? []
+      this.objective = projectInfo?.Objective ?? ''
+      this.motivation = projectInfo?.Motivation ?? ''
+      this.assets = projectInfo?.Assets ?? '' 
 
+      this.founders = JSON.parse(JSON.stringify(this.founders))
+      console.log(this.founders)
+    } else {
+      var projectGuid = mapping[this.$route.params.projectID as keyof typeof mapping]
+      console.log(this.$route.params.projectID)
+      var project = this.organizationsStore.findProject('e262d5c2-16f8-47a0-8c70-4019514b137c', projectGuid)
+      this.name = project!.name
+      console.log(project?.description)
+    }
+    console.log(projectInfo)
   },
   data() {
     return {
@@ -168,20 +185,20 @@ export default {
       whitepaper: '',
       teamMembers: [
         {
-          name: '',
-          role: ''
+          Name: '',
+          Role: ''
         }
       ],
       founders: [
         {
-          name: '',
-          position: '',
-          kyc: '',
-          twitter: '',
-          linkedin: '',
-          ethereum: '',
-          email: '',
-          cv: ''
+          Name: '',
+          Position: '',
+          Kyc: '',
+          Twitter: '',
+          Linkedin: '',
+          Ethereum: '',
+          Email: '',
+          CV: ''
         }
       ],
       objective: '',
@@ -204,27 +221,33 @@ export default {
   },
   watch: {
     numFounders: function (val: string) {
-      this.founders = []
-      for (let i = 0; i < parseInt(val); i++) {
-        this.founders.push({
-          name: '',
-          position: '',
-          kyc: '',
-          twitter: '',
-          linkedin: '',
-          ethereum: '',
-          email: '',
-          cv: ''
-        })
+      if (parseInt(val) > this.founders.length) {
+        for (let i = this.founders.length; i < parseInt(val); i++) {
+          this.founders.push({
+            Name: '',
+            Position: '',
+            Kyc: '',
+            Twitter: '',
+            Linkedin: '',
+            Ethereum: '',
+            Email: '',
+            CV: ''
+          })
+        }
+      } else {
+        this.founders = this.founders.slice(0, parseInt(val))
       }
     },
     numTeamMembers: function (val: string) {
-      this.teamMembers = []
-      for (let i = 0; i < parseInt(val); i++) {
-        this.teamMembers.push({
-          name: '',
-          role: ''
-        })
+      if (parseInt(val) > this.teamMembers.length) {
+        for (let i = this.teamMembers.length; i < parseInt(val); i++) {
+          this.teamMembers.push({
+            Name: '',
+            Role: ''
+          })
+        }
+      } else {
+        this.teamMembers = this.teamMembers.slice(0, parseInt(val))
       }
     }
   }

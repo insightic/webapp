@@ -286,6 +286,8 @@
 <script lang="ts">
 import LabelInputComponent from '@/components/LabelInputComponent.vue'
 import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
+import { createProject } from '@/api'
+import type { NewProject } from '@/api'
 
 export default {
   setup() {},
@@ -341,7 +343,7 @@ export default {
     },
     complete2() {
       if (this.founders.length == 0 &&this.teamMembers.length == 0 ) {
-        return false
+        return true
       } else if (this.founders[0].name == '') {
         return false
       } else {
@@ -365,15 +367,30 @@ export default {
     save() {
       window.alert('Your response has been saved')
     },
-    submit() {
-      if (!this.complete1 || !this.complete2 || !this.complete3 || !this.complete4) {
-        window.alert('Please fill in all required fields')
-        return
-      } else if (!(this.$refs.terms as any).checked) {
-        window.alert('Please agree to the terms and conditions')
-        return
-      }
-      window.alert('Your response has been submitted')
+    async submit() {
+      // if (!this.complete1 || !this.complete2 || !this.complete3 || !this.complete4) {
+      //   window.alert('Please fill in all required fields')
+      //   return
+      // } else if (!(this.$refs.terms as any).checked) {
+      //   window.alert('Please agree to the terms and conditions')
+      //   return
+      // } else {
+        let data = {
+          name: this.name,
+          twitter: this.twitter,
+          website: this.website,
+          whitepaper: this.whitepaper,
+          numFounders: parseInt(this.numFounders) ? parseInt(this.numFounders) : 0,
+          founders: this.founders,
+          numMembers: parseInt(this.numTeamMembers) ? parseInt(this.numTeamMembers) : 0,
+          members: this.teamMembers,
+          objective: this.objective,
+          motivation: this.motivation,
+          assets: this.assets
+        } as unknown as NewProject
+        await createProject(data)
+        window.alert('Your response has been submitted')
+      // }
     },
 
     addMember() {

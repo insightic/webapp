@@ -40,6 +40,58 @@ export interface Project {
     UpdatedAt: string
     DeletedAt: string | null
     Name: string
+    Twitter: string
+    Website: string
+    Whitepaper: string
+    // WhitepaperFile: string
+    NumFounders: number
+    Founders: Founder[]
+    NumMembers: number
+    Members: Member[]
+    Objective: string
+    Motivation: string
+    Assets: string
+}
+
+export interface Founder {
+    Name: string
+    Position: string
+    Kyc: string
+    Twitter: string
+    Linkedin: string
+    Ethereum: string
+    Email: string
+    CV: string
+}
+
+export interface Member {
+    Name: string
+    Role: string
+}
+
+export interface NewProject {
+    Name: string
+    Twitter: string
+    Website: string
+    Whitepaper: string
+    // WhitepaperFile: string
+    NumFounders: number
+    Founders: Founder[]
+    NumMembers: number
+    Members: Member[]
+    Objective: string
+    Motivation: string
+    Assets: string
+}
+
+
+export async function createProject(project: NewProject): Promise<Project> {
+
+    const resp = await httpclient.post<Project>(`/projects`, project)
+    console.log(project)
+    console.log("debug")
+    console.log(resp?.payload)
+    return resp?.payload || {} as Project
 }
 
 export async function getProjects(): Promise<Project[]> {

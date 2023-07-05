@@ -3,7 +3,9 @@ import axios from 'axios'
 interface Response<T> { code: number, error: string, payload: T, status: string }
 
 class HttpClient {
-    public baseUrl: string = "https://f9a2s4wxdj.execute-api.ap-southeast-1.amazonaws.com/staging"
+    // public baseUrl: string = "https://f9a2s4wxdj.execute-api.ap-southeast-1.amazonaws.com/staging"
+    public baseUrl: string = "http://localhost:3000"
+
     private _token: string = ""
 
     public get token(): string {
@@ -48,10 +50,14 @@ class HttpClient {
 
     public async post<T>(url: string, data: any = null, autoRefresh: boolean = true): Promise<Response<T> | null> {
         url = this.absoluteUrl(url)
+        console.log(data)
+        // alert(JSON.stringify(data))
         try {
             const resp = await axios.post<Response<T>>(url, data, { headers: this._headers() })
             return resp?.data
         } catch (e: any) {
+            console.log(e)
+            
             const data = e?.response?.data as Response<T>
             if (autoRefresh && data.code == 401) {
                 const tokenResp = await this.refreshToken()
