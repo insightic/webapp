@@ -390,6 +390,7 @@ export default {
         } as unknown as NewProject
         await createProject(data)
         window.alert('Your response has been submitted')
+        this.$router.push({ query: { view: 'Projects' } })
       // }
     },
 
