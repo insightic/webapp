@@ -88,9 +88,6 @@ export interface NewProject {
 export async function createProject(project: NewProject): Promise<Project> {
 
     const resp = await httpclient.post<Project>(`/projects`, project)
-    console.log(project)
-    console.log("debug")
-    console.log(resp?.payload)
     return resp?.payload || {} as Project
 }
 
@@ -101,6 +98,11 @@ export async function getProjects(): Promise<Project[]> {
 
 export async function getProject(id: number | string): Promise<Project | null> {
     const resp = await httpclient.get<Project>(`/projects/${id}`)
+    return resp?.payload || null
+}
+
+export async function deleteProject(id: number | string): Promise<any | null> {
+    const resp = await httpclient.delete<any>(`/projects/${id}`)
     return resp?.payload || null
 }
 

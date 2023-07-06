@@ -29,6 +29,9 @@
           <div class="col-6">Open Issues: 80</div>
         </div>
       </div>
+
+      <button type="button" @click.stop="deleteProject(project!.ID)" class="btn mt-3 btn-outline-danger mx-auto w-100">Delete</button>
+
     </div>
 
     <div v-else class="text-center" @click="toCreateProject">
@@ -45,6 +48,7 @@
 import { formatDateTime } from '@/helpers'
 import type { PropType } from 'vue'
 import type { Project } from '@/stores/projects'
+import { deleteProject } from "@/api"
 
 export default {
   props: {
@@ -59,6 +63,14 @@ export default {
     click(projectID: number) {
       if (this.isAdmin) this.$router.push(`/admin/projects/${projectID}`)
       else this.$router.push(`/projects/${projectID}`)
+    },
+    async deleteProject(projectID: number) {
+      if (confirm('Are you sure to delete this project?') == false) {
+        return
+      } else {
+        const res = await deleteProject(projectID)
+        this.$emit('refresh')
+      }
     }
   }
 }

@@ -67,6 +67,23 @@ class HttpClient {
         }
     }
 
+    public async delete<T>(url: string, autoRefresh: boolean = true): Promise<Response<T> | null> {
+        url = this.absoluteUrl(url)
+        try {
+            const resp = await axios.delete<Response<T>>(url, { headers: this._headers() })
+            console.log(resp)
+            return resp?.data
+        } catch (e: any) {
+            console.log(e)
+            const data = e?.response?.data as Response<T>
+            if (autoRefresh && data.code == 401) {
+                const tokenResp = await this.refreshToken()
+                return tokenResp?.code == 200 ? await this.delete<T>(url, false) : data
+            }
+            return data
+        }
+    }
+
     public isAuthorized(): boolean {
         if (!this.token) return false
         return true

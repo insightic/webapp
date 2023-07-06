@@ -3,7 +3,7 @@
 
   <div class="d-flex flex-wrap">
     <ProjectCardComponent @click="createProject()" />
-    <ProjectCardComponent v-for="project in projects" :key="project.ID" :project="project" />
+    <ProjectCardComponent v-for="project in projects" :key="project.ID" :project="project" @refresh="refresh"/>
   </div>
 </template>
 
@@ -28,6 +28,9 @@ export default {
   methods: {
     createProject() {
       this.$router.push({ query: { view: 'Create Project' } })
+    },
+    refresh() {
+      window.location.reload()
     }
   }
 }
