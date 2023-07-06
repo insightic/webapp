@@ -50,8 +50,6 @@ class HttpClient {
 
     public async post<T>(url: string, data: any = null, autoRefresh: boolean = true): Promise<Response<T> | null> {
         url = this.absoluteUrl(url)
-        console.log(data)
-        // alert(JSON.stringify(data))
         try {
             const resp = await axios.post<Response<T>>(url, data, { headers: this._headers() })
             return resp?.data
@@ -67,11 +65,27 @@ class HttpClient {
         }
     }
 
+    public async put<T>(url: string, data: any = null, autoRefresh: boolean = true): Promise<Response<T> | null> {
+        url = this.absoluteUrl(url)
+        try {
+            const resp = await axios.put<Response<T>>(url, data, { headers: this._headers() })
+            return resp?.data
+        } catch (e: any) {
+            console.log(e)
+            
+            const data = e?.response?.data as Response<T>
+            if (autoRefresh && data.code == 401) {
+                const tokenResp = await this.refreshToken()
+                return tokenResp?.code == 200 ? await this.put<T>(url, data, false) : data
+            }
+            return data
+        }
+    }
+
     public async delete<T>(url: string, autoRefresh: boolean = true): Promise<Response<T> | null> {
         url = this.absoluteUrl(url)
         try {
             const resp = await axios.delete<Response<T>>(url, { headers: this._headers() })
-            console.log(resp)
             return resp?.data
         } catch (e: any) {
             console.log(e)

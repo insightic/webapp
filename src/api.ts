@@ -101,6 +101,11 @@ export async function getProject(id: number | string): Promise<Project | null> {
     return resp?.payload || null
 }
 
+export async function updateProject(id: number | string, project: NewProject): Promise<Project | null> {
+    const resp = await httpclient.put<Project>(`/projects/${id}`, project)
+    return resp?.payload || null
+}
+
 export async function deleteProject(id: number | string): Promise<any | null> {
     const resp = await httpclient.delete<any>(`/projects/${id}`)
     return resp?.payload || null

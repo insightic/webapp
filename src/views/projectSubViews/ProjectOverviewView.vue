@@ -135,7 +135,8 @@ import ProjectViewMixin from './ProjectViewMixin'
 import { createProjectJob, getProject } from '@/api'
 import { organizationsStore } from '@/stores/organizations'
 import { mapStores } from 'pinia'
-
+import { updateProject } from '@/api'
+import type { NewProject } from '@/api'
 
 export default {
   components: {
@@ -211,6 +212,23 @@ export default {
   mixins: [ProjectViewMixin],
   methods: {
     async submit() {
+      let data = {
+          name: this.name,
+          twitter: this.twitter,
+          website: this.website,
+          whitepaper: this.whitepaper,
+          numFounders: parseInt(this.numFounders) ? parseInt(this.numFounders) : 0,
+          founders: this.founders,
+          numMembers: parseInt(this.numTeamMembers) ? parseInt(this.numTeamMembers) : 0,
+          members: this.teamMembers,
+          objective: this.objective,
+          motivation: this.motivation,
+          assets: this.assets
+        } as unknown as NewProject
+      const update = await updateProject(this.projectID, data)
+      console.log(update)
+      window.alert('Project updated successfully!')
+
       const job = await createProjectJob(this.projectID)
       console.log(job)
       this.$router.push({ query: { view: 'Validations' } })
