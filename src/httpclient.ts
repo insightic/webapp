@@ -3,8 +3,8 @@ import axios from 'axios'
 interface Response<T> { code: number, error: string, payload: T, status: string }
 
 class HttpClient {
-    public baseUrl: string = "https://f9a2s4wxdj.execute-api.ap-southeast-1.amazonaws.com/staging"
-    // public baseUrl: string = "http://localhost:3000"
+    // public baseUrl: string = "https://f9a2s4wxdj.execute-api.ap-southeast-1.amazonaws.com/staging"
+    public baseUrl: string = "http://localhost:3000"
 
     private _token: string = ""
 

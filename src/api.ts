@@ -34,6 +34,20 @@ export async function createRule(rule: Rule) {
     await httpclient.post(`/rules`, rule)
 }
 
+export async function getPreSignedUrl(name: string) {
+    const body = {"ObjectName": name}
+    const data = await httpclient.post(`/preSignedPut`, body )
+    return data?.payload || null
+}
+
+export async function uploadFile(url: string, file: File) {
+    const resp= await fetch(url, {
+        method: 'PUT',
+        body: file
+     });
+    return resp
+}
+
 export interface Project {
     ID: number
     CreatedAt: string
@@ -74,7 +88,7 @@ export interface NewProject {
     Twitter: string
     Website: string
     Whitepaper: string
-    // WhitepaperFile: string
+    WhitepaperFileLink:string
     NumFounders: number
     Founders: Founder[]
     NumMembers: number

@@ -28,6 +28,7 @@
                 type="file"
                 class="form-controls w-100"
                 id="document"
+                @change="onFileChange"
               />
               <div class="text-secondary small">
                 Please attach a quality version of the whitepaper document.
@@ -286,7 +287,7 @@
 <script lang="ts">
 import LabelInputComponent from '@/components/LabelInputComponent.vue'
 import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
-import { createProject } from '@/api'
+import { createProject, getPreSignedUrl, uploadFile } from '@/api'
 import type { NewProject } from '@/api'
 
 export default {
@@ -307,6 +308,8 @@ export default {
       twitter: '',
       website: '',
       whitepaper: '',
+      whitepaperFile: File,
+      whitepaperFileLink: '',
       teamMembers: [
         {
           name: '',
@@ -367,6 +370,18 @@ export default {
     save() {
       window.alert('Your response has been saved')
     },
+    async onFileChange(e: any) {
+      this.whitepaperFile = e.target.files[0]
+      const file = e.target.files[0]
+      // const preSignedUrl : any = await getPreSignedUrl(file.name)
+      // if (preSignedUrl) {
+      //   const fileResp = await uploadFile(preSignedUrl.URL, file)
+      //   if (fileResp.ok) {
+      //     this.whitepaperFileLink = "https://staging-webapp-private-assets-insightic.s3.ap-southeast-1.amazonaws.com" + file.name
+      //   }
+      // }
+
+    },
     async submit() {
       // if (!this.complete1 || !this.complete2 || !this.complete3 || !this.complete4) {
       //   window.alert('Please fill in all required fields')
@@ -375,11 +390,19 @@ export default {
       //   window.alert('Please agree to the terms and conditions')
       //   return
       // } else {
+        const preSignedUrl : any = await getPreSignedUrl(this.whitepaperFile!.name)
+        if (preSignedUrl) {
+          const fileResp = await uploadFile(preSignedUrl.URL, this.whitepaperFile as any)
+          if (fileResp.ok) {
+            this.whitepaperFileLink = "https://staging-webapp-private-assets-insightic.s3.ap-southeast-1.amazonaws.com/" + this.whitepaperFile.name
+          }
+        }
         let data = {
           name: this.name,
           twitter: this.twitter,
           website: this.website,
           whitepaper: this.whitepaper,
+          whitepaperFile: this.whitepaperFileLink,
           numFounders: parseInt(this.numFounders) ? parseInt(this.numFounders) : 0,
           founders: this.founders,
           numMembers: parseInt(this.numTeamMembers) ? parseInt(this.numTeamMembers) : 0,
