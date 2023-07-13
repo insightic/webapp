@@ -330,29 +330,29 @@ export default {
         actions: [
             {
                 title: 'The DAO voting is highly centralized.',
-                text: '10 votings events are led by a single address (> 50% weight). Request the VASP t...',
+                text: '10 votings events are led by a single address (> 50% weight). Request the VASP to propose a more balanced voting strategies.',
                 type: 'danger'
             },
             {
                 title: 'The DAO voting is highly centralized.',
-                text: 'Request the VASP to conduct KYC for addresses, unless reducing their voting weig...',
+                text: 'Request the VASP to conduct KYC for addresses, unless reducing their voting weights.',
                 type: 'danger'
             },
             {
                 title: 'Core contract has been modified recently.',
-                text: 'Suggest the VASP to submit at least two security audit reports that covers the u...',
+                text: 'Suggest the VASP to submit at least two security audit reports that covers the upgrades within 45 days.',
                 type: 'danger'
             },
             {
                 title: 'A new developer address added.',
-                text: 'Request the VASP to conduct KYC for the new developer. No contract modification ...',
+                text: 'Request the VASP to conduct KYC for the new developer. No contract modification is allowed until the KYC is verified.',
                 type: 'warn'
             }
         ],
         tasks: [
             {
                 title: 'Add security audit report',
-                text: 'Suggest the VASP to submit at least another security audit report within 45 days...',
+                text: 'Suggest the VASP to submit at least another security audit report within 45 days.',
                 type: 'danger'
             },
             {
@@ -362,7 +362,7 @@ export default {
             },
             {
                 title: 'Check the interaction of the wallets',
-                text: 'The deployed contract has attracted many newly wallets. Require VASP to validate...',
+                text: 'The deployed contract has attracted many newly wallets. Require VASP to validate their users. ',
                 type: 'primary'
             }
         ]
