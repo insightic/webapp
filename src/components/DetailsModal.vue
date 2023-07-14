@@ -23,6 +23,9 @@
                 class="mx-auto"
               >
                 {{ description }}
+                <ul>
+                  <li v-for="item in list" class="text-start" :key="item.key">{{ item }}</li>
+                </ul>
               </p>
             </div>
 
@@ -77,7 +80,7 @@
 
 <script lang="ts">
 export default {
-  props: ['title', 'description', 'actions', 'tasks', 'visible']
+  props: ['title', 'description', 'list', 'actions', 'tasks', 'visible']
 }
 </script>
 

@@ -336,6 +336,12 @@ export default {
             {
                 title: 'The DAO voting is highly centralized.',
                 text: 'Request the VASP to conduct KYC for addresses, unless reducing their voting weights.',
+                list: [
+                    '0x1A185F9F55b161E921C74FDeF3C444b8Dd2B8B16',
+                    '0x2aB8019A3191861F8235ec9FC5a9087d04682480',
+                    '0xD178F2d93B92Ac47cf51a899463Eca8acC37A8D5',
+                    '0x66cD62c6F8A4BB0Cd8720488BCBd1A6221B765F9'
+                ],
                 type: 'danger'
             },
             {
