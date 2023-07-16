@@ -1,42 +1,48 @@
 <template>
   <div class="text-secondary mb-4">Auto Assessment Report</div>
 
-  <table class="table">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col" width="20%">Name</th>
-        <th scope="col" width="20%">Status</th>
-        <th scope="col" width="60%">Output</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="(result, idx) in jobRunResults" :key="idx">
-        <td>{{ result.RuleName }}</td>
-        <td>
-          <span v-if="result.Status == 'passed'">
-            <i class="bi bi-check-circle text-success"></i>
-          </span>
-          <span v-if="result.Status == 'failed'">
-            <i class="bi bi-x-circle text-danger"></i>
-          </span>
-          <span v-if="result.Status == 'skipped'">
-            <i class="bi bi-dash-circle text-warn"></i>
-          </span>
-          <span v-if="result.Status == 'internal_error'">
-            <i class="bi bi-exclamation-circle text-danger"></i>
-          </span>
-        </td>
-        <td>{{ result.Output }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div style="max-width: 960px">
+    <div class="card w-100" style="width: 18rem">
+      <div class="card-header">
+        <b>Rule Set</b>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li
+          class="list-group-item"
+          v-for="result in jobRunResults"
+          :key="result.ID"
+        >
+          <div class="d-flex my-3 flex-row">
+            <div class="me-2">
+              <i class="text-primary bi bi-check-circle-fill" v-if="result.Status == 'passed'"></i>
+              <i class="text-danger bi bi-x-circle-fill" v-if="result.Status == 'failed'"></i>
+            </div>
+            <div class="flex-grow-1">
+              <div>{{ result.RuleName }}</div>
+              <div class="text-secondary small">{{ result.RuleDescription }}</div>
+              <div class="text-secondary small">{{ formatDateTime(result.UpdatedAt, true)  }}</div>
+              <div class="mt-3 small" v-if="result.Output">Output Log</div>
+              <div v-if="result.Output">
+                <CodeViewComponent :code="result.Output"/>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
 import { getJobRunResults, type JobRunResult } from '@/api'
 import ProjectViewMixin from './ProjectViewMixin'
+import CodeViewComponent from '@/components/CodeViewComponent.vue'
+import { formatDateTime } from '@/helpers'
 
 export default {
+  components: {
+    CodeViewComponent
+  },
   mixins: [ProjectViewMixin],
   async created() {
     const jobID = this.$route.query.jobID as string
@@ -47,6 +53,9 @@ export default {
     return {
       jobRunResults: [] as JobRunResult[]
     }
+  },
+  methods: {
+    formatDateTime
   }
 }
 </script>

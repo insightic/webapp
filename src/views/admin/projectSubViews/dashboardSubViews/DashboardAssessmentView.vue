@@ -27,7 +27,7 @@
             </select>
           </form>
   
-          <CodeView class="h-100" style="overflow-y: auto" :code="code" />
+          <CodeViewComponent class="h-100" style="overflow-y: auto" :code="code" />
         </div>
       </div>
       <div class="h-100 col-md-3" style="overflow-y: auto">
@@ -73,14 +73,14 @@
   <script lang="ts">
   import StatusCardGroup from '@/components/StatusCardGroup.vue'
   import TextCard from '@/components/TextCard.vue'
-  import CodeView from '@/components/CodeView.vue'
+  import CodeViewComponent from '@/components/CodeViewComponent.vue'
   
   export default {
     props: ['project'],
     components: {
       StatusCardGroup,
       TextCard,
-      CodeView
+      CodeViewComponent
     },
     data() {
       return {

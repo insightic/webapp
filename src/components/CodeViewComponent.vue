@@ -10,7 +10,9 @@
 import Prism from 'prismjs'
 
 export default {
-  props: ['code'],
+  props: {
+    code: { type: String, required: true }
+  },
   created() {
     this.$nextTick(() => {
       Prism.highlightAll()
