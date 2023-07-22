@@ -155,6 +155,10 @@ export async function createProjectJob(projectID: number | string): Promise<Job 
 }
 
 export interface JobRunResult {
+    ID: number
+    CreatedAt: string
+    UpdatedAt: string
+    DeletedAt: string | null
     JobID: number
     RuleID: number
     RuleName: string

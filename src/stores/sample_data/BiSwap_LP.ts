@@ -361,17 +361,17 @@ export default {
         tasks: [
             {
                 title: 'Require 1 or more security audit report',
-                text: 'Suggest the VASP to submit at least another security audit report within 45 days...',
+                text: 'Suggest the VASP to submit at least another security audit report within 45 days.',
                 type: 'danger'
             },
             {
                 title: 'Code has not been updates for long time',
-                text: 'Suggest the VASP to link Github account or submit a new code base.',
+                text: 'Suggest the VASP to link Github account or submit a new code base. ',
                 type: 'warn'
             },
             {
                 title: 'Risky wallets interaction',
-                text: 'The deployed contract has attracted many newly wallets. Require VASP to validate...',
+                text: 'The deployed contract has attracted many newly wallets. Require VASP to validate their users. ',
                 type: 'primary'
             }
         ]

@@ -5,6 +5,7 @@
         @close="modalShown = false"
         :title="modalTitle"
         :description="modalDescription"
+        :list="list"
       />
   
       <!-- <div class="row my-3">
@@ -31,7 +32,7 @@
             :title="status.title"
             :text="status.text"
             :type="status.type"
-            @click="showModal(status.title, status.text)"
+            @click="showModal(status.title, status.text, status.list || [])"
           />
         </div>
       </div>
@@ -42,7 +43,7 @@
             :title="status.title"
             :text="status.text"
             :type="status.type"
-            @click="showModal(status.title, status.text)"
+            @click="showModal(status.title, status.text, status.list || [])"
           />
         </div>
       </div>
@@ -65,14 +66,17 @@
       return {
         modalShown: false,
         modalTitle: '',
-        modalDescription: ''
+        modalDescription: '',
+        list: []
       }
     },
     methods: {
-      showModal(title: string, description: string) {
+      showModal(title: string, description: string, list: [] = []) {
         this.modalTitle = title
         this.modalDescription = description
-        this.modalShown = true
+        this.modalShown = true,
+        this.list = list
+        console.log(this.list)
       }
     },
     computed: {
