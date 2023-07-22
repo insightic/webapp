@@ -12,14 +12,24 @@
               <label for="document" class=""
                 >Whitepaper (File)</label
               >
-              <input
-                type="file"
-                class="form-controls w-100"
-                id="document"
-              />
-              <div class="text-secondary small">
-                Please attach a quality version of the whitepaper document.
+              <div v-if="!editWhitepaper">
+                <i class="bi bi-file-earmark-text me-2"></i>
+                <a :href="whitepaperDownloadLink">{{ whitepaperFileLink.split('/').pop() }}</a>
+                <a class="ms-5" @click="editWhitepaper = !editWhitepaper">Edit</a>
               </div>
+              <div v-else>
+                <input
+                  type="file"
+                  class="form-controls"
+                  id="document"
+                  @change="onFileChange"
+                />
+                <a @click="editWhitepaper = !editWhitepaper">Cancel</a>
+                <div class="text-secondary small">
+                  Please attach a quality version of the whitepaper document.
+                </div>
+              </div>
+              
             </div>
     </SectionLayout>
 
@@ -69,13 +79,22 @@
               <label for="document" class=""
                 >CV</label
               >
-              <input
-                type="file"
-                class="form-controls w-100"
-                id="document"
-              />
-              <div class="text-secondary small">
-                Brief CV or Biography (Please attach separate sheets if necessary)
+              <div v-if="!founder.editCv">
+                <i class="bi bi-file-earmark-text me-2"></i>
+                <a :href="founder.CVDwonloadLink">{{ founder.CV.split('/').pop() }}</a>
+                <a class="ms-5" @click="founder.editCv = !founder.editCv">Edit</a>
+              </div>
+              <div v-else>
+                <input
+                  type="file"
+                  class="form-controls"
+                  id="document"
+                  @change="onFileChangeCV($event, counter)"
+                />
+                <a @click="founder.editCv = !founder.editCv">Cancel</a>
+                <div class="text-secondary small">
+                  Brief CV or Biography (Please attach separate sheets if necessary)
+                </div>
               </div>
             </div>
           </div>
@@ -135,7 +154,7 @@ import ProjectViewMixin from './ProjectViewMixin'
 import { createProjectJob, getProject } from '@/api'
 import { organizationsStore } from '@/stores/organizations'
 import { mapStores } from 'pinia'
-import { updateProject } from '@/api'
+import { updateProject, getPreSignedPutUrl, getPreSignedGetUrl, uploadFile } from '@/api'
 import type { NewProject } from '@/api'
 
 export default {
@@ -159,6 +178,7 @@ export default {
       this.twitter = projectInfo?.Twitter ?? ''
       this.website = projectInfo?.Website ?? ''
       this.whitepaper = projectInfo?.Whitepaper ?? ''
+      this.whitepaperFileLink = projectInfo?.WhitepaperFile ?? ''
       this.numFounders = projectInfo?.NumFounders.toString() ?? '0'
       this.founders = JSON.parse(JSON.stringify(projectInfo?.Founders)) ?? []
       this.numTeamMembers = projectInfo?.NumMembers.toString() ?? '0'
@@ -167,8 +187,16 @@ export default {
       this.motivation = projectInfo?.Motivation ?? ''
       this.assets = projectInfo?.Assets ?? '' 
 
+      const preSignedGetUrl : any = await getPreSignedGetUrl(this.whitepaperFileLink.split('/').pop() as string)
+      this.whitepaperDownloadLink = preSignedGetUrl?.URL ?? ''
+
+      for (let i = 0; i < this.founders.length; i++) {
+        const preSignedGetUrl : any = await getPreSignedGetUrl(this.founders[i].CV.split('/').pop() as string)
+        this.founders[i].CVDwonloadLink = preSignedGetUrl?.URL ?? ''
+      }
+
       this.founders = JSON.parse(JSON.stringify(this.founders))
-      console.log(this.founders)
+      
     } else {
       var projectGuid = mapping[this.$route.params.projectID as keyof typeof mapping]
       console.log(this.$route.params.projectID)
@@ -176,7 +204,8 @@ export default {
       this.name = project!.name
       console.log(project?.description)
     }
-    console.log(projectInfo)
+
+    
   },
   data() {
     return {
@@ -184,6 +213,10 @@ export default {
       twitter: '',
       website: '',
       whitepaper: '',
+      whitepaperFile: null as File | null,
+      whitepaperFileLink: '',
+      whitepaperDownloadLink: '',
+      editWhitepaper: false,
       teamMembers: [
         {
           Name: '',
@@ -199,7 +232,10 @@ export default {
           Linkedin: '',
           Ethereum: '',
           Email: '',
-          CV: ''
+          CV: '',
+          cvFile: null as File | null,
+          CVDwonloadLink: '',
+          editCv: false
         }
       ],
       objective: '',
@@ -211,12 +247,42 @@ export default {
   },
   mixins: [ProjectViewMixin],
   methods: {
+    async onFileChange(e: any) {
+      this.whitepaperFile = e.target.files[0]
+    },
+    async onFileChangeCV(e: any, index: number) {
+      this.founders[index].cvFile = e.target.files[0]
+    },
     async submit() {
+      if (this.whitepaperFile) {
+        const preSignedPutUrl : any = await getPreSignedPutUrl(this.whitepaperFile!.name)
+        if (preSignedPutUrl) {
+          const fileResp = await uploadFile(preSignedPutUrl.URL, this.whitepaperFile as any)
+          if (fileResp.ok) {
+            this.whitepaperFileLink = "https://staging-webapp-private-assets-insightic.s3.ap-southeast-1.amazonaws.com/" + this.whitepaperFile!.name
+          }
+        }
+      }
+      for (let i = 0; i < this.founders.length; i++) {
+        if (this.founders[i].cvFile) {
+
+          const preSignedPutUrlCV : any = await getPreSignedPutUrl(this.founders[i].cvFile!.name)
+          if (preSignedPutUrlCV) {
+            const fileResp = await uploadFile(preSignedPutUrlCV.URL, this.founders[i].cvFile as any)
+            if (fileResp.ok) {
+              this.founders[i].CV = "https://staging-webapp-private-assets-insightic.s3.ap-southeast-1.amazonaws.com/" + this.founders[i].cvFile!.name
+            }
+          }
+        }
+        console.log("cv changed", i)
+        console.log(this.founders[i])
+      }
       let data = {
           name: this.name,
           twitter: this.twitter,
           website: this.website,
           whitepaper: this.whitepaper,
+          whitepaperFile: this.whitepaperFileLink,
           numFounders: parseInt(this.numFounders) ? parseInt(this.numFounders) : 0,
           founders: this.founders,
           numMembers: parseInt(this.numTeamMembers) ? parseInt(this.numTeamMembers) : 0,
@@ -225,8 +291,9 @@ export default {
           motivation: this.motivation,
           assets: this.assets
         } as unknown as NewProject
+      console.log(data)
       const update = await updateProject(this.projectID, data)
-      console.log(update)
+      console.log('update', update)
       window.alert('Project updated successfully!')
 
       const job = await createProjectJob(this.projectID)
@@ -249,7 +316,10 @@ export default {
             Linkedin: '',
             Ethereum: '',
             Email: '',
-            CV: ''
+            CV: '',
+            cvFile: null as File | null,
+            CVDwonloadLink: '',
+            editCv: false
           })
         }
       } else {

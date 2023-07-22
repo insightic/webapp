@@ -102,6 +102,7 @@
                       type="file"
                       class="form-controls w-100"
                       id="document"
+                      @change="onFileChangeCV($event, counter)"
                     />
                     <div class="text-secondary small">
                       Brief CV or Biography (Please attach separate sheets if necessary)
@@ -287,7 +288,7 @@
 <script lang="ts">
 import LabelInputComponent from '@/components/LabelInputComponent.vue'
 import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
-import { createProject, getPreSignedUrl, uploadFile } from '@/api'
+import { createProject, getPreSignedPutUrl, uploadFile } from '@/api'
 import type { NewProject } from '@/api'
 
 export default {
@@ -325,7 +326,8 @@ export default {
           linkedin: '',
           ethereum: '',
           email: '',
-          cv: ''
+          cv: '',
+          cvFile: File,
         }
       ],
       objective: '',
@@ -380,21 +382,44 @@ export default {
       //     this.whitepaperFileLink = "https://staging-webapp-private-assets-insightic.s3.ap-southeast-1.amazonaws.com" + file.name
       //   }
       // }
-
+    },
+    async onFileChangeCV(e: any, index: number) {
+      console.log(e.target)
+      this.founders[index].cvFile = e.target.files[0]
+      console.log(this.founders[index].cvFile)
+      // const preSignedUrl : any = await getPreSignedUrl(file.name)
+      // if (preSignedUrl) {
+      //   const fileResp = await uploadFile(preSignedUrl.URL, file)
+      //   if (fileResp.ok) {
+      //     this.founders[index].cv = "https://staging-webapp-private-assets-insightic.s3.ap-southeast-1.amazonaws.com" + file.name
+      //   }
+      // }
     },
     async submit() {
-      // if (!this.complete1 || !this.complete2 || !this.complete3 || !this.complete4) {
-      //   window.alert('Please fill in all required fields')
-      //   return
-      // } else if (!(this.$refs.terms as any).checked) {
-      //   window.alert('Please agree to the terms and conditions')
-      //   return
-      // } else {
-        const preSignedUrl : any = await getPreSignedUrl(this.whitepaperFile!.name)
+    //   if (!this.complete1 || !this.complete2 || !this.complete3 || !this.complete4) {
+    //     window.alert('Please fill in all required fields')
+    //     return
+    //   } else if (!(this.$refs.terms as any).checked) {
+    //     window.alert('Please agree to the terms and conditions')
+    //     return
+    //   } else {
+        if (!this.complete1 || !this.complete2 || !this.complete3 || !this.complete4) {
+          window.confirm('Required fields are not filled in. Are you sure you want to submit?')
+        }
+        const preSignedUrl : any = await getPreSignedPutUrl(this.whitepaperFile!.name)
         if (preSignedUrl) {
           const fileResp = await uploadFile(preSignedUrl.URL, this.whitepaperFile as any)
           if (fileResp.ok) {
             this.whitepaperFileLink = "https://staging-webapp-private-assets-insightic.s3.ap-southeast-1.amazonaws.com/" + this.whitepaperFile.name
+          }
+        }
+        for (let i = 0; i < this.founders.length; i++) {
+          const preSignedUrl : any = await getPreSignedPutUrl(this.founders[i].cvFile!.name)
+          if (preSignedUrl) {
+            const fileResp = await uploadFile(preSignedUrl.URL, this.founders[i].cvFile as any)
+            if (fileResp.ok) {
+              this.founders[i].cv = "https://staging-webapp-private-assets-insightic.s3.ap-southeast-1.amazonaws.com/" + this.founders[i].cvFile.name
+            }
           }
         }
         let data = {
@@ -432,7 +457,8 @@ export default {
           linkedin: '',
           ethereum: '',
           email: '',
-          cv: ''
+          cv: '',
+          cvFile: File,
       })
     },
     deleteMember(counter: number) {
@@ -457,7 +483,8 @@ export default {
           linkedin: '',
           ethereum: '',
           email: '',
-          cv: ''
+          cv: '',
+          cvFile: File,
         })
       }
     },
