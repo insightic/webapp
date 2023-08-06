@@ -47,13 +47,12 @@
 <script lang="ts">
 import { formatDateTime } from '@/helpers'
 import type { PropType } from 'vue'
-import type { Project } from '@/stores/projects'
-import { deleteProject } from "@/api"
+import { deleteProject, type ProjectContent as Project } from "@/api"
 
 export default {
   props: {
     project: { type: Object as PropType<Project> },
-    isAdmin: { type: Boolean, default: false }
+    isAdmin: { type: Boolean, default: false },
   },
   methods: {
     formatDateTime,

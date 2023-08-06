@@ -7,6 +7,7 @@
 
       <LabelInputComponent label="Official Twitter Account (URL)" type="text" v-model:field="twitter" :required="true"/>
             <LabelInputComponent label="Official Website (URL)" type="text" v-model:field="website" :required="true"/>
+
             <LabelInputComponent label="Whitepaper (URL)" type="text" v-model:field="whitepaper" :required="true"/>
             <div class="">
               <label for="document" class=""
@@ -39,8 +40,9 @@
           Founders
           <span class="text-danger">*</span>
         </label>
+
         <LabelInputComponent label="Number of Founders" type="text" v-model:field="numFounders" :required="true"/>
-        
+
         <div class="">
           <div class="mb-4" v-for="(founder, counter) in founders" v-bind:key="counter">
             <div class="d-flex">
@@ -125,7 +127,6 @@
               type="text" v-model:field="objective" :required="true"/>
     </SectionLayout>
 
-    
     <SectionLayout title="Part D: Specific Purpose">
       <LabelTextareaComponent label="Motivation of your DLT Foundation" 
               footnote="If your DLT Foundation has been established for a specific purpose, please detail the purpose (max. 5000 characters)" 
@@ -165,6 +166,7 @@ export default {
   },
   async created() {
     const projectInfo = await getProject(this.$route.params.projectID as string)
+
     const mapping = {
       '1': 'e262d5c2-16f8-47a0-8c70-4019514d137b',
       '2': 'e262d5c2-16f8-47a0-8c70-4019514d137a',
@@ -174,28 +176,64 @@ export default {
       '6': 'e262d5c2-16f8-47a0-8d10-4019514d137a',
     }
     if (!mapping[this.$route.params.projectID as keyof typeof mapping]) {
-      this.name = projectInfo?.Name ?? ''
-      this.twitter = projectInfo?.Twitter ?? ''
-      this.website = projectInfo?.Website ?? ''
-      this.whitepaper = projectInfo?.Whitepaper ?? ''
-      this.whitepaperFileLink = projectInfo?.WhitepaperFile ?? ''
-      this.numFounders = projectInfo?.NumFounders.toString() ?? '0'
-      this.founders = JSON.parse(JSON.stringify(projectInfo?.Founders)) ?? []
-      this.numTeamMembers = projectInfo?.NumMembers.toString() ?? '0'
-      this.teamMembers = projectInfo?.Members ?? []
-      this.objective = projectInfo?.Objective ?? ''
-      this.motivation = projectInfo?.Motivation ?? ''
-      this.assets = projectInfo?.Assets ?? '' 
+      this.name = projectInfo?.Content.Name ?? ''
+      this.twitter = projectInfo?.Content.Twitter ?? ''
+      this.website = projectInfo?.Content.Website ?? ''
+      this.whitepaper = projectInfo?.Content.Whitepaper ?? ''
+      this.whitepaperFileLink = projectInfo?.Content.WhitepaperFile ?? ''
+      this.numFounders = projectInfo?.Content.NumFounders.toString() ?? '0'
 
-      const preSignedGetUrl : any = await getPreSignedGetUrl(this.whitepaperFileLink.split('/').pop() as string)
-      this.whitepaperDownloadLink = preSignedGetUrl?.URL ?? ''
-
-      for (let i = 0; i < this.founders.length; i++) {
-        const preSignedGetUrl : any = await getPreSignedGetUrl(this.founders[i].CV.split('/').pop() as string)
-        this.founders[i].CVDwonloadLink = preSignedGetUrl?.URL ?? ''
+      // this.founders = JSON.parse(JSON.stringify(projectInfo?.Content.Founders)) ?? []
+      if (parseInt(this.numFounders) != projectInfo?.Content.Founders.length) {
+        this.numFounders = projectInfo?.Content.Founders.length.toString()!
+      }
+      if (projectInfo?.Content.Founders) {
+        this.founders = []
+        for (let i = 0; i < projectInfo?.Content.Founders.length; i++) {
+          this.founders.push({
+            Name: projectInfo?.Content.Founders[i].Name ?? '',
+            Position: projectInfo?.Content.Founders[i].Position ?? '',
+            Kyc: projectInfo?.Content.Founders[i].Kyc ?? '',
+            Twitter: projectInfo?.Content.Founders[i].Twitter ?? '',
+            Linkedin: projectInfo?.Content.Founders[i].Linkedin ?? '',
+            Ethereum: projectInfo?.Content.Founders[i].Ethereum ?? '',
+            Email: projectInfo?.Content.Founders[i].Email ?? '',
+            CV: projectInfo?.Content.Founders[i].CV ?? '',
+            cvFile: null as File | null,
+            CVDwonloadLink: '',
+            editCv: false
+          })
+        }
       }
 
-      this.founders = JSON.parse(JSON.stringify(this.founders))
+      this.numTeamMembers = projectInfo?.Content.NumMembers.toString() ?? '0'
+      // this.teamMembers = projectInfo?.Content.Members ?? []
+      if (parseInt(this.numTeamMembers) != projectInfo?.Content.Members.length) {
+        this.numTeamMembers = projectInfo?.Content.Members.length.toString()!
+      }
+      if (projectInfo?.Content.Members) {
+        this.teamMembers = []
+        for (let i = 0; i < projectInfo?.Content.Members.length; i++) {
+          this.teamMembers.push({
+            Name: projectInfo?.Content.Members[i].Name ?? '',
+            Role: projectInfo?.Content.Members[i].Position ?? ''
+          })
+        }
+      }
+
+      this.objective = projectInfo?.Content.Objective ?? ''
+      this.motivation = projectInfo?.Content.Motivation ?? ''
+      this.assets = projectInfo?.Content.Assets ?? '' 
+
+      // const preSignedGetUrl : any = await getPreSignedGetUrl(this.whitepaperFileLink.split('/').pop() as string)
+      // this.whitepaperDownloadLink = preSignedGetUrl?.URL ?? ''
+
+      // for (let i = 0; i < this.founders.length; i++) {
+      //   const preSignedGetUrl : any = await getPreSignedGetUrl(this.founders[i].CV.split('/').pop() as string)
+      //   this.founders[i].CVDwonloadLink = preSignedGetUrl?.URL ?? ''
+      // }
+
+      // this.founders = JSON.parse(JSON.stringify(this.founders))
       
     } else {
       var projectGuid = mapping[this.$route.params.projectID as keyof typeof mapping]
@@ -254,44 +292,46 @@ export default {
       this.founders[index].cvFile = e.target.files[0]
     },
     async submit() {
-      if (this.whitepaperFile) {
-        const preSignedPutUrl : any = await getPreSignedPutUrl(this.whitepaperFile!.name)
-        if (preSignedPutUrl) {
-          const fileResp = await uploadFile(preSignedPutUrl.URL, this.whitepaperFile as any)
-          if (fileResp.ok) {
-            this.whitepaperFileLink = "https://staging-webapp-private-assets-insightic.s3.ap-southeast-1.amazonaws.com/" + this.whitepaperFile!.name
-          }
-        }
-      }
-      for (let i = 0; i < this.founders.length; i++) {
-        if (this.founders[i].cvFile) {
+      // if (this.whitepaperFile) {
+      //   const preSignedPutUrl : any = await getPreSignedPutUrl(this.whitepaperFile!.name)
+      //   if (preSignedPutUrl) {
+      //     const fileResp = await uploadFile(preSignedPutUrl.URL, this.whitepaperFile as any)
+      //     if (fileResp.ok) {
+      //       this.whitepaperFileLink = "https://staging-webapp-private-assets-insightic.s3.ap-southeast-1.amazonaws.com/" + this.whitepaperFile!.name
+      //     }
+      //   }
+      // }
+      // for (let i = 0; i < this.founders.length; i++) {
+      //   if (this.founders[i].cvFile) {
 
-          const preSignedPutUrlCV : any = await getPreSignedPutUrl(this.founders[i].cvFile!.name)
-          if (preSignedPutUrlCV) {
-            const fileResp = await uploadFile(preSignedPutUrlCV.URL, this.founders[i].cvFile as any)
-            if (fileResp.ok) {
-              this.founders[i].CV = "https://staging-webapp-private-assets-insightic.s3.ap-southeast-1.amazonaws.com/" + this.founders[i].cvFile!.name
-            }
-          }
-        }
-        console.log("cv changed", i)
-        console.log(this.founders[i])
-      }
+      //     const preSignedPutUrlCV : any = await getPreSignedPutUrl(this.founders[i].cvFile!.name)
+      //     if (preSignedPutUrlCV) {
+      //       const fileResp = await uploadFile(preSignedPutUrlCV.URL, this.founders[i].cvFile as any)
+      //       if (fileResp.ok) {
+      //         this.founders[i].CV = "https://staging-webapp-private-assets-insightic.s3.ap-southeast-1.amazonaws.com/" + this.founders[i].cvFile!.name
+      //       }
+      //     }
+      //   }
+      //   console.log("cv changed", i)
+      //   console.log(this.founders[i])
+      // }
       let data = {
-          name: this.name,
-          twitter: this.twitter,
-          website: this.website,
-          whitepaper: this.whitepaper,
-          whitepaperFile: this.whitepaperFileLink,
-          numFounders: parseInt(this.numFounders) ? parseInt(this.numFounders) : 0,
-          founders: this.founders,
-          numMembers: parseInt(this.numTeamMembers) ? parseInt(this.numTeamMembers) : 0,
-          members: this.teamMembers,
-          objective: this.objective,
-          motivation: this.motivation,
-          assets: this.assets
+          Name: this.name,
+          Twitter: this.twitter,
+          Website: this.website,
+          Whitepaper: this.whitepaper,
+          WhitepaperFile: this.whitepaperFileLink,
+          NumFounders: parseInt(this.numFounders) ? parseInt(this.numFounders) : 0,
+          Founders: this.founders,
+          NumMembers: parseInt(this.numTeamMembers) ? parseInt(this.numTeamMembers) : 0,
+          Members: this.teamMembers,
+          Objective: this.objective,
+          Motivation: this.motivation,
+          Assets: this.assets
         } as unknown as NewProject
-      console.log(data)
+      console.log('hii', data)
+      console.log(this.projectID)
+      
       const update = await updateProject(this.projectID, data)
       console.log('update', update)
       window.alert('Project updated successfully!')

@@ -54,12 +54,12 @@ export async function uploadFile(url: string, file: File) {
     return resp
 }
 
-export interface Project {
+export interface ProjectContent {
+    Name: string
     ID: number
     CreatedAt: string
     UpdatedAt: string
     DeletedAt: string | null
-    Name: string
     Twitter: string
     Website: string
     Whitepaper: string
@@ -71,6 +71,11 @@ export interface Project {
     Objective: string
     Motivation: string
     Assets: string
+}
+
+export interface Project {
+    ID: number
+    Content: ProjectContent
 }
 
 export interface Founder {
@@ -86,7 +91,7 @@ export interface Founder {
 
 export interface Member {
     Name: string
-    Role: string
+    Position: string
 }
 
 export interface NewProject {
@@ -106,14 +111,22 @@ export interface NewProject {
 
 
 export async function createProject(project: NewProject): Promise<Project> {
-
     const resp = await httpclient.post<Project>(`/projects`, project)
     return resp?.payload || {} as Project
 }
 
 export async function getProjects(): Promise<Project[]> {
-    const resp = await httpclient.get<Project[]>(`/projects`)
-    return resp?.payload || []
+    const resp = await httpclient.get<number[]>(`/projects`)
+    const projectList = [] as Project[]
+    for(const projectId of resp!.payload) {
+        const project = await getProject(projectId)
+        if (project) {
+            project.Content.ID = projectId
+            projectList.push(project)
+        }
+    }
+    console.log('aaa', projectList)
+    return projectList
 }
 
 export async function getProject(id: number | string): Promise<Project | null> {

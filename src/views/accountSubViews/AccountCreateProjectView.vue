@@ -85,30 +85,30 @@
                   </div>
                   <div class="row">
                     <div class="col-md-6">
-                      <LabelInputComponent label="Name" type="text" v-model:field="founder.name" :required="true"/>
+                      <LabelInputComponent label="Name" type="text" v-model:field="founder.Name" :required="true"/>
                     </div>
                     <div class="col-md-6">
-                      <LabelInputComponent label="Position within DLT Foundation" type="text" v-model:field="founder.position" :required="true"/>
-                    </div>
-                  </div>
-
-                  <LabelInputComponent label="KYC Verification" type="text" v-model:field="founder.kyc" :required="true"/>
-
-                  <div class="row">
-                    <div class="col-md-6">
-                      <LabelInputComponent label="Twitter Account (URL)" type="text" v-model:field="founder.twitter" :required="true"/>
-                    </div>
-                    <div class="col-md-6">
-                      <LabelInputComponent label="LinkedIn Profile (URL)" type="text" v-model:field="founder.linkedin" :required="true"/>
+                      <LabelInputComponent label="Position within DLT Foundation" type="text" v-model:field="founder.Position" :required="true"/>
                     </div>
                   </div>
 
+                  <LabelInputComponent label="KYC Verification" type="text" v-model:field="founder.Kyc" :required="true"/>
+
                   <div class="row">
                     <div class="col-md-6">
-                      <LabelInputComponent label="Email Address" type="text" v-model:field="founder.email" :required="true"/>
+                      <LabelInputComponent label="Twitter Account (URL)" type="text" v-model:field="founder.Twitter" :required="true"/>
                     </div>
                     <div class="col-md-6">
-                      <LabelInputComponent label="Ethereum Address" type="text" v-model:field="founder.ethereum" :required="true"/>
+                      <LabelInputComponent label="LinkedIn Profile (URL)" type="text" v-model:field="founder.Linkedin" :required="true"/>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <LabelInputComponent label="Email Address" type="text" v-model:field="founder.Email" :required="true"/>
+                    </div>
+                    <div class="col-md-6">
+                      <LabelInputComponent label="Ethereum Address" type="text" v-model:field="founder.Ethereum" :required="true"/>
                     </div>
                   </div>
 
@@ -142,9 +142,9 @@
                 <div class="">
                   <div class="mb-2" v-for="(member, counter) in teamMembers" v-bind:key="counter">
                     <label for="duration" class="me-2">{{ counter + 1 }}. Member - Name:</label>
-                    <input type="text" class="me-5 rounded" v-model.lazy="member.name" required />
+                    <input type="text" class="me-5 rounded" v-model.lazy="member.Name" required />
                     <label for="duration" class="me-2">Role:</label>
-                    <input type="text" class="me-2 rounded" v-model.lazy="member.role" required />
+                    <input type="text" class="me-2 rounded" v-model.lazy="member.Position" required />
                   </div>
                 </div>
               </div>
@@ -259,20 +259,20 @@ export default {
       whitepaperFileLink: '',
       teamMembers: [
         {
-          name: '',
-          role: ''
+          Name: '',
+          Position: ''
         }
       ],
       founders: [
         {
-          name: '',
-          position: '',
-          kyc: '',
-          twitter: '',
-          linkedin: '',
-          ethereum: '',
-          email: '',
-          cv: '',
+          Name: '',
+          Position: '',
+          Kyc: '',
+          Twitter: '',
+          Linkedin: '',
+          Ethereum: '',
+          Email: '',
+          CV: '',
           cvFile: File,
         }
       ],
@@ -295,7 +295,7 @@ export default {
     complete2() {
       if (this.founders.length == 0 &&this.teamMembers.length == 0 ) {
         return true
-      } else if (this.founders[0].name == '') {
+      } else if (this.founders[0].Name == '') {
         return false
       } else {
         return true
@@ -352,36 +352,37 @@ export default {
         if (!this.complete1 || !this.complete2 || !this.complete3 || !this.complete4) {
           window.confirm('Required fields are not filled in. Are you sure you want to submit?')
         }
-        const preSignedUrl : any = await getPreSignedPutUrl(this.whitepaperFile!.name)
-        if (preSignedUrl) {
-          const fileResp = await uploadFile(preSignedUrl.URL, this.whitepaperFile as any)
-          if (fileResp.ok) {
-            this.whitepaperFileLink = "https://staging-webapp-private-assets-insightic.s3.ap-southeast-1.amazonaws.com/" + this.whitepaperFile.name
-          }
-        }
-        for (let i = 0; i < this.founders.length; i++) {
-          const preSignedUrl : any = await getPreSignedPutUrl(this.founders[i].cvFile!.name)
-          if (preSignedUrl) {
-            const fileResp = await uploadFile(preSignedUrl.URL, this.founders[i].cvFile as any)
-            if (fileResp.ok) {
-              this.founders[i].cv = "https://staging-webapp-private-assets-insightic.s3.ap-southeast-1.amazonaws.com/" + this.founders[i].cvFile.name
-            }
-          }
-        }
+        // const preSignedUrl : any = await getPreSignedPutUrl(this.whitepaperFile!.name)
+        // if (preSignedUrl) {
+        //   const fileResp = await uploadFile(preSignedUrl.URL, this.whitepaperFile as any)
+        //   if (fileResp.ok) {
+        //     this.whitepaperFileLink = "https://staging-webapp-private-assets-insightic.s3.ap-southeast-1.amazonaws.com/" + this.whitepaperFile.name
+        //   }
+        // }
+        // for (let i = 0; i < this.founders.length; i++) {
+        //   const preSignedUrl : any = await getPreSignedPutUrl(this.founders[i].cvFile!.name)
+        //   if (preSignedUrl) {
+        //     const fileResp = await uploadFile(preSignedUrl.URL, this.founders[i].cvFile as any)
+        //     if (fileResp.ok) {
+        //       this.founders[i].cv = "https://staging-webapp-private-assets-insightic.s3.ap-southeast-1.amazonaws.com/" + this.founders[i].cvFile.name
+        //     }
+        //   }
+        // }
         let data = {
-          name: this.name,
-          twitter: this.twitter,
-          website: this.website,
-          whitepaper: this.whitepaper,
-          whitepaperFile: this.whitepaperFileLink,
-          numFounders: parseInt(this.numFounders) ? parseInt(this.numFounders) : 0,
-          founders: this.founders,
-          numMembers: parseInt(this.numTeamMembers) ? parseInt(this.numTeamMembers) : 0,
-          members: this.teamMembers,
-          objective: this.objective,
-          motivation: this.motivation,
-          assets: this.assets
+          Name: this.name,
+          Twitter: this.twitter,
+          Website: this.website,
+          Whitepaper: this.whitepaper,
+          WhitepaperFile: this.whitepaperFileLink,
+          NumFounders: parseInt(this.numFounders) ? parseInt(this.numFounders) : 0,
+          Founders: this.founders,
+          NumMembers: parseInt(this.numTeamMembers) ? parseInt(this.numTeamMembers) : 0,
+          Members: this.teamMembers,
+          Objective: this.objective,
+          Motivation: this.motivation,
+          Assets: this.assets
         } as unknown as NewProject
+        console.log('hii',data)
         await createProject(data)
         window.alert('Your response has been submitted')
         this.$router.push({ query: { view: 'Projects' } })
@@ -390,20 +391,20 @@ export default {
 
     addMember() {
       this.teamMembers.push({
-        name: '',
-        role: ''
+        Name: '',
+        Position: ''
       })
     },
     addFounder() {
       this.founders.push({
-          name: '',
-          position: '',
-          kyc: '',
-          twitter: '',
-          linkedin: '',
-          ethereum: '',
-          email: '',
-          cv: '',
+          Name: '',
+          Position: '',
+          Kyc: '',
+          Twitter: '',
+          Linkedin: '',
+          Ethereum: '',
+          Email: '',
+          CV: '',
           cvFile: File,
       })
     },
@@ -437,14 +438,14 @@ export default {
       this.founders = []
       for (let i = 0; i < parseInt(val); i++) {
         this.founders.push({
-          name: '',
-          position: '',
-          kyc: '',
-          twitter: '',
-          linkedin: '',
-          ethereum: '',
-          email: '',
-          cv: '',
+          Name: '',
+          Position: '',
+          Kyc: '',
+          Twitter: '',
+          Linkedin: '',
+          Ethereum: '',
+          Email: '',
+          CV: '',
           cvFile: File,
         })
       }
@@ -453,8 +454,8 @@ export default {
       this.teamMembers = []
       for (let i = 0; i < parseInt(val); i++) {
         this.teamMembers.push({
-          name: '',
-          role: ''
+          Name: '',
+          Position: ''
         })
       }
     }
