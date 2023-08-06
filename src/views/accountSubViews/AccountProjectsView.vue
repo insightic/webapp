@@ -20,7 +20,6 @@ export default {
   async created() {
     // await projectsStore().getProjects()
     this.projects = await getProjects()
-    console.log('hii',this.projects)
   },
   data() {
     return {

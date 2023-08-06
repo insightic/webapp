@@ -28,6 +28,7 @@ import ProjectCardComponent from '@/components/ProjectCardComponent.vue'
 import ProjectListComponent from '@/components/ProjectListComponent.vue'
 import { projectsStore } from '@/stores/projects'
 import { mapStores } from 'pinia'
+import { getProjects, type Project } from '@/api'
 
 export default {
   components: {
@@ -44,17 +45,15 @@ export default {
         'olympus': 'https://yt3.googleusercontent.com/pAzCW6e1kfAi2HOSS0B9DVCzn3Hi2ciYRNii2V6JtgJiLTiNsW-bRWZjfgOiqQf3sx_0QB2Ymg=s900-c-k-c0x00ffffff-no-rj',
         'euler finance': 'https://storage.googleapis.com/subgraph-images/1656114240805euler-transparent.png',
         'neopin': 'https://www.coinlore.com/img/neopin.png',
-      }
+      },
+      projects: [] as Project[]
     }
   },
   async created() {
-    await projectsStore().getProjects()
+    this.projects = await getProjects()
   },
   computed: {
     ...mapStores(projectsStore),
-    projects() {
-      return Object.values(this.projectsStore.projects)
-    },
     organizationID(): string {
       return this.$route.params.organizationID as string
     }
