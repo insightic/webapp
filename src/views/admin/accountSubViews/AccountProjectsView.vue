@@ -13,7 +13,7 @@
 
   <!-- card list -->
   <div v-if="view=='card'" class="d-flex flex-wrap">
-    <ProjectCardComponent v-for="project in projects" :key="project.ID" :project="project" :isAdmin="true"/>
+    <ProjectCardComponent v-for="project in projects" :key="project.ID" :project="project.Content" :isAdmin="true"/>
   </div>
   
   <!-- file list -->
