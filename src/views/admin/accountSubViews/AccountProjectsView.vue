@@ -19,7 +19,7 @@
   <!-- file list -->
   <div v-if="view=='list'" class="d-flex flex-column w-100">
     <ProjectListComponent :isHeader="true"  :isAdmin="true"/>
-    <ProjectListComponent v-for="project in projects" :key="project.ID" :project="project" :icon="icons[project.Name.toLowerCase() as keyof typeof icons]" :isAdmin="true"/>
+    <ProjectListComponent v-for="project in projects" :key="project.ID" :project="project.Content" :icon="icons[project.Content.Name.toLowerCase() as keyof typeof icons]" :isAdmin="true"/>
   </div>
 </template>
 
