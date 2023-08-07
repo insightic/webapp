@@ -256,7 +256,8 @@ export default {
       website: '',
       whitepaper: '',
       whitepaperFile: File,
-      whitepaperFileLink: '',
+      whitepaperId: '',
+      whitepaperUploadLink: '',
       teamMembers: [
         {
           Name: '',
@@ -274,13 +275,15 @@ export default {
           Email: '',
           CV: '',
           cvFile: File,
+          cvUploadLink: '',
         }
       ],
       objective: '',
       motivation: '',
       assets: '',
       numFounders: '',
-      numTeamMembers: ''
+      numTeamMembers: '',
+
     }
   },
   computed: {
@@ -321,11 +324,13 @@ export default {
     async onFileChange(e: any) {
       this.whitepaperFile = e.target.files[0]
       const file = e.target.files[0]
-      // const preSignedUrl : any = await getPreSignedUrl(file.name)
-      // if (preSignedUrl) {
-      //   const fileResp = await uploadFile(preSignedUrl.URL, file)
+      // const preSignedPutUrl : any = await getPreSignedPutUrl()
+      // console.log("hii", preSignedPutUrl)
+      // if (preSignedPutUrl) {
+      //   const fileResp = await uploadFile(preSignedPutUrl.URL, file)
       //   if (fileResp.ok) {
-      //     this.whitepaperFileLink = "https://staging-webapp-private-assets-insightic.s3.ap-southeast-1.amazonaws.com" + file.name
+      //     this.whitepaperId = preSignedPutUrl.ObjectID
+      //     this.whitepaperUploadLink = preSignedPutUrl.URL
       //   }
       // }
     },
@@ -352,28 +357,36 @@ export default {
         if (!this.complete1 || !this.complete2 || !this.complete3 || !this.complete4) {
           window.confirm('Required fields are not filled in. Are you sure you want to submit?')
         }
-        // const preSignedUrl : any = await getPreSignedPutUrl(this.whitepaperFile!.name)
-        // if (preSignedUrl) {
-        //   const fileResp = await uploadFile(preSignedUrl.URL, this.whitepaperFile as any)
-        //   if (fileResp.ok) {
-        //     this.whitepaperFileLink = "https://staging-webapp-private-assets-insightic.s3.ap-southeast-1.amazonaws.com/" + this.whitepaperFile.name
-        //   }
-        // }
-        // for (let i = 0; i < this.founders.length; i++) {
-        //   const preSignedUrl : any = await getPreSignedPutUrl(this.founders[i].cvFile!.name)
-        //   if (preSignedUrl) {
-        //     const fileResp = await uploadFile(preSignedUrl.URL, this.founders[i].cvFile as any)
-        //     if (fileResp.ok) {
-        //       this.founders[i].cv = "https://staging-webapp-private-assets-insightic.s3.ap-southeast-1.amazonaws.com/" + this.founders[i].cvFile.name
-        //     }
-        //   }
-        // }
+        if (this.whitepaperFile) {
+          const preSignedPutUrl : any = await getPreSignedPutUrl()
+          if (preSignedPutUrl) {
+            const fileResp = await uploadFile(preSignedPutUrl.URL, this.whitepaperFile as any)
+            if (fileResp.ok) {
+              this.whitepaperId = preSignedPutUrl.ObjectID
+              this.whitepaperUploadLink = preSignedPutUrl.URL
+            }
+          }
+        }
+
+        for (let i = 0; i < this.founders.length; i++) {
+          if (this.founders[i].cvFile) {
+            const preSignedPutUrl : any = await getPreSignedPutUrl()
+            if (preSignedPutUrl) {
+              const fileResp = await uploadFile(preSignedPutUrl.URL, this.founders[i].cvFile as any)
+              if (fileResp.ok) {
+                this.founders[i].CV = preSignedPutUrl.ObjectID
+                this.founders[i].cvUploadLink = preSignedPutUrl.URL
+              }
+            }
+          }
+
+        }
         let data = {
           Name: this.name,
           Twitter: this.twitter,
           Website: this.website,
           Whitepaper: this.whitepaper,
-          WhitepaperFile: this.whitepaperFileLink,
+          WhitepaperFile: this.whitepaperId,
           NumFounders: parseInt(this.numFounders) ? parseInt(this.numFounders) : 0,
           Founders: this.founders,
           NumMembers: parseInt(this.numTeamMembers) ? parseInt(this.numTeamMembers) : 0,
@@ -382,7 +395,7 @@ export default {
           Motivation: this.motivation,
           Assets: this.assets
         } as unknown as NewProject
-        console.log('hii',data)
+
         await createProject(data)
         window.alert('Your response has been submitted')
         this.$router.push({ query: { view: 'Projects' } })
@@ -406,6 +419,7 @@ export default {
           Email: '',
           CV: '',
           cvFile: File,
+          cvUploadLink: ''
       })
     },
     deleteMember(counter: number) {
@@ -447,6 +461,7 @@ export default {
           Email: '',
           CV: '',
           cvFile: File,
+          cvUploadLink: ''
         })
       }
     },

@@ -15,7 +15,8 @@
               >
               <div v-if="!editWhitepaper">
                 <i class="bi bi-file-earmark-text me-2"></i>
-                <a :href="whitepaperDownloadLink">{{ whitepaperFileLink.split('/').pop() }}</a>
+                <!-- <a :href="whitepaperDownloadLink">{{ whitepaperId }}</a> -->
+                <a @click="getRequest(whitepaperDownloadLink)">{{ whitepaperId }}</a>
                 <a class="ms-5" @click="editWhitepaper = !editWhitepaper">Edit</a>
               </div>
               <div v-else>
@@ -157,6 +158,7 @@ import { organizationsStore } from '@/stores/organizations'
 import { mapStores } from 'pinia'
 import { updateProject, getPreSignedPutUrl, getPreSignedGetUrl, uploadFile } from '@/api'
 import type { NewProject } from '@/api'
+import axios from 'axios'
 
 export default {
   components: {
@@ -180,7 +182,7 @@ export default {
       this.twitter = projectInfo?.Content.Twitter ?? ''
       this.website = projectInfo?.Content.Website ?? ''
       this.whitepaper = projectInfo?.Content.Whitepaper ?? ''
-      this.whitepaperFileLink = projectInfo?.Content.WhitepaperFile ?? ''
+      this.whitepaperId = projectInfo?.Content.WhitepaperFile ?? ''
       this.numFounders = projectInfo?.Content.NumFounders.toString() ?? '0'
 
       // this.founders = JSON.parse(JSON.stringify(projectInfo?.Content.Founders)) ?? []
@@ -201,7 +203,8 @@ export default {
             CV: projectInfo?.Content.Founders[i].CV ?? '',
             cvFile: null as File | null,
             CVDwonloadLink: '',
-            editCv: false
+            editCv: false,
+            cvUploadLink: '',
           })
         }
       }
@@ -224,14 +227,19 @@ export default {
       this.objective = projectInfo?.Content.Objective ?? ''
       this.motivation = projectInfo?.Content.Motivation ?? ''
       this.assets = projectInfo?.Content.Assets ?? '' 
+      
 
-      // const preSignedGetUrl : any = await getPreSignedGetUrl(this.whitepaperFileLink.split('/').pop() as string)
-      // this.whitepaperDownloadLink = preSignedGetUrl?.URL ?? ''
+      const preSignedGetUrl : any = await getPreSignedGetUrl(this.whitepaperId)
+      this.whitepaperDownloadLink = preSignedGetUrl?.URL ?? ''
 
-      // for (let i = 0; i < this.founders.length; i++) {
-      //   const preSignedGetUrl : any = await getPreSignedGetUrl(this.founders[i].CV.split('/').pop() as string)
-      //   this.founders[i].CVDwonloadLink = preSignedGetUrl?.URL ?? ''
-      // }
+      console.log('hii',projectInfo)
+      console.log('hii', this.whitepaperId)
+      console.log('hii',preSignedGetUrl)
+
+      for (let i = 0; i < this.founders.length; i++) {
+        const preSignedGetUrl : any = await getPreSignedGetUrl(this.founders[i].CV)
+        this.founders[i].CVDwonloadLink = preSignedGetUrl?.URL ?? ''
+      }
 
       // this.founders = JSON.parse(JSON.stringify(this.founders))
       
@@ -255,6 +263,8 @@ export default {
       whitepaperFileLink: '',
       whitepaperDownloadLink: '',
       editWhitepaper: false,
+      whitepaperId: '',
+      whitepaperUploadLink: '',
       teamMembers: [
         {
           Name: '',
@@ -273,7 +283,8 @@ export default {
           CV: '',
           cvFile: null as File | null,
           CVDwonloadLink: '',
-          editCv: false
+          editCv: false,
+          cvUploadLink: '',
         }
       ],
       objective: '',
@@ -287,34 +298,54 @@ export default {
   methods: {
     async onFileChange(e: any) {
       this.whitepaperFile = e.target.files[0]
+      this.editWhitepaper = true
     },
     async onFileChangeCV(e: any, index: number) {
       this.founders[index].cvFile = e.target.files[0]
+      this.founders[index].editCv = true
+    },
+    getRequest(link: string) {
+      alert("download")
+      axios({
+        method: 'get',
+        url: link,
+        responseType: 'arraybuffer',
+      })
+        .then((response) => {
+          const url = window.URL.createObjectURL(new Blob([response.data]))
+          const link = document.createElement('a')
+          link.href = url
+          link.setAttribute('download', "file")
+          document.body.appendChild(link)
+          link.click()
+        })
+        .catch(() => console.log('error occured'))
     },
     async submit() {
-      // if (this.whitepaperFile) {
-      //   const preSignedPutUrl : any = await getPreSignedPutUrl(this.whitepaperFile!.name)
-      //   if (preSignedPutUrl) {
-      //     const fileResp = await uploadFile(preSignedPutUrl.URL, this.whitepaperFile as any)
-      //     if (fileResp.ok) {
-      //       this.whitepaperFileLink = "https://staging-webapp-private-assets-insightic.s3.ap-southeast-1.amazonaws.com/" + this.whitepaperFile!.name
-      //     }
-      //   }
-      // }
-      // for (let i = 0; i < this.founders.length; i++) {
-      //   if (this.founders[i].cvFile) {
-
-      //     const preSignedPutUrlCV : any = await getPreSignedPutUrl(this.founders[i].cvFile!.name)
-      //     if (preSignedPutUrlCV) {
-      //       const fileResp = await uploadFile(preSignedPutUrlCV.URL, this.founders[i].cvFile as any)
-      //       if (fileResp.ok) {
-      //         this.founders[i].CV = "https://staging-webapp-private-assets-insightic.s3.ap-southeast-1.amazonaws.com/" + this.founders[i].cvFile!.name
-      //       }
-      //     }
-      //   }
-      //   console.log("cv changed", i)
-      //   console.log(this.founders[i])
-      // }
+      if (this.whitepaperFile && this.editWhitepaper) {
+        const preSignedPutUrl : any = await getPreSignedPutUrl()
+        if (preSignedPutUrl) {
+          const fileResp = await uploadFile(preSignedPutUrl.URL, this.whitepaperFile as any)
+          if (fileResp.ok) {
+            this.whitepaperId = preSignedPutUrl.ObjectID
+            this.whitepaperUploadLink = preSignedPutUrl.URL
+          }
+        }
+      }
+      for (let i = 0; i < this.founders.length; i++) {
+        if (this.founders[i].cvFile && this.founders[i].editCv) {
+          const preSignedPutUrlCV : any = await getPreSignedPutUrl()
+          if (preSignedPutUrlCV) {
+            const fileResp = await uploadFile(preSignedPutUrlCV.URL, this.founders[i].cvFile as any)
+            if (fileResp.ok) {
+              this.founders[i].CV = preSignedPutUrlCV.URL
+              this.founders[i].cvUploadLink = preSignedPutUrlCV.URL
+            }
+          }
+        }
+        console.log("cv changed", i)
+        console.log(this.founders[i])
+      }
       let data = {
           Name: this.name,
           Twitter: this.twitter,
@@ -359,7 +390,8 @@ export default {
             CV: '',
             cvFile: null as File | null,
             CVDwonloadLink: '',
-            editCv: false
+            editCv: false,
+            cvUploadLink: '',
           })
         }
       } else {

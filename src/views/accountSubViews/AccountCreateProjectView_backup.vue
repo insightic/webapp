@@ -406,7 +406,7 @@ export default {
         if (!this.complete1 || !this.complete2 || !this.complete3 || !this.complete4) {
           window.confirm('Required fields are not filled in. Are you sure you want to submit?')
         }
-        const preSignedUrl : any = await getPreSignedPutUrl(this.whitepaperFile!.name)
+        const preSignedUrl : any = await getPreSignedPutUrl()
         if (preSignedUrl) {
           const fileResp = await uploadFile(preSignedUrl.URL, this.whitepaperFile as any)
           if (fileResp.ok) {
@@ -414,7 +414,7 @@ export default {
           }
         }
         for (let i = 0; i < this.founders.length; i++) {
-          const preSignedUrl : any = await getPreSignedPutUrl(this.founders[i].cvFile!.name)
+          const preSignedUrl : any = await getPreSignedPutUrl()
           if (preSignedUrl) {
             const fileResp = await uploadFile(preSignedUrl.URL, this.founders[i].cvFile as any)
             if (fileResp.ok) {
