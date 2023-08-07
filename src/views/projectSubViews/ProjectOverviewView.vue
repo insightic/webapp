@@ -15,8 +15,7 @@
               >
               <div v-if="!editWhitepaper">
                 <i class="bi bi-file-earmark-text me-2"></i>
-                <!-- <a :href="whitepaperDownloadLink">{{ whitepaperId }}</a> -->
-                <a @click="getRequest(whitepaperDownloadLink)">{{ whitepaperId }}</a>
+                <a :href="whitepaperDownloadLink">{{ whitepaperId }}</a>
                 <a class="ms-5" @click="editWhitepaper = !editWhitepaper">Edit</a>
               </div>
               <div v-else>
@@ -84,7 +83,7 @@
               >
               <div v-if="!founder.editCv">
                 <i class="bi bi-file-earmark-text me-2"></i>
-                <a :href="founder.CVDwonloadLink">{{ founder.CV.split('/').pop() }}</a>
+                <a :href="founder.CVDwonloadLink">{{ founder.CV }}</a>
                 <a class="ms-5" @click="founder.editCv = !founder.editCv">Edit</a>
               </div>
               <div v-else>
@@ -158,7 +157,6 @@ import { organizationsStore } from '@/stores/organizations'
 import { mapStores } from 'pinia'
 import { updateProject, getPreSignedPutUrl, getPreSignedGetUrl, uploadFile } from '@/api'
 import type { NewProject } from '@/api'
-import axios from 'axios'
 
 export default {
   components: {
@@ -298,23 +296,6 @@ export default {
     async onFileChangeCV(e: any, index: number) {
       this.founders[index].cvFile = e.target.files[0]
       this.founders[index].editCv = true
-    },
-    getRequest(link: string) {
-      alert("download")
-      axios({
-        method: 'get',
-        url: link,
-        responseType: 'arraybuffer',
-      })
-        .then((response) => {
-          const url = window.URL.createObjectURL(new Blob([response.data]))
-          const link = document.createElement('a')
-          link.href = url
-          link.setAttribute('download', "file")
-          document.body.appendChild(link)
-          link.click()
-        })
-        .catch(() => console.log('error occured'))
     },
     async submit() {
       if (this.whitepaperFile && this.editWhitepaper) {
