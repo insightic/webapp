@@ -232,9 +232,6 @@ export default {
       const preSignedGetUrl : any = await getPreSignedGetUrl(this.whitepaperId)
       this.whitepaperDownloadLink = preSignedGetUrl?.URL ?? ''
 
-      console.log('hii',projectInfo)
-      console.log('hii', this.whitepaperId)
-      console.log('hii',preSignedGetUrl)
 
       for (let i = 0; i < this.founders.length; i++) {
         const preSignedGetUrl : any = await getPreSignedGetUrl(this.founders[i].CV)
@@ -245,10 +242,8 @@ export default {
       
     } else {
       var projectGuid = mapping[this.$route.params.projectID as keyof typeof mapping]
-      console.log(this.$route.params.projectID)
       var project = this.organizationsStore.findProject('e262d5c2-16f8-47a0-8c70-4019514b137c', projectGuid)
       this.name = project!.name
-      console.log(project?.description)
     }
 
     
@@ -343,8 +338,6 @@ export default {
             }
           }
         }
-        console.log("cv changed", i)
-        console.log(this.founders[i])
       }
       let data = {
           Name: this.name,
@@ -360,8 +353,6 @@ export default {
           Motivation: this.motivation,
           Assets: this.assets
         } as unknown as NewProject
-      console.log('hii', data)
-      console.log(this.projectID)
       
       const update = await updateProject(this.projectID, data)
       console.log('update', update)

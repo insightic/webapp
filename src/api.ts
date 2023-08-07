@@ -108,7 +108,6 @@ export interface NewProject {
     Assets: string
 }
 
-
 export async function createProject(project: NewProject): Promise<Project> {
     const resp = await httpclient.post<Project>(`/projects`, project)
     return resp?.payload || {} as Project
@@ -124,7 +123,6 @@ export async function getProjects(): Promise<Project[]> {
             projectList.push(project)
         }
     }
-    console.log('aaa', projectList)
     return projectList
 }
 
