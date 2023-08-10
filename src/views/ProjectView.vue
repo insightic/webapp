@@ -9,7 +9,7 @@ import ProjectOverviewView from '@/views/projectSubViews/ProjectOverviewView.vue
 import ProjectKYCView from './projectSubViews/ProjectKYCView.vue'
 import ProjectSourceCodeView from '@/views/projectSubViews/ProjectSourceCodeView.vue'
 import ProjectValidationsView from '@/views/projectSubViews/ProjectValidationsView.vue'
-import ProjectApplicationsView from '@/views/projectSubViews/ProjectApplicationsView.vue'
+import ProjectResultsView from '@/views/projectSubViews/ProjectResultsView.vue'
 import ProjectAutoAssessmentView from '@/views/projectSubViews/ProjectAutoAssessmentView.vue'
 import ProjectAutoAssessmentView_Backup from './projectSubViews/ProjectAutoAssessmentView_Backup.vue'
 
@@ -47,9 +47,9 @@ export default {
           component: ProjectValidationsView
         },
         {
-          name: 'Applications',
+          name: 'Results',
           icon: 'bi-file-text',
-          component: ProjectApplicationsView
+          component: ProjectResultsView
         },
         {
           name: 'Auto Assessment View (Example)',

@@ -1,11 +1,11 @@
 <template>
-  <SidebarLayout name="Account" :sub-views="subViews" default-sub-view="Projects" />
+  <SidebarLayout name="Account" :sub-views="subViews" default-sub-view="Applications" />
 </template>
 
 <script lang="ts">
 import SidebarLayout from '@/layouts/SidebarLayout.vue'
 
-import AccountProjectsView from '@/views/accountSubViews/AccountProjectsView.vue'
+import AccountApplicationsView from '@/views/accountSubViews/AccountApplicationsView.vue'
 import AccountUsersView from '@/views/accountSubViews/AccountUsersView.vue'
 import AccountKYCView from '@/views/accountSubViews/AccountKYCView.vue'
 import AccountProfileView from '@/views/accountSubViews/AccountProfileView.vue'
@@ -19,9 +19,9 @@ export default {
     return {
       subViews: [
         {
-          name: 'Projects',
+          name: 'Applications',
           icon: 'bi-box',
-          component: AccountProjectsView
+          component: AccountApplicationsView
         },
         {
           name: 'Create Project',

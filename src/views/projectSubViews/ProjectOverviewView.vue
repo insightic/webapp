@@ -3,12 +3,12 @@
 
   <div style="max-width: 960px">
     <SectionLayout title="Part A: DLT Foundation Details">
-      <LabelInputComponent label="DLT Foundation Name" type="text" v-model:field="name" :required="true"/>
+      <LabelInputComponent label="DLT Foundation Name" type="text" v-model:field="name" :required="true" :disabled="readonly" />
 
-      <LabelInputComponent label="Official Twitter Account (URL)" type="text" v-model:field="twitter" :required="true"/>
-            <LabelInputComponent label="Official Website (URL)" type="text" v-model:field="website" :required="true"/>
+      <LabelInputComponent label="Official Twitter Account (URL)" type="text" v-model:field="twitter" :required="true" :disabled="readonly" />
+            <LabelInputComponent label="Official Website (URL)" type="text" v-model:field="website" :required="true" :disabled="readonly"/>
 
-            <LabelInputComponent label="Whitepaper (URL)" type="text" v-model:field="whitepaper" :required="true"/>
+            <LabelInputComponent label="Whitepaper (URL)" type="text" v-model:field="whitepaper" :required="true" :disabled="readonly"/>
             <div class="">
               <label for="document" class=""
                 >Whitepaper (File)</label
@@ -41,7 +41,7 @@
           <span class="text-danger">*</span>
         </label>
 
-        <LabelInputComponent label="Number of Founders" type="text" v-model:field="numFounders" :required="true"/>
+        <LabelInputComponent label="Number of Founders" type="text" v-model:field="numFounders" :required="true" :disabled="readonly"/>
 
         <div class="">
           <div class="mb-4" v-for="(founder, counter) in founders" v-bind:key="counter">
@@ -50,30 +50,30 @@
             </div>
             <div class="row">
               <div class="col-md-6">
-                <LabelInputComponent label="Name" type="text" v-model:field="founder.Name" :required="true"/>
+                <LabelInputComponent label="Name" type="text" v-model:field="founder.Name" :required="true" :disabled="readonly"/>
               </div>
               <div class="col-md-6">
-                <LabelInputComponent label="Position within DLT Foundation" type="text" v-model:field="founder.Position" :required="true"/>
-              </div>
-            </div>
-
-            <LabelInputComponent label="KYC Verification" type="text" v-model:field="founder.Kyc" :required="true"/>
-
-            <div class="row">
-              <div class="col-md-6">
-                <LabelInputComponent label="Twitter Account (URL)" type="text" v-model:field="founder.Twitter" :required="true"/>
-              </div>
-              <div class="col-md-6">
-                <LabelInputComponent label="LinkedIn Profile (URL)" type="text" v-model:field="founder.Linkedin" :required="true"/>
+                <LabelInputComponent label="Position within DLT Foundation" type="text" v-model:field="founder.Position" :required="true" :disabled="readonly"/>
               </div>
             </div>
 
+            <LabelInputComponent label="KYC Verification" type="text" v-model:field="founder.Kyc" :required="true" :disabled="readonly"/>
+
             <div class="row">
               <div class="col-md-6">
-                <LabelInputComponent label="Email Address" type="text" v-model:field="founder.Email" :required="true"/>
+                <LabelInputComponent label="Twitter Account (URL)" type="text" v-model:field="founder.Twitter" :required="true" :disabled="readonly"/>
               </div>
               <div class="col-md-6">
-                <LabelInputComponent label="Ethereum Address" type="text" v-model:field="founder.Ethereum" :required="true"/>
+                <LabelInputComponent label="LinkedIn Profile (URL)" type="text" v-model:field="founder.Linkedin" :required="true" :disabled="readonly"/>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <LabelInputComponent label="Email Address" type="text" v-model:field="founder.Email" :required="true" :disabled="readonly"/>
+              </div>
+              <div class="col-md-6">
+                <LabelInputComponent label="Ethereum Address" type="text" v-model:field="founder.Ethereum" :required="true" :disabled="readonly"/>
               </div>
             </div>
 
@@ -107,14 +107,14 @@
             Team Members
             <span class="text-danger">*</span>
           </label>
-          <LabelInputComponent label="Number of Team Members" type="text" v-model:field="numTeamMembers" :required="true"/>
+          <LabelInputComponent label="Number of Team Members" type="text" v-model:field="numTeamMembers" :required="true" :disabled="readonly"/>
 
           <div class="">
             <div class="mb-2" v-for="(member, counter) in teamMembers" v-bind:key="counter">
               <label for="duration" class="me-2">{{ counter + 1 }}. Member - Name:</label>
-              <input type="text" class="me-5 rounded" v-model.lazy="member.Name" required />
+              <input type="text" class="me-5 rounded" v-model.lazy="member.Name" required :disabled="readonly"/>
               <label for="duration" class="me-2">Role:</label>
-              <input type="text" class="me-2 rounded" v-model.lazy="member.Role" required />
+              <input type="text" class="me-2 rounded" v-model.lazy="member.Role" required :disabled="readonly"/>
             </div>
           </div>
         </div>
@@ -124,20 +124,20 @@
     <SectionLayout title="Part C: Objectives of the DLT Foundation">
       <LabelTextareaComponent label="Objectives of your DLT Foundation" 
               footnote="Please provide a detailed description of the objectives of your DLT Foundation (max. 5000 characters)" 
-              type="text" v-model:field="objective" :required="true"/>
+              type="text" v-model:field="objective" :required="true" :disabled="readonly"/>
     </SectionLayout>
 
     <SectionLayout title="Part D: Specific Purpose">
       <LabelTextareaComponent label="Motivation of your DLT Foundation" 
               footnote="If your DLT Foundation has been established for a specific purpose, please detail the purpose (max. 5000 characters)" 
-              type="text" v-model:field="motivation" :required="true"/>
+              type="text" v-model:field="motivation" :required="true" :disabled="readonly"/>
     </SectionLayout>
 
     
     <SectionLayout title="Part E: Initial Assets">
       <LabelTextareaComponent label="Initial Assets of your DLT Foundation" 
               footnote="Please provide a detailed description of the initial assets of your DLT Foundation (max. 5000 characters):" 
-              type="text" v-model:field="assets" :required="true"/>
+              type="text" v-model:field="assets" :required="true" :disabled="readonly"/>
     </SectionLayout>
 
     <button type="button" class="btn btn-primary" @click="submit()">Save and Submit</button>
@@ -258,6 +258,7 @@ export default {
       editWhitepaper: false,
       whitepaperId: '',
       whitepaperUploadLink: '',
+      readonly: true,
       teamMembers: [
         {
           Name: '',
