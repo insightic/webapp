@@ -39,8 +39,8 @@ export async function getPreSignedPutUrl() {
     return data?.payload || null
 }
 
-export async function getPreSignedGetUrl(id: string) {
-    const body = {"ObjectID": id}
+export async function getPreSignedGetUrl(id: string, filename: string) {
+    const body = {"ObjectID": id, "DesiredFilename": filename}
     const data = await httpclient.post(`/preSignedGet`, body )
     return data?.payload || null
 }
@@ -62,7 +62,7 @@ export interface ProjectContent {
     Twitter: string
     Website: string
     Whitepaper: string
-    WhitepaperFile: string
+    WhitepaperFile: WhitepaperFile
     NumFounders: number
     Founders: Founder[]
     NumMembers: number
@@ -72,9 +72,18 @@ export interface ProjectContent {
     Assets: string
 }
 
-export interface Project {
-    ID: number
+export interface Submission {
     Content: ProjectContent
+    SubmissionID: string
+    Results: JobRunResult[]
+    Status: string
+    SubmissionAt: string
+}
+
+export interface Application {
+    ID: string
+    AccountID: string
+    Submissions: Submission []
 }
 
 export interface Founder {
@@ -86,6 +95,7 @@ export interface Founder {
     Ethereum: string
     Email: string
     CV: string
+    CVFilename: string
 }
 
 export interface Member {
@@ -93,12 +103,19 @@ export interface Member {
     Position: string
 }
 
+export interface WhitepaperFile {
+    ID: string
+    Filename: string
+    FileLink: string
+}
+
 export interface NewProject {
     Name: string
     Twitter: string
     Website: string
     Whitepaper: string
-    WhitepaperFileLink:string
+    WhitepaperFile: WhitepaperFile
+    WhitepaperFileLink: string
     NumFounders: number
     Founders: Founder[]
     NumMembers: number
@@ -108,31 +125,30 @@ export interface NewProject {
     Assets: string
 }
 
-export async function createProject(project: NewProject): Promise<Project> {
-    const resp = await httpclient.post<Project>(`/projects`, project)
-    return resp?.payload || {} as Project
+export async function createProject(project: NewProject): Promise<Application> {
+    const resp = await httpclient.post<Application>(`/projects`, project)
+    return resp?.payload || {} as Application
 }
 
-export async function getProjects(): Promise<Project[]> {
+export async function getProjects(): Promise<Application[]> {
     const resp = await httpclient.get<number[]>(`/projects`)
-    const projectList = [] as Project[]
-    for(const projectId of resp!.payload) {
-        const project = await getProject(projectId)
-        if (project) {
-            project.Content.ID = projectId
-            projectList.push(project)
+    const applicationList = [] as Application[]
+    for(const applicationId of resp!.payload) {
+        const application = await getProject(applicationId)
+        if (application) {
+            applicationList.push(application)
         }
     }
-    return projectList
+    return applicationList
 }
 
-export async function getProject(id: number | string): Promise<Project | null> {
-    const resp = await httpclient.get<Project>(`/projects/${id}`)
+export async function getProject(id: number | string): Promise<Application | null> {
+    const resp = await httpclient.get<Application>(`/projects/${id}`)
     return resp?.payload || null
 }
 
-export async function updateProject(id: number | string, project: NewProject): Promise<Project | null> {
-    const resp = await httpclient.put<Project>(`/projects/${id}`, project)
+export async function updateProject(id: number | string, project: NewProject): Promise<Application | null> {
+    const resp = await httpclient.put<Application>(`/projects/${id}`, project)
     return resp?.payload || null
 }
 

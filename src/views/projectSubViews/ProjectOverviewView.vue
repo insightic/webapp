@@ -15,7 +15,7 @@
               >
               <div v-if="!editWhitepaper">
                 <i class="bi bi-file-earmark-text me-2"></i>
-                <a :href="whitepaperDownloadLink">{{ whitepaperId }}</a>
+                <a :href="whitepaperDownloadLink">{{ whitepaperFilename }}</a>
                 <a class="ms-5" @click="editWhitepaper = !editWhitepaper">Edit</a>
               </div>
               <div v-else>
@@ -83,7 +83,7 @@
               >
               <div v-if="!founder.editCv">
                 <i class="bi bi-file-earmark-text me-2"></i>
-                <a :href="founder.CVDwonloadLink">{{ founder.CV }}</a>
+                <a :href="founder.CVDwonloadLink">{{ founder.CVFilename }}</a>
                 <a class="ms-5" @click="founder.editCv = !founder.editCv">Edit</a>
               </div>
               <div v-else>
@@ -165,7 +165,7 @@ export default {
     LabelTextareaComponent,
   },
   async created() {
-    const projectInfo = await getProject(this.$route.params.projectID as string)
+    const projectInfo = await getProject(this.$route.params.projectID as string).then(res => res!.Submissions.slice(-1)[0])
 
     const mapping = {
       '1': 'e262d5c2-16f8-47a0-8c70-4019514d137b',
@@ -180,7 +180,8 @@ export default {
       this.twitter = projectInfo?.Content.Twitter ?? ''
       this.website = projectInfo?.Content.Website ?? ''
       this.whitepaper = projectInfo?.Content.Whitepaper ?? ''
-      this.whitepaperId = projectInfo?.Content.WhitepaperFile ?? ''
+      this.whitepaperId = projectInfo?.Content.WhitepaperFile.ID ?? ''
+      this.whitepaperFilename = projectInfo?.Content.WhitepaperFile.Filename ?? ''
       this.numFounders = projectInfo?.Content.NumFounders.toString() ?? '0'
 
       // this.founders = JSON.parse(JSON.stringify(projectInfo?.Content.Founders)) ?? []
@@ -200,6 +201,7 @@ export default {
             Email: projectInfo?.Content.Founders[i].Email ?? '',
             CV: projectInfo?.Content.Founders[i].CV ?? '',
             cvFile: null as File | null,
+            CVFilename: projectInfo.Content.Founders[i].CVFilename ?? '',
             CVDwonloadLink: '',
             editCv: false,
             cvUploadLink: '',
@@ -227,12 +229,12 @@ export default {
       this.assets = projectInfo?.Content.Assets ?? '' 
       
 
-      const preSignedGetUrl : any = await getPreSignedGetUrl(this.whitepaperId)
+      const preSignedGetUrl : any = await getPreSignedGetUrl(this.whitepaperId, this.whitepaperFilename)
       this.whitepaperDownloadLink = preSignedGetUrl?.URL ?? ''
 
 
       for (let i = 0; i < this.founders.length; i++) {
-        const preSignedGetUrl : any = await getPreSignedGetUrl(this.founders[i].CV)
+        const preSignedGetUrl : any = await getPreSignedGetUrl(this.founders[i].CV, this.founders[i].CVFilename)
         this.founders[i].CVDwonloadLink = preSignedGetUrl?.URL ?? ''
       }
 
@@ -257,6 +259,7 @@ export default {
       whitepaperDownloadLink: '',
       editWhitepaper: false,
       whitepaperId: '',
+      whitepaperFilename: '',
       whitepaperUploadLink: '',
       readonly: true,
       teamMembers: [
@@ -276,6 +279,7 @@ export default {
           Email: '',
           CV: '',
           cvFile: null as File | null,
+          CVFilename: '',
           CVDwonloadLink: '',
           editCv: false,
           cvUploadLink: '',
@@ -362,6 +366,7 @@ export default {
             Email: '',
             CV: '',
             cvFile: null as File | null,
+            CVFilename: '',
             CVDwonloadLink: '',
             editCv: false,
             cvUploadLink: '',

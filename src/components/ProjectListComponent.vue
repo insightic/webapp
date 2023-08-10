@@ -1,5 +1,5 @@
 <template>
-  <div class="project d-flex my-1 mx-1 p-2 flex-row align-items-center" :class="isHeader ? 'header': ''" @click="click(project!.ID)">
+  <div class="project d-flex my-1 mx-1 p-2 flex-row align-items-center" :class="isHeader ? 'header': ''" @click="click($.vnode.key! as number)">
 
       <div class="col col-3 d-flex align-items-center">
         <span v-if="!isHeader" class="me-3">{{ counter }}.</span>
@@ -48,7 +48,7 @@ export default {
     isAsc: { type: Boolean },
     sortBy: { type: String },
     icon: { type: String },
-    counter: { type: Number }
+    counter: { type: Number },
   },
   methods: {
     formatDateTime,

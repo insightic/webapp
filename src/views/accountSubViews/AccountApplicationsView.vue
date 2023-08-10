@@ -12,7 +12,7 @@
     <!-- file list -->
     <div class="d-flex flex-column w-100">
       <ProjectListComponent :isHeader="true" :isAdmin="false"/>
-      <ProjectListComponent v-for="(project, index) in projects" :key="project.ID" :project="project.Content" :isAdmin="false" :counter="index+1" @refresh="refresh"/>
+      <ProjectListComponent v-for="(application, index) in applications" :key="application.ID" :project="application.Submissions.slice(-1)[0].Content" :isAdmin="false" :counter="index+1" @refresh="refresh"/>
     </div>
 </template>
 
@@ -21,7 +21,7 @@ import ProjectCardComponent from '@/components/ProjectCardComponent.vue'
 import ProjectListComponent from '@/components/ProjectListComponent.vue'
 import { projectsStore } from '@/stores/projects'
 import { mapStores } from 'pinia'
-import { getProjects, type Project } from '@/api'
+import { getProjects, type Application } from '@/api'
 
 export default {
   components: {
@@ -29,11 +29,12 @@ export default {
   },
   async created() {
     // await projectsStore().getProjects()
-    this.projects = await getProjects()
+    this.applications= await getProjects()
+    console.log(this.applications[0])
   },
   data() {
     return {
-      projects: [] as Project[]
+      applications: [] as Application[]
     }
   },
   computed: {

@@ -276,6 +276,7 @@ export default {
           CV: '',
           cvFile: File,
           cvUploadLink: '',
+          CVFilename: '',
         }
       ],
       objective: '',
@@ -376,6 +377,7 @@ export default {
               if (fileResp.ok) {
                 this.founders[i].CV = preSignedPutUrl.ObjectID
                 this.founders[i].cvUploadLink = preSignedPutUrl.URL
+                this.founders[i].CVFilename = this.founders[i].cvFile.name
               }
             }
           }
@@ -386,7 +388,7 @@ export default {
           Twitter: this.twitter,
           Website: this.website,
           Whitepaper: this.whitepaper,
-          WhitepaperFile: this.whitepaperId,
+          WhitepaperFile: {"ID":this.whitepaperId, "Filename":this.whitepaperFile.name, "URL":this.whitepaperUploadLink},
           NumFounders: parseInt(this.numFounders) ? parseInt(this.numFounders) : 0,
           Founders: this.founders,
           NumMembers: parseInt(this.numTeamMembers) ? parseInt(this.numTeamMembers) : 0,
@@ -398,7 +400,7 @@ export default {
 
         await createProject(data)
         window.alert('Your response has been submitted')
-        this.$router.push({ query: { view: 'Projects' } })
+        this.$router.push({ query: { view: 'Applications' } })
       // }
     },
 
@@ -419,7 +421,8 @@ export default {
           Email: '',
           CV: '',
           cvFile: File,
-          cvUploadLink: ''
+          cvUploadLink: '',
+          CVFilename: ''
       })
     },
     deleteMember(counter: number) {
@@ -461,7 +464,8 @@ export default {
           Email: '',
           CV: '',
           cvFile: File,
-          cvUploadLink: ''
+          cvUploadLink: '',
+          CVFilename: ''
         })
       }
     },
