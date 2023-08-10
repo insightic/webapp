@@ -11,15 +11,15 @@
     </div>
   </div>
 
-  <!-- card list -->
+  <!-- card list
   <div v-if="view=='card'" class="d-flex flex-wrap">
-    <ProjectCardComponent v-for="project in projects" :key="project.ID" :project="project.Content" :isAdmin="true"/>
-  </div>
+    <ProjectCardComponent v-for="(application, index) in applications" :key="application.ID" :project="application.Submissions.slice(-1)[0].Content" :isAdmin="true"/>
+  </div> -->
   
   <!-- file list -->
   <div v-if="view=='list'" class="d-flex flex-column w-100">
     <ProjectListComponent :isHeader="true"  :isAdmin="true"/>
-    <ProjectListComponent v-for="project in projects" :key="project.ID" :project="project.Content" :icon="icons[project.Content.Name.toLowerCase() as keyof typeof icons]" :isAdmin="true"/>
+    <ProjectListComponent v-for="(application, index) in applications" :key="application.ID" :project="application.Submissions.slice(-1)[0].Content" :counter="index+1" :isAdmin="true"/>
   </div>
 </template>
 
@@ -28,11 +28,10 @@ import ProjectCardComponent from '@/components/ProjectCardComponent.vue'
 import ProjectListComponent from '@/components/ProjectListComponent.vue'
 import { projectsStore } from '@/stores/projects'
 import { mapStores } from 'pinia'
-import { getProjects, type Project } from '@/api'
+import { getProjects, type Application } from '@/api'
 
 export default {
   components: {
-    ProjectCardComponent,
     ProjectListComponent
   },
   data() {
@@ -46,11 +45,11 @@ export default {
         'euler finance': 'https://storage.googleapis.com/subgraph-images/1656114240805euler-transparent.png',
         'neopin': 'https://www.coinlore.com/img/neopin.png',
       },
-      projects: [] as Project[]
+      applications: [] as Application[]
     }
   },
   async created() {
-    this.projects = await getProjects()
+    this.applications = await getProjects()
   },
   computed: {
     ...mapStores(projectsStore),
