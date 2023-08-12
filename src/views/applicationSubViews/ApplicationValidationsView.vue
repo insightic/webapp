@@ -23,7 +23,7 @@
 
 <script lang="ts">
 import ValidationComponent from '@/components/ValidationComponent.vue'
-import ProjectViewMixin from './ProjectViewMixin'
+import ApplicationViewMixin from './ApplicationViewMixin'
 
 import { getProjectJobs } from '@/api'
 import type { Job } from '@/api'
@@ -32,7 +32,7 @@ export default {
   components: {
     ValidationComponent
   },
-  mixins: [ProjectViewMixin],
+  mixins: [ApplicationViewMixin],
   async created() {
     this.jobs = await getProjectJobs(this.projectID)
   },

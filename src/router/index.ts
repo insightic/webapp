@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import AccountView from '@/views/AccountView.vue'
-import ProjectView from '@/views/ProjectView.vue'
+import ApplicationView from '@/views/ApplicationView.vue'
 import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import AdminLoginView from '@/views/admin/AdminLoginView.vue'
@@ -29,12 +29,12 @@ const router = createRouter({
     {
       path: '/projects/:projectID',
       name: 'projectView',
-      component: ProjectView,
+      component: ApplicationView,
     },
     {
       path: '/projects/:projectID/:ruleID',
       name: 'ruleReportView',
-      component: ProjectView,
+      component: ApplicationView,
     },
     {
       path: '/admin/login',

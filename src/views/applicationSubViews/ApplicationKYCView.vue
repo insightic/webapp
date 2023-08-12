@@ -54,7 +54,7 @@
 import SectionLayout from '@/layouts/SectionLayout.vue'
 import LabelInputComponent from '@/components/LabelInputComponent.vue'
 
-import ProjectViewMixin from './ProjectViewMixin'
+import ApplicationViewMixin from './ApplicationViewMixin'
 
 import { createProjectJob } from '@/api'
 
@@ -63,7 +63,7 @@ export default {
     SectionLayout,
     LabelInputComponent
   },
-  mixins: [ProjectViewMixin],
+  mixins: [ApplicationViewMixin],
   methods: {
     async submit() {
       const job = await createProjectJob(this.projectID)

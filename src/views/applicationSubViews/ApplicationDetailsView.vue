@@ -1,5 +1,11 @@
 <template>
-  <div class="text-secondary mb-4">Project Overview</div>
+  <div class="d-flex justify-content-between" style="max-width:960px">
+    <div class="text-secondary mb-4">Project Details</div>
+    <div>
+      <div>Status: {{ status }}</div>
+      <div>Submitted At: {{ submissionAt }}</div>
+    </div>
+  </div>
 
   <div style="max-width: 960px">
     <SectionLayout title="Part A: DLT Foundation Details">
@@ -150,7 +156,7 @@ import SectionLayout from '@/layouts/SectionLayout.vue'
 import LabelInputComponent from '@/components/LabelInputComponent.vue'
 import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
 
-import ProjectViewMixin from './ProjectViewMixin'
+import ApplicationViewMixin from './ApplicationViewMixin'
 
 import { createProjectJob, getProject } from '@/api'
 import { organizationsStore } from '@/stores/organizations'
@@ -165,7 +171,11 @@ export default {
     LabelTextareaComponent,
   },
   async created() {
-    const projectInfo = await getProject(this.$route.params.projectID as string).then(res => res!.Submissions.slice(-1)[0])
+    const projectInfo = await getProject(this.$route.params.projectID as string)
+    .then(res => res!.Submissions.filter(item => item.SubmissionID == this.$route.query.submissionID)[0])
+
+    this.submissionAt = projectInfo?.SubmissionAt
+    this.status = projectInfo?.Status
 
     const mapping = {
       '1': 'e262d5c2-16f8-47a0-8c70-4019514d137b',
@@ -250,6 +260,8 @@ export default {
   },
   data() {
     return {
+      submissionAt: '',
+      status: '',
       name: '',
       twitter: '',
       website: '',
@@ -292,7 +304,7 @@ export default {
       numTeamMembers: ''
     }
   },
-  mixins: [ProjectViewMixin],
+  mixins: [ApplicationViewMixin],
   methods: {
     async onFileChange(e: any) {
       this.whitepaperFile = e.target.files[0]

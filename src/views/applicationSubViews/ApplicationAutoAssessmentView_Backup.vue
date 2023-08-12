@@ -33,11 +33,11 @@
           <th scope="col">Status</th>
         </tr>
       </thead>
-      <tbody v-for="founder in sectB">
+      <tbody v-for="(founder, index) in sectB" :key="index">
         <tr>
           <td colspan="3" class="text-center fw-bold"> Founder {{ founder.founder }}</td>
         </tr>
-        <tr v-for="(item,index) in founder.data" :key="item.item">
+        <tr v-for="(item) in founder.data" :key="item.item">
           <td>{{ item.item }}</td>
           <td>{{ item['Data Received'] }}</td>
           <td>{{ item.Status }}</td>
@@ -102,10 +102,8 @@
 </template>
 
 <script lang="ts">
-import SectionLayout from '@/layouts/SectionLayout.vue'
 
-
-import ProjectViewMixin from './ProjectViewMixin'
+import ApplicationViewMixin from './ApplicationViewMixin'
 
 import { createProjectJob } from '@/api'
 import { organizationsStore } from '@/stores/organizations'
@@ -115,7 +113,6 @@ import { mapStores } from 'pinia'
 
 export default {
   components: {
-    SectionLayout,
   },
   created() {
 
@@ -257,7 +254,7 @@ export default {
       
     }
   },
-  mixins: [ProjectViewMixin],
+  mixins: [ApplicationViewMixin],
   methods: {
     async submit() {
       const job = await createProjectJob(this.projectID)

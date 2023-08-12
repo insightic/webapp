@@ -35,7 +35,7 @@
 
 <script lang="ts">
 import { getJobRunResults, type JobRunResult } from '@/api'
-import ProjectViewMixin from './ProjectViewMixin'
+import ApplicationViewMixin from './ApplicationViewMixin'
 import CodeViewComponent from '@/components/CodeViewComponent.vue'
 import { formatDateTime } from '@/helpers'
 
@@ -43,7 +43,7 @@ export default {
   components: {
     CodeViewComponent
   },
-  mixins: [ProjectViewMixin],
+  mixins: [ApplicationViewMixin],
   async created() {
     const jobID = this.$route.query.jobID as string
     this.jobRunResults = await getJobRunResults(this.projectID, jobID)
