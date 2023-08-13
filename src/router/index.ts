@@ -3,7 +3,7 @@ import AccountView from '@/views/AccountView.vue'
 import ApplicationView from '@/views/ApplicationView.vue'
 import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
-import CreateProjectView from '@/views/CreateApplication.vue'
+import CreateApplicationView from '@/views/CreateApplication.vue'
 import AdminLoginView from '@/views/admin/AdminLoginView.vue'
 import AdminAccountView from '@/views/admin/AdminAccountView.vue'
 import AdminProjectView from '@/views/admin/AdminProjectView.vue'
@@ -28,9 +28,9 @@ const router = createRouter({
       component: AccountView
     },
     {
-      path: '/create-project',
-      name: 'CreateProjectView',
-      component: CreateProjectView
+      path: '/create-application',
+      name: 'CreateApplicationView',
+      component: CreateApplicationView
     },
     {
       path: '/projects/:projectID',
