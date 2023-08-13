@@ -1,7 +1,12 @@
 <template>
   <BasicLayout>
-    <slot />
-    <FooterComponent />
+    <div class="d-flex flex-column" style="height: 100%">
+      <div class="flex-grow-1">
+        <slot />
+      </div>
+
+      <FooterComponent />
+    </div>
   </BasicLayout>
 </template>
 
