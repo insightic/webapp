@@ -32,9 +32,7 @@
       </div>
       <h6>Upload a Zip</h6>
       <div class="text-secondary small w-100">
-        <div class="mx-auto" style="width: 80%">
-          Upload your source codes with a zip file.
-        </div>
+        <div class="mx-auto" style="width: 80%">Upload your source codes with a zip file.</div>
       </div>
     </div>
   </div>

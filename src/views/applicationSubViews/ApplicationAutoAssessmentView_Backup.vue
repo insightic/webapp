@@ -22,8 +22,6 @@
       </tbody>
     </table>
 
-
-
     <div class="mb-2">**Section B: Founder(s) Details**</div>
     <table class="table w-100 mb-4">
       <thead>
@@ -35,9 +33,9 @@
       </thead>
       <tbody v-for="(founder, index) in sectB" :key="index">
         <tr>
-          <td colspan="3" class="text-center fw-bold"> Founder {{ founder.founder }}</td>
+          <td colspan="3" class="text-center fw-bold">Founder {{ founder.founder }}</td>
         </tr>
-        <tr v-for="(item) in founder.data" :key="item.item">
+        <tr v-for="item in founder.data" :key="item.item">
           <td>{{ item.item }}</td>
           <td>{{ item['Data Received'] }}</td>
           <td>{{ item.Status }}</td>
@@ -102,156 +100,147 @@
 </template>
 
 <script lang="ts">
-
 import ApplicationViewMixin from './ApplicationViewMixin'
 
 import { createProjectJob } from '@/api'
 import { organizationsStore } from '@/stores/organizations'
 import { mapStores } from 'pinia'
 
-
-
 export default {
-  components: {
-  },
-  created() {
-
-  },
+  components: {},
+  created() {},
   data() {
     return {
       sectA: [
         {
-          "item": "DLT Foundation Name",
-          "Data Received": "____________________",
-          "Status": "✔️ Pass / ❌ Fail"
+          item: 'DLT Foundation Name',
+          'Data Received': '____________________',
+          Status: '✔️ Pass / ❌ Fail'
         },
         {
-          "item": "Official Twitter Account (URL)",
-          "Data Received": "____________________",
-          "Status": "✔️ Pass / ❌ Fail"
+          item: 'Official Twitter Account (URL)',
+          'Data Received': '____________________',
+          Status: '✔️ Pass / ❌ Fail'
         },
         {
-          "item": "Official Website (URL)",
-          "Data Received": "____________________",
-          "Status": "✔️ Pass / ❌ Fail"
+          item: 'Official Website (URL)',
+          'Data Received': '____________________',
+          Status: '✔️ Pass / ❌ Fail'
         },
         {
-          "item": "Official Website (URL)",
-          "Data Received": "____________________",
-          "Status": "✔️ Pass / ❌ Fail"
+          item: 'Official Website (URL)',
+          'Data Received': '____________________',
+          Status: '✔️ Pass / ❌ Fail'
         },
         {
-          "item": "Whitepaper Document Quality",
-          "Data Received": "____________________",
-          "Status": "✔️ Pass / ❌ Fail"
+          item: 'Whitepaper Document Quality',
+          'Data Received': '____________________',
+          Status: '✔️ Pass / ❌ Fail'
         }
       ],
-      sectB: [ 
+      sectB: [
         {
-          'founder': 1,
-          "data": [
+          founder: 1,
+          data: [
             {
-              "item": "Name",
-              "Data Received": "____________________",
-              "Status": "✔️ Pass / ❌ Fail"
+              item: 'Name',
+              'Data Received': '____________________',
+              Status: '✔️ Pass / ❌ Fail'
             },
             {
-              "item": "Position within DLT Foundation",
-              "Data Received": "____________________",
-              "Status": "✔️ Pass / ❌ Fail"
+              item: 'Position within DLT Foundation',
+              'Data Received': '____________________',
+              Status: '✔️ Pass / ❌ Fail'
             },
             {
-              "item": "KYC Verification",
-              "Data Received": "____________________",
-              "Status": "✔️ Pass / ❌ Fail"
+              item: 'KYC Verification',
+              'Data Received': '____________________',
+              Status: '✔️ Pass / ❌ Fail'
             },
             {
-              "item": "Twitter Account (URL)",
-              "Data Received": "____________________",
-              "Status": "✔️ Pass / ❌ Fail"
+              item: 'Twitter Account (URL)',
+              'Data Received': '____________________',
+              Status: '✔️ Pass / ❌ Fail'
             },
             {
-              "item": "LinkedIn Profile (URL)",
-              "Data Received": "____________________",
-              "Status": "✔️ Pass / ❌ Fail"
+              item: 'LinkedIn Profile (URL)',
+              'Data Received': '____________________',
+              Status: '✔️ Pass / ❌ Fail'
             },
             {
-              "item": "Ethereum Address",
-              "Data Received": "____________________",
-              "Status": "✔️ Pass / ❌ Fail"
+              item: 'Ethereum Address',
+              'Data Received': '____________________',
+              Status: '✔️ Pass / ❌ Fail'
             },
             {
-              "item": "Email Address",
-              "Data Received": "____________________",
-              "Status": "✔️ Pass / ❌ Fail"
+              item: 'Email Address',
+              'Data Received': '____________________',
+              Status: '✔️ Pass / ❌ Fail'
             }
-          ]        
+          ]
         },
         {
-          'founder': 2,
-          "data": [
+          founder: 2,
+          data: [
             {
-              "item": "Name",
-              "Data Received": "____________________",
-              "Status": "✔️ Pass / ❌ Fail"
+              item: 'Name',
+              'Data Received': '____________________',
+              Status: '✔️ Pass / ❌ Fail'
             },
             {
-              "item": "Position within DLT Foundation",
-              "Data Received": "____________________",
-              "Status": "✔️ Pass / ❌ Fail"
+              item: 'Position within DLT Foundation',
+              'Data Received': '____________________',
+              Status: '✔️ Pass / ❌ Fail'
             },
             {
-              "item": "KYC Verification",
-              "Data Received": "____________________",
-              "Status": "✔️ Pass / ❌ Fail"
+              item: 'KYC Verification',
+              'Data Received': '____________________',
+              Status: '✔️ Pass / ❌ Fail'
             },
             {
-              "item": "Twitter Account (URL)",
-              "Data Received": "____________________",
-              "Status": "✔️ Pass / ❌ Fail"
+              item: 'Twitter Account (URL)',
+              'Data Received': '____________________',
+              Status: '✔️ Pass / ❌ Fail'
             },
             {
-              "item": "LinkedIn Profile (URL)",
-              "Data Received": "____________________",
-              "Status": "✔️ Pass / ❌ Fail"
+              item: 'LinkedIn Profile (URL)',
+              'Data Received': '____________________',
+              Status: '✔️ Pass / ❌ Fail'
             },
             {
-              "item": "Ethereum Address",
-              "Data Received": "____________________",
-              "Status": "✔️ Pass / ❌ Fail"
+              item: 'Ethereum Address',
+              'Data Received': '____________________',
+              Status: '✔️ Pass / ❌ Fail'
             },
             {
-              "item": "Email Address",
-              "Data Received": "____________________",
-              "Status": "✔️ Pass / ❌ Fail"
+              item: 'Email Address',
+              'Data Received': '____________________',
+              Status: '✔️ Pass / ❌ Fail'
             }
-          ]        
+          ]
         }
-
-
       ],
       sectC: [
         {
-          "item": "Objectives Description",
-          "Data Received": "____________________",
-          "Status": "✔️ Pass / ❌ Fail"
+          item: 'Objectives Description',
+          'Data Received': '____________________',
+          Status: '✔️ Pass / ❌ Fail'
         }
       ],
       sectD: [
         {
-          "item": "Specific Purpose Description",
-          "Data Received": "____________________",
-          "Status": "✔️ Pass / ❌ Fail"
+          item: 'Specific Purpose Description',
+          'Data Received': '____________________',
+          Status: '✔️ Pass / ❌ Fail'
         }
       ],
       sectE: [
         {
-          "item": "Initial Assets Description",
-          "Data Received": "____________________",
-          "Status": "✔️ Pass / ❌ Fail"
+          item: 'Initial Assets Description',
+          'Data Received': '____________________',
+          Status: '✔️ Pass / ❌ Fail'
         }
       ]
-      
     }
   },
   mixins: [ApplicationViewMixin],
@@ -263,14 +252,14 @@ export default {
     }
   },
   computed: {
-    ...mapStores(organizationsStore),
+    ...mapStores(organizationsStore)
   }
-
 }
 </script>
 
 <style scoped>
-th, td {
+th,
+td {
   padding: 0.6rem;
   text-align: left;
 }
@@ -280,21 +269,22 @@ thead {
   border: 1px solid #000;
 }
 
-table{
+table {
   margin: auto;
   border-collapse: separate;
   border-spacing: 0;
 }
 
-td, th{
+td,
+th {
   border: 1px solid #000;
 }
 
-th:first-child{
+th:first-child {
   border-top-left-radius: 10px;
 }
 
-th:last-child{
+th:last-child {
   border-top-right-radius: 10px;
 }
 
@@ -303,7 +293,7 @@ tr:first-child td:first-child{
   border-top-left-radius: 10px;
 } */
 
-tbody:last-child tr:last-child td:first-child{
+tbody:last-child tr:last-child td:first-child {
   border-bottom-left-radius: 10px;
 }
 
@@ -311,9 +301,7 @@ tbody:last-child tr:last-child td:first-child{
   border-top-right-radius: 10px;
 } */
 
-tbody:last-child tr:last-child td:last-child{
+tbody:last-child tr:last-child td:last-child {
   border-bottom-right-radius: 10px;
 }
-
-
 </style>

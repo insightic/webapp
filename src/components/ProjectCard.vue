@@ -7,13 +7,12 @@
 
 <script lang="ts">
 export default {
-props: {
+  props: {
     guid: String,
     name: String,
     logo: String,
     highlighted: Boolean
   }
-
 }
 </script>
 

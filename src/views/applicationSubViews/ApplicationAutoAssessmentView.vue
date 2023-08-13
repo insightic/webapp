@@ -7,11 +7,7 @@
         <b>Rule Set</b>
       </div>
       <ul class="list-group list-group-flush">
-        <li
-          class="list-group-item"
-          v-for="result in jobRunResults"
-          :key="result.ID"
-        >
+        <li class="list-group-item" v-for="result in jobRunResults" :key="result.ID">
           <div class="d-flex my-3 flex-row">
             <div class="me-2">
               <i class="text-primary bi bi-check-circle-fill" v-if="result.Status == 'passed'"></i>
@@ -20,10 +16,10 @@
             <div class="flex-grow-1">
               <div>{{ result.RuleName }}</div>
               <div class="text-secondary small">{{ result.RuleDescription }}</div>
-              <div class="text-secondary small">{{ formatDateTime(result.UpdatedAt, true)  }}</div>
+              <div class="text-secondary small">{{ formatDateTime(result.UpdatedAt, true) }}</div>
               <div class="mt-3 small" v-if="result.Output">Output Log</div>
               <div v-if="result.Output">
-                <CodeViewComponent :code="result.Output"/>
+                <CodeViewComponent :code="result.Output" />
               </div>
             </div>
           </div>

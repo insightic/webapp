@@ -3,7 +3,9 @@
 
   <div style="max-width: 960px">
     <div class="card w-100">
-      <div class="card-header"><b>{{ applications.length }} applications</b></div>
+      <div class="card-header">
+        <b>{{ applications.length }} applications</b>
+      </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item" v-for="application in applications" :key="application.ID">
           <ApplicationComponent :status="application.Status" />

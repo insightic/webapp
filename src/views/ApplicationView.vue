@@ -1,5 +1,11 @@
 <template>
-  <SidebarLayout name="Application" :sub-views="subViews" default-sub-view="Overview" back-button-name="Return to organizations" back-button-path="/"/>
+  <SidebarLayout
+    name="Application"
+    :sub-views="subViews"
+    default-sub-view="Overview"
+    back-button-name="Return to organizations"
+    back-button-path="/"
+  />
 </template>
 
 <script lang="ts">
@@ -36,7 +42,7 @@ export default {
           name: 'Report',
           icon: 'bi-patch-question',
           component: ProjectAutoAssessmentView,
-          hidden: true,
+          hidden: true
         },
         {
           name: 'KYC',
@@ -62,7 +68,7 @@ export default {
           name: 'Auto Assessment View (Example)',
           icon: 'bi-patch-question',
           component: ProjectAutoAssessmentView_Backup
-        },
+        }
       ]
     }
   }

@@ -1,5 +1,12 @@
 <template>
-  <SidebarLayout name="Project" :selectedProject="selectedProject" :sub-views="subViews" default-sub-view="Dashboard" back-button-name="Return to organizations" back-button-path="/admin"/>
+  <SidebarLayout
+    name="Project"
+    :selectedProject="selectedProject"
+    :sub-views="subViews"
+    default-sub-view="Dashboard"
+    back-button-name="Return to organizations"
+    back-button-path="/admin"
+  />
 </template>
 
 <script lang="ts">
@@ -16,7 +23,7 @@ export default {
     SidebarLayout
   },
   props: {
-    selectedProject: {type: Object, required: true}
+    selectedProject: { type: Object, required: true }
   },
   data() {
     return {

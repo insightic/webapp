@@ -23,8 +23,7 @@ export default {
   created() {
     if (this.isLoginView || this.isRegisterView) {
       this.isAuthorized && this.$router.push('/teams')
-    }
-    else {
+    } else {
       !this.isLoginView && !this.isAuthorized && this.$router.push('/admin/login')
     }
   }

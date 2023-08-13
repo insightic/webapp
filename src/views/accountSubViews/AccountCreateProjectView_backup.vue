@@ -14,27 +14,38 @@
         </div>
 
         <Transition name="smooth" mode="out-in">
-
           <div v-if="show1" class="form-content ms-3">
-            <LabelInputComponent label="DLT Foundation Name" type="text" v-model:field="name" :required="true"/>
-            <LabelInputComponent label="Official Twitter Account (URL)" type="text" v-model:field="twitter" :required="true"/>
-            <LabelInputComponent label="Official Website (URL)" type="text" v-model:field="website" :required="true"/>
-            <LabelInputComponent label="Whitepaper (URL)" type="text" v-model:field="whitepaper" :required="true"/>
+            <LabelInputComponent
+              label="DLT Foundation Name"
+              type="text"
+              v-model:field="name"
+              :required="true"
+            />
+            <LabelInputComponent
+              label="Official Twitter Account (URL)"
+              type="text"
+              v-model:field="twitter"
+              :required="true"
+            />
+            <LabelInputComponent
+              label="Official Website (URL)"
+              type="text"
+              v-model:field="website"
+              :required="true"
+            />
+            <LabelInputComponent
+              label="Whitepaper (URL)"
+              type="text"
+              v-model:field="whitepaper"
+              :required="true"
+            />
             <div class="">
-              <label for="document" class=""
-                >Whitepaper (File)</label
-              >
-              <input
-                type="file"
-                class="form-controls w-100"
-                id="document"
-                @change="onFileChange"
-              />
+              <label for="document" class="">Whitepaper (File)</label>
+              <input type="file" class="form-controls w-100" id="document" @change="onFileChange" />
               <div class="text-secondary small">
                 Please attach a quality version of the whitepaper document.
               </div>
             </div>
-          
           </div>
         </Transition>
       </section>
@@ -58,8 +69,13 @@
                 Founders
                 <span class="text-danger">*</span>
               </label>
-              <LabelInputComponent label="Number of Founders" type="text" v-model:field="numFounders" :required="true"/>
-              
+              <LabelInputComponent
+                label="Number of Founders"
+                type="text"
+                v-model:field="numFounders"
+                :required="true"
+              />
+
               <div class="">
                 <div class="mb-4" v-for="(founder, counter) in founders" v-bind:key="counter">
                   <div class="d-flex">
@@ -67,37 +83,70 @@
                   </div>
                   <div class="row">
                     <div class="col-md-6">
-                      <LabelInputComponent label="Name" type="text" v-model:field="founder.name" :required="true"/>
+                      <LabelInputComponent
+                        label="Name"
+                        type="text"
+                        v-model:field="founder.name"
+                        :required="true"
+                      />
                     </div>
                     <div class="col-md-6">
-                      <LabelInputComponent label="Position within DLT Foundation" type="text" v-model:field="founder.position" :required="true"/>
+                      <LabelInputComponent
+                        label="Position within DLT Foundation"
+                        type="text"
+                        v-model:field="founder.position"
+                        :required="true"
+                      />
                     </div>
                   </div>
 
-                  <LabelInputComponent label="KYC Verification" type="text" v-model:field="founder.kyc" :required="true"/>
+                  <LabelInputComponent
+                    label="KYC Verification"
+                    type="text"
+                    v-model:field="founder.kyc"
+                    :required="true"
+                  />
 
                   <div class="row">
                     <div class="col-md-6">
-                      <LabelInputComponent label="Twitter Account (URL)" type="text" v-model:field="founder.twitter" :required="true"/>
+                      <LabelInputComponent
+                        label="Twitter Account (URL)"
+                        type="text"
+                        v-model:field="founder.twitter"
+                        :required="true"
+                      />
                     </div>
                     <div class="col-md-6">
-                      <LabelInputComponent label="LinkedIn Profile (URL)" type="text" v-model:field="founder.linkedin" :required="true"/>
+                      <LabelInputComponent
+                        label="LinkedIn Profile (URL)"
+                        type="text"
+                        v-model:field="founder.linkedin"
+                        :required="true"
+                      />
                     </div>
                   </div>
 
                   <div class="row">
                     <div class="col-md-6">
-                      <LabelInputComponent label="Email Address" type="text" v-model:field="founder.email" :required="true"/>
+                      <LabelInputComponent
+                        label="Email Address"
+                        type="text"
+                        v-model:field="founder.email"
+                        :required="true"
+                      />
                     </div>
                     <div class="col-md-6">
-                      <LabelInputComponent label="Ethereum Address" type="text" v-model:field="founder.ethereum" :required="true"/>
+                      <LabelInputComponent
+                        label="Ethereum Address"
+                        type="text"
+                        v-model:field="founder.ethereum"
+                        :required="true"
+                      />
                     </div>
                   </div>
 
                   <div class="">
-                    <label for="document" class=""
-                      >CV</label
-                    >
+                    <label for="document" class="">CV</label>
                     <input
                       type="file"
                       class="form-controls w-100"
@@ -108,17 +157,20 @@
                       Brief CV or Biography (Please attach separate sheets if necessary)
                     </div>
                   </div>
-
-
                 </div>
               </div>
-              
+
               <div class="mt-5">
                 <label class="form-label" for="teamMembers">
                   Team Members
                   <span class="text-danger">*</span>
                 </label>
-                <LabelInputComponent label="Number of Team Members" type="text" v-model:field="numTeamMembers" :required="true"/>
+                <LabelInputComponent
+                  label="Number of Team Members"
+                  type="text"
+                  v-model:field="numTeamMembers"
+                  :required="true"
+                />
 
                 <div class="">
                   <div class="mb-2" v-for="(member, counter) in teamMembers" v-bind:key="counter">
@@ -129,7 +181,7 @@
                   </div>
                 </div>
               </div>
-              
+
               <!-- <div class="">
                 <div class="mb-2" v-for="(founder, counter) in founders" v-bind:key="counter">
                   <div class="d-flex">
@@ -222,9 +274,13 @@
 
         <Transition name="smooth" mode="out-in">
           <div v-if="show3" class="form-content ms-3">
-            <LabelTextareaComponent label="Objectives of your DLT Foundation" 
-              footnote="Please provide a detailed description of the objectives of your DLT Foundation (max. 5000 characters)" 
-              type="text" v-model:field="objective" :required="true"/>
+            <LabelTextareaComponent
+              label="Objectives of your DLT Foundation"
+              footnote="Please provide a detailed description of the objectives of your DLT Foundation (max. 5000 characters)"
+              type="text"
+              v-model:field="objective"
+              :required="true"
+            />
           </div>
         </Transition>
       </section>
@@ -242,9 +298,13 @@
 
         <Transition name="smooth" mode="out-in">
           <div v-if="show4" class="form-content ms-3">
-            <LabelTextareaComponent label="Motivation of your DLT Foundation" 
-              footnote="If your DLT Foundation has been established for a specific purpose, please detail the purpose (max. 5000 characters)" 
-              type="text" v-model:field="motivation" :required="true"/>
+            <LabelTextareaComponent
+              label="Motivation of your DLT Foundation"
+              footnote="If your DLT Foundation has been established for a specific purpose, please detail the purpose (max. 5000 characters)"
+              type="text"
+              v-model:field="motivation"
+              :required="true"
+            />
           </div>
         </Transition>
       </section>
@@ -262,18 +322,23 @@
 
         <Transition name="smooth" mode="out-in">
           <div v-if="show5" class="form-content ms-3">
-            <LabelTextareaComponent label="Initial Assets of your DLT Foundation" 
-              footnote="Please provide a detailed description of the initial assets of your DLT Foundation (max. 5000 characters):" 
-              type="text" v-model:field="assets" :required="true"/>
+            <LabelTextareaComponent
+              label="Initial Assets of your DLT Foundation"
+              footnote="Please provide a detailed description of the initial assets of your DLT Foundation (max. 5000 characters):"
+              type="text"
+              v-model:field="assets"
+              :required="true"
+            />
           </div>
         </Transition>
       </section>
 
       <!-- terms and conditions tickbox -->
       <div class="px-3 text-nowrap">
-        <input type="checkbox" id="terms" name="terms" value="terms" ref="terms" class="me-2"/>
+        <input type="checkbox" id="terms" name="terms" value="terms" ref="terms" class="me-2" />
         <label for="terms" class="text-wrap align-top">
-          By submitting this form, I/we confirm that the provided information is true and accurate to the best of my/our knowledge.
+          By submitting this form, I/we confirm that the provided information is true and accurate
+          to the best of my/our knowledge.
         </label>
       </div>
 
@@ -295,8 +360,7 @@ export default {
   setup() {},
   components: {
     LabelInputComponent,
-    LabelTextareaComponent,
-
+    LabelTextareaComponent
   },
   data() {
     return {
@@ -327,7 +391,7 @@ export default {
           ethereum: '',
           email: '',
           cv: '',
-          cvFile: File,
+          cvFile: File
         }
       ],
       objective: '',
@@ -340,14 +404,11 @@ export default {
   computed: {
     complete1() {
       return (
-        this.name !== '' &&
-        this.twitter !== '' &&
-        this.website !== '' &&
-        this.whitepaper !== ''
+        this.name !== '' && this.twitter !== '' && this.website !== '' && this.whitepaper !== ''
       )
     },
     complete2() {
-      if (this.founders.length == 0 &&this.teamMembers.length == 0 ) {
+      if (this.founders.length == 0 && this.teamMembers.length == 0) {
         return true
       } else if (this.founders[0].name == '') {
         return false
@@ -366,7 +427,7 @@ export default {
     },
     calcHeight() {
       return this.founders.length * 600 + this.teamMembers.length * 100 + 'px'
-    },
+    }
   },
   methods: {
     save() {
@@ -396,49 +457,53 @@ export default {
       // }
     },
     async submit() {
-    //   if (!this.complete1 || !this.complete2 || !this.complete3 || !this.complete4) {
-    //     window.alert('Please fill in all required fields')
-    //     return
-    //   } else if (!(this.$refs.terms as any).checked) {
-    //     window.alert('Please agree to the terms and conditions')
-    //     return
-    //   } else {
-        if (!this.complete1 || !this.complete2 || !this.complete3 || !this.complete4) {
-          window.confirm('Required fields are not filled in. Are you sure you want to submit?')
+      //   if (!this.complete1 || !this.complete2 || !this.complete3 || !this.complete4) {
+      //     window.alert('Please fill in all required fields')
+      //     return
+      //   } else if (!(this.$refs.terms as any).checked) {
+      //     window.alert('Please agree to the terms and conditions')
+      //     return
+      //   } else {
+      if (!this.complete1 || !this.complete2 || !this.complete3 || !this.complete4) {
+        window.confirm('Required fields are not filled in. Are you sure you want to submit?')
+      }
+      const preSignedUrl: any = await getPreSignedPutUrl()
+      if (preSignedUrl) {
+        const fileResp = await uploadFile(preSignedUrl.URL, this.whitepaperFile as any)
+        if (fileResp.ok) {
+          this.whitepaperFileLink =
+            'https://staging-webapp-private-assets-insightic.s3.ap-southeast-1.amazonaws.com/' +
+            this.whitepaperFile.name
         }
-        const preSignedUrl : any = await getPreSignedPutUrl()
+      }
+      for (let i = 0; i < this.founders.length; i++) {
+        const preSignedUrl: any = await getPreSignedPutUrl()
         if (preSignedUrl) {
-          const fileResp = await uploadFile(preSignedUrl.URL, this.whitepaperFile as any)
+          const fileResp = await uploadFile(preSignedUrl.URL, this.founders[i].cvFile as any)
           if (fileResp.ok) {
-            this.whitepaperFileLink = "https://staging-webapp-private-assets-insightic.s3.ap-southeast-1.amazonaws.com/" + this.whitepaperFile.name
+            this.founders[i].cv =
+              'https://staging-webapp-private-assets-insightic.s3.ap-southeast-1.amazonaws.com/' +
+              this.founders[i].cvFile.name
           }
         }
-        for (let i = 0; i < this.founders.length; i++) {
-          const preSignedUrl : any = await getPreSignedPutUrl()
-          if (preSignedUrl) {
-            const fileResp = await uploadFile(preSignedUrl.URL, this.founders[i].cvFile as any)
-            if (fileResp.ok) {
-              this.founders[i].cv = "https://staging-webapp-private-assets-insightic.s3.ap-southeast-1.amazonaws.com/" + this.founders[i].cvFile.name
-            }
-          }
-        }
-        let data = {
-          name: this.name,
-          twitter: this.twitter,
-          website: this.website,
-          whitepaper: this.whitepaper,
-          whitepaperFile: this.whitepaperFileLink,
-          numFounders: parseInt(this.numFounders) ? parseInt(this.numFounders) : 0,
-          founders: this.founders,
-          numMembers: parseInt(this.numTeamMembers) ? parseInt(this.numTeamMembers) : 0,
-          members: this.teamMembers,
-          objective: this.objective,
-          motivation: this.motivation,
-          assets: this.assets
-        } as unknown as NewProject
-        await createProject(data)
-        window.alert('Your response has been submitted')
-        this.$router.push({ query: { view: 'Projects' } })
+      }
+      let data = {
+        name: this.name,
+        twitter: this.twitter,
+        website: this.website,
+        whitepaper: this.whitepaper,
+        whitepaperFile: this.whitepaperFileLink,
+        numFounders: parseInt(this.numFounders) ? parseInt(this.numFounders) : 0,
+        founders: this.founders,
+        numMembers: parseInt(this.numTeamMembers) ? parseInt(this.numTeamMembers) : 0,
+        members: this.teamMembers,
+        objective: this.objective,
+        motivation: this.motivation,
+        assets: this.assets
+      } as unknown as NewProject
+      await createProject(data)
+      window.alert('Your response has been submitted')
+      this.$router.push({ query: { view: 'Projects' } })
       // }
     },
 
@@ -450,15 +515,15 @@ export default {
     },
     addFounder() {
       this.founders.push({
-          name: '',
-          position: '',
-          kyc: '',
-          twitter: '',
-          linkedin: '',
-          ethereum: '',
-          email: '',
-          cv: '',
-          cvFile: File,
+        name: '',
+        position: '',
+        kyc: '',
+        twitter: '',
+        linkedin: '',
+        ethereum: '',
+        email: '',
+        cv: '',
+        cvFile: File
       })
     },
     deleteMember(counter: number) {
@@ -484,7 +549,7 @@ export default {
           ethereum: '',
           email: '',
           cv: '',
-          cvFile: File,
+          cvFile: File
         })
       }
     },
@@ -514,12 +579,12 @@ export default {
 .form-content {
   max-height: 800px;
   overflow-y: hidden;
-  overflow-x: hidden
+  overflow-x: hidden;
 }
 .form-content2 {
   max-height: 2000px;
   overflow-y: hidden;
-  overflow-x: hidden
+  overflow-x: hidden;
 }
 
 .secHeader > i {

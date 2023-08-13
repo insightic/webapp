@@ -3,7 +3,9 @@
 
   <div style="max-width: 960px">
     <div class="card w-100">
-      <div class="card-header"><b>{{ applications.length }} submissions</b></div>
+      <div class="card-header">
+        <b>{{ applications.length }} submissions</b>
+      </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item" v-for="application in applications" :key="application.ID">
           <SubmissionComponent :status="application.Status" />
@@ -34,7 +36,7 @@ export default {
         {
           ID: 2,
           Status: 'pending'
-        },
+        }
       ]
     }
   }

@@ -9,11 +9,18 @@
     <!-- <ProjectCardComponent v-for="project in projects" :key="project.ID" :project="project.Content" @refresh="refresh"/> -->
   </div>
 
-    <!-- file list -->
-    <div class="d-flex flex-column w-100">
-      <ProjectListComponent :isHeader="true" :isAdmin="false"/>
-      <ProjectListComponent v-for="(application, index) in applications" :key="application.ID" :project="application.Submissions.slice(-1)[0].Content" :isAdmin="false" :counter="index+1" @refresh="refresh"/>
-    </div>
+  <!-- file list -->
+  <div class="d-flex flex-column w-100">
+    <ProjectListComponent :isHeader="true" :isAdmin="false" />
+    <ProjectListComponent
+      v-for="(application, index) in applications"
+      :key="application.ID"
+      :project="application.Submissions.slice(-1)[0].Content"
+      :isAdmin="false"
+      :counter="index + 1"
+      @refresh="refresh"
+    />
+  </div>
 </template>
 
 <script lang="ts">
@@ -29,7 +36,7 @@ export default {
   },
   async created() {
     // await projectsStore().getProjects()
-    this.applications= await getProjects()
+    this.applications = await getProjects()
     console.log(this.applications[0])
   },
   data() {
@@ -38,7 +45,7 @@ export default {
     }
   },
   computed: {
-    ...mapStores(projectsStore),
+    ...mapStores(projectsStore)
     // projects() {
     //   // return Object.values(this.projectsStore.projects)
     //   return getProjects() as any as Project[]

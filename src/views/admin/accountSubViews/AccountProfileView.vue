@@ -28,7 +28,11 @@
       />
       <LabelInputComponent label="Company" type="text" />
       <LabelInputComponent label="Industry" type="text" />
-      <LabelInputComponent label="Country" type="text" footnote="Which country does your company base in?"/>
+      <LabelInputComponent
+        label="Country"
+        type="text"
+        footnote="Which country does your company base in?"
+      />
     </SectionLayout>
   </div>
 

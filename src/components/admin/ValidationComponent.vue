@@ -15,7 +15,11 @@
     </div>
     <div class="ms-auto">
       <button type="button" class="btn btn-sm btn-outline-primary mx-2 my-1">Edit Report</button>
-      <button type="button" class="btn btn-sm btn-success mx-2 my-1" v-if="passedRules == totalRules">
+      <button
+        type="button"
+        class="btn btn-sm btn-success mx-2 my-1"
+        v-if="passedRules == totalRules"
+      >
         Approve
       </button>
     </div>
@@ -23,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import { formatDateTime } from '@/helpers';
+import { formatDateTime } from '@/helpers'
 
 export default {
   props: {

@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark" :style="{'background-color': bgColor}">
+  <nav class="navbar navbar-expand-lg navbar-dark" :style="{ 'background-color': bgColor }">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">
         <div
@@ -37,9 +37,7 @@
           </li>
         </ul>
       </div>
-      <div v-show="isAdmin" class="admin rounded">
-        Admin
-      </div>
+      <div v-show="isAdmin" class="admin rounded">Admin</div>
     </div>
   </nav>
 </template>

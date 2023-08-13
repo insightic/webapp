@@ -30,8 +30,13 @@
         </div>
       </div>
 
-      <button type="button" @click.stop="deleteProject(project!.ID)" class="btn mt-3 btn-outline-danger mx-auto w-100">Delete</button>
-
+      <button
+        type="button"
+        @click.stop="deleteProject(project!.ID)"
+        class="btn mt-3 btn-outline-danger mx-auto w-100"
+      >
+        Delete
+      </button>
     </div>
 
     <div v-else class="text-center" @click="toCreateProject">
@@ -47,17 +52,17 @@
 <script lang="ts">
 import { formatDateTime } from '@/helpers'
 import type { PropType } from 'vue'
-import { deleteProject, type ProjectContent as Project } from "@/api"
+import { deleteProject, type ProjectContent as Project } from '@/api'
 
 export default {
   props: {
     project: { type: Object as PropType<Project> },
-    isAdmin: { type: Boolean, default: false },
+    isAdmin: { type: Boolean, default: false }
   },
   methods: {
     formatDateTime,
     toCreateProject() {
-      this.$router.push('/?tab=CreateProject' )
+      this.$router.push('/?tab=CreateProject')
     },
     click(projectID: number) {
       if (this.isAdmin) this.$router.push(`/admin/projects/${projectID}`)

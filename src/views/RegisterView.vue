@@ -12,7 +12,6 @@ onMounted(async () => {
     router.push('/')
   }
 })
-
 </script>
 
 <template>
@@ -31,17 +30,17 @@ onMounted(async () => {
       <form @submit.prevent="handleSubmit">
         <div class="form-group my-3">
           <label class="mb-2">Username</label>
-          <input type="text" class="form-control" v-model="username"/>
+          <input type="text" class="form-control" v-model="username" />
         </div>
 
         <div class="form-group my-3">
           <label class="mb-2">Password</label>
-          <input type="password" class="form-control" v-model="password"/>
+          <input type="password" class="form-control" v-model="password" />
         </div>
 
         <div class="form-group my-3">
           <label class="mb-2">Confirm password</label>
-          <input type="password" class="form-control" v-model="passwordConfirm"/>
+          <input type="password" class="form-control" v-model="passwordConfirm" />
         </div>
 
         <!-- check password match-->
@@ -49,7 +48,6 @@ onMounted(async () => {
           <p v-if="passwordMatch" class="text-success">Password match</p>
           <p v-else class="text-danger">Password not match</p>
         </div>
-
 
         <button type="submit" class="mt-3 w-100 btn btn-lg btn-primary">Register</button>
 
@@ -67,7 +65,6 @@ onMounted(async () => {
 </template>
 
 <script lang="ts">
-
 let router = useRouter()
 let route = useRoute()
 

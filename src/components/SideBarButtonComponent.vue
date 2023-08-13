@@ -11,7 +11,7 @@
 <script lang="ts">
 export default {
   props: {
-    selected: { type: Boolean},
+    selected: { type: Boolean },
     icon: { type: String, required: true },
     rightIcon: { type: String },
     name: { type: String, required: true }

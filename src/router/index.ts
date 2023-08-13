@@ -19,22 +19,22 @@ const router = createRouter({
     {
       path: '/register',
       name: 'register',
-      component: RegisterView,
+      component: RegisterView
     },
     {
       path: '/',
       name: 'AccountView',
-      component: AccountView,
+      component: AccountView
     },
     {
       path: '/projects/:projectID',
       name: 'projectView',
-      component: ApplicationView,
+      component: ApplicationView
     },
     {
       path: '/projects/:projectID/:ruleID',
       name: 'ruleReportView',
-      component: ApplicationView,
+      component: ApplicationView
     },
     {
       path: '/admin/login',
@@ -45,13 +45,13 @@ const router = createRouter({
     {
       path: '/admin/',
       name: 'AdminAccountView',
-      component: AdminAccountView,
+      component: AdminAccountView
     },
     {
       path: '/admin/projects/:projectID',
       name: 'adminProjectView',
-      component: AdminProjectView,
-    },
+      component: AdminProjectView
+    }
   ]
 })
 

@@ -1,33 +1,63 @@
 <template>
   <div class="text-secondary mb-4 d-flex justify-content-between align-items-center">
     <div>Project Source Code</div>
-    
+
     <div class="icon-btn">
       <!-- show list -->
-      <i class="bi bi-list-ul me-3" style="font-size: 1.5rem" :style="view=='list'?'color:blue':'color:grey'" @click="view='list'"></i>
+      <i
+        class="bi bi-list-ul me-3"
+        style="font-size: 1.5rem"
+        :style="view == 'list' ? 'color:blue' : 'color:grey'"
+        @click="view = 'list'"
+      ></i>
       <!-- show card -->
-      <i class="bi bi-grid-3x3-gap me-3" style="font-size: 1.5rem" :style="view=='card' ?'color:blue':'color:grey'" @click="view='card'"></i>
+      <i
+        class="bi bi-grid-3x3-gap me-3"
+        style="font-size: 1.5rem"
+        :style="view == 'card' ? 'color:blue' : 'color:grey'"
+        @click="view = 'card'"
+      ></i>
     </div>
   </div>
 
   <!-- file list -->
-  <div v-if="view=='list'" class="d-flex flex-column w-100">
+  <div v-if="view == 'list'" class="d-flex flex-column w-100">
     <div class="header-div w-100">
-      <FileListItemComponent :sortBy="sortBy" :name="'Name'" :desc="'Description'" :modifiedAt="'Last Modified'" :createdAt="'Date'" isHeader="true" :isAsc="isAsc" @setSortBy="setSorttBy" @setIsAsc="setIsAsc"/>
+      <FileListItemComponent
+        :sortBy="sortBy"
+        :name="'Name'"
+        :desc="'Description'"
+        :modifiedAt="'Last Modified'"
+        :createdAt="'Date'"
+        isHeader="true"
+        :isAsc="isAsc"
+        @setSortBy="setSorttBy"
+        @setIsAsc="setIsAsc"
+      />
     </div>
     <div class="source-code-listitem w-100" v-for="file in sortedFiles" :key="file.name">
-      <FileListItemComponent :name="file.name" :desc="file.desc" :modifiedAt="file.modifiedAt" :createdAt="file.createdAt" :icon="file.icon"/>
+      <FileListItemComponent
+        :name="file.name"
+        :desc="file.desc"
+        :modifiedAt="file.modifiedAt"
+        :createdAt="file.createdAt"
+        :icon="file.icon"
+      />
     </div>
   </div>
 
   <!-- card list -->
-  <div v-else-if="view=='card'" class="d-flex flex-row text-center">
+  <div v-else-if="view == 'card'" class="d-flex flex-row text-center">
     <div class="source-code-card me-3" v-for="file in sortedFilesDate" :key="file.name">
-      <FileListCardComponent :name="file.name" :desc="file.desc" :modifiedAt="file.modifiedAt" :createdAt="file.createdAt" :icon="file.icon"/>
+      <FileListCardComponent
+        :name="file.name"
+        :desc="file.desc"
+        :modifiedAt="file.modifiedAt"
+        :createdAt="file.createdAt"
+        :icon="file.icon"
+      />
     </div>
   </div>
-
-
 </template>
 
 <script lang="ts">
@@ -63,7 +93,7 @@ export default {
           name: 'file3.sol',
           desc: 'file3 description',
           createdAt: '2021-08-02 12:00:00',
-          modifiedAt: '2021-08-02 12:00:00', 
+          modifiedAt: '2021-08-02 12:00:00',
           icon: 'bi-file-code'
         },
         {
@@ -79,9 +109,8 @@ export default {
           createdAt: '2021-08-05 12:00:00',
           modifiedAt: '2021-08-05 12:00:00',
           icon: 'bi-file-slides'
-        },
-      ],
-
+        }
+      ]
     }
   },
   methods: {
@@ -95,7 +124,7 @@ export default {
   computed: {
     sortedFilesDate() {
       return this.files.sort((a, b) => {
-      return a.createdAt.localeCompare(b.createdAt)
+        return a.createdAt.localeCompare(b.createdAt)
       })
     },
     sortedFiles() {
@@ -152,7 +181,8 @@ export default {
   cursor: pointer;
 }
 
-.source-code-listitem:hover, .source-code-card:hover {
+.source-code-listitem:hover,
+.source-code-card:hover {
   background-color: #00000005;
 }
 
