@@ -35,11 +35,6 @@ export default {
           component: AccountUsersView
         },
         {
-          name: 'KYC',
-          icon: 'bi-credit-card-2-front',
-          component: AccountKYCView
-        },
-        {
           name: 'Profile',
           icon: 'bi-diagram-3',
           component: AccountProfileView
