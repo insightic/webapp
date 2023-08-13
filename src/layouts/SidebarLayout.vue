@@ -127,7 +127,7 @@ export default {
 }
 
 .content {
-  margin-top: 56px;
+  margin-top: 63px;
 }
 
 .sidebar {

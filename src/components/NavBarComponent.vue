@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark" :style="{ 'background-color': bgColor }">
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">
         <div
@@ -15,7 +15,7 @@
           "
           class="d-inline-block align-top"
         ></div>
-        Insightic
+        <span class="ms-2">Insightic</span>
       </a>
 
       <button
@@ -31,13 +31,22 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+        <div class="me-auto"></div>
+        <ul class="navbar-nav me-2">
           <li class="nav-item">
-            <a class="nav-link" href="#">Contact Us</a>
+            <a class="nav-link" href="https://insightic.io/blog">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://insightic.io/about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://insightic.io/contact-us">Contact Us</a>
           </li>
         </ul>
+        <form class="form-inline my-2">
+          <a class="btn btn-sm btn-primary my-2 my-sm-0" type="button" href="/">My Account</a>
+        </form>
       </div>
-      <div v-show="isAdmin" class="admin rounded">Admin</div>
     </div>
   </nav>
 </template>
