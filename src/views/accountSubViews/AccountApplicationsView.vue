@@ -23,8 +23,12 @@
         <td>{{ formatDate(getSubmission(application).SubmissionAt) }}</td>
         <td>{{ 'Pending' }}</td>
         <td>
-          <a class="btn btn-sm btn-outline-primary mx-2" type="button"
-            :href="'/projects/' + getSubmission(application).SubmissionID">View</a>
+          <a
+            class="btn btn-sm btn-outline-primary mx-2"
+            type="button"
+            :href="'/projects/' + getSubmission(application).SubmissionID"
+            >View</a
+          >
           <a class="btn btn-sm btn-outline-danger mx-2" type="button">Withdraw</a>
         </td>
       </tr>
@@ -45,7 +49,6 @@ export default {
   },
   async created() {
     this.applications = await getProjects()
-    console.log(this.applications[0])
   },
   data() {
     return {
