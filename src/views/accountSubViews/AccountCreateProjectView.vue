@@ -582,6 +582,7 @@ export default {
   overflow-y: hidden;
   overflow-x: hidden;
 }
+
 .form-content2 {
   max-height: 3000px;
   overflow-y: hidden;
@@ -601,6 +602,7 @@ export default {
 .smooth-leave-active {
   transition: opacity 0.3s;
 }
+
 .smooth-enter,
 .smooth-leave-to {
   opacity: 0;

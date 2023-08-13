@@ -1,8 +1,6 @@
 <template>
-  <div class="view">
-    <NavBarComponent class="navbar" />
-
-    <div class="content d-flex flex-md-row flex-column-reverse">
+  <BasicLayout>
+    <div class="d-flex flex-md-row flex-column-reverse" style="height: 100%">
       <div class="sidebar p-3">
         <h5 class="mb-4">{{ name }}</h5>
 
@@ -56,12 +54,12 @@
         <div style="height: 120px"></div>
       </div>
     </div>
-  </div>
+  </BasicLayout>
 </template>
 
 <script lang="ts">
 import { toRaw, type Component } from 'vue'
-import NavBarComponent from '@/components/NavBarComponent.vue'
+import BasicLayout from './BasicLayout.vue'
 import SideBarButtonComponent from '@/components/SideBarButtonComponent.vue'
 import httpclient from '@/httpclient'
 
@@ -74,7 +72,7 @@ export interface SubView {
 
 export default {
   components: {
-    NavBarComponent,
+    BasicLayout,
     SideBarButtonComponent
   },
   props: {
@@ -119,17 +117,6 @@ export default {
 </script>
 
 <style scoped>
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-}
-
-.content {
-  margin-top: 63px;
-}
-
 .sidebar {
   width: 100%;
   border-right: 1px solid #e0e0e0;
@@ -142,18 +129,6 @@ export default {
 }
 
 @media (min-width: 768px) {
-  .view {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
-
-  .content {
-    height: calc(100vh - 56px);
-  }
-
   .sidebar {
     overflow: auto;
     width: 300px;

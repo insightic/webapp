@@ -11,7 +11,7 @@
       :project="application.Submissions.slice(-1)[0].Content" :isAdmin="false" :counter="index + 1" @refresh="refresh" />
   </div> -->
 
-  <table class="table">
+  <table class="table table-bordered">
     <thead class="table-dark">
       <tr>
         <th scope="col" style="width: 20%">ID</th>
