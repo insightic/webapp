@@ -32,11 +32,8 @@
 <script lang="ts">
 import { toRaw, type Component } from 'vue'
 import BasicLayout from '@/layouts/BasicLayout.vue'
-import ApplicationSourceCodeView from '@/views/applicationSubViews/ApplicationSourceCodeView.vue'
 import SubmissionDetailsView from '@/views/submissionSubViews/SubmissionDetailsView.vue'
 import SubmissionCodeValidationView from '@/views/submissionSubViews/SubmissionCodeValidationView.vue'
-
-import DashboardAssessmentView from '@/views/admin/projectSubViews/dashboardSubViews/DashboardAssessmentView.vue'
 import ApplicationAutoAssessmentView from './applicationSubViews/ApplicationAutoAssessmentView_Backup.vue'
 
 export default {
@@ -46,7 +43,7 @@ export default {
   data() {
     return {
       subViewIdx: 0,
-      subViews: [SubmissionDetailsView, ApplicationAutoAssessmentView , SubmissionCodeValidationView]
+      subViews: [SubmissionDetailsView, ApplicationAutoAssessmentView, SubmissionCodeValidationView]
     }
   },
   computed: {
