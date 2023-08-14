@@ -1,4 +1,68 @@
 <template>
+  <NavFooterLayout>
+    <div class="container p-3 mb-5">
+      <h1>Applications</h1>
+      <div class="text-secondary">Showing all submissions</div>
+
+      <div class="w-100 my-3" style="overflow-x: auto">
+        <table class="table table-bordered">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col" style="width: 40%">Sumission ID</th>
+              <th scope="col" style="width: 10%">Updated At</th>
+              <th scope="col" style="width: 10%">Created At</th>
+              <th scope="col" style="width: 8%">Status</th>
+              <th scope="col" style="width: 12%; min-width: 200px">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>DKJMNU76AD</td>
+              <td>2023/08/10</td>
+              <td>2023/08/10</td>
+              <td>Pending</td>
+              <td>
+                <a
+                  class="btn btn-sm btn-outline-primary mx-2"
+                  type="button"
+                  >View</a
+                >
+                <a class="btn btn-sm btn-outline-danger mx-2" type="button">Withdraw</a>
+              </td>
+            </tr>
+            <!-- <tr v-for="application in applications" :key="application.ID">
+              <td>asdf</td>
+              <td>{{ formatDate(getSubmission(application).SubmissionAt) }}</td>
+              <td>{{ formatDate(getSubmission(application).SubmissionAt) }}</td>
+              <td>{{ 'Pending' }}</td>
+              <td>
+                <a
+                  class="btn btn-sm btn-outline-primary mx-2"
+                  type="button"
+                  :href="'/projects/' + application.ID"
+                  >View</a
+                >
+                <a class="btn btn-sm btn-outline-danger mx-2" type="button">Withdraw</a>
+              </td>
+            </tr> -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </NavFooterLayout>
+</template>
+
+<script lang="ts">
+import NavFooterLayout from '@/layouts/NavFooterLayout.vue'
+
+export default {
+  components: {
+    NavFooterLayout
+  }
+}
+</script>
+
+<!-- <template>
   <SidebarLayout
     name="Application"
     :sub-views="subViews"
@@ -74,4 +138,4 @@ export default {
   }
 }
 </script>
-./applicationSubViews/ProjectKYCView.vue./applicationSubViews/ProjectAutoAssessmentView_Backup.vue./applicationSubViews/ProjectKYCView.vue./applicationSubViews/ProjectAutoAssessmentView_Backup.vue
+./applicationSubViews/ProjectKYCView.vue./applicationSubViews/ProjectAutoAssessmentView_Backup.vue./applicationSubViews/ProjectKYCView.vue./applicationSubViews/ProjectAutoAssessmentView_Backup.vue -->
