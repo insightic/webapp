@@ -7,7 +7,6 @@ import SidebarLayout from '@/layouts/SidebarLayout.vue'
 
 import AccountApplicationsView from '@/views/accountSubViews/AccountApplicationsView.vue'
 import AccountUsersView from '@/views/accountSubViews/AccountUsersView.vue'
-import AccountKYCView from '@/views/accountSubViews/AccountKYCView.vue'
 import AccountProfileView from '@/views/accountSubViews/AccountProfileView.vue'
 import AccountCreateProjectView from '@/views/accountSubViews/AccountCreateProjectView.vue'
 
