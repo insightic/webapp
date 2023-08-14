@@ -51,72 +51,111 @@
             <div class="row">
               <div class="col-md-12">
                 <LabelInputComponent
-                  label="DLT Foundation Name"
+                  label="Project Name"
                   type="text"
                   v-model:field="name"
                   :required="true"
                 />
               </div>
               <div class="col-md-6">
-                <LabelInputComponent label="Twitter (URL)" type="text" :required="true" />
+                <LabelInputComponent label="Twitter (URL)" type="text" v-model:field="twitter" :required="true" />
               </div>
               <div class="col-md-6">
-                <LabelInputComponent label="Website (URL)" type="text" :required="true" />
+                <LabelInputComponent label="Website (URL)" type="text" v-model:field="website" :required="true" />
               </div>
               <div class="col-md-12">
-                <LabelInputComponent label="Whitepaper (URL)" type="text" :required="true" />
+                <LabelInputComponent label="Whitepaper (URL)" type="text" v-model:field="whitepaper" :required="true" />
+              </div>
+
+              <div class="">
+                <label for="document" class="">Whitepaper (File)</label>
+                <input type="file" class="form-controls w-100" id="document" @change="onFileChange" />
+                <div class="text-secondary small">
+                  Please attach a quality version of the whitepaper document.
+                </div>
               </div>
             </div>
           </SectionLayout>
 
           <SectionLayout title="Founders">
-            <h6>Founder 1</h6>
-            <div class="row">
-              <div class="col-md-6">
-                <LabelInputComponent label="Name" type="text" :required="true" />
-              </div>
-              <div class="col-md-6">
-                <LabelInputComponent
-                  label="Position within DLT Foundation"
-                  type="text"
-                  :required="true"
-                />
-              </div>
-              <div class="col-md-12">
-                <LabelInputComponent label="KYC Verification" type="text" :required="true" />
-              </div>
-              <div class="col-md-6">
-                <LabelInputComponent label="Twitter (URL)" type="text" :required="true" />
-              </div>
-              <div class="col-md-6">
-                <LabelInputComponent label="LinkedIn (URL)" type="text" :required="true" />
-              </div>
-              <div class="col-md-6">
-                <LabelInputComponent label="Email" type="text" :required="true" />
-              </div>
-              <div class="col-md-6">
-                <LabelInputComponent label="Whitepaper (URL)" type="text" :required="true" />
+            <LabelInputComponent
+                label="Number of Founders"
+                type="text"
+                v-model:field="numFounders"
+                :required="true"
+              />
+            <div class="mb-4" v-for="(founder, counter) in founders" v-bind:key="counter">
+              <h6>Founder {{ counter + 1 }}</h6>
+              <div class="row">
+                <div class="col-md-6">
+                  <LabelInputComponent label="Name" type="text" v-model:field="founder.Name" :required="true" />
+                </div>
+                <div class="col-md-6">
+                  <LabelInputComponent
+                    label="Position"
+                    type="text"
+                    v-model:field="founder.Position"
+                    :required="true"
+                  />
+                </div>
+                <div class="col-md-12">
+                  <LabelInputComponent label="KYC Verification" type="text" v-model:field="founder.Kyc" :required="true" />
+                </div>
+                <div class="col-md-6">
+                  <LabelInputComponent label="Twitter (URL)" type="text" v-model:field="founder.Twitter" :required="true" />
+                </div>
+                <div class="col-md-6">
+                  <LabelInputComponent label="LinkedIn (URL)" type="text" v-model:field="founder.Linkedin" :required="true" />
+                </div>
+                <div class="col-md-6">
+                  <LabelInputComponent label="Email" type="text" v-model:field="founder.Email" :required="true" />
+                </div>
+                <div class="col-md-6">
+                  <LabelInputComponent label="Ethereum Address" type="text" v-model:field="founder.Ethereum" :required="true" />
+                </div>
+
+                <div class="">
+                  <label for="document" class="">CV</label>
+                  <input
+                    type="file"
+                    class="form-controls w-100"
+                    id="document"
+                    @change="onFileChangeCV($event, counter)"
+                  />
+                  <div class="text-secondary small">
+                    Brief CV or Biography (Please attach separate sheets if necessary)
+                  </div>
+                </div>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6">
-                <button class="btn btn-sm btn-outline-primary">Add Another Founder</button>
+                <button class="btn btn-sm btn-outline-primary" @click="numFounders = parseInt(numFounders) + 1 + ''">Add Another Founder</button>
               </div>
             </div>
           </SectionLayout>
 
           <SectionLayout title="Team Members">
-            <div class="row">
-              <div class="col-md-6">
-                <LabelInputComponent label="Name" type="text" :required="true" />
-              </div>
-              <div class="col-md-6">
-                <LabelInputComponent label="Role" type="text" :required="true" />
+            <LabelInputComponent
+                  label="Number of Team Members"
+                  type="text"
+                  v-model:field="numTeamMembers"
+                  :required="true"
+                />
+            <div class="mb-2" v-for="(member, counter) in teamMembers" v-bind:key="counter">
+              <div class="row">
+                <h6>Member {{ counter + 1 }}</h6>
+                  <div class="col-md-6">
+                    <LabelInputComponent label="Name" type="text" v-model.lazy="member.Name" :required="true" />
+                  </div>
+                  <div class="col-md-6">
+                    <LabelInputComponent label="Role" type="text" v-model.lazy="member.Position" :required="true" />
+                  </div>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6">
-                <button class="btn btn-sm btn-outline-primary">Add Another Team Member</button>
+                <button class="btn btn-sm btn-outline-primary" @click="numTeamMembers = parseInt(numTeamMembers) + 1 + ''">Add Another Team Member</button>
               </div>
             </div>
           </SectionLayout>
@@ -137,6 +176,7 @@
                   label="Objectives of your DLT Foundation"
                   footnote="Please provide a detailed description of the objectives of your DLT Foundation (max. 5000 characters)"
                   type="text"
+                  v-model:field="objective"
                   :required="true"
                 />
               </div>
@@ -145,6 +185,7 @@
                   label="Motivation of your DLT Foundation"
                   footnote="If your DLT Foundation has been established for a specific purpose, please detail the purpose (max. 5000 characters)"
                   type="text"
+                  v-model:field="motivation"
                   :required="true"
                 />
               </div>
@@ -167,6 +208,7 @@
                   label="Initial Assets of your DLT Foundation"
                   footnote="Please provide a detailed description of the initial assets of your DLT Foundation (max. 5000 characters):"
                   type="text"
+                  v-model:field="assets"
                   :required="true"
                 />
               </div>
@@ -246,7 +288,7 @@
           </div>
           <div class="row">
             <div class="col-md-6">
-              <button class="btn btn-success">Submit</button>
+              <button class="btn btn-success" @click="submit">Submit</button>
             </div>
           </div>
         </div>
@@ -260,6 +302,8 @@ import NavFooterLayout from '@/layouts/NavFooterLayout.vue'
 import SectionLayout from '@/layouts/SectionLayout.vue'
 import LabelInputComponent from '@/components/LabelInputComponent.vue'
 import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
+import { createProject, getPreSignedPutUrl, uploadFile } from '@/api'
+import type { NewProject } from '@/api'
 
 export default {
   components: {
@@ -270,8 +314,222 @@ export default {
   },
   data() {
     return {
+      show1: true,
+      show2: true,
+      show3: true,
+      show4: true,
+      show5: true,
       current: 1,
-      name: ''
+      name: '',
+      twitter: '',
+      website: '',
+      whitepaper: '',
+      whitepaperFile: File,
+      whitepaperId: '',
+      whitepaperUploadLink: '',
+      teamMembers: [
+        {
+          Name: '',
+          Position: ''
+        }
+      ],
+      founders: [
+        {
+          Name: '',
+          Position: '',
+          Kyc: '',
+          Twitter: '',
+          Linkedin: '',
+          Ethereum: '',
+          Email: '',
+          CV: '',
+          cvFile: File,
+          cvUploadLink: '',
+          CVFilename: ''
+        }
+      ],
+      objective: '',
+      motivation: '',
+      assets: '',
+      numFounders: '',
+      numTeamMembers: ''
+    }
+  },
+  computed: {
+    complete1() {
+      return (
+        this.name !== '' && this.twitter !== '' && this.website !== '' && this.whitepaper !== ''
+      )
+    },
+    complete2() {
+      if (this.founders.length == 0 && this.teamMembers.length == 0) {
+        return true
+      } else if (this.founders[0].Name == '') {
+        return false
+      } else {
+        return true
+      }
+    },
+    complete3() {
+      return this.objective !== ''
+    },
+    complete4() {
+      return this.motivation !== ''
+    },
+    complete5() {
+      return this.assets !== ''
+    },
+    calcHeight() {
+      return this.founders.length * 600 + this.teamMembers.length * 100 + 'px'
+    }
+  },
+  methods: {
+    save() {
+      window.alert('Your response has been saved')
+    },
+    async onFileChange(e: any) {
+      this.whitepaperFile = e.target.files[0]
+    },
+    async onFileChangeCV(e: any, index: number) {
+      console.log(e.target)
+      this.founders[index].cvFile = e.target.files[0]
+      console.log(this.founders[index].cvFile)
+    },
+    async submit() {
+      //   if (!this.complete1 || !this.complete2 || !this.complete3 || !this.complete4) {
+      //     window.alert('Please fill in all required fields')
+      //     return
+      //   } else if (!(this.$refs.terms as any).checked) {
+      //     window.alert('Please agree to the terms and conditions')
+      //     return
+      //   } else {
+      if (!this.complete1 || !this.complete2 || !this.complete3 || !this.complete4) {
+        window.confirm('Required fields are not filled in. Are you sure you want to submit?')
+      }
+      if (this.whitepaperFile) {
+        const preSignedPutUrl: any = await getPreSignedPutUrl()
+        if (preSignedPutUrl) {
+          const fileResp = await uploadFile(preSignedPutUrl.URL, this.whitepaperFile as any)
+          if (fileResp.ok) {
+            this.whitepaperId = preSignedPutUrl.ObjectID
+            this.whitepaperUploadLink = preSignedPutUrl.URL
+          }
+        }
+      }
+
+      for (let i = 0; i < this.founders.length; i++) {
+        if (this.founders[i].cvFile) {
+          const preSignedPutUrl: any = await getPreSignedPutUrl()
+          if (preSignedPutUrl) {
+            const fileResp = await uploadFile(preSignedPutUrl.URL, this.founders[i].cvFile as any)
+            if (fileResp.ok) {
+              this.founders[i].CV = preSignedPutUrl.ObjectID
+              this.founders[i].cvUploadLink = preSignedPutUrl.URL
+              this.founders[i].CVFilename = this.founders[i].cvFile.name
+            }
+          }
+        }
+      }
+      let data = {
+        Name: this.name,
+        Twitter: this.twitter,
+        Website: this.website,
+        Whitepaper: this.whitepaper,
+        WhitepaperFile: {
+          ID: this.whitepaperId,
+          Filename: this.whitepaperFile.name,
+          URL: this.whitepaperUploadLink
+        },
+        NumFounders: parseInt(this.numFounders) ? parseInt(this.numFounders) : 0,
+        Founders: this.founders,
+        NumMembers: parseInt(this.numTeamMembers) ? parseInt(this.numTeamMembers) : 0,
+        Members: this.teamMembers,
+        Objective: this.objective,
+        Motivation: this.motivation,
+        Assets: this.assets
+      } as unknown as NewProject
+
+      console.log(data)
+
+      const resp = await createProject(data)
+      console.log(resp)
+      window.alert('Your response has been submitted')
+      this.$router.push({ path:"/", query: { view: 'Applications' } })
+      // }
+    }, 
+
+    addMember() {
+      this.teamMembers.push({
+        Name: '',
+        Position: ''
+      })
+    },
+    addFounder() {
+      this.founders.push({
+        Name: '',
+        Position: '',
+        Kyc: '',
+        Twitter: '',
+        Linkedin: '',
+        Ethereum: '',
+        Email: '',
+        CV: '',
+        cvFile: File,
+        cvUploadLink: '',
+        CVFilename: ''
+      })
+    },
+    deleteMember(counter: number) {
+      this.teamMembers.splice(counter, 1)
+    },
+    deleteFounder(counter: number) {
+      this.founders.splice(counter, 1)
+    },
+    alert() {
+      window.alert(this.name)
+    },
+    nextStep(curr: number) {
+      const mapping = {
+        1: this.complete1,
+        2: this.complete2,
+        3: this.complete3,
+        4: this.complete4,
+        5: this.complete5
+      }
+      if (mapping[curr as keyof typeof mapping]) {
+        this.current = curr + 1
+      } else {
+        window.alert('Please fill in all required fields')
+      }
+    }
+  },
+  watch: {
+    numFounders: function (val: string) {
+      this.founders = []
+      for (let i = 0; i < parseInt(val); i++) {
+        this.founders.push({
+          Name: '',
+          Position: '',
+          Kyc: '',
+          Twitter: '',
+          Linkedin: '',
+          Ethereum: '',
+          Email: '',
+          CV: '',
+          cvFile: File,
+          cvUploadLink: '',
+          CVFilename: ''
+        })
+      }
+    },
+    numTeamMembers: function (val: string) {
+      this.teamMembers = []
+      for (let i = 0; i < parseInt(val); i++) {
+        this.teamMembers.push({
+          Name: '',
+          Position: ''
+        })
+      }
     }
   }
 }

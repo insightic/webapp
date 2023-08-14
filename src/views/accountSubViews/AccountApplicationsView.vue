@@ -18,9 +18,9 @@
       <tbody>
         <tr v-for="application in applications" :key="application.ID">
           <td>{{ getSubmission(application).Content.Name }}</td>
-          <td>{{ formatDate(getSubmission(application).SubmissionAt) }}</td>
-          <td>{{ formatDate(getSubmission(application).SubmissionAt) }}</td>
-          <td>{{ 'Pending' }}</td>
+          <td>{{ formatDate(application.UpdatedAt) }}</td>
+          <td>{{ formatDate(application.CreatedAt) }}</td>
+          <td>{{ application.Status }}</td>
           <td>
             <a
               class="btn btn-sm btn-outline-primary mx-2"

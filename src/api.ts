@@ -83,7 +83,11 @@ export interface Submission {
 export interface Application {
   ID: string
   AccountID: string
-  Submissions: Submission[]
+  Submissions: Submission[],
+  Status: string
+  CreatedAt: string
+  UpdatedAt: string
+  DataVersion: string
 }
 
 export interface Founder {
