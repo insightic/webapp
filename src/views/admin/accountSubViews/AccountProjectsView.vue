@@ -42,7 +42,7 @@ import ProjectCardComponent from '@/components/ProjectCardComponent.vue'
 import ProjectListComponent from '@/components/ProjectListComponent.vue'
 import { projectsStore } from '@/stores/projects'
 import { mapStores } from 'pinia'
-import { getProjects, type Application } from '@/api'
+import { getApplications, type Application } from '@/api'
 
 export default {
   components: {
@@ -66,7 +66,7 @@ export default {
     }
   },
   async created() {
-    this.applications = await getProjects()
+    this.applications = await getApplications()
   },
   computed: {
     ...mapStores(projectsStore),

@@ -134,11 +134,11 @@ export async function createProject(project: NewProject): Promise<Application> {
   return resp?.payload || ({} as Application)
 }
 
-export async function getProjects(): Promise<Application[]> {
+export async function getApplications(): Promise<Application[]> {
   const resp = await httpclient.get<number[]>(`/applications`)
   const applicationList = [] as Application[]
   for (const applicationId of resp!.payload) {
-    const application = await getProject(applicationId)
+    const application = await getApplication(applicationId)
     if (application) {
       applicationList.push(application)
     }
@@ -146,12 +146,12 @@ export async function getProjects(): Promise<Application[]> {
   return applicationList
 }
 
-export async function getProject(id: number | string): Promise<Application | null> {
+export async function getApplication(id: number | string): Promise<Application | null> {
   const resp = await httpclient.get<Application>(`/applications/${id}`)
   return resp?.payload || null
 }
 
-export async function updateProject(
+export async function updateApplication(
   id: number | string,
   project: NewProject
 ): Promise<Application | null> {
@@ -159,7 +159,7 @@ export async function updateProject(
   return resp?.payload || null
 }
 
-export async function deleteProject(id: number | string): Promise<any | null> {
+export async function deleteApplication(id: number | string): Promise<any | null> {
   const resp = await httpclient.delete<any>(`/applications/${id}`)
   return resp?.payload || null
 }

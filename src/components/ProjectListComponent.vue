@@ -51,7 +51,7 @@
       <button
         v-if="!isHeader"
         type="button"
-        @click.stop="deleteProject($.vnode.key! as number)"
+        @click.stop="deleteApplication($.vnode.key! as number)"
         class="btn btn-outline-danger m-0 p-1"
       >
         Delete
@@ -64,7 +64,7 @@
 <script lang="ts">
 import { formatDateTime } from '@/helpers'
 import type { PropType } from 'vue'
-import { deleteProject, type ProjectContent as Project } from '@/api'
+import { deleteApplication, type ProjectContent as Project } from '@/api'
 
 export default {
   props: {
@@ -85,11 +85,11 @@ export default {
       if (this.isAdmin) this.$router.push(`/admin/projects/${projectID}`)
       else this.$router.push(`/projects/${projectID}`)
     },
-    async deleteProject(projectID: number) {
+    async deleteApplication(projectID: number) {
       if (confirm('Are you sure to delete this project?') == false) {
         return
       } else {
-        const res = await deleteProject(projectID)
+        const res = await deleteApplication(projectID)
         this.$emit('refresh')
       }
     }

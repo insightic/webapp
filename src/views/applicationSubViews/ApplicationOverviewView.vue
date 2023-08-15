@@ -19,7 +19,7 @@
 import { formatDateTime } from '@/helpers'
 import SubmissionListComponent from '@/components/SubmissionListComponent.vue'
 
-import { getProject } from '@/api'
+import { getApplication } from '@/api'
 import type { Submission } from '@/api'
 
 export default {
@@ -28,7 +28,7 @@ export default {
   },
   async created() {
     this.submissionList = (
-      await getProject(this.$route.params.projectID as string).then((res) => res!.Submissions)
+      await getApplication(this.$route.params.projectID as string).then((res) => res!.Submissions)
     ).sort((a, b) => (formatDateTime(a.CreatedAt) < formatDateTime(b.CreatedAt) ? 1 : -1))
   },
   data() {

@@ -53,7 +53,7 @@
 
 <script lang="ts">
 import NavFooterLayout from '@/layouts/NavFooterLayout.vue'
-import { getProject, type Submission } from '@/api'
+import { getApplication, type Submission } from '@/api'
 import { formatDate } from '@/helpers'
 
 export default {
@@ -66,7 +66,7 @@ export default {
   },
   async created() {
     this.applicationID = window.location.href.split('/')[4]
-    const resp = await getProject(this.applicationID)
+    const resp = await getApplication(this.applicationID)
     this.submissions = resp?.Submissions || []
   },
   components: {

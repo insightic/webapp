@@ -252,10 +252,10 @@ import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
 
 import ApplicationViewMixin from './ApplicationViewMixin'
 
-import { createProjectJob, getProject } from '@/api'
+import { createProjectJob, getApplication } from '@/api'
 import { organizationsStore } from '@/stores/organizations'
 import { mapStores } from 'pinia'
-import { updateProject, getPreSignedPutUrl, getPreSignedGetUrl, uploadFile } from '@/api'
+import { updateApplication, getPreSignedPutUrl, getPreSignedGetUrl, uploadFile } from '@/api'
 import type { NewProject } from '@/api'
 
 export default {
@@ -265,7 +265,7 @@ export default {
     LabelTextareaComponent
   },
   async created() {
-    const projectInfo = await getProject(this.$route.params.projectID as string).then(
+    const projectInfo = await getApplication(this.$route.params.projectID as string).then(
       (res) =>
         res!.Submissions.filter((item) => item.SubmissionID == this.$route.query.submissionID)[0]
     )
@@ -452,7 +452,7 @@ export default {
         Assets: this.assets
       } as unknown as NewProject
 
-      const update = await updateProject(this.projectID, data)
+      const update = await updateApplication(this.projectID, data)
       console.log('update', update)
       window.alert('Project updated successfully!')
 

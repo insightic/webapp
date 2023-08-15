@@ -28,7 +28,7 @@
               :href="'/projects/' + application.ID"
               >View</a
             >
-            <a class="btn btn-sm btn-outline-danger mx-2" type="button">Withdraw</a>
+            <a class="btn btn-sm btn-outline-danger mx-2" type="button" @click="deleteApplication(application.ID)">Delete</a>
           </td>
         </tr>
       </tbody>
@@ -40,7 +40,7 @@
 import { RouterLink } from 'vue-router'
 import { projectsStore } from '@/stores/projects'
 import { mapStores } from 'pinia'
-import { getProjects, type Application, type Submission } from '@/api'
+import { getApplications, deleteApplication ,type Application, type Submission } from '@/api'
 import { formatDate } from '@/helpers'
 
 export default {
@@ -48,7 +48,7 @@ export default {
     RouterLink
   },
   async created() {
-    this.applications = await getProjects()
+    this.applications = await getApplications()
   },
   data() {
     return {
@@ -65,6 +65,14 @@ export default {
     },
     getSubmission(application: Application): Submission {
       return application.Submissions.slice(-1)[0]
+    },
+    async deleteApplication(id: string) {
+      if (confirm('Are you sure to delete this project?') == false) {
+        return
+      } else {
+        const res = await deleteApplication(id)
+        location.reload()
+      }    
     }
   }
 }
