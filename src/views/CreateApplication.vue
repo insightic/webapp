@@ -35,12 +35,22 @@
         </div>
         <span><i class="bi bi-chevron-right"></i></span>
         <div
-          class="ms-2 nav-item"
+          class="mx-2 nav-item"
           @click="current = 4"
           :class="current == 4 ? '' : 'text-secondary'"
         >
           <i v-if="current == 4" class="bi bi-4-square-fill"></i>
           <i v-else class="bi bi-4-square"></i>
+          <span class="ms-2">Upload Documents</span>
+        </div>
+        <span><i class="bi bi-chevron-right"></i></span>
+        <div
+          class="ms-2 nav-item"
+          @click="current = 5"
+          :class="current == 5 ? '' : 'text-secondary'"
+        >
+          <i v-if="current == 5" class="bi bi-5-square-fill"></i>
+          <i v-else class="bi bi-5-square"></i>
           <span class="ms-2">Submit</span>
         </div>
       </div>
@@ -63,17 +73,8 @@
               <div class="col-md-6">
                 <LabelInputComponent label="Website (URL)" type="text" v-model:field="website" :required="true" />
               </div>
-              <div class="col-md-12">
-                <LabelInputComponent label="Whitepaper (URL)" type="text" v-model:field="whitepaper" :required="true" />
-              </div>
 
-              <div class="">
-                <label for="document" class="">Whitepaper (File)</label>
-                <input type="file" class="form-controls w-100" id="document" @change="onFileChange" />
-                <div class="text-secondary small">
-                  Please attach a quality version of the whitepaper document.
-                </div>
-              </div>
+
             </div>
           </SectionLayout>
 
@@ -114,7 +115,7 @@
                   <LabelInputComponent label="Ethereum Address" type="text" v-model:field="founder.Ethereum" :required="true" />
                 </div>
 
-                <div class="">
+                <!-- <div class="">
                   <label for="document" class="">CV</label>
                   <input
                     type="file"
@@ -125,7 +126,7 @@
                   <div class="text-secondary small">
                     Brief CV or Biography (Please attach separate sheets if necessary)
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
             <div class="row">
@@ -225,6 +226,30 @@
         </div>
 
         <div v-if="current == 4">
+          <SectionLayout title="Documents">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="">
+                  <label for="document" class="">Whitepaper (File)</label>
+                  <input type="file" class="form-controls w-100" id="document" @change="onFileChange" />
+                  <div class="text-secondary small">
+                    Please attach a quality version of the whitepaper document.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </SectionLayout>
+
+          <hr />
+          <div class="row">
+            <div class="col-md-6">
+              <button class="btn btn-primary me-2">Save Draft</button>
+              <button class="btn btn-success ms-2">Save and Next</button>
+            </div>
+          </div>
+        </div>
+
+        <div v-if="current == 5">
           <SectionLayout title="Term and Conditions">
             <div class="row">
               <div class="col-md-12">
@@ -351,8 +376,8 @@ export default {
       objective: '',
       motivation: '',
       assets: '',
-      numFounders: '',
-      numTeamMembers: ''
+      numFounders: '1',
+      numTeamMembers: '1'
     }
   },
   computed: {
