@@ -8,8 +8,7 @@
         <table class="table table-bordered">
           <thead class="table-dark">
             <tr>
-              <th scope="col" style="width: 40%">Sumission ID</th>
-              <th scope="col" style="width: 10%">Updated At</th>
+              <th scope="col" style="width: 50%">Sumission ID</th>
               <th scope="col" style="width: 10%">Created At</th>
               <th scope="col" style="width: 8%">Status</th>
               <th scope="col" style="width: 12%; min-width: 200px">Action</th>
@@ -17,10 +16,9 @@
           </thead>
           <tbody>
             <tr v-for="submission in submissions">
-              <td>{{ submission["SubmissionID"] }}</td>
-              <td>{{ formatDate(submission["UpdatedAt"]) }}</td>
-              <td>{{ formatDate(submission["UpdatedAt"]) }}</td>
-              <td>{{ submission["Status"] }}</td>
+              <td>{{ submission.SubmissionID }}</td>
+              <td>{{ formatDate(submission.CreatedAt) }}</td>
+              <td>{{ submission.Status }}</td>
               <td>
                 <a class="btn btn-sm btn-outline-primary mx-2" type="button">View</a>
                 <a class="btn btn-sm btn-outline-danger mx-2" type="button">Withdraw</a>
@@ -50,7 +48,7 @@
 
 <script lang="ts">
 import NavFooterLayout from '@/layouts/NavFooterLayout.vue'
-import { getProject } from '@/api'
+import { getProject, type Submission } from '@/api'
 import {formatDate} from "@/helpers";
 
 export default {
@@ -58,14 +56,13 @@ export default {
   data() {
     return {
       applicationID: '',
-      submissions: []
+      submissions: [] as Array<Submission>
     }
   },
-  created() {
+  async created() {
     this.applicationID = window.location.href.split('/')[4]
-    getProject(this.applicationID).then((Response) => {
-        Response ? this.submissions = Response.Submissions : null
-    })
+    const resp = await getProject(this.applicationID)
+    this.submissions =  resp?.Submissions || []
   },
   components: {
     NavFooterLayout

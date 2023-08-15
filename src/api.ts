@@ -77,7 +77,7 @@ export interface Submission {
   SubmissionID: string
   Results: JobRunResult[]
   Status: string
-  SubmissionAt: string
+  CreatedAt: string
 }
 
 export interface Application {
