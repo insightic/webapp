@@ -29,7 +29,7 @@ export default {
   async created() {
     this.submissionList = (
       await getProject(this.$route.params.projectID as string).then((res) => res!.Submissions)
-    ).sort((a, b) => (formatDateTime(a.SubmissionAt) < formatDateTime(b.SubmissionAt) ? 1 : -1))
+    ).sort((a, b) => (formatDateTime(a.CreatedAt) < formatDateTime(b.CreatedAt) ? 1 : -1))
   },
   data() {
     return {

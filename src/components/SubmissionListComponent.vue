@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="col col-3 small" :class="isHeader ? '' : 'text-secondary'">
-      {{ isHeader ? 'Submitted At' : formatDateTime(submission!.SubmissionAt) }}
+      {{ isHeader ? 'Submitted At' : formatDateTime(submission!.CreatedAt) }}
       <i
         v-show="sortBy == 'modifiedAt'"
         class="bi"

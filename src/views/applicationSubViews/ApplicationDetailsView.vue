@@ -270,7 +270,7 @@ export default {
         res!.Submissions.filter((item) => item.SubmissionID == this.$route.query.submissionID)[0]
     )
 
-    this.submissionAt = projectInfo?.SubmissionAt
+    this.submissionAt = projectInfo?.CreatedAt
     this.status = projectInfo?.Status
 
     const mapping = {
