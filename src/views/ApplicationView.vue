@@ -16,17 +16,13 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>DKJMNU76AD</td>
-              <td>2023/08/10</td>
-              <td>2023/08/10</td>
-              <td>Pending</td>
+            <tr v-for="submission in submissions">
+              <td>{{ submission["SubmissionID"] }}</td>
+              <td>{{ formatDate(submission["UpdatedAt"]) }}</td>
+              <td>{{ formatDate(submission["UpdatedAt"]) }}</td>
+              <td>{{ submission["Status"] }}</td>
               <td>
-                <a
-                  class="btn btn-sm btn-outline-primary mx-2"
-                  type="button"
-                  >View</a
-                >
+                <a class="btn btn-sm btn-outline-primary mx-2" type="button">View</a>
                 <a class="btn btn-sm btn-outline-danger mx-2" type="button">Withdraw</a>
               </td>
             </tr>
@@ -54,8 +50,23 @@
 
 <script lang="ts">
 import NavFooterLayout from '@/layouts/NavFooterLayout.vue'
+import { getProject } from '@/api'
+import {formatDate} from "@/helpers";
 
 export default {
+    methods: {formatDate},
+  data() {
+    return {
+      applicationID: '',
+      submissions: []
+    }
+  },
+  created() {
+    this.applicationID = window.location.href.split('/')[4]
+    getProject(this.applicationID).then((Response) => {
+        Response ? this.submissions = Response.Submissions : null
+    })
+  },
   components: {
     NavFooterLayout
   }
