@@ -83,6 +83,7 @@ export interface Submission {
 export interface Application {
   ID: string
   AccountID: string
+  ApplicationName: string
   Submissions: Submission[],
   Status: string
   CreatedAt: string
@@ -161,6 +162,11 @@ export async function updateApplication(
 
 export async function deleteApplication(id: number | string): Promise<any | null> {
   const resp = await httpclient.delete<any>(`/applications/${id}`)
+  return resp?.payload || null
+}
+
+export async function deleteSubmission(applicationID: number | string, submissionID: number | string): Promise<any | null> {
+  const resp = await httpclient.delete<any>(`/applications/${applicationID}/submissions/${submissionID}`)
   return resp?.payload || null
 }
 

@@ -17,7 +17,7 @@
       </thead>
       <tbody>
         <tr v-for="application in applications" :key="application.ID">
-          <td>{{ getSubmission(application).Content.Name }}</td>
+          <td>{{ application.ApplicationName }}</td>
           <td>{{ formatDate(application.UpdatedAt) }}</td>
           <td>{{ formatDate(application.CreatedAt) }}</td>
           <td>{{ application.Status }}</td>

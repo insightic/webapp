@@ -52,7 +52,7 @@
         @click.stop=""
         class="btn btn-outline-danger m-0 p-1"
       >
-        Withdraw
+        Delete
       </button>
       <!-- <i class="bi bi-three-dots-vertical actions" @click.stop=""></i> -->
     </div>
@@ -88,11 +88,12 @@ export default {
       if (this.isAdmin) this.$router.push(`/admin/projects/${projectID}`)
       else this.$router.push(`/projects/${projectID}`)
     },
-    async deleteProject(projectID: number) {
-      if (confirm('Are you sure to delete this project?') == false) {
+    async deleteSubmission(projectID: number) {
+      alert(this.$route.params.projectID)
+      if (confirm('Are you sure to delete this submission?') == false) {
         return
       } else {
-        const res = await deleteApplication(projectID)
+        // const res = await deleteSubmission(this.$route.params.projectID, projectID)
         this.$emit('refresh')
       }
     }

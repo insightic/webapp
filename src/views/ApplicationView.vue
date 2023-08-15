@@ -1,7 +1,7 @@
 <template>
   <NavFooterLayout>
     <div class="container p-3 mb-5">
-      <h1>Applications</h1>
+      <h1>Submissions</h1>
       <div class="text-secondary">Showing all submissions</div>
 
       <div class="w-100 my-3" style="overflow-x: auto">
@@ -26,7 +26,7 @@
                   :href="'/projects/' + applicationID + '/' + submission.SubmissionID"
                   >View</a
                 >
-                <a class="btn btn-sm btn-outline-danger mx-2" type="button">Withdraw</a>
+                <a class="btn btn-sm btn-outline-danger mx-2" type="button" @click="deleteSubmission(applicationID, submission.SubmissionID)">Delete</a>
               </td>
             </tr>
             <!-- <tr v-for="application in applications" :key="application.ID">
@@ -53,11 +53,10 @@
 
 <script lang="ts">
 import NavFooterLayout from '@/layouts/NavFooterLayout.vue'
-import { getApplication, type Submission } from '@/api'
+import { getApplication, type Submission, deleteSubmission } from '@/api'
 import { formatDate } from '@/helpers'
 
 export default {
-  methods: { formatDate },
   data() {
     return {
       applicationID: '',
@@ -65,12 +64,24 @@ export default {
     }
   },
   async created() {
-    this.applicationID = window.location.href.split('/')[4]
+    this.applicationID = this.$route.params.projectID as string
     const resp = await getApplication(this.applicationID)
     this.submissions = resp?.Submissions || []
   },
   components: {
     NavFooterLayout
+  },
+  methods: {
+    formatDate,
+    async deleteSubmission(applicationID: string, submissionID: string) {
+      if (confirm('Are you sure to delete this submission?') == false) {
+        return
+      } else {
+        const res = await deleteSubmission(applicationID, submissionID)
+        console.log(res)
+        location.reload()
+      }
+    }
   }
 }
 </script>
