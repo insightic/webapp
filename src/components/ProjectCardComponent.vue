@@ -52,7 +52,7 @@
 <script lang="ts">
 import { formatDateTime } from '@/helpers'
 import type { PropType } from 'vue'
-import { deleteProject, type ProjectContent as Project } from '@/api'
+import { deleteApplication, type ProjectContent as Project } from '@/api'
 
 export default {
   props: {
@@ -72,7 +72,7 @@ export default {
       if (confirm('Are you sure to delete this project?') == false) {
         return
       } else {
-        const res = await deleteProject(projectID)
+        const res = await deleteApplication(projectID)
         this.$emit('refresh')
       }
     }
