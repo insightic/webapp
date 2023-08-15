@@ -2,7 +2,10 @@
   <NavFooterLayout>
     <div class="container p-3 mb-5">
       <h1>Submissions</h1>
-      <div class="text-secondary">Showing all submissions</div>
+      <div class="d-flex justify-content-between align-items-center my-2">
+        <div class="text-secondary">Showing all submissions</div>
+        <RouterLink class="btn btn-primary" :to="'/projects/' + $route.params.projectID + '/create-submission'">New Submission</RouterLink>
+      </div>
 
       <div class="w-100 my-3" style="overflow-x: auto">
         <table class="table table-bordered">
