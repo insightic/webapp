@@ -130,12 +130,12 @@ export interface NewProject {
 }
 
 export async function createProject(project: NewProject): Promise<Application> {
-  const resp = await httpclient.post<Application>(`/projects`, project)
+  const resp = await httpclient.post<Application>(`/applications`, project)
   return resp?.payload || ({} as Application)
 }
 
 export async function getProjects(): Promise<Application[]> {
-  const resp = await httpclient.get<number[]>(`/projects`)
+  const resp = await httpclient.get<number[]>(`/applications`)
   const applicationList = [] as Application[]
   for (const applicationId of resp!.payload) {
     const application = await getProject(applicationId)
@@ -147,7 +147,7 @@ export async function getProjects(): Promise<Application[]> {
 }
 
 export async function getProject(id: number | string): Promise<Application | null> {
-  const resp = await httpclient.get<Application>(`/projects/${id}`)
+  const resp = await httpclient.get<Application>(`/applications/${id}`)
   return resp?.payload || null
 }
 
@@ -155,12 +155,12 @@ export async function updateProject(
   id: number | string,
   project: NewProject
 ): Promise<Application | null> {
-  const resp = await httpclient.put<Application>(`/projects/${id}`, project)
+  const resp = await httpclient.put<Application>(`/applications/${id}`, project)
   return resp?.payload || null
 }
 
 export async function deleteProject(id: number | string): Promise<any | null> {
-  const resp = await httpclient.delete<any>(`/projects/${id}`)
+  const resp = await httpclient.delete<any>(`/applications/${id}`)
   return resp?.payload || null
 }
 
@@ -178,12 +178,12 @@ export interface Job {
 }
 
 export async function getProjectJobs(projectID: number | string): Promise<Job[]> {
-  const resp = await httpclient.get<Job[]>(`/projects/${projectID}/jobs`)
+  const resp = await httpclient.get<Job[]>(`/applications/${projectID}/jobs`)
   return resp?.payload || []
 }
 
 export async function createProjectJob(projectID: number | string): Promise<Job | null> {
-  const resp = await httpclient.post<Job>(`/projects/${projectID}/jobs`)
+  const resp = await httpclient.post<Job>(`/applications/${projectID}/jobs`)
   return resp?.payload || null
 }
 
@@ -206,6 +206,6 @@ export async function getJobRunResults(
   projectID: number | string,
   jobID: number | string
 ): Promise<JobRunResult[]> {
-  const resp = await httpclient.get<JobRunResult[]>(`/projects/${projectID}/jobs/${jobID}/results`)
+  const resp = await httpclient.get<JobRunResult[]>(`/applications/${projectID}/jobs/${jobID}/results`)
   return resp?.payload || []
 }

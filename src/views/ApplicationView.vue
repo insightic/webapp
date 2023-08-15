@@ -15,12 +15,17 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="submission in submissions">
+            <tr v-for="submission in submissions" :key="submission.SubmissionID">
               <td>{{ submission.SubmissionID }}</td>
               <td>{{ formatDate(submission.CreatedAt) }}</td>
               <td>{{ submission.Status }}</td>
               <td>
-                <a class="btn btn-sm btn-outline-primary mx-2" type="button">View</a>
+                <a
+                  class="btn btn-sm btn-outline-primary mx-2"
+                  type="button"
+                  :href="'/projects/' + applicationID + '/' + submission.SubmissionID"
+                  >View</a
+                >
                 <a class="btn btn-sm btn-outline-danger mx-2" type="button">Withdraw</a>
               </td>
             </tr>
@@ -49,10 +54,10 @@
 <script lang="ts">
 import NavFooterLayout from '@/layouts/NavFooterLayout.vue'
 import { getProject, type Submission } from '@/api'
-import {formatDate} from "@/helpers";
+import { formatDate } from '@/helpers'
 
 export default {
-    methods: {formatDate},
+  methods: { formatDate },
   data() {
     return {
       applicationID: '',
@@ -62,7 +67,7 @@ export default {
   async created() {
     this.applicationID = window.location.href.split('/')[4]
     const resp = await getProject(this.applicationID)
-    this.submissions =  resp?.Submissions || []
+    this.submissions = resp?.Submissions || []
   },
   components: {
     NavFooterLayout
