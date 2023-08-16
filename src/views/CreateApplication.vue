@@ -238,6 +238,18 @@
                 </div>
               </div>
             </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="mt-3">
+                  <label for="document" class="">Code Files</label>
+                  <input type="file" class="form-controls w-100" id="document" @change="onFileChangeCodes" />
+                  <div class="text-secondary small">
+                    Please attach a zipped folder containing the code files.
+                  </div>
+                </div>
+              </div>
+            </div>
           </SectionLayout>
 
           <hr />
@@ -351,6 +363,8 @@ export default {
       whitepaper: '',
       whitepaperFile: File,
       whitepaperId: '',
+      codesFile: File,
+      codesId: '',
       whitepaperUploadLink: '',
       teamMembers: [
         {
@@ -414,6 +428,9 @@ export default {
     },
     async onFileChange(e: any) {
       this.whitepaperFile = e.target.files[0]
+    },
+    async onFileChangeCodes(e: any) {
+      this.codesFile = e.target.files[0]
     },
     async onFileChangeCV(e: any, index: number) {
       console.log(e.target)

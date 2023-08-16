@@ -208,11 +208,6 @@
                     </div> -->
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <button class="btn btn-sm btn-outline-primary" @click="numFounders = parseInt(numFounders) + 1 + ''">Add Another Founder</button>
-                  </div>
-                </div>
               </SectionLayout>
 
             <SectionLayout title="Team Members">
@@ -240,11 +235,6 @@
                         <div class="col-md-6">
                           <LabelInputComponent label="Role" type="text" v-model.lazy="member.Role" :required="true" :disabled="readonly"/>
                         </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <button class="btn btn-sm btn-outline-primary" @click="numTeamMembers = parseInt(numTeamMembers) + 1 + ''">Add Another Team Member</button>
                     </div>
                   </div>
 
