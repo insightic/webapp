@@ -165,6 +165,11 @@ export async function deleteApplication(id: number | string): Promise<any | null
   return resp?.payload || null
 }
 
+export async function updateSubmission(applicationID: number | string, submissionID: number | string, project: NewProject): Promise<Application | null> {
+  const resp = await httpclient.put<Application>(`/applications/${applicationID}/results/${submissionID}`, project)
+  return resp?.payload || null
+}
+
 export async function deleteSubmission(applicationID: number | string, submissionID: number | string): Promise<any | null> {
   const resp = await httpclient.delete<any>(`/applications/${applicationID}/submissions/${submissionID}`)
   return resp?.payload || null

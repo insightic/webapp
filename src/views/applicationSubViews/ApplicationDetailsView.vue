@@ -263,7 +263,7 @@ import ApplicationViewMixin from './ApplicationViewMixin'
 import { createProjectJob, getApplication } from '@/api'
 import { organizationsStore } from '@/stores/organizations'
 import { mapStores } from 'pinia'
-import { updateApplication, getPreSignedPutUrl, getPreSignedGetUrl, uploadFile } from '@/api'
+import { updateSubmission, getPreSignedPutUrl, getPreSignedGetUrl, uploadFile } from '@/api'
 import type { NewProject } from '@/api'
 
 export default {
@@ -284,6 +284,7 @@ export default {
 
     this.submissionAt = projectInfo?.CreatedAt
     this.status = projectInfo?.Status
+    this.submissionId = projectInfo?.SubmissionID
 
     const mapping = {
       '1': 'e262d5c2-16f8-47a0-8c70-4019514d137b',
@@ -372,6 +373,7 @@ export default {
   },
   data() {
     return {
+      submissionId: '',
       submissionAt: '',
       status: '',
       name: '',
@@ -461,15 +463,20 @@ export default {
         Members: this.teamMembers,
         Objective: this.objective,
         Motivation: this.motivation,
-        Assets: this.assets
+        Assets: this.assets,
+        status: 'accepted'
       } as unknown as NewProject
 
-      const update = await updateApplication(this.projectID, data)
+      console.log(data)
+      console.log('this.$route.params.projectID', this.$route.params.projectID)
+      console.log('this.submissionId', this.submissionId)
+      const update = await updateSubmission(this.$route.params.projectID as string, this.submissionId, data)
       console.log('update', update)
+      
       window.alert('Project updated successfully!')
 
-      const job = await createProjectJob(this.projectID)
-      console.log(job)
+      // const job = await createProjectJob(this.projectID)
+      // console.log(job)
       this.$router.push({ query: { view: 'Validations' } })
     }
   },
