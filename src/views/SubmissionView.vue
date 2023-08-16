@@ -34,6 +34,8 @@ import { toRaw, type Component } from 'vue'
 import BasicLayout from '@/layouts/BasicLayout.vue'
 import ApplicationSourceCodeView from '@/views/applicationSubViews/ApplicationSourceCodeView.vue'
 import SubmissionDetailsView from '@/views/submissionSubViews/SubmissionDetailsView.vue'
+import DashboardAssessmentView from '@/views/admin/projectSubViews/dashboardSubViews/DashboardAssessmentView.vue'
+import ApplicationAutoAssessmentView from './applicationSubViews/ApplicationAutoAssessmentView_Backup.vue'
 
 export default {
   components: {
@@ -42,7 +44,7 @@ export default {
   data() {
     return {
       subViewIdx: 0,
-      subViews: [SubmissionDetailsView, ApplicationSourceCodeView, ApplicationSourceCodeView]
+      subViews: [SubmissionDetailsView, ApplicationAutoAssessmentView , DashboardAssessmentView]
     }
   },
   computed: {
