@@ -2,248 +2,309 @@
   <NavFooterLayout>
     <div class="container p-3 mb-5 d-flex justify-content-center">
       <div>
-        <div class="d-flex justify-content-between" style="max-width: 960px">
-          <div class="text-secondary mb-4">Submission Details</div>
+        <div class="d-flex justify-content-between mb-3" style="max-width: 960px">
+          <div class="text-secondary align-self-center">Submission Details</div>
           <div>
             <div>Status: {{ status }}</div>
             <div>Submitted At: {{ submissionAt }}</div>
           </div>
         </div>
 
-        <div style="max-width: 960px">
-          <SectionLayout title="Part A: DLT Foundation Details">
-            <LabelInputComponent
-              label="DLT Foundation Name"
-              type="text"
-              v-model:field="name"
-              :required="true"
-              :disabled="readonly"
-            />
+        <div class="d-flex align-items-center align-items-start mb-3">
+          <div
+            class="me-2 nav-item"
+            @click="current = 1"
+            :class="current == 1 ? '' : 'text-secondary'"
+          >
+            <i v-if="current == 1" class="bi bi-1-square-fill"></i>
+            <i v-else class="bi bi-1-square"></i>
+            <span class="ms-2">Basic Information</span>
+          </div>
+          <span><i class="bi bi-chevron-right"></i></span>
+          <div
+            class="mx-2 nav-item"
+            @click="current = 2"
+            :class="current == 2 ? '' : 'text-secondary'"
+          >
+            <i v-if="current == 2" class="bi bi-2-square-fill"></i>
+            <i v-else class="bi bi-2-square"></i>
+            <span class="ms-2">Objective</span>
+          </div>
+          <span><i class="bi bi-chevron-right"></i></span>
+          <div
+            class="mx-2 nav-item"
+            @click="current = 3"
+            :class="current == 3 ? '' : 'text-secondary'"
+          >
+            <i v-if="current == 3" class="bi bi-3-square-fill"></i>
+            <i v-else class="bi bi-3-square"></i>
+            <span class="ms-2">Assets</span>
+          </div>
+          <span><i class="bi bi-chevron-right"></i></span>
+          <div
+            class="mx-2 nav-item"
+            @click="current = 4"
+            :class="current == 4 ? '' : 'text-secondary'"
+          >
+            <i v-if="current == 4" class="bi bi-4-square-fill"></i>
+            <i v-else class="bi bi-4-square"></i>
+            <span class="ms-2">Upload Documents</span>
+          </div>
+          <span><i class="bi bi-chevron-right"></i></span>
+          <div
+            class="ms-2 nav-item"
+            @click="current = 5"
+            :class="current == 5 ? '' : 'text-secondary'"
+          >
+            <i v-if="current == 5" class="bi bi-5-square-fill"></i>
+            <i v-else class="bi bi-5-square"></i>
+            <span class="ms-2">Submit</span>
+          </div>
+        </div>
 
-            <LabelInputComponent
-              label="Official Twitter Account (URL)"
-              type="text"
-              v-model:field="twitter"
-              :required="true"
-              :disabled="readonly"
-            />
-            <LabelInputComponent
-              label="Official Website (URL)"
-              type="text"
-              v-model:field="website"
-              :required="true"
-              :disabled="readonly"
-            />
-
-            <LabelInputComponent
-              label="Whitepaper (URL)"
-              type="text"
-              v-model:field="whitepaper"
-              :required="true"
-              :disabled="readonly"
-            />
-            <!-- <div class="">
-              <label for="document" class="">Whitepaper (File)</label>
-              <div v-if="!editWhitepaper">
-                <i class="bi bi-file-earmark-text me-2"></i>
-                <a :href="whitepaperDownloadLink">{{ whitepaperFilename }}</a>
-                <a class="ms-5" @click="editWhitepaper = !editWhitepaper">Edit</a>
-              </div>
-              <div v-else>
-                <input type="file" class="form-controls" id="document" @change="onFileChange" />
-                <a @click="editWhitepaper = !editWhitepaper">Cancel</a>
-                <div class="text-secondary small">
-                  Please attach a quality version of the whitepaper document.
-                </div>
-              </div>
-            </div> -->
-          </SectionLayout>
-
-          <SectionLayout title="Part B: Founder(s) Detail">
-            <div class="">
-              <label class="form-label" for="teamMembers">
-                Founders
-                <span class="text-danger">*</span>
-              </label>
-
+        <div style="max-width: 1250px">
+          <div v-if="current == 1">
+            <SectionLayout title="Part A: DLT Foundation Details">
               <LabelInputComponent
-                label="Number of Founders"
+                label="DLT Foundation Name"
                 type="text"
-                v-model:field="numFounders"
+                v-model:field="name"
                 :required="true"
                 :disabled="readonly"
               />
 
-              <div class="">
-                <div class="mb-4" v-for="(founder, counter) in founders" v-bind:key="counter">
-                  <div class="d-flex">
-                    <div class="fw-bold">Founder {{ counter + 1 }}</div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <LabelInputComponent
-                        label="Name"
-                        type="text"
-                        v-model:field="founder.Name"
-                        :required="true"
-                        :disabled="readonly"
-                      />
-                    </div>
-                    <div class="col-md-6">
-                      <LabelInputComponent
-                        label="Position within DLT Foundation"
-                        type="text"
-                        v-model:field="founder.Position"
-                        :required="true"
-                        :disabled="readonly"
-                      />
-                    </div>
-                  </div>
+              <LabelInputComponent
+                label="Official Twitter Account (URL)"
+                type="text"
+                v-model:field="twitter"
+                :required="true"
+                :disabled="readonly"
+              />
+              <LabelInputComponent
+                label="Official Website (URL)"
+                type="text"
+                v-model:field="website"
+                :required="true"
+                :disabled="readonly"
+              />
 
-                  <LabelInputComponent
-                    label="KYC Verification"
-                    type="text"
-                    v-model:field="founder.Kyc"
-                    :required="true"
-                    :disabled="readonly"
-                  />
-
-                  <div class="row">
-                    <div class="col-md-6">
-                      <LabelInputComponent
-                        label="Twitter Account (URL)"
-                        type="text"
-                        v-model:field="founder.Twitter"
-                        :required="true"
-                        :disabled="readonly"
-                      />
-                    </div>
-                    <div class="col-md-6">
-                      <LabelInputComponent
-                        label="LinkedIn Profile (URL)"
-                        type="text"
-                        v-model:field="founder.Linkedin"
-                        :required="true"
-                        :disabled="readonly"
-                      />
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-6">
-                      <LabelInputComponent
-                        label="Email Address"
-                        type="text"
-                        v-model:field="founder.Email"
-                        :required="true"
-                        :disabled="readonly"
-                      />
-                    </div>
-                    <div class="col-md-6">
-                      <LabelInputComponent
-                        label="Ethereum Address"
-                        type="text"
-                        v-model:field="founder.Ethereum"
-                        :required="true"
-                        :disabled="readonly"
-                      />
-                    </div>
-                  </div>
-
-                  <!-- <div class="">
-                    <label for="document" class="">CV</label>
-                    <div v-if="!founder.editCv">
-                      <i class="bi bi-file-earmark-text me-2"></i>
-                      <a :href="founder.CVDwonloadLink">{{ founder.CVFilename }}</a>
-                      <a class="ms-5" @click="founder.editCv = !founder.editCv">Edit</a>
-                    </div>
-                    <div v-else>
-                      <input
-                        type="file"
-                        class="form-controls"
-                        id="document"
-                        @change="onFileChangeCV($event, counter)"
-                      />
-                      <a @click="founder.editCv = !founder.editCv">Cancel</a>
-                      <div class="text-secondary small">
-                        Brief CV or Biography (Please attach separate sheets if necessary)
-                      </div>
-                    </div>
-                  </div> -->
+              <LabelInputComponent
+                label="Whitepaper (URL)"
+                type="text"
+                v-model:field="whitepaper"
+                :required="true"
+                :disabled="readonly"
+              />
+              <!-- <div class="">
+                <label for="document" class="">Whitepaper (File)</label>
+                <div v-if="!editWhitepaper">
+                  <i class="bi bi-file-earmark-text me-2"></i>
+                  <a :href="whitepaperDownloadLink">{{ whitepaperFilename }}</a>
+                  <a class="ms-5" @click="editWhitepaper = !editWhitepaper">Edit</a>
                 </div>
-              </div>
+                <div v-else>
+                  <input type="file" class="form-controls" id="document" @change="onFileChange" />
+                  <a @click="editWhitepaper = !editWhitepaper">Cancel</a>
+                  <div class="text-secondary small">
+                    Please attach a quality version of the whitepaper document.
+                  </div>
+                </div>
+              </div> -->
+            </SectionLayout>
+          </div>
 
-              <div class="mt-5">
+          <div v-if="current == 2">
+            <SectionLayout title="Part B: Founder(s) Detail">
+              <div class="">
                 <label class="form-label" for="teamMembers">
-                  Team Members
+                  Founders
                   <span class="text-danger">*</span>
                 </label>
+
                 <LabelInputComponent
-                  label="Number of Team Members"
+                  label="Number of Founders"
                   type="text"
-                  v-model:field="numTeamMembers"
+                  v-model:field="numFounders"
                   :required="true"
                   :disabled="readonly"
                 />
 
                 <div class="">
-                  <div class="mb-2" v-for="(member, counter) in teamMembers" v-bind:key="counter">
-                    <label for="duration" class="me-2">{{ counter + 1 }}. Member - Name:</label>
-                    <input
+                  <div class="mb-4" v-for="(founder, counter) in founders" v-bind:key="counter">
+                    <div class="d-flex">
+                      <div class="fw-bold">Founder {{ counter + 1 }}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <LabelInputComponent
+                          label="Name"
+                          type="text"
+                          v-model:field="founder.Name"
+                          :required="true"
+                          :disabled="readonly"
+                        />
+                      </div>
+                      <div class="col-md-6">
+                        <LabelInputComponent
+                          label="Position within DLT Foundation"
+                          type="text"
+                          v-model:field="founder.Position"
+                          :required="true"
+                          :disabled="readonly"
+                        />
+                      </div>
+                    </div>
+
+                    <LabelInputComponent
+                      label="KYC Verification"
                       type="text"
-                      class="me-5 rounded"
-                      v-model.lazy="member.Name"
-                      required
+                      v-model:field="founder.Kyc"
+                      :required="true"
                       :disabled="readonly"
                     />
-                    <label for="duration" class="me-2">Role:</label>
-                    <input
-                      type="text"
-                      class="me-2 rounded"
-                      v-model.lazy="member.Role"
-                      required
-                      :disabled="readonly"
-                    />
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <LabelInputComponent
+                          label="Twitter Account (URL)"
+                          type="text"
+                          v-model:field="founder.Twitter"
+                          :required="true"
+                          :disabled="readonly"
+                        />
+                      </div>
+                      <div class="col-md-6">
+                        <LabelInputComponent
+                          label="LinkedIn Profile (URL)"
+                          type="text"
+                          v-model:field="founder.Linkedin"
+                          :required="true"
+                          :disabled="readonly"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <LabelInputComponent
+                          label="Email Address"
+                          type="text"
+                          v-model:field="founder.Email"
+                          :required="true"
+                          :disabled="readonly"
+                        />
+                      </div>
+                      <div class="col-md-6">
+                        <LabelInputComponent
+                          label="Ethereum Address"
+                          type="text"
+                          v-model:field="founder.Ethereum"
+                          :required="true"
+                          :disabled="readonly"
+                        />
+                      </div>
+                    </div>
+
+                    <!-- <div class="">
+                      <label for="document" class="">CV</label>
+                      <div v-if="!founder.editCv">
+                        <i class="bi bi-file-earmark-text me-2"></i>
+                        <a :href="founder.CVDwonloadLink">{{ founder.CVFilename }}</a>
+                        <a class="ms-5" @click="founder.editCv = !founder.editCv">Edit</a>
+                      </div>
+                      <div v-else>
+                        <input
+                          type="file"
+                          class="form-controls"
+                          id="document"
+                          @change="onFileChangeCV($event, counter)"
+                        />
+                        <a @click="founder.editCv = !founder.editCv">Cancel</a>
+                        <div class="text-secondary small">
+                          Brief CV or Biography (Please attach separate sheets if necessary)
+                        </div>
+                      </div>
+                    </div> -->
+                  </div>
+                </div>
+
+                <div class="mt-5">
+                  <label class="form-label" for="teamMembers">
+                    Team Members
+                    <span class="text-danger">*</span>
+                  </label>
+                  <LabelInputComponent
+                    label="Number of Team Members"
+                    type="text"
+                    v-model:field="numTeamMembers"
+                    :required="true"
+                    :disabled="readonly"
+                  />
+
+                  <div class="">
+                    <div class="mb-2" v-for="(member, counter) in teamMembers" v-bind:key="counter">
+                      <label for="duration" class="me-2">{{ counter + 1 }}. Member - Name:</label>
+                      <input
+                        type="text"
+                        class="me-5 rounded"
+                        v-model.lazy="member.Name"
+                        required
+                        :disabled="readonly"
+                      />
+                      <label for="duration" class="me-2">Role:</label>
+                      <input
+                        type="text"
+                        class="me-2 rounded"
+                        v-model.lazy="member.Role"
+                        required
+                        :disabled="readonly"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </SectionLayout>
+            </SectionLayout>
+          </div>
 
-          <SectionLayout title="Part C: Objectives of the DLT Foundation">
-            <LabelTextareaComponent
-              label="Objectives of your DLT Foundation"
-              footnote="Please provide a detailed description of the objectives of your DLT Foundation (max. 5000 characters)"
-              type="text"
-              v-model:field="objective"
-              :required="true"
-              :disabled="readonly"
-            />
-          </SectionLayout>
+          <div v-if="current == 3">
+            <SectionLayout title="Part C: Objectives of the DLT Foundation">
+              <LabelTextareaComponent
+                label="Objectives of your DLT Foundation"
+                footnote="Please provide a detailed description of the objectives of your DLT Foundation (max. 5000 characters)"
+                type="text"
+                v-model:field="objective"
+                :required="true"
+                :disabled="readonly"
+              />
+            </SectionLayout>
+          </div>
 
-          <SectionLayout title="Part D: Specific Purpose">
-            <LabelTextareaComponent
-              label="Motivation of your DLT Foundation"
-              footnote="If your DLT Foundation has been established for a specific purpose, please detail the purpose (max. 5000 characters)"
-              type="text"
-              v-model:field="motivation"
-              :required="true"
-              :disabled="readonly"
-            />
-          </SectionLayout>
+          <div v-if="current == 4">
+            <SectionLayout title="Part D: Specific Purpose">
+              <LabelTextareaComponent
+                label="Motivation of your DLT Foundation"
+                footnote="If your DLT Foundation has been established for a specific purpose, please detail the purpose (max. 5000 characters)"
+                type="text"
+                v-model:field="motivation"
+                :required="true"
+                :disabled="readonly"
+              />
+            </SectionLayout>
+          </div>
 
-          <SectionLayout title="Part E: Initial Assets">
-            <LabelTextareaComponent
-              label="Initial Assets of your DLT Foundation"
-              footnote="Please provide a detailed description of the initial assets of your DLT Foundation (max. 5000 characters):"
-              type="text"
-              v-model:field="assets"
-              :required="true"
-              :disabled="readonly"
-            />
-          </SectionLayout>
-
-          <button type="button" class="btn btn-primary" @click="submit()">Save and Submit</button>
+          <div v-if="current == 5">
+            <SectionLayout title="Part E: Initial Assets">
+              <LabelTextareaComponent
+                label="Initial Assets of your DLT Foundation"
+                footnote="Please provide a detailed description of the initial assets of your DLT Foundation (max. 5000 characters):"
+                type="text"
+                v-model:field="assets"
+                :required="true"
+                :disabled="readonly"
+              />
+            </SectionLayout>
+            <button type="button" class="btn btn-primary" @click="submit()">Save and Submit</button>
+          </div>
         </div>
       </div>
 
@@ -263,7 +324,7 @@ import ApplicationViewMixin from './ApplicationViewMixin'
 import { createProjectJob, getApplication } from '@/api'
 import { organizationsStore } from '@/stores/organizations'
 import { mapStores } from 'pinia'
-import { updateSubmission, getPreSignedPutUrl, getPreSignedGetUrl, uploadFile } from '@/api'
+import { updateApplication, getPreSignedPutUrl, getPreSignedGetUrl, uploadFile } from '@/api'
 import type { NewProject } from '@/api'
 
 export default {
@@ -375,6 +436,7 @@ export default {
     return {
       submissionId: '',
       submissionAt: '',
+      current: 1,
       status: '',
       name: '',
       twitter: '',
@@ -464,20 +526,19 @@ export default {
         Objective: this.objective,
         Motivation: this.motivation,
         Assets: this.assets,
-        status: 'accepted'
       } as unknown as NewProject
 
       console.log(data)
       console.log('this.$route.params.projectID', this.$route.params.projectID)
       console.log('this.submissionId', this.submissionId)
-      const update = await updateSubmission(this.$route.params.projectID as string, this.submissionId, data)
+      const update = await updateApplication(this.$route.params.projectID as string, data)
       console.log('update', update)
       
       window.alert('Project updated successfully!')
 
       // const job = await createProjectJob(this.projectID)
       // console.log(job)
-      this.$router.push({ query: { view: 'Validations' } })
+      this.$router.push('/projects/' + this.$route.params.projectID)
     }
   },
   computed: {

@@ -32,7 +32,8 @@
 <script lang="ts">
 import { toRaw, type Component } from 'vue'
 import BasicLayout from '@/layouts/BasicLayout.vue'
-import ProjectSourceCodeView from '@/views/applicationSubViews/ApplicationSourceCodeView.vue'
+import ApplicationSourceCodeView from '@/views/applicationSubViews/ApplicationSourceCodeView.vue'
+import SubmissionDetailsView from '@/views/submissionSubViews/SubmissionDetailsView.vue'
 
 export default {
   components: {
@@ -41,7 +42,7 @@ export default {
   data() {
     return {
       subViewIdx: 0,
-      subViews: [ProjectSourceCodeView, ProjectSourceCodeView, ProjectSourceCodeView]
+      subViews: [SubmissionDetailsView, ApplicationSourceCodeView, ApplicationSourceCodeView]
     }
   },
   computed: {
