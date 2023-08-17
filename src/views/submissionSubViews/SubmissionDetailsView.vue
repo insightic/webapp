@@ -230,10 +230,10 @@
                     <div class="row">
                       <h6>Member {{ counter + 1 }}</h6>
                         <div class="col-md-6">
-                          <LabelInputComponent label="Name" type="text" v-model.lazy="member.Name" :required="true" :disabled="readonly"/>
+                          <LabelInputComponent label="Name" type="text" v-model:field="member.Name" :required="true" :disabled="readonly"/>
                         </div>
                         <div class="col-md-6">
-                          <LabelInputComponent label="Role" type="text" v-model.lazy="member.Role" :required="true" :disabled="readonly"/>
+                          <LabelInputComponent label="Role" type="text" v-model:field="member.Role" :required="true" :disabled="readonly"/>
                         </div>
                     </div>
                   </div>
@@ -278,28 +278,21 @@
 
           <div v-if="current == 4">
             <SectionLayout title="Documents">
-              <div class="">
-                <label for="document" class="">Whitepaper (File)</label>
+              <div class="mb-3">
+                <label for="document" class="">Whitepaper File</label>
                 <div>
                   <i class="bi bi-file-earmark-text me-2"></i>
                   <a :href="whitepaperDownloadLink">{{ whitepaperFilename }}</a>
-                  <a class="ms-5" @click="editWhitepaper = !editWhitepaper">Edit</a>
                 </div>
               </div>
 
-              <div class="row">
-              <div class="col-md-12">
-                <div class="mt-3">
-                  <label for="document" class="">Code Files</label>
-                  <input type="file" ref="codes" class="form-controls w-100" id="document" @change="onFileChangeCodes" />
-                  <div class="text-secondary small">
-                    Please attach a zipped folder containing the code files.
-                  </div>
+              <div class="">
+                <label for="document" class="">Code Files</label>
+                <div>
+                  <i class="bi bi-file-earmark-text me-2"></i>
+                  <a :href="codeFilesDownloadLink">{{ codeFilesname }}</a>
                 </div>
               </div>
-            </div>
-
-          
             </SectionLayout>
 
             
@@ -360,13 +353,12 @@
               </div>
             </SectionLayout>
             <div class="text-nowrap my-2">
-              <input type="checkbox" id="terms" name="terms" value="terms" ref="terms" class="me-2" />
+              <input type="checkbox" id="terms" name="terms" value="terms" ref="terms" class="me-2" checked/>
               <label for="terms" class="text-wrap align-top">
                 By submitting this form, I/we confirm that the provided information is true and
                 accurate to the best of my/our knowledge.
               </label>
             </div>
-            <button type="button" class="btn btn-primary" @click="submit()">Submit</button>
           </div>
         </div>
       </div>
@@ -421,6 +413,8 @@ export default {
       this.whitepaper = projectInfo?.Content.Whitepaper ?? ''
       this.whitepaperId = projectInfo?.Content.WhitepaperFile.ID ?? ''
       this.whitepaperFilename = projectInfo?.Content.WhitepaperFile.Filename ?? ''
+      this.codeFilesId = projectInfo?.Content.CodeFiles.ID ?? ''
+      this.codeFilesname = projectInfo?.Content.CodeFiles.Filename ?? ''
       this.numFounders = projectInfo?.Content.NumFounders.toString() ?? '0'
 
       // this.founders = JSON.parse(JSON.stringify(projectInfo?.Content.Founders)) ?? []
@@ -467,19 +461,27 @@ export default {
       this.motivation = projectInfo?.Content.Motivation ?? ''
       this.assets = projectInfo?.Content.Assets ?? ''
 
+      console.log('whitepaper', this.whitepaperId, this.whitepaperFilename)
       const preSignedGetUrl: any = await getPreSignedGetUrl(
         this.whitepaperId,
         this.whitepaperFilename
       )
       this.whitepaperDownloadLink = preSignedGetUrl?.URL ?? ''
 
-      for (let i = 0; i < this.founders.length; i++) {
-        const preSignedGetUrl: any = await getPreSignedGetUrl(
-          this.founders[i].CV,
-          this.founders[i].CVFilename
-        )
-        this.founders[i].CVDwonloadLink = preSignedGetUrl?.URL ?? ''
-      }
+      console.log('codeFiles', this.codeFilesId, this.codeFilesname)
+      const preSignedGetUrlCode: any = await getPreSignedGetUrl(
+        this.codeFilesId,
+        this.codeFilesname
+      )
+      this.codeFilesDownloadLink = preSignedGetUrlCode?.URL ?? ''
+
+      // for (let i = 0; i < this.founders.length; i++) {
+      //   const preSignedGetUrl: any = await getPreSignedGetUrl(
+      //     this.founders[i].CV,
+      //     this.founders[i].CVFilename
+      //   )
+      //   this.founders[i].CVDwonloadLink = preSignedGetUrl?.URL ?? ''
+      // }
 
       // this.founders = JSON.parse(JSON.stringify(this.founders))
     } else {
@@ -507,6 +509,9 @@ export default {
       editWhitepaper: false,
       whitepaperId: '',
       whitepaperFilename: '',
+      codeFilesId: '',
+      codeFilesname: '',
+      codeFilesDownloadLink: '',
       whitepaperUploadLink: '',
       readonly: true,
       teamMembers: [

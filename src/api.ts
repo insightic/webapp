@@ -40,7 +40,7 @@ export async function getPreSignedPutUrl() {
 }
 
 export async function getPreSignedGetUrl(id: string, filename: string) {
-  const body = { ObjectID: id, DesiredFilename: filename }
+  const body = { ObjectID: id, FileName: filename }
   const data = await httpclient.post(`/preSignedGet`, body)
   return data?.payload || null
 }
@@ -63,6 +63,7 @@ export interface ProjectContent {
   Website: string
   Whitepaper: string
   WhitepaperFile: S3File
+  CodeFiles: S3File
   NumFounders: number
   Founders: Founder[]
   NumMembers: number
