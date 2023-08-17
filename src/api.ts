@@ -62,7 +62,7 @@ export interface ProjectContent {
   Twitter: string
   Website: string
   Whitepaper: string
-  WhitepaperFile: WhitepaperFile
+  WhitepaperFile: S3File
   NumFounders: number
   Founders: Founder[]
   NumMembers: number
@@ -108,18 +108,19 @@ export interface Member {
   Position: string
 }
 
-export interface WhitepaperFile {
+export interface S3File {
   ID: string
   Filename: string
   FileLink: string
 }
 
-export interface NewProject {
+export interface NewApplication {
   Name: string
   Twitter: string
   Website: string
   Whitepaper: string
-  WhitepaperFile: WhitepaperFile
+  WhitepaperFile: S3File,
+  CodeFiles: S3File
   WhitepaperFileLink: string
   NumFounders: number
   Founders: Founder[]
@@ -130,7 +131,7 @@ export interface NewProject {
   Assets: string
 }
 
-export async function createProject(project: NewProject): Promise<Application> {
+export async function createProject(project: NewApplication): Promise<Application> {
   const resp = await httpclient.post<Application>(`/applications`, project)
   return resp?.payload || ({} as Application)
 }
@@ -154,7 +155,7 @@ export async function getApplication(id: number | string): Promise<Application |
 
 export async function updateApplication(
   id: number | string,
-  project: NewProject
+  project: NewApplication
 ): Promise<Application | null> {
   const resp = await httpclient.put<Application>(`/applications/${id}`, project)
   return resp?.payload || null
@@ -165,7 +166,7 @@ export async function deleteApplication(id: number | string): Promise<any | null
   return resp?.payload || null
 }
 
-export async function updateSubmission(applicationID: number | string, submissionID: number | string, project: NewProject): Promise<Application | null> {
+export async function updateSubmission(applicationID: number | string, submissionID: number | string, project: NewApplication): Promise<Application | null> {
   const resp = await httpclient.put<Application>(`/applications/${applicationID}/results/${submissionID}`, project)
   return resp?.payload || null
 }

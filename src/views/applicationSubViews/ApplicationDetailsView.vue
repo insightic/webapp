@@ -393,7 +393,7 @@ import { createProjectJob, getApplication } from '@/api'
 import { organizationsStore } from '@/stores/organizations'
 import { mapStores } from 'pinia'
 import { updateApplication, getPreSignedPutUrl, getPreSignedGetUrl, uploadFile } from '@/api'
-import type { NewProject } from '@/api'
+import type { NewApplication } from '@/api'
 
 export default {
   components: {
@@ -594,7 +594,7 @@ export default {
         Objective: this.objective,
         Motivation: this.motivation,
         Assets: this.assets,
-      } as unknown as NewProject
+      } as unknown as NewApplication
 
       console.log(data)
       console.log('this.$route.params.projectID', this.$route.params.projectID)

@@ -280,20 +280,26 @@
             <SectionLayout title="Documents">
               <div class="">
                 <label for="document" class="">Whitepaper (File)</label>
-                <div v-if="!editWhitepaper && whitepaper">
+                <div>
                   <i class="bi bi-file-earmark-text me-2"></i>
                   <a :href="whitepaperDownloadLink">{{ whitepaperFilename }}</a>
                   <a class="ms-5" @click="editWhitepaper = !editWhitepaper">Edit</a>
                 </div>
-                <div v-else>
-                  <input type="file" class="form-controls" id="document" @change="onFileChange" />
-                  <a @click="editWhitepaper = !editWhitepaper">Cancel</a>
+              </div>
+
+              <div class="row">
+              <div class="col-md-12">
+                <div class="mt-3">
+                  <label for="document" class="">Code Files</label>
+                  <input type="file" ref="codes" class="form-controls w-100" id="document" @change="onFileChangeCodes" />
                   <div class="text-secondary small">
-                    Please attach a quality version of the whitepaper document.
+                    Please attach a zipped folder containing the code files.
                   </div>
                 </div>
               </div>
+            </div>
 
+          
             </SectionLayout>
 
             
@@ -379,7 +385,7 @@ import { createProjectJob, getApplication } from '@/api'
 import { organizationsStore } from '@/stores/organizations'
 import { mapStores } from 'pinia'
 import { updateApplication, getPreSignedPutUrl, getPreSignedGetUrl, uploadFile } from '@/api'
-import type { NewProject } from '@/api'
+import type { NewApplication } from '@/api'
 
 export default {
   components: {
@@ -578,7 +584,7 @@ export default {
         Objective: this.objective,
         Motivation: this.motivation,
         Assets: this.assets,
-      } as unknown as NewProject
+      } as unknown as NewApplication
 
       console.log(data)
       console.log('this.$route.params.projectID', this.$route.params.projectID)

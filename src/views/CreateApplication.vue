@@ -7,7 +7,7 @@
         <div
           class="me-2 nav-item"
           @click="current = 1"
-          :class="current == 1 ? '' : 'text-secondary'"
+          :class="current != 1 && complete1 ? 'text-success' : current != 1 && !complete1 ? 'text-secondary' : 'text-secondary'"
         >
           <i v-if="current == 1" class="bi bi-1-square-fill"></i>
           <i v-else class="bi bi-1-square"></i>
@@ -17,7 +17,7 @@
         <div
           class="mx-2 nav-item"
           @click="current = 2"
-          :class="current == 2 ? '' : 'text-secondary'"
+          :class="current != 2 && complete2 ? 'text-success' : current != 2 && !complete2 ? 'text-secondary' : 'text-secondary'"
         >
           <i v-if="current == 2" class="bi bi-2-square-fill"></i>
           <i v-else class="bi bi-2-square"></i>
@@ -27,7 +27,7 @@
         <div
           class="mx-2 nav-item"
           @click="current = 3"
-          :class="current == 3 ? '' : 'text-secondary'"
+          :class="current != 3 && complete3 ? 'text-success' : current != 3 && !complete3 ? 'text-secondary' : 'text-secondary'"
         >
           <i v-if="current == 3" class="bi bi-3-square-fill"></i>
           <i v-else class="bi bi-3-square"></i>
@@ -37,7 +37,7 @@
         <div
           class="mx-2 nav-item"
           @click="current = 4"
-          :class="current == 4 ? '' : 'text-secondary'"
+          :class="current != 4 && complete4 ? 'text-success' : current != 4 && !complete4 ? 'text-secondary' : 'text-secondary'"
         >
           <i v-if="current == 4" class="bi bi-4-square-fill"></i>
           <i v-else class="bi bi-4-square"></i>
@@ -45,9 +45,8 @@
         </div>
         <span><i class="bi bi-chevron-right"></i></span>
         <div
-          class="ms-2 nav-item"
+          class="ms-2 nav-item text-secondary"
           @click="current = 5"
-          :class="current == 5 ? '' : 'text-secondary'"
         >
           <i v-if="current == 5" class="bi bi-5-square-fill"></i>
           <i v-else class="bi bi-5-square"></i>
@@ -73,8 +72,6 @@
               <div class="col-md-6">
                 <LabelInputComponent label="Website (URL)" type="text" v-model:field="website" :required="true" />
               </div>
-
-
             </div>
           </SectionLayout>
 
@@ -100,19 +97,19 @@
                   />
                 </div>
                 <div class="col-md-12">
-                  <LabelInputComponent label="KYC Verification" type="text" v-model:field="founder.Kyc" :required="true" />
+                  <LabelInputComponent label="KYC Verification" type="text" v-model:field="founder.Kyc" />
                 </div>
                 <div class="col-md-6">
-                  <LabelInputComponent label="Twitter (URL)" type="text" v-model:field="founder.Twitter" :required="true" />
+                  <LabelInputComponent label="Twitter (URL)" type="text" v-model:field="founder.Twitter" />
                 </div>
                 <div class="col-md-6">
-                  <LabelInputComponent label="LinkedIn (URL)" type="text" v-model:field="founder.Linkedin" :required="true" />
+                  <LabelInputComponent label="LinkedIn (URL)" type="text" v-model:field="founder.Linkedin" />
                 </div>
                 <div class="col-md-6">
-                  <LabelInputComponent label="Email" type="text" v-model:field="founder.Email" :required="true" />
+                  <LabelInputComponent label="Email" type="text" v-model:field="founder.Email" />
                 </div>
                 <div class="col-md-6">
-                  <LabelInputComponent label="Ethereum Address" type="text" v-model:field="founder.Ethereum" :required="true" />
+                  <LabelInputComponent label="Ethereum Address" type="text" v-model:field="founder.Ethereum" />
                 </div>
 
                 <!-- <div class="">
@@ -147,10 +144,10 @@
               <div class="row">
                 <h6>Member {{ counter + 1 }}</h6>
                   <div class="col-md-6">
-                    <LabelInputComponent label="Name" type="text" v-model.lazy="member.Name" :required="true" />
+                    <LabelInputComponent label="Name" type="text" v-model:field="member.Name" :required="true" />
                   </div>
                   <div class="col-md-6">
-                    <LabelInputComponent label="Role" type="text" v-model.lazy="member.Position" :required="true" />
+                    <LabelInputComponent label="Role" type="text" v-model:field="member.Position" :required="true" />
                   </div>
               </div>
             </div>
@@ -165,7 +162,7 @@
           <div class="row">
             <div class="col-md-6">
               <button class="btn btn-primary me-2">Save Draft</button>
-              <button class="btn btn-success ms-2">Save and Next</button>
+              <button class="btn btn-success ms-2">Next</button>
             </div>
           </div>
         </div>
@@ -197,7 +194,7 @@
           <div class="row">
             <div class="col-md-6">
               <button class="btn btn-primary me-2">Save Draft</button>
-              <button class="btn btn-success ms-2">Save and Next</button>
+              <button class="btn btn-success ms-2">Next</button>
             </div>
           </div>
         </div>
@@ -220,18 +217,18 @@
           <div class="row">
             <div class="col-md-6">
               <button class="btn btn-primary me-2">Save Draft</button>
-              <button class="btn btn-success ms-2">Save and Next</button>
+              <button class="btn btn-success ms-2">Next</button>
             </div>
           </div>
         </div>
 
-        <div v-if="current == 4">
+        <div v-show="current == 4">
           <SectionLayout title="Documents">
             <div class="row">
               <div class="col-md-12">
                 <div class="">
                   <label for="document" class="">Whitepaper (File)</label>
-                  <input type="file" class="form-controls w-100" id="document" @change="onFileChange" />
+                  <input type="file" ref="whitepaper" class="form-controls w-100" id="document" @change="onFileChange" />
                   <div class="text-secondary small">
                     Please attach a quality version of the whitepaper document.
                   </div>
@@ -243,7 +240,7 @@
               <div class="col-md-12">
                 <div class="mt-3">
                   <label for="document" class="">Code Files</label>
-                  <input type="file" class="form-controls w-100" id="document" @change="onFileChangeCodes" />
+                  <input type="file" ref="codes" class="form-controls w-100" id="document" @change="onFileChangeCodes" />
                   <div class="text-secondary small">
                     Please attach a zipped folder containing the code files.
                   </div>
@@ -256,7 +253,7 @@
           <div class="row">
             <div class="col-md-6">
               <button class="btn btn-primary me-2">Save Draft</button>
-              <button class="btn btn-success ms-2">Save and Next</button>
+              <button class="btn btn-success ms-2">Next</button>
             </div>
           </div>
         </div>
@@ -340,7 +337,7 @@ import SectionLayout from '@/layouts/SectionLayout.vue'
 import LabelInputComponent from '@/components/LabelInputComponent.vue'
 import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
 import { createProject, getPreSignedPutUrl, uploadFile } from '@/api'
-import type { NewProject } from '@/api'
+import type { NewApplication } from '@/api'
 
 export default {
   components: {
@@ -348,6 +345,8 @@ export default {
     SectionLayout,
     LabelInputComponent,
     LabelTextareaComponent
+  },
+  mounted() {
   },
   data() {
     return {
@@ -362,10 +361,11 @@ export default {
       website: '',
       whitepaper: '',
       whitepaperFile: File,
-      whitepaperId: '',
+      whitepaperFileId: '',
       codesFile: File,
-      codesId: '',
+      codesFileId: '',
       whitepaperUploadLink: '',
+      codesUploadLink: '',
       teamMembers: [
         {
           Name: '',
@@ -396,30 +396,41 @@ export default {
   },
   computed: {
     complete1() {
-      return (
-        this.name !== '' && this.twitter !== '' && this.website !== '' && this.whitepaper !== ''
-      )
+      let info = this.name !== '' && this.twitter !== '' && this.website !== ''
+      let founder = true
+      if (this.founders.length != 0 && this.teamMembers.length != 0) {
+        for (let i = 0; i < this.founders.length; i++) {
+          if (
+            this.founders[i].Name === '' ||
+            this.founders[i].Position === ''
+          ) {
+            founder = false
+          }
+        }
+      }
+      let teamMember = true
+      if (this.teamMembers.length != 0) {
+        for (let i = 0; i < this.teamMembers.length; i++) {
+          if (
+            this.teamMembers[i].Name === '' ||
+            this.teamMembers[i].Position === ''
+          ) {
+            teamMember = false
+          }
+        }
+      }
+      return info && founder && teamMember
     },
     complete2() {
-      if (this.founders.length == 0 && this.teamMembers.length == 0) {
-        return true
-      } else if (this.founders[0].Name == '') {
-        return false
-      } else {
-        return true
-      }
+      return this.objective !== '' && this.motivation !== ''
+
     },
     complete3() {
-      return this.objective !== ''
+      return this.assets !== ''
+
     },
     complete4() {
-      return this.motivation !== ''
-    },
-    complete5() {
-      return this.assets !== ''
-    },
-    calcHeight() {
-      return this.founders.length * 600 + this.teamMembers.length * 100 + 'px'
+      return (this.whitepaperFile as any).size > 0 && (this.codesFile as any).size > 0
     }
   },
   methods: {
@@ -428,9 +439,12 @@ export default {
     },
     async onFileChange(e: any) {
       this.whitepaperFile = e.target.files[0]
+      console.log(this.whitepaperFile)
+      console.log((this.$refs.whitepaper as any)?.files.length)
     },
     async onFileChangeCodes(e: any) {
       this.codesFile = e.target.files[0]
+      console.log((this.$refs.codes as any)?.files.length)
     },
     async onFileChangeCV(e: any, index: number) {
       console.log(e.target)
@@ -438,66 +452,79 @@ export default {
       console.log(this.founders[index].cvFile)
     },
     async submit() {
-      //   if (!this.complete1 || !this.complete2 || !this.complete3 || !this.complete4) {
-      //     window.alert('Please fill in all required fields')
-      //     return
-      //   } else if (!(this.$refs.terms as any).checked) {
-      //     window.alert('Please agree to the terms and conditions')
-      //     return
-      //   } else {
       if (!this.complete1 || !this.complete2 || !this.complete3 || !this.complete4) {
-        window.confirm('Required fields are not filled in. Are you sure you want to submit?')
-      }
-      if (this.whitepaperFile) {
-        const preSignedPutUrl: any = await getPreSignedPutUrl()
-        if (preSignedPutUrl) {
-          const fileResp = await uploadFile(preSignedPutUrl.URL, this.whitepaperFile as any)
-          if (fileResp.ok) {
-            this.whitepaperId = preSignedPutUrl.ObjectID
-            this.whitepaperUploadLink = preSignedPutUrl.URL
-          }
-        }
-      }
-
-      for (let i = 0; i < this.founders.length; i++) {
-        if (this.founders[i].cvFile) {
+        window.alert('Please fill in all required fields')
+        return
+      } else if (!(this.$refs.terms as any).checked) {
+        window.alert('Please agree to the terms and conditions')
+        return
+      } else {
+        if (this.whitepaperFile) {
           const preSignedPutUrl: any = await getPreSignedPutUrl()
           if (preSignedPutUrl) {
-            const fileResp = await uploadFile(preSignedPutUrl.URL, this.founders[i].cvFile as any)
+            const fileResp = await uploadFile(preSignedPutUrl.URL, this.whitepaperFile as any)
             if (fileResp.ok) {
-              this.founders[i].CV = preSignedPutUrl.ObjectID
-              this.founders[i].cvUploadLink = preSignedPutUrl.URL
-              this.founders[i].CVFilename = this.founders[i].cvFile.name
+              this.whitepaperFileId = preSignedPutUrl.ObjectID
+              this.whitepaperUploadLink = preSignedPutUrl.URL
             }
           }
         }
+
+        if (this.codesFile) {
+          const preSignedPutUrl: any = await getPreSignedPutUrl()
+          if (preSignedPutUrl) {
+            const fileResp = await uploadFile(preSignedPutUrl.URL, this.codesFile as any)
+            if (fileResp.ok) {
+              this.codesFileId = preSignedPutUrl.ObjectID
+              this.codesUploadLink = preSignedPutUrl.URL
+            }
+          }
+        }
+
+        // for (let i = 0; i < this.founders.length; i++) {
+        //   if (this.founders[i].cvFile) {
+        //     const preSignedPutUrl: any = await getPreSignedPutUrl()
+        //     if (preSignedPutUrl) {
+        //       const fileResp = await uploadFile(preSignedPutUrl.URL, this.founders[i].cvFile as any)
+        //       if (fileResp.ok) {
+        //         this.founders[i].CV = preSignedPutUrl.ObjectID
+        //         this.founders[i].cvUploadLink = preSignedPutUrl.URL
+        //         this.founders[i].CVFilename = this.founders[i].cvFile.name
+        //       }
+        //     }
+        //   }
+        // }
+        let data = {
+          Name: this.name,
+          Twitter: this.twitter,
+          Website: this.website,
+          Whitepaper: this.whitepaper,
+          WhitepaperFile: {
+            ID: this.whitepaperFileId,
+            Filename: this.whitepaperFile.name,
+            URL: this.whitepaperUploadLink
+          },
+          CodeFiles: {
+            ID: this.codesFileId,
+            Filename: this.codesFile.name,
+            URL: this.codesUploadLink
+          },
+          NumFounders: parseInt(this.numFounders) ? parseInt(this.numFounders) : 0,
+          Founders: this.founders,
+          NumMembers: parseInt(this.numTeamMembers) ? parseInt(this.numTeamMembers) : 0,
+          Members: this.teamMembers,
+          Objective: this.objective,
+          Motivation: this.motivation,
+          Assets: this.assets
+        } as unknown as NewApplication
+
+        console.log(data)
+
+        const resp = await createProject(data)
+        console.log(resp)
+        window.alert('Your response has been submitted')
+        this.$router.push({ path:"/", query: { view: 'Applications' } })
       }
-      let data = {
-        Name: this.name,
-        Twitter: this.twitter,
-        Website: this.website,
-        Whitepaper: this.whitepaper,
-        WhitepaperFile: {
-          ID: this.whitepaperId,
-          Filename: this.whitepaperFile.name,
-          URL: this.whitepaperUploadLink
-        },
-        NumFounders: parseInt(this.numFounders) ? parseInt(this.numFounders) : 0,
-        Founders: this.founders,
-        NumMembers: parseInt(this.numTeamMembers) ? parseInt(this.numTeamMembers) : 0,
-        Members: this.teamMembers,
-        Objective: this.objective,
-        Motivation: this.motivation,
-        Assets: this.assets
-      } as unknown as NewProject
-
-      console.log(data)
-
-      const resp = await createProject(data)
-      console.log(resp)
-      window.alert('Your response has been submitted')
-      this.$router.push({ path:"/", query: { view: 'Applications' } })
-      // }
     }, 
 
     addMember() {
@@ -536,7 +563,6 @@ export default {
         2: this.complete2,
         3: this.complete3,
         4: this.complete4,
-        5: this.complete5
       }
       if (mapping[curr as keyof typeof mapping]) {
         this.current = curr + 1
