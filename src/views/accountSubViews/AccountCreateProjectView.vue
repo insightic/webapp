@@ -322,7 +322,7 @@
 import LabelInputComponent from '@/components/LabelInputComponent.vue'
 import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
 import { createProject, getPreSignedPutUrl, uploadFile } from '@/api'
-import type { NewProject } from '@/api'
+import type { NewApplication } from '@/api'
 
 export default {
   setup() {},
@@ -482,7 +482,7 @@ export default {
         Objective: this.objective,
         Motivation: this.motivation,
         Assets: this.assets
-      } as unknown as NewProject
+      } as unknown as NewApplication
 
       await createProject(data)
       window.alert('Your response has been submitted')
