@@ -217,8 +217,7 @@
               </SectionLayout>
 
             <SectionLayout title="Team Members">
-
-                <div class="mt-5">
+                <div class="">
                   <label class="form-label" for="teamMembers">
                     Team Members
                     <span class="text-danger">*</span>
@@ -236,10 +235,10 @@
                     <div class="row">
                       <h6>Member {{ counter + 1 }}</h6>
                         <div class="col-md-6">
-                          <LabelInputComponent label="Name" type="text" v-model.lazy="member.Name" :required="true" />
+                          <LabelInputComponent label="Name" type="text" v-model:field="member.Name" :required="true" />
                         </div>
                         <div class="col-md-6">
-                          <LabelInputComponent label="Role" type="text" v-model.lazy="member.Role" :required="true" />
+                          <LabelInputComponent label="Role" type="text" v-model:field="member.Role" :required="true" />
                         </div>
                     </div>
                   </div>
@@ -291,7 +290,7 @@
             <SectionLayout title="Documents">
               <div class="">
                 <label for="document" class="">Whitepaper (File)</label>
-                <div v-if="!editWhitepaper && whitepaper">
+                <div v-if="!editWhitepaper">
                   <i class="bi bi-file-earmark-text me-2"></i>
                   <a :href="whitepaperDownloadLink">{{ whitepaperFilename }}</a>
                   <a class="ms-5" @click="editWhitepaper = !editWhitepaper">Edit</a>

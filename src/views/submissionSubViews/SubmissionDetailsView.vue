@@ -211,8 +211,7 @@
               </SectionLayout>
 
             <SectionLayout title="Team Members">
-
-                <div class="mt-5">
+                <div class="">
                   <label class="form-label" for="teamMembers">
                     Team Members
                     <span class="text-danger">*</span>
