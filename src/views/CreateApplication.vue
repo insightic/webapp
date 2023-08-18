@@ -161,8 +161,8 @@
           <hr />
           <div class="row">
             <div class="col-md-6">
-              <button class="btn btn-primary me-2">Save Draft</button>
-              <button class="btn btn-success ms-2">Next</button>
+              <button class="btn btn-primary me-2" @click="save()">Save Draft</button>
+              <button class="btn btn-success ms-2" @click="nextStep(1)">Next</button>
             </div>
           </div>
         </div>
@@ -193,8 +193,8 @@
           <hr />
           <div class="row">
             <div class="col-md-6">
-              <button class="btn btn-primary me-2">Save Draft</button>
-              <button class="btn btn-success ms-2">Next</button>
+              <button class="btn btn-primary me-2" @click=save()>Save Draft</button>
+              <button class="btn btn-success ms-2" @click="nextStep(2)">Next</button>
             </div>
           </div>
         </div>
@@ -216,8 +216,8 @@
           <hr />
           <div class="row">
             <div class="col-md-6">
-              <button class="btn btn-primary me-2">Save Draft</button>
-              <button class="btn btn-success ms-2">Next</button>
+              <button class="btn btn-primary me-2" @click="save()">Save Draft</button>
+              <button class="btn btn-success ms-2" @click="nextStep(3)">Next</button>
             </div>
           </div>
         </div>
@@ -227,7 +227,7 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="">
-                  <label for="document" class="">Whitepaper (File)</label>
+                  <label for="document" class="">Whitepaper File <span class="text-danger">*</span></label>
                   <input type="file" ref="whitepaper" class="form-controls w-100" id="document" @change="onFileChange" />
                   <div class="text-secondary small">
                     Please attach a quality version of the whitepaper document.
@@ -239,7 +239,7 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="mt-3">
-                  <label for="document" class="">Code Files</label>
+                  <label for="document" class="">Code Files <span class="text-danger">*</span></label>
                   <input type="file" ref="codes" class="form-controls w-100" id="document" @change="onFileChangeCodes" />
                   <div class="text-secondary small">
                     Please attach a zipped folder containing the code files.
@@ -252,8 +252,8 @@
           <hr />
           <div class="row">
             <div class="col-md-6">
-              <button class="btn btn-primary me-2">Save Draft</button>
-              <button class="btn btn-success ms-2">Next</button>
+              <button class="btn btn-primary me-2" @click=save()>Save Draft</button>
+              <button class="btn btn-success ms-2"  @click="nextStep(4)">Next</button>
             </div>
           </div>
         </div>
@@ -362,8 +362,8 @@ export default {
       whitepaper: '',
       whitepaperFile: File,
       whitepaperFileId: '',
-      codesFile: File,
-      codesFileId: '',
+      codeFiles: File,
+      codeFilesId: '',
       whitepaperUploadLink: '',
       codesUploadLink: '',
       teamMembers: [
@@ -430,12 +430,12 @@ export default {
 
     },
     complete4() {
-      return (this.whitepaperFile as any).size > 0 && (this.codesFile as any).size > 0
+      return (this.whitepaperFile as any).size > 0 && (this.codeFiles as any).size > 0
     }
   },
   methods: {
     save() {
-      window.alert('Your response has been saved')
+      window.alert('Your response has been saved (template))')
     },
     async onFileChange(e: any) {
       this.whitepaperFile = e.target.files[0]
@@ -443,7 +443,7 @@ export default {
       console.log((this.$refs.whitepaper as any)?.files.length)
     },
     async onFileChangeCodes(e: any) {
-      this.codesFile = e.target.files[0]
+      this.codeFiles = e.target.files[0]
       console.log((this.$refs.codes as any)?.files.length)
     },
     async onFileChangeCV(e: any, index: number) {
@@ -470,12 +470,12 @@ export default {
           }
         }
 
-        if (this.codesFile) {
+        if (this.codeFiles) {
           const preSignedPutUrl: any = await getPreSignedPutUrl()
           if (preSignedPutUrl) {
-            const fileResp = await uploadFile(preSignedPutUrl.URL, this.codesFile as any)
+            const fileResp = await uploadFile(preSignedPutUrl.URL, this.codeFiles as any)
             if (fileResp.ok) {
-              this.codesFileId = preSignedPutUrl.ObjectID
+              this.codeFilesId = preSignedPutUrl.ObjectID
               this.codesUploadLink = preSignedPutUrl.URL
             }
           }
@@ -505,8 +505,8 @@ export default {
             URL: this.whitepaperUploadLink
           },
           CodeFiles: {
-            ID: this.codesFileId,
-            Filename: this.codesFile.name,
+            ID: this.codeFilesId,
+            Filename: this.codeFiles.name,
             URL: this.codesUploadLink
           },
           NumFounders: parseInt(this.numFounders) ? parseInt(this.numFounders) : 0,
@@ -573,21 +573,24 @@ export default {
   },
   watch: {
     numFounders: function (val: string) {
-      this.founders = []
-      for (let i = 0; i < parseInt(val); i++) {
-        this.founders.push({
-          Name: '',
-          Position: '',
-          Kyc: '',
-          Twitter: '',
-          Linkedin: '',
-          Ethereum: '',
-          Email: '',
-          CV: '',
-          cvFile: File,
-          cvUploadLink: '',
-          CVFilename: ''
-        })
+      if (this.founders.length > parseInt(val)) {
+        this.founders.splice(parseInt(val), this.founders.length - parseInt(val))
+      } else {
+        while (this.founders.length < parseInt(val)) {
+          this.founders.push({
+            Name: '',
+            Position: '',
+            Kyc: '',
+            Twitter: '',
+            Linkedin: '',
+            Ethereum: '',
+            Email: '',
+            CV: '',
+            cvFile: File,
+            cvUploadLink: '',
+            CVFilename: ''
+          })
+        }
       }
     },
     numTeamMembers: function (val: string) {
