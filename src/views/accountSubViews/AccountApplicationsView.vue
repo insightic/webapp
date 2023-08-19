@@ -4,7 +4,13 @@
     <RouterLink class="btn btn-primary" to="/create-application">New Application</RouterLink>
   </div>
 
-  <div class="w-100" style="overflow-x: auto">
+  <div v-if="isloading" class="w-100 d-flex justify-content-center mt-5">
+    <div class="spinner-grow spinner-grow-sm text-primary mx-2"></div>
+    <div class="spinner-grow spinner-grow-sm text-primary mx-2"></div>
+    <div class="spinner-grow spinner-grow-sm text-primary mx-2"></div>
+  </div>
+
+  <div v-else class="w-100" style="overflow-x: auto">
     <table class="table table-bordered">
       <thead class="table-dark">
         <tr>
@@ -49,10 +55,12 @@ export default {
   },
   async created() {
     this.applications = await getApplications()
+    this.isloading = false
   },
   data() {
     return {
-      applications: [] as Application[]
+      applications: [] as Application[],
+      isloading: true
     }
   },
   computed: {
