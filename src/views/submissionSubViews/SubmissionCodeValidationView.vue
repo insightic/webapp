@@ -19,7 +19,7 @@
           <td>{{ item['Data Received'] }}</td>
           <td>{{ item.Status }}</td>
         </tr> -->
-        <tr v-for="item in codeValidation" :key="item">
+        <tr v-for="item in codeValidation" :key="item.description">
           <td>{{item.description}}</td>
           <td>{{item.code}}</td>
           <td>{{item.whitepaper}}</td>
@@ -37,6 +37,8 @@ import ApplicationViewMixin from '@/views/applicationSubViews/ApplicationViewMix
 import { organizationsStore } from '@/stores/organizations'
 import { mapStores } from 'pinia'
 import { updateApplication, getPreSignedPutUrl, getPreSignedGetUrl, uploadFile, createProjectJob, getApplication  } from '@/api'
+import type { CodeValidationResult } from '@/api'
+
 
 export default {
   components: {},
@@ -52,7 +54,7 @@ export default {
   },
   data() {
     return {
-      codeValidation: [],
+      codeValidation: [] as CodeValidationResult[],
       sectA: [
         {
           item: 'DLT Foundation Name',

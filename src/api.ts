@@ -73,12 +73,19 @@ export interface ProjectContent {
   Assets: string
 }
 
+export interface CodeValidationResult {
+  code: string
+  description: string
+  whitepaper: string
+}
+
 export interface Submission {
   Content: ProjectContent
   SubmissionID: string
   Results: JobRunResult[]
   Status: string
   CreatedAt: string
+  CodeValidationResults: CodeValidationResult[]
 }
 
 export interface Application {
