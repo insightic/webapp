@@ -615,6 +615,16 @@ export default {
             }
           }
         }
+        if (this.codeFiles && this.editCodeFiles) {
+          const preSignedPutUrlCode: any = await getPreSignedPutUrl()
+          if (preSignedPutUrlCode) {
+            const fileResp = await uploadFile(preSignedPutUrlCode.URL, this.codeFiles as any)
+            if (fileResp.ok) {
+              this.codeFilesId = preSignedPutUrlCode.ObjectID
+              this.codeFilesUploadLink = preSignedPutUrlCode.URL
+            }
+          }
+        }
         let data = {
           Name: this.name,
           Twitter: this.twitter,
