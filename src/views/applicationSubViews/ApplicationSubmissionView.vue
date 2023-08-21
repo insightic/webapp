@@ -70,6 +70,8 @@ export default {
     this.applicationID = this.$route.params.projectID as string
     const resp = await getApplication(this.applicationID)
     this.submissions = resp?.Submissions || []
+
+    console.log(this.submissions)
   },
   components: {
     NavFooterLayout

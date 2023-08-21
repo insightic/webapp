@@ -19,10 +19,10 @@
           <td>{{ item['Data Received'] }}</td>
           <td>{{ item.Status }}</td>
         </tr> -->
-        <tr v-for="item in [1,2,3,4,5]" :key="item">
-          <td>desc</td>
-          <td>code</td>
-          <td>whitepaper</td>
+        <tr v-for="item in codeValidation" :key="item">
+          <td>{{item.description}}</td>
+          <td>{{item.code}}</td>
+          <td>{{item.whitepaper}}</td>
         </tr>
       </tbody>
     </table>
@@ -44,10 +44,11 @@ export default {
     const projectInfo = await getApplication(this.$route.params.projectID as string)
     .then(
       (res) =>
-        res!.Submissions.filter((item) => item.CreatedAt == res?.UpdatedAt)[0]
+        res!.Submissions.filter((item) => item.CreatedAt == res?.CreatedAt)[0]
     )
     console.log('projectInfo', projectInfo)
-
+    this.codeValidation = projectInfo.CodeValidationResults
+    console.log('codeValid', this.codeValidation)
   },
   data() {
     return {
