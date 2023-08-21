@@ -1,10 +1,9 @@
 <template>
-  <div class="text-secondary mb-4">Project Overview</div>
+  <div class="text-secondary mb-4">Submission Details</div>
 
   <div style="max-width: 960px">
-    <div class="mb-4 fw-bold">DLT Foundation Details Registration Auto-Check Report</div>
+    <div class="mb-4 fw-bold">Code Validation Results</div>
 
-    <div class="mb-2">**Section A: DLT Foundation Details**</div>
     <table class="table w-100 mb-4">
       <thead>
         <tr>
