@@ -388,14 +388,16 @@ export default {
     const projectInfo = await getApplication(this.$route.params.projectID as string)
     .then(
       (res) =>
-        res!.Submissions.filter((item) => item.CreatedAt == res?.CreatedAt)[0]
+        res!.Submissions.filter((item) => item.SubmissionID == this.$route.params.submissionID)[0]
     )
 
     const proj = await getApplication(this.$route.params.projectID as string)
-    .then(
-      (res) =>
-        res!.Submissions.filter((item) => item.CreatedAt == res?.UpdatedAt)[0]
-    )
+    // .then(
+    //   (res) =>
+    //     res!.Submissions.filter((item) => item.CreatedAt == res?.UpdatedAt)[0]
+    // )
+
+    console.log('route', this.$route.params)
     
     console.log('prog', proj)
 

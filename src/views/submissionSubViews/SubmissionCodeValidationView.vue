@@ -45,7 +45,7 @@ export default {
     const projectInfo = await getApplication(this.$route.params.projectID as string)
     .then(
       (res) =>
-        res!.Submissions.filter((item) => item.CreatedAt == res?.CreatedAt)[0]
+        res!.Submissions.filter((item) => item.SubmissionID == this.$route.params.submissionID)[0]
     )
     console.log('projectInfo', projectInfo)
     this.codeValidation = projectInfo.CodeValidationResults
