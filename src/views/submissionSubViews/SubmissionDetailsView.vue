@@ -239,6 +239,8 @@
 
                 </div>
             </SectionLayout>
+            <FormNavButtons :nextBtn="true" @prev="prev" @next="next"/>
+
           </div>
 
           <div v-if="current == 2">
@@ -260,6 +262,8 @@
                 :disabled="readonly"
               />
             </SectionLayout>
+            <FormNavButtons :prevBtn="true" :nextBtn="true" @prev="prev" @next="next"/>
+
           </div>
 
           <div v-if="current == 3">
@@ -273,6 +277,7 @@
                 :disabled="readonly"
               />
             </SectionLayout>
+            <FormNavButtons :prevBtn="true" :nextBtn="true" @prev="prev" @next="next"/>
           </div>
 
           <div v-if="current == 4">
@@ -294,7 +299,8 @@
               </div>
             </SectionLayout>
 
-            
+            <FormNavButtons :prevBtn="true" :nextBtn="true" @prev="prev" @next="next"/>
+
           </div>
 
           <div v-if="current == 5">
@@ -358,6 +364,7 @@
                 accurate to the best of my/our knowledge.
               </label>
             </div>
+            <FormNavButtons :prevBtn="true" :nextBtn="false" @prev="prev" @next="next"/>
           </div>
         </div>
       </div>
@@ -377,12 +384,14 @@ import { organizationsStore } from '@/stores/organizations'
 import { mapStores } from 'pinia'
 import { updateApplication, getPreSignedPutUrl, getPreSignedGetUrl, uploadFile } from '@/api'
 import type { NewApplication } from '@/api'
+import FormNavButtons from '@/components/FormNavButtons.vue'
 
 export default {
   components: {
     SectionLayout,
     LabelInputComponent,
-    LabelTextareaComponent
+    LabelTextareaComponent,
+    FormNavButtons
   },
   async created() {
     const projectInfo = await getApplication(this.$route.params.projectID as string)
@@ -611,6 +620,12 @@ export default {
       // const job = await createProjectJob(this.projectID)
       // console.log(job)
       this.$router.push('/projects/' + this.$route.params.projectID)
+    },
+    prev() {
+      this.current = this.current - 1
+    },
+    next() {
+      this.current = this.current + 1
     }
   },
   computed: {

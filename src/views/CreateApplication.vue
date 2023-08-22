@@ -158,13 +158,8 @@
             </div>
           </SectionLayout>
 
-          <hr />
-          <div class="row">
-            <div class="col-md-6">
-              <button class="btn btn-primary me-2" @click="save()">Save Draft</button>
-              <button class="btn btn-success ms-2" @click="nextStep(1)">Next</button>
-            </div>
-          </div>
+          <FormNavButtons :prevBtn="false" :saveBtn="true" :nextBtn="true" @save="save" @next="nextStep(1)"/>
+
         </div>
         <div v-if="current == 2">
           <SectionLayout title="Objective">
@@ -190,13 +185,8 @@
             </div>
           </SectionLayout>
 
-          <hr />
-          <div class="row">
-            <div class="col-md-6">
-              <button class="btn btn-primary me-2" @click=save()>Save Draft</button>
-              <button class="btn btn-success ms-2" @click="nextStep(2)">Next</button>
-            </div>
-          </div>
+          <FormNavButtons :prevBtn="false" :saveBtn="true" :nextBtn="true" @save="save" @next="nextStep(2)"/>
+
         </div>
         <div v-if="current == 3">
           <SectionLayout title="Initial Assets">
@@ -213,13 +203,8 @@
             </div>
           </SectionLayout>
 
-          <hr />
-          <div class="row">
-            <div class="col-md-6">
-              <button class="btn btn-primary me-2" @click="save()">Save Draft</button>
-              <button class="btn btn-success ms-2" @click="nextStep(3)">Next</button>
-            </div>
-          </div>
+          <FormNavButtons :prevBtn="false" :saveBtn="true" :nextBtn="true" @save="save" @next="nextStep(3)"/>
+
         </div>
 
         <div v-show="current == 4">
@@ -249,13 +234,8 @@
             </div>
           </SectionLayout>
 
-          <hr />
-          <div class="row">
-            <div class="col-md-6">
-              <button class="btn btn-primary me-2" @click=save()>Save Draft</button>
-              <button class="btn btn-success ms-2"  @click="nextStep(4)">Next</button>
-            </div>
-          </div>
+          <FormNavButtons :prevBtn="false" :saveBtn="true" :nextBtn="true" @save="save" @next="nextStep(4)"/>
+
         </div>
 
         <div v-if="current == 5">
@@ -338,13 +318,16 @@ import LabelInputComponent from '@/components/LabelInputComponent.vue'
 import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
 import { createProject, getPreSignedPutUrl, uploadFile } from '@/api'
 import type { NewApplication } from '@/api'
+import FormNavButtons from '@/components/FormNavButtons.vue'
+
 
 export default {
   components: {
     NavFooterLayout,
     SectionLayout,
     LabelInputComponent,
-    LabelTextareaComponent
+    LabelTextareaComponent,
+    FormNavButtons
   },
   mounted() {
   },

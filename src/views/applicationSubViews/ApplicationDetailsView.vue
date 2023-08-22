@@ -250,6 +250,8 @@
 
                 </div>
             </SectionLayout>
+            <FormNavButtons :prevBtn="false" :saveBtn="true" :nextBtn="true" @save="save" @next="nextStep(1)"/>
+
           </div>
 
           <div v-if="current == 2">
@@ -271,6 +273,8 @@
                 :disabled="readonly"
               />
             </SectionLayout>
+            <FormNavButtons :prevBtn="false" :saveBtn="true" :nextBtn="true" @save="save" @next="nextStep(2)"/>
+
           </div>
 
           <div v-if="current == 3">
@@ -284,6 +288,8 @@
                 :disabled="readonly"
               />
             </SectionLayout>
+            <FormNavButtons :prevBtn="false" :saveBtn="true" :nextBtn="true" @save="save" @next="nextStep(3)"/>
+
           </div>
 
           <div v-show="current == 4">
@@ -321,7 +327,7 @@
               </div>
 
             </SectionLayout>
-
+            <FormNavButtons :prevBtn="false" :saveBtn="true" :nextBtn="true" @save="save" @next="nextStep(4)"/>
             
           </div>
 
@@ -409,19 +415,22 @@ import { organizationsStore } from '@/stores/organizations'
 import { mapStores } from 'pinia'
 import { updateApplication, getPreSignedPutUrl, getPreSignedGetUrl, uploadFile } from '@/api'
 import type { NewApplication } from '@/api'
+import FormNavButtons from '@/components/FormNavButtons.vue'
 
 export default {
   components: {
     NavFooterLayout,
     SectionLayout,
     LabelInputComponent,
-    LabelTextareaComponent
+    LabelTextareaComponent,
+    FormNavButtons
   },
   async created() {
     const projectInfo = await getApplication(this.$route.params.projectID as string)
     .then(
       (res) =>
-        res!.Submissions.filter((item) => item.CreatedAt == res?.UpdatedAt)[0]
+        // res!.Submissions.filter((item) => item.CreatedAt == res?.UpdatedAt)[0]
+        res!.Submissions.slice(-1)[0]
     )
 
     console.log('projectInfo', projectInfo)
@@ -655,6 +664,22 @@ export default {
         window.alert('Project updated successfully!')
 
         this.$router.push('/projects/' + this.$route.params.projectID)
+      }
+    },
+    save() {
+      window.alert('Your response has been saved (template))')
+    },
+    nextStep(curr: number) {
+      const mapping = {
+        1: this.complete1,
+        2: this.complete2,
+        3: this.complete3,
+        4: this.complete4,
+      }
+      if (mapping[curr as keyof typeof mapping]) {
+        this.current = curr + 1
+      } else {
+        window.alert('Please fill in all required fields')
       }
     }
   },
