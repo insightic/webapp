@@ -144,6 +144,11 @@ export async function createProject(project: NewApplication): Promise<Applicatio
   return resp?.payload || ({} as Application)
 }
 
+export async function saveApplication(project: NewApplication): Promise<Application> {
+  const resp = await httpclient.post<Application>(`/applications/drafts`, project)
+  return resp?.payload || ({} as Application)
+}
+
 export async function getApplications(): Promise<Application[]> {
   const resp = await httpclient.get<number[]>(`/applications`)
   const applicationList = [] as Application[]
@@ -171,6 +176,11 @@ export async function updateApplication(
 
 export async function deleteApplication(id: number | string): Promise<any | null> {
   const resp = await httpclient.delete<any>(`/applications/${id}`)
+  return resp?.payload || null
+}
+
+export async function saveSubmission(applicationID: number | string, submissionID: number | string, project: NewApplication): Promise<Application | null> {
+  const resp = await httpclient.put<Application>(`/applications/${applicationID}/drafts`, project)
   return resp?.payload || null
 }
 

@@ -316,7 +316,7 @@ import NavFooterLayout from '@/layouts/NavFooterLayout.vue'
 import SectionLayout from '@/layouts/SectionLayout.vue'
 import LabelInputComponent from '@/components/LabelInputComponent.vue'
 import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
-import { createProject, getPreSignedPutUrl, uploadFile } from '@/api'
+import { createProject, saveApplication, getPreSignedPutUrl, uploadFile } from '@/api'
 import type { NewApplication } from '@/api'
 import FormNavButtons from '@/components/FormNavButtons.vue'
 
@@ -417,9 +417,6 @@ export default {
     }
   },
   methods: {
-    save() {
-      window.alert('Your response has been saved (template))')
-    },
     async onFileChange(e: any) {
       this.whitepaperFile = e.target.files[0]
       console.log(this.whitepaperFile)
@@ -509,6 +506,76 @@ export default {
         this.$router.push({ path:"/", query: { view: 'Applications' } })
       }
     }, 
+
+    async save() {
+      if (this.whitepaperFile) {
+        const preSignedPutUrl: any = await getPreSignedPutUrl()
+        if (preSignedPutUrl) {
+          const fileResp = await uploadFile(preSignedPutUrl.URL, this.whitepaperFile as any)
+          if (fileResp.ok) {
+            this.whitepaperFileId = preSignedPutUrl.ObjectID
+            this.whitepaperUploadLink = preSignedPutUrl.URL
+          }
+        }
+      }
+
+      if (this.codeFiles) {
+        const preSignedPutUrl: any = await getPreSignedPutUrl()
+        if (preSignedPutUrl) {
+          const fileResp = await uploadFile(preSignedPutUrl.URL, this.codeFiles as any)
+          if (fileResp.ok) {
+            this.codeFilesId = preSignedPutUrl.ObjectID
+            this.codesUploadLink = preSignedPutUrl.URL
+          }
+        }
+      }
+
+      // for (let i = 0; i < this.founders.length; i++) {
+      //   if (this.founders[i].cvFile) {
+      //     const preSignedPutUrl: any = await getPreSignedPutUrl()
+      //     if (preSignedPutUrl) {
+      //       const fileResp = await uploadFile(preSignedPutUrl.URL, this.founders[i].cvFile as any)
+      //       if (fileResp.ok) {
+      //         this.founders[i].CV = preSignedPutUrl.ObjectID
+      //         this.founders[i].cvUploadLink = preSignedPutUrl.URL
+      //         this.founders[i].CVFilename = this.founders[i].cvFile.name
+      //       }
+      //     }
+      //   }
+      // }
+      let data = {
+        Name: this.name,
+        Twitter: this.twitter,
+        Website: this.website,
+        Whitepaper: this.whitepaper,
+        WhitepaperFile: {
+          ID: this.whitepaperFileId,
+          Filename: this.whitepaperFile.name,
+          URL: this.whitepaperUploadLink
+        },
+        CodeFiles: {
+          ID: this.codeFilesId,
+          Filename: this.codeFiles.name,
+          URL: this.codesUploadLink
+        },
+        NumFounders: parseInt(this.numFounders) ? parseInt(this.numFounders) : 0,
+        Founders: this.founders,
+        NumMembers: parseInt(this.numTeamMembers) ? parseInt(this.numTeamMembers) : 0,
+        Members: this.teamMembers,
+        Objective: this.objective,
+        Motivation: this.motivation,
+        Assets: this.assets
+      } as unknown as NewApplication
+
+      console.log(data)
+
+      const resp = await saveApplication(data)
+      console.log(resp)
+      window.alert('Your response has been saved')
+      this.$router.push({ path:"/", query: { view: 'Applications' } })
+
+    }, 
+
 
     addMember() {
       this.teamMembers.push({
