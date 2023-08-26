@@ -144,7 +144,14 @@ export async function createProject(project: NewApplication): Promise<Applicatio
   return resp?.payload || ({} as Application)
 }
 
-export async function saveApplication(project: NewApplication): Promise<Application> {
+// submit new draft application
+export async function submitApplicationDraft(project: NewApplication): Promise<Application> {
+  const resp = await httpclient.post<Application>(`/applications/drafts`, project)
+  return resp?.payload || ({} as Application)
+}
+
+// save new application without any submission
+export async function saveApplicationDraft(project: NewApplication): Promise<Application> {
   const resp = await httpclient.post<Application>(`/applications/drafts`, project)
   return resp?.payload || ({} as Application)
 }
@@ -179,13 +186,20 @@ export async function deleteApplication(id: number | string): Promise<any | null
   return resp?.payload || null
 }
 
-export async function saveSubmission(applicationID: number | string, submissionID: number | string, project: NewApplication): Promise<Application | null> {
-  const resp = await httpclient.put<Application>(`/applications/${applicationID}/drafts`, project)
+// when there is application and save new submission as draft
+export async function saveSubmissionDraft(applicationID: number | string, project: NewApplication): Promise<Application | null> {
+  const resp = await httpclient.post<Application>(`/applications/${applicationID}/drafts`, project)
   return resp?.payload || null
 }
 
-export async function updateSubmission(applicationID: number | string, submissionID: number | string, project: NewApplication): Promise<Application | null> {
-  const resp = await httpclient.put<Application>(`/applications/${applicationID}/results/${submissionID}`, project)
+export async function updateSubmissionDraft(applicationID: number | string, submissionID: number | string, project: NewApplication): Promise<Application | null> {
+  const resp = await httpclient.put<Application>(`/applications/${applicationID}/submissions/${submissionID}/drafts`, project)
+  return resp?.payload || null
+}
+
+// when there is application and submit submission draft
+export async function submitSubmissionDraft(applicationID: number | string, submissionID: number | string, project: NewApplication): Promise<Application | null> {
+  const resp = await httpclient.post<Application>(`/applications/${applicationID}/submissions/${submissionID}/submit`, project)
   return resp?.payload || null
 }
 

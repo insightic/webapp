@@ -45,6 +45,11 @@ const router = createRouter({
       component: ApplicationDetailsView
     },
     {
+      path: '/projects/:projectID/:submissionID/draft',
+      name: 'ContinueSubmissionView',
+      component: ApplicationDetailsView
+    },
+    {
       path: '/projects/:projectID/:submissionID',
       name: 'SubmissionView',
       component: SubmissionView

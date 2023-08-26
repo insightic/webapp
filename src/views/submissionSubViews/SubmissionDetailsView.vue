@@ -531,7 +531,7 @@ export default {
       codeFilesname: '',
       codeFilesDownloadLink: '',
       whitepaperUploadLink: '',
-      readonly: true,
+      readonly: this.$route.query.edit == 'true' ? false : true,
       teamMembers: [
         {
           Name: '',

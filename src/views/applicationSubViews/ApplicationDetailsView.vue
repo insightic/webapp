@@ -250,7 +250,8 @@
 
                 </div>
             </SectionLayout>
-            <FormNavButtons :prevBtn="false" :saveBtn="true" :nextBtn="true" @save="save" @next="nextStep(1)"/>
+            <FormNavButtons v-if='newDraft' :prevBtn="false" :saveBtn="true" :nextBtn="true" @save="save" @next="nextStep(1)"/>
+            <FormNavButtons v-else :prevBtn="false" :saveBtn="true" :nextBtn="true" @save="updateSubmissionDraft" @next="nextStep(1)"/>
 
           </div>
 
@@ -273,8 +274,8 @@
                 :disabled="readonly"
               />
             </SectionLayout>
-            <FormNavButtons :prevBtn="false" :saveBtn="true" :nextBtn="true" @save="save" @next="nextStep(2)"/>
-
+            <FormNavButtons v-if='newDraft' :prevBtn="false" :saveBtn="true" :nextBtn="true" @save="save" @next="nextStep(2)"/>
+            <FormNavButtons v-else :prevBtn="false" :saveBtn="true" :nextBtn="true" @save="updateSubmissionDraft" @next="nextStep(2)"/>
           </div>
 
           <div v-if="current == 3">
@@ -288,7 +289,8 @@
                 :disabled="readonly"
               />
             </SectionLayout>
-            <FormNavButtons :prevBtn="false" :saveBtn="true" :nextBtn="true" @save="save" @next="nextStep(3)"/>
+            <FormNavButtons v-if='newDraft' :prevBtn="false" :saveBtn="true" :nextBtn="true" @save="save" @next="nextStep(3)"/>
+            <FormNavButtons v-else :prevBtn="false" :saveBtn="true" :nextBtn="true" @save="updateSubmissionDraft" @next="nextStep(3)"/>
 
           </div>
 
@@ -327,8 +329,9 @@
               </div>
 
             </SectionLayout>
-            <FormNavButtons :prevBtn="false" :saveBtn="true" :nextBtn="true" @save="save" @next="nextStep(4)"/>
-            
+            <FormNavButtons v-if="newDraft" :prevBtn="false" :saveBtn="true" :nextBtn="true" @save="save" @next="nextStep(4)"/>
+            <FormNavButtons v-else :prevBtn="false" :saveBtn="true" :nextBtn="true" @save="updateSubmissionDraft" @next="nextStep(4)"/>
+
           </div>
 
           <div v-if="current == 5">
@@ -392,7 +395,8 @@
                 accurate to the best of my/our knowledge.
               </label>
             </div>
-            <button type="button" class="btn btn-primary" @click="submit()">Submit</button>
+            <button v-if='newDraft' type="button" class="btn btn-primary" @click="submit()">Submit</button>
+            <button v-else type="button" class="btn btn-primary" @click="submitSubmissionDraft()">Submit</button>
           </div>
         </div>
       </div>
@@ -410,10 +414,10 @@ import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
 
 import ApplicationViewMixin from './ApplicationViewMixin'
 
-import { createProjectJob, getApplication } from '@/api'
+import { createProjectJob } from '@/api'
 import { organizationsStore } from '@/stores/organizations'
 import { mapStores } from 'pinia'
-import { updateApplication, getPreSignedPutUrl, getPreSignedGetUrl, uploadFile } from '@/api'
+import { getApplication, updateApplication, getPreSignedPutUrl, getPreSignedGetUrl, uploadFile, updateSubmissionDraft, saveSubmissionDraft, submitSubmissionDraft } from '@/api'
 import type { NewApplication } from '@/api'
 import FormNavButtons from '@/components/FormNavButtons.vue'
 
@@ -432,6 +436,8 @@ export default {
         // res!.Submissions.filter((item) => item.CreatedAt == res?.UpdatedAt)[0]
         res!.Submissions.slice(-1)[0]
     )
+
+    this.newDraft = this.$route.params.submissionID ? false : true
 
     console.log('projectInfo', projectInfo)
 
@@ -503,18 +509,25 @@ export default {
       this.motivation = projectInfo?.Content.Motivation ?? ''
       this.assets = projectInfo?.Content.Assets ?? ''
 
-      const preSignedGetUrl: any = await getPreSignedGetUrl(
-        this.whitepaperFileId,
-        this.whitepaperFilename
-      )
-      this.whitepaperDownloadLink = preSignedGetUrl?.URL ?? ''
+      if (this.whitepaperFileId) {
+        const preSignedGetUrl: any = await getPreSignedGetUrl(
+          this.whitepaperFileId,
+          this.whitepaperFilename
+        )
+        this.whitepaperDownloadLink = preSignedGetUrl?.URL ?? ''
+        this.editWhitepaper = false
+      }
 
       console.log('codeFiles', this.codeFilesId, this.codeFilesname)
-      const preSignedGetUrlCode: any = await getPreSignedGetUrl(
-        this.codeFilesId,
-        this.codeFilesname
-      )
-      this.codeFilesDownloadLink = preSignedGetUrlCode?.URL ?? ''
+      if (this.codeFilesId) {
+        const preSignedGetUrlCode: any = await getPreSignedGetUrl(
+          this.codeFilesId,
+          this.codeFilesname
+        )
+        this.codeFilesDownloadLink = preSignedGetUrlCode?.URL ?? ''
+        this.editCodeFiles = false
+      }
+
 
       // this.founders = JSON.parse(JSON.stringify(this.founders))
     } else {
@@ -528,6 +541,7 @@ export default {
   },
   data() {
     return {
+      newDraft: false,
       submissionId: '',
       submissionAt: '',
       current: 1,
@@ -536,18 +550,18 @@ export default {
       twitter: '',
       website: '',
       whitepaper: '',
-      whitepaperFile: null as File | null,
+      whitepaperFile: File,
       whitepaperDownloadLink: '',
-      editWhitepaper: false,
+      editWhitepaper: true,
       whitepaperFileId: '',
       whitepaperFilename: '',
       whitepaperUploadLink: '',
-      codeFiles: null as File | null,
+      codeFiles: File,
       codeFilesId: '',
       codeFilesname: '',
       codeFilesUploadLink: '',
       codeFilesDownloadLink: '',
-      editCodeFiles: false,
+      editCodeFiles: true,
 
       readonly: false,
       teamMembers: [
@@ -594,6 +608,65 @@ export default {
       this.codeFiles = e.target.files[0]
       this.editCodeFiles = true
     },
+    async prepareData() {
+      if ((this.whitepaperFile as any).size > 0) {
+        const preSignedPutUrl: any = await getPreSignedPutUrl()
+        if (preSignedPutUrl) {
+          const fileResp = await uploadFile(preSignedPutUrl.URL, this.whitepaperFile as any)
+          if (fileResp.ok) {
+            this.whitepaperFileId = preSignedPutUrl.ObjectID
+            this.whitepaperUploadLink = preSignedPutUrl.URL
+          }
+        }
+      }
+      for (let i = 0; i < this.founders.length; i++) {
+        if (this.founders[i].cvFile && this.founders[i].editCv) {
+          const preSignedPutUrlCV: any = await getPreSignedPutUrl()
+          if (preSignedPutUrlCV) {
+            const fileResp = await uploadFile(preSignedPutUrlCV.URL, this.founders[i].cvFile as any)
+            if (fileResp.ok) {
+              this.founders[i].CV = preSignedPutUrlCV.URL
+              this.founders[i].cvUploadLink = preSignedPutUrlCV.URL
+            }
+          }
+        }
+      }
+      if ((this.codeFiles as any).size > 0) {
+        const preSignedPutUrlCode: any = await getPreSignedPutUrl()
+        if (preSignedPutUrlCode) {
+          const fileResp = await uploadFile(preSignedPutUrlCode.URL, this.codeFiles as any)
+          if (fileResp.ok) {
+            this.codeFilesId = preSignedPutUrlCode.ObjectID
+            this.codeFilesUploadLink = preSignedPutUrlCode.URL
+          }
+        }
+      }
+      let data = {
+        Name: this.name,
+        Twitter: this.twitter,
+        Website: this.website,
+        Whitepaper: this.whitepaper,
+        WhitepaperFile: {
+          ID: this.whitepaperFileId,
+          Filename: this.whitepaperFile.name == 'File' ? this.whitepaperFilename : this.whitepaperFile.name,
+          URL: this.whitepaperUploadLink
+        },
+        CodeFiles: {
+          ID: this.codeFilesId,
+          Filename: this.codeFiles.name == 'File' ? this.codeFilesname : this.codeFiles.name,
+          URL: this.codeFilesUploadLink
+        },
+        NumFounders: parseInt(this.numFounders) ? parseInt(this.numFounders) : 0,
+        Founders: this.founders,
+        NumMembers: parseInt(this.numTeamMembers) ? parseInt(this.numTeamMembers) : 0,
+        Members: this.teamMembers,
+        Objective: this.objective,
+        Motivation: this.motivation,
+        Assets: this.assets,
+      } as unknown as NewApplication
+
+      return data
+    },
     async submit() {
       if (!this.complete1 || !this.complete2 || !this.complete3 || !this.complete4) {
         window.alert('Please fill in all required fields')
@@ -602,73 +675,76 @@ export default {
         window.alert('Please agree to the terms and conditions')
         return
       } else {
-        if (this.whitepaperFile && this.editWhitepaper) {
-          const preSignedPutUrl: any = await getPreSignedPutUrl()
-          if (preSignedPutUrl) {
-            const fileResp = await uploadFile(preSignedPutUrl.URL, this.whitepaperFile as any)
-            if (fileResp.ok) {
-              this.whitepaperFileId = preSignedPutUrl.ObjectID
-              this.whitepaperUploadLink = preSignedPutUrl.URL
-            }
-          }
-        }
-        for (let i = 0; i < this.founders.length; i++) {
-          if (this.founders[i].cvFile && this.founders[i].editCv) {
-            const preSignedPutUrlCV: any = await getPreSignedPutUrl()
-            if (preSignedPutUrlCV) {
-              const fileResp = await uploadFile(preSignedPutUrlCV.URL, this.founders[i].cvFile as any)
-              if (fileResp.ok) {
-                this.founders[i].CV = preSignedPutUrlCV.URL
-                this.founders[i].cvUploadLink = preSignedPutUrlCV.URL
-              }
-            }
-          }
-        }
-        if (this.codeFiles && this.editCodeFiles) {
-          const preSignedPutUrlCode: any = await getPreSignedPutUrl()
-          if (preSignedPutUrlCode) {
-            const fileResp = await uploadFile(preSignedPutUrlCode.URL, this.codeFiles as any)
-            if (fileResp.ok) {
-              this.codeFilesId = preSignedPutUrlCode.ObjectID
-              this.codeFilesUploadLink = preSignedPutUrlCode.URL
-            }
-          }
-        }
-        let data = {
-          Name: this.name,
-          Twitter: this.twitter,
-          Website: this.website,
-          Whitepaper: this.whitepaper,
-          WhitepaperFile: {
-            ID: this.whitepaperFileId,
-            Filename: this.whitepaperFile?.name,
-            URL: this.whitepaperUploadLink
-          },
-          CodeFiles: {
-            ID: this.codeFilesId,
-            Filename: this.codeFiles?.name,
-            URL: this.codeFilesUploadLink
-          },
-          NumFounders: parseInt(this.numFounders) ? parseInt(this.numFounders) : 0,
-          Founders: this.founders,
-          NumMembers: parseInt(this.numTeamMembers) ? parseInt(this.numTeamMembers) : 0,
-          Members: this.teamMembers,
-          Objective: this.objective,
-          Motivation: this.motivation,
-          Assets: this.assets,
-        } as unknown as NewApplication
+        let data = await this.prepareData()
         console.log(data)
 
         const update = await updateApplication(this.$route.params.projectID as string, data)
-        console.log(update)
-        window.alert('Project updated successfully!')
+        console.log('update',update)
 
+        if (update?.Status) {
+          window.alert('Project updated successfully!')
+          this.$router.push('/projects/' + this.$route.params.projectID)
+        } else {
+          window.alert('Something went wrong. Please try again later.')
+        }
+      }
+    },
+    async save() {
+      let data = await this.prepareData()
+      console.log('is new draft', this.newDraft)
+      console.log('saving new submission draft', data)
+
+      const update = await saveSubmissionDraft(this.$route.params.projectID as string, data)
+      console.log('update',update)
+
+      if (update?.Status) {
+        window.alert('Your response has been saved successfully!')
+        this.$router.push('/projects/' + this.$route.params.projectID)
+      } else {
+        window.alert('Something went wrong. Please try again later.')
+      }
+
+    },
+
+    async updateSubmissionDraft() {
+      let data = await this.prepareData()
+      console.log('is new draft', this.newDraft)
+      console.log('updating submission draft', data)
+
+      const update = await updateSubmissionDraft(this.$route.params.projectID as string, this.$route.params.submissionID as string, data)
+      console.log('update:',update)
+
+      if (update) {
+        window.alert('Your response has been updated successfully!')
+        this.$router.push('/projects/' + this.$route.params.projectID)
+      } else {
+        window.alert('Something went wrong. Please try again later.')
+      }
+
+    },
+
+    async submitSubmissionDraft() {
+      if (!this.complete1 || !this.complete2 || !this.complete3 || !this.complete4) {
+        window.alert('Please fill in all required fields')
+        return
+      } else if (!(this.$refs.terms as any).checked) {
+        window.alert('Please agree to the terms and conditions')
+        return
+      } else {
+        let data = await this.prepareData()
+        console.log('submitting submission draft', data)
+
+        const update1 = await updateSubmissionDraft(this.$route.params.projectID as string, this.$route.params.submissionID as string,data)
+        console.log('update1',update1)
+
+        const update = await submitSubmissionDraft(this.$route.params.projectID as string,  this.$route.params.submissionID as string, data)
+        console.log('update',update)
+
+        window.alert('Your response has been submitted successfully!')
         this.$router.push('/projects/' + this.$route.params.projectID)
       }
     },
-    save() {
-      window.alert('Your response has been saved (template))')
-    },
+
     nextStep(curr: number) {
       const mapping = {
         1: this.complete1,

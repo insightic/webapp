@@ -316,7 +316,7 @@ import NavFooterLayout from '@/layouts/NavFooterLayout.vue'
 import SectionLayout from '@/layouts/SectionLayout.vue'
 import LabelInputComponent from '@/components/LabelInputComponent.vue'
 import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
-import { createProject, saveApplication, getPreSignedPutUrl, uploadFile } from '@/api'
+import { createProject, saveApplicationDraft, getPreSignedPutUrl, uploadFile } from '@/api'
 import type { NewApplication } from '@/api'
 import FormNavButtons from '@/components/FormNavButtons.vue'
 
@@ -431,15 +431,8 @@ export default {
       this.founders[index].cvFile = e.target.files[0]
       console.log(this.founders[index].cvFile)
     },
-    async submit() {
-      if (!this.complete1 || !this.complete2 || !this.complete3 || !this.complete4) {
-        window.alert('Please fill in all required fields')
-        return
-      } else if (!(this.$refs.terms as any).checked) {
-        window.alert('Please agree to the terms and conditions')
-        return
-      } else {
-        if (this.whitepaperFile) {
+    async prepareData() {
+      if ((this.whitepaperFile as any).size > 0) {
           const preSignedPutUrl: any = await getPreSignedPutUrl()
           if (preSignedPutUrl) {
             const fileResp = await uploadFile(preSignedPutUrl.URL, this.whitepaperFile as any)
@@ -450,7 +443,7 @@ export default {
           }
         }
 
-        if (this.codeFiles) {
+        if ((this.codeFiles as any).size > 0) {
           const preSignedPutUrl: any = await getPreSignedPutUrl()
           if (preSignedPutUrl) {
             const fileResp = await uploadFile(preSignedPutUrl.URL, this.codeFiles as any)
@@ -497,7 +490,17 @@ export default {
           Motivation: this.motivation,
           Assets: this.assets
         } as unknown as NewApplication
-
+        return data
+    },
+    async submit() {
+      if (!this.complete1 || !this.complete2 || !this.complete3 || !this.complete4) {
+        window.alert('Please fill in all required fields')
+        return
+      } else if (!(this.$refs.terms as any).checked) {
+        window.alert('Please agree to the terms and conditions')
+        return
+      } else {
+        let data = await this.prepareData()
         console.log(data)
 
         const resp = await createProject(data)
@@ -506,70 +509,12 @@ export default {
         this.$router.push({ path:"/", query: { view: 'Applications' } })
       }
     }, 
-
     async save() {
-      if (this.whitepaperFile) {
-        const preSignedPutUrl: any = await getPreSignedPutUrl()
-        if (preSignedPutUrl) {
-          const fileResp = await uploadFile(preSignedPutUrl.URL, this.whitepaperFile as any)
-          if (fileResp.ok) {
-            this.whitepaperFileId = preSignedPutUrl.ObjectID
-            this.whitepaperUploadLink = preSignedPutUrl.URL
-          }
-        }
-      }
-
-      if (this.codeFiles) {
-        const preSignedPutUrl: any = await getPreSignedPutUrl()
-        if (preSignedPutUrl) {
-          const fileResp = await uploadFile(preSignedPutUrl.URL, this.codeFiles as any)
-          if (fileResp.ok) {
-            this.codeFilesId = preSignedPutUrl.ObjectID
-            this.codesUploadLink = preSignedPutUrl.URL
-          }
-        }
-      }
-
-      // for (let i = 0; i < this.founders.length; i++) {
-      //   if (this.founders[i].cvFile) {
-      //     const preSignedPutUrl: any = await getPreSignedPutUrl()
-      //     if (preSignedPutUrl) {
-      //       const fileResp = await uploadFile(preSignedPutUrl.URL, this.founders[i].cvFile as any)
-      //       if (fileResp.ok) {
-      //         this.founders[i].CV = preSignedPutUrl.ObjectID
-      //         this.founders[i].cvUploadLink = preSignedPutUrl.URL
-      //         this.founders[i].CVFilename = this.founders[i].cvFile.name
-      //       }
-      //     }
-      //   }
-      // }
-      let data = {
-        Name: this.name,
-        Twitter: this.twitter,
-        Website: this.website,
-        Whitepaper: this.whitepaper,
-        WhitepaperFile: {
-          ID: this.whitepaperFileId,
-          Filename: this.whitepaperFile.name,
-          URL: this.whitepaperUploadLink
-        },
-        CodeFiles: {
-          ID: this.codeFilesId,
-          Filename: this.codeFiles.name,
-          URL: this.codesUploadLink
-        },
-        NumFounders: parseInt(this.numFounders) ? parseInt(this.numFounders) : 0,
-        Founders: this.founders,
-        NumMembers: parseInt(this.numTeamMembers) ? parseInt(this.numTeamMembers) : 0,
-        Members: this.teamMembers,
-        Objective: this.objective,
-        Motivation: this.motivation,
-        Assets: this.assets
-      } as unknown as NewApplication
+      let data = await this.prepareData()
 
       console.log(data)
 
-      const resp = await saveApplication(data)
+      const resp = await saveApplicationDraft(data)
       console.log(resp)
       window.alert('Your response has been saved')
       this.$router.push({ path:"/", query: { view: 'Applications' } })

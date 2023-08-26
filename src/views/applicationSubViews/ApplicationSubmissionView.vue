@@ -4,7 +4,7 @@
       <h1>Submissions</h1>
       <div class="d-flex justify-content-between align-items-center my-2">
         <div class="text-secondary">Showing all submissions</div>
-        <RouterLink class="btn btn-primary" :to="'/projects/' + $route.params.projectID + '/create-submission'">New Submission</RouterLink>
+        <button class="btn btn-primary" @click="toCreateSubmission">New Submission</button>
       </div>
 
       <div class="w-100 my-3" style="overflow-x: auto">
@@ -22,7 +22,7 @@
               <td>{{ submission.SubmissionID }}</td>
               <td>{{ formatDate(submission.CreatedAt) }}</td>
               <td>{{ submission.Status }}</td>
-              <td>
+              <td v-if="submission.Status != 'draft'">
                 <a
                   class="btn btn-sm btn-outline-primary mx-2"
                   type="button"
@@ -30,6 +30,12 @@
                   >View</a
                 >
                 <a class="btn btn-sm btn-outline-danger mx-2" type="button" @click="deleteSubmission(applicationID, submission.SubmissionID)">Delete</a>
+              </td>
+              <td v-else>
+                <button
+                  class="btn btn-sm btn-outline-primary mx-2"
+                  @click="toSubmission(submission.SubmissionID)"
+                  >Continue Application</button>
               </td>
             </tr>
             <!-- <tr v-for="application in applications" :key="application.ID">
@@ -63,15 +69,16 @@ export default {
   data() {
     return {
       applicationID: '',
-      submissions: [] as Array<Submission>
+      submissions: [] as Array<Submission>,
+      draftExists: false
     }
   },
   async created() {
     this.applicationID = this.$route.params.projectID as string
     const resp = await getApplication(this.applicationID)
     this.submissions = resp?.Submissions || []
-
-    console.log(this.submissions)
+    this.draftExists = resp!.Submissions.filter((item) => item.Status == 'draft').length > 0
+    console.log('submission', this.submissions)
   },
   components: {
     NavFooterLayout
@@ -86,6 +93,18 @@ export default {
         console.log(res)
         location.reload()
       }
+    },
+    toCreateSubmission() {
+      if (this.draftExists) {
+        window.alert('You already have a draft submission. Please continue on the draft submission.')
+      } else {
+        this.$router.push('/projects/' + this.applicationID + '/create-submission')
+      }
+    },
+    toSubmission(submissionID: string) {
+      this.$router.push('/projects/' + this.applicationID + '/' + submissionID + '/draft')
+      // this.$router.push({name:'SubmissionView', query: {submissionID:submissionID, edit:'1'}})
+
     }
   }
 }
