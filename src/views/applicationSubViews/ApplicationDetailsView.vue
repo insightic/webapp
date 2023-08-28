@@ -697,7 +697,7 @@ export default {
       const update = await saveSubmissionDraft(this.$route.params.projectID as string, data)
       console.log('update',update)
 
-      if (update?.Status) {
+      if (update) {
         window.alert('Your response has been saved successfully!')
         this.$router.push('/projects/' + this.$route.params.projectID)
       } else {
