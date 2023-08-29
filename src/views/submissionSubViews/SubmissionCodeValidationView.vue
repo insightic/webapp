@@ -1,32 +1,32 @@
 <template>
-  <div class="text-secondary mb-4">Submission Details</div>
+  <div id="app" class="container p-3">
+    <div>
+        <div class="w-100 text-center my-3">
+            <img src="/logo.png" alt="Insightic Logo" style="width: 60px; height: 60px;">
+            <h2>Contract Diff - Results</h2>
+        </div>
 
-  <div style="max-width: 960px">
-    <div class="mb-4 fw-bold">Code Validation Results</div>
+        <div class="w-100 my-3 mx-auto">
+            <div v-if="loading" class="text-center my-5">
+                <div class="spinner-border">
+                </div>
+            </div>
+            <div v-else class="row">
+                <div class="col-md-6 col-lg-4 my-2" v-for="item in codeValidation" :key="item.description">
+                    <result-component :title="item.description" :whitepaper="item.whitepaper" :code="item.code"
+                        :variant="getVariant(item.whitepaper, item.code)">
+                    </result-component>
+                </div>
+            </div>
+        </div>
 
-    <table class="table w-100 mb-4">
-      <thead>
-        <tr>
-          <th scope="col">Description</th>
-          <th scope="col">Codes</th>
-          <th scope="col">Whitepaper</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- <tr v-for="item in sectA" :key="item.item">
-          <td>{{ item.item }}</td>
-          <td>{{ item['Data Received'] }}</td>
-          <td>{{ item.Status }}</td>
-        </tr> -->
-        <tr v-for="item in codeValidation" :key="item.description">
-          <td>{{item.description}}</td>
-          <td>{{item.code}}</td>
-          <td>{{item.whitepaper}}</td>
-        </tr>
-      </tbody>
-    </table>
-
-  </div>
+        <div class="w-100 text-center my-3">
+            <a class="btn btn-lg btn-primary text-center" style="width: 200px;" type="button" href="/contract-diff">
+                Try again
+            </a>
+        </div>
+    </div>
+</div>
 
 </template>
 
@@ -35,52 +35,27 @@ import ApplicationViewMixin from '@/views/applicationSubViews/ApplicationViewMix
 
 import { organizationsStore } from '@/stores/organizations'
 import { mapStores } from 'pinia'
-import { updateApplication, getPreSignedPutUrl, getPreSignedGetUrl, uploadFile, createProjectJob, getApplication  } from '@/api'
+import { createProjectJob, getApplication } from '@/api'
 import type { CodeValidationResult } from '@/api'
-
+import ResultComponent from '@/components/ResultComponent.vue'
 
 export default {
-  components: {},
+  components: {
+    ResultComponent
+  },
   async created() {
-    const projectInfo = await getApplication(this.$route.params.projectID as string)
-    .then(
+    const projectInfo = await getApplication(this.$route.params.projectID as string).then(
       (res) =>
         res!.Submissions.filter((item) => item.SubmissionID == this.$route.params.submissionID)[0]
     )
-    console.log('projectInfo', projectInfo)
+    // console.log('projectInfo', projectInfo)
     this.codeValidation = projectInfo.CodeValidationResults
     console.log('codeValid', this.codeValidation)
   },
   data() {
     return {
       codeValidation: [] as CodeValidationResult[],
-      sectA: [
-        {
-          item: 'DLT Foundation Name',
-          'Data Received': '____________________',
-          Status: '✔️ Pass / ❌ Fail'
-        },
-        {
-          item: 'Official Twitter Account (URL)',
-          'Data Received': '____________________',
-          Status: '✔️ Pass / ❌ Fail'
-        },
-        {
-          item: 'Official Website (URL)',
-          'Data Received': '____________________',
-          Status: '✔️ Pass / ❌ Fail'
-        },
-        {
-          item: 'Official Website (URL)',
-          'Data Received': '____________________',
-          Status: '✔️ Pass / ❌ Fail'
-        },
-        {
-          item: 'Whitepaper Document Quality',
-          'Data Received': '____________________',
-          Status: '✔️ Pass / ❌ Fail'
-        }
-      ],
+      loading: false
     }
   },
   mixins: [ApplicationViewMixin],
@@ -89,6 +64,13 @@ export default {
       const job = await createProjectJob(this.projectID)
       console.log(job)
       this.$router.push({ query: { view: 'Validations' } })
+    },
+    getVariant(whitepaper: string, code: string) {
+      if (whitepaper == code) {
+        return 'success'
+      } else {
+        return 'danger'
+      }
     }
   },
   computed: {
@@ -128,18 +110,9 @@ th:last-child {
   border-top-right-radius: 10px;
 }
 
-/* 
-tr:first-child td:first-child{
-  border-top-left-radius: 10px;
-} */
-
 tbody:last-child tr:last-child td:first-child {
   border-bottom-left-radius: 10px;
 }
-
-/* tr:first-child td:last-child{
-  border-top-right-radius: 10px;
-} */
 
 tbody:last-child tr:last-child td:last-child {
   border-bottom-right-radius: 10px;
