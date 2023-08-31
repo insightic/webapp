@@ -1,33 +1,73 @@
 <template>
   <div id="app" class="container p-3">
     <div>
-        <div class="w-100 text-center my-3">
-            <img src="/logo.png" alt="Insightic Logo" style="width: 60px; height: 60px;">
-            <h2>Contract Diff - Results</h2>
-        </div>
+      <div class="w-100 text-center my-3">
+        <img src="/logo.png" alt="Insightic Logo" style="width: 60px; height: 60px" />
+        <h2>Contract Diff - Results</h2>
+      </div>
 
-        <div class="w-100 my-3 mx-auto">
-            <div v-if="loading" class="text-center my-5">
-                <div class="spinner-border">
-                </div>
-            </div>
-            <div v-else class="row">
-                <div class="col-md-6 col-lg-4 my-2" v-for="item in codeValidation" :key="item.description">
-                    <result-component :title="item.description" :whitepaper="item.whitepaper" :code="item.code"
-                        :variant="getVariant(item.whitepaper, item.code)">
-                    </result-component>
-                </div>
-            </div>
+      <div class="w-100 my-3 mx-auto">
+        <div v-if="loading" class="text-center my-5">
+          <div class="spinner-border"></div>
         </div>
-
-        <div class="w-100 text-center my-3">
-            <a class="btn btn-lg btn-primary text-center" style="width: 200px;" type="button" href="/contract-diff">
-                Try again
-            </a>
+        <div v-else class="row">
+          <div
+            class="col-md-6 col-lg-4 my-2"
+            v-for="item in codeValidation"
+            :key="item.description"
+          >
+            <result-component
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              :title="item.description"
+              :whitepaper="item.whitepaper"
+              :code="item.code"
+              :variant="getVariant(item.whitepaper, item.code)"
+            >
+            </result-component>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
 
+  <!-- Button trigger modal -->
+  <button
+    type="button"
+    class="btn btn-primary"
+    data-bs-toggle="modal"
+    data-bs-target="#exampleModal"
+  >
+    Launch demo modal
+  </button>
+
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">Woohoo, you're reading this text in a modal!</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -79,42 +119,4 @@ export default {
 }
 </script>
 
-<style scoped>
-th,
-td {
-  padding: 0.6rem;
-  text-align: left;
-}
-
-thead {
-  background-color: rgb(214, 246, 255);
-  border: 1px solid #000;
-}
-
-table {
-  margin: auto;
-  border-collapse: separate;
-  border-spacing: 0;
-}
-
-td,
-th {
-  border: 1px solid #000;
-}
-
-th:first-child {
-  border-top-left-radius: 10px;
-}
-
-th:last-child {
-  border-top-right-radius: 10px;
-}
-
-tbody:last-child tr:last-child td:first-child {
-  border-bottom-left-radius: 10px;
-}
-
-tbody:last-child tr:last-child td:last-child {
-  border-bottom-right-radius: 10px;
-}
-</style>
+<style scoped></style>
