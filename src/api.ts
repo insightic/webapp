@@ -82,10 +82,9 @@ export interface CodeValidationResult {
 export interface Submission {
   Content: ProjectContent
   SubmissionID: string
-  Results: JobRunResult[]
+  Results: { CodeValidation: CodeValidationResult[] }
   Status: string
   CreatedAt: string
-  CodeValidationResults: CodeValidationResult[]
 }
 
 export interface Application {

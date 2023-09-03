@@ -60,9 +60,8 @@ export default {
       (res) =>
         res!.Submissions.filter((item) => item.SubmissionID == this.$route.params.submissionID)[0]
     )
-    // console.log('projectInfo', projectInfo)
-    this.codeValidation = projectInfo.CodeValidationResults
-    console.log('codeValid', this.codeValidation)
+
+    this.codeValidation = projectInfo.Results.CodeValidation
   },
   data() {
     return {
