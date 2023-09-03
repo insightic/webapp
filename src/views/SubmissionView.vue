@@ -6,19 +6,19 @@
 
       <ul class="nav nav-pills my-3">
         <li class="nav-item">
-          <btn class="nav-link" :class="{ active: subViewIdx == 0 }" @click="subViewIdx = 0"
-            >Details</btn
-          >
+          <div class="nav-link" :class="{ active: subViewIdx == 0 }" @click="subViewIdx = 0">
+            Details
+          </div>
         </li>
         <li class="nav-item">
-          <btn class="nav-link" :class="{ active: subViewIdx == 1 }" @click="subViewIdx = 1"
-            >Assessment</btn
-          >
+          <div class="nav-link" :class="{ active: subViewIdx == 1 }" @click="subViewIdx = 1">
+            Assessment
+          </div>
         </li>
         <li class="nav-item">
-          <btn class="nav-link" :class="{ active: subViewIdx == 2 }" @click="subViewIdx = 2"
-            >Code Validation</btn
-          >
+          <div class="nav-link" :class="{ active: subViewIdx == 2 }" @click="subViewIdx = 2">
+            Code Validation
+          </div>
         </li>
       </ul>
       <hr />
@@ -55,7 +55,7 @@ export default {
 </script>
 
 <style scoped>
-btn {
+.nav-link {
   cursor: pointer;
 }
 </style>

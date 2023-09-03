@@ -5,11 +5,16 @@
         <div class="text-secondary align-self-center">Submission Details</div>
       </div>
 
-      <div class="d-flex align-items-center align-items-start mb-3">
+      <div v-if="loading" class="text-center my-5">
+        <div class="spinner-border"></div>
+      </div>
+
+      <div v-if="!loading" class="d-flex align-items-center align-items-start mb-3">
         <div
           class="me-2 nav-item"
           @click="current = 1"
           :class="current == 1 ? '' : 'text-secondary'"
+          style="cursor: pointer"
         >
           <i v-if="current == 1" class="bi bi-1-square-fill"></i>
           <i v-else class="bi bi-1-square"></i>
@@ -20,6 +25,7 @@
           class="mx-2 nav-item"
           @click="current = 2"
           :class="current == 2 ? '' : 'text-secondary'"
+          style="cursor: pointer"
         >
           <i v-if="current == 2" class="bi bi-2-square-fill"></i>
           <i v-else class="bi bi-2-square"></i>
@@ -30,6 +36,7 @@
           class="mx-2 nav-item"
           @click="current = 3"
           :class="current == 3 ? '' : 'text-secondary'"
+          style="cursor: pointer"
         >
           <i v-if="current == 3" class="bi bi-3-square-fill"></i>
           <i v-else class="bi bi-3-square"></i>
@@ -40,6 +47,7 @@
           class="mx-2 nav-item"
           @click="current = 4"
           :class="current == 4 ? '' : 'text-secondary'"
+          style="cursor: pointer"
         >
           <i v-if="current == 4" class="bi bi-4-square-fill"></i>
           <i v-else class="bi bi-4-square"></i>
@@ -50,6 +58,7 @@
           class="ms-2 nav-item"
           @click="current = 5"
           :class="current == 5 ? '' : 'text-secondary'"
+          style="cursor: pointer"
         >
           <i v-if="current == 5" class="bi bi-5-square-fill"></i>
           <i v-else class="bi bi-5-square"></i>
@@ -57,7 +66,7 @@
         </div>
       </div>
 
-      <div>
+      <div v-if="!loading">
         <div v-if="current == 1">
           <SectionLayout title="Overview">
             <div class="row">
@@ -406,6 +415,7 @@ export default {
     FormNavButtons
   },
   async created() {
+    this.loading = true
     const projectInfo = await getApplication(this.$route.params.projectID as string).then(
       (res) =>
         res!.Submissions.filter((item) => item.SubmissionID == this.$route.params.submissionID)[0]
@@ -436,15 +446,15 @@ export default {
       '6': 'e262d5c2-16f8-47a0-8d10-4019514d137a'
     }
     if (!mapping[this.$route.params.projectID as keyof typeof mapping]) {
-      this.name = projectInfo?.Content.Name ?? ''
-      this.twitter = projectInfo?.Content.Twitter ?? ''
-      this.website = projectInfo?.Content.Website ?? ''
-      this.whitepaper = projectInfo?.Content.Whitepaper ?? ''
-      this.whitepaperId = projectInfo?.Content.WhitepaperFile.ID ?? ''
-      this.whitepaperFilename = projectInfo?.Content.WhitepaperFile.Filename ?? ''
-      this.codeFilesId = projectInfo?.Content.CodeFiles.ID ?? ''
-      this.codeFilesname = projectInfo?.Content.CodeFiles.Filename ?? ''
-      this.numFounders = projectInfo?.Content.NumFounders.toString() ?? '0'
+      this.name = projectInfo?.Content?.Name ?? ''
+      this.twitter = projectInfo?.Content?.Twitter ?? ''
+      this.website = projectInfo?.Content?.Website ?? ''
+      this.whitepaper = projectInfo?.Content?.Whitepaper ?? ''
+      this.whitepaperId = projectInfo?.Content?.WhitepaperFile?.ID ?? ''
+      this.whitepaperFilename = projectInfo?.Content?.WhitepaperFile?.Filename ?? ''
+      this.codeFilesId = projectInfo?.Content?.CodeFiles?.ID ?? ''
+      this.codeFilesname = projectInfo?.Content?.CodeFiles?.Filename ?? ''
+      this.numFounders = projectInfo?.Content?.NumFounders?.toString() ?? '0'
 
       // this.founders = JSON.parse(JSON.stringify(projectInfo?.Content.Founders)) ?? []
       if (parseInt(this.numFounders) != projectInfo?.Content.Founders.length) {
@@ -521,9 +531,12 @@ export default {
       )
       this.name = project!.name
     }
+
+    this.loading = false
   },
   data() {
     return {
+      loading: true,
       submissionId: '',
       submissionAt: '',
       current: 1,

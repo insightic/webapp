@@ -1,11 +1,15 @@
 <template>
-  <div id="app" class="container p-3">
-    <div>
+  <div class="container p-0 mb-5 d-flex justify-content-center">
+    <div class="container p-0 mb-5">
+      <div class="d-flex justify-content-between mb-3" style="max-width: 960px">
+        <div class="text-secondary align-self-center">Submission Details</div>
+      </div>
+
       <div class="w-100 my-3 mx-auto">
         <div v-if="loading" class="text-center my-5">
           <div class="spinner-border"></div>
         </div>
-        <div v-else class="row">
+        <div v-else-if="codeValidation && codeValidation.length > 0" class="row">
           <div class="col-md-6 col-lg-4 my-2" v-for="(item, idx) in codeValidation" :key="idx">
             <result-component
               :title="item.description"
@@ -17,6 +21,9 @@
             >
             </result-component>
           </div>
+        </div>
+        <div v-else>
+          <div class="small text-secondary text-center">Results Not Found.</div>
         </div>
       </div>
     </div>
@@ -51,7 +58,7 @@ export default {
         res!.Submissions.filter((item) => item.SubmissionID == this.$route.params.submissionID)[0]
     )
 
-    this.codeValidation = projectInfo.Results.CodeValidation
+    this.codeValidation = projectInfo?.Results?.CodeValidation || []
     this.loading = false
   },
   data() {
