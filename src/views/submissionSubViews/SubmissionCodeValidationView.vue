@@ -32,42 +32,12 @@
   </div>
 
   <!-- Button trigger modal -->
-  <button
-    type="button"
-    class="btn btn-primary"
-    data-bs-toggle="modal"
-    data-bs-target="#exampleModal"
-  >
-    Launch demo modal
-  </button>
-
-  <!-- Modal -->
-  <div
-    class="modal fade"
-    id="exampleModal"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">Woohoo, you're reading this text in a modal!</div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <button class="btn btn-primary" @click="showCodeValidationModal = true">Launch demo modal</button>
+  <CodeValidationModal
+    title="test"
+    :visible="showCodeValidationModal"
+    @close="showCodeValidationModal = false"
+  />
 </template>
 
 <script lang="ts">
@@ -78,10 +48,12 @@ import { mapStores } from 'pinia'
 import { createProjectJob, getApplication } from '@/api'
 import type { CodeValidationResult } from '@/api'
 import ResultComponent from '@/components/ResultComponent.vue'
+import CodeValidationModal from '@/components/CodeValidationModal.vue'
 
 export default {
   components: {
-    ResultComponent
+    ResultComponent,
+    CodeValidationModal
   },
   async created() {
     const projectInfo = await getApplication(this.$route.params.projectID as string).then(
@@ -95,6 +67,7 @@ export default {
   data() {
     return {
       codeValidation: [] as CodeValidationResult[],
+      showCodeValidationModal: false,
       loading: false
     }
   },
