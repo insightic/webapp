@@ -74,8 +74,10 @@ export interface ProjectContent {
 }
 
 export interface CodeValidationResult {
-  code: string
+  id: string
+  pass: string
   description: string
+  code: string
   whitepaper: string
 }
 
