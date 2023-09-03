@@ -5,9 +5,7 @@
   </div>
 
   <div v-if="isloading" class="w-100 d-flex justify-content-center mt-5">
-    <div class="spinner-grow spinner-grow-sm text-primary mx-2"></div>
-    <div class="spinner-grow spinner-grow-sm text-primary mx-2"></div>
-    <div class="spinner-grow spinner-grow-sm text-primary mx-2"></div>
+    <div class="spinner-border"></div>
   </div>
 
   <div v-else class="w-100" style="overflow-x: auto">
@@ -34,7 +32,12 @@
               :href="'/projects/' + application.ID"
               >View</a
             >
-            <a class="btn btn-sm btn-outline-danger mx-2" type="button" @click="deleteApplication(application.ID)">Delete</a>
+            <a
+              class="btn btn-sm btn-outline-danger mx-2"
+              type="button"
+              @click="deleteApplication(application.ID)"
+              >Delete</a
+            >
           </td>
         </tr>
       </tbody>
@@ -46,7 +49,7 @@
 import { RouterLink } from 'vue-router'
 import { projectsStore } from '@/stores/projects'
 import { mapStores } from 'pinia'
-import { getApplications, deleteApplication ,type Application, type Submission } from '@/api'
+import { getApplications, deleteApplication, type Application, type Submission } from '@/api'
 import { formatDate } from '@/helpers'
 
 export default {
@@ -80,7 +83,7 @@ export default {
       } else {
         await deleteApplication(id)
         location.reload()
-      }    
+      }
     }
   }
 }

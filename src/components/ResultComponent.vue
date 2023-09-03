@@ -1,5 +1,5 @@
 <template>
-  <div id="result-component-template" style="display: inline;">
+  <div id="result-component-template" style="display: inline">
     <div
       class="rounded p-3 bg-opacity-25 h-100 w-100"
       :class="{
@@ -39,7 +39,7 @@ export default {
     description: { type: String, default: '' },
     whitepaper: { type: String, default: '' },
     code: { type: String, default: '' }
-  },
+  }
 }
 </script>
 

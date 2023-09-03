@@ -29,13 +29,20 @@
                   :href="'/projects/' + applicationID + '/' + submission.SubmissionID"
                   >View</a
                 >
-                <a class="btn btn-sm btn-outline-danger mx-2" type="button" @click="deleteSubmission(applicationID, submission.SubmissionID)">Delete</a>
+                <a
+                  class="btn btn-sm btn-outline-danger mx-2"
+                  type="button"
+                  @click="deleteSubmission(applicationID, submission.SubmissionID)"
+                  >Delete</a
+                >
               </td>
               <td v-else>
                 <button
                   class="btn btn-sm btn-outline-primary mx-2"
                   @click="toSubmission(submission.SubmissionID)"
-                  >Continue Application</button>
+                >
+                  Continue Application
+                </button>
               </td>
             </tr>
             <!-- <tr v-for="application in applications" :key="application.ID">
@@ -96,7 +103,9 @@ export default {
     },
     toCreateSubmission() {
       if (this.draftExists) {
-        window.alert('You already have a draft submission. Please continue on the draft submission.')
+        window.alert(
+          'You already have a draft submission. Please continue on the draft submission.'
+        )
       } else {
         this.$router.push('/projects/' + this.applicationID + '/create-submission')
       }
@@ -104,11 +113,18 @@ export default {
     toSubmission(submissionID: string) {
       this.$router.push('/projects/' + this.applicationID + '/' + submissionID + '/draft')
       // this.$router.push({name:'SubmissionView', query: {submissionID:submissionID, edit:'1'}})
-
     }
   }
 }
 </script>
+
+<style scoped>
+th,
+tr {
+  vertical-align: middle;
+}
+</style>
+
 
 <!-- <template>
   <SidebarLayout

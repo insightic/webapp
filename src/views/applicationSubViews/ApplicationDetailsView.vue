@@ -10,7 +10,13 @@
           <div
             class="me-2 nav-item"
             @click="current = 1"
-            :class="current != 1 && complete1 ? 'text-success' : current != 1 && !complete1 ? 'text-secondary' : 'text-secondary'"
+            :class="
+              current != 1 && complete1
+                ? 'text-success'
+                : current != 1 && !complete1
+                ? 'text-secondary'
+                : 'text-secondary'
+            "
           >
             <i v-if="current == 1" class="bi bi-1-square-fill"></i>
             <i v-else class="bi bi-1-square"></i>
@@ -20,7 +26,13 @@
           <div
             class="mx-2 nav-item"
             @click="current = 2"
-            :class="current != 2 && complete2 ? 'text-success' : current != 2 && !complete2 ? 'text-secondary' : 'text-secondary'"
+            :class="
+              current != 2 && complete2
+                ? 'text-success'
+                : current != 2 && !complete2
+                ? 'text-secondary'
+                : 'text-secondary'
+            "
           >
             <i v-if="current == 2" class="bi bi-2-square-fill"></i>
             <i v-else class="bi bi-2-square"></i>
@@ -30,7 +42,13 @@
           <div
             class="mx-2 nav-item"
             @click="current = 3"
-            :class="current != 3 && complete3 ? 'text-success' : current != 3 && !complete3 ? 'text-secondary' : 'text-secondary'"
+            :class="
+              current != 3 && complete3
+                ? 'text-success'
+                : current != 3 && !complete3
+                ? 'text-secondary'
+                : 'text-secondary'
+            "
           >
             <i v-if="current == 3" class="bi bi-3-square-fill"></i>
             <i v-else class="bi bi-3-square"></i>
@@ -40,7 +58,13 @@
           <div
             class="mx-2 nav-item"
             @click="current = 4"
-            :class="current != 4 && complete4 ? 'text-success' : current != 4 && !complete4 ? 'text-secondary' : 'text-secondary'"
+            :class="
+              current != 4 && complete4
+                ? 'text-success'
+                : current != 4 && !complete4
+                ? 'text-secondary'
+                : 'text-secondary'
+            "
           >
             <i v-if="current == 4" class="bi bi-4-square-fill"></i>
             <i v-else class="bi bi-4-square"></i>
@@ -98,96 +122,96 @@
             </SectionLayout>
 
             <SectionLayout title="Part B: Founder(s) Detail">
-                <label class="form-label" for="teamMembers">
-                  Founders
-                  <span class="text-danger">*</span>
-                </label>
+              <label class="form-label" for="teamMembers">
+                Founders
+                <span class="text-danger">*</span>
+              </label>
 
-                <LabelInputComponent
-                  label="Number of Founders"
-                  type="text"
-                  v-model:field="numFounders"
-                  :required="true"
-                  :disabled="readonly"
-                />
+              <LabelInputComponent
+                label="Number of Founders"
+                type="text"
+                v-model:field="numFounders"
+                :required="true"
+                :disabled="readonly"
+              />
 
-                <div class="">
-                  <div class="mb-4" v-for="(founder, counter) in founders" v-bind:key="counter">
-                    <div class="d-flex">
-                      <div class="fw-bold">Founder {{ counter + 1 }}</div>
+              <div class="">
+                <div class="mb-4" v-for="(founder, counter) in founders" v-bind:key="counter">
+                  <div class="d-flex">
+                    <div class="fw-bold">Founder {{ counter + 1 }}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <LabelInputComponent
+                        label="Name"
+                        type="text"
+                        v-model:field="founder.Name"
+                        :required="true"
+                        :disabled="readonly"
+                      />
                     </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <LabelInputComponent
-                          label="Name"
-                          type="text"
-                          v-model:field="founder.Name"
-                          :required="true"
-                          :disabled="readonly"
-                        />
-                      </div>
-                      <div class="col-md-6">
-                        <LabelInputComponent
-                          label="Position within DLT Foundation"
-                          type="text"
-                          v-model:field="founder.Position"
-                          :required="true"
-                          :disabled="readonly"
-                        />
-                      </div>
+                    <div class="col-md-6">
+                      <LabelInputComponent
+                        label="Position within DLT Foundation"
+                        type="text"
+                        v-model:field="founder.Position"
+                        :required="true"
+                        :disabled="readonly"
+                      />
                     </div>
+                  </div>
 
-                    <LabelInputComponent
-                      label="KYC Verification"
-                      type="text"
-                      v-model:field="founder.Kyc"
-                      :required="true"
-                      :disabled="readonly"
-                    />
+                  <LabelInputComponent
+                    label="KYC Verification"
+                    type="text"
+                    v-model:field="founder.Kyc"
+                    :required="true"
+                    :disabled="readonly"
+                  />
 
-                    <div class="row">
-                      <div class="col-md-6">
-                        <LabelInputComponent
-                          label="Twitter Account (URL)"
-                          type="text"
-                          v-model:field="founder.Twitter"
-                          :required="true"
-                          :disabled="readonly"
-                        />
-                      </div>
-                      <div class="col-md-6">
-                        <LabelInputComponent
-                          label="LinkedIn Profile (URL)"
-                          type="text"
-                          v-model:field="founder.Linkedin"
-                          :required="true"
-                          :disabled="readonly"
-                        />
-                      </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <LabelInputComponent
+                        label="Twitter Account (URL)"
+                        type="text"
+                        v-model:field="founder.Twitter"
+                        :required="true"
+                        :disabled="readonly"
+                      />
                     </div>
-
-                    <div class="row">
-                      <div class="col-md-6">
-                        <LabelInputComponent
-                          label="Email Address"
-                          type="text"
-                          v-model:field="founder.Email"
-                          :required="true"
-                          :disabled="readonly"
-                        />
-                      </div>
-                      <div class="col-md-6">
-                        <LabelInputComponent
-                          label="Ethereum Address"
-                          type="text"
-                          v-model:field="founder.Ethereum"
-                          :required="true"
-                          :disabled="readonly"
-                        />
-                      </div>
+                    <div class="col-md-6">
+                      <LabelInputComponent
+                        label="LinkedIn Profile (URL)"
+                        type="text"
+                        v-model:field="founder.Linkedin"
+                        :required="true"
+                        :disabled="readonly"
+                      />
                     </div>
+                  </div>
 
-                    <!-- <div class="">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <LabelInputComponent
+                        label="Email Address"
+                        type="text"
+                        v-model:field="founder.Email"
+                        :required="true"
+                        :disabled="readonly"
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <LabelInputComponent
+                        label="Ethereum Address"
+                        type="text"
+                        v-model:field="founder.Ethereum"
+                        :required="true"
+                        :disabled="readonly"
+                      />
+                    </div>
+                  </div>
+
+                  <!-- <div class="">
                       <label for="document" class="">CV</label>
                       <div v-if="!founder.editCv">
                         <i class="bi bi-file-earmark-text me-2"></i>
@@ -207,52 +231,83 @@
                         </div>
                       </div>
                     </div> -->
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <button
+                    class="btn btn-sm btn-outline-primary"
+                    @click="numFounders = parseInt(numFounders) + 1 + ''"
+                  >
+                    Add Another Founder
+                  </button>
+                </div>
+              </div>
+            </SectionLayout>
+
+            <SectionLayout title="Team Members">
+              <div class="">
+                <label class="form-label" for="teamMembers">
+                  Team Members
+                  <span class="text-danger">*</span>
+                </label>
+                <LabelInputComponent
+                  label="Number of Team Members"
+                  type="text"
+                  v-model:field="numTeamMembers"
+                  :required="true"
+                  :disabled="readonly"
+                />
+
+                <div class="mb-2" v-for="(member, counter) in teamMembers" v-bind:key="counter">
+                  <div class="row">
+                    <h6>Member {{ counter + 1 }}</h6>
+                    <div class="col-md-6">
+                      <LabelInputComponent
+                        label="Name"
+                        type="text"
+                        v-model:field="member.Name"
+                        :required="true"
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <LabelInputComponent
+                        label="Position"
+                        type="text"
+                        v-model:field="member.Position"
+                        :required="true"
+                      />
+                    </div>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-6">
-                    <button class="btn btn-sm btn-outline-primary" @click="numFounders = parseInt(numFounders) + 1 + ''">Add Another Founder</button>
+                    <button
+                      class="btn btn-sm btn-outline-primary"
+                      @click="numTeamMembers = parseInt(numTeamMembers) + 1 + ''"
+                    >
+                      Add Another Team Member
+                    </button>
                   </div>
                 </div>
-              </SectionLayout>
-
-            <SectionLayout title="Team Members">
-                <div class="">
-                  <label class="form-label" for="teamMembers">
-                    Team Members
-                    <span class="text-danger">*</span>
-                  </label>
-                  <LabelInputComponent
-                    label="Number of Team Members"
-                    type="text"
-                    v-model:field="numTeamMembers"
-                    :required="true"
-                    :disabled="readonly"
-                  />
-
-
-                  <div class="mb-2" v-for="(member, counter) in teamMembers" v-bind:key="counter">
-                    <div class="row">
-                      <h6>Member {{ counter + 1 }}</h6>
-                        <div class="col-md-6">
-                          <LabelInputComponent label="Name" type="text" v-model:field="member.Name" :required="true" />
-                        </div>
-                        <div class="col-md-6">
-                          <LabelInputComponent label="Position" type="text" v-model:field="member.Position" :required="true" />
-                        </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <button class="btn btn-sm btn-outline-primary" @click="numTeamMembers = parseInt(numTeamMembers) + 1 + ''">Add Another Team Member</button>
-                    </div>
-                  </div>
-
-                </div>
+              </div>
             </SectionLayout>
-            <FormNavButtons v-if='newDraft' :prevBtn="false" :saveBtn="true" :nextBtn="true" @save="save" @next="nextStep(1)"/>
-            <FormNavButtons v-else :prevBtn="false" :saveBtn="true" :nextBtn="true" @save="updateSubmissionDraft" @next="nextStep(1)"/>
-
+            <FormNavButtons
+              v-if="newDraft"
+              :prevBtn="false"
+              :saveBtn="true"
+              :nextBtn="true"
+              @save="save"
+              @next="nextStep(1)"
+            />
+            <FormNavButtons
+              v-else
+              :prevBtn="false"
+              :saveBtn="true"
+              :nextBtn="true"
+              @save="updateSubmissionDraft"
+              @next="nextStep(1)"
+            />
           </div>
 
           <div v-if="current == 2">
@@ -274,8 +329,22 @@
                 :disabled="readonly"
               />
             </SectionLayout>
-            <FormNavButtons v-if='newDraft' :prevBtn="false" :saveBtn="true" :nextBtn="true" @save="save" @next="nextStep(2)"/>
-            <FormNavButtons v-else :prevBtn="false" :saveBtn="true" :nextBtn="true" @save="updateSubmissionDraft" @next="nextStep(2)"/>
+            <FormNavButtons
+              v-if="newDraft"
+              :prevBtn="false"
+              :saveBtn="true"
+              :nextBtn="true"
+              @save="save"
+              @next="nextStep(2)"
+            />
+            <FormNavButtons
+              v-else
+              :prevBtn="false"
+              :saveBtn="true"
+              :nextBtn="true"
+              @save="updateSubmissionDraft"
+              @next="nextStep(2)"
+            />
           </div>
 
           <div v-if="current == 3">
@@ -289,9 +358,22 @@
                 :disabled="readonly"
               />
             </SectionLayout>
-            <FormNavButtons v-if='newDraft' :prevBtn="false" :saveBtn="true" :nextBtn="true" @save="save" @next="nextStep(3)"/>
-            <FormNavButtons v-else :prevBtn="false" :saveBtn="true" :nextBtn="true" @save="updateSubmissionDraft" @next="nextStep(3)"/>
-
+            <FormNavButtons
+              v-if="newDraft"
+              :prevBtn="false"
+              :saveBtn="true"
+              :nextBtn="true"
+              @save="save"
+              @next="nextStep(3)"
+            />
+            <FormNavButtons
+              v-else
+              :prevBtn="false"
+              :saveBtn="true"
+              :nextBtn="true"
+              @save="updateSubmissionDraft"
+              @next="nextStep(3)"
+            />
           </div>
 
           <div v-show="current == 4">
@@ -320,18 +402,35 @@
                   <a class="ms-5" @click="editCodeFiles = !editCodeFiles">Edit</a>
                 </div>
                 <div v-else>
-                  <input type="file" class="form-controls" id="document" @change="onFileChangeCode" />
+                  <input
+                    type="file"
+                    class="form-controls"
+                    id="document"
+                    @change="onFileChangeCode"
+                  />
                   <a @click="editCodeFiles = !editCodeFiles">Cancel</a>
                   <div class="text-secondary small">
                     Please attach a quality version of the whitepaper document.
                   </div>
                 </div>
               </div>
-
             </SectionLayout>
-            <FormNavButtons v-if="newDraft" :prevBtn="false" :saveBtn="true" :nextBtn="true" @save="save" @next="nextStep(4)"/>
-            <FormNavButtons v-else :prevBtn="false" :saveBtn="true" :nextBtn="true" @save="updateSubmissionDraft" @next="nextStep(4)"/>
-
+            <FormNavButtons
+              v-if="newDraft"
+              :prevBtn="false"
+              :saveBtn="true"
+              :nextBtn="true"
+              @save="save"
+              @next="nextStep(4)"
+            />
+            <FormNavButtons
+              v-else
+              :prevBtn="false"
+              :saveBtn="true"
+              :nextBtn="true"
+              @save="updateSubmissionDraft"
+              @next="nextStep(4)"
+            />
           </div>
 
           <div v-if="current == 5">
@@ -345,43 +444,44 @@
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                     incididunt ut labore et dolore magna aliqua. Sit amet facilisis magna etiam
                     tempor. At erat pellentesque adipiscing commodo elit at. Vivamus arcu felis
-                    bibendum ut tristique et. Nulla facilisi nullam vehicula ipsum a arcu cursus vitae
-                    congue. Ornare lectus sit amet est placerat. Leo vel fringilla est ullamcorper
-                    eget nulla facilisi. Tellus pellentesque eu tincidunt tortor. Placerat vestibulum
-                    lectus mauris ultrices eros. Amet commodo nulla facilisi nullam vehicula ipsum a
-                    arcu cursus. Laoreet suspendisse interdum consectetur libero id. Id donec ultrices
-                    tincidunt arcu non sodales neque sodales. Et netus et malesuada fames. Adipiscing
-                    elit pellentesque habitant morbi tristique senectus et netus. Neque vitae tempus
-                    quam pellentesque nec nam aliquam sem et. Pretium aenean pharetra magna ac
-                    placerat. Semper auctor neque vitae tempus quam pellentesque nec nam aliquam.
-                    Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit amet. Tortor
-                    dignissim convallis aenean et tortor. Velit ut tortor pretium viverra suspendisse
-                    potenti nullam. Urna et pharetra pharetra massa massa ultricies mi quis. Et
-                    pharetra pharetra massa massa ultricies mi. Id nibh tortor id aliquet. Amet massa
-                    vitae tortor condimentum lacinia quis vel. Integer quis auctor elit sed vulputate.
-                    Quam vulputate dignissim suspendisse in est ante in nibh mauris. Parturient montes
-                    nascetur ridiculus mus mauris vitae ultricies leo integer. Sodales ut eu sem
-                    integer vitae. Orci a scelerisque purus semper eget duis at. Egestas dui id ornare
-                    arcu. Sodales ut etiam sit amet nisl purus in mollis. Nec ullamcorper sit amet
-                    risus nullam eget felis eget nunc. Diam quis enim lobortis scelerisque. Commodo
-                    nulla facilisi nullam vehicula ipsum a. Quis risus sed vulputate odio ut.
-                    Condimentum vitae sapien pellentesque habitant morbi. Venenatis a condimentum
-                    vitae sapien pellentesque habitant morbi. Lacus luctus accumsan tortor posuere ac
-                    ut. Neque vitae tempus quam pellentesque nec nam aliquam sem et. Cursus sit amet
-                    dictum sit amet. Sodales ut eu sem integer vitae justo eget magna fermentum.
-                    Imperdiet massa tincidunt nunc pulvinar sapien. Massa tempor nec feugiat nisl
-                    pretium fusce id velit ut. Nibh sed pulvinar proin gravida. Et netus et malesuada
-                    fames ac turpis. Dui vivamus arcu felis bibendum ut tristique. Nullam eget felis
-                    eget nunc lobortis mattis aliquam faucibus. Semper viverra nam libero justo. Eget
-                    nulla facilisi etiam dignissim diam quis enim lobortis. Diam maecenas ultricies mi
-                    eget mauris pharetra et. Aliquam ultrices sagittis orci a scelerisque purus.
-                    Semper viverra nam libero justo laoreet. Ut aliquam purus sit amet luctus
-                    venenatis lectus magna. Proin fermentum leo vel orci porta non. Vitae sapien
-                    pellentesque habitant morbi tristique senectus et. Malesuada proin libero nunc
-                    consequat interdum varius sit amet. Quis hendrerit dolor magna eget est lorem.
-                    Posuere urna nec tincidunt praesent semper feugiat nibh sed pulvinar. Hac
-                    habitasse platea dictumst vestibulum rhoncus est pellentesque elit. Faucibus purus
-                    in massa tempor nec feugiat nisl. Nunc eget lorem dolor sed viverra ipsum nunc
+                    bibendum ut tristique et. Nulla facilisi nullam vehicula ipsum a arcu cursus
+                    vitae congue. Ornare lectus sit amet est placerat. Leo vel fringilla est
+                    ullamcorper eget nulla facilisi. Tellus pellentesque eu tincidunt tortor.
+                    Placerat vestibulum lectus mauris ultrices eros. Amet commodo nulla facilisi
+                    nullam vehicula ipsum a arcu cursus. Laoreet suspendisse interdum consectetur
+                    libero id. Id donec ultrices tincidunt arcu non sodales neque sodales. Et netus
+                    et malesuada fames. Adipiscing elit pellentesque habitant morbi tristique
+                    senectus et netus. Neque vitae tempus quam pellentesque nec nam aliquam sem et.
+                    Pretium aenean pharetra magna ac placerat. Semper auctor neque vitae tempus quam
+                    pellentesque nec nam aliquam. Lacus suspendisse faucibus interdum posuere lorem
+                    ipsum dolor sit amet. Tortor dignissim convallis aenean et tortor. Velit ut
+                    tortor pretium viverra suspendisse potenti nullam. Urna et pharetra pharetra
+                    massa massa ultricies mi quis. Et pharetra pharetra massa massa ultricies mi. Id
+                    nibh tortor id aliquet. Amet massa vitae tortor condimentum lacinia quis vel.
+                    Integer quis auctor elit sed vulputate. Quam vulputate dignissim suspendisse in
+                    est ante in nibh mauris. Parturient montes nascetur ridiculus mus mauris vitae
+                    ultricies leo integer. Sodales ut eu sem integer vitae. Orci a scelerisque purus
+                    semper eget duis at. Egestas dui id ornare arcu. Sodales ut etiam sit amet nisl
+                    purus in mollis. Nec ullamcorper sit amet risus nullam eget felis eget nunc.
+                    Diam quis enim lobortis scelerisque. Commodo nulla facilisi nullam vehicula
+                    ipsum a. Quis risus sed vulputate odio ut. Condimentum vitae sapien pellentesque
+                    habitant morbi. Venenatis a condimentum vitae sapien pellentesque habitant
+                    morbi. Lacus luctus accumsan tortor posuere ac ut. Neque vitae tempus quam
+                    pellentesque nec nam aliquam sem et. Cursus sit amet dictum sit amet. Sodales ut
+                    eu sem integer vitae justo eget magna fermentum. Imperdiet massa tincidunt nunc
+                    pulvinar sapien. Massa tempor nec feugiat nisl pretium fusce id velit ut. Nibh
+                    sed pulvinar proin gravida. Et netus et malesuada fames ac turpis. Dui vivamus
+                    arcu felis bibendum ut tristique. Nullam eget felis eget nunc lobortis mattis
+                    aliquam faucibus. Semper viverra nam libero justo. Eget nulla facilisi etiam
+                    dignissim diam quis enim lobortis. Diam maecenas ultricies mi eget mauris
+                    pharetra et. Aliquam ultrices sagittis orci a scelerisque purus. Semper viverra
+                    nam libero justo laoreet. Ut aliquam purus sit amet luctus venenatis lectus
+                    magna. Proin fermentum leo vel orci porta non. Vitae sapien pellentesque
+                    habitant morbi tristique senectus et. Malesuada proin libero nunc consequat
+                    interdum varius sit amet. Quis hendrerit dolor magna eget est lorem. Posuere
+                    urna nec tincidunt praesent semper feugiat nibh sed pulvinar. Hac habitasse
+                    platea dictumst vestibulum rhoncus est pellentesque elit. Faucibus purus in
+                    massa tempor nec feugiat nisl. Nunc eget lorem dolor sed viverra ipsum nunc
                     aliquet. Fringilla urna porttitor rhoncus dolor purus non enim. Donec et odio
                     pellentesque diam volutpat commodo sed egestas.
                   </div>
@@ -389,21 +489,30 @@
               </div>
             </SectionLayout>
             <div class="text-nowrap my-2">
-              <input type="checkbox" id="terms" name="terms" value="terms" ref="terms" class="me-2" />
+              <input
+                type="checkbox"
+                id="terms"
+                name="terms"
+                value="terms"
+                ref="terms"
+                class="me-2"
+              />
               <label for="terms" class="text-wrap align-top">
                 By submitting this form, I/we confirm that the provided information is true and
                 accurate to the best of my/our knowledge.
               </label>
             </div>
-            <button v-if='newDraft' type="button" class="btn btn-primary" @click="submit()">Submit</button>
-            <button v-else type="button" class="btn btn-primary" @click="submitSubmissionDraft()">Submit</button>
+            <button v-if="newDraft" type="button" class="btn btn-primary" @click="submit()">
+              Submit
+            </button>
+            <button v-else type="button" class="btn btn-primary" @click="submitSubmissionDraft()">
+              Submit
+            </button>
           </div>
         </div>
       </div>
-
     </div>
   </NavFooterLayout>
-
 </template>
 
 <script lang="ts">
@@ -417,7 +526,16 @@ import ApplicationViewMixin from './ApplicationViewMixin'
 import { createProjectJob } from '@/api'
 import { organizationsStore } from '@/stores/organizations'
 import { mapStores } from 'pinia'
-import { getApplication, updateApplication, getPreSignedPutUrl, getPreSignedGetUrl, uploadFile, updateSubmissionDraft, saveSubmissionDraft, submitSubmissionDraft } from '@/api'
+import {
+  getApplication,
+  updateApplication,
+  getPreSignedPutUrl,
+  getPreSignedGetUrl,
+  uploadFile,
+  updateSubmissionDraft,
+  saveSubmissionDraft,
+  submitSubmissionDraft
+} from '@/api'
 import type { NewApplication } from '@/api'
 import FormNavButtons from '@/components/FormNavButtons.vue'
 
@@ -430,8 +548,7 @@ export default {
     FormNavButtons
   },
   async created() {
-    const projectInfo = await getApplication(this.$route.params.projectID as string)
-    .then(
+    const projectInfo = await getApplication(this.$route.params.projectID as string).then(
       (res) =>
         // res!.Submissions.filter((item) => item.CreatedAt == res?.UpdatedAt)[0]
         res!.Submissions.slice(-1)[0]
@@ -527,7 +644,6 @@ export default {
         this.codeFilesDownloadLink = preSignedGetUrlCode?.URL ?? ''
         this.editCodeFiles = false
       }
-
 
       // this.founders = JSON.parse(JSON.stringify(this.founders))
     } else {
@@ -648,7 +764,8 @@ export default {
         Whitepaper: this.whitepaper,
         WhitepaperFile: {
           ID: this.whitepaperFileId,
-          Filename: this.whitepaperFile.name == 'File' ? this.whitepaperFilename : this.whitepaperFile.name,
+          Filename:
+            this.whitepaperFile.name == 'File' ? this.whitepaperFilename : this.whitepaperFile.name,
           URL: this.whitepaperUploadLink
         },
         CodeFiles: {
@@ -662,7 +779,7 @@ export default {
         Members: this.teamMembers,
         Objective: this.objective,
         Motivation: this.motivation,
-        Assets: this.assets,
+        Assets: this.assets
       } as unknown as NewApplication
 
       return data
@@ -679,7 +796,7 @@ export default {
         console.log(data)
 
         const update = await updateApplication(this.$route.params.projectID as string, data)
-        console.log('update',update)
+        console.log('update', update)
 
         if (update?.Status) {
           window.alert('Project updated successfully!')
@@ -695,7 +812,7 @@ export default {
       console.log('saving new submission draft', data)
 
       const update = await saveSubmissionDraft(this.$route.params.projectID as string, data)
-      console.log('update',update)
+      console.log('update', update)
 
       if (update) {
         window.alert('Your response has been saved successfully!')
@@ -703,7 +820,6 @@ export default {
       } else {
         window.alert('Something went wrong. Please try again later.')
       }
-
     },
 
     async updateSubmissionDraft() {
@@ -711,8 +827,12 @@ export default {
       console.log('is new draft', this.newDraft)
       console.log('updating submission draft', data)
 
-      const update = await updateSubmissionDraft(this.$route.params.projectID as string, this.$route.params.submissionID as string, data)
-      console.log('update:',update)
+      const update = await updateSubmissionDraft(
+        this.$route.params.projectID as string,
+        this.$route.params.submissionID as string,
+        data
+      )
+      console.log('update:', update)
 
       if (update) {
         window.alert('Your response has been updated successfully!')
@@ -720,7 +840,6 @@ export default {
       } else {
         window.alert('Something went wrong. Please try again later.')
       }
-
     },
 
     async submitSubmissionDraft() {
@@ -734,11 +853,19 @@ export default {
         let data = await this.prepareData()
         console.log('submitting submission draft', data)
 
-        const update1 = await updateSubmissionDraft(this.$route.params.projectID as string, this.$route.params.submissionID as string,data)
-        console.log('update1',update1)
+        const update1 = await updateSubmissionDraft(
+          this.$route.params.projectID as string,
+          this.$route.params.submissionID as string,
+          data
+        )
+        console.log('update1', update1)
 
-        const update = await submitSubmissionDraft(this.$route.params.projectID as string,  this.$route.params.submissionID as string, data)
-        console.log('update',update)
+        const update = await submitSubmissionDraft(
+          this.$route.params.projectID as string,
+          this.$route.params.submissionID as string,
+          data
+        )
+        console.log('update', update)
 
         window.alert('Your response has been submitted successfully!')
         this.$router.push('/projects/' + this.$route.params.projectID)
@@ -750,7 +877,7 @@ export default {
         1: this.complete1,
         2: this.complete2,
         3: this.complete3,
-        4: this.complete4,
+        4: this.complete4
       }
       if (mapping[curr as keyof typeof mapping]) {
         this.current = curr + 1
@@ -766,10 +893,7 @@ export default {
       let founder = true
       if (this.founders.length != 0 && this.teamMembers.length != 0) {
         for (let i = 0; i < this.founders.length; i++) {
-          if (
-            this.founders[i].Name === '' ||
-            this.founders[i].Position === ''
-          ) {
+          if (this.founders[i].Name === '' || this.founders[i].Position === '') {
             founder = false
           }
         }
@@ -777,10 +901,7 @@ export default {
       let teamMember = true
       if (this.teamMembers.length != 0) {
         for (let i = 0; i < this.teamMembers.length; i++) {
-          if (
-            this.teamMembers[i].Name === '' ||
-            this.teamMembers[i].Position === ''
-          ) {
+          if (this.teamMembers[i].Name === '' || this.teamMembers[i].Position === '') {
             teamMember = false
           }
         }
@@ -789,14 +910,14 @@ export default {
     },
     complete2() {
       return this.objective !== '' && this.motivation !== ''
-
     },
     complete3() {
       return this.assets !== ''
-
     },
     complete4() {
-      return !this.editWhitepaper && !this.editCodeFiles ? true : (this.whitepaperFile as any).size > 0 && (this.codeFiles as any).size > 0
+      return !this.editWhitepaper && !this.editCodeFiles
+        ? true
+        : (this.whitepaperFile as any).size > 0 && (this.codeFiles as any).size > 0
     }
   },
   watch: {

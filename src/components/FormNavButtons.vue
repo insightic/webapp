@@ -13,7 +13,7 @@ export default {
   props: {
     prevBtn: { type: Boolean },
     nextBtn: { type: Boolean },
-    saveBtn: { type: Boolean , default: false, required: false}
+    saveBtn: { type: Boolean, default: false, required: false }
   },
   methods: {
     prev() {
@@ -29,6 +29,4 @@ export default {
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

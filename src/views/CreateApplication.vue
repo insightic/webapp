@@ -7,7 +7,13 @@
         <div
           class="me-2 nav-item"
           @click="current = 1"
-          :class="current != 1 && complete1 ? 'text-success' : current != 1 && !complete1 ? 'text-secondary' : 'text-secondary'"
+          :class="
+            current != 1 && complete1
+              ? 'text-success'
+              : current != 1 && !complete1
+              ? 'text-secondary'
+              : 'text-secondary'
+          "
         >
           <i v-if="current == 1" class="bi bi-1-square-fill"></i>
           <i v-else class="bi bi-1-square"></i>
@@ -17,7 +23,13 @@
         <div
           class="mx-2 nav-item"
           @click="current = 2"
-          :class="current != 2 && complete2 ? 'text-success' : current != 2 && !complete2 ? 'text-secondary' : 'text-secondary'"
+          :class="
+            current != 2 && complete2
+              ? 'text-success'
+              : current != 2 && !complete2
+              ? 'text-secondary'
+              : 'text-secondary'
+          "
         >
           <i v-if="current == 2" class="bi bi-2-square-fill"></i>
           <i v-else class="bi bi-2-square"></i>
@@ -27,7 +39,13 @@
         <div
           class="mx-2 nav-item"
           @click="current = 3"
-          :class="current != 3 && complete3 ? 'text-success' : current != 3 && !complete3 ? 'text-secondary' : 'text-secondary'"
+          :class="
+            current != 3 && complete3
+              ? 'text-success'
+              : current != 3 && !complete3
+              ? 'text-secondary'
+              : 'text-secondary'
+          "
         >
           <i v-if="current == 3" class="bi bi-3-square-fill"></i>
           <i v-else class="bi bi-3-square"></i>
@@ -37,17 +55,20 @@
         <div
           class="mx-2 nav-item"
           @click="current = 4"
-          :class="current != 4 && complete4 ? 'text-success' : current != 4 && !complete4 ? 'text-secondary' : 'text-secondary'"
+          :class="
+            current != 4 && complete4
+              ? 'text-success'
+              : current != 4 && !complete4
+              ? 'text-secondary'
+              : 'text-secondary'
+          "
         >
           <i v-if="current == 4" class="bi bi-4-square-fill"></i>
           <i v-else class="bi bi-4-square"></i>
           <span class="ms-2">Upload Documents</span>
         </div>
         <span><i class="bi bi-chevron-right"></i></span>
-        <div
-          class="ms-2 nav-item text-secondary"
-          @click="current = 5"
-        >
+        <div class="ms-2 nav-item text-secondary" @click="current = 5">
           <i v-if="current == 5" class="bi bi-5-square-fill"></i>
           <i v-else class="bi bi-5-square"></i>
           <span class="ms-2">Submit</span>
@@ -67,26 +88,41 @@
                 />
               </div>
               <div class="col-md-6">
-                <LabelInputComponent label="Twitter (URL)" type="text" v-model:field="twitter" :required="true" />
+                <LabelInputComponent
+                  label="Twitter (URL)"
+                  type="text"
+                  v-model:field="twitter"
+                  :required="true"
+                />
               </div>
               <div class="col-md-6">
-                <LabelInputComponent label="Website (URL)" type="text" v-model:field="website" :required="true" />
+                <LabelInputComponent
+                  label="Website (URL)"
+                  type="text"
+                  v-model:field="website"
+                  :required="true"
+                />
               </div>
             </div>
           </SectionLayout>
 
           <SectionLayout title="Founders">
             <LabelInputComponent
-                label="Number of Founders"
-                type="text"
-                v-model:field="numFounders"
-                :required="true"
-              />
+              label="Number of Founders"
+              type="text"
+              v-model:field="numFounders"
+              :required="true"
+            />
             <div class="mb-4" v-for="(founder, counter) in founders" v-bind:key="counter">
               <h6>Founder {{ counter + 1 }}</h6>
               <div class="row">
                 <div class="col-md-6">
-                  <LabelInputComponent label="Name" type="text" v-model:field="founder.Name" :required="true" />
+                  <LabelInputComponent
+                    label="Name"
+                    type="text"
+                    v-model:field="founder.Name"
+                    :required="true"
+                  />
                 </div>
                 <div class="col-md-6">
                   <LabelInputComponent
@@ -97,19 +133,35 @@
                   />
                 </div>
                 <div class="col-md-12">
-                  <LabelInputComponent label="KYC Verification" type="text" v-model:field="founder.Kyc" />
+                  <LabelInputComponent
+                    label="KYC Verification"
+                    type="text"
+                    v-model:field="founder.Kyc"
+                  />
                 </div>
                 <div class="col-md-6">
-                  <LabelInputComponent label="Twitter (URL)" type="text" v-model:field="founder.Twitter" />
+                  <LabelInputComponent
+                    label="Twitter (URL)"
+                    type="text"
+                    v-model:field="founder.Twitter"
+                  />
                 </div>
                 <div class="col-md-6">
-                  <LabelInputComponent label="LinkedIn (URL)" type="text" v-model:field="founder.Linkedin" />
+                  <LabelInputComponent
+                    label="LinkedIn (URL)"
+                    type="text"
+                    v-model:field="founder.Linkedin"
+                  />
                 </div>
                 <div class="col-md-6">
                   <LabelInputComponent label="Email" type="text" v-model:field="founder.Email" />
                 </div>
                 <div class="col-md-6">
-                  <LabelInputComponent label="Ethereum Address" type="text" v-model:field="founder.Ethereum" />
+                  <LabelInputComponent
+                    label="Ethereum Address"
+                    type="text"
+                    v-model:field="founder.Ethereum"
+                  />
                 </div>
 
                 <!-- <div class="">
@@ -128,38 +180,63 @@
             </div>
             <div class="row">
               <div class="col-md-6">
-                <button class="btn btn-sm btn-outline-primary" @click="numFounders = parseInt(numFounders) + 1 + ''">Add Another Founder</button>
+                <button
+                  class="btn btn-sm btn-outline-primary"
+                  @click="numFounders = parseInt(numFounders) + 1 + ''"
+                >
+                  Add Another Founder
+                </button>
               </div>
             </div>
           </SectionLayout>
 
           <SectionLayout title="Team Members">
             <LabelInputComponent
-                  label="Number of Team Members"
-                  type="text"
-                  v-model:field="numTeamMembers"
-                  :required="true"
-                />
+              label="Number of Team Members"
+              type="text"
+              v-model:field="numTeamMembers"
+              :required="true"
+            />
             <div class="mb-2" v-for="(member, counter) in teamMembers" v-bind:key="counter">
               <div class="row">
                 <h6>Member {{ counter + 1 }}</h6>
-                  <div class="col-md-6">
-                    <LabelInputComponent label="Name" type="text" v-model:field="member.Name" :required="true" />
-                  </div>
-                  <div class="col-md-6">
-                    <LabelInputComponent label="Role" type="text" v-model:field="member.Position" :required="true" />
-                  </div>
+                <div class="col-md-6">
+                  <LabelInputComponent
+                    label="Name"
+                    type="text"
+                    v-model:field="member.Name"
+                    :required="true"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <LabelInputComponent
+                    label="Role"
+                    type="text"
+                    v-model:field="member.Position"
+                    :required="true"
+                  />
+                </div>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6">
-                <button class="btn btn-sm btn-outline-primary" @click="numTeamMembers = parseInt(numTeamMembers) + 1 + ''">Add Another Team Member</button>
+                <button
+                  class="btn btn-sm btn-outline-primary"
+                  @click="numTeamMembers = parseInt(numTeamMembers) + 1 + ''"
+                >
+                  Add Another Team Member
+                </button>
               </div>
             </div>
           </SectionLayout>
 
-          <FormNavButtons :prevBtn="false" :saveBtn="true" :nextBtn="true" @save="save" @next="nextStep(1)"/>
-
+          <FormNavButtons
+            :prevBtn="false"
+            :saveBtn="true"
+            :nextBtn="true"
+            @save="save"
+            @next="nextStep(1)"
+          />
         </div>
         <div v-if="current == 2">
           <SectionLayout title="Objective">
@@ -185,8 +262,13 @@
             </div>
           </SectionLayout>
 
-          <FormNavButtons :prevBtn="false" :saveBtn="true" :nextBtn="true" @save="save" @next="nextStep(2)"/>
-
+          <FormNavButtons
+            :prevBtn="false"
+            :saveBtn="true"
+            :nextBtn="true"
+            @save="save"
+            @next="nextStep(2)"
+          />
         </div>
         <div v-if="current == 3">
           <SectionLayout title="Initial Assets">
@@ -203,8 +285,13 @@
             </div>
           </SectionLayout>
 
-          <FormNavButtons :prevBtn="false" :saveBtn="true" :nextBtn="true" @save="save" @next="nextStep(3)"/>
-
+          <FormNavButtons
+            :prevBtn="false"
+            :saveBtn="true"
+            :nextBtn="true"
+            @save="save"
+            @next="nextStep(3)"
+          />
         </div>
 
         <div v-show="current == 4">
@@ -212,8 +299,16 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="">
-                  <label for="document" class="">Whitepaper File <span class="text-danger">*</span></label>
-                  <input type="file" ref="whitepaper" class="form-controls w-100" id="document" @change="onFileChange" />
+                  <label for="document" class=""
+                    >Whitepaper File <span class="text-danger">*</span></label
+                  >
+                  <input
+                    type="file"
+                    ref="whitepaper"
+                    class="form-controls w-100"
+                    id="document"
+                    @change="onFileChange"
+                  />
                   <div class="text-secondary small">
                     Please attach a quality version of the whitepaper document.
                   </div>
@@ -224,8 +319,16 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="mt-3">
-                  <label for="document" class="">Code Files <span class="text-danger">*</span></label>
-                  <input type="file" ref="codes" class="form-controls w-100" id="document" @change="onFileChangeCodes" />
+                  <label for="document" class=""
+                    >Code Files <span class="text-danger">*</span></label
+                  >
+                  <input
+                    type="file"
+                    ref="codes"
+                    class="form-controls w-100"
+                    id="document"
+                    @change="onFileChangeCodes"
+                  />
                   <div class="text-secondary small">
                     Please attach a zipped folder containing the code files.
                   </div>
@@ -234,8 +337,13 @@
             </div>
           </SectionLayout>
 
-          <FormNavButtons :prevBtn="false" :saveBtn="true" :nextBtn="true" @save="save" @next="nextStep(4)"/>
-
+          <FormNavButtons
+            :prevBtn="false"
+            :saveBtn="true"
+            :nextBtn="true"
+            @save="save"
+            @next="nextStep(4)"
+          />
         </div>
 
         <div v-if="current == 5">
@@ -320,7 +428,6 @@ import { createProject, saveApplicationDraft, getPreSignedPutUrl, uploadFile } f
 import type { NewApplication } from '@/api'
 import FormNavButtons from '@/components/FormNavButtons.vue'
 
-
 export default {
   components: {
     NavFooterLayout,
@@ -329,8 +436,7 @@ export default {
     LabelTextareaComponent,
     FormNavButtons
   },
-  mounted() {
-  },
+  mounted() {},
   data() {
     return {
       show1: true,
@@ -383,10 +489,7 @@ export default {
       let founder = true
       if (this.founders.length != 0 && this.teamMembers.length != 0) {
         for (let i = 0; i < this.founders.length; i++) {
-          if (
-            this.founders[i].Name === '' ||
-            this.founders[i].Position === ''
-          ) {
+          if (this.founders[i].Name === '' || this.founders[i].Position === '') {
             founder = false
           }
         }
@@ -394,10 +497,7 @@ export default {
       let teamMember = true
       if (this.teamMembers.length != 0) {
         for (let i = 0; i < this.teamMembers.length; i++) {
-          if (
-            this.teamMembers[i].Name === '' ||
-            this.teamMembers[i].Position === ''
-          ) {
+          if (this.teamMembers[i].Name === '' || this.teamMembers[i].Position === '') {
             teamMember = false
           }
         }
@@ -406,11 +506,9 @@ export default {
     },
     complete2() {
       return this.objective !== '' && this.motivation !== ''
-
     },
     complete3() {
       return this.assets !== ''
-
     },
     complete4() {
       return (this.whitepaperFile as any).size > 0 && (this.codeFiles as any).size > 0
@@ -433,64 +531,64 @@ export default {
     },
     async prepareData() {
       if ((this.whitepaperFile as any).size > 0) {
-          const preSignedPutUrl: any = await getPreSignedPutUrl()
-          if (preSignedPutUrl) {
-            const fileResp = await uploadFile(preSignedPutUrl.URL, this.whitepaperFile as any)
-            if (fileResp.ok) {
-              this.whitepaperFileId = preSignedPutUrl.ObjectID
-              this.whitepaperUploadLink = preSignedPutUrl.URL
-            }
+        const preSignedPutUrl: any = await getPreSignedPutUrl()
+        if (preSignedPutUrl) {
+          const fileResp = await uploadFile(preSignedPutUrl.URL, this.whitepaperFile as any)
+          if (fileResp.ok) {
+            this.whitepaperFileId = preSignedPutUrl.ObjectID
+            this.whitepaperUploadLink = preSignedPutUrl.URL
           }
         }
+      }
 
-        if ((this.codeFiles as any).size > 0) {
-          const preSignedPutUrl: any = await getPreSignedPutUrl()
-          if (preSignedPutUrl) {
-            const fileResp = await uploadFile(preSignedPutUrl.URL, this.codeFiles as any)
-            if (fileResp.ok) {
-              this.codeFilesId = preSignedPutUrl.ObjectID
-              this.codesUploadLink = preSignedPutUrl.URL
-            }
+      if ((this.codeFiles as any).size > 0) {
+        const preSignedPutUrl: any = await getPreSignedPutUrl()
+        if (preSignedPutUrl) {
+          const fileResp = await uploadFile(preSignedPutUrl.URL, this.codeFiles as any)
+          if (fileResp.ok) {
+            this.codeFilesId = preSignedPutUrl.ObjectID
+            this.codesUploadLink = preSignedPutUrl.URL
           }
         }
+      }
 
-        // for (let i = 0; i < this.founders.length; i++) {
-        //   if (this.founders[i].cvFile) {
-        //     const preSignedPutUrl: any = await getPreSignedPutUrl()
-        //     if (preSignedPutUrl) {
-        //       const fileResp = await uploadFile(preSignedPutUrl.URL, this.founders[i].cvFile as any)
-        //       if (fileResp.ok) {
-        //         this.founders[i].CV = preSignedPutUrl.ObjectID
-        //         this.founders[i].cvUploadLink = preSignedPutUrl.URL
-        //         this.founders[i].CVFilename = this.founders[i].cvFile.name
-        //       }
-        //     }
-        //   }
-        // }
-        let data = {
-          Name: this.name,
-          Twitter: this.twitter,
-          Website: this.website,
-          Whitepaper: this.whitepaper,
-          WhitepaperFile: {
-            ID: this.whitepaperFileId,
-            Filename: this.whitepaperFile.name,
-            URL: this.whitepaperUploadLink
-          },
-          CodeFiles: {
-            ID: this.codeFilesId,
-            Filename: this.codeFiles.name,
-            URL: this.codesUploadLink
-          },
-          NumFounders: parseInt(this.numFounders) ? parseInt(this.numFounders) : 0,
-          Founders: this.founders,
-          NumMembers: parseInt(this.numTeamMembers) ? parseInt(this.numTeamMembers) : 0,
-          Members: this.teamMembers,
-          Objective: this.objective,
-          Motivation: this.motivation,
-          Assets: this.assets
-        } as unknown as NewApplication
-        return data
+      // for (let i = 0; i < this.founders.length; i++) {
+      //   if (this.founders[i].cvFile) {
+      //     const preSignedPutUrl: any = await getPreSignedPutUrl()
+      //     if (preSignedPutUrl) {
+      //       const fileResp = await uploadFile(preSignedPutUrl.URL, this.founders[i].cvFile as any)
+      //       if (fileResp.ok) {
+      //         this.founders[i].CV = preSignedPutUrl.ObjectID
+      //         this.founders[i].cvUploadLink = preSignedPutUrl.URL
+      //         this.founders[i].CVFilename = this.founders[i].cvFile.name
+      //       }
+      //     }
+      //   }
+      // }
+      let data = {
+        Name: this.name,
+        Twitter: this.twitter,
+        Website: this.website,
+        Whitepaper: this.whitepaper,
+        WhitepaperFile: {
+          ID: this.whitepaperFileId,
+          Filename: this.whitepaperFile.name,
+          URL: this.whitepaperUploadLink
+        },
+        CodeFiles: {
+          ID: this.codeFilesId,
+          Filename: this.codeFiles.name,
+          URL: this.codesUploadLink
+        },
+        NumFounders: parseInt(this.numFounders) ? parseInt(this.numFounders) : 0,
+        Founders: this.founders,
+        NumMembers: parseInt(this.numTeamMembers) ? parseInt(this.numTeamMembers) : 0,
+        Members: this.teamMembers,
+        Objective: this.objective,
+        Motivation: this.motivation,
+        Assets: this.assets
+      } as unknown as NewApplication
+      return data
     },
     async submit() {
       if (!this.complete1 || !this.complete2 || !this.complete3 || !this.complete4) {
@@ -506,9 +604,9 @@ export default {
         const resp = await createProject(data)
         console.log(resp)
         window.alert('Your response has been submitted')
-        this.$router.push({ path:"/", query: { view: 'Applications' } })
+        this.$router.push({ path: '/', query: { view: 'Applications' } })
       }
-    }, 
+    },
     async save() {
       let data = await this.prepareData()
 
@@ -517,10 +615,8 @@ export default {
       const resp = await saveApplicationDraft(data)
       console.log(resp)
       window.alert('Your response has been saved')
-      this.$router.push({ path:"/", query: { view: 'Applications' } })
-
-    }, 
-
+      this.$router.push({ path: '/', query: { view: 'Applications' } })
+    },
 
     addMember() {
       this.teamMembers.push({
@@ -557,7 +653,7 @@ export default {
         1: this.complete1,
         2: this.complete2,
         3: this.complete3,
-        4: this.complete4,
+        4: this.complete4
       }
       if (mapping[curr as keyof typeof mapping]) {
         this.current = curr + 1

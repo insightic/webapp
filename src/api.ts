@@ -92,7 +92,7 @@ export interface Application {
   ID: string
   AccountID: string
   ApplicationName: string
-  Submissions: Submission[],
+  Submissions: Submission[]
   Status: string
   CreatedAt: string
   UpdatedAt: string
@@ -127,7 +127,7 @@ export interface NewApplication {
   Twitter: string
   Website: string
   Whitepaper: string
-  WhitepaperFile: S3File,
+  WhitepaperFile: S3File
   CodeFiles: S3File
   WhitepaperFileLink: string
   NumFounders: number
@@ -187,24 +187,46 @@ export async function deleteApplication(id: number | string): Promise<any | null
 }
 
 // when there is application and save new submission as draft
-export async function saveSubmissionDraft(applicationID: number | string, project: NewApplication): Promise<Application | null> {
+export async function saveSubmissionDraft(
+  applicationID: number | string,
+  project: NewApplication
+): Promise<Application | null> {
   const resp = await httpclient.post<Application>(`/applications/${applicationID}/drafts`, project)
   return resp?.payload || null
 }
 
-export async function updateSubmissionDraft(applicationID: number | string, submissionID: number | string, project: NewApplication): Promise<Application | null> {
-  const resp = await httpclient.put<Application>(`/applications/${applicationID}/submissions/${submissionID}/drafts`, project)
+export async function updateSubmissionDraft(
+  applicationID: number | string,
+  submissionID: number | string,
+  project: NewApplication
+): Promise<Application | null> {
+  const resp = await httpclient.put<Application>(
+    `/applications/${applicationID}/submissions/${submissionID}/drafts`,
+    project
+  )
   return resp?.payload || null
 }
 
 // when there is application and submit submission draft
-export async function submitSubmissionDraft(applicationID: number | string, submissionID: number | string, project: NewApplication): Promise<Application | null> {
-  const resp = await httpclient.post<Application>(`/applications/${applicationID}/submissions/${submissionID}/submit`, project)
+export async function submitSubmissionDraft(
+  applicationID: number | string,
+  submissionID: number | string,
+  project: NewApplication
+): Promise<Application | null> {
+  const resp = await httpclient.post<Application>(
+    `/applications/${applicationID}/submissions/${submissionID}/submit`,
+    project
+  )
   return resp?.payload || null
 }
 
-export async function deleteSubmission(applicationID: number | string, submissionID: number | string): Promise<any | null> {
-  const resp = await httpclient.delete<any>(`/applications/${applicationID}/submissions/${submissionID}`)
+export async function deleteSubmission(
+  applicationID: number | string,
+  submissionID: number | string
+): Promise<any | null> {
+  const resp = await httpclient.delete<any>(
+    `/applications/${applicationID}/submissions/${submissionID}`
+  )
   return resp?.payload || null
 }
 
@@ -250,6 +272,8 @@ export async function getJobRunResults(
   projectID: number | string,
   jobID: number | string
 ): Promise<JobRunResult[]> {
-  const resp = await httpclient.get<JobRunResult[]>(`/applications/${projectID}/jobs/${jobID}/results`)
+  const resp = await httpclient.get<JobRunResult[]>(
+    `/applications/${projectID}/jobs/${jobID}/results`
+  )
   return resp?.payload || []
 }
