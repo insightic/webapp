@@ -10,6 +10,8 @@ import AccountUsersView from '@/views/admin/accountSubViews/AccountUsersView.vue
 import AccountProfileView from '@/views/admin/accountSubViews/AccountProfileView.vue'
 import AccountRulesView from './accountSubViews/AccountRulesView.vue'
 import AccountAddRuleView from '@/views/admin/accountSubViews/AccountAddRuleView.vue'
+import AccountAddPromptView from '@/views/admin/accountSubViews/AccountAddPromptView.vue'
+import AccountPromptsView from './accountSubViews/AccountPromptsView.vue'
 
 export default {
   components: {
@@ -34,9 +36,20 @@ export default {
           component: AccountRulesView
         },
         {
+          name: 'Prompts',
+          icon: 'bi-braces',
+          component: AccountPromptsView
+        },
+        {
           name: 'Add Rule',
           icon: 'bi-braces-asterisk',
           component: AccountAddRuleView,
+          hidden: true
+        },
+        {
+          name: 'Add Prompt',
+          icon: 'bi-braces-asterisk',
+          component: AccountAddPromptView,
           hidden: true
         },
         {

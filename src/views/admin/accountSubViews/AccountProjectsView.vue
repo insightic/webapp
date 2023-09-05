@@ -50,7 +50,7 @@ export default {
   },
   data() {
     return {
-      view: 'card',
+      view: 'list',
       icons: {
         wolfgame:
           'https://nftnow.com/wp-content/uploads/2023/02/Screen-Shot-2023-02-02-at-11.33.07-AM.png',

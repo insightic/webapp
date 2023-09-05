@@ -1,8 +1,9 @@
 <template>
   <div class="d-flex justify-content-between align-items-center">
-    <div class="text-secondary mb-4">Rules that being executed</div>
-    <button type="button" class="btn btn-primary my-3" @click="createRule()">Add New Rule</button>
+    <div class="text-secondary mb-4">Prompts that being passed to AI model</div>
+    <button type="button" class="btn btn-primary my-3" @click="createPrompt()">Add New Prompt</button>
   </div>
+
   <table class="table">
     <thead class="thead-dark">
       <tr>
@@ -36,8 +37,8 @@ export default {
     }
   },
   methods: {
-    createRule() {
-      this.$router.push({ query: { view: 'Add Rule' } })
+    createPrompt() {
+      this.$router.push({ query: { view: 'Add Prompt' } })
     }
   }
 }
