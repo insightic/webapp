@@ -3,99 +3,34 @@
 
   <div style="max-width: 960px">
     <div class="mb-4 fw-bold">DLT Foundation Details Registration Auto-Check Report</div>
-
-    <div class="mb-2">**Section A: DLT Foundation Details**</div>
-    <table class="table w-100 mb-4">
-      <thead>
-        <tr>
-          <th scope="col">Item</th>
-          <th scope="col">Data Received</th>
-          <th scope="col">Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="item in sectA" :key="item.item">
-          <td>{{ item.item }}</td>
-          <td>{{ item['Data Received'] }}</td>
-          <td>{{ item.Status }}</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="mb-2">**Section B: Founder(s) Details**</div>
-    <table class="table w-100 mb-4">
-      <thead>
-        <tr>
-          <th scope="col">Item</th>
-          <th scope="col">Data Received</th>
-          <th scope="col">Status</th>
-        </tr>
-      </thead>
-      <tbody v-for="(founder, index) in sectB" :key="index">
-        <tr>
-          <td colspan="3" class="text-center fw-bold">Founder {{ founder.founder }}</td>
-        </tr>
-        <tr v-for="item in founder.data" :key="item.item">
-          <td>{{ item.item }}</td>
-          <td>{{ item['Data Received'] }}</td>
-          <td>{{ item.Status }}</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="mb-2">**Section C: Objectives of DLT Foundation**</div>
-    <table class="table w-100 mb-4">
-      <thead>
-        <tr>
-          <th scope="col">Item</th>
-          <th scope="col">Data Received</th>
-          <th scope="col">Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="item in sectC" :key="item.item">
-          <td>{{ item.item }}</td>
-          <td>{{ item['Data Received'] }}</td>
-          <td>{{ item.Status }}</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="mb-2">**Section D: Specific Purpose**</div>
-    <table class="table w-100 mb-4">
-      <thead>
-        <tr>
-          <th scope="col">Item</th>
-          <th scope="col">Data Received</th>
-          <th scope="col">Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="item in sectD" :key="item.item">
-          <td>{{ item.item }}</td>
-          <td>{{ item['Data Received'] }}</td>
-          <td>{{ item.Status }}</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="mb-2">**Section E: Initial Assets**</div>
-    <table class="table w-100 mb-4">
-      <thead>
-        <tr>
-          <th scope="col">Item</th>
-          <th scope="col">Data Received</th>
-          <th scope="col">Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="item in sectE" :key="item.item">
-          <td>{{ item.item }}</td>
-          <td>{{ item['Data Received'] }}</td>
-          <td>{{ item.Status }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div v-for="(res, idx) in result" :key="idx">
+      <div class="mb-2 display-7 fw-bold">{{ res.name }}</div>
+      <div class="row">
+        <div class="col-md-6 col-lg-4 my-2" v-for="item in res.item">
+          <div v-if="'founder' in item">
+            <div>{{ item.founder }}</div>
+            <div v-for="info in item.data">
+              <information-component
+                :title="info.title"
+                :dataReceived="info.dataReceived"
+                :information="info.information"
+                :variant="info.status"
+              >
+              </information-component>
+            </div>
+          </div>
+          <div v-else>
+            <information-component
+              :title="item.title"
+              :dataReceived="item.dataReceived"
+              :information="item.information"
+              :variant="item.status"
+            >
+            </information-component>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -105,140 +40,182 @@ import ApplicationViewMixin from './ApplicationViewMixin'
 import { createProjectJob } from '@/api'
 import { organizationsStore } from '@/stores/organizations'
 import { mapStores } from 'pinia'
+import InformationComponent from '@/components/InformationComponent.vue'
 
 export default {
-  components: {},
+  components: {
+    InformationComponent
+  },
   created() {},
   data() {
     return {
-      sectA: [
+      result: [
         {
-          item: 'DLT Foundation Name',
-          'Data Received': '____________________',
-          Status: '✔️ Pass / ❌ Fail'
-        },
-        {
-          item: 'Official Twitter Account (URL)',
-          'Data Received': '____________________',
-          Status: '✔️ Pass / ❌ Fail'
-        },
-        {
-          item: 'Official Website (URL)',
-          'Data Received': '____________________',
-          Status: '✔️ Pass / ❌ Fail'
-        },
-        {
-          item: 'Official Website (URL)',
-          'Data Received': '____________________',
-          Status: '✔️ Pass / ❌ Fail'
-        },
-        {
-          item: 'Whitepaper Document Quality',
-          'Data Received': '____________________',
-          Status: '✔️ Pass / ❌ Fail'
-        }
-      ],
-      sectB: [
-        {
-          founder: 1,
-          data: [
+          name: 'DLT Foundation Details',
+          item: [
             {
-              item: 'Name',
-              'Data Received': '____________________',
-              Status: '✔️ Pass / ❌ Fail'
+              title: 'DLT Foundation Name',
+              information: '123123',
+              dataReceived: '1231234444',
+              status: 'fail'
             },
             {
-              item: 'Position within DLT Foundation',
-              'Data Received': '____________________',
-              Status: '✔️ Pass / ❌ Fail'
+              title: 'Official Twitter Account (URL)',
+              information: '123123',
+              dataReceived: '123123',
+              status: 'pass'
             },
             {
-              item: 'KYC Verification',
-              'Data Received': '____________________',
-              Status: '✔️ Pass / ❌ Fail'
+              title: 'Official Website (URL)',
+              information: '123123',
+              dataReceived: '123123',
+              status: 'pass'
             },
             {
-              item: 'Twitter Account (URL)',
-              'Data Received': '____________________',
-              Status: '✔️ Pass / ❌ Fail'
+              title: 'Official Website (URL)',
+              information: '123123',
+              dataReceived: '12312344',
+              status: 'fail'
             },
             {
-              item: 'LinkedIn Profile (URL)',
-              'Data Received': '____________________',
-              Status: '✔️ Pass / ❌ Fail'
-            },
-            {
-              item: 'Ethereum Address',
-              'Data Received': '____________________',
-              Status: '✔️ Pass / ❌ Fail'
-            },
-            {
-              item: 'Email Address',
-              'Data Received': '____________________',
-              Status: '✔️ Pass / ❌ Fail'
+              title: 'Whitepaper Document Quality',
+              information: '123123',
+              dataReceived: '?',
+              status: 'not sure'
             }
           ]
         },
         {
-          founder: 2,
-          data: [
+          name: 'Founder(s) Details',
+          item: [
             {
-              item: 'Name',
-              'Data Received': '____________________',
-              Status: '✔️ Pass / ❌ Fail'
+              founder: 1,
+              data: [
+                {
+                  title: 'Name',
+                  information: '123123',
+                  dataReceived: '?',
+                  status: 'not sure'
+                },
+                {
+                  title: 'Position within DLT Foundation',
+                  information: '123123',
+                  dataReceived: '?',
+                  status: 'not sure'
+                },
+                {
+                  title: 'KYC Verification',
+                  information: '123123',
+                  dataReceived: '123123',
+                  status: 'pass'
+                },
+                {
+                  title: 'Twitter Account (URL)',
+                  information: '123123',
+                  dataReceived: '123',
+                  status: 'fail'
+                },
+                {
+                  title: 'LinkedIn Profile (URL)',
+                  information: '123123',
+                  dataReceived: '123',
+                  status: 'fail'
+                },
+                {
+                  title: 'Ethereum Address',
+                  information: '123123',
+                  dataReceived: '123',
+                  status: 'fail'
+                },
+                {
+                  title: 'Email Address',
+                  information: '123123',
+                  dataReceived: '123123',
+                  status: 'pass'
+                }
+              ]
             },
             {
-              item: 'Position within DLT Foundation',
-              'Data Received': '____________________',
-              Status: '✔️ Pass / ❌ Fail'
-            },
-            {
-              item: 'KYC Verification',
-              'Data Received': '____________________',
-              Status: '✔️ Pass / ❌ Fail'
-            },
-            {
-              item: 'Twitter Account (URL)',
-              'Data Received': '____________________',
-              Status: '✔️ Pass / ❌ Fail'
-            },
-            {
-              item: 'LinkedIn Profile (URL)',
-              'Data Received': '____________________',
-              Status: '✔️ Pass / ❌ Fail'
-            },
-            {
-              item: 'Ethereum Address',
-              'Data Received': '____________________',
-              Status: '✔️ Pass / ❌ Fail'
-            },
-            {
-              item: 'Email Address',
-              'Data Received': '____________________',
-              Status: '✔️ Pass / ❌ Fail'
+              founder: 2,
+              data: [
+                {
+                  title: 'Name',
+                  information: '123123',
+                  dataReceived: '?',
+                  status: 'not sure'
+                },
+                {
+                  title: 'Position within DLT Foundation',
+                  information: '123123',
+                  dataReceived: '?',
+                  status: 'not sure'
+                },
+                {
+                  title: 'KYC Verification',
+                  information: '123123',
+                  dataReceived: '123123',
+                  status: 'pass'
+                },
+                {
+                  title: 'Twitter Account (URL)',
+                  information: '123123',
+                  dataReceived: '123',
+                  status: 'fail'
+                },
+                {
+                  title: 'LinkedIn Profile (URL)',
+                  information: '123123',
+                  dataReceived: '123',
+                  status: 'fail'
+                },
+                {
+                  title: 'Ethereum Address',
+                  information: '123123',
+                  dataReceived: '123',
+                  status: 'fail'
+                },
+                {
+                  title: 'Email Address',
+                  information: '123123',
+                  dataReceived: '123123',
+                  status: 'pass'
+                }
+              ]
             }
           ]
-        }
-      ],
-      sectC: [
+        },
         {
-          item: 'Objectives Description',
-          'Data Received': '____________________',
-          Status: '✔️ Pass / ❌ Fail'
-        }
-      ],
-      sectD: [
+          name: 'Objectives of DLT Foundation',
+          item: [
+            {
+              title: 'Objectives Description',
+              information: '123123',
+              dataReceived: '?',
+              status: 'not sure'
+            }
+          ]
+        },
         {
-          item: 'Specific Purpose Description',
-          'Data Received': '____________________',
-          Status: '✔️ Pass / ❌ Fail'
-        }
-      ],
-      sectE: [
+          name: 'Specific Purpose',
+          item: [
+            {
+              title: 'Specific Purpose Description',
+              information: '123123',
+              dataReceived: '123123',
+              status: 'pass'
+            }
+          ]
+        },
         {
-          item: 'Initial Assets Description',
-          'Data Received': '____________________',
-          Status: '✔️ Pass / ❌ Fail'
+          name: 'Initial Assets',
+          item: [
+            {
+              title: 'Initial Assets Description',
+              information: '123123',
+              dataReceived: '123',
+              status: 'fail'
+            }
+          ]
         }
       ]
     }
