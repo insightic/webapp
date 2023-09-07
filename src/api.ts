@@ -278,3 +278,19 @@ export async function getJobRunResults(
   )
   return resp?.payload || []
 }
+
+export interface AssessmentResults {
+  title: string,
+  information: string,
+  dataReceived: string,
+  status: string
+}
+
+export async function getAssessmentResults(
+  applicationID: number | string
+  ): Promise<AssessmentResults[]> {
+    const resp = await httpclient.get<AssessmentResults[]>(
+      `/applications/${applicationID}/assessment`
+    )
+  return resp?.payload || []
+}

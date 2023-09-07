@@ -3,15 +3,15 @@
     <div
       class="rounded p-3 bg-opacity-25 h-100 w-100"
       :class="{
-        'bg-danger': variant == 'fail',
+        'bg-danger': variant == 'Fail',
         'bg-warning': variant == 'not sure',
-        'bg-success': variant == 'pass'
+        'bg-success': variant == 'Pass'
       }"
     >
       <div class="d-flex align-items-top">
-        <i v-if="variant == 'fail'" class="bi bi-x-circle-fill me-2 text-danger"></i>
+        <i v-if="variant == 'Fail'" class="bi bi-x-circle-fill me-2 text-danger"></i>
         <i v-if="variant == 'not sure'" class="bi bi-exclamation-circle-fill me-2 text-warning"></i>
-        <i v-if="variant == 'pass'" class="bi bi-check-circle-fill me-2 text-success"></i>
+        <i v-if="variant == 'Pass'" class="bi bi-check-circle-fill me-2 text-success"></i>
 
         <div class="text-break">
           <div style="font-size: 1.05rem">
@@ -59,7 +59,7 @@ export default {
     title: { type: String, default: '' },
     dataReceived: { type: String, default: '' },
     information: { type: String, default: '' },
-    variant: { type: String, default: 'success' },
+    variant: { type: String, default: 'Pass' },
   }
 }
 </script>
