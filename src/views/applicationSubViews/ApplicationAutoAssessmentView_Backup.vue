@@ -9,7 +9,7 @@
         <div class="col-md-6 col-lg-4 my-2" v-for="item in res.item">
           <div v-if="'founder' in item">
             <div>Founder: {{ item.founder }}</div>
-            <div v-for="info in item.data">
+            <div v-for="info in item.data" style="margin-top: 30px;">
               <information-component
                 :title="info.title"
                 :dataReceived="info.dataReceived"
@@ -37,7 +37,7 @@
 <script lang="ts">
 import ApplicationViewMixin from './ApplicationViewMixin'
 
-import { createProjectJob, getAssessmentResults, type AssessmentResults } from '@/api'
+import { createProjectJob, getAssessmentResults, type AssessmentResults, type AssessmentResultsFounder } from '@/api'
 import { organizationsStore } from '@/stores/organizations'
 import { mapStores } from 'pinia'
 import InformationComponent from '@/components/InformationComponent.vue'
@@ -52,7 +52,7 @@ export default {
   },
   data() {
     return {
-      result: [] as Array<AssessmentResults>
+      result: [] as Array<AssessmentResults> | Array<AssessmentResultsFounder>
     }
   },
   mixins: [ApplicationViewMixin],
