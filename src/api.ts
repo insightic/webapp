@@ -301,8 +301,8 @@ export interface AssessmentResults {
 
 export async function getAssessmentResults(
   applicationID: number | string
-  ): Promise<AssessmentResultsFounder[] | AssessmentResultsFounder[]> {
-    const resp = await httpclient.get<AssessmentResultsFounder[] | AssessmentResultsFounder[]>(
+  ): Promise<AssessmentResults[] | AssessmentResultsFounder[]> {
+    const resp = await httpclient.get<AssessmentResults[] | AssessmentResultsFounder[]>(
       `/applications/${applicationID}/assessment`
     )
   return resp?.payload || []

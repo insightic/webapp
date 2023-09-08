@@ -4,9 +4,9 @@
   <div style="max-width: 960px">
     <div class="mb-4 fw-bold">DLT Foundation Details Registration Auto-Check Report</div>
     <div v-for="(res, idx) in result" :key="idx">
-      <div class="mb-2 display-7 fw-bold">{{ res.name }}</div>
+      <div class="mb-2 display-7 fw-bold">{{ res['name'] }}</div>
       <div class="row">
-        <div class="col-md-6 col-lg-4 my-2" v-for="item in res.item">
+        <div class="col-md-6 col-lg-4 my-2" v-for="item in res['item']">
           <div v-if="'founder' in item">
             <div>Founder: {{ item.founder }}</div>
             <div v-for="info in item.data" style="margin-top: 30px;">
