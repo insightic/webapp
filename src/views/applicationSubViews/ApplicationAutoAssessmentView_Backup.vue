@@ -4,12 +4,15 @@
   <div style="max-width: 960px">
     <div class="mb-4 fw-bold">DLT Foundation Details Registration Auto-Check Report</div>
     <div v-for="(res, idx) in result" :key="idx">
-      <div class="mb-2 display-7 fw-bold">{{ res['name'] }}</div>
-      <div class="row">
-        <div class="col-md-6 col-lg-4 my-2" v-for="item in res['item']">
-          <div v-if="'founder' in item">
+      <div v-if="'founder' in res.item[0]">
+        <div class="mb-2 display-7 fw-bold">{{ (res as AssessmentResultsFounder).name }}</div>
+        <div class="row">
+          <div
+            class="col-md-6 col-lg-4 my-2"
+            v-for="item in (res as AssessmentResultsFounder).item"
+          >
             <div>Founder: {{ item.founder }}</div>
-            <div v-for="info in item.data" style="margin-top: 30px;">
+            <div v-for="info in item.data" style="margin-top: 30px">
               <information-component
                 :title="info.title"
                 :dataReceived="info.dataReceived"
@@ -19,7 +22,12 @@
               </information-component>
             </div>
           </div>
-          <div v-else>
+        </div>
+      </div>
+      <div v-else>
+        <div class="mb-2 display-7 fw-bold">{{ (res as AssessmentResults).name }}</div>
+        <div class="row">
+          <div class="col-md-6 col-lg-4 my-2" v-for="item in (res as AssessmentResults).item">
             <information-component
               :title="item.title"
               :dataReceived="item.dataReceived"
@@ -37,7 +45,12 @@
 <script lang="ts">
 import ApplicationViewMixin from './ApplicationViewMixin'
 
-import { createProjectJob, getAssessmentResults, type AssessmentResults, type AssessmentResultsFounder } from '@/api'
+import {
+  createProjectJob,
+  getAssessmentResults,
+  type AssessmentResults,
+  type AssessmentResultsFounder
+} from '@/api'
 import { organizationsStore } from '@/stores/organizations'
 import { mapStores } from 'pinia'
 import InformationComponent from '@/components/InformationComponent.vue'

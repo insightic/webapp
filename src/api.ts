@@ -287,17 +287,18 @@ export interface AssessmentResultsItem {
 }
 
 export interface AssessmentResultsFounder {
-  founder: string,
-  data: {
-    name: string,
-    item: AssessmentResultsItem[]
-  } 
+  name: string,
+  item: {
+    founder: string,
+    data: AssessmentResultsItem[]
+  }[]
 } 
 
 export interface AssessmentResults {
   name: string,
   item: AssessmentResultsItem[]
 }
+
 
 export async function getAssessmentResults(
   applicationID: number | string
