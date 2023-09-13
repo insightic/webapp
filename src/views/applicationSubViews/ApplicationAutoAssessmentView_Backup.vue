@@ -1,7 +1,7 @@
 <template>
   <div class="text-secondary mb-4">Project Overview</div>
 
-  <div style="max-width: 960px">
+  <div style="max-width: 1900px">
     <div class="mb-4 fw-bold">DLT Foundation Details Registration Auto-Check Report</div>
     <div v-for="(res, idx) in result" :key="idx">
       <div v-if="'founder' in res.item[0]">
@@ -18,6 +18,7 @@
                 :dataReceived="info.dataReceived"
                 :information="info.information"
                 :variant="info.status"
+                @click="showResultModal(info)"
               >
               </information-component>
             </div>
@@ -33,11 +34,17 @@
               :dataReceived="item.dataReceived"
               :information="item.information"
               :variant="item.status"
+              @click="showResultModal(item)"
             >
             </information-component>
           </div>
         </div>
       </div>
+      <AutoAssessmentModal
+        :result="selectedAssessmentResult"
+        :visible="showAssessmentModal"
+        @close="showAssessmentModal = false"
+      />
     </div>
   </div>
 </template>
@@ -49,15 +56,18 @@ import {
   createProjectJob,
   getAssessmentResults,
   type AssessmentResults,
-  type AssessmentResultsFounder
+  type AssessmentResultsFounder,
+  type AssessmentResultsItem
 } from '@/api'
 import { organizationsStore } from '@/stores/organizations'
 import { mapStores } from 'pinia'
 import InformationComponent from '@/components/InformationComponent.vue'
+import AutoAssessmentModal from '@/components/AutoAssessmentModal.vue'
 
 export default {
   components: {
-    InformationComponent
+    InformationComponent,
+    AutoAssessmentModal
   },
   async created() {
     this.result = await getAssessmentResults(this.projectID)
@@ -65,7 +75,9 @@ export default {
   },
   data() {
     return {
-      result: [] as Array<AssessmentResults> | Array<AssessmentResultsFounder>
+      result: [] as Array<AssessmentResults> | Array<AssessmentResultsFounder>,
+      showAssessmentModal: false,
+      selectedAssessmentResult: null as AssessmentResultsItem | null
     }
   },
   mixins: [ApplicationViewMixin],
@@ -74,6 +86,10 @@ export default {
       const job = await createProjectJob(this.projectID)
       console.log(job)
       this.$router.push({ query: { view: 'Validations' } })
+    },
+    showResultModal(result: AssessmentResultsItem) {
+      this.selectedAssessmentResult = result
+      this.showAssessmentModal = true
     }
   },
   computed: {
