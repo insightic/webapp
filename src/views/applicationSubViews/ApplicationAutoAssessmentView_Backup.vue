@@ -2,17 +2,15 @@
   <div class="text-secondary mb-4">Project Overview</div>
 
   <div style="max-width: 1900px">
-    <div class="mb-4 fw-bold">DLT Foundation Details Registration Auto-Check Report</div>
+    <h3 class="mb-4 fw-bold">DLT Foundation Details Registration Auto-Check Report</h3>
     <div v-for="(res, idx) in result" :key="idx">
       <div v-if="'founder' in res.item[0]">
         <div class="mb-2 display-7 fw-bold">{{ (res as AssessmentResultsFounder).name }}</div>
-        <div class="row">
-          <div
-            class="col-md-6 col-lg-4 my-2"
-            v-for="item in (res as AssessmentResultsFounder).item"
-          >
-            <div>Founder: {{ item.founder }}</div>
-            <div v-for="info in item.data" style="margin-top: 30px">
+
+        <div v-for="item in (res as AssessmentResultsFounder).item">
+          <div>Founder: {{ item.founder }}</div>
+          <div class="row">
+            <div class="col-md-6 col-lg-4 my-2" v-for="info in item.data" style="margin-top: 30px">
               <information-component
                 :title="info.title"
                 :dataReceived="info.dataReceived"
