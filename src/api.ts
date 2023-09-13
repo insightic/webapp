@@ -75,10 +75,11 @@ export interface ProjectContent {
 
 export interface CodeValidationResult {
   id: string
-  pass: string
+  title: string
   description: string
   code: string
   whitepaper: string
+  pass: string
 }
 
 export interface Submission {
