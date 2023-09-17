@@ -20,6 +20,11 @@
             Code Validation
           </div>
         </li>
+        <li class="nav-item">
+          <div class="nav-link" :class="{ active: subViewIdx == 3 }" @click="subViewIdx = 3">
+            Dashboard
+          </div>
+        </li>
       </ul>
       <hr />
       <div>
@@ -35,6 +40,7 @@ import BasicLayout from '@/layouts/BasicLayout.vue'
 import SubmissionDetailsView from '@/views/submissionSubViews/SubmissionDetailsView.vue'
 import SubmissionCodeValidationView from '@/views/submissionSubViews/SubmissionCodeValidationView.vue'
 import ApplicationAutoAssessmentView from './applicationSubViews/ApplicationAutoAssessmentView_Backup.vue'
+import SubmissionDashboard from '@/views/submissionSubViews/SubmissionDashboard.vue'
 
 export default {
   components: {
@@ -43,7 +49,7 @@ export default {
   data() {
     return {
       subViewIdx: 0,
-      subViews: [SubmissionDetailsView, ApplicationAutoAssessmentView, SubmissionCodeValidationView]
+      subViews: [SubmissionDetailsView, ApplicationAutoAssessmentView, SubmissionCodeValidationView, SubmissionDashboard]
     }
   },
   computed: {

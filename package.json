@@ -13,14 +13,18 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.7",
+    "apexcharts": "^3.42.0",
     "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.5",
+    "echarts": "^5.4.3",
     "moment": "^2.29.4",
     "pinia": "^2.0.36",
     "prismjs": "^1.29.0",
     "vue": "^3.3.2",
+    "vue-echarts": "^6.6.1",
     "vue-router": "^4.2.0",
+    "vue3-apexcharts": "^1.4.4",
     "vuex": "^4.1.0",
     "vuex-persistedstate": "^4.1.0"
   },
