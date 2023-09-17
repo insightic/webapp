@@ -2,7 +2,7 @@
     <v-chart class="chart p-3 rounded" :option="option" autoresize />
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { use } from 'echarts/core';
 import { CanvasRenderer } from 'echarts/renderers';
 import { PieChart } from 'echarts/charts';

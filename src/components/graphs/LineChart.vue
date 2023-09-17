@@ -4,7 +4,7 @@
 	</div>
 </template>
 
-<script>
+<script lang="ts">
 import VueApexCharts from "vue3-apexcharts";
 
 export default {
@@ -61,7 +61,7 @@ export default {
         },
         tooltip: {
           y: {
-            formatter: function (val) {
+            formatter: function (val: string) {
               return "$ " + val + " thousands";
             },
           },
