@@ -1,7 +1,7 @@
 FROM node:20 AS builder
 WORKDIR /app
 COPY package.json .
-COPY package-lock.json
+COPY package-lock.json .
 RUN npm i
 COPY . .
 RUN npm run build
