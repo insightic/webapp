@@ -8,7 +8,7 @@ image:
   repository: 574244600599.dkr.ecr.ap-southeast-1.amazonaws.com/app-repository # Docker image name
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 		webapp-473b1440a98ac97f781af8906aafb8304437dadc
+  tag: 		webapp-867423ff65ad4488481e106a75a35ebf2f472c71
 
 imagePullSecrets: []
 nameOverride: ""
@@ -49,7 +49,7 @@ ingress:
     alb.ingress.kubernetes.io/subnets: subnet-0f8ef624acfb9c8db,subnet-073047fe693150472,subnet-0d60e32760a0b5f26
 
   hosts:
-    - host: staging-webapp-1.insightic.io
+    - host: prod-webapp.insightic.io
       paths:
         - path: /*
           pathType: ImplementationSpecific
