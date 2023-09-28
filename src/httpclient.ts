@@ -8,7 +8,8 @@ interface Response<T> {
 }
 
 class HttpClient {
-  public baseUrl: string = 'https://f9a2s4wxdj.execute-api.ap-southeast-1.amazonaws.com/staging'
+  // public baseUrl: string = 'https://f9a2s4wxdj.execute-api.ap-southeast-1.amazonaws.com/staging'
+  public baseUrl: string = 'https://prod-app-api.io'
   // public baseUrl: string = "http://localhost:3000"
 
   private _token: string = ''
