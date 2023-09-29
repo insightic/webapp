@@ -15,7 +15,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      
+
+      - name: Read image_tag from config.json
+        id: read-tag
+        run: |
+          IMAGE_TAG=$(jq -r '.image_tag' config/config.json)
+          echo "IMAGE_TAG=$IMAGE_TAG"
+          echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_OUTPUT
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -27,11 +34,32 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
       
-      - name: Build, tag, and push image to Amazon ECR
+      - name: Check if image tag exists in ECR
+        id: check-tag
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: app-repository
-          IMAGE_TAG: webapp-${{ github.sha }}
+          IMAGE_TAG: ${{ steps.read-tag.outputs.IMAGE_TAG }}
+        run: |
+          EXISTS=$(aws ecr list-images --repository-name $ECR_REPOSITORY --query 'imageIds[?imageTag==`'$IMAGE_TAG'`]' --output json | jq -r '. | length')
+          echo "EXISTS=$EXISTS"
+          if [ "$EXISTS" == "0" ]; then
+            echo "EXISTS=false" >> $GITHUB_ENV
+          else
+            echo "EXISTS=true" >> $GITHUB_ENV
+          fi
+
+      - name: Debug Output
+        run: |
+          echo "IMAGE_TAG=${{ steps.read-tag.outputs.IMAGE_TAG }}"
+          echo "EXISTS=${{ env.EXISTS }}"
+
+      - name: Build, tag, and push image to Amazon ECR
+        if: env.EXISTS == 'false'
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: app-repository
+          IMAGE_TAG: ${{ steps.read-tag.outputs.IMAGE_TAG }}
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
