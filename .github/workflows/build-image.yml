@@ -15,13 +15,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Preparation of variables
-        id: preparation
-        run: |
-          IMAGE_TAG=$(jq -r '.image_tag' config/config.json)
-          echo "IMAGE_TAG=$IMAGE_TAG"
-          echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_OUTPUT
-
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
