@@ -2,6 +2,7 @@
   <div class="mb-2">
     <label class="form-label">{{ label }}</label
     ><span v-show="required" class="ms-1 text-danger">*</span>
+    <label class="text-secondary small" v-html="hint"></label>
     <input
       :type="type"
       class="form-control"
@@ -21,6 +22,7 @@ export default {
     type: { type: String, required: true },
     field: { type: String },
     placeholder: { type: String },
+    hint: { type: String },
     footnote: { type: String },
     required: { type: Boolean, default: false },
     disabled: { type: Boolean, default: false }

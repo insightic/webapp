@@ -4,11 +4,13 @@
       {{ label }}
     </label>
     <span v-show="required" class="ms-1 text-danger">*</span> <br />
-    <label class="text-secondary small" v-html="hint"></label>
-    <select class="form-select" @change="onChange">
-      <option value="" selected disabled>{{ placeholder }}</option>
-      <option v-for="option in options" :key="option" :value="option">{{ option }}</option>
-    </select>
+    <label class="text-secondary small mb-3" v-html="hint"></label>
+    <div class="form-check" v-for="option in options" :key="option">
+      <input class="form-check-input" type="radio" :name="options.toString()" id="option" />
+      <label class="form-check-label" for="flexRadioDefault2">
+      {{ option }}
+      </label>
+    </div>
     <label class="text-secondary small" v-if="footnote">{{ footnote }}</label>
   </div>
 </template>
