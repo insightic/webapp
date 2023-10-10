@@ -15,4 +15,5 @@ COPY package-lock.json .
 RUN npm i
 COPY . .
 
+COPY ./nginx.conf /etc/nginx/nginx.conf
 CMD ["bash", "start.sh"]
