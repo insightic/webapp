@@ -8,9 +8,12 @@ interface Response<T> {
 }
 
 class HttpClient {
-  // public baseUrl: string = 'https://f9a2s4wxdj.execute-api.ap-southeast-1.amazonaws.com/staging'
-  public baseUrl: string = 'https://staging-api-test.insightic.io'
-  // public baseUrl: string = "http://localhost:3000"
+
+  public get baseUrl(): string {
+    const url = import.meta.env.VITE_API_URL as string
+    if (url) return url
+    return "https://staging-api-test.insightic.io"
+  }
 
   private _token: string = ''
 
