@@ -1,0 +1,12 @@
+
+# Use an official Node image as the base image
+FROM node:14 
+
+WORKDIR /app
+COPY package.json .
+COPY package-lock.json .
+RUN npm install
+COPY . .
+
+# Build the application
+RUN npm run build

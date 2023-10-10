@@ -35,6 +35,12 @@ jobs:
           export DOCKER_IMAGE_NAME=$ECR_REGISTRY/$ECR_REPOSITORY
         
 
+          # Build the application using Dockerfile.build
+          docker build -t webapp-build -f Dockerfile.build .
+          docker create --name temp-container webapp-build
+          docker cp temp-container:/app/dist ./dist
+          docker rm temp-container
+
           # Build with the 'latest' tag
           docker build -t $DOCKER_IMAGE_NAME:latest .
           echo $DOCKER_IMAGE_NAME:latest
