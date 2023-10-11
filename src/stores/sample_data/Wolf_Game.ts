@@ -4,19 +4,6 @@ import FarmerGem from './contracts/FarmerGem.sol.txt?raw'
 import IControllable1155 from './contracts/IControllable1155.sol.txt?raw'
 
 export default {
-<<<<<<< HEAD
-    guid: "e262d5c2-16f8-47a0-8c70-4019514d137b",
-    logo: "/logos/wolfgame.jpeg",
-    name: "Wolf Game",
-    url: "https://wolf.game",
-    author: "John Doe",
-    rating: "B-",
-    description: "Wolf Game is a game where you play as a wolf",
-    tags: ["Game", "NFT"],
-    status: "In Progress",
-    dueAt: "2023-05-25T00:00:00.000Z",
-    overviewView: [
-=======
   guid: 'e262d5c2-16f8-47a0-8c70-4019514d137b',
   logo: 'https://nftnow.com/wp-content/uploads/2023/02/Screen-Shot-2023-02-02-at-11.33.07-AM.png',
   name: 'Wolf Game',
@@ -31,7 +18,6 @@ export default {
     {
       title: 'Business Model Analysis',
       props: [
->>>>>>> dev
         {
           component: 'PropDisplayCard',
           title: 'Business model & Value Proposition',
