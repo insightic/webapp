@@ -44,3 +44,44 @@ npm run build
 ```sh
 npm run lint
 ```
+
+## Kubernetes (EKS)
+
+### Pre-requisities
+- [Have AWS CLI installed](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+
+### Adding K8S to your ~/.kube/config
+``` bash
+aws eks update-kubeconfig --region ap-southeast-1 --name prod-insightic-southeast-1
+aws eks update-kubeconfig --region ap-southeast-1 --name staging-insightic-southeast-1
+```
+
+### Verify contexts
+``` bash
+kubectl config get-contexts
+```
+
+### Display current context
+``` bash
+kubectl config current-context
+```
+
+
+### Switch context
+``` bash
+# should be in this format 
+# arn:aws:eks:region-code:1234567890:cluster/cluster-name
+kubectl config use-context <ARN-of-context-name>
+```
+
+### View logs
+``` bash
+kubectl get pods -n insightic-<env> | grep webapp
+```
+
+### View other details
+``` bash
+kubectl get services -n insightic-<env> | grep webapp
+
+kubectl get ingress -n insightic-<env> | grep webapp
+```

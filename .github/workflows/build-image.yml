@@ -1,0 +1,69 @@
+name: Publish Docker Image
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
+          aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+          aws-region: ${{secrets.AWS_REGION}}
+      
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+
+      - name: Build, tag, and push image to Amazon ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: webapp
+        run: |
+          export DOCKER_IMAGE_NAME=$ECR_REGISTRY/$ECR_REPOSITORY
+        
+
+          # Build with the 'latest' tag
+          docker build -t $DOCKER_IMAGE_NAME:latest .
+          echo $DOCKER_IMAGE_NAME:latest
+          docker push $DOCKER_IMAGE_NAME:latest
+
+          # Tag and push with 'dev' tag
+          docker tag $DOCKER_IMAGE_NAME:latest $DOCKER_IMAGE_NAME:dev
+          echo $DOCKER_IMAGE_NAME:dev
+          docker push $DOCKER_IMAGE_NAME:dev
+
+          # Tag and push with 'staging' tag
+          docker tag $DOCKER_IMAGE_NAME:latest $DOCKER_IMAGE_NAME:staging
+          echo $DOCKER_IMAGE_NAME:staging
+          docker push $DOCKER_IMAGE_NAME:staging
+      - name: Update kube config
+        run: |
+          aws eks update-kubeconfig --name ${{ secrets.AWS_AKS_STAGING_CLUSTER }}
+          kubectl config current-context
+
+      - name: Clone helm repo
+        run: |
+          git clone https://${{ secrets.TOKEN_SECRET }}@github.com/insightic/helm-charts.git
+
+      - name: Deploy with Helm
+        env:
+          APP_NAME: webapp
+        run: |
+          helm upgrade --install ${{ env.APP_NAME }} helm-charts/${{ env.APP_NAME }} --set upgrade_repo=${{ env.APP_NAME }} -n ${{ secrets.AWS_STAGING_NAMESPACE }}
+
+      - name: Clean up kubeconfig
+        run: |
+          rm -f kubeconfig_dev

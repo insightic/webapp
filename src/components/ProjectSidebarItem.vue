@@ -19,6 +19,7 @@ export default {
 <style scoped>
 .project-sidebar-item {
   cursor: pointer;
+  min-width: 210px;
 }
 
 .project-sidebar-item:hover {

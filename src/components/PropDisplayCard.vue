@@ -4,7 +4,9 @@
     <p v-html="prop.text"></p>
     <div v-if="prop?.tags" class="my-2">
       <b>Tags:</b>
-      <div class="d-flex flex-wrap"><Tag v-for="(tag, idx) in prop?.tags" :key="idx" :tag="tag" /></div>
+      <div class="d-flex flex-wrap">
+        <Tag v-for="(tag, idx) in prop?.tags" :key="idx" :tag="tag" />
+      </div>
     </div>
     <div v-if="prop?.regulations" class="my-2">
       <b>Related Regulations:</b>

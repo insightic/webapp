@@ -18,12 +18,15 @@
               </div>
 
               <h5 class="modal-title mb-2" style="font-size: 1rem">{{ title }}</h5>
-              <p
+              <div
                 style="font-size: 0.8rem; max-width: 300px; color: rgb(135, 136, 141)"
                 class="mx-auto"
               >
                 {{ description }}
-              </p>
+                <ul>
+                  <li v-for="item in list" class="text-start" :key="item.key">{{ item }}</li>
+                </ul>
+              </div>
             </div>
 
             <div class="mx-auto mt-4" style="max-width: 400px">
@@ -77,7 +80,7 @@
 
 <script lang="ts">
 export default {
-  props: ['title', 'description', 'actions', 'tasks', 'visible']
+  props: ['title', 'description', 'list', 'actions', 'tasks', 'visible']
 }
 </script>
 
