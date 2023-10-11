@@ -1,17 +1,4 @@
 export default {
-<<<<<<< HEAD
-    guid: "e262d5c2-16f8-47a0-8c70-4019514d137c",
-    logo: "/logos/pooltogether.jpeg",
-    name: "Pool Together",
-    url: "https://pooltogether.com",
-    author: "John Doe",
-    rating: "B-",
-    description: "Pool Together is a lottery game",
-    tags: ["Pool", "NFT"],
-    status: "In Progress",
-    dueAt: "2023-05-25T00:00:00.000Z",
-    overviewView: [
-=======
   guid: 'e262d5c2-16f8-47a0-8c70-4019514d137c',
   logo: 'https://avatars.githubusercontent.com/u/52546024?s=200&v=4',
   name: 'Pool Together',
@@ -26,7 +13,6 @@ export default {
     {
       title: 'Business Model Analysis',
       props: [
->>>>>>> dev
         {
           component: 'PropDisplayCard',
           title: 'Business model & Value Proposition',
