@@ -1,6 +1,6 @@
 <template>
   <div style="max-width: 960px">
-    <SectionLayout title="RegistrationAgreement">
+    <SectionLayout title="Technical Details">
       <LabelTextareaComponent
         label="Provide a Detailed Description of the Technology"
         hint="Brief description of the technology, platform, or system developed or being developed."

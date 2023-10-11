@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex justify-content-between align-items-center my-2">
     <div class="text-secondary">Showing all applications</div>
-    <RouterLink class="btn btn-primary" to="/create-application">New Application</RouterLink>
+    <RouterLink class="btn btn-primary" to="/create-new-application">New Application</RouterLink>
   </div>
 
   <div v-if="isloading" class="w-100 d-flex justify-content-center mt-5">

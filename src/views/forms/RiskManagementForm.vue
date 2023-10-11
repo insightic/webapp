@@ -1,6 +1,6 @@
 <template>
   <div style="max-width: 960px">
-    <SectionLayout title="Legal">
+    <SectionLayout title="Risk Management">
       <div class="col-md-12" style="margin-bottom: 40px">
         <div class="">
           <label for="document" class=""

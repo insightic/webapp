@@ -1,6 +1,6 @@
 <template>
   <div style="max-width: 960px">
-    <SectionLayout title="RegistrationAgreement">
+    <SectionLayout title="Registration Agreement">
       <LabelTextareaComponent
         label="Name"
         hint="Name of the project owner"

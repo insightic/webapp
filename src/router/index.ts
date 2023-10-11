@@ -5,11 +5,12 @@ import ApplicationDetailsView from '@/views/applicationSubViews/ApplicationDetai
 import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import CreateApplicationView from '@/views/CreateApplication.vue'
+import CreateNewApplicationView from '@/views/CreateNewApplication.vue'
 import SubmissionView from '@/views/SubmissionView.vue'
 import AdminLoginView from '@/views/admin/AdminLoginView.vue'
 import AdminAccountView from '@/views/admin/AdminAccountView.vue'
 import AdminProjectView from '@/views/admin/AdminProjectView.vue'
-
+ 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -33,6 +34,11 @@ const router = createRouter({
       path: '/create-application',
       name: 'CreateApplicationView',
       component: CreateApplicationView
+    },
+    {
+      path: '/create-new-application',
+      name: 'CreateNewApplicationView',
+      component: CreateNewApplicationView
     },
     {
       path: '/projects/:projectID',

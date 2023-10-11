@@ -1,6 +1,6 @@
 <template>
   <div style="max-width: 960px">
-    <SectionLayout title="ComplianceTeam">
+    <SectionLayout title="Compliance & Team">
       <LabelTextareaComponent
         label="Company Name"
         hint="Provide the full name of your company"

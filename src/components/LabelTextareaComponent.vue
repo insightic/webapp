@@ -1,8 +1,8 @@
 <template>
-  <div class="mb-2">
+  <div>
     <label class="form-label">{{ label }}</label
-    ><span v-show="required" class="ms-1 text-danger">*</span> <br/>
-    <label class="text-secondary small" v-html="hint"></label>
+    ><span v-show="required" class="ms-1 text-danger">*</span> <br />
+    <label class="text-secondary small mb-3" v-html="hint"></label>
     <textarea
       class="form-control"
       :value="field"
