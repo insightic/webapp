@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { RouterLink, useRouter, useRoute } from 'vue-router'
+import BackgroundImageComponent from '@/components/BackgroundImageComponent.vue'
 import httpClient from '@/httpclient'
 
 router = useRouter()
@@ -15,6 +16,7 @@ onMounted(async () => {
 </script>
 
 <template>
+  <BackgroundImageComponent :src="'/public/backgrounds/ball.jpg'" />
   <div class="container">
     <div class="mx-auto my-5 login py-3 px-5">
       <div>
@@ -55,9 +57,33 @@ onMounted(async () => {
           class="mt-5 d-flex justify-content-between mb-2"
           style="color: rgba(0, 0, 0, 0.5); font-size: 0.99rem"
         >
-          <div>Privacy Policy</div>
-          <div>Term of Service</div>
-          <div>Contact</div>
+          <div>
+            <a
+              href="https://insightic.io"
+              target="_blank"
+              style="text-decoration: none"
+              class="text-secondary"
+              >Insightic</a
+            >
+          </div>
+          <div>
+            <a
+              href="https://insightic.io/about"
+              target="_blank"
+              style="text-decoration: none"
+              class="text-secondary"
+              >About</a
+            >
+          </div>
+          <div>
+            <a
+              href="https://insightic.io/contact-us"
+              target="_blank"
+              style="text-decoration: none"
+              class="text-secondary"
+              >Contact Us</a
+            >
+          </div>
         </div>
       </form>
     </div>
@@ -105,8 +131,7 @@ export default {
 .login {
   width: 100%;
   max-width: 480px;
-  background-color: rgba(86, 161, 208, 0.15);
-  border: 1px solid #ccc;
+  background-color: whitesmoke;
   border-radius: 4px;
 }
 
