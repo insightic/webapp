@@ -407,7 +407,7 @@ export default {
     },
     async onFileChange(e: any) {
       this.whitepaperFile = e.target.files[0]
-      const file = e.target.files[0]
+      // const file = e.target.files[0]
       // const preSignedPutUrl : any = await getPreSignedPutUrl()
       // console.log("hii", preSignedPutUrl)
       // if (preSignedPutUrl) {

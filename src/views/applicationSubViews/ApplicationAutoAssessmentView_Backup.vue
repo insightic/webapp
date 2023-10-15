@@ -7,10 +7,15 @@
       <div v-if="'founder' in res.item[0]">
         <div class="mb-2 display-7 fw-bold">{{ (res as AssessmentResultsFounder).name }}</div>
 
-        <div v-for="item in (res as AssessmentResultsFounder).item">
+        <div v-for="(item, idx) in (res as AssessmentResultsFounder).item" :key="idx">
           <div>Founder: {{ item.founder }}</div>
           <div class="row">
-            <div class="col-md-6 col-lg-4 my-2" v-for="info in item.data" style="margin-top: 30px">
+            <div
+              class="col-md-6 col-lg-4 my-2"
+              v-for="(info, infoIdx) in item.data"
+              :key="infoIdx"
+              style="margin-top: 30px"
+            >
               <information-component
                 :title="info.title"
                 :dataReceived="info.dataReceived"
@@ -26,7 +31,11 @@
       <div v-else>
         <div class="mb-2 display-7 fw-bold">{{ (res as AssessmentResults).name }}</div>
         <div class="row">
-          <div class="col-md-6 col-lg-4 my-2" v-for="item in (res as AssessmentResults).item">
+          <div
+            class="col-md-6 col-lg-4 my-2"
+            v-for="(item, itemIdx) in (res as AssessmentResults).item"
+            :key="itemIdx"
+          >
             <information-component
               :title="item.title"
               :dataReceived="item.dataReceived"

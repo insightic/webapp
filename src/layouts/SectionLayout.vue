@@ -1,6 +1,8 @@
 <template>
   <div class="mb-4">
-    <h4 class="mb-4 "><strong>{{ title }}</strong></h4>
+    <h4 class="mb-4">
+      <strong>{{ title }}</strong>
+    </h4>
     <slot />
   </div>
 </template>

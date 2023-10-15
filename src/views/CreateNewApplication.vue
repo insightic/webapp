@@ -4,7 +4,7 @@
       <h1 class="mb-4"><strong>Create New Application</strong></h1>
 
       <div class="d-flex flex-wrap align-items-center align-items-start mb-3">
-        <div v-for="(form, index) in forms">
+        <div v-for="(form, index) in forms" :key="index">
           <div
             class="me-2 nav-item"
             @click="current = index + 1"
@@ -168,9 +168,6 @@
 
 <script lang="ts">
 import NavFooterLayout from '@/layouts/NavFooterLayout.vue'
-import SectionLayout from '@/layouts/SectionLayout.vue'
-import LabelInputComponent from '@/components/LabelInputComponent.vue'
-import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
 import { createProject, saveApplicationDraft, getPreSignedPutUrl, uploadFile } from '@/api'
 import type { NewApplication } from '@/api'
 import FormNavButtons from '@/components/FormNavButtons.vue'
@@ -189,9 +186,6 @@ import COI from './forms/COIForm.vue'
 export default {
   components: {
     NavFooterLayout,
-    SectionLayout,
-    LabelInputComponent,
-    LabelTextareaComponent,
     FormNavButtons,
     RegistrationAgreement,
     ComplianceTeam,

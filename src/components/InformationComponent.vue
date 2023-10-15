@@ -59,7 +59,7 @@ export default {
     title: { type: String, default: '' },
     dataReceived: { type: String, default: '' },
     information: { type: String, default: '' },
-    variant: { type: String, default: 'Pass' },
+    variant: { type: String, default: 'Pass' }
   }
 }
 </script>

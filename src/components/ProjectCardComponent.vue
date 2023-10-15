@@ -72,7 +72,7 @@ export default {
       if (confirm('Are you sure to delete this project?') == false) {
         return
       } else {
-        const res = await deleteApplication(projectID)
+        await deleteApplication(projectID)
         this.$emit('refresh')
       }
     }

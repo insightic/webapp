@@ -15,7 +15,7 @@
 
     <div class="col-5">
       <DashboardSectionLayout bg-color="white">
-        <Sparkline />
+        <SparklineChart />
       </DashboardSectionLayout>
     </div>
   </div>
@@ -23,17 +23,13 @@
   <DashboardSectionLayout bg-color="white">
     <TableChart />
   </DashboardSectionLayout>
-
 </template>
 
 <script lang="ts">
 import DashboardSectionLayout from '@/layouts/DashboardSectionLayout.vue'
-import PieChart from '@/components/graphs/PieChart.vue'
-import BarChart from '@/components/graphs/BarChart.vue'
-import LineChart from '@/components/graphs/LineChart.vue'
 import RadarChart from '@/components/graphs/RadarChart.vue'
 import RadialBarChart from '@/components/graphs/RadialBarChart.vue'
-import Sparkline from '@/components/graphs/Sparkline.vue'
+import SparklineChart from '@/components/graphs/SparklineChart.vue'
 import TableChart from '@/components/graphs/TableChart.vue'
 
 export default {
@@ -41,16 +37,13 @@ export default {
     DashboardSectionLayout,
     RadarChart,
     RadialBarChart,
-    Sparkline,
+    SparklineChart,
     TableChart
   },
-  async created() {
-  },
+  async created() {},
   data() {
-    return {
-    }
+    return {}
   },
-  methods: {
-  }
+  methods: {}
 }
 </script>

@@ -100,8 +100,6 @@
 </template>
 
 <script lang="ts">
-import SectionLayout from '@/layouts/SectionLayout.vue'
-
 import ApplicationViewMixin from './ApplicationViewMixin'
 
 import { createProjectJob } from '@/api'

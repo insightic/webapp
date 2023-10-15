@@ -281,31 +281,30 @@ export async function getJobRunResults(
 }
 
 export interface AssessmentResultsItem {
-  title: string,
-  information: string,
-  dataReceived: string,
+  title: string
+  information: string
+  dataReceived: string
   status: string
 }
 
 export interface AssessmentResultsFounder {
-  name: string,
+  name: string
   item: {
-    founder: string,
+    founder: string
     data: AssessmentResultsItem[]
   }[]
-} 
+}
 
 export interface AssessmentResults {
-  name: string,
+  name: string
   item: AssessmentResultsItem[]
 }
 
-
 export async function getAssessmentResults(
   applicationID: number | string
-  ): Promise<AssessmentResults[] | AssessmentResultsFounder[]> {
-    const resp = await httpclient.get<AssessmentResults[] | AssessmentResultsFounder[]>(
-      `/applications/${applicationID}/assessment`
-    )
+): Promise<AssessmentResults[] | AssessmentResultsFounder[]> {
+  const resp = await httpclient.get<AssessmentResults[] | AssessmentResultsFounder[]>(
+    `/applications/${applicationID}/assessment`
+  )
   return resp?.payload || []
 }

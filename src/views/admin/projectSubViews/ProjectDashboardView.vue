@@ -29,7 +29,7 @@
     </div>
 
     <div class="mt-4 d-flex">
-      <Tag v-for="tag in project?.tags" :key="tag" :tag="tag" />
+      <TagComponent v-for="tag in project?.tags" :key="tag" :tag="tag" />
     </div>
 
     <div class="mt-4">
@@ -103,7 +103,7 @@
 </template>
 
 <script lang="ts">
-import Tag from '@/components/Tag.vue'
+import TagComponent from '@/components/TagComponent.vue'
 import DashboardOverviewView from './dashboardSubViews/DashboardOverviewView.vue'
 import DashboardAssessmentView from './dashboardSubViews/DashboardAssessmentView.vue'
 import DashboardActionView from './dashboardSubViews/DashboardActionView.vue'
@@ -116,7 +116,7 @@ export default {
     projectGuid: String
   },
   components: {
-    Tag,
+    TagComponent,
     DashboardOverviewView,
     DashboardAssessmentView,
     DashboardActionView

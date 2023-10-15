@@ -435,7 +435,7 @@ export default {
     },
     async onFileChange(e: any) {
       this.whitepaperFile = e.target.files[0]
-      const file = e.target.files[0]
+      // const file = e.target.files[0]
       // const preSignedUrl : any = await getPreSignedUrl(file.name)
       // if (preSignedUrl) {
       //   const fileResp = await uploadFile(preSignedUrl.URL, file)

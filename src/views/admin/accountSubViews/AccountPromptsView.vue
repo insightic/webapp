@@ -1,7 +1,9 @@
 <template>
   <div class="d-flex justify-content-between align-items-center">
     <div class="text-secondary mb-4">Prompts that being passed to AI model</div>
-    <button type="button" class="btn btn-primary my-3" @click="createPrompt()">Add New Prompt</button>
+    <button type="button" class="btn btn-primary my-3" @click="createPrompt()">
+      Add New Prompt
+    </button>
   </div>
 
   <table class="table">

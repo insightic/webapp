@@ -199,7 +199,7 @@ export default {
   mixins: [ApplicationViewMixin],
   methods: {
     async submit() {
-      const job = await createProjectJob(this.projectID)
+      await createProjectJob(this.projectID)
       this.$router.push({ query: { view: 'Validations' } })
     },
     getVariant(result: CodeValidationResult) {

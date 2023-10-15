@@ -38,7 +38,6 @@
 </template>
 
 <script lang="ts">
-import ProjectCardComponent from '@/components/ProjectCardComponent.vue'
 import ProjectListComponent from '@/components/ProjectListComponent.vue'
 import { projectsStore } from '@/stores/projects'
 import { mapStores } from 'pinia'

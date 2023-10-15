@@ -7,31 +7,27 @@
         type="text"
         class="mb-4"
       />
-      <div class="col-md-12" style="margin-bottom: 40px;">
+      <div class="col-md-12" style="margin-bottom: 40px">
         <div class="">
-          <label for="document" class="">Technical Documentation <span class="text-danger">*</span></label>
-          <input
-            type="file"
-            ref="whitepaper"
-            class="form-controls w-100"
-            id="document"
-          />
+          <label for="document" class=""
+            >Technical Documentation <span class="text-danger">*</span></label
+          >
+          <input type="file" ref="whitepaper" class="form-controls w-100" id="document" />
           <div class="text-secondary small">
-            Submit any technical documents that detail the technology.(Document can be online like github wiki or just a pdf files)
+            Submit any technical documents that detail the technology.(Document can be online like
+            github wiki or just a pdf files)
           </div>
         </div>
       </div>
-      <div class="col-md-12" style="margin-bottom: 40px;">
+      <div class="col-md-12" style="margin-bottom: 40px">
         <div class="">
-          <label for="document" class="">Upload/Import Code Base <span class="text-danger">*</span></label>
-          <input
-            type="file"
-            ref="whitepaper"
-            class="form-controls w-100"
-            id="document"
-          />
+          <label for="document" class=""
+            >Upload/Import Code Base <span class="text-danger">*</span></label
+          >
+          <input type="file" ref="whitepaper" class="form-controls w-100" id="document" />
           <div class="text-secondary small">
-            Provide a link to the repository or upload a ZIP file containing the code base and test suites.(Code files can be in URL, github link, or zip.)
+            Provide a link to the repository or upload a ZIP file containing the code base and test
+            suites.(Code files can be in URL, github link, or zip.)
           </div>
         </div>
       </div>
@@ -90,13 +86,11 @@
 <script lang="ts">
 import SectionLayout from '@/layouts/SectionLayout.vue'
 import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
-import LabelRadioComponent from '@/components/LabelRadioComponent.vue'
 
 export default {
   components: {
     SectionLayout,
-    LabelTextareaComponent,
-    LabelRadioComponent
+    LabelTextareaComponent
   }
 }
 </script>

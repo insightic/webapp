@@ -522,8 +522,6 @@ import LabelInputComponent from '@/components/LabelInputComponent.vue'
 import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
 
 import ApplicationViewMixin from './ApplicationViewMixin'
-
-import { createProjectJob } from '@/api'
 import { organizationsStore } from '@/stores/organizations'
 import { mapStores } from 'pinia'
 import {

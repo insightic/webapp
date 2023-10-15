@@ -123,12 +123,14 @@ export default {
   },
   computed: {
     sortedFilesDate() {
-      return this.files.sort((a, b) => {
-        return a.createdAt.localeCompare(b.createdAt)
-      })
+      return this.files
+        .map((f) => f)
+        .sort((a, b) => {
+          return a.createdAt.localeCompare(b.createdAt)
+        })
     },
     sortedFiles() {
-      const files = this.files!
+      const files = this.files.map((f) => f)!
       const sortBy = this.sortBy!
       const isAsc = this.isAsc!
       return files.sort((a, b) => {

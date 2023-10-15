@@ -27,18 +27,11 @@
         type="text"
         class="mb-4"
       />
-      <div class="col-md-12" style="margin-bottom: 40px;">
+      <div class="col-md-12" style="margin-bottom: 40px">
         <div class="">
           <label for="document" class="">Executives (CV) <span class="text-danger">*</span></label>
-          <input
-            type="file"
-            ref="whitepaper"
-            class="form-controls w-100"
-            id="document"
-          />
-          <div class="text-secondary small">
-            User may upload CV (in PDF format)
-          </div>
+          <input type="file" ref="whitepaper" class="form-controls w-100" id="document" />
+          <div class="text-secondary small">User may upload CV (in PDF format)</div>
         </div>
       </div>
       <LabelTextareaComponent
@@ -78,18 +71,13 @@
         type="text"
         class="mb-4"
       />
-      <div class="col-md-12" style="margin-bottom: 40px;">
+      <div class="col-md-12" style="margin-bottom: 40px">
         <div class="">
-          <label for="document" class="">Core Team Members (CV) <span class="text-danger">*</span></label>
-          <input
-            type="file"
-            ref="whitepaper"
-            class="form-controls w-100"
-            id="document"
-          />
-          <div class="text-secondary small">
-            User may upload CV (in PDF format)
-          </div>
+          <label for="document" class=""
+            >Core Team Members (CV) <span class="text-danger">*</span></label
+          >
+          <input type="file" ref="whitepaper" class="form-controls w-100" id="document" />
+          <div class="text-secondary small">User may upload CV (in PDF format)</div>
         </div>
       </div>
       <LabelTextareaComponent label="Government Connections" hint="" type="text" class="mb-4" />
@@ -100,13 +88,11 @@
 <script lang="ts">
 import SectionLayout from '@/layouts/SectionLayout.vue'
 import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
-import LabelRadioComponent from '@/components/LabelRadioComponent.vue'
 
 export default {
   components: {
     SectionLayout,
-    LabelTextareaComponent,
-    LabelRadioComponent
+    LabelTextareaComponent
   }
 }
 </script>

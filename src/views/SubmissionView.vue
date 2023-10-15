@@ -49,7 +49,12 @@ export default {
   data() {
     return {
       subViewIdx: 0,
-      subViews: [SubmissionDetailsView, ApplicationAutoAssessmentView, SubmissionCodeValidationView, SubmissionDashboard]
+      subViews: [
+        SubmissionDetailsView,
+        ApplicationAutoAssessmentView,
+        SubmissionCodeValidationView,
+        SubmissionDashboard
+      ]
     }
   },
   computed: {

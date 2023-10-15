@@ -8,7 +8,7 @@
     <div class="form-check" v-for="option in options" :key="option">
       <input class="form-check-input" type="radio" :name="options.toString()" id="option" />
       <label class="form-check-label" for="flexRadioDefault2">
-      {{ option }}
+        {{ option }}
       </label>
     </div>
     <label class="text-secondary small" v-if="footnote">{{ footnote }}</label>
