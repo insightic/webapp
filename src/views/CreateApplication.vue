@@ -1,163 +1,162 @@
 <template>
   <NavFooterLayout>
-    <div class="container p-3 mb-5">
+    <div class="container-fluid p-3 mb-5" style="max-width: 1440px">
       <h1 class="mb-4"><strong>Create New Application</strong></h1>
 
-      <div class="d-flex flex-wrap align-items-center align-items-start mb-3">
-        <div v-for="(form, index) in forms" :key="index">
-          <div
-            class="me-2 nav-item"
-            @click="current = index + 1"
-            :class="
-              current != index + 1 && 'complete' + (index + 1)
-                ? 'text-success'
-                : current != index + 1 && 'complete' + (index + 1)
-                ? 'text-secondary'
-                : 'text-secondary'
-            "
-          >
-            <i v-if="current == index + 1" class="bi bi-1-square-fill"></i>
-            <i v-else class="bi bi-1-square"></i>
-            <span class="ms-2 font-weight-bold">
-              {{ form }}
-            </span>
-            <span><i class="bi bi-chevron-right ms-2"></i></span>
+      <div class="row">
+        <div class="col-2">
+          <div v-for="(form, index) in forms" :key="index">
+            <div @click="current = index + 1" class="nav-item" :class="formStepStyle(index)">
+              <div class="d-flex align-items-center">
+                <i class="bi bi-check-circle-fill me-3"></i>
+                <div>
+                  {{ form }}
+                </div>
+              </div>
+              <div
+                v-if="index + 1 != forms.length"
+                style="height: 20px; border-left: 1px gray solid; margin-left: 7px"
+              ></div>
+            </div>
           </div>
         </div>
-        <div class="ms-2 nav-item text-secondary" @click="current = 14">
-          <i v-if="current == 14" class="bi bi-1-square-fill"></i>
-          <i v-else class="bi bi-1-square"></i>
-          <span class="ms-2">Submit</span>
-        </div>
-      </div>
+        <div class="col-10">
+          <div>
+            <div v-if="current == 1">
+              <RegistrationAgreement></RegistrationAgreement>
+              <FormNavButtons
+                :prevBtn="false"
+                :saveBtn="true"
+                :nextBtn="true"
+                @save="save"
+                @next="nextStep(1)"
+              />
+            </div>
+            <div v-if="current == 2">
+              <ComplianceTeam></ComplianceTeam>
+              <FormNavButtons
+                :prevBtn="false"
+                :saveBtn="true"
+                :nextBtn="true"
+                @save="save"
+                @next="nextStep(2)"
+              />
+            </div>
+            <div v-if="current == 3">
+              <Legal></Legal>
+              <FormNavButtons
+                :prevBtn="false"
+                :saveBtn="true"
+                :nextBtn="true"
+                @save="save"
+                @next="nextStep(3)"
+              />
+            </div>
 
-      <div>
-        <div v-if="current == 1">
-          <RegistrationAgreement></RegistrationAgreement>
-          <FormNavButtons
-            :prevBtn="false"
-            :saveBtn="true"
-            :nextBtn="true"
-            @save="save"
-            @next="nextStep(1)"
-          />
-        </div>
-        <div v-if="current == 2">
-          <ComplianceTeam></ComplianceTeam>
-          <FormNavButtons
-            :prevBtn="false"
-            :saveBtn="true"
-            :nextBtn="true"
-            @save="save"
-            @next="nextStep(2)"
-          />
-        </div>
-        <div v-if="current == 3">
-          <Legal></Legal>
-          <FormNavButtons
-            :prevBtn="false"
-            :saveBtn="true"
-            :nextBtn="true"
-            @save="save"
-            @next="nextStep(3)"
-          />
-        </div>
+            <div v-show="current == 4">
+              <Overview></Overview>
+              <FormNavButtons
+                :prevBtn="false"
+                :saveBtn="true"
+                :nextBtn="true"
+                @save="save"
+                @next="nextStep(4)"
+              />
+            </div>
 
-        <div v-show="current == 4">
-          <Overview></Overview>
-          <FormNavButtons
-            :prevBtn="false"
-            :saveBtn="true"
-            :nextBtn="true"
-            @save="save"
-            @next="nextStep(4)"
-          />
-        </div>
+            <div v-show="current == 5">
+              <ProjectDetails></ProjectDetails>
+              <FormNavButtons
+                :prevBtn="false"
+                :saveBtn="true"
+                :nextBtn="true"
+                @save="save"
+                @next="nextStep(5)"
+              />
+            </div>
 
-        <div v-show="current == 5">
-          <ProjectDetails></ProjectDetails>
-          <FormNavButtons
-            :prevBtn="false"
-            :saveBtn="true"
-            :nextBtn="true"
-            @save="save"
-            @next="nextStep(5)"
-          />
-        </div>
+            <div v-show="current == 7">
+              <TechnicalDetails></TechnicalDetails>
+              <FormNavButtons
+                :prevBtn="false"
+                :saveBtn="true"
+                :nextBtn="true"
+                @save="save"
+                @next="nextStep(7)"
+              />
+            </div>
 
-        <div v-show="current == 7">
-          <TechnicalDetails></TechnicalDetails>
-          <FormNavButtons
-            :prevBtn="false"
-            :saveBtn="true"
-            :nextBtn="true"
-            @save="save"
-            @next="nextStep(7)"
-          />
-        </div>
+            <div v-show="current == 8">
+              <RiskManagement></RiskManagement>
+              <FormNavButtons
+                :prevBtn="false"
+                :saveBtn="true"
+                :nextBtn="true"
+                @save="save"
+                @next="nextStep(8)"
+              />
+            </div>
 
-        <div v-show="current == 8">
-          <RiskManagement></RiskManagement>
-          <FormNavButtons
-            :prevBtn="false"
-            :saveBtn="true"
-            :nextBtn="true"
-            @save="save"
-            @next="nextStep(8)"
-          />
-        </div>
-
-        <div v-show="current == 10">
-          <Acknowledgement></Acknowledgement>
-          <FormNavButtons
-            :prevBtn="false"
-            :saveBtn="true"
-            :nextBtn="true"
-            @save="save"
-            @next="nextStep(10)"
-          />
-        </div>
-        <div v-show="current == 11">
-          <Competitiveness></Competitiveness>
-          <FormNavButtons
-            :prevBtn="false"
-            :saveBtn="true"
-            :nextBtn="true"
-            @save="save"
-            @next="nextStep(11)"
-          />
-        </div>
-        <div v-show="current == 12">
-          <Investors></Investors>
-          <FormNavButtons
-            :prevBtn="false"
-            :saveBtn="true"
-            :nextBtn="true"
-            @save="save"
-            @next="nextStep(12)"
-          />
-        </div>
-        <div v-show="current == 13">
-          <COI></COI>
-          <FormNavButtons
-            :prevBtn="false"
-            :saveBtn="true"
-            :nextBtn="true"
-            @save="save"
-            @next="nextStep(13)"
-          />
-        </div>
-        <div v-if="current == 14">
-          <div class="text-nowrap my-2">
-            <input type="checkbox" id="terms" name="terms" value="terms" ref="terms" class="me-2" />
-            <label for="terms" class="text-wrap align-top">
-              By submitting this form, I/we confirm that the provided information is true and
-              accurate to the best of my/our knowledge.
-            </label>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <button class="btn btn-success" @click="submit">Submit</button>
+            <div v-show="current == 10">
+              <Acknowledgement></Acknowledgement>
+              <FormNavButtons
+                :prevBtn="false"
+                :saveBtn="true"
+                :nextBtn="true"
+                @save="save"
+                @next="nextStep(10)"
+              />
+            </div>
+            <div v-show="current == 11">
+              <Competitiveness></Competitiveness>
+              <FormNavButtons
+                :prevBtn="false"
+                :saveBtn="true"
+                :nextBtn="true"
+                @save="save"
+                @next="nextStep(11)"
+              />
+            </div>
+            <div v-show="current == 12">
+              <Investors></Investors>
+              <FormNavButtons
+                :prevBtn="false"
+                :saveBtn="true"
+                :nextBtn="true"
+                @save="save"
+                @next="nextStep(12)"
+              />
+            </div>
+            <div v-show="current == 13">
+              <COI></COI>
+              <FormNavButtons
+                :prevBtn="false"
+                :saveBtn="true"
+                :nextBtn="true"
+                @save="save"
+                @next="nextStep(13)"
+              />
+            </div>
+            <div v-if="current == 14">
+              <div class="text-nowrap my-2">
+                <input
+                  type="checkbox"
+                  id="terms"
+                  name="terms"
+                  value="terms"
+                  ref="terms"
+                  class="me-2"
+                />
+                <label for="terms" class="text-wrap align-top">
+                  By submitting this form, I/we confirm that the provided information is true and
+                  accurate to the best of my/our knowledge.
+                </label>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <button class="btn btn-success" @click="submit">Submit</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -323,6 +322,10 @@ export default {
     }
   },
   methods: {
+    formStepStyle(index: number) {
+      if (this.current == index + 1) return 'text-primary'
+      return 'text-secondary'
+    },
     async onFileChange(e: any) {
       this.whitepaperFile = e.target.files[0]
       console.log(this.whitepaperFile)
@@ -504,5 +507,10 @@ export default {
 <style scoped>
 .nav-item {
   cursor: pointer;
+}
+
+.dot {
+  width: 16px;
+  height: 16px;
 }
 </style>

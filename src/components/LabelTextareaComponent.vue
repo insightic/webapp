@@ -1,8 +1,7 @@
 <template>
-  <div>
-    <label class="form-label">{{ label }}</label
+  <div class="mb-3">
+    <label class="form-label bold">{{ label }}</label
     ><span v-show="required" class="ms-1 text-danger">*</span> <br />
-    <label class="text-secondary small mb-3" v-html="hint"></label>
     <textarea
       class="form-control"
       :value="field"
@@ -22,7 +21,6 @@ export default {
     rows: { type: Number, default: 3 },
     field: { type: String },
     placeholder: { type: String },
-    hint: { type: String },
     footnote: { type: String },
     required: { type: Boolean, default: false },
     disabled: { type: Boolean, default: false }

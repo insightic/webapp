@@ -1,10 +1,9 @@
 <template>
-  <div class="mb-2">
+  <div class="mb-3">
     <label class="form-label">
       {{ label }}
     </label>
-    <span v-show="required" class="ms-1 text-danger">*</span> <br />
-    <label class="text-secondary small" v-html="hint"></label>
+    <span v-show="required" class="ms-1 text-danger">*</span>
     <select class="form-select" @change="onChange">
       <option value="" selected disabled>{{ placeholder }}</option>
       <option v-for="option in options" :key="option" :value="option">{{ option }}</option>
@@ -19,7 +18,7 @@ export default {
     label: { type: String, required: true },
     options: { type: Array<string>, required: true },
     field: { type: String },
-    placeholder: { type: String, default: 'Please select project type' },
+    placeholder: { type: String, default: 'Options...' },
     hint: { type: String },
     footnote: { type: String },
     required: { type: Boolean, default: false }

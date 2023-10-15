@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-2">
+  <div class="mb-3">
     <label class="form-label">{{ label }}</label
     ><span v-show="required" class="ms-1 text-danger">*</span>
     <label class="text-secondary small" v-html="hint"></label>
