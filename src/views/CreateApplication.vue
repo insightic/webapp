@@ -1,235 +1,39 @@
 <template>
   <NavFooterLayout>
     <div class="container p-3 mb-5">
-      <h1>Create New Application</h1>
+      <h1 class="mb-4"><strong>Create New Application</strong></h1>
 
-      <div class="d-flex align-items-center align-items-start mb-3">
-        <div
-          class="me-2 nav-item"
-          @click="current = 1"
-          :class="
-            current != 1 && complete1
-              ? 'text-success'
-              : current != 1 && !complete1
-              ? 'text-secondary'
-              : 'text-secondary'
-          "
-        >
-          <i v-if="current == 1" class="bi bi-1-square-fill"></i>
+      <div class="d-flex flex-wrap align-items-center align-items-start mb-3">
+        <div v-for="(form, index) in forms" :key="index">
+          <div
+            class="me-2 nav-item"
+            @click="current = index + 1"
+            :class="
+              current != index + 1 && 'complete' + (index + 1)
+                ? 'text-success'
+                : current != index + 1 && 'complete' + (index + 1)
+                ? 'text-secondary'
+                : 'text-secondary'
+            "
+          >
+            <i v-if="current == index + 1" class="bi bi-1-square-fill"></i>
+            <i v-else class="bi bi-1-square"></i>
+            <span class="ms-2 font-weight-bold">
+              {{ form }}
+            </span>
+            <span><i class="bi bi-chevron-right ms-2"></i></span>
+          </div>
+        </div>
+        <div class="ms-2 nav-item text-secondary" @click="current = 14">
+          <i v-if="current == 14" class="bi bi-1-square-fill"></i>
           <i v-else class="bi bi-1-square"></i>
-          <span class="ms-2">Basic Information</span>
-        </div>
-        <span><i class="bi bi-chevron-right"></i></span>
-        <div
-          class="mx-2 nav-item"
-          @click="current = 2"
-          :class="
-            current != 2 && complete2
-              ? 'text-success'
-              : current != 2 && !complete2
-              ? 'text-secondary'
-              : 'text-secondary'
-          "
-        >
-          <i v-if="current == 2" class="bi bi-2-square-fill"></i>
-          <i v-else class="bi bi-2-square"></i>
-          <span class="ms-2">Objective</span>
-        </div>
-        <span><i class="bi bi-chevron-right"></i></span>
-        <div
-          class="mx-2 nav-item"
-          @click="current = 3"
-          :class="
-            current != 3 && complete3
-              ? 'text-success'
-              : current != 3 && !complete3
-              ? 'text-secondary'
-              : 'text-secondary'
-          "
-        >
-          <i v-if="current == 3" class="bi bi-3-square-fill"></i>
-          <i v-else class="bi bi-3-square"></i>
-          <span class="ms-2">Assets</span>
-        </div>
-        <span><i class="bi bi-chevron-right"></i></span>
-        <div
-          class="mx-2 nav-item"
-          @click="current = 4"
-          :class="
-            current != 4 && complete4
-              ? 'text-success'
-              : current != 4 && !complete4
-              ? 'text-secondary'
-              : 'text-secondary'
-          "
-        >
-          <i v-if="current == 4" class="bi bi-4-square-fill"></i>
-          <i v-else class="bi bi-4-square"></i>
-          <span class="ms-2">Upload Documents</span>
-        </div>
-        <span><i class="bi bi-chevron-right"></i></span>
-        <div class="ms-2 nav-item text-secondary" @click="current = 5">
-          <i v-if="current == 5" class="bi bi-5-square-fill"></i>
-          <i v-else class="bi bi-5-square"></i>
           <span class="ms-2">Submit</span>
         </div>
       </div>
 
       <div>
         <div v-if="current == 1">
-          <SectionLayout title="Overview">
-            <div class="row">
-              <div class="col-md-12">
-                <LabelInputComponent
-                  label="Project Name"
-                  type="text"
-                  v-model:field="name"
-                  :required="true"
-                />
-              </div>
-              <div class="col-md-6">
-                <LabelInputComponent
-                  label="Twitter (URL)"
-                  type="text"
-                  v-model:field="twitter"
-                  :required="true"
-                />
-              </div>
-              <div class="col-md-6">
-                <LabelInputComponent
-                  label="Website (URL)"
-                  type="text"
-                  v-model:field="website"
-                  :required="true"
-                />
-              </div>
-            </div>
-          </SectionLayout>
-
-          <SectionLayout title="Founders">
-            <LabelInputComponent
-              label="Number of Founders"
-              type="text"
-              v-model:field="numFounders"
-              :required="true"
-            />
-            <div class="mb-4" v-for="(founder, counter) in founders" v-bind:key="counter">
-              <h6>Founder {{ counter + 1 }}</h6>
-              <div class="row">
-                <div class="col-md-6">
-                  <LabelInputComponent
-                    label="Name"
-                    type="text"
-                    v-model:field="founder.Name"
-                    :required="true"
-                  />
-                </div>
-                <div class="col-md-6">
-                  <LabelInputComponent
-                    label="Position"
-                    type="text"
-                    v-model:field="founder.Position"
-                    :required="true"
-                  />
-                </div>
-                <div class="col-md-12">
-                  <LabelInputComponent
-                    label="KYC Verification"
-                    type="text"
-                    v-model:field="founder.Kyc"
-                  />
-                </div>
-                <div class="col-md-6">
-                  <LabelInputComponent
-                    label="Twitter (URL)"
-                    type="text"
-                    v-model:field="founder.Twitter"
-                  />
-                </div>
-                <div class="col-md-6">
-                  <LabelInputComponent
-                    label="LinkedIn (URL)"
-                    type="text"
-                    v-model:field="founder.Linkedin"
-                  />
-                </div>
-                <div class="col-md-6">
-                  <LabelInputComponent label="Email" type="text" v-model:field="founder.Email" />
-                </div>
-                <div class="col-md-6">
-                  <LabelInputComponent
-                    label="Ethereum Address"
-                    type="text"
-                    v-model:field="founder.Ethereum"
-                  />
-                </div>
-
-                <!-- <div class="">
-                  <label for="document" class="">CV</label>
-                  <input
-                    type="file"
-                    class="form-controls w-100"
-                    id="document"
-                    @change="onFileChangeCV($event, counter)"
-                  />
-                  <div class="text-secondary small">
-                    Brief CV or Biography (Please attach separate sheets if necessary)
-                  </div>
-                </div> -->
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <button
-                  class="btn btn-sm btn-outline-primary"
-                  @click="numFounders = parseInt(numFounders) + 1 + ''"
-                >
-                  Add Another Founder
-                </button>
-              </div>
-            </div>
-          </SectionLayout>
-
-          <SectionLayout title="Team Members">
-            <LabelInputComponent
-              label="Number of Team Members"
-              type="text"
-              v-model:field="numTeamMembers"
-              :required="true"
-            />
-            <div class="mb-2" v-for="(member, counter) in teamMembers" v-bind:key="counter">
-              <div class="row">
-                <h6>Member {{ counter + 1 }}</h6>
-                <div class="col-md-6">
-                  <LabelInputComponent
-                    label="Name"
-                    type="text"
-                    v-model:field="member.Name"
-                    :required="true"
-                  />
-                </div>
-                <div class="col-md-6">
-                  <LabelInputComponent
-                    label="Role"
-                    type="text"
-                    v-model:field="member.Position"
-                    :required="true"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <button
-                  class="btn btn-sm btn-outline-primary"
-                  @click="numTeamMembers = parseInt(numTeamMembers) + 1 + ''"
-                >
-                  Add Another Team Member
-                </button>
-              </div>
-            </div>
-          </SectionLayout>
-
+          <RegistrationAgreement></RegistrationAgreement>
           <FormNavButtons
             :prevBtn="false"
             :saveBtn="true"
@@ -239,29 +43,7 @@
           />
         </div>
         <div v-if="current == 2">
-          <SectionLayout title="Objective">
-            <div class="row">
-              <div class="col-md-12">
-                <LabelTextareaComponent
-                  label="Objectives of your DLT Foundation"
-                  footnote="Please provide a detailed description of the objectives of your DLT Foundation (max. 5000 characters)"
-                  type="text"
-                  v-model:field="objective"
-                  :required="true"
-                />
-              </div>
-              <div class="col-md-12">
-                <LabelTextareaComponent
-                  label="Motivation of your DLT Foundation"
-                  footnote="If your DLT Foundation has been established for a specific purpose, please detail the purpose (max. 5000 characters)"
-                  type="text"
-                  v-model:field="motivation"
-                  :required="true"
-                />
-              </div>
-            </div>
-          </SectionLayout>
-
+          <ComplianceTeam></ComplianceTeam>
           <FormNavButtons
             :prevBtn="false"
             :saveBtn="true"
@@ -271,20 +53,7 @@
           />
         </div>
         <div v-if="current == 3">
-          <SectionLayout title="Initial Assets">
-            <div class="row">
-              <div class="col-md-12">
-                <LabelTextareaComponent
-                  label="Initial Assets of your DLT Foundation"
-                  footnote="Please provide a detailed description of the initial assets of your DLT Foundation (max. 5000 characters):"
-                  type="text"
-                  v-model:field="assets"
-                  :required="true"
-                />
-              </div>
-            </div>
-          </SectionLayout>
-
+          <Legal></Legal>
           <FormNavButtons
             :prevBtn="false"
             :saveBtn="true"
@@ -295,48 +64,7 @@
         </div>
 
         <div v-show="current == 4">
-          <SectionLayout title="Documents">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="">
-                  <label for="document" class=""
-                    >Whitepaper File <span class="text-danger">*</span></label
-                  >
-                  <input
-                    type="file"
-                    ref="whitepaper"
-                    class="form-controls w-100"
-                    id="document"
-                    @change="onFileChange"
-                  />
-                  <div class="text-secondary small">
-                    Please attach a quality version of the whitepaper document.
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-12">
-                <div class="mt-3">
-                  <label for="document" class=""
-                    >Code Files <span class="text-danger">*</span></label
-                  >
-                  <input
-                    type="file"
-                    ref="codes"
-                    class="form-controls w-100"
-                    id="document"
-                    @change="onFileChangeCodes"
-                  />
-                  <div class="text-secondary small">
-                    Please attach a zipped folder containing the code files.
-                  </div>
-                </div>
-              </div>
-            </div>
-          </SectionLayout>
-
+          <Overview></Overview>
           <FormNavButtons
             :prevBtn="false"
             :saveBtn="true"
@@ -346,61 +74,80 @@
           />
         </div>
 
-        <div v-if="current == 5">
-          <SectionLayout title="Term and Conditions">
-            <div class="row">
-              <div class="col-md-12">
-                <div
-                  style="height: 256px; overflow-y: auto; border: 1px solid #ccc"
-                  class="rounded p-2"
-                >
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                  incididunt ut labore et dolore magna aliqua. Sit amet facilisis magna etiam
-                  tempor. At erat pellentesque adipiscing commodo elit at. Vivamus arcu felis
-                  bibendum ut tristique et. Nulla facilisi nullam vehicula ipsum a arcu cursus vitae
-                  congue. Ornare lectus sit amet est placerat. Leo vel fringilla est ullamcorper
-                  eget nulla facilisi. Tellus pellentesque eu tincidunt tortor. Placerat vestibulum
-                  lectus mauris ultrices eros. Amet commodo nulla facilisi nullam vehicula ipsum a
-                  arcu cursus. Laoreet suspendisse interdum consectetur libero id. Id donec ultrices
-                  tincidunt arcu non sodales neque sodales. Et netus et malesuada fames. Adipiscing
-                  elit pellentesque habitant morbi tristique senectus et netus. Neque vitae tempus
-                  quam pellentesque nec nam aliquam sem et. Pretium aenean pharetra magna ac
-                  placerat. Semper auctor neque vitae tempus quam pellentesque nec nam aliquam.
-                  Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit amet. Tortor
-                  dignissim convallis aenean et tortor. Velit ut tortor pretium viverra suspendisse
-                  potenti nullam. Urna et pharetra pharetra massa massa ultricies mi quis. Et
-                  pharetra pharetra massa massa ultricies mi. Id nibh tortor id aliquet. Amet massa
-                  vitae tortor condimentum lacinia quis vel. Integer quis auctor elit sed vulputate.
-                  Quam vulputate dignissim suspendisse in est ante in nibh mauris. Parturient montes
-                  nascetur ridiculus mus mauris vitae ultricies leo integer. Sodales ut eu sem
-                  integer vitae. Orci a scelerisque purus semper eget duis at. Egestas dui id ornare
-                  arcu. Sodales ut etiam sit amet nisl purus in mollis. Nec ullamcorper sit amet
-                  risus nullam eget felis eget nunc. Diam quis enim lobortis scelerisque. Commodo
-                  nulla facilisi nullam vehicula ipsum a. Quis risus sed vulputate odio ut.
-                  Condimentum vitae sapien pellentesque habitant morbi. Venenatis a condimentum
-                  vitae sapien pellentesque habitant morbi. Lacus luctus accumsan tortor posuere ac
-                  ut. Neque vitae tempus quam pellentesque nec nam aliquam sem et. Cursus sit amet
-                  dictum sit amet. Sodales ut eu sem integer vitae justo eget magna fermentum.
-                  Imperdiet massa tincidunt nunc pulvinar sapien. Massa tempor nec feugiat nisl
-                  pretium fusce id velit ut. Nibh sed pulvinar proin gravida. Et netus et malesuada
-                  fames ac turpis. Dui vivamus arcu felis bibendum ut tristique. Nullam eget felis
-                  eget nunc lobortis mattis aliquam faucibus. Semper viverra nam libero justo. Eget
-                  nulla facilisi etiam dignissim diam quis enim lobortis. Diam maecenas ultricies mi
-                  eget mauris pharetra et. Aliquam ultrices sagittis orci a scelerisque purus.
-                  Semper viverra nam libero justo laoreet. Ut aliquam purus sit amet luctus
-                  venenatis lectus magna. Proin fermentum leo vel orci porta non. Vitae sapien
-                  pellentesque habitant morbi tristique senectus et. Malesuada proin libero nunc
-                  consequat interdum varius sit amet. Quis hendrerit dolor magna eget est lorem.
-                  Posuere urna nec tincidunt praesent semper feugiat nibh sed pulvinar. Hac
-                  habitasse platea dictumst vestibulum rhoncus est pellentesque elit. Faucibus purus
-                  in massa tempor nec feugiat nisl. Nunc eget lorem dolor sed viverra ipsum nunc
-                  aliquet. Fringilla urna porttitor rhoncus dolor purus non enim. Donec et odio
-                  pellentesque diam volutpat commodo sed egestas.
-                </div>
-              </div>
-            </div>
-          </SectionLayout>
+        <div v-show="current == 5">
+          <ProjectDetails></ProjectDetails>
+          <FormNavButtons
+            :prevBtn="false"
+            :saveBtn="true"
+            :nextBtn="true"
+            @save="save"
+            @next="nextStep(5)"
+          />
+        </div>
 
+        <div v-show="current == 7">
+          <TechnicalDetails></TechnicalDetails>
+          <FormNavButtons
+            :prevBtn="false"
+            :saveBtn="true"
+            :nextBtn="true"
+            @save="save"
+            @next="nextStep(7)"
+          />
+        </div>
+
+        <div v-show="current == 8">
+          <RiskManagement></RiskManagement>
+          <FormNavButtons
+            :prevBtn="false"
+            :saveBtn="true"
+            :nextBtn="true"
+            @save="save"
+            @next="nextStep(8)"
+          />
+        </div>
+
+        <div v-show="current == 10">
+          <Acknowledgement></Acknowledgement>
+          <FormNavButtons
+            :prevBtn="false"
+            :saveBtn="true"
+            :nextBtn="true"
+            @save="save"
+            @next="nextStep(10)"
+          />
+        </div>
+        <div v-show="current == 11">
+          <Competitiveness></Competitiveness>
+          <FormNavButtons
+            :prevBtn="false"
+            :saveBtn="true"
+            :nextBtn="true"
+            @save="save"
+            @next="nextStep(11)"
+          />
+        </div>
+        <div v-show="current == 12">
+          <Investors></Investors>
+          <FormNavButtons
+            :prevBtn="false"
+            :saveBtn="true"
+            :nextBtn="true"
+            @save="save"
+            @next="nextStep(12)"
+          />
+        </div>
+        <div v-show="current == 13">
+          <COI></COI>
+          <FormNavButtons
+            :prevBtn="false"
+            :saveBtn="true"
+            :nextBtn="true"
+            @save="save"
+            @next="nextStep(13)"
+          />
+        </div>
+        <div v-if="current == 14">
           <div class="text-nowrap my-2">
             <input type="checkbox" id="terms" name="terms" value="terms" ref="terms" class="me-2" />
             <label for="terms" class="text-wrap align-top">
@@ -421,20 +168,36 @@
 
 <script lang="ts">
 import NavFooterLayout from '@/layouts/NavFooterLayout.vue'
-import SectionLayout from '@/layouts/SectionLayout.vue'
-import LabelInputComponent from '@/components/LabelInputComponent.vue'
-import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
 import { createProject, saveApplicationDraft, getPreSignedPutUrl, uploadFile } from '@/api'
 import type { NewApplication } from '@/api'
 import FormNavButtons from '@/components/FormNavButtons.vue'
+import RegistrationAgreement from './forms/RegistrationAgreementForm.vue'
+import ComplianceTeam from './forms/ComplianceTeamForm.vue'
+import Legal from './forms/LegalForm.vue'
+import Overview from './forms/OverviewForm.vue'
+import ProjectDetails from './forms/ProjectDetailsForm.vue'
+import TechnicalDetails from './forms/TechnicalDetailsForm.vue'
+import RiskManagement from './forms/RiskManagementForm.vue'
+import Acknowledgement from './forms/AcknowledgementForm.vue'
+import Competitiveness from './forms/CompetitivenessForm.vue'
+import Investors from './forms/InvestorForm.vue'
+import COI from './forms/COIForm.vue'
 
 export default {
   components: {
     NavFooterLayout,
-    SectionLayout,
-    LabelInputComponent,
-    LabelTextareaComponent,
-    FormNavButtons
+    FormNavButtons,
+    RegistrationAgreement,
+    ComplianceTeam,
+    Legal,
+    Overview,
+    ProjectDetails,
+    TechnicalDetails,
+    RiskManagement,
+    Acknowledgement,
+    Competitiveness,
+    Investors,
+    COI
   },
   mounted() {},
   data() {
@@ -480,7 +243,22 @@ export default {
       motivation: '',
       assets: '',
       numFounders: '1',
-      numTeamMembers: '1'
+      numTeamMembers: '1',
+      forms: [
+        'Registration Agreement',
+        'Compliance & Team',
+        'Legal',
+        'Overview',
+        'Project Details',
+        'Digital asset',
+        'Technical Details',
+        'Risk Management',
+        'Volume & Community',
+        'Acknowledgement',
+        'Competitiveness',
+        'Investors',
+        'COI'
+      ]
     }
   },
   computed: {
@@ -512,6 +290,36 @@ export default {
     },
     complete4() {
       return (this.whitepaperFile as any).size > 0 && (this.codeFiles as any).size > 0
+    },
+    complete5() {
+      return true
+    },
+    complete6() {
+      return true
+    },
+    complete7() {
+      return true
+    },
+    complete8() {
+      return true
+    },
+    complete9() {
+      return true
+    },
+    complete10() {
+      return true
+    },
+    complete11() {
+      return true
+    },
+    complete12() {
+      return true
+    },
+    complete13() {
+      return true
+    },
+    complete14() {
+      return true
     }
   },
   methods: {
@@ -551,20 +359,6 @@ export default {
           }
         }
       }
-
-      // for (let i = 0; i < this.founders.length; i++) {
-      //   if (this.founders[i].cvFile) {
-      //     const preSignedPutUrl: any = await getPreSignedPutUrl()
-      //     if (preSignedPutUrl) {
-      //       const fileResp = await uploadFile(preSignedPutUrl.URL, this.founders[i].cvFile as any)
-      //       if (fileResp.ok) {
-      //         this.founders[i].CV = preSignedPutUrl.ObjectID
-      //         this.founders[i].cvUploadLink = preSignedPutUrl.URL
-      //         this.founders[i].CVFilename = this.founders[i].cvFile.name
-      //       }
-      //     }
-      //   }
-      // }
       let data = {
         Name: this.name,
         Twitter: this.twitter,
@@ -653,7 +447,17 @@ export default {
         1: this.complete1,
         2: this.complete2,
         3: this.complete3,
-        4: this.complete4
+        4: this.complete4,
+        5: this.complete5,
+        6: this.complete6,
+        7: this.complete7,
+        8: this.complete8,
+        9: this.complete9,
+        10: this.complete10,
+        11: this.complete11,
+        12: this.complete12,
+        13: this.complete13,
+        14: this.complete14
       }
       if (mapping[curr as keyof typeof mapping]) {
         this.current = curr + 1

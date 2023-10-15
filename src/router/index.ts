@@ -4,8 +4,7 @@ import ApplicationSubmissionView from '@/views/applicationSubViews/ApplicationSu
 import ApplicationDetailsView from '@/views/applicationSubViews/ApplicationDetailsView.vue'
 import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
-import CreateApplicationView from '@/views/CreateApplication.vue'
-import CreateNewApplicationView from '@/views/CreateNewApplication.vue'
+import CreateApplication from '@/views/CreateApplication.vue'
 import SubmissionView from '@/views/SubmissionView.vue'
 
 const router = createRouter({
@@ -30,12 +29,7 @@ const router = createRouter({
     {
       path: '/create-application',
       name: 'CreateApplicationView',
-      component: CreateApplicationView
-    },
-    {
-      path: '/create-new-application',
-      name: 'CreateNewApplicationView',
-      component: CreateNewApplicationView
+      component: CreateApplication
     },
     {
       path: '/projects/:projectID',
