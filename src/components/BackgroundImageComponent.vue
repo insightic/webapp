@@ -4,16 +4,12 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue'
-
 const props = defineProps({
   src: {
     type: String,
     required: true
   }
 })
-
-console.log(props.src)
 </script>
 
 <style scoped>

@@ -9,7 +9,6 @@ import AccountApplicationsView from '@/views/accountSubViews/AccountApplications
 import AccountUsersView from '@/views/accountSubViews/AccountUsersView.vue'
 import AccountProfileView from '@/views/accountSubViews/AccountProfileView.vue'
 import AccountCreateProjectView from '@/views/accountSubViews/AccountCreateProjectView.vue'
-import FormView from '@/views/accountSubViews/FormView.vue'
 
 export default {
   components: {
@@ -20,7 +19,7 @@ export default {
       subViews: [
         {
           name: 'Applications',
-          icon: 'bi-box',
+          icon: 'bi-card-checklist',
           component: AccountApplicationsView
         },
         {
@@ -36,13 +35,8 @@ export default {
         },
         {
           name: 'Profile',
-          icon: 'bi-diagram-3',
+          icon: 'bi-info-circle',
           component: AccountProfileView
-        },
-        {
-          name: 'Forms',
-          icon: 'bi-diagram-3',
-          component: FormView
         }
       ]
     }
