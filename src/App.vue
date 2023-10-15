@@ -11,20 +11,17 @@ export default {
       return httpClient.isAuthorized()
     },
     isLoginView() {
-      return this.$route.path == '/login' || this.$route.path == '/admin/login'
+      return this.$route.path == '/login'
     },
     isRegisterView() {
       return this.$route.path == '/register'
-    },
-    showAuth() {
-      return !this.isAuthorized && !this.isLoginView && !this.isRegisterView
     }
   },
   created() {
-    if (this.isLoginView || this.isRegisterView) {
-      this.isAuthorized && this.$router.push('/teams')
+    if (this.isAuthorized) {
+      if (this.isLoginView || this.isRegisterView) this.$router.push('/')
     } else {
-      !this.isLoginView && !this.isAuthorized && this.$router.push('/admin/login')
+      if (!this.isLoginView && !this.isRegisterView) this.$router.push('/login')
     }
   }
 }
