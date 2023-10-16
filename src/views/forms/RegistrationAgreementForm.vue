@@ -7,11 +7,12 @@
       />
       <LabelInputComponent label="Title" type="text" />
       <LabelInputComponent label="Name" type="text" />
-      <LabelRadioComponent
+      <LabelSwitchComponent
         label="Accept the NDA agreement"
         footnote="Only if the user agrees the agreement, then it can continue."
+        width="100"
+        height="40"
         :options="['Yes', 'No']"
-        class="mb-4"
       />
     </SectionLayout>
   </div>
@@ -20,14 +21,14 @@
 <script lang="ts">
 import SectionLayout from '@/layouts/SectionLayout.vue'
 import LabelInputComponent from '@/components/LabelInputComponent.vue'
-import LabelRadioComponent from '@/components/LabelRadioComponent.vue'
+import LabelSwitchComponent from '@/components/LabelSwitchComponent.vue'
 import PDFComponent from '@/components/PDFComponent.vue'
 
 export default {
   components: {
     SectionLayout,
     LabelInputComponent,
-    LabelRadioComponent,
+    LabelSwitchComponent,
     PDFComponent
   }
 }

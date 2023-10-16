@@ -52,10 +52,12 @@
         :options="['Yes', 'No']"
       />
 
-      <LabelRadioComponent
+      <LabelSwitchComponent
         label="Prior Application"
         footnote="Have you applied before?"
-        :options="['Have you applied before?', 'No']"
+        width="100"
+        height="40"
+        :options="['Yes', 'No']"
       />
     </SectionLayout>
   </div>
@@ -64,19 +66,19 @@
 <script lang="ts">
 import SectionLayout from '@/layouts/SectionLayout.vue'
 import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
-import LabelRadioComponent from '@/components/LabelRadioComponent.vue'
 import LabelInputComponent from '@/components/LabelInputComponent.vue'
 import LabelFileUploadComponent from '@/components/LabelFileUploadComponent.vue'
 import LabelSelectComponent from '@/components/LabelSelectComponent.vue'
+import LabelSwitchComponent from '@/components/LabelSwitchComponent.vue' 
 
 export default {
   components: {
     SectionLayout,
     LabelTextareaComponent,
-    LabelRadioComponent,
     LabelInputComponent,
     LabelFileUploadComponent,
-    LabelSelectComponent
+    LabelSelectComponent,
+    LabelSwitchComponent
   }
 }
 </script>
