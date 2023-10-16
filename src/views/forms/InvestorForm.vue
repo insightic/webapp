@@ -1,10 +1,9 @@
 <template>
   <div style="max-width: 960px">
     <SectionLayout title="Investors">
-      <LabelTextareaComponent
+      <LabelTextFileURLComponent
         label="Key Incubators, Advisors, and Major Investors/Partner"
         footnote="Please share a list of your key incubators, advisors, and major investors or partners, specifying involvement in tokens and equity."
-        type="text"
       />
 
       <LabelTextareaComponent
@@ -22,11 +21,13 @@
 <script lang="ts">
 import SectionLayout from '@/layouts/SectionLayout.vue'
 import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
+import LabelTextFileURLComponent from '@/components/LabelTextFileURLComponent.vue'
 
 export default {
   components: {
     SectionLayout,
-    LabelTextareaComponent
+    LabelTextareaComponent,
+    LabelTextFileURLComponent
   }
 }
 </script>

@@ -13,10 +13,9 @@
         "
         type="text"
       />
-      <LabelTextareaComponent
+      <LabelTextFileURLComponent
         label="Please provide rough statistics on the number of users, and include on-chain proof/reference sites if applicable."
         footnote="Please provide detailed information and links to reference sites"
-        type="text"
       />
       <LabelInputComponent label="Total Value Locked(TVL)" type="text" />
       <LabelInputComponent label="Total Trading/Transaction Volume" type="text" />
@@ -25,10 +24,9 @@
         footnote="Please describe the geographical demographic of your community"
         type="text"
       />
-      <LabelTextareaComponent
+      <LabelTextFileURLComponent
         label="User Acquisition Strategy"
-        footnote="How do you plan to attract new users to your project? [Please describe your strategy in detail]"
-        type="text"
+        footnote="How do you plan to attract new users to your project?"
       />
     </SectionLayout>
   </div>
@@ -38,12 +36,14 @@
 import SectionLayout from '@/layouts/SectionLayout.vue'
 import LabelInputComponent from '@/components/LabelInputComponent.vue'
 import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
+import LabelTextFileURLComponent from '@/components/LabelTextFileURLComponent.vue'
 
 export default {
   components: {
     SectionLayout,
     LabelInputComponent,
-    LabelTextareaComponent
+    LabelTextareaComponent,
+    LabelTextFileURLComponent
   }
 }
 </script>

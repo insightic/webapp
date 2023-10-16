@@ -18,3 +18,7 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+.form-control:focus {
+  box-shadow: none;
+}

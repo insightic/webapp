@@ -1,7 +1,7 @@
 <template>
   <div style="max-width: 960px">
     <SectionLayout title="Legal">
-      <LabelFileUploadComponent
+      <LabelTextFileURLComponent
         label="Regulatory Status"
         footnote="Provide any third-party or internal legal opinion, memorandum or analysis (if available) on the regulatory status of the token/network."
       />
@@ -18,14 +18,14 @@
 
 <script lang="ts">
 import SectionLayout from '@/layouts/SectionLayout.vue'
-import LabelFileUploadComponent from '@/components/LabelFileUploadComponent.vue'
 import LabelSwitchComponent from '@/components/LabelSwitchComponent.vue'
+import LabelTextFileURLComponent from '@/components/LabelTextFileURLComponent.vue'
 
 export default {
   components: {
     SectionLayout,
-    LabelFileUploadComponent,
-    LabelSwitchComponent
+    LabelSwitchComponent,
+    LabelTextFileURLComponent
   }
 }
 </script>

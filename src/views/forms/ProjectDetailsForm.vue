@@ -1,10 +1,9 @@
 <template>
   <div style="max-width: 960px">
     <SectionLayout title="Project Details">
-      <LabelTextareaComponent
+      <LabelTextFileURLComponent
         label="Project Summary"
         footnote="Please provide a detailed summary of your project."
-        type="text"
       />
 
       <LabelSelectComponent
@@ -88,10 +87,9 @@
         type="text"
       />
 
-      <LabelTextareaComponent
+      <LabelTextFileURLComponent
         label="Business Model"
         footnote="Please provide a detailed summary on the following: a. Current and planned revenue streams and usage. b. Is the team working on multiple projects at the same time?"
-        type="text"
       />
 
       <LabelTextareaComponent
@@ -100,13 +98,12 @@
         type="text"
       />
 
-      <LabelTextareaComponent
+      <LabelTextFileURLComponent
         label="Roadmap"
         footnote="Please list out the roadmap of your company."
-        type="text"
       />
 
-      <LabelTextareaComponent label="Other Details" type="text" />
+      <LabelTextFileURLComponent label="Other Supporting Documents" />
     </SectionLayout>
   </div>
 </template>
@@ -115,12 +112,14 @@
 import SectionLayout from '@/layouts/SectionLayout.vue'
 import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
 import LabelSelectComponent from '@/components/LabelSelectComponent.vue'
+import LabelTextFileURLComponent from '@/components/LabelTextFileURLComponent.vue'
 
 export default {
   components: {
     SectionLayout,
     LabelTextareaComponent,
-    LabelSelectComponent
+    LabelSelectComponent,
+    LabelTextFileURLComponent
   }
 }
 </script>
