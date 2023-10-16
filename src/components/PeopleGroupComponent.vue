@@ -17,7 +17,6 @@
                   <td>Name</td>
                   <td>Date of Birth</td>
                   <td>Social Medias</td>
-                  <td>Share Percentage</td>
                   <td>CV</td>
                 </tr>
                 <tr>
@@ -28,7 +27,6 @@
                     <i class="bi bi-linkedin me-2"></i>
                     <i class="bi bi-github me-2"></i>
                   </td>
-                  <td>80%</td>
                   <td>
                     <button class="btn btn-sm btn-outline-primary px-2">
                       <i class="bi bi-cloud-download"></i>
@@ -38,6 +36,7 @@
               </table>
             </div>
             <div class="ms-auto">
+              <button type="button" class="btn btn-sm btn-outline-primary mx-2">Edit</button>
               <button type="button" class="btn btn-sm btn-outline-danger mx-2">Remove</button>
             </div>
           </div>

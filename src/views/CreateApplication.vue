@@ -149,25 +149,14 @@
               />
             </div>
             <div v-if="current == 14">
-              <div class="text-nowrap my-2">
-                <input
-                  type="checkbox"
-                  id="terms"
-                  name="terms"
-                  value="terms"
-                  ref="terms"
-                  class="me-2"
-                />
-                <label for="terms" class="text-wrap align-top">
-                  By submitting this form, I/we confirm that the provided information is true and
-                  accurate to the best of my/our knowledge.
-                </label>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <button class="btn btn-success" @click="submit">Submit</button>
-                </div>
-              </div>
+              <ConfirmationForm></ConfirmationForm>
+              <FormNavButtons
+                :prevBtn="false"
+                :saveBtn="true"
+                :nextBtn="true"
+                @save="save"
+                @next="nextStep(13)"
+              />
             </div>
           </div>
         </div>
@@ -193,6 +182,7 @@ import Acknowledgement from './forms/AcknowledgementForm.vue'
 import Competitiveness from './forms/CompetitivenessForm.vue'
 import Investors from './forms/InvestorForm.vue'
 import COI from './forms/COIForm.vue'
+import ConfirmationForm from './forms/ConfirmationForm.vue'
 
 export default {
   components: {
@@ -209,7 +199,8 @@ export default {
     Acknowledgement,
     Competitiveness,
     Investors,
-    COI
+    COI,
+    ConfirmationForm
   },
   mounted() {},
   data() {
@@ -269,7 +260,8 @@ export default {
         'Acknowledgement',
         'Competitiveness',
         'Investors',
-        'COI'
+        'Conflict of Interest',
+        'Confirmation'
       ]
     }
   },

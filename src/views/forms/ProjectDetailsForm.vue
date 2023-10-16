@@ -7,10 +7,61 @@
         type="text"
       />
 
-      <LabelTextareaComponent
+      <LabelSelectComponent
         label="Category and Classification"
         footnote="Please select all the categories that your project."
-        type="text"
+        :options="[
+          'Non-Fungible Token (NFT)',
+          'Decentralized Exchange (DEX)',
+          'DeFi',
+          'Lending Protocols',
+          'Yield Farming',
+          'Stablecoins',
+          'DAOs',
+          'Smart Contracts',
+          'Wallets',
+          'GameFi',
+          'Art Collection',
+          'Interoperability',
+          'Oracles',
+          'Layer 2 Solutions',
+          'Cross-Chain Solutions',
+          'Governance Tokens',
+          'Staking',
+          'SocialFi',
+          'Decentralized Marketplaces',
+          'Liquidity Pools',
+          'Tokenization',
+          'Infrastructure',
+          'Web3 Development Tools',
+          'Web3 Analytics',
+          'Identity',
+          'Metaverses',
+          'Decentralized Storage',
+          'Security Tokens',
+          'On-chain Governance',
+          'Insurance Protocols',
+          'Peer-to-Peer Networks',
+          'Sidechains',
+          'Privacy Coins',
+          'Quantum-Resistant Cryptography',
+          'Investment Advisory',
+          'Carbon-Neutral Blockchain',
+          'Zero-Knowledge',
+          'Credentials',
+          'Hardware',
+          'Account Abstraction',
+          'Security',
+          'Community',
+          'Education',
+          'Supply Chain',
+          'Mining',
+          'E-commerce',
+          'Blockchain-as-a-Service (BaaS)',
+          'Compliance',
+          'Digital Rights Management (DRM)',
+          'Sustainability'
+        ]"
       />
 
       <LabelTextareaComponent
@@ -63,11 +114,13 @@
 <script lang="ts">
 import SectionLayout from '@/layouts/SectionLayout.vue'
 import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
+import LabelSelectComponent from '@/components/LabelSelectComponent.vue'
 
 export default {
   components: {
     SectionLayout,
-    LabelTextareaComponent
+    LabelTextareaComponent,
+    LabelSelectComponent
   }
 }
 </script>

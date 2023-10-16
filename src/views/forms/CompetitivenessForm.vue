@@ -12,12 +12,6 @@
         footnote="Please share the difference in the business logic between your company and the competitors and what is your innovation / advantages over the competitors."
         type="text"
       />
-
-      <LabelTextareaComponent
-        label="Awards, Recognitions, and Reputation"
-        footnote="a. Has your organization received any awards or recognitions from reputable bodies or organizations? If so, can you provide details of such awards and the criteria?"
-        type="text"
-      />
     </SectionLayout>
   </div>
 </template>

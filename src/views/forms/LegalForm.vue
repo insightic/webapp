@@ -3,7 +3,7 @@
     <SectionLayout title="Legal">
       <LabelFileUploadComponent
         label="Regulatory Status"
-        footnote="Provide any third-party or internal legal opinion, memorandum or analysis (if available) on the regulatory status of the token/network, including under U.S. federal, state or foreign securities laws and other financial product-related laws relating to the token."
+        footnote="Provide any third-party or internal legal opinion, memorandum or analysis (if available) on the regulatory status of the token/network."
       />
       <LabelSwitchComponent
         label="Legal Action"

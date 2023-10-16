@@ -7,8 +7,8 @@
         type="text"
       />
 
-      <LabelTextareaComponent
-        label="Project Summary"
+      <LabelInputComponent
+        label="Project One-liner"
         footnote="Please provide a one-sentence introduction to your project."
         type="text"
       />
@@ -20,12 +20,6 @@
       />
 
       <LabelFileUploadComponent label="Pitch Deck" />
-
-      <LabelSelectComponent
-        label="Program Selection"
-        footnote="Select the program to apply."
-        :options="['Sandbox', 'Direct / Full License']"
-      />
 
       <LabelSelectComponent
         label="Project Stage"
@@ -65,7 +59,6 @@
 
 <script lang="ts">
 import SectionLayout from '@/layouts/SectionLayout.vue'
-import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
 import LabelInputComponent from '@/components/LabelInputComponent.vue'
 import LabelFileUploadComponent from '@/components/LabelFileUploadComponent.vue'
 import LabelSelectComponent from '@/components/LabelSelectComponent.vue'
@@ -74,7 +67,6 @@ import LabelSwitchComponent from '@/components/LabelSwitchComponent.vue'
 export default {
   components: {
     SectionLayout,
-    LabelTextareaComponent,
     LabelInputComponent,
     LabelFileUploadComponent,
     LabelSelectComponent,

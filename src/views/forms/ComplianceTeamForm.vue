@@ -2,7 +2,7 @@
   <div style="max-width: 960px">
     <SectionLayout title="Compliance & Team">
       <LabelInputComponent label="Company Name" type="text" />
-      <LabelInputComponent label="Company Address" type="text" />
+      <LabelTextareaComponent label="Company Address" type="text" />
       <PeopleGroupComponent label="Executives" add-button-name="Add Executive" />
       <PeopleGroupComponent label="Core Team Members" add-button-name="Add Core Team Member" />
       <PeopleGroupComponent

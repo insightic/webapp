@@ -1,6 +1,6 @@
 <template>
   <div style="max-width: 960px">
-    <SectionLayout title="COI">
+    <SectionLayout title="Conflict of Interest">
       <LabelRadioComponent
         label="Regulatory and Organizational Affiliations"
         hint="
