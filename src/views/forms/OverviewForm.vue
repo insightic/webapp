@@ -69,7 +69,7 @@ import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
 import LabelInputComponent from '@/components/LabelInputComponent.vue'
 import LabelFileUploadComponent from '@/components/LabelFileUploadComponent.vue'
 import LabelSelectComponent from '@/components/LabelSelectComponent.vue'
-import LabelSwitchComponent from '@/components/LabelSwitchComponent.vue' 
+import LabelSwitchComponent from '@/components/LabelSwitchComponent.vue'
 
 export default {
   components: {

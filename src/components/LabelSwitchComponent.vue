@@ -49,7 +49,7 @@ export default {
   },
   data() {
     return {
-      toggleState: false,
+      toggleState: false
     }
   }
 }

@@ -37,14 +37,12 @@
 <script lang="ts">
 import SectionLayout from '@/layouts/SectionLayout.vue'
 import LabelInputComponent from '@/components/LabelInputComponent.vue'
-import LabelRadioComponent from '@/components/LabelRadioComponent.vue'
 import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
 
 export default {
   components: {
     SectionLayout,
     LabelInputComponent,
-    LabelRadioComponent,
     LabelTextareaComponent
   }
 }
