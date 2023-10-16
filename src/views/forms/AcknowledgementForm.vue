@@ -4,10 +4,10 @@
       <LabelTextareaComponent
         label="Partnerships, Collaborations, and Vendor Relationships"
         footnote="
-            a. Can you list the major partnerships, collaborations, and vendor relationships that your organization has engaged in, including those with Fortune 500 companies or industry leaders? <br/>
-            b. What were the objectives, outcomes, and enhancements to your service offerings or capabilities due to these collaborations and relationships? <br/>
-            c. Do you have any testimonials or endorsements from renowned individuals or reputable entities? If permissible, can you share these testimonials? <br/>
-            d. Have you published any research papers, articles, or works in collaboration with industry experts or reputed institutions? Please provide references or links to such works <br/>
+            a. Can you list the major partnerships, collaborations, and vendor relationships that your organization has engaged in, including those with Fortune 500 companies or industry leaders? `\n
+            b. What were the objectives, outcomes, and enhancements to your service offerings or capabilities due to these collaborations and relationships? \n
+            c. Do you have any testimonials or endorsements from renowned individuals or reputable entities? If permissible, can you share these testimonials? \n
+            d. Have you published any research papers, articles, or works in collaboration with industry experts or reputed institutions? Please provide references or links to such works \n
             "
         type="text"
       />

@@ -1,7 +1,7 @@
 <template>
   <NavFooterLayout>
     <div class="container-fluid p-3 mb-5" style="max-width: 1440px">
-      <h1 class="mb-4"><strong>Create New Application</strong></h1>
+      <h1 class="mb-4"><strong>New Application</strong></h1>
 
       <div class="row">
         <div class="col-2">
@@ -97,6 +97,17 @@
               />
             </div>
 
+            <div v-show="current == 9">
+              <VolumeCommunity></VolumeCommunity>
+              <FormNavButtons
+                :prevBtn="false"
+                :saveBtn="true"
+                :nextBtn="true"
+                @save="save"
+                @next="nextStep(9)"
+              />
+            </div>
+
             <div v-show="current == 10">
               <Acknowledgement></Acknowledgement>
               <FormNavButtons
@@ -177,6 +188,7 @@ import Overview from './forms/OverviewForm.vue'
 import ProjectDetails from './forms/ProjectDetailsForm.vue'
 import TechnicalDetails from './forms/TechnicalDetailsForm.vue'
 import RiskManagement from './forms/RiskManagementForm.vue'
+import VolumeCommunity from './forms/VolumeCommunityForm.vue'
 import Acknowledgement from './forms/AcknowledgementForm.vue'
 import Competitiveness from './forms/CompetitivenessForm.vue'
 import Investors from './forms/InvestorForm.vue'
@@ -193,6 +205,7 @@ export default {
     ProjectDetails,
     TechnicalDetails,
     RiskManagement,
+    VolumeCommunity,
     Acknowledgement,
     Competitiveness,
     Investors,
@@ -249,7 +262,7 @@ export default {
         'Legal',
         'Overview',
         'Project Details',
-        'Digital asset',
+        'Digital Asset',
         'Technical Details',
         'Risk Management',
         'Volume & Community',
