@@ -6,7 +6,7 @@
 
     <div class="card w-100">
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">
+        <li class="list-group-item" v-for="(p, idx) in people" :key="idx">
           <div class="d-flex my-3 flex-row align-items-center">
             <div class="me-2">
               <i class="text-primary bi bi-person" style="font-size: 1.6rem"></i>
@@ -20,12 +20,12 @@
                   <td>CV</td>
                 </tr>
                 <tr>
-                  <td>Gong Yiwei</td>
-                  <td>1994/02/28</td>
+                  <td>{{ p.name }}</td>
+                  <td>{{ p.birthday }}</td>
                   <td class="d-flex">
-                    <i class="bi bi-twitter me-2"></i>
-                    <i class="bi bi-linkedin me-2"></i>
-                    <i class="bi bi-github me-2"></i>
+                    <a v-if="p.github" :href="p.github" target="_blank"><i class="bi bi-github me-2"></i></a>
+                    <a v-if="p.twitter" :href="p.twitter" target="_blank"><i class="bi bi-twitter me-2"></i></a>
+                    <a v-if="p.linkedin" :href="p.linkedin" target="_blank"><i class="bi bi-linkedin me-2"></i></a>
                   </td>
                   <td>
                     <button class="btn btn-sm btn-outline-primary px-2">
@@ -50,10 +50,29 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
+
 const props = defineProps({
   label: { type: String, required: true },
   addButtonName: { type: String, default: 'Add' }
 })
+
+const people = ref([
+  {
+    name: 'Gong Yiwei',
+    birthday: '1994/02/02',
+    github: 'https://github.com/imwithye',
+    twitter: 'https://twitter.com/imwithye',
+    linkedin: 'https://www.linkedin.com/in/imwithye/'
+  },
+  {
+    name: 'Gong Yiwei',
+    birthday: '1994/02/02',
+    github: 'https://github.com/imwithye',
+    twitter: 'https://twitter.com/imwithye',
+    linkedin: 'https://www.linkedin.com/in/imwithye/'
+  }
+])
 </script>
 
 <style scoped>

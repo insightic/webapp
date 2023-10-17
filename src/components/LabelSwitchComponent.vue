@@ -40,11 +40,9 @@ export default {
   },
   emits: ['update:field'],
   methods: {
-    onChange(e: any) {
-      this.$emit('update:field', e.target.value)
-    },
     toggleSwitch() {
       this.toggleState = !this.toggleState
+      this.$emit('update:field', this.toggleState)
     }
   },
   data() {

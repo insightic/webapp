@@ -6,7 +6,7 @@
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
           <textarea
-            class="form-control px-0"
+            class="form-control px-1"
             style="border: 0px; resize: none; overflow: hidden"
             @input="onInput"
             rows="1"

@@ -24,13 +24,6 @@
           <div>
             <div v-if="current == 1">
               <RegistrationAgreement></RegistrationAgreement>
-              <FormNavButtons
-                :prevBtn="false"
-                :saveBtn="true"
-                :nextBtn="true"
-                @save="save"
-                @next="nextStep(1)"
-              />
             </div>
             <div v-if="current == 2">
               <ComplianceTeam></ComplianceTeam>
