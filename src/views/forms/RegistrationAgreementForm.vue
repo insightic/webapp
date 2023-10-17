@@ -9,13 +9,12 @@
       <LabelInputComponent label="Name" type="text" v-model:field="name" />
       <LabelSwitchComponent
         label="Accept the NDA agreement"
-        footnote="Only if the user agrees the agreement, then it can continue."
+        :footnote="getFootnote(completed)"
         width="100"
         height="40"
-        :options="['Yes', 'No']"
-        @update:field="(value) => acceptNDA"
+        @choose="acceptNDA"
       />
-      <button class="btn btn-primary" @click="submit" :disabled="!acceptNDA">Next</button>
+      <button class="btn btn-primary" @click="submit" :disabled="!completed">Next</button>
     </SectionLayout>
   </div>
 </template>
@@ -37,14 +36,32 @@ export default {
     return {
       title: '',
       name: '',
-      acceptNDA: false
+      acceptNDARes: false
+    }
+  },
+  computed: {
+    completed() {
+      return this.title != '' && this.name != '' && this.acceptNDARes
     }
   },
   methods: {
+    getFootnote(completed: boolean | string) {
+      if (completed == false) {
+        return 'Only if the user fill all the form and agrees the agreement, then it can continue.'
+      } else {
+        return ''
+      }
+    },
+    acceptNDA(result: boolean) {
+      console.log(result)
+      this.acceptNDARes = result
+      console.log(this.acceptNDARes)
+    },
     submit() {
       console.log(this.title)
       console.log(this.name)
-      console.log(this.acceptNDA)
+      console.log(this.acceptNDARes)
+      this.$emit('submit', this.completed)
     }
   }
 }

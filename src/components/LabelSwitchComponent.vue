@@ -30,7 +30,6 @@
 export default {
   props: {
     label: { type: String, required: true },
-    options: { type: Array<string>, required: true },
     field: { type: String },
     placeholder: { type: String, default: 'Please select project type' },
     footnote: { type: String },
@@ -38,16 +37,18 @@ export default {
     width: { type: String, default: '100' },
     height: { type: String, default: '100' }
   },
-  emits: ['update:field'],
-  methods: {
-    toggleSwitch() {
-      this.toggleState = !this.toggleState
-      this.$emit('update:field', this.toggleState)
-    }
-  },
   data() {
     return {
       toggleState: false
+    }
+  },
+  emits: ['choose'],
+  methods: {
+    toggleSwitch() {
+      this.toggleState = !this.toggleState
+      this.$emit('choose', this.toggleState)
+      console.log("methods is chufa")
+      console.log(this.toggleState, "原始数据")
     }
   }
 }

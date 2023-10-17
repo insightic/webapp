@@ -23,7 +23,7 @@
         <div class="col-10">
           <div>
             <div v-if="current == 1">
-              <RegistrationAgreement></RegistrationAgreement>
+              <RegistrationAgreement @submit="addMoreItems"></RegistrationAgreement>
             </div>
             <div v-if="current == 2">
               <ComplianceTeam></ComplianceTeam>
@@ -240,22 +240,7 @@ export default {
       assets: '',
       numFounders: '1',
       numTeamMembers: '1',
-      forms: [
-        'Registration Agreement',
-        'Compliance & Team',
-        'Legal',
-        'Overview',
-        'Project Details',
-        'Digital Asset',
-        'Technical Details',
-        'Risk Management',
-        'Volume & Community',
-        'Acknowledgement',
-        'Competitiveness',
-        'Investors',
-        'Conflict of Interest',
-        'Confirmation'
-      ]
+      forms: ['Registration Agreement']
     }
   },
   computed: {
@@ -320,6 +305,29 @@ export default {
     }
   },
   methods: {
+    /**
+     * When user complete the first form(RegistrationAgreementForm), we add other items to the list.
+     */
+    addMoreItems() {
+      const newForm = [
+        'RegistrationAgreement',
+        'Compliance & Team',
+        'Legal',
+        'Overview',
+        'Project Details',
+        'Digital Asset',
+        'Technical Details',
+        'Risk Management',
+        'Volume & Community',
+        'Acknowledgement',
+        'Competitiveness',
+        'Investors',
+        'Conflict of Interest',
+        'Confirmation'
+      ]
+      this.current = 2
+      this.forms = newForm
+    },
     formStepStyle(index: number) {
       if (this.current == index + 1) return 'text-primary'
       return 'text-secondary'
