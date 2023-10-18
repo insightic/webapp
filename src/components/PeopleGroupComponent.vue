@@ -33,8 +33,9 @@
                       v-if="p.linkedin"
                       :href="`https://www.linkedin.com/in/${p.linkedin}`"
                       target="_blank"
-                      ><i class="bi bi-linkedin me-2"></i
-                    ></a>
+                    >
+                      <i class="bi bi-linkedin me-2"></i>
+                    </a>
                   </td>
                   <td>
                     <button class="btn btn-sm btn-outline-primary px-2">
@@ -119,9 +120,9 @@ export default {
       this.showAskRemoveModal = true
     },
     showEditModal(idx: number) {
-      this.activeIdx = this.people.length
+      this.activeIdx = idx
       this.peopleInfo = JSON.parse(JSON.stringify(this.people[idx]))
-      this.peopleInfoModalTitle = `Edit ${this.peopleInfo?.name}}`
+      this.peopleInfoModalTitle = `Edit ${this.peopleInfo?.name}`
       this.peopleInfoModalConfirmText = 'Save'
       this.showPeopleInfoModal = true
     },
