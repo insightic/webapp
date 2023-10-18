@@ -1,6 +1,6 @@
 <template>
   <div style="max-width: 960px">
-    <SectionLayout title="Conflict of Interest">
+    <SectionLayout title="Confirmation">
       <LabelTextareaComponent
         label="Confirmation"
         footnote="

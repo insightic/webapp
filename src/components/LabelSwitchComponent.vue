@@ -47,8 +47,6 @@ export default {
     toggleSwitch() {
       this.toggleState = !this.toggleState
       this.$emit('choose', this.toggleState)
-      console.log("methods is chufa")
-      console.log(this.toggleState, "原始数据")
     }
   }
 }
