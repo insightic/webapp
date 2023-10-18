@@ -34,14 +34,17 @@ export async function createRule(rule: Rule) {
   await httpclient.post(`/rules`, rule)
 }
 
-export async function getPreSignedPutUrl() {
-  const data = await httpclient.post(`/preSignedPut`)
+export async function getPreSignedPutUrl(): Promise<{ ObjectID: string; URL: string } | null> {
+  const data = await httpclient.post<{ ObjectID: string; URL: string }>(`/preSignedPut`)
   return data?.payload || null
 }
 
-export async function getPreSignedGetUrl(id: string, filename: string) {
+export async function getPreSignedGetUrl(
+  id: string,
+  filename: string
+): Promise<{ URL: string } | null> {
   const body = { ObjectID: id, FileName: filename }
-  const data = await httpclient.post(`/preSignedGet`, body)
+  const data = await httpclient.post<{ URL: string }>(`/preSignedGet`, body)
   return data?.payload || null
 }
 

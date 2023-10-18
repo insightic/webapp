@@ -6,16 +6,16 @@
 
     <div class="card w-100">
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">
+        <li class="list-group-item" v-if="filename && objectID && url">
           <div class="d-flex my-3 flex-row align-items-center">
             <div class="me-2">
               <i class="text-primary bi bi-file-earmark" style="font-size: 1.6rem"></i>
             </div>
             <div class="flex-grow-1">
-              {{ props.filename }}
+              {{ filename }}
             </div>
             <div class="ms-auto">
-              <button type="button" class="btn btn-sm btn-outline-primary mx-2">
+              <button type="button" class="btn btn-sm btn-outline-primary mx-2" @click="download">
                 <i class="bi bi-cloud-download"></i>
               </button>
               <button type="button" class="btn btn-sm btn-outline-danger mx-2">Remove</button>
@@ -23,8 +23,10 @@
           </div>
         </li>
         <li class="list-group-item d-flex">
-          <button class="btn btn-sm btn-primary me-2">Upload File</button>
-          <button class="btn btn-sm btn-outline-primary me-2">Upload by Link</button>
+          <label class="btn btn-primary">
+            <input type="file" style="display: none" @change="upload" ref="fileInput" />
+            <i class="bi bi-cloud-upload me-1"></i> Upload File
+          </label>
         </li>
       </ul>
     </div>
@@ -34,11 +36,36 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
+import { getPreSignedGetUrl, getPreSignedPutUrl, uploadFile } from '@/api'
+
+const fileInput = ref<HTMLInputElement | null>(null)
+const filename = ref('')
+const objectID = ref('')
+const url = ref('')
+
 const props = defineProps({
   label: { type: String, required: true },
-  filename: { type: String, default: 'Default File.pdf' },
   footnote: { type: String }
 })
+
+const upload = async function () {
+  const file = fileInput.value?.files?.[0]
+  if (!file) return
+
+  const preSignedPut = await getPreSignedPutUrl()
+  if (!preSignedPut?.ObjectID || !preSignedPut?.URL) return
+  filename.value = file.name
+  objectID.value = preSignedPut.ObjectID
+  url.value = preSignedPut.URL
+  await uploadFile(preSignedPut.URL, file)
+}
+
+const download = async function () {
+  const preSignedGet = await getPreSignedGetUrl(objectID.value, filename.value)
+  if (!preSignedGet?.URL) return
+  window.location.href = preSignedGet?.URL
+}
 </script>
 
 <style scoped>

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="modal fade"
+    class="modal modal-lg fade"
     :class="{ show: visible, hidden: !visible }"
     tabindex="-1"
     style="display: block; background-color: rgba(0, 0, 0, 0.5)"
@@ -63,6 +63,8 @@
             prefix="https://www.linkedin.com/in/"
             v-model:field="linkedin"
           />
+
+          <LabelFileUploadComponent label="CV" />
         </div>
         <div class="modal-footer">
           <button
@@ -87,6 +89,7 @@ import LabelInputComponent from '@/components/LabelInputComponent.vue'
 import LabelInputPrefixComponent from '@/components/LabelInputPrefixComponent.vue'
 import LabelSelectComponent from './LabelSelectComponent.vue'
 import { type PeopleInfo } from '@/api'
+import LabelFileUploadComponent from './LabelFileUploadComponent.vue'
 
 export default {
   props: {
@@ -98,7 +101,8 @@ export default {
   components: {
     LabelInputComponent,
     LabelInputPrefixComponent,
-    LabelSelectComponent
+    LabelSelectComponent,
+    LabelFileUploadComponent
   },
   watch: {
     visible(newValue) {
