@@ -308,3 +308,11 @@ export async function getAssessmentResults(
   )
   return resp?.payload || []
 }
+
+export interface PeopleInfo {
+  name: string,
+  birthday: string,
+  githubURL: string,
+  twitterURL: string,
+  linkedinURL: string
+}
