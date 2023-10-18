@@ -310,9 +310,9 @@ export async function getAssessmentResults(
 }
 
 export interface PeopleInfo {
-  name: string,
-  birthday: string,
-  githubURL: string,
-  twitterURL: string,
-  linkedinURL: string
+  name: string
+  birthday: string
+  github: string
+  twitter: string
+  linkedin: string
 }

@@ -1,8 +1,8 @@
 <template>
   <div class="mb-3">
-    <label for="basic-url" class="form-label">Your {{ label }} URL</label>
+    <label for="basic-url" class="form-label">{{ label }}</label>
     <div class="input-group mb-3">
-      <span class="input-group-text" id="basic-addon3">{{ link }}</span>
+      <span class="input-group-text" id="basic-addon3">{{ prefix }}</span>
       <input :type="type" class="form-control" :value="field" @change="onChange" />
     </div>
   </div>
@@ -14,7 +14,7 @@ export default {
     label: { type: String, required: true },
     type: { type: String, required: true },
     field: { type: String },
-    link: { type: String, required: true }
+    prefix: { type: String, required: true }
   },
   emits: ['update:field'],
   methods: {

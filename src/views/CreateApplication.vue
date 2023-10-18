@@ -118,6 +118,7 @@ export default {
       if (this.current == index + 1) return 'text-primary'
       return 'text-secondary'
     },
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     nextStep(curr: number) {
       window.alert('Please fill in all required fields')
     }

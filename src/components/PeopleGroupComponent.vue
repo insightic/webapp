@@ -14,22 +14,25 @@
             <div class="flex-grow-1">
               <table style="width: 80%; text-align: left">
                 <tr class="text-secondary small">
-                  <td>Name</td>
-                  <td>Date of Birth</td>
-                  <td>Social Medias</td>
-                  <td>CV</td>
+                  <td width="20%">Name</td>
+                  <td width="20%">Date of Birth</td>
+                  <td width="20%">Social Medias</td>
+                  <td width="20%">CV</td>
                 </tr>
                 <tr>
                   <td>{{ p.name }}</td>
                   <td>{{ p.birthday }}</td>
                   <td class="d-flex">
-                    <a v-if="p.githubURL" :href="p.githubURL" target="_blank"
+                    <a v-if="p.github" :href="`https://github.com/${p.github}`" target="_blank"
                       ><i class="bi bi-github me-2"></i
                     ></a>
-                    <a v-if="p.twitterURL" :href="p.twitterURL" target="_blank"
+                    <a v-if="p.twitter" :href="`https://twitter.com/${p.twitter}`" target="_blank"
                       ><i class="bi bi-twitter me-2"></i
                     ></a>
-                    <a v-if="p.linkedinURL" :href="p.linkedinURL" target="_blank"
+                    <a
+                      v-if="p.linkedin"
+                      :href="`https://www.linkedin.com/in/${p.linkedin}`"
+                      target="_blank"
                       ><i class="bi bi-linkedin me-2"></i
                     ></a>
                   </td>
@@ -42,13 +45,17 @@
               </table>
             </div>
             <div class="ms-auto">
-              <button type="button" class="btn btn-sm btn-outline-primary mx-2" @click="edit(idx)">
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-primary mx-2"
+                @click="showEditModal(idx)"
+              >
                 Edit
               </button>
               <button
                 type="button"
                 class="btn btn-sm btn-outline-danger mx-2"
-                @click=";(showAskRemoveModal = true), (index = idx)"
+                @click="showRemoveModal(idx)"
               >
                 Remove
               </button>
@@ -56,7 +63,7 @@
           </div>
         </li>
         <li class="list-group-item d-flex">
-          <button class="btn btn-sm btn-primary" @click="add()">
+          <button class="btn btn-sm btn-primary" @click="showAddModal()">
             {{ addButtonName }}
           </button>
         </li>
@@ -66,14 +73,15 @@
   <AskRemoveModal
     :visible="showAskRemoveModal"
     @close="showAskRemoveModal = false"
-    @sure="remove"
+    @ok="onConfirmRemove"
   />
   <PeopleInfoModal
     :visible="showPeopleInfoModal"
-    :operationType="operationType"
+    :title="peopleInfoModalTitle"
+    :confirmText="peopleInfoModalConfirmText"
     :peopleInfo="peopleInfo"
     @close="showPeopleInfoModal = false"
-    @sure="submit"
+    @save="onSavePeopleInfoModal"
   />
 </template>
 
@@ -93,57 +101,48 @@ export default {
   },
   data() {
     return {
-      people: [
-        {
-          name: 'Gong Yiwei',
-          birthday: '1994/02/02',
-          githubURL: 'https://github.com/imwithye',
-          twitterURL: 'https://twitter.com/imwithye',
-          linkedinURL: 'https://www.linkedin.com/in/imwithye/'
-        },
-        {
-          name: 'Lu Shengliang',
-          birthday: '1970/02/02',
-          githubURL: 'https://github.com/imwithye',
-          twitterURL: 'https://twitter.com/imwithye',
-          linkedinURL: 'https://www.linkedin.com/in/imwithye/'
-        },
-        {
-          name: 'Wang Ruilin',
-          birthday: '2000/02/02',
-          githubURL: 'https://github.com/imwithye',
-          twitterURL: 'https://twitter.com/imwithye',
-          linkedinURL: 'https://www.linkedin.com/in/imwithye/'
-        }
-      ],
+      people: Array<PeopleInfo>(),
+
       showAskRemoveModal: false,
+
       showPeopleInfoModal: false,
-      index: 0,
-      operationType: 'Add',
+      peopleInfoModalTitle: '',
+      peopleInfoModalConfirmText: '',
+
+      activeIdx: 0,
       peopleInfo: {} as PeopleInfo
     }
   },
   methods: {
-    remove() {
-      this.people.splice(this.index, 1)
+    showRemoveModal(idx: number) {
+      this.activeIdx = idx
+      this.showAskRemoveModal = true
+    },
+    showEditModal(idx: number) {
+      this.activeIdx = this.people.length
+      this.peopleInfo = JSON.parse(JSON.stringify(this.people[idx]))
+      this.peopleInfoModalTitle = `Edit ${this.peopleInfo?.name}}`
+      this.peopleInfoModalConfirmText = 'Save'
+      this.showPeopleInfoModal = true
+    },
+    showAddModal() {
+      this.activeIdx = this.people.length
+      this.peopleInfo = {} as PeopleInfo
+      this.peopleInfoModalTitle = this.addButtonName
+      this.peopleInfoModalConfirmText = this.addButtonName
+      this.showPeopleInfoModal = true
+    },
+    onConfirmRemove() {
+      this.people.slice(this.activeIdx, 1)
       this.showAskRemoveModal = false
     },
-    edit(idx: number) {
-      ;(this.showPeopleInfoModal = true), (this.operationType = 'Edit'), (this.index = idx)
-      this.peopleInfo = this.people[this.index]
-    },
-    add() {
-      ;(this.showPeopleInfoModal = true), (this.operationType = 'Add')
-      this.peopleInfo = {} as PeopleInfo
-    },
-    submit(peopleInfo: PeopleInfo, index: number) {
-      if (this.operationType == 'Add') {
-        this.showPeopleInfoModal = false
+    onSavePeopleInfoModal(peopleInfo: PeopleInfo) {
+      if (this.activeIdx == this.people.length) {
         this.people.push(peopleInfo)
       } else {
-        this.showPeopleInfoModal = false
-        // this.people[index]
+        this.people[this.activeIdx] = peopleInfo
       }
+      this.showPeopleInfoModal = false
     }
   }
 }

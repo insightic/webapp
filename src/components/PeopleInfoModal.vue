@@ -1,6 +1,6 @@
 <template>
   <div
-    class="modal modal-lg fade"
+    class="modal fade"
     :class="{ show: visible, hidden: !visible }"
     tabindex="-1"
     style="display: block; background-color: rgba(0, 0, 0, 0.5)"
@@ -8,7 +8,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">{{ operationType }} People</h5>
+          <h5 class="modal-title">{{ title }}</h5>
           <button
             type="button"
             class="btn-close"
@@ -18,32 +18,50 @@
           ></button>
         </div>
         <div class="modal-body">
-          <!-- name -->
-          <LabelInputComponent label="Name" type="text" v-model:field="peopleInfo.name" />
-          <!-- birthday -->
-          <LabelInputComponent
-            label="Birthday (The format should be yyyy/mm/dd)"
-            type="text"
-            v-model:field="peopleInfo.birthday"
-          />
+          <LabelInputComponent label="Name" type="text" v-model:field="name" />
+
+          <div>Birthday</div>
+          <div class="row">
+            <div class="col-4">
+              <LabelSelectComponent
+                label="Year"
+                :options="[...Array(70).keys()].map((n) => n + 1950)"
+                v-model:field="year"
+              />
+            </div>
+            <div class="col-4">
+              <LabelSelectComponent
+                label="Month"
+                :options="[...Array(12).keys()].map((n) => n + 1)"
+                v-model:field="month"
+              />
+            </div>
+            <div class="col-4">
+              <LabelSelectComponent
+                label="Date"
+                :options="[...Array(31).keys()].map((n) => n + 1)"
+                v-model:field="date"
+              />
+            </div>
+          </div>
           <!-- link of the social media -->
           <LabelInputPrefixComponent
             label="Github"
             type="text"
-            v-model:field="peopleInfo.githubURL"
-            :link="`https://github.com/`"
+            prefix="https://github.com/"
+            v-model:field="github"
           />
           <LabelInputPrefixComponent
             label="Twitter"
             type="text"
-            v-model:field="peopleInfo.twitterURL"
-            :link="`https://twitter.com/`"
+            prefix="https://twitter.com/"
+            v-model:field="twitter"
           />
           <LabelInputPrefixComponent
             label="Linkedin"
             type="text"
-            v-model:field="peopleInfo.linkedinURL"
-            :link="`https://www.linkedin.com/in/`"
+            prefix="https://www.linkedin.com/in/"
+            v-model:field="linkedin"
           />
         </div>
         <div class="modal-footer">
@@ -55,8 +73,8 @@
           >
             Close
           </button>
-          <button type="button" class="btn btn-primary" @click="sendPeopleInfo">
-            {{ operationType }}
+          <button type="button" class="btn btn-primary" @click="save">
+            {{ confirmText }}
           </button>
         </div>
       </div>
@@ -69,10 +87,12 @@ import LabelInputComponent from '@/components/LabelInputComponent.vue'
 import LabelInputPrefixComponent from '@/components/LabelInputPrefixComponent.vue'
 import LabelSelectComponent from './LabelSelectComponent.vue'
 import { type PeopleInfo } from '@/api'
+
 export default {
   props: {
     visible: { type: Boolean, required: true },
-    operationType: { type: String, default: 'Add' },
+    title: { type: String, default: 'Add' },
+    confirmText: { type: String, default: 'Save' },
     peopleInfo: { type: Object, default: {} as PeopleInfo }
   },
   components: {
@@ -80,27 +100,41 @@ export default {
     LabelInputPrefixComponent,
     LabelSelectComponent
   },
+  watch: {
+    visible(newValue) {
+      if (!newValue) return
+
+      // reset when modal becomes visible
+      this.name = this.peopleInfo.name
+      const birthday = this.peopleInfo?.birthday?.split('/') || '1990/1/1'.split('/')
+      this.year = parseInt(birthday[0])
+      this.month = parseInt(birthday[1])
+      this.date = parseInt(birthday[2])
+      this.github = this.peopleInfo.github
+      this.twitter = this.peopleInfo.twitter
+      this.linkedin = this.peopleInfo.linkedin
+    }
+  },
   data() {
     return {
-      peopleInfo: {
-        name: '',
-        birthday: '',
-        githubURL: '',
-        twitterURL: '',
-        linkedinURL: ''
-      }
+      name: '',
+      year: 1990,
+      month: 1,
+      date: 1,
+      github: '',
+      twitter: '',
+      linkedin: ''
     }
   },
   methods: {
-    sendPeopleInfo() {
-      this.$emit('sure', {
-        name: this.peopleInfo.name,
-        birthday: this.peopleInfo.birthday,
-        githubURL: 'https://github.com/' + this.peopleInfo.githubURL,
-        twitterURL: 'https://twitter.com/' + this.peopleInfo.twitterURL,
-        linkedinURL: 'https://linkedin.com/' + this.peopleInfo.linkedinURL
+    save() {
+      this.$emit('save', {
+        name: this.name,
+        birthday: `${this.year}/${this.month}/${this.date}`,
+        github: this.github,
+        twitter: this.twitter,
+        linkedin: this.linkedin
       })
-      this.peopleInfo = {} as PeopleInfo
     }
   }
 }
