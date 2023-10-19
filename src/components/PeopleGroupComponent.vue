@@ -146,7 +146,7 @@ export default {
       this.showPeopleInfoModal = true
     },
     onConfirmRemove() {
-      this.people.slice(this.activeIdx, 1)
+      this.people.splice(this.activeIdx, 1)
       this.showAskRemoveModal = false
     },
     onSavePeopleInfoModal(peopleInfo: PeopleInfo) {
