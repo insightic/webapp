@@ -1,4 +1,6 @@
 import httpclient from './httpclient'
+import axios from 'axios'
+import { type AxiosProgressEvent } from 'axios'
 
 export interface RuleParamDescription {
   Name: string
@@ -48,12 +50,16 @@ export async function getPreSignedGetUrl(
   return data?.payload || null
 }
 
-export async function uploadFile(url: string, file: File) {
-  const resp = await fetch(url, {
-    method: 'PUT',
-    body: file
+export async function uploadFile(
+  url: string,
+  file: File,
+  onUploadProgress?: (evt: AxiosProgressEvent) => void
+) {
+  return await axios.put(url, file, {
+    onUploadProgress: (evt) => {
+      if (onUploadProgress) onUploadProgress(evt)
+    }
   })
-  return resp
 }
 
 export interface ProjectContent {

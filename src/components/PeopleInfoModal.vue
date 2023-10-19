@@ -18,7 +18,7 @@
           ></button>
         </div>
         <div class="modal-body">
-          <LabelInputComponent label="Name" type="text" v-model:field="name" />
+          <LabelInputComponent label="Name" v-model:field="name" :required="true" />
 
           <div>Birthday</div>
           <div class="row">
@@ -44,27 +44,37 @@
               />
             </div>
           </div>
-          <!-- link of the social media -->
-          <LabelInputPrefixComponent
-            label="Github"
-            type="text"
-            prefix="https://github.com/"
-            v-model:field="github"
-          />
-          <LabelInputPrefixComponent
-            label="Twitter"
-            type="text"
-            prefix="https://twitter.com/"
-            v-model:field="twitter"
-          />
-          <LabelInputPrefixComponent
-            label="Linkedin"
-            type="text"
-            prefix="https://www.linkedin.com/in/"
-            v-model:field="linkedin"
+
+          <LabelFileUploadComponent
+            label="CV"
+            description="Please upload CV in PDF or DOCX format."
+            accept=".pdf,.docx"
+            :required="true"
           />
 
-          <LabelFileUploadComponent label="CV" />
+          <div class="row">
+            <div class="col-6">
+              <LabelInputComponent label="Address" prefix="0x" v-model:field="twitter" />
+            </div>
+
+            <div class="col-6">
+              <LabelInputComponent label="Twitter" prefix="twitter.com/" v-model:field="twitter" />
+            </div>
+
+            <div class="col-6">
+              <LabelInputComponent label="Github" prefix="github.com/" v-model:field="github" />
+            </div>
+
+            <div class="col-6">
+              <LabelInputComponent
+                label="Linkedin"
+                prefix="linkedin.com/in/"
+                v-model:field="linkedin"
+              />
+            </div>
+          </div>
+
+          <!-- link of the social media -->
         </div>
         <div class="modal-footer">
           <button
@@ -86,7 +96,6 @@
 
 <script lang="ts">
 import LabelInputComponent from '@/components/LabelInputComponent.vue'
-import LabelInputPrefixComponent from '@/components/LabelInputPrefixComponent.vue'
 import LabelSelectComponent from './LabelSelectComponent.vue'
 import { type PeopleInfo } from '@/api'
 import LabelFileUploadComponent from './LabelFileUploadComponent.vue'
@@ -100,7 +109,6 @@ export default {
   },
   components: {
     LabelInputComponent,
-    LabelInputPrefixComponent,
     LabelSelectComponent,
     LabelFileUploadComponent
   },
