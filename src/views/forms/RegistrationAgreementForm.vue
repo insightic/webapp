@@ -2,7 +2,7 @@
   <div style="max-width: 960px">
     <SectionLayout title="Registration Agreement">
       <PDFComponent
-        src="https://github.com/insightic/webapp/blob/dev/src/assets/insightic.pdf"
+        src="../../../insightic.pdf"
         style="height: 480px"
       />
       <LabelInputComponent label="Title" type="text" v-model:field="title" />

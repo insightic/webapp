@@ -470,7 +470,7 @@ export default {
       const preSignedUrl: any = await getPreSignedPutUrl()
       if (preSignedUrl) {
         const fileResp = await uploadFile(preSignedUrl.URL, this.whitepaperFile as any)
-        if (fileResp.ok) {
+        if (fileResp) {
           this.whitepaperFileLink =
             'https://staging-webapp-private-assets-insightic.s3.ap-southeast-1.amazonaws.com/' +
             this.whitepaperFile.name
@@ -480,7 +480,7 @@ export default {
         const preSignedUrl: any = await getPreSignedPutUrl()
         if (preSignedUrl) {
           const fileResp = await uploadFile(preSignedUrl.URL, this.founders[i].cvFile as any)
-          if (fileResp.ok) {
+          if (fileResp) {
             this.founders[i].cv =
               'https://staging-webapp-private-assets-insightic.s3.ap-southeast-1.amazonaws.com/' +
               this.founders[i].cvFile.name

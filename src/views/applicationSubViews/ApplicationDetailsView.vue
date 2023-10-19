@@ -727,7 +727,7 @@ export default {
         const preSignedPutUrl: any = await getPreSignedPutUrl()
         if (preSignedPutUrl) {
           const fileResp = await uploadFile(preSignedPutUrl.URL, this.whitepaperFile as any)
-          if (fileResp.ok) {
+          if (fileResp) {
             this.whitepaperFileId = preSignedPutUrl.ObjectID
             this.whitepaperUploadLink = preSignedPutUrl.URL
           }
@@ -738,7 +738,7 @@ export default {
           const preSignedPutUrlCV: any = await getPreSignedPutUrl()
           if (preSignedPutUrlCV) {
             const fileResp = await uploadFile(preSignedPutUrlCV.URL, this.founders[i].cvFile as any)
-            if (fileResp.ok) {
+            if (fileResp) {
               this.founders[i].CV = preSignedPutUrlCV.URL
               this.founders[i].cvUploadLink = preSignedPutUrlCV.URL
             }
@@ -749,7 +749,7 @@ export default {
         const preSignedPutUrlCode: any = await getPreSignedPutUrl()
         if (preSignedPutUrlCode) {
           const fileResp = await uploadFile(preSignedPutUrlCode.URL, this.codeFiles as any)
-          if (fileResp.ok) {
+          if (fileResp) {
             this.codeFilesId = preSignedPutUrlCode.ObjectID
             this.codeFilesUploadLink = preSignedPutUrlCode.URL
           }
