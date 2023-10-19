@@ -50,11 +50,12 @@
             description="Please upload CV in PDF or DOCX format."
             accept=".pdf,.docx"
             :required="true"
+            v-model:field="cv"
           />
 
           <div class="row">
             <div class="col-6">
-              <LabelInputComponent label="Address" prefix="0x" v-model:field="twitter" />
+              <LabelInputComponent label="Address" prefix="0x" v-model:field="address" />
             </div>
 
             <div class="col-6">
@@ -97,7 +98,7 @@
 <script lang="ts">
 import LabelInputComponent from '@/components/LabelInputComponent.vue'
 import LabelSelectComponent from './LabelSelectComponent.vue'
-import { type PeopleInfo } from '@/api'
+import { type FileObject, type PeopleInfo } from '@/api'
 import LabelFileUploadComponent from './LabelFileUploadComponent.vue'
 
 export default {
@@ -122,6 +123,9 @@ export default {
       this.year = parseInt(birthday[0])
       this.month = parseInt(birthday[1])
       this.date = parseInt(birthday[2])
+      console.log(this.peopleInfo.cv)
+      this.cv = this.peopleInfo.cv
+      this.address = this.peopleInfo.address
       this.github = this.peopleInfo.github
       this.twitter = this.peopleInfo.twitter
       this.linkedin = this.peopleInfo.linkedin
@@ -133,8 +137,10 @@ export default {
       year: 1990,
       month: 1,
       date: 1,
-      github: '',
+      cv: null as FileObject | null,
+      address: '',
       twitter: '',
+      github: '',
       linkedin: ''
     }
   },
@@ -143,8 +149,10 @@ export default {
       this.$emit('save', {
         name: this.name,
         birthday: `${this.year}/${this.month}/${this.date}`,
-        github: this.github,
+        cv: this.cv,
+        address: this.address,
         twitter: this.twitter,
+        github: this.github,
         linkedin: this.linkedin
       })
     }

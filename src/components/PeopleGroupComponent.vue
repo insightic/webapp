@@ -23,12 +23,19 @@
                   <td>{{ p.name }}</td>
                   <td>{{ p.birthday }}</td>
                   <td class="d-flex">
-                    <a v-if="p.github" :href="`https://github.com/${p.github}`" target="_blank"
-                      ><i class="bi bi-github me-2"></i
-                    ></a>
-                    <a v-if="p.twitter" :href="`https://twitter.com/${p.twitter}`" target="_blank"
-                      ><i class="bi bi-twitter me-2"></i
-                    ></a>
+                    <a
+                      v-if="p.address"
+                      :href="`https://etherscan.io/address/0x${p.address}`"
+                      target="_blank"
+                    >
+                      <i class="bi bi-wallet-fill me-2"></i>
+                    </a>
+                    <a v-if="p.github" :href="`https://github.com/${p.github}`" target="_blank">
+                      <i class="bi bi-github me-2"></i>
+                    </a>
+                    <a v-if="p.twitter" :href="`https://twitter.com/${p.twitter}`" target="_blank">
+                      <i class="bi bi-twitter me-2"></i>
+                    </a>
                     <a
                       v-if="p.linkedin"
                       :href="`https://www.linkedin.com/in/${p.linkedin}`"
@@ -64,7 +71,7 @@
           </div>
         </li>
         <li class="list-group-item d-flex">
-          <button class="btn btn-sm btn-primary" @click="showAddModal()">
+          <button class="btn btn btn-primary" @click="showAddModal()">
             {{ addButtonName }}
           </button>
         </li>
