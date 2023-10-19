@@ -341,10 +341,6 @@ export interface PeopleInfo {
   twitter: string
   github: string
   linkedin: string
-<<<<<<< HEAD
-}
-=======
-
   score: string
 }
 
@@ -352,4 +348,3 @@ export interface filesInfo {
   name: string
   objectID: string
 }
->>>>>>> d162887 (add score)
