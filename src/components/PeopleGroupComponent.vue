@@ -74,6 +74,10 @@
               </button>
             </div>
           </div>
+
+          <div class="small" v-if="p.score">
+            Risk Score: <span>{{ p.score }}</span>
+          </div>
         </li>
         <li class="list-group-item d-flex">
           <button class="btn btn btn-primary" @click="showAddModal()">

@@ -272,6 +272,13 @@ export async function createProjectJob(projectID: number | string): Promise<Job 
   return resp?.payload || null
 }
 
+export async function getZanScore(address: string): Promise<number | undefined> {
+  const resp = await axios.post(`https://staging-api.insightic.io/zan/score`, {
+    objectId: `0x${address}`
+  })
+  return resp?.data?.data?.score?.riskScore
+}
+
 export interface JobRunResult {
   ID: number
   CreatedAt: string
@@ -334,4 +341,15 @@ export interface PeopleInfo {
   twitter: string
   github: string
   linkedin: string
+<<<<<<< HEAD
 }
+=======
+
+  score: string
+}
+
+export interface filesInfo {
+  name: string
+  objectID: string
+}
+>>>>>>> d162887 (add score)

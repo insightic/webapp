@@ -98,7 +98,7 @@
 <script lang="ts">
 import LabelInputComponent from '@/components/LabelInputComponent.vue'
 import LabelSelectComponent from './LabelSelectComponent.vue'
-import { type FileObject, type PeopleInfo } from '@/api'
+import { getZanScore, type FileObject, type PeopleInfo } from '@/api'
 import LabelFileUploadComponent from './LabelFileUploadComponent.vue'
 
 export default {
@@ -128,6 +128,7 @@ export default {
       this.github = this.peopleInfo.github
       this.twitter = this.peopleInfo.twitter
       this.linkedin = this.peopleInfo.linkedin
+      this.score = this.peopleInfo.score
     }
   },
   data() {
@@ -140,11 +141,13 @@ export default {
       address: '',
       twitter: '',
       github: '',
-      linkedin: ''
+      linkedin: '',
+      score: ''
     }
   },
   methods: {
-    save() {
+    async save() {
+      const score = await getZanScore(this.address)
       this.$emit('save', {
         name: this.name,
         birthday: `${this.year}/${this.month}/${this.date}`,
@@ -152,7 +155,8 @@ export default {
         address: this.address,
         twitter: this.twitter,
         github: this.github,
-        linkedin: this.linkedin
+        linkedin: this.linkedin,
+        score: score
       })
     }
   }
