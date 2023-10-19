@@ -45,9 +45,14 @@
                     </a>
                   </td>
                   <td>
-                    <button class="btn btn-sm btn-outline-primary px-2">
+                    <button
+                      class="btn btn-sm btn-outline-primary px-2"
+                      v-if="p.cv"
+                      @click="downloadFileObject(p.cv)"
+                    >
                       <i class="bi bi-cloud-download"></i>
                     </button>
+                    <div v-else>Not Available</div>
                   </td>
                 </tr>
               </table>
@@ -96,7 +101,7 @@
 <script lang="ts">
 import AskRemoveModal from './AskRemoveModal.vue'
 import PeopleInfoModal from './PeopleInfoModal.vue'
-import { type PeopleInfo } from '@/api'
+import { getPreSignedGetUrl, type FileObject, type PeopleInfo } from '@/api'
 
 export default {
   components: {
@@ -151,6 +156,14 @@ export default {
         this.people[this.activeIdx] = peopleInfo
       }
       this.showPeopleInfoModal = false
+    },
+    async downloadFileObject(f: FileObject) {
+      const objectId = f.ObjectID
+      const filename = f.Filename
+      if (!objectId || !filename) return
+      const preSignedGet = await getPreSignedGetUrl(objectId, filename)
+      if (!preSignedGet?.URL) return
+      window.open(preSignedGet?.URL)
     }
   }
 }

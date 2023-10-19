@@ -123,7 +123,6 @@ export default {
       this.year = parseInt(birthday[0])
       this.month = parseInt(birthday[1])
       this.date = parseInt(birthday[2])
-      console.log(this.peopleInfo.cv)
       this.cv = this.peopleInfo.cv
       this.address = this.peopleInfo.address
       this.github = this.peopleInfo.github
