@@ -2,6 +2,12 @@ import httpclient from './httpclient'
 import axios from 'axios'
 import { type AxiosProgressEvent } from 'axios'
 
+export interface FileObject {
+  Filename: string
+  ObjectID: string
+  URL: string
+}
+
 export interface RuleParamDescription {
   Name: string
   Type: string
@@ -53,9 +59,11 @@ export async function getPreSignedGetUrl(
 export async function uploadFile(
   url: string,
   file: File,
+  abortController?: AbortController,
   onUploadProgress?: (evt: AxiosProgressEvent) => void
 ) {
   return await axios.put(url, file, {
+    signal: abortController?.signal,
     onUploadProgress: (evt) => {
       if (onUploadProgress) onUploadProgress(evt)
     }

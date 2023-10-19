@@ -10,13 +10,13 @@
 
     <div class="card w-100">
       <ul class="list-group list-group-flush">
-        <li class="list-group-item" v-if="filename && objectID && url">
+        <li class="list-group-item" v-if="fileObject">
           <div class="d-flex my-3 flex-row align-items-center">
             <div class="me-2">
               <i class="text-primary bi bi-file-earmark" style="font-size: 1.6rem"></i>
             </div>
             <div class="flex-grow-1">
-              {{ filename }}
+              {{ fileObject.Filename }}
             </div>
             <div class="ms-auto d-flex align-items-center">
               <div class="progress me-2" style="width: 128px" v-if="uploading">
@@ -27,7 +27,12 @@
                 ></div>
               </div>
 
-              <button type="button" class="btn btn-sm btn-outline-danger mx-2" v-if="uploading">
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-danger mx-2"
+                v-if="uploading"
+                @click="cancelAbort.abort()"
+              >
                 Cancel
               </button>
 
@@ -39,14 +44,19 @@
               >
                 <i class="bi bi-cloud-download"></i>
               </button>
-              <button type="button" class="btn btn-sm btn-outline-danger mx-2" v-if="!uploading">
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-danger mx-2"
+                v-if="!uploading"
+                @click="remove"
+              >
                 Remove
               </button>
             </div>
           </div>
         </li>
 
-        <li class="list-group-item d-flex" v-if="!filename || !objectID || !url">
+        <li class="list-group-item d-flex" v-if="!fileObject">
           <label class="btn btn-primary">
             <input
               type="file"
@@ -66,26 +76,29 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { getPreSignedGetUrl, getPreSignedPutUrl, uploadFile } from '@/api'
+import { ref, type PropType } from 'vue'
+import { getPreSignedGetUrl, getPreSignedPutUrl, uploadFile, type FileObject } from '@/api'
 
-defineProps({
+const props = defineProps({
   accept: { type: String, default: '*' },
 
   label: { type: String, required: true },
   description: { type: String },
   footnote: { type: String },
 
-  required: { type: Boolean, default: false }
+  required: { type: Boolean, default: false },
+
+  field: { type: Object as PropType<FileObject>, default: null }
 })
 
+const emit = defineEmits(['update:field'])
+
 const fileInput = ref<HTMLInputElement | null>(null)
-const filename = ref('')
-const objectID = ref('')
-const url = ref('')
+const fileObject = ref<FileObject | null>(JSON.parse(JSON.stringify(props.field)))
 
 const uploading = ref(false)
 const uploadingProgress = ref(0.0)
+const cancelAbort = ref(new AbortController())
 
 const upload = async function () {
   const file = fileInput.value?.files?.[0]
@@ -94,21 +107,43 @@ const upload = async function () {
   const preSignedPut = await getPreSignedPutUrl()
   if (!preSignedPut?.ObjectID || !preSignedPut?.URL) return
   uploading.value = true
-  filename.value = file.name
-  objectID.value = preSignedPut.ObjectID
-  url.value = preSignedPut.URL
-  await uploadFile(
-    preSignedPut.URL,
-    file,
-    (evt) => (uploadingProgress.value = (evt.progress || 0) * 100)
-  )
-  uploading.value = false
+  uploadingProgress.value = 0
+  cancelAbort.value = new AbortController()
+
+  fileObject.value = {
+    Filename: file.name,
+    ObjectID: preSignedPut.ObjectID,
+    URL: preSignedPut.URL
+  }
+
+  try {
+    await uploadFile(
+      preSignedPut.URL,
+      file,
+      cancelAbort.value,
+      (evt) => (uploadingProgress.value = (evt.progress || 0) * 100)
+    )
+    emit('update:field', fileObject.value)
+  } catch (err: any) {
+    fileObject.value = null
+  } finally {
+    uploading.value = false
+    uploadingProgress.value = 0
+  }
 }
 
 const download = async function () {
-  const preSignedGet = await getPreSignedGetUrl(objectID.value, filename.value)
+  const objectId = fileObject.value?.ObjectID
+  const filename = fileObject.value?.Filename
+  if (!objectId || !filename) return
+  const preSignedGet = await getPreSignedGetUrl(objectId, filename)
   if (!preSignedGet?.URL) return
-  window.location.href = preSignedGet?.URL
+  window.open(preSignedGet?.URL)
+}
+
+const remove = function () {
+  fileObject.value = null
+  emit('update:field', fileObject.value)
 }
 </script>
 
