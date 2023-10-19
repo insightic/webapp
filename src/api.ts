@@ -333,3 +333,8 @@ export interface PeopleInfo {
   twitter: string
   linkedin: string
 }
+
+export interface filesInfo {
+  name: string,
+  objectID: string
+}
