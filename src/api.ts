@@ -335,8 +335,3 @@ export interface PeopleInfo {
   github: string
   linkedin: string
 }
-
-export interface filesInfo {
-  name: string,
-  objectID: string
-}
