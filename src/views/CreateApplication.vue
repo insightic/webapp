@@ -21,7 +21,7 @@
           </div>
         </div>
         <div class="col-10">
-          <component :is="tabs[current - 1]"></component>
+          <component :is="tabs[current - 1]" @change="onChange"></component>
           <!-- current begin from 1 -->
           <FormNavButtons
             v-if="current != 1 && current != forms.length"
@@ -117,6 +117,10 @@ export default {
     formStepStyle(index: number) {
       if (this.current == index + 1) return 'text-primary'
       return 'text-secondary'
+    },
+    onChange(form: string, data: { [key: string]: any }) {
+      console.log(form)
+      console.log(data)
     },
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     nextStep(curr: number) {

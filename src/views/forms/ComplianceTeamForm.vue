@@ -1,9 +1,24 @@
 <template>
   <div style="max-width: 960px">
     <SectionLayout title="Compliance & Team">
-      <LabelInputComponent label="Company Name" type="text" />
-      <LabelTextareaComponent label="Company Address" type="text" />
-      <PeopleGroupComponent label="Executives" add-button-name="Add Executive" />
+      <LabelInputComponent
+        label="Company Name"
+        type="text"
+        v-model:field="editingField.CompanyName"
+        @update:field="change"
+      />
+      <LabelTextareaComponent
+        label="Company Address"
+        type="text"
+        v-model:field="editingField.CompanyAddress"
+        @update:field="change"
+      />
+      <PeopleGroupComponent
+        label="Executives"
+        add-button-name="Add Executive"
+        v-model:field="editingField.Executives"
+        @update:field="change"
+      />
       <PeopleGroupComponent label="Core Team Members" add-button-name="Add Core Team Member" />
       <PeopleGroupComponent
         label="Non-executive Beneficial Owners"
@@ -23,14 +38,44 @@ import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
 import LabelInputComponent from '@/components/LabelInputComponent.vue'
 import PeopleGroupComponent from '@/components/PeopleGroupComponent.vue'
 import LabelTextFileURLComponent from '@/components/LabelTextFileURLComponent.vue'
+import type { PropType } from 'vue'
+import type { PeopleInfo } from '@/api'
 
 export default {
+  props: {
+    field: {
+      type: Object as PropType<{
+        CompanyName: string
+        CompanyAddress: string
+        Executives: PeopleInfo[]
+      }>,
+      default: null
+    }
+  },
+  created() {
+    this.editingField = {
+      CompanyName: this.field?.CompanyName,
+      CompanyAddress: this.field?.CompanyAddress,
+      Executives: this.field?.Executives
+    }
+  },
+  data() {
+    return {
+      editingField: { CompanyName: '', CompanyAddress: '', Executives: Array<PeopleInfo>() }
+    }
+  },
   components: {
     SectionLayout,
     LabelTextareaComponent,
     PeopleGroupComponent,
     LabelInputComponent,
     LabelTextFileURLComponent
+  },
+  methods: {
+    change() {
+      this.$emit('update:field', this.editingField)
+      this.$emit('change', 'ComplianceAndTeam', this.editingField)
+    }
   }
 }
 </script>
