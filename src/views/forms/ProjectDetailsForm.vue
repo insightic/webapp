@@ -3,12 +3,12 @@
     <SectionLayout title="Project Details">
       <LabelTextFileURLComponent
         label="Project Summary"
-        footnote="Please provide a detailed summary of your project."
+        description="Please provide a detailed summary of your project."
       />
 
       <LabelSelectComponent
         label="Category and Classification"
-        footnote="Please select all the categories that your project."
+        description="Please select all the categories that your project."
         :options="[
           'Non-Fungible Token (NFT)',
           'Decentralized Exchange (DEX)',
@@ -63,63 +63,76 @@
         ]"
       />
 
-      <LabelTextareaComponent
+      <LabelTextFileURLComponent
         label="Challenges and Roadblocks"
-        footnote="Please describe the challenges and difficulties while developing the project."
+        description="Please describe the challenges and difficulties while developing the project."
         type="text"
       />
 
-      <LabelTextareaComponent
+      <LabelTextFileURLComponent
         label="Solutions and Innovation"
-        footnote="Please describe the solutions that solves the business problem."
+        description="Please describe the solutions that solves the business problem."
         type="text"
       />
 
-      <LabelTextareaComponent
+      <LabelTextFileURLComponent
         label="Target Audience"
-        footnote="Please list down the target audience of your products."
+        description="Please list down the target audience of your products."
         type="text"
       />
 
-      <LabelTextareaComponent
+      <LabelTextFileURLComponent
         label="Impacts / Benefits"
-        footnote="Please provide a detailed summary on the impacts and benefits brought to the target audience listed down in question 5."
+        description="Please provide a detailed summary on the impacts and benefits brought to the target audience listed down in question 5."
         type="text"
       />
 
       <LabelTextFileURLComponent
         label="Business Model"
-        footnote="Please provide a detailed summary on the following: a. Current and planned revenue streams and usage. b. Is the team working on multiple projects at the same time?"
+        description="Please provide a detailed summary on the following: a. Current and planned revenue streams and usage. b. Is the team working on multiple projects at the same time?"
       />
 
-      <LabelTextareaComponent
+      <LabelTextFileURLComponent
         label="Product Stage"
-        footnote="Please list out the roadmap of your product."
+        description="Please list out the roadmap of your product."
         type="text"
       />
 
       <LabelTextFileURLComponent
         label="Roadmap"
-        footnote="Please list out the roadmap of your company."
+        description="Please list out the roadmap of your company."
       />
 
       <LabelTextFileURLComponent label="Other Supporting Documents" />
+
+      <SaveNextButtonComponent @save="save" @next="next" />
     </SectionLayout>
   </div>
 </template>
 
 <script lang="ts">
 import SectionLayout from '@/layouts/SectionLayout.vue'
-import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
 import LabelSelectComponent from '@/components/LabelSelectComponent.vue'
 import LabelTextFileURLComponent from '@/components/LabelTextFileURLComponent.vue'
+import SaveNextButtonComponent from '@/components/SaveNextButtonComponent.vue'
 
 export default {
   components: {
     SectionLayout,
-    LabelTextareaComponent,
     LabelSelectComponent,
-    LabelTextFileURLComponent
+    LabelTextFileURLComponent,
+    SaveNextButtonComponent
+  },
+  methods: {
+    data() {
+      return {}
+    },
+    save() {
+      this.$emit('save', this.data())
+    },
+    next() {
+      this.$emit('next', this.data())
+    }
   }
 }
 </script>

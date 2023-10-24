@@ -622,9 +622,7 @@ export default {
   -moz-appearance: none;
   appearance: none;
   border-radius: 0.375rem;
-  transition:
-    border-color 0.15s ease-in-out,
-    box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .form-controls:focus {

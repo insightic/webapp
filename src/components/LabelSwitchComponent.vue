@@ -1,25 +1,21 @@
 <template>
   <div class="mb-3">
-    <label class="form-label">
-      {{ label }}
-    </label>
-    <span v-show="required" class="ms-1 text-danger">*</span> <br />
+    <div class="d-flex">
+      <div>
+        {{ label }}
+      </div>
+      <span v-show="required" class="text-danger">*</span>
+    </div>
+
+    <div class="text-secondary small mb-1" v-html="description"></div>
     <div
       :class="['switch', { on: toggleState }]"
-      :style="{
-        width: width + 'px',
-        height: height + 'px',
-        borderRadius: parseInt(width) / 2 + 'px'
-      }"
+      style="width: 100px; height: 40px; border-radius: 50px"
       @click="toggleSwitch"
     >
       <div
         :class="['switch-button', { on: toggleState }]"
-        :style="{
-          width: parseInt(width) / 2 + 'px',
-          height: parseInt(height) - 2 + 'px',
-          borderRadius: parseInt(width) / 2 + 'px'
-        }"
+        style="width: 50px; height: 38px; border-radius: 50px"
       ></div>
     </div>
     <label class="text-secondary small" v-if="footnote">{{ footnote }}</label>
@@ -30,23 +26,26 @@
 export default {
   props: {
     label: { type: String, required: true },
-    field: { type: String },
-    placeholder: { type: String, default: 'Please select project type' },
+    description: { type: String },
     footnote: { type: String },
+
     required: { type: Boolean, default: false },
-    width: { type: String, default: '100' },
-    height: { type: String, default: '100' }
+    disabled: { type: Boolean, default: false },
+
+    field: { type: Boolean }
+  },
+  created() {
+    this.toggleState = this.field
   },
   data() {
     return {
       toggleState: false
     }
   },
-  emits: ['choose'],
   methods: {
     toggleSwitch() {
       this.toggleState = !this.toggleState
-      this.$emit('choose', this.toggleState)
+      this.$emit('update:field', this.toggleState)
     }
   }
 }

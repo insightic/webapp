@@ -1,7 +1,13 @@
 <template>
   <div class="mb-3">
-    <label class="form-label bold">{{ label }}</label
-    ><span v-show="required" class="ms-1 text-danger">*</span> <br />
+    <div class="d-flex">
+      <div>
+        {{ label }}
+      </div>
+      <span v-show="required" class="text-danger">*</span>
+    </div>
+
+    <div class="text-secondary small mb-1" v-html="description"></div>
     <textarea
       class="form-control"
       :value="field"
@@ -19,11 +25,15 @@ export default {
   props: {
     label: { type: String, required: true },
     rows: { type: Number, default: 3 },
-    field: { type: String },
+
     placeholder: { type: String },
+    description: { type: String },
     footnote: { type: String },
+
     required: { type: Boolean, default: false },
-    disabled: { type: Boolean, default: false }
+    disabled: { type: Boolean, default: false },
+
+    field: { type: String }
   },
   emits: ['update:field'],
   methods: {

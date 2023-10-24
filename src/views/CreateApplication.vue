@@ -22,16 +22,8 @@
         </div>
         <div class="col-10">
           <div>
-            <component :is="tabs[current - 1]" @change="onChange"></component>
+            <component :is="tabs[current - 1]" @save="save" @next="next"></component>
           </div>
-          <!-- current begin from 1 -->
-          <FormNavButtons
-            v-if="current != 1 && current != forms.length"
-            :prevBtn="false"
-            :saveBtn="true"
-            :nextBtn="true"
-            @next="nextStep(current)"
-          />
         </div>
       </div>
     </div>
@@ -111,7 +103,8 @@ export default {
         'Investors',
         'Conflict of Interest',
         'Confirmation'
-      ]
+      ],
+      submission: {} as { [key: string]: any }
     }
   },
   computed: {},
@@ -124,8 +117,19 @@ export default {
       console.log(form)
       console.log(data)
     },
-    nextStep(curr: number) {
+    nextStep() {
       window.alert('Please fill in all required fields')
+    },
+    save(data: any) {
+      const tab = this.tabs[this.current - 1]
+      this.submission[tab] = data
+      console.log(this.submission)
+    },
+    next(data: any) {
+      const tab = this.tabs[this.current - 1]
+      this.submission[tab] = data
+      this.current++
+      console.log(this.submission)
     }
   }
 }

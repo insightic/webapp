@@ -1,7 +1,13 @@
 <template>
   <div class="mb-3">
-    <label class="form-label bold">{{ props.label }}</label>
+    <div class="d-flex">
+      <div>
+        {{ label }}
+      </div>
+      <span v-show="required" class="text-danger">*</span>
+    </div>
 
+    <div class="text-secondary small mb-1" v-html="description"></div>
     <div class="card w-100">
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
@@ -105,9 +111,12 @@ const uploadingProgress = ref(0.0)
 const uploadingFileObject = ref<FileObject | null>(null)
 const cancelAbort = ref(new AbortController())
 
-const props = defineProps({
+defineProps({
   label: { type: String, required: true },
-  footnote: { type: String }
+  description: { type: String },
+  footnote: { type: String },
+
+  required: { type: Boolean, default: false }
 })
 
 const emit = defineEmits(['update:field'])

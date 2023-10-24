@@ -3,27 +3,30 @@
     <SectionLayout title="Overview">
       <LabelInputComponent
         label="Project Name"
-        footnote="Please enter the name of your project."
-        type="text"
+        description="Please enter the name of your project."
+        :required="true"
+        v-model:field="projectName"
       />
 
       <LabelInputComponent
         label="Project One-liner"
-        footnote="Please provide a one-sentence introduction to your project."
-        type="text"
+        description="Please provide a one-sentence introduction to your project."
+        :required="true"
+        v-model:field="projectOneLiner"
       />
 
       <LabelInputComponent
         label="Official Website"
-        footnote="Please enter the URL of your official website."
-        type="text"
+        description="Please enter the URL of your official website."
+        :required="true"
+        v-model:field="officialWebsite"
       />
 
-      <LabelFileUploadComponent label="Pitch Deck" />
+      <LabelTextFileURLComponent label="Pitch Deck" />
 
       <LabelSelectComponent
         label="Project Stage"
-        footnote="Please select the current stage of your project."
+        description="Please select the current stage of your project."
         :options="[
           'Ideation',
           'Proof of Concept (PoC)',
@@ -32,26 +35,35 @@
           'Grow',
           'Mature'
         ]"
+        :required="true"
+        v-model:field="projectStage"
       />
 
       <LabelSelectComponent
         label="Token Launch"
-        footnote="Please select the current stage of your project."
+        description="Please select the current stage of your project."
         :options="['Yes', 'No', 'Not Sure']"
+        v-model:field="tokenLaunch"
       />
 
-      <LabelSelectComponent
+      <LabelSwitchComponent
+        v-if="tokenLaunch == 'Yes'"
         label="Token Circulation"
-        footnote="Has the token been circulated?"
+        description="Has the token been circulated?"
         :options="['Yes', 'No']"
+        v-model:field="tokenCirculation"
       />
 
       <LabelSwitchComponent
         label="Prior Application"
-        footnote="Have you applied before?"
-        width="100"
-        height="40"
-        :options="['Yes', 'No']"
+        description="Have you applied before?"
+        v-model:field="priorApplication"
+      />
+
+      <SaveNextButtonComponent
+        :disabled="!projectName || !projectOneLiner || !officialWebsite || !projectStage"
+        @save="save"
+        @next="next"
       />
     </SectionLayout>
   </div>
@@ -60,17 +72,49 @@
 <script lang="ts">
 import SectionLayout from '@/layouts/SectionLayout.vue'
 import LabelInputComponent from '@/components/LabelInputComponent.vue'
-import LabelFileUploadComponent from '@/components/LabelFileUploadComponent.vue'
 import LabelSelectComponent from '@/components/LabelSelectComponent.vue'
 import LabelSwitchComponent from '@/components/LabelSwitchComponent.vue'
+import LabelTextFileURLComponent from '@/components/LabelTextFileURLComponent.vue'
+import SaveNextButtonComponent from '@/components/SaveNextButtonComponent.vue'
 
 export default {
   components: {
     SectionLayout,
     LabelInputComponent,
-    LabelFileUploadComponent,
     LabelSelectComponent,
-    LabelSwitchComponent
+    LabelSwitchComponent,
+    LabelTextFileURLComponent,
+    SaveNextButtonComponent
+  },
+  data() {
+    return {
+      projectName: '',
+      projectOneLiner: '',
+      officialWebsite: '',
+      projectStage: '',
+      tokenLaunch: '',
+      tokenCirculation: false,
+      priorApplication: false
+    }
+  },
+  methods: {
+    data() {
+      return {
+        projectName: this.projectName,
+        projectOneLiner: this.projectOneLiner,
+        officialWebsite: this.officialWebsite,
+        projectStage: this.projectStage,
+        tokenLaunch: this.tokenLaunch,
+        tokenCirculation: this.tokenCirculation,
+        priorApplication: this.priorApplication
+      }
+    },
+    save() {
+      this.$emit('save', this.data())
+    },
+    next() {
+      this.$emit('next', this.data())
+    }
   }
 }
 </script>
