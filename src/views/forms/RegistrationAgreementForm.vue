@@ -50,9 +50,9 @@ export default {
   methods: {
     data() {
       return {
-        title: this.title,
-        name: this.name,
-        acceptNDA: this.acceptNDA
+        Title: this.title,
+        Name: this.name,
+        AcceptNDA: this.acceptNDA
       }
     },
     save() {

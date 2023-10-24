@@ -23,6 +23,7 @@ import SectionLayout from '@/layouts/SectionLayout.vue'
 import LabelSwitchComponent from '@/components/LabelSwitchComponent.vue'
 import LabelTextFileURLComponent from '@/components/LabelTextFileURLComponent.vue'
 import SaveNextButtonComponent from '@/components/SaveNextButtonComponent.vue'
+import type { TextFilesObject } from '@/api'
 
 export default {
   components: {
@@ -33,15 +34,15 @@ export default {
   },
   data() {
     return {
-      regulatoryStatus: null,
+      regulatoryStatus: null as TextFilesObject | null,
       legalAction: false
     }
   },
   methods: {
     data() {
       return {
-        regulatoryStatus: this.regulatoryStatus,
-        legalAction: this.legalAction
+        RegulatoryStatus: this.regulatoryStatus,
+        LegalAction: this.legalAction
       }
     },
     save() {

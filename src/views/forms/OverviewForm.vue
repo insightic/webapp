@@ -22,7 +22,7 @@
         v-model:field="officialWebsite"
       />
 
-      <LabelTextFileURLComponent label="Pitch Deck" />
+      <LabelTextFileURLComponent label="Pitch Deck" v-model:field="pitchDeck" />
 
       <LabelSelectComponent
         label="Project Stage"
@@ -76,6 +76,7 @@ import LabelSelectComponent from '@/components/LabelSelectComponent.vue'
 import LabelSwitchComponent from '@/components/LabelSwitchComponent.vue'
 import LabelTextFileURLComponent from '@/components/LabelTextFileURLComponent.vue'
 import SaveNextButtonComponent from '@/components/SaveNextButtonComponent.vue'
+import type { TextFilesObject } from '@/api'
 
 export default {
   components: {
@@ -91,6 +92,7 @@ export default {
       projectName: '',
       projectOneLiner: '',
       officialWebsite: '',
+      pitchDeck: null as TextFilesObject | null,
       projectStage: '',
       tokenLaunch: '',
       tokenCirculation: false,
@@ -100,13 +102,14 @@ export default {
   methods: {
     data() {
       return {
-        projectName: this.projectName,
-        projectOneLiner: this.projectOneLiner,
-        officialWebsite: this.officialWebsite,
-        projectStage: this.projectStage,
-        tokenLaunch: this.tokenLaunch,
-        tokenCirculation: this.tokenCirculation,
-        priorApplication: this.priorApplication
+        ProjectName: this.projectName,
+        ProjectOneLiner: this.projectOneLiner,
+        OfficialWebsite: this.officialWebsite,
+        PitchDeck: this.pitchDeck,
+        ProjectStage: this.projectStage,
+        TokenLaunch: this.tokenLaunch,
+        TokenCirculation: this.tokenCirculation,
+        PriorApplication: this.priorApplication
       }
     },
     save() {

@@ -18,6 +18,7 @@
             rows="1"
             placeholder="Please describe in text or attach files by uploading or url..."
             ref="textarea"
+            v-model="text"
           />
         </li>
         <li class="list-group-item" v-for="(file, idx) in files" :key="idx">
@@ -85,12 +86,6 @@
               <i class="bi bi-cloud-upload me-1"></i> Upload File
             </label>
           </button>
-          <button class="btn btn-sm btn-outline-primary">
-            <div class="d-flex align-items-center">
-              <i class="bi bi-link me-1"></i>
-              <div>Add Link</div>
-            </div>
-          </button>
         </li>
       </ul>
     </div>
@@ -105,6 +100,7 @@ import { getPreSignedGetUrl, getPreSignedPutUrl, uploadFile, type FileObject } f
 
 const textarea: Ref<HTMLElement | null> = ref(null)
 const fileInput = ref<HTMLInputElement | null>(null)
+const text = ref('')
 const files = ref<FileObject[]>([])
 const uploading = ref(false)
 const uploadingProgress = ref(0.0)
@@ -125,6 +121,7 @@ const onInput = function () {
   if (!textarea.value) return
   textarea.value.style.height = '18px'
   textarea.value.style.height = textarea.value.scrollHeight + 'px'
+  emit('update:field', { Text: text.value, Files: files.value })
 }
 
 const remove = function (idx: number) {
@@ -154,9 +151,9 @@ const upload = async function () {
       cancelAbort.value,
       (evt) => (uploadingProgress.value = (evt.progress || 0) * 100)
     )
-    emit('update:field', uploadingFileObject.value)
   } finally {
     files.value?.push(uploadingFileObject.value)
+    emit('update:field', { Text: text.value, Files: files.value })
     uploading.value = false
     uploadingProgress.value = 0
     uploadingFileObject.value = null

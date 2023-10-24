@@ -11,6 +11,7 @@
       <LabelTextFileURLComponent
         v-if="regulatoryAffiliations"
         label="Description of the nature of the relationship or interaction"
+        v-model:field="relationshipDescription"
       />
 
       <SaveNextButtonComponent @save="save" @next="next" />
@@ -23,6 +24,7 @@ import SectionLayout from '@/layouts/SectionLayout.vue'
 import LabelSwitchComponent from '@/components/LabelSwitchComponent.vue'
 import LabelTextFileURLComponent from '@/components/LabelTextFileURLComponent.vue'
 import SaveNextButtonComponent from '@/components/SaveNextButtonComponent.vue'
+import type { TextFilesObject } from '@/api'
 
 export default {
   components: {
@@ -34,12 +36,15 @@ export default {
   data() {
     return {
       regulatoryAffiliations: false,
-      relationshipDescription: ''
+      relationshipDescription: null as TextFilesObject | null
     }
   },
   methods: {
     data() {
-      return {}
+      return {
+        RegulatoryAffiliations: this.regulatoryAffiliations,
+        RelationshipDescription: this.relationshipDescription
+      }
     },
     save() {
       this.$emit('save', this.data())

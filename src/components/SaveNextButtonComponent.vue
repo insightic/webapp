@@ -4,7 +4,7 @@
       Save Draft
     </button>
     <button class="btn btn-primary" @click="next" :disabled="disabled">
-      Save Draft and Continue
+      {{ nextButtonText }}
     </button>
   </div>
 </template>
@@ -13,6 +13,7 @@
 const emit = defineEmits(['save', 'next'])
 
 defineProps({
+  nextButtonText: { type: String, default: 'Save Draft and Continue' },
   disabled: { type: Boolean, default: false }
 })
 

@@ -6,7 +6,7 @@
       <div class="row">
         <div class="col-2">
           <div v-for="(form, index) in forms" :key="index">
-            <div @click="current = index + 1" class="nav-item" :class="formStepStyle(index)">
+            <div @click="current = index" class="nav-item" :class="formStepStyle(index)">
               <div class="d-flex align-items-center">
                 <i class="bi bi-check-circle-fill me-3"></i>
                 <div>
@@ -22,7 +22,7 @@
         </div>
         <div class="col-10">
           <div>
-            <component :is="tabs[current - 1]" @save="save" @next="next"></component>
+            <component :is="tabs[current]" @save="save" @next="next"></component>
           </div>
         </div>
       </div>
@@ -70,7 +70,7 @@ export default {
   mounted() {},
   data() {
     return {
-      current: 1,
+      current: 0,
       currentTab: 'RegistrationAgreement',
       tabs: [
         'RegistrationAgreement',
@@ -104,13 +104,13 @@ export default {
         'Conflict of Interest',
         'Confirmation'
       ],
-      submission: {} as { [key: string]: any }
+      application: {} as { [key: string]: any }
     }
   },
   computed: {},
   methods: {
     formStepStyle(index: number) {
-      if (this.current == index + 1) return 'text-primary'
+      if (this.current == index) return 'text-primary'
       return 'text-secondary'
     },
     onChange(form: string, data: { [key: string]: any }) {
@@ -121,15 +121,19 @@ export default {
       window.alert('Please fill in all required fields')
     },
     save(data: any) {
-      const tab = this.tabs[this.current - 1]
-      this.submission[tab] = data
-      console.log(this.submission)
+      const tab = this.tabs[this.current]
+      this.application[tab] = data
+      console.log(this.application)
     },
     next(data: any) {
-      const tab = this.tabs[this.current - 1]
-      this.submission[tab] = data
-      this.current++
-      console.log(this.submission)
+      const tab = this.tabs[this.current]
+      this.application[tab] = data
+      if (this.current + 1 != this.tabs.length) {
+        this.current = this.current + 1
+        return
+      }
+      console.log(this.application)
+      alert(JSON.stringify(this.application))
     }
   }
 }

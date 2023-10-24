@@ -54,7 +54,7 @@ import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
 import LabelInputComponent from '@/components/LabelInputComponent.vue'
 import PeopleGroupComponent from '@/components/PeopleGroupComponent.vue'
 import LabelTextFileURLComponent from '@/components/LabelTextFileURLComponent.vue'
-import type { PeopleInfo } from '@/api'
+import type { PeopleInfo, TextFilesObject } from '@/api'
 import SaveNextButtonComponent from '@/components/SaveNextButtonComponent.vue'
 
 export default {
@@ -73,18 +73,18 @@ export default {
       executives: [] as Array<PeopleInfo>,
       coreMembers: [] as Array<PeopleInfo>,
       beneficialOwners: [] as Array<PeopleInfo>,
-      governmentConnections: null
+      governmentConnections: null as TextFilesObject | null
     }
   },
   methods: {
     data() {
       return {
-        companyName: this.companyName,
-        companyAddress: this.companyAddress,
-        executives: this.executives,
-        coreMembers: this.coreMembers,
-        beneficialOwners: this.beneficialOwners,
-        governmentConnections: this.governmentConnections
+        CompanyName: this.companyName,
+        CompanyAddress: this.companyAddress,
+        Executives: this.executives,
+        CoreMembers: this.coreMembers,
+        BeneficialOwners: this.beneficialOwners,
+        GovernmentConnections: this.governmentConnections
       }
     },
     save() {

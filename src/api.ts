@@ -8,6 +8,11 @@ export interface FileObject {
   URL: string
 }
 
+export interface TextFilesObject {
+  Text: string
+  Files: Array<FileObject>
+}
+
 export interface RuleParamDescription {
   Name: string
   Type: string

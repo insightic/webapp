@@ -147,7 +147,13 @@ export default {
   },
   methods: {
     async save() {
-      const score = await getZanScore(this.address)
+      let score = 'N.A.'
+      try {
+        score = (await getZanScore(this.address))?.toString() || 'N.A.'
+      } catch {
+        // ignore
+      }
+
       this.$emit('save', {
         name: this.name,
         birthday: `${this.year}/${this.month}/${this.date}`,

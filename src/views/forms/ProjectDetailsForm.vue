@@ -4,6 +4,7 @@
       <LabelTextFileURLComponent
         label="Project Summary"
         description="Please provide a detailed summary of your project."
+        :required="true"
       />
 
       <LabelSelectComponent
@@ -61,49 +62,55 @@
           'Digital Rights Management (DRM)',
           'Sustainability'
         ]"
+        v-model:field="projectCategory"
       />
 
       <LabelTextFileURLComponent
         label="Challenges and Roadblocks"
         description="Please describe the challenges and difficulties while developing the project."
-        type="text"
+        v-model:field="projectChallenges"
       />
 
       <LabelTextFileURLComponent
         label="Solutions and Innovation"
         description="Please describe the solutions that solves the business problem."
-        type="text"
+        v-model:field="projectInnovation"
       />
 
       <LabelTextFileURLComponent
         label="Target Audience"
         description="Please list down the target audience of your products."
-        type="text"
+        v-model:field="projectTargetAudience"
       />
 
       <LabelTextFileURLComponent
         label="Impacts / Benefits"
         description="Please provide a detailed summary on the impacts and benefits brought to the target audience listed down in question 5."
-        type="text"
+        v-model:field="projectImpacts"
       />
 
       <LabelTextFileURLComponent
         label="Business Model"
         description="Please provide a detailed summary on the following: a. Current and planned revenue streams and usage. b. Is the team working on multiple projects at the same time?"
+        v-model:field="projectBusinessModel"
       />
 
       <LabelTextFileURLComponent
         label="Product Stage"
         description="Please list out the roadmap of your product."
-        type="text"
+        v-model:field="productStage"
       />
 
       <LabelTextFileURLComponent
         label="Roadmap"
         description="Please list out the roadmap of your company."
+        v-model:field="projectRoadmap"
       />
 
-      <LabelTextFileURLComponent label="Other Supporting Documents" />
+      <LabelTextFileURLComponent
+        label="Other Supporting Documents"
+        v-model:field="otherSupportingDocuments"
+      />
 
       <SaveNextButtonComponent @save="save" @next="next" />
     </SectionLayout>
@@ -115,6 +122,7 @@ import SectionLayout from '@/layouts/SectionLayout.vue'
 import LabelSelectComponent from '@/components/LabelSelectComponent.vue'
 import LabelTextFileURLComponent from '@/components/LabelTextFileURLComponent.vue'
 import SaveNextButtonComponent from '@/components/SaveNextButtonComponent.vue'
+import type { TextFilesObject } from '@/api'
 
 export default {
   components: {
@@ -123,9 +131,34 @@ export default {
     LabelTextFileURLComponent,
     SaveNextButtonComponent
   },
+  data() {
+    return {
+      projectSummary: null as TextFilesObject | null,
+      projectCategory: '',
+      projectChallenges: null as TextFilesObject | null,
+      projectInnovation: null as TextFilesObject | null,
+      projectTargetAudience: null as TextFilesObject | null,
+      projectImpacts: null as TextFilesObject | null,
+      projectBusinessModel: null as TextFilesObject | null,
+      productStage: null as TextFilesObject | null,
+      projectRoadmap: null as TextFilesObject | null,
+      otherSupportingDocuments: null as TextFilesObject | null
+    }
+  },
   methods: {
     data() {
-      return {}
+      return {
+        ProjectSummary: this.projectSummary,
+        ProjectCategory: this.projectCategory,
+        ProjectChallenges: this.projectChallenges,
+        ProjectInnovation: this.projectInnovation,
+        ProjectTargetAudience: this.projectTargetAudience,
+        ProjectImpacts: this.projectImpacts,
+        ProjectBusinessModel: this.projectBusinessModel,
+        ProductStage: this.productStage,
+        ProjectRoadmap: this.projectRoadmap,
+        OtherSupportingDocuments: this.otherSupportingDocuments
+      }
     },
     save() {
       this.$emit('save', this.data())
