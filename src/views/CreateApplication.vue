@@ -21,7 +21,9 @@
           </div>
         </div>
         <div class="col-10">
-          <component :is="tabs[current - 1]" @change="onChange"></component>
+          <div>
+            <component :is="tabs[current - 1]" @change="onChange"></component>
+          </div>
           <!-- current begin from 1 -->
           <FormNavButtons
             v-if="current != 1 && current != forms.length"
@@ -122,7 +124,6 @@ export default {
       console.log(form)
       console.log(data)
     },
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     nextStep(curr: number) {
       window.alert('Please fill in all required fields')
     }

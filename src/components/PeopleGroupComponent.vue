@@ -114,8 +114,10 @@ export default {
   },
   props: {
     label: { type: String, required: true },
-    addButtonName: { type: String, default: 'Add' }
+    addButtonName: { type: String, default: 'Add' },
+    field: { type: Array<PeopleInfo> }
   },
+  emits: ['update:field'],
   data() {
     return {
       people: Array<PeopleInfo>(),

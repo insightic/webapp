@@ -19,10 +19,17 @@
         v-model:field="editingField.Executives"
         @update:field="change"
       />
-      <PeopleGroupComponent label="Core Team Members" add-button-name="Add Core Team Member" />
+      <PeopleGroupComponent
+        label="Core Team Members"
+        add-button-name="Add Core Team Member"
+        v-model:field="editingField.CoreMemebers"
+        @update:field="change"
+      />
       <PeopleGroupComponent
         label="Non-executive Beneficial Owners"
         add-button-name="Add Non-executive Beneficial Owner"
+        v-model:field="editingField.BeneficialOwners"
+        @update:field="change"
       />
       <LabelTextFileURLComponent
         label="Government Connections"
@@ -48,6 +55,8 @@ export default {
         CompanyName: string
         CompanyAddress: string
         Executives: PeopleInfo[]
+        CoreMembers: PeopleInfo[]
+        BeneficialOwners: PeopleInfo[]
       }>,
       default: null
     }
@@ -56,12 +65,20 @@ export default {
     this.editingField = {
       CompanyName: this.field?.CompanyName,
       CompanyAddress: this.field?.CompanyAddress,
-      Executives: this.field?.Executives
+      Executives: this.field?.Executives,
+      CoreMemebers: this.field?.CoreMembers,
+      BeneficialOwners: this.field?.BeneficialOwners
     }
   },
   data() {
     return {
-      editingField: { CompanyName: '', CompanyAddress: '', Executives: Array<PeopleInfo>() }
+      editingField: {
+        CompanyName: '',
+        CompanyAddress: '',
+        Executives: Array<PeopleInfo>(),
+        CoreMemebers: Array<PeopleInfo>(),
+        BeneficialOwners: Array<PeopleInfo>()
+      }
     }
   },
   components: {
@@ -75,6 +92,7 @@ export default {
     change() {
       this.$emit('update:field', this.editingField)
       this.$emit('change', 'ComplianceAndTeam', this.editingField)
+      console.log(this.editingField);
     }
   }
 }

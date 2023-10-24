@@ -273,7 +273,7 @@ export async function createProjectJob(projectID: number | string): Promise<Job 
 }
 
 export async function getZanScore(address: string): Promise<number | undefined> {
-  const resp = await axios.post(`https://staging-api.insightic.io/zan/score`, {
+  const resp = await axios.post(`https://staging-api.insightic.io/kyt/score`, {
     objectId: `0x${address}`
   })
   return resp?.data?.data?.score?.riskScore
