@@ -47,15 +47,16 @@ import Competitiveness from './forms/CompetitivenessForm.vue'
 import Investors from './forms/InvestorForm.vue'
 import COI from './forms/COIForm.vue'
 import ConfirmationForm from './forms/ConfirmationForm.vue'
+import { saveApplicationDraft, submitApplicationDraft } from '@/api'
 
 export default {
   components: {
+    Overview,
     NavFooterLayout,
     FormNavButtons,
     RegistrationAgreement,
     ComplianceTeam,
     Legal,
-    Overview,
     ProjectDetails,
     DigitalAsset,
     TechnicalDetails,
@@ -71,12 +72,12 @@ export default {
   data() {
     return {
       current: 0,
-      currentTab: 'RegistrationAgreement',
+      currentTab: 'Overview',
       tabs: [
+        'Overview',
         'RegistrationAgreement',
         'ComplianceTeam',
         'Legal',
-        'Overview',
         'ProjectDetails',
         'DigitalAsset',
         'TechnicalDetails',
@@ -89,10 +90,10 @@ export default {
         'ConfirmationForm'
       ],
       forms: [
+        'Overview',
         'Registration Agreement',
         'Compliance & Team',
         'Legal',
-        'Overview',
         'Project Details',
         'Digital Asset',
         'Technical Details',
@@ -104,7 +105,7 @@ export default {
         'Conflict of Interest',
         'Confirmation'
       ],
-      application: {} as { [key: string]: any }
+      application: {} as { [key: string]: any },
     }
   },
   computed: {},
@@ -120,20 +121,28 @@ export default {
     nextStep() {
       window.alert('Please fill in all required fields')
     },
-    save(data: any) {
+    async save(data: any) {
       const tab = this.tabs[this.current]
       this.application[tab] = data
-      console.log(this.application)
+      this.application['Name'] = this.application['Overview']['ProjectName']
+      this.application['One-liner'] = this.application['Overview']['ProjectOneLiner']
+      this.application['Website'] = this.application['Overview']['OfficialWebsite']
+      const res = await saveApplicationDraft(JSON.stringify(this.application))
+      console.log(res, 'result')
     },
-    next(data: any) {
+    async next(data: any) {
       const tab = this.tabs[this.current]
       this.application[tab] = data
       if (this.current + 1 != this.tabs.length) {
         this.current = this.current + 1
         return
       }
-      console.log(this.application)
-      alert(JSON.stringify(this.application))
+      // Send network-request to the back-end
+      this.application['Name'] = this.application['Overview']['ProjectName']
+      this.application['One-liner'] = this.application['Overview']['ProjectOneLiner']
+      this.application['Website'] = this.application['Overview']['OfficialWebsite']
+      const res = await submitApplicationDraft(JSON.stringify(this.application))
+      console.log(res, 'result')
     }
   }
 }
