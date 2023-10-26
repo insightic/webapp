@@ -58,6 +58,7 @@ import type { PeopleInfo, TextFilesObject } from '@/api'
 import SaveNextButtonComponent from '@/components/SaveNextButtonComponent.vue'
 
 export default {
+  props: ['applicationData'],
   components: {
     SectionLayout,
     LabelTextareaComponent,
@@ -92,6 +93,16 @@ export default {
     },
     next() {
       this.$emit('next', this.data())
+    },
+    mounted() {
+      console.log(123);
+      if (this.applicationData['ComplianceTeam'] == null) return
+      this.companyName = this.applicationData['ComplianceTeam']['CompanyName']
+      this.companyAddress = this.applicationData['ComplianceTeam']['CompanyAddress']
+      this.executives = this.applicationData['ComplianceTeam']['Executives']
+      this.coreMembers = this.applicationData['ComplianceTeam']['CoreMembers']
+      this.beneficialOwners = this.applicationData['ComplianceTeam']['BeneficialOwners']
+      this.governmentConnections = this.applicationData['ComplianceTeam']['GovernmentConnections']
     }
   }
 }

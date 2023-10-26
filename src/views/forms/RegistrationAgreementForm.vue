@@ -33,6 +33,7 @@ import PDFComponent from '@/components/PDFComponent.vue'
 import SaveNextButtonComponent from '@/components/SaveNextButtonComponent.vue'
 
 export default {
+  props: ['applicationData'],
   components: {
     SectionLayout,
     LabelInputComponent,
@@ -60,6 +61,14 @@ export default {
     },
     next() {
       this.$emit('next', this.data())
+    },
+    created() {
+      //First time we will not apply this progess
+      console.log(123)
+      if (this.applicationData['RegistrationAgreement'] == null) return
+      this.title = this.applicationData['RegistrationAgreement']['Title']
+      this.name = this.applicationData['RegistrationAgreement']['Name']
+      this.acceptNDA = this.applicationData['RegistrationAgreement']['AcceptNDA']
     }
   }
 }

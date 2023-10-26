@@ -79,6 +79,7 @@ import SaveNextButtonComponent from '@/components/SaveNextButtonComponent.vue'
 import type { TextFilesObject } from '@/api'
 
 export default {
+  props: ['applicationData'],
   components: {
     SectionLayout,
     LabelInputComponent,
@@ -118,6 +119,19 @@ export default {
     next() {
       this.$emit('next', this.data())
     }
+  },
+  created() {
+    //First time we will not apply this progess
+    console.log(123)
+    if (this.applicationData['Overview'] == null) return
+    this.projectName = this.applicationData['Overview']['ProjectName']
+    this.projectOneLiner = this.applicationData['Overview']['ProjectOneLiner']
+    this.officialWebsite = this.applicationData['Overview']['OfficialWebsite']
+    this.pitchDeck = this.applicationData['Overview']['PitchDeck']
+    this.projectStage = this.applicationData['Overview']['ProjectStage']
+    this.tokenLaunch = this.applicationData['Overview']['TokenLaunch']
+    this.tokenCirculation = this.applicationData['Overview']['TokenCirculation']
+    this.priorApplication = this.applicationData['Overview']['PriorApplication']
   }
 }
 </script>

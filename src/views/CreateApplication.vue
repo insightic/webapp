@@ -1,12 +1,14 @@
 <template>
   <NavFooterLayout>
     <div class="container-fluid p-3 mb-5" style="max-width: 1440px">
-      <h1 class="mb-4"><strong>New Application</strong></h1>
+      <h1 class="mb-4">
+        <strong>New Application (You are now doing the {{ tabs[pageFinishedNum] }} page)</strong>
+      </h1>
 
       <div class="row">
         <div class="col-2">
           <div v-for="(form, index) in forms" :key="index">
-            <div @click="current = index" class="nav-item" :class="formStepStyle(index)">
+            <div @click="changePage(index)" class="nav-item" :class="formStepStyle(index)">
               <div class="d-flex align-items-center">
                 <i class="bi bi-check-circle-fill me-3"></i>
                 <div>
@@ -22,7 +24,12 @@
         </div>
         <div class="col-10">
           <div>
-            <component :is="tabs[current]" @save="save" @next="next"></component>
+            <component
+              :is="tabs[current]"
+              @save="save"
+              @next="next"
+              :applicationData="application"
+            ></component>
           </div>
         </div>
       </div>
@@ -72,6 +79,7 @@ export default {
   data() {
     return {
       current: 0,
+      pageFinishedNum: 0,
       currentTab: 'Overview',
       tabs: [
         'Overview',
@@ -105,10 +113,9 @@ export default {
         'Conflict of Interest',
         'Confirmation'
       ],
-      application: {} as { [key: string]: any },
+      application: {} as { [key: string]: any }
     }
   },
-  computed: {},
   methods: {
     formStepStyle(index: number) {
       if (this.current == index) return 'text-primary'
@@ -121,6 +128,11 @@ export default {
     nextStep() {
       window.alert('Please fill in all required fields')
     },
+    changePage(index: number) {
+      if (this.pageFinishedNum >= index) {
+        this.current = index
+      }
+    },
     async save(data: any) {
       const tab = this.tabs[this.current]
       this.application[tab] = data
@@ -131,6 +143,7 @@ export default {
       console.log(res, 'result')
     },
     async next(data: any) {
+      this.pageFinishedNum = this.pageFinishedNum + 1
       const tab = this.tabs[this.current]
       this.application[tab] = data
       if (this.current + 1 != this.tabs.length) {

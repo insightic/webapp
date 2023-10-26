@@ -96,7 +96,13 @@
 
 <script setup lang="ts">
 import { ref, type Ref } from 'vue'
-import { getPreSignedGetUrl, getPreSignedPutUrl, uploadFile, type FileObject } from '@/api'
+import {
+  getPreSignedGetUrl,
+  getPreSignedPutUrl,
+  uploadFile,
+  type FileObject,
+  type TextFilesObject
+} from '@/api'
 
 const textarea: Ref<HTMLElement | null> = ref(null)
 const fileInput = ref<HTMLInputElement | null>(null)
