@@ -171,13 +171,13 @@ export async function createProject(project: NewApplication): Promise<Applicatio
 // submit new draft application
 export async function submitApplicationDraft(project: string): Promise<string> {
   const resp = await httpclient.post<string>(`/applications/drafts`, project)
-  return resp?.payload || ""
+  return resp?.payload || ''
 }
 
 // save new application without any submission
 export async function saveApplicationDraft(project: string): Promise<string> {
   const resp = await httpclient.post<string>(`/applications/drafts`, project)
-  return resp?.payload || ""
+  return resp?.payload || ''
 }
 
 export async function getApplications(): Promise<Application[]> {

@@ -95,7 +95,7 @@ export default {
       this.$emit('next', this.data())
     },
     mounted() {
-      console.log(123);
+      console.log(123)
       if (this.applicationData['ComplianceTeam'] == null) return
       this.companyName = this.applicationData['ComplianceTeam']['CompanyName']
       this.companyAddress = this.applicationData['ComplianceTeam']['CompanyAddress']
