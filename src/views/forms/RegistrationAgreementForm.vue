@@ -61,14 +61,15 @@ export default {
     },
     next() {
       this.$emit('next', this.data())
-    },
-    created() {
-      //First time we will not apply this progess
-      console.log(123)
-      if (this.applicationData['RegistrationAgreement'] == null) return
-      this.title = this.applicationData['RegistrationAgreement']['Title']
-      this.name = this.applicationData['RegistrationAgreement']['Name']
-      this.acceptNDA = this.applicationData['RegistrationAgreement']['AcceptNDA']
+    }
+  },
+  watch: {
+    applicationData: function (data) {
+      if (!data || !data['RegistrationAgreement']) return
+      const val = data['RegistrationAgreement']
+      this.title = val['Title']
+      this.name = val['Name']
+      this.acceptNDA = val['AcceptNDA']
     }
   }
 }

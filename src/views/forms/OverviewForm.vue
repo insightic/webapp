@@ -120,18 +120,19 @@ export default {
       this.$emit('next', this.data())
     }
   },
-  created() {
-    //First time we will not apply this progess
-    console.log(123)
-    if (this.applicationData['Overview'] == null) return
-    this.projectName = this.applicationData['Overview']['ProjectName']
-    this.projectOneLiner = this.applicationData['Overview']['ProjectOneLiner']
-    this.officialWebsite = this.applicationData['Overview']['OfficialWebsite']
-    this.pitchDeck = this.applicationData['Overview']['PitchDeck']
-    this.projectStage = this.applicationData['Overview']['ProjectStage']
-    this.tokenLaunch = this.applicationData['Overview']['TokenLaunch']
-    this.tokenCirculation = this.applicationData['Overview']['TokenCirculation']
-    this.priorApplication = this.applicationData['Overview']['PriorApplication']
+  watch: {
+    applicationData: function (data) {
+      if (!data || !data['Overview']) return
+      const val = data['Overview']
+      this.projectName = val['ProjectName']
+      this.projectOneLiner = val['ProjectOneLiner']
+      this.officialWebsite = val['OfficialWebsite']
+      this.pitchDeck = val['PitchDeck']
+      this.projectStage = val['ProjectStage']
+      this.tokenLaunch = val['TokenLaunch']
+      this.tokenCirculation = val['TokenCirculation']
+      this.priorApplication = val['PriorApplication']
+    }
   }
 }
 </script>
