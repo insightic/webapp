@@ -5,21 +5,21 @@
         label="Project Name"
         description="Please enter the name of your project."
         :required="true"
-        v-model:field="projectName"
+        v-model:field="name"
       />
 
       <LabelInputComponent
         label="Project One-liner"
         description="Please provide a one-sentence introduction to your project."
         :required="true"
-        v-model:field="projectOneLiner"
+        v-model:field="oneLiner"
       />
 
       <LabelInputComponent
-        label="Official Website"
+        label="Project Website"
         description="Please enter the URL of your official website."
         :required="true"
-        v-model:field="officialWebsite"
+        v-model:field="website"
       />
 
       <LabelTextFileURLComponent label="Pitch Deck" v-model:field="pitchDeck" />
@@ -35,7 +35,6 @@
           'Grow',
           'Mature'
         ]"
-        :required="true"
         v-model:field="projectStage"
       />
 
@@ -61,7 +60,7 @@
       />
 
       <SaveNextButtonComponent
-        :disabled="!projectName || !projectOneLiner || !officialWebsite || !projectStage"
+        :disabled="!name || !oneLiner || !website"
         @save="save"
         @next="next"
       />
@@ -90,9 +89,9 @@ export default {
   },
   data() {
     return {
-      projectName: '',
-      projectOneLiner: '',
-      officialWebsite: '',
+      name: '',
+      oneLiner: '',
+      website: '',
       pitchDeck: null as TextFilesObject | null,
       projectStage: '',
       tokenLaunch: '',
@@ -103,9 +102,9 @@ export default {
   methods: {
     data() {
       return {
-        ProjectName: this.projectName,
-        ProjectOneLiner: this.projectOneLiner,
-        OfficialWebsite: this.officialWebsite,
+        Name: this.name,
+        OneLiner: this.oneLiner,
+        Website: this.website,
         PitchDeck: this.pitchDeck,
         ProjectStage: this.projectStage,
         TokenLaunch: this.tokenLaunch,
@@ -124,9 +123,9 @@ export default {
     applicationData: function (data) {
       if (!data || !data['Overview']) return
       const val = data['Overview']
-      this.projectName = val['ProjectName']
-      this.projectOneLiner = val['ProjectOneLiner']
-      this.officialWebsite = val['OfficialWebsite']
+      this.name = val['Name']
+      this.oneLiner = val['OneLiner']
+      this.website = val['Website']
       this.pitchDeck = val['PitchDeck']
       this.projectStage = val['ProjectStage']
       this.tokenLaunch = val['TokenLaunch']

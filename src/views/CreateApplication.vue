@@ -54,7 +54,7 @@ import Competitiveness from './forms/CompetitivenessForm.vue'
 import Investors from './forms/InvestorForm.vue'
 import COI from './forms/COIForm.vue'
 import Confirmation from './forms/ConfirmationForm.vue'
-import { saveApplicationDraft, submitApplicationDraft } from '@/api'
+import { saveApplicationDraft, updateSubmissionDraft } from '@/api'
 import { toRaw } from 'vue'
 
 export default {
@@ -87,6 +87,14 @@ export default {
       application: {} as { [key: string]: any }
     }
   },
+  computed: {
+    applicationID: function () {
+      return this.$route.query?.applicationID?.toString() || ''
+    },
+    submissionID: function () {
+      return this.$route.query?.submissionID?.toString() || ''
+    }
+  },
   methods: {
     toRaw: toRaw,
     formStepStyle(index: number) {
@@ -105,29 +113,55 @@ export default {
         this.current = index
       }
     },
-    async save(data: any) {
-      const formName = this.tabs[this.current].component.name
-      this.application[formName] = data
-      this.application['Name'] = this.application['Overview']['ProjectName']
-      this.application['One-liner'] = this.application['Overview']['ProjectOneLiner']
-      this.application['Website'] = this.application['Overview']['OfficialWebsite']
-      const res = await saveApplicationDraft(JSON.stringify(this.application))
-      console.log(res, 'result')
-    },
-    async next(data: any) {
-      this.pageFinishedNum = this.pageFinishedNum + 1
-      const formName = this.tabs[this.current].component.name
-      this.application[formName] = data
-      if (this.current + 1 != this.tabs.length) {
-        this.current = this.current + 1
+    async newOrSaveDraft(data: any) {
+      const tabName = this.tabs[this.current].name
+      this.application[tabName] = data
+      this.application['Name'] = this.application['Overview']['Name']
+      this.application['OneLiner'] = this.application['Overview']['OneLiner']
+      this.application['Website'] = this.application['Overview']['Website']
+
+      const applicationData = JSON.stringify(this.application)
+      if (!applicationData) {
+        alert('Error saving application draft')
         return
       }
-      // Send network-request to the back-end
-      this.application['Name'] = this.application['Overview']['ProjectName']
-      this.application['One-liner'] = this.application['Overview']['ProjectOneLiner']
-      this.application['Website'] = this.application['Overview']['OfficialWebsite']
-      const res = await submitApplicationDraft(JSON.stringify(this.application))
-      console.log(res, 'result')
+      let res = null
+      if (this.applicationID && this.submissionID) {
+        res = await updateSubmissionDraft(this.applicationID, this.submissionID, applicationData)
+        if (!res) {
+          alert('Error saving application draft')
+          return
+        }
+
+        console.log(res)
+      } else {
+        res = await saveApplicationDraft(applicationData)
+        if (!res) {
+          alert('Error saving application draft')
+          return
+        }
+        this.$router.push({
+          query: { applicationID: res?.applicationID, submissionID: res.submissionID }
+        })
+      }
+    },
+    async save(data: any) {
+      await this.newOrSaveDraft(data)
+    },
+    async next(data: any) {
+      // this.pageFinishedNum = this.pageFinishedNum + 1
+      // const tabName = this.tabs[this.current].name
+      // this.application[tabName] = data
+      // if (this.current + 1 != this.tabs.length) {
+      //   this.current = this.current + 1
+      //   return
+      // }
+      // // Send network-request to the back-end
+      // this.application['Name'] = this.application['Overview']['ProjectName']
+      // this.application['One-liner'] = this.application['Overview']['ProjectOneLiner']
+      // this.application['Website'] = this.application['Overview']['OfficialWebsite']
+      // const res = await submitApplicationDraft(JSON.stringify(this.application))
+      // console.log(res, 'result')
     }
   }
 }

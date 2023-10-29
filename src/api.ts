@@ -175,9 +175,14 @@ export async function submitApplicationDraft(project: string): Promise<string> {
 }
 
 // save new application without any submission
-export async function saveApplicationDraft(project: string): Promise<string> {
-  const resp = await httpclient.post<string>(`/applications/drafts`, project)
-  return resp?.payload || ''
+export async function saveApplicationDraft(
+  project: any
+): Promise<{ applicationID: string; submissionID: string } | null> {
+  const resp = await httpclient.post<{ applicationID: string; submissionID: string }>(
+    `/applications/drafts`,
+    project
+  )
+  return resp?.payload || null
 }
 
 export async function getApplications(): Promise<Application[]> {
@@ -222,7 +227,7 @@ export async function saveSubmissionDraft(
 export async function updateSubmissionDraft(
   applicationID: number | string,
   submissionID: number | string,
-  project: NewApplication
+  project: any
 ): Promise<Application | null> {
   const resp = await httpclient.put<Application>(
     `/applications/${applicationID}/submissions/${submissionID}/drafts`,
