@@ -2,21 +2,21 @@
   <NavFooterLayout>
     <div class="container-fluid p-3 mb-5" style="max-width: 1440px">
       <h1 class="mb-4">
-        <strong>New Application (You are now doing the {{ tabs[pageFinishedNum] }} page)</strong>
+        <strong>New Application</strong>
       </h1>
 
       <div class="row">
         <div class="col-2">
-          <div v-for="(form, index) in forms" :key="index">
+          <div v-for="(form, index) in tabs" :key="index">
             <div @click="changePage(index)" class="nav-item" :class="formStepStyle(index)">
               <div class="d-flex align-items-center">
                 <i class="bi bi-check-circle-fill me-3"></i>
                 <div>
-                  {{ form }}
+                  {{ form.name }}
                 </div>
               </div>
               <div
-                v-if="index + 1 != forms.length"
+                v-if="index + 1 != tabs.length"
                 style="height: 20px; border-left: 1px gray solid; margin-left: 7px"
               ></div>
             </div>
@@ -25,7 +25,7 @@
         <div class="col-10">
           <div>
             <component
-              :is="tabs[current]"
+              :is="toRaw(tabs[current].component)"
               @save="save"
               @next="next"
               :applicationData="application"
@@ -53,27 +53,14 @@ import Acknowledgement from './forms/AcknowledgementForm.vue'
 import Competitiveness from './forms/CompetitivenessForm.vue'
 import Investors from './forms/InvestorForm.vue'
 import COI from './forms/COIForm.vue'
-import ConfirmationForm from './forms/ConfirmationForm.vue'
+import Confirmation from './forms/ConfirmationForm.vue'
 import { saveApplicationDraft, submitApplicationDraft } from '@/api'
+import { toRaw } from 'vue'
 
 export default {
   components: {
-    Overview,
     NavFooterLayout,
-    FormNavButtons,
-    RegistrationAgreement,
-    ComplianceTeam,
-    Legal,
-    ProjectDetails,
-    DigitalAsset,
-    TechnicalDetails,
-    RiskManagement,
-    VolumeCommunity,
-    Acknowledgement,
-    Competitiveness,
-    Investors,
-    COI,
-    ConfirmationForm
+    FormNavButtons
   },
   mounted() {},
   data() {
@@ -82,41 +69,26 @@ export default {
       pageFinishedNum: 0,
       currentTab: 'Overview',
       tabs: [
-        'Overview',
-        'RegistrationAgreement',
-        'ComplianceTeam',
-        'Legal',
-        'ProjectDetails',
-        'DigitalAsset',
-        'TechnicalDetails',
-        'RiskManagement',
-        'VolumeCommunity',
-        'Acknowledgement',
-        'Competitiveness',
-        'Investors',
-        'COI',
-        'ConfirmationForm'
-      ],
-      forms: [
-        'Overview',
-        'Registration Agreement',
-        'Compliance & Team',
-        'Legal',
-        'Project Details',
-        'Digital Asset',
-        'Technical Details',
-        'Risk Management',
-        'Volume & Community',
-        'Acknowledgement',
-        'Competitiveness',
-        'Investors',
-        'Conflict of Interest',
-        'Confirmation'
+        { name: 'Overview', component: Overview },
+        { name: 'Registration Agreement', component: RegistrationAgreement },
+        { name: 'Compliance & Team', component: ComplianceTeam },
+        { name: 'Legal', component: Legal },
+        { name: 'ProjectDetails', component: ProjectDetails },
+        { name: 'Digital Asset', component: DigitalAsset },
+        { name: 'Technical Details', component: TechnicalDetails },
+        { name: 'Risk Management', component: RiskManagement },
+        { name: 'Volume & Community', component: VolumeCommunity },
+        { name: 'Acknowledgement', component: Acknowledgement },
+        { name: 'Competitiveness', component: Competitiveness },
+        { name: 'Investors', component: Investors },
+        { name: 'Conflict of Interest', component: COI },
+        { name: 'Confirmation', component: Confirmation }
       ],
       application: {} as { [key: string]: any }
     }
   },
   methods: {
+    toRaw: toRaw,
     formStepStyle(index: number) {
       if (this.current == index) return 'text-primary'
       return 'text-secondary'
@@ -134,8 +106,8 @@ export default {
       }
     },
     async save(data: any) {
-      const tab = this.tabs[this.current]
-      this.application[tab] = data
+      const formName = this.tabs[this.current].component.name
+      this.application[formName] = data
       this.application['Name'] = this.application['Overview']['ProjectName']
       this.application['One-liner'] = this.application['Overview']['ProjectOneLiner']
       this.application['Website'] = this.application['Overview']['OfficialWebsite']
@@ -144,8 +116,8 @@ export default {
     },
     async next(data: any) {
       this.pageFinishedNum = this.pageFinishedNum + 1
-      const tab = this.tabs[this.current]
-      this.application[tab] = data
+      const formName = this.tabs[this.current].component.name
+      this.application[formName] = data
       if (this.current + 1 != this.tabs.length) {
         this.current = this.current + 1
         return
