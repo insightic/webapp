@@ -51,6 +51,7 @@ import SaveNextButtonComponent from '@/components/SaveNextButtonComponent.vue'
 import type { TextFilesObject } from '@/api'
 
 export default {
+  props: ['data'],
   components: {
     SectionLayout,
     LabelInputComponent,
@@ -69,7 +70,7 @@ export default {
     }
   },
   methods: {
-    data() {
+    payload() {
       return {
         communitySize: this.communitySize,
         detailedInformation: this.detailedInformation,
@@ -80,11 +81,20 @@ export default {
       }
     },
     save() {
-      this.$emit('save', this.data())
+      this.$emit('save', this.payload())
     },
     next() {
-      this.$emit('next', this.data())
+      this.$emit('next', this.payload())
     }
+  },
+  activated() {
+    if (!this.data) return
+    this.communitySize = this.data['CommunitySize']
+    this.detailedInformation = this.data['DetailedInformation']
+    this.totalValueLocked = this.data['TotalValueLocked']
+    this.totalTradingVolume = this.data['TotalTradingVolume']
+    this.geographicalDemographic = this.data['GeographicalDemographic']
+    this.userAcquisitionStrategy = this.data['UserAcquisitionStrategy']
   }
 }
 </script>

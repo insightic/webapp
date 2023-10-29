@@ -27,6 +27,7 @@ import SaveNextButtonComponent from '@/components/SaveNextButtonComponent.vue'
 import type { TextFilesObject } from '@/api'
 
 export default {
+  props: ['data'],
   components: {
     SectionLayout,
     LabelSwitchComponent,
@@ -40,18 +41,23 @@ export default {
     }
   },
   methods: {
-    data() {
+    payload() {
       return {
         RegulatoryAffiliations: this.regulatoryAffiliations,
         RelationshipDescription: this.relationshipDescription
       }
     },
     save() {
-      this.$emit('save', this.data())
+      this.$emit('save', this.payload())
     },
     next() {
-      this.$emit('next', this.data())
+      this.$emit('next', this.payload())
     }
+  },
+  activated() {
+    if (!this.data) return
+    this.regulatoryAffiliations = this.data['RegulatoryAffiliations']
+    this.relationshipDescription = this.data['RelationshipDescription']
   }
 }
 </script>

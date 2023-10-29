@@ -58,7 +58,7 @@ import type { PeopleInfo, TextFilesObject } from '@/api'
 import SaveNextButtonComponent from '@/components/SaveNextButtonComponent.vue'
 
 export default {
-  props: ['applicationData'],
+  props: ['data'],
   components: {
     SectionLayout,
     LabelTextareaComponent,
@@ -78,7 +78,7 @@ export default {
     }
   },
   methods: {
-    data() {
+    payload() {
       return {
         CompanyName: this.companyName,
         CompanyAddress: this.companyAddress,
@@ -89,23 +89,20 @@ export default {
       }
     },
     save() {
-      this.$emit('save', this.data())
+      this.$emit('save', this.payload())
     },
     next() {
-      this.$emit('next', this.data())
+      this.$emit('next', this.payload())
     }
   },
-  watch: {
-    applicationData: function (data) {
-      if (!data || !data['ComplianceTeam']) return
-      const val = data['ComplianceTeam']
-      this.companyName = val['CompanyName']
-      this.companyAddress = val['CompanyAddress']
-      this.executives = val['Executives']
-      this.coreMembers = val['CoreMembers']
-      this.beneficialOwners = val['BeneficialOwners']
-      this.governmentConnections = val['GovernmentConnections']
-    }
+  activated() {
+    if (!this.data) return
+    this.companyName = this.data['CompanyName']
+    this.companyAddress = this.data['CompanyAddress']
+    this.executives = this.data['Executives']
+    this.coreMembers = this.data['CoreMembers']
+    this.beneficialOwners = this.data['BeneficialOwners']
+    this.governmentConnections = this.data['GovernmentConnections']
   }
 }
 </script>

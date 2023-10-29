@@ -78,7 +78,7 @@ import SaveNextButtonComponent from '@/components/SaveNextButtonComponent.vue'
 import type { TextFilesObject } from '@/api'
 
 export default {
-  props: ['applicationData'],
+  props: ['data'],
   components: {
     SectionLayout,
     LabelInputComponent,
@@ -100,7 +100,7 @@ export default {
     }
   },
   methods: {
-    data() {
+    payload() {
       return {
         Name: this.name,
         OneLiner: this.oneLiner,
@@ -113,25 +113,22 @@ export default {
       }
     },
     save() {
-      this.$emit('save', this.data())
+      this.$emit('save', this.payload())
     },
     next() {
-      this.$emit('next', this.data())
+      this.$emit('next', this.payload())
     }
   },
-  watch: {
-    applicationData: function (data) {
-      if (!data || !data['Overview']) return
-      const val = data['Overview']
-      this.name = val['Name']
-      this.oneLiner = val['OneLiner']
-      this.website = val['Website']
-      this.pitchDeck = val['PitchDeck']
-      this.projectStage = val['ProjectStage']
-      this.tokenLaunch = val['TokenLaunch']
-      this.tokenCirculation = val['TokenCirculation']
-      this.priorApplication = val['PriorApplication']
-    }
+  activated() {
+    if (!this.data) return
+    this.name = this.data['Name']
+    this.oneLiner = this.data['OneLiner']
+    this.website = this.data['Website']
+    this.pitchDeck = this.data['PitchDeck']
+    this.projectStage = this.data['ProjectStage']
+    this.tokenLaunch = this.data['TokenLaunch']
+    this.tokenCirculation = this.data['TokenCirculation']
+    this.priorApplication = this.data['PriorApplication']
   }
 }
 </script>

@@ -10,7 +10,11 @@
           <div v-for="(form, index) in tabs" :key="index">
             <div @click="changePage(index)" class="nav-item" :class="formStepStyle(index)">
               <div class="d-flex align-items-center">
-                <i class="bi bi-check-circle-fill me-3"></i>
+                <i
+                  class="bi bi-check-circle-fill me-3"
+                  v-if="hasData(index) || current == index"
+                ></i>
+                <i class="bi bi-check-circle me-3" v-else></i>
                 <div>
                   {{ form.name }}
                 </div>
@@ -24,12 +28,14 @@
         </div>
         <div class="col-10">
           <div>
-            <component
-              :is="toRaw(tabs[current].component)"
-              @save="save"
-              @next="next"
-              :applicationData="application"
-            ></component>
+            <keep-alive>
+              <component
+                :is="toRaw(tabs[current].component)"
+                @save="save"
+                @next="next"
+                :data="application[tabs[current].name]"
+              ></component>
+            </keep-alive>
           </div>
         </div>
       </div>
@@ -109,9 +115,13 @@ export default {
       window.alert('Please fill in all required fields')
     },
     changePage(index: number) {
-      if (this.pageFinishedNum >= index) {
+      if (this.hasData(index)) {
         this.current = index
       }
+    },
+    hasData(idx: number): boolean {
+      const tabName = this.tabs[idx].name
+      return this.application[tabName] != null
     },
     async newOrSaveDraft(data: any) {
       const tabName = this.tabs[this.current].name
@@ -125,37 +135,38 @@ export default {
         alert('Error saving application draft')
         return
       }
-      let res = null
-      if (this.applicationID && this.submissionID) {
-        res = await updateSubmissionDraft(this.applicationID, this.submissionID, applicationData)
-        if (!res) {
-          alert('Error saving application draft')
-          return
-        }
+      // let res = null
+      // if (this.applicationID && this.submissionID) {
+      //   res = await updateSubmissionDraft(this.applicationID, this.submissionID, applicationData)
+      //   if (!res) {
+      //     alert('Error saving application draft')
+      //     return
+      //   }
 
-        console.log(res)
-      } else {
-        res = await saveApplicationDraft(applicationData)
-        if (!res) {
-          alert('Error saving application draft')
-          return
-        }
-        this.$router.push({
-          query: { applicationID: res?.applicationID, submissionID: res.submissionID }
-        })
-      }
+      //   console.log(res)
+      // } else {
+      //   res = await saveApplicationDraft(applicationData)
+      //   if (!res) {
+      //     alert('Error saving application draft')
+      //     return
+      //   }
+      //   this.$router.push({
+      //     query: { applicationID: res?.applicationID, submissionID: res.submissionID }
+      //   })
+      // }
     },
     async save(data: any) {
       await this.newOrSaveDraft(data)
     },
     async next(data: any) {
-      // this.pageFinishedNum = this.pageFinishedNum + 1
+      await this.newOrSaveDraft(data)
+      this.pageFinishedNum = this.pageFinishedNum + 1
       // const tabName = this.tabs[this.current].name
       // this.application[tabName] = data
-      // if (this.current + 1 != this.tabs.length) {
-      //   this.current = this.current + 1
-      //   return
-      // }
+      if (this.current + 1 != this.tabs.length) {
+        this.current = this.current + 1
+        return
+      }
       // // Send network-request to the back-end
       // this.application['Name'] = this.application['Overview']['ProjectName']
       // this.application['One-liner'] = this.application['Overview']['ProjectOneLiner']

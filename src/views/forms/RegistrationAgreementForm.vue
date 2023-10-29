@@ -33,7 +33,7 @@ import PDFComponent from '@/components/PDFComponent.vue'
 import SaveNextButtonComponent from '@/components/SaveNextButtonComponent.vue'
 
 export default {
-  props: ['applicationData'],
+  props: ['data'],
   components: {
     SectionLayout,
     LabelInputComponent,
@@ -49,7 +49,7 @@ export default {
     }
   },
   methods: {
-    data() {
+    payload() {
       return {
         Title: this.title,
         Name: this.name,
@@ -57,20 +57,17 @@ export default {
       }
     },
     save() {
-      this.$emit('save', this.data())
+      this.$emit('save', this.payload())
     },
     next() {
-      this.$emit('next', this.data())
+      this.$emit('next', this.payload())
     }
   },
-  watch: {
-    applicationData: function (data) {
-      if (!data || !data['RegistrationAgreement']) return
-      const val = data['RegistrationAgreement']
-      this.title = val['Title']
-      this.name = val['Name']
-      this.acceptNDA = val['AcceptNDA']
-    }
+  activated() {
+    if (!this.data) return
+    this.title = this.data['Title']
+    this.name = this.data['Name']
+    this.acceptNDA = this.data['AcceptNDA']
   }
 }
 </script>

@@ -125,6 +125,7 @@ import SaveNextButtonComponent from '@/components/SaveNextButtonComponent.vue'
 import type { TextFilesObject } from '@/api'
 
 export default {
+  props: ['data'],
   components: {
     SectionLayout,
     LabelSelectComponent,
@@ -146,7 +147,7 @@ export default {
     }
   },
   methods: {
-    data() {
+    payload() {
       return {
         ProjectSummary: this.projectSummary,
         ProjectCategory: this.projectCategory,
@@ -161,11 +162,24 @@ export default {
       }
     },
     save() {
-      this.$emit('save', this.data())
+      this.$emit('save', this.payload())
     },
     next() {
-      this.$emit('next', this.data())
+      this.$emit('next', this.payload())
     }
+  },
+  activated() {
+    if (!this.data) return
+    this.projectSummary = this.data['ProjectSummary']
+    this.projectCategory = this.data['ProjectCategory']
+    this.projectChallenges = this.data['ProjectChallenges']
+    this.projectInnovation = this.data['ProjectInnovation']
+    this.projectTargetAudience = this.data['ProjectTargetAudience']
+    this.projectImpacts = this.data['ProjectImpacts']
+    this.projectBusinessModel = this.data['ProjectBusinessModel']
+    this.productStage = this.data['ProductStage']
+    this.projectRoadmap = this.data['ProjectRoadmap']
+    this.otherSupportingDocuments = this.data['OtherSupportingDocuments']
   }
 }
 </script>

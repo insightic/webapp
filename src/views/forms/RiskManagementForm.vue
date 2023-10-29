@@ -41,6 +41,7 @@ import SaveNextButtonComponent from '@/components/SaveNextButtonComponent.vue'
 import type { TextFilesObject } from '@/api'
 
 export default {
+  props: ['data'],
   components: {
     SectionLayout,
     LabelTextFileURLComponent,
@@ -56,7 +57,7 @@ export default {
     }
   },
   methods: {
-    data() {
+    payload() {
       return {
         SecurityAssessment: this.securityAssessment,
         BugBounties: this.bugBounties,
@@ -65,11 +66,18 @@ export default {
       }
     },
     save() {
-      this.$emit('save', this.data())
+      this.$emit('save', this.payload())
     },
     next() {
-      this.$emit('next', this.data())
+      this.$emit('next', this.payload())
     }
+  },
+  activated() {
+    if (!this.data) return
+    this.securityAssessment = this.data['SecurityAssessment']
+    this.bugBounties = this.data['BugBounties']
+    this.superuserPrivileges = this.data['SuperuserPrivileges']
+    this.superuserPrivilegesDetails = this.data['SuperuserPrivilegesDetails']
   }
 }
 </script>
