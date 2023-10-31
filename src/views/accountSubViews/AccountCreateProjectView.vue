@@ -321,7 +321,7 @@
 <script lang="ts">
 import LabelInputComponent from '@/components/LabelInputComponent.vue'
 import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
-import { createProject, getPreSignedPutUrl, uploadFile } from '@/api'
+import { getPreSignedPutUrl, uploadFile } from '@/api'
 import type { NewApplication } from '@/api'
 
 export default {
@@ -465,26 +465,26 @@ export default {
           }
         }
       }
-      let data = {
-        Name: this.name,
-        Twitter: this.twitter,
-        Website: this.website,
-        Whitepaper: this.whitepaper,
-        WhitepaperFile: {
-          ID: this.whitepaperId,
-          Filename: this.whitepaperFile.name,
-          URL: this.whitepaperUploadLink
-        },
-        NumFounders: parseInt(this.numFounders) ? parseInt(this.numFounders) : 0,
-        Founders: this.founders,
-        NumMembers: parseInt(this.numTeamMembers) ? parseInt(this.numTeamMembers) : 0,
-        Members: this.teamMembers,
-        Objective: this.objective,
-        Motivation: this.motivation,
-        Assets: this.assets
-      } as unknown as NewApplication
+      // let data = {
+      //   Name: this.name,
+      //   Twitter: this.twitter,
+      //   Website: this.website,
+      //   Whitepaper: this.whitepaper,
+      //   WhitepaperFile: {
+      //     ID: this.whitepaperId,
+      //     Filename: this.whitepaperFile.name,
+      //     URL: this.whitepaperUploadLink
+      //   },
+      //   NumFounders: parseInt(this.numFounders) ? parseInt(this.numFounders) : 0,
+      //   Founders: this.founders,
+      //   NumMembers: parseInt(this.numTeamMembers) ? parseInt(this.numTeamMembers) : 0,
+      //   Members: this.teamMembers,
+      //   Objective: this.objective,
+      //   Motivation: this.motivation,
+      //   Assets: this.assets
+      // } as unknown as NewApplication
 
-      await createProject(data)
+      // await createProject(data)
       window.alert('Your response has been submitted')
       this.$router.push({ query: { view: 'Applications' } })
       // }

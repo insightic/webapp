@@ -163,9 +163,9 @@ export interface NewApplication {
   Assets: string
 }
 
-export async function createProject(project: NewApplication): Promise<Application> {
-  const resp = await httpclient.post<Application>(`/applications`, project)
-  return resp?.payload || ({} as Application)
+export async function createApplication(): Promise<Application | null> {
+  const resp = await httpclient.post<Application>(`/applications`)
+  return resp?.payload || null
 }
 
 // submit new draft application
