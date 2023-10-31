@@ -130,25 +130,30 @@ export default {
       this.application['OneLiner'] = this.application['Overview']['OneLiner']
       this.application['Website'] = this.application['Overview']['Website']
 
-      if (!this.applicationID) {
+      let applicationID = this.applicationID
+      let submissionID = this.submissionID
+      if (!applicationID) {
         const res = await createApplication()
         if (!res) {
           alert('Error creating application')
           return false
         }
-        this.$router.push({ query: { applicationID: res.applicationID } })
+        applicationID = res.ID
+        this.$router.push({ query: { applicationID } })
       }
 
-      if (!this.submissionID) {
-        const res = await createSubmission(this.applicationID, this.application)
+      if (!submissionID) {
+        const res = await createSubmission(applicationID, this.application)
         if (!res) {
           alert('Error creating submission')
           return false
         }
-        this.$router.push({ query: { submissionID: res.submissionID } })
+        submissionID = res.SubmissionID
+        this.$router.push({ query: { applicationID, submissionID } })
       }
 
-      const res = await updateSubmission(this.applicationID, this.submissionID, this.application)
+
+      const res = await updateSubmission(applicationID, submissionID, this.application)
       if (!res) {
         alert('Error updating submission')
         return false

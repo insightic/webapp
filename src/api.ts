@@ -105,8 +105,9 @@ export interface CodeValidationResult {
 }
 
 export interface Submission {
-  Content: ProjectContent
+  Content: { [key: string]: any}
   SubmissionID: string
+  ApplicationID: string
   Results: { CodeValidation: CodeValidationResult[] }
   Status: string
   CreatedAt: string
@@ -163,8 +164,8 @@ export interface NewApplication {
   Assets: string
 }
 
-export async function createApplication(): Promise<{applicationID: string} | null> {
-  const resp = await httpclient.post<{applicationID: string}>(`/applications`)
+export async function createApplication(): Promise<Application | null> {
+  const resp = await httpclient.post<Application>(`/applications`)
   return resp?.payload || null
 }
 
@@ -215,36 +216,16 @@ export async function deleteApplication(id: number | string): Promise<any | null
   return resp?.payload || null
 }
 
-export async function createSubmission(applicationID: number | string, data: { [key:string]: any}): Promise<{applicationID: string, submissionID: string, draft: Submission} | null> {
-  const resp = await httpclient.post<{applicationID: string, submissionID: string, draft: Submission}>(`/applications/${applicationID}/submissions`, data)
+export async function createSubmission(applicationID: number | string, data: { [key:string]: any}): Promise<Submission | null> {
+  const resp = await httpclient.post<Submission>(`/applications/${applicationID}/submissions`, data)
   return resp?.payload || null
 }
 
-export async function updateSubmission(applicationID: number | string, submissionID: number | string, data: { [key:string]: any}): Promise<{applicationID: string, submissionID: string, draft: Submission} | null> {
-  const resp = await httpclient.put<{applicationID: string, submissionID: string, draft: Submission}>(`/applications/${applicationID}/submissions/${submissionID}`, data)
+export async function updateSubmission(applicationID: number | string, submissionID: number | string, data: { [key:string]: any}): Promise<Submission | null> {
+  const resp = await httpclient.put<Submission>(`/applications/${applicationID}/submissions/${submissionID}`, data)
   return resp?.payload || null
 }
 
-// when there is application and save new submission as draft
-export async function saveSubmissionDraft(
-  applicationID: number | string,
-  project: NewApplication
-): Promise<Application | null> {
-  const resp = await httpclient.post<Application>(`/applications/${applicationID}/drafts`, project)
-  return resp?.payload || null
-}
-
-export async function updateSubmissionDraft(
-  applicationID: number | string,
-  submissionID: number | string,
-  project: any
-): Promise<Application | null> {
-  const resp = await httpclient.put<Application>(
-    `/applications/${applicationID}/submissions/${submissionID}/drafts`,
-    project
-  )
-  return resp?.payload || null
-}
 
 // when there is application and submit submission draft
 export async function submitSubmissionDraft(
