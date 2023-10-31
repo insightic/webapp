@@ -147,23 +147,6 @@ export interface S3File {
   FileLink: string
 }
 
-export interface NewApplication {
-  Name: string
-  Twitter: string
-  Website: string
-  Whitepaper: string
-  WhitepaperFile: S3File
-  CodeFiles: S3File
-  WhitepaperFileLink: string
-  NumFounders: number
-  Founders: Founder[]
-  NumMembers: number
-  Members: Member[]
-  Objective: string
-  Motivation: string
-  Assets: string
-}
-
 export async function createApplication(): Promise<Application | null> {
   const resp = await httpclient.post<Application>(`/applications`)
   return resp?.payload || null
@@ -231,7 +214,7 @@ export async function updateSubmission(applicationID: number | string, submissio
 export async function submitSubmissionDraft(
   applicationID: number | string,
   submissionID: number | string,
-  project: NewApplication
+  project: {}
 ): Promise<Application | null> {
   const resp = await httpclient.post<Application>(
     `/applications/${applicationID}/submissions/${submissionID}/submit`,

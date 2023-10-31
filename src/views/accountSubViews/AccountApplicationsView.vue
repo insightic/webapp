@@ -15,7 +15,6 @@
           <th scope="col" style="width: 40%">Project Name</th>
           <th scope="col" style="width: 10%">Updated At</th>
           <th scope="col" style="width: 10%">Created At</th>
-          <th scope="col" style="width: 8%">Status</th>
           <th scope="col" style="width: 12%; min-width: 200px">Action</th>
         </tr>
       </thead>
@@ -24,7 +23,6 @@
           <td>{{ application.ApplicationName }}</td>
           <td>{{ formatDate(application.UpdatedAt) }}</td>
           <td>{{ formatDate(application.CreatedAt) }}</td>
-          <td>{{ application.Status }}</td>
           <td>
             <a
               class="btn btn-sm btn-outline-primary mx-2"
@@ -58,6 +56,7 @@ export default {
   },
   async created() {
     this.applications = await getApplications()
+    console.log(this.applications)
     this.isloading = false
   },
   data() {

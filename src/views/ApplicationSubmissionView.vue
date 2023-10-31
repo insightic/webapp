@@ -41,7 +41,7 @@
                   class="btn btn-sm btn-outline-primary mx-2"
                   @click="ContinueSubmission(submission.SubmissionID)"
                 >
-                  Continue Application
+                  Continue Submission
                 </button>
               </td>
             </tr>
@@ -70,7 +70,6 @@ export default {
     const resp = await getApplication(this.applicationID)
     this.submissions = resp?.Submissions || []
     this.draftExists = resp!.Submissions.filter((item) => item.Status == 'draft').length > 0
-    console.log('submission', this.submissions)
   },
   components: {
     NavFooterLayout

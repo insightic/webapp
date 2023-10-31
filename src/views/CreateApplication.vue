@@ -60,7 +60,13 @@ import Competitiveness from './forms/CompetitivenessForm.vue'
 import Investors from './forms/InvestorForm.vue'
 import COI from './forms/COIForm.vue'
 import Confirmation from './forms/ConfirmationForm.vue'
-import { createApplication, createSubmission, updateSubmission } from '@/api'
+import {
+  getApplication,
+  createApplication,
+  createSubmission,
+  updateSubmission,
+  submitSubmissionDraft
+} from '@/api'
 import { toRaw } from 'vue'
 
 export default {
@@ -80,7 +86,7 @@ export default {
         { name: 'Compliance & Team', component: ComplianceTeam },
         { name: 'Legal', component: Legal },
         { name: 'ProjectDetails', component: ProjectDetails },
-        { name: 'Digital Asset', component: DigitalAsset },
+        // { name: 'Digital Asset', component: DigitalAsset },
         { name: 'Technical Details', component: TechnicalDetails },
         { name: 'Risk Management', component: RiskManagement },
         { name: 'Volume & Community', component: VolumeCommunity },
@@ -93,12 +99,25 @@ export default {
       application: {} as { [key: string]: any }
     }
   },
+  async created() {
+    this.applicationID = this.$route.params.applicationID as string
+    this.submissionID = this.$route.params.submissionID as string
+    if (this.applicationID && this.submissionID) {
+      const resp = await getApplication(this.applicationID)
+      if (resp) {
+        this.application = resp.Submissions.filter(
+          (res) => res.SubmissionID == this.submissionID
+        )[0].Content
+        console.log(this.application)
+      }
+    }
+  },
   computed: {
     applicationID: function () {
-      return this.$route.query?.applicationID?.toString() || ''
+      return this.$route.params?.applicationID?.toString() || ''
     },
     submissionID: function () {
-      return this.$route.query?.submissionID?.toString() || ''
+      return this.$route.params?.submissionID?.toString() || ''
     }
   },
   methods: {
@@ -152,7 +171,6 @@ export default {
         this.$router.push({ query: { applicationID, submissionID } })
       }
 
-
       const res = await updateSubmission(applicationID, submissionID, this.application)
       if (!res) {
         alert('Error updating submission')
@@ -170,6 +188,15 @@ export default {
       if (this.current + 1 != this.tabs.length) {
         this.current = this.current + 1
         return
+      } else {
+        if (this.applicationID && this.submissionID) {
+          const res = await submitSubmissionDraft(
+            this.applicationID,
+            this.submissionID,
+            this.application
+          )
+          console.log(res)
+        }
       }
     }
   }
