@@ -4,7 +4,7 @@
       <h1>Submissions</h1>
       <div class="d-flex justify-content-between align-items-center my-2">
         <div class="text-secondary">Showing all submissions</div>
-        <button class="btn btn-primary" @click="toCreateSubmission">New Submission</button>
+        <button class="btn btn-primary" @click="CreateSubmission">New Submission</button>
       </div>
 
       <div class="w-100 my-3" style="overflow-x: auto">
@@ -26,7 +26,7 @@
                 <a
                   class="btn btn-sm btn-outline-primary mx-2"
                   type="button"
-                  :href="'/projects/' + applicationID + '/' + submission.SubmissionID"
+                  :href="'/applications/' + applicationID + '/' + submission.SubmissionID"
                   >View</a
                 >
                 <a
@@ -39,27 +39,12 @@
               <td v-else>
                 <button
                   class="btn btn-sm btn-outline-primary mx-2"
-                  @click="toSubmission(submission.SubmissionID)"
+                  @click="ContinueSubmission(submission.SubmissionID)"
                 >
                   Continue Application
                 </button>
               </td>
             </tr>
-            <!-- <tr v-for="application in applications" :key="application.ID">
-              <td>asdf</td>
-              <td>{{ formatDate(getSubmission(application).SubmissionAt) }}</td>
-              <td>{{ formatDate(getSubmission(application).SubmissionAt) }}</td>
-              <td>{{ 'Pending' }}</td>
-              <td>
-                <a
-                  class="btn btn-sm btn-outline-primary mx-2"
-                  type="button"
-                  :href="'/projects/' + application.ID"
-                  >View</a
-                >
-                <a class="btn btn-sm btn-outline-danger mx-2" type="button">Withdraw</a>
-              </td>
-            </tr> -->
           </tbody>
         </table>
       </div>
@@ -81,7 +66,7 @@ export default {
     }
   },
   async created() {
-    this.applicationID = this.$route.params.projectID as string
+    this.applicationID = this.$route.params.applicationID as string
     const resp = await getApplication(this.applicationID)
     this.submissions = resp?.Submissions || []
     this.draftExists = resp!.Submissions.filter((item) => item.Status == 'draft').length > 0
@@ -101,8 +86,8 @@ export default {
         location.reload()
       }
     },
-    toCreateSubmission() {
-      this.$router.push('/projects/' + this.applicationID + '/create-submission')
+    CreateSubmission() {
+      this.$router.push('/applications/' + this.applicationID + '/create-submission')
       // if (this.draftExists) {
       //   window.alert(
       //     'You already have a draft submission. Please continue on the draft submission.'
@@ -111,8 +96,8 @@ export default {
       //   this.$router.push('/projects/' + this.applicationID + '/create-submission')
       // }
     },
-    toSubmission(submissionID: string) {
-      this.$router.push('/projects/' + this.applicationID + '/' + submissionID + '/draft')
+    ContinueSubmission(submissionID: string) {
+      this.$router.push('/applications/' + this.applicationID + '/' + submissionID + '/continue-submission')
       // this.$router.push({name:'SubmissionView', query: {submissionID:submissionID, edit:'1'}})
     }
   }

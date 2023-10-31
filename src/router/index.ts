@@ -31,6 +31,16 @@ const router = createRouter({
       component: CreateApplication
     },
     {
+      path: '/applications/:applicationID/create-submission',
+      name: 'CreateSubmissionView',
+      component: CreateApplication
+    },
+    {
+      path: '/applications/:applicationID/:submissionID/continue-submission',
+      name: 'ContinueSubmissionView',
+      component: CreateApplication
+    },
+    {
       path: '/applications/:applicationID',
       name: 'ApplicationView',
       component: ApplicationSubmissionView

@@ -29,7 +29,7 @@
             <a
               class="btn btn-sm btn-outline-primary mx-2"
               type="button"
-              :href="'/projects/' + application.ID"
+              :href="'/applications/' + application.ID"
               >View</a
             >
             <a
