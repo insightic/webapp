@@ -11,10 +11,10 @@
         <table class="table table-bordered">
           <thead class="table-dark">
             <tr>
-              <th scope="col" style="width: 50%">Sumission ID</th>
+              <th scope="col" style="width: 40%">Sumission ID</th>
               <th scope="col" style="width: 10%">Created At</th>
               <th scope="col" style="width: 8%">Status</th>
-              <th scope="col" style="width: 12%; min-width: 200px">Action</th>
+              <th scope="col" style="width: 22%; min-width: 200px">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -22,11 +22,25 @@
               <td>{{ submission.SubmissionID }}</td>
               <td>{{ formatDate(submission.CreatedAt) }}</td>
               <td>{{ submission.Status }}</td>
-              <td v-if="submission.Status != 'draft'">
+              <td>
+                <button
+                  v-if="submission.Status == 'draft'"
+                  class="btn btn-sm btn-outline-primary mx-2"
+                  @click="ContinueSubmission(submission.SubmissionID)"
+                >
+                  Continue Submission
+                </button>
                 <a
+                  v-if="submission.Status != 'draft'"
                   class="btn btn-sm btn-outline-primary mx-2"
                   type="button"
-                  :href="'/applications/' + applicationID + '/' + submission.SubmissionID"
+                  :href="
+                    '/applications/' +
+                    applicationID +
+                    '/' +
+                    submission.SubmissionID +
+                    '/view-submission'
+                  "
                   >View</a
                 >
                 <a
@@ -35,14 +49,6 @@
                   @click="deleteSubmission(applicationID, submission.SubmissionID)"
                   >Delete</a
                 >
-              </td>
-              <td v-else>
-                <button
-                  class="btn btn-sm btn-outline-primary mx-2"
-                  @click="ContinueSubmission(submission.SubmissionID)"
-                >
-                  Continue Submission
-                </button>
               </td>
             </tr>
           </tbody>
@@ -62,7 +68,8 @@ export default {
     return {
       applicationID: '',
       submissions: [] as Array<Submission>,
-      draftExists: false
+      draftExists: false,
+      isDisabled: false
     }
   },
   async created() {
@@ -96,7 +103,9 @@ export default {
       // }
     },
     ContinueSubmission(submissionID: string) {
-      this.$router.push('/applications/' + this.applicationID + '/' + submissionID + '/continue-submission')
+      this.$router.push(
+        '/applications/' + this.applicationID + '/' + submissionID + '/continue-submission'
+      )
       // this.$router.push({name:'SubmissionView', query: {submissionID:submissionID, edit:'1'}})
     }
   }

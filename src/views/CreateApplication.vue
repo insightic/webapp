@@ -96,7 +96,9 @@ export default {
         { name: 'Conflict of Interest', component: COI },
         { name: 'Confirmation', component: Confirmation }
       ],
-      application: {} as { [key: string]: any }
+      application: {} as { [key: string]: any },
+      applicationID: this.$route.params?.applicationID?.toString() || '',
+      submissionID: this.$route.params?.submissionID?.toString() || ''
     }
   },
   async created() {
@@ -112,26 +114,19 @@ export default {
       }
     }
   },
-  computed: {
-    applicationID: function () {
-      return this.$route.params?.applicationID?.toString() || ''
-    },
-    submissionID: function () {
-      return this.$route.params?.submissionID?.toString() || ''
-    }
-  },
+  // computed: {
+  //   applicationID: function () {
+  //     return this.$route.params?.applicationID?.toString() || ''
+  //   },
+  //   submissionID: function () {
+  //     return this.$route.params?.submissionID?.toString() || ''
+  //   }
+  // },
   methods: {
     toRaw: toRaw,
     formStepStyle(index: number) {
       if (this.current == index) return 'text-primary'
       return 'text-secondary'
-    },
-    onChange(form: string, data: { [key: string]: any }) {
-      console.log(form)
-      console.log(data)
-    },
-    nextStep() {
-      window.alert('Please fill in all required fields')
     },
     changePage(index: number) {
       if (this.hasData(index)) {
@@ -158,6 +153,7 @@ export default {
           return false
         }
         applicationID = res.ID
+        this.applicationID = res.ID
         this.$router.push({ query: { applicationID } })
       }
 
@@ -168,6 +164,7 @@ export default {
           return false
         }
         submissionID = res.SubmissionID
+        this.submissionID = res.SubmissionID
         this.$router.push({ query: { applicationID, submissionID } })
       }
 
