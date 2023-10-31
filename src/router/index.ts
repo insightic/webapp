@@ -31,12 +31,12 @@ const router = createRouter({
       component: CreateApplication
     },
     {
-      path: '/applications/:projectID',
+      path: '/applications/:applicationID',
       name: 'ApplicationView',
       component: ApplicationSubmissionView
     },
     {
-      path: '/applications/:projectID/:submissionID',
+      path: '/applications/:applicationID/:submissionID',
       name: 'SubmissionView',
       component: SubmissionView
     }
