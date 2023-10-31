@@ -39,7 +39,7 @@ import { toRaw, type Component } from 'vue'
 import BasicLayout from '@/layouts/BasicLayout.vue'
 import SubmissionDetailsView from '@/views/submissionSubViews/SubmissionDetailsView.vue'
 import SubmissionCodeValidationView from '@/views/submissionSubViews/SubmissionCodeValidationView.vue'
-import ApplicationAutoAssessmentView from './applicationSubViews/ApplicationAutoAssessmentView_Backup.vue'
+import ApplicationAutoAssessmentView from './submissionSubViews/ApplicationAutoAssessmentView_Backup.vue'
 import SubmissionDashboard from '@/views/submissionSubViews/SubmissionDashboard.vue'
 
 export default {

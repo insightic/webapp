@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import AccountView from '@/views/AccountView.vue'
-import ApplicationSubmissionView from '@/views/applicationSubViews/ApplicationSubmissionView.vue'
-import ApplicationDetailsView from '@/views/applicationSubViews/ApplicationDetailsView.vue'
+import ApplicationSubmissionView from '@/views/ApplicationSubmissionView.vue'
 import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import CreateApplication from '@/views/CreateApplication.vue'
@@ -32,22 +31,12 @@ const router = createRouter({
       component: CreateApplication
     },
     {
-      path: '/projects/:projectID',
-      name: 'projectView',
+      path: '/applications/:projectID',
+      name: 'ApplicationView',
       component: ApplicationSubmissionView
     },
     {
-      path: '/projects/:projectID/create-submission',
-      name: 'CreateSubmissionView',
-      component: ApplicationDetailsView
-    },
-    {
-      path: '/projects/:projectID/:submissionID/draft',
-      name: 'ContinueSubmissionView',
-      component: ApplicationDetailsView
-    },
-    {
-      path: '/projects/:projectID/:submissionID',
+      path: '/applications/:projectID/:submissionID',
       name: 'SubmissionView',
       component: SubmissionView
     }

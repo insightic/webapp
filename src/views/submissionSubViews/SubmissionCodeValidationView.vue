@@ -160,7 +160,7 @@
 </template>
 
 <script lang="ts">
-import ApplicationViewMixin from '@/views/applicationSubViews/ApplicationViewMixin'
+import ApplicationViewMixin from '@/views/submissionSubViews/ApplicationViewMixin'
 
 import { organizationsStore } from '@/stores/organizations'
 import { mapStores } from 'pinia'
@@ -249,3 +249,4 @@ export default {
   }
 }
 </script>
+@/views/submissionSubViews/ApplicationViewMixin
