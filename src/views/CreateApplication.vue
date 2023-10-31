@@ -60,7 +60,7 @@ import Competitiveness from './forms/CompetitivenessForm.vue'
 import Investors from './forms/InvestorForm.vue'
 import COI from './forms/COIForm.vue'
 import Confirmation from './forms/ConfirmationForm.vue'
-import { saveApplicationDraft, updateSubmissionDraft } from '@/api'
+import { createApplication, createSubmission, updateSubmission } from '@/api'
 import { toRaw } from 'vue'
 
 export default {
@@ -123,37 +123,38 @@ export default {
       const tabName = this.tabs[idx].name
       return this.application[tabName] != null
     },
-    async newOrSaveDraft(data: any) {
+    async newOrSaveDraft(data: any): Promise<boolean> {
       const tabName = this.tabs[this.current].name
       this.application[tabName] = data
       this.application['Name'] = this.application['Overview']['Name']
       this.application['OneLiner'] = this.application['Overview']['OneLiner']
       this.application['Website'] = this.application['Overview']['Website']
 
-      const applicationData = JSON.stringify(this.application)
-      if (!applicationData) {
-        alert('Error saving application draft')
-        return
+      if (!this.applicationID) {
+        const res = await createApplication()
+        if (!res) {
+          alert('Error creating application')
+          return false
+        }
+        this.$router.push({ query: { applicationID: res.applicationID } })
       }
-      // let res = null
-      // if (this.applicationID && this.submissionID) {
-      //   res = await updateSubmissionDraft(this.applicationID, this.submissionID, applicationData)
-      //   if (!res) {
-      //     alert('Error saving application draft')
-      //     return
-      //   }
 
-      //   console.log(res)
-      // } else {
-      //   res = await saveApplicationDraft(applicationData)
-      //   if (!res) {
-      //     alert('Error saving application draft')
-      //     return
-      //   }
-      //   this.$router.push({
-      //     query: { applicationID: res?.applicationID, submissionID: res.submissionID }
-      //   })
-      // }
+      if (!this.submissionID) {
+        const res = await createSubmission(this.applicationID, this.application)
+        if (!res) {
+          alert('Error creating submission')
+          return false
+        }
+        this.$router.push({ query: { submissionID: res.submissionID } })
+      }
+
+      const res = await updateSubmission(this.applicationID, this.submissionID, this.application)
+      if (!res) {
+        alert('Error updating submission')
+        return false
+      }
+
+      return true
     },
     async save(data: any) {
       await this.newOrSaveDraft(data)
@@ -161,18 +162,10 @@ export default {
     async next(data: any) {
       await this.newOrSaveDraft(data)
       this.pageFinishedNum = this.pageFinishedNum + 1
-      // const tabName = this.tabs[this.current].name
-      // this.application[tabName] = data
       if (this.current + 1 != this.tabs.length) {
         this.current = this.current + 1
         return
       }
-      // // Send network-request to the back-end
-      // this.application['Name'] = this.application['Overview']['ProjectName']
-      // this.application['One-liner'] = this.application['Overview']['ProjectOneLiner']
-      // this.application['Website'] = this.application['Overview']['OfficialWebsite']
-      // const res = await submitApplicationDraft(JSON.stringify(this.application))
-      // console.log(res, 'result')
     }
   }
 }

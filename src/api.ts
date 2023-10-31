@@ -163,8 +163,8 @@ export interface NewApplication {
   Assets: string
 }
 
-export async function createApplication(): Promise<Application | null> {
-  const resp = await httpclient.post<Application>(`/applications`)
+export async function createApplication(): Promise<{applicationID: string} | null> {
+  const resp = await httpclient.post<{applicationID: string}>(`/applications`)
   return resp?.payload || null
 }
 
@@ -212,6 +212,16 @@ export async function updateApplication(
 
 export async function deleteApplication(id: number | string): Promise<any | null> {
   const resp = await httpclient.delete<any>(`/applications/${id}`)
+  return resp?.payload || null
+}
+
+export async function createSubmission(applicationID: number | string, data: { [key:string]: any}): Promise<{applicationID: string, submissionID: string, draft: Submission} | null> {
+  const resp = await httpclient.post<{applicationID: string, submissionID: string, draft: Submission}>(`/applications/${applicationID}/submissions`, data)
+  return resp?.payload || null
+}
+
+export async function updateSubmission(applicationID: number | string, submissionID: number | string, data: { [key:string]: any}): Promise<{applicationID: string, submissionID: string, draft: Submission} | null> {
+  const resp = await httpclient.put<{applicationID: string, submissionID: string, draft: Submission}>(`/applications/${applicationID}/submissions/${submissionID}`, data)
   return resp?.payload || null
 }
 

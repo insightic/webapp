@@ -322,7 +322,6 @@
 import LabelInputComponent from '@/components/LabelInputComponent.vue'
 import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
 import { getPreSignedPutUrl, uploadFile } from '@/api'
-import type { NewApplication } from '@/api'
 
 export default {
   setup() {},
