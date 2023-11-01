@@ -24,8 +24,8 @@
         ]"
         style="width: 80px; height: 48px; border-radius: 30px"
       >
-        <div v-if="field">YES</div>
-        <div v-if="!field">NO</div>
+        <div v-if="toggleState">YES</div>
+        <div v-if="!toggleState">NO</div>
       </div>
     </div>
     <label class="text-secondary small" v-if="footnote">{{ footnote }}</label>
