@@ -1,7 +1,7 @@
 <template>
-  <div class="mb-4">
-    <h3>Scores</h3>
-    <div class="row">
+  <div class="mb-5">
+    <h3 class="my-3">Scores</h3>
+    <div class="my-3 row">
       <div class="col-3">
         <ScoreBoard />
       </div>
@@ -23,48 +23,48 @@
     </div>
   </div>
 
-  <div class="mb-4">
-    <h3>Security Assurance</h3>
-    <div class="row mb-3">
+  <div class="mb-5">
+    <h3 class="my-3">Security Assurance</h3>
+    <div class="row my-3">
       <div class="col-3">
         <ScoreBoard />
       </div>
       <div class="col-9">
-        <table class="w-100 h-100 table text-center" style="border-color: black">
+        <table class="w-100 h-100 table table-bordered text-center" style="border-color: black">
           <thead>
             <tr>
-              <th>Security Audit Status</th>
+              <th style="border-left: 1px solid black;">Security Audit Status</th>
               <th>KYT Service Providers</th>
               <th>Security Auditors</th>
-              <th>Incident Response Plan</th>
+              <th style="border-right: 1px solid black;">Incident Response Plan</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Pass</td>
+              <td style="border-left: 1px solid black;">Pass</td>
               <td>Internal Chainalysis Elliptic</td>
               <td>Certik Hacken</td>
-              <td>Ready</td>
+              <td style="border-right: 1px solid black;">Ready</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-    <div class="row">
+    <div class="row my-3">
       <div class="col-12">
-        <table class="w-100 h-100 table text-center" style="border-color: black">
+        <table class="w-100 h-100 table table-bordered text-center" style="border-color: black">
           <thead>
             <tr>
-              <th>Security Audits</th>
+              <th style="border-left: 1px solid black;">Security Audits</th>
               <th>Number of Incidents</th>
               <th>Total Loss</th>
               <th>Critical Issues</th>
-              <th>Non-Critical Issues</th>
+              <th style="border-right: 1px solid black;">Non-Critical Issues</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>
+              <td style="border-left: 1px solid black;">
                 <div>1</div>
                 <div>in 6 months</div>
               </td>
@@ -80,13 +80,13 @@
                 <div>0</div>
                 <div>in 6 months</div>
               </td>
-              <td>
+              <td style="border-right: 1px solid black;">
                 <div>1</div>
                 <div>in 6 months</div>
               </td>
             </tr>
             <tr>
-              <td>
+              <td style="border-left: 1px solid black;">
                 <div>5</div>
                 <div>in 2 years</div>
               </td>
@@ -102,7 +102,7 @@
                 <div>1</div>
                 <div>in 2 years</div>
               </td>
-              <td>
+              <td style="border-right: 1px solid black;">
                 <div>17</div>
                 <div>in 2 years</div>
               </td>
@@ -113,49 +113,47 @@
     </div>
   </div>
 
-  <div class="mb-4">
-    <h3>Regulatory Compliance</h3>
-    <div class="row mb-4">
+  <div class="mb-5">
+    <h3 class="my-3">Regulatory Compliance</h3>
+    <div class="row my-3">
       <div class="col-3">
         <ScoreBoard />
       </div>
       <div class="col-9">
-        <table class="w-100 h-100 table text-center" style="border-color: black">
+        <table class="w-100 h-100 table table-bordered text-center" style="border-color: black">
           <thead>
             <tr>
-              <th>Registration Status</th>
+              <th style="border-left: 1px solid black;">Registration Status</th>
               <th>Age</th>
               <th>Auditor</th>
-              <th>Audit Status</th>
+              <th style="border-right: 1px solid black;">Audit Status</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Active</td>
+              <td style="border-left: 1px solid black;">Active</td>
               <td>3 Years<br />32 days</td>
               <td>Ernst & Young - Middle East</td>
-              <td>Pass</td>
+              <td style="border-right: 1px solid black;">Pass</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-    <div class="row">
+    <div class="row my-3">
       <div class="col-12">
-        <table class="w-100 h-100 table text-center" style="border-color: black">
+        <table class="w-100 h-100 table table-bordered text-center" style="border-color: black">
           <thead>
             <tr>
-              <th>Charter Score</th>
+              <th style="border-left: 1px solid black;">Charter Score</th>
               <th>Issues</th>
               <th>Licensed Vendors</th>
-              <th>Unlicensed Vendors</th>
+              <th style="border-right: 1px solid black;">Unlicensed Vendors</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>
-                95
-              </td>
+              <td style="border-left: 1px solid black;">95</td>
               <td>
                 <div>0</div>
                 <div>in 6 months</div>
@@ -164,15 +162,13 @@
                 <div>0</div>
                 <div>in 6 months</div>
               </td>
-              <td>
+              <td style="border-right: 1px solid black;">
                 <div>1</div>
                 <div>in 6 months</div>
               </td>
             </tr>
             <tr>
-              <td>
-                Last update 1 June 2023
-              </td>
+              <td style="border-left: 1px solid black;">Last update 1 June 2023</td>
               <td>
                 <div>4</div>
                 <div>in 2 years</div>
@@ -181,7 +177,7 @@
                 <div>0</div>
                 <div>in 2 years</div>
               </td>
-              <td>
+              <td style="border-right: 1px solid black;">
                 <div>3</div>
                 <div>in 2 years</div>
               </td>
@@ -191,34 +187,6 @@
       </div>
     </div>
   </div>
-
-  <!-- <div class="row">
-    <DashboardSectionLayout bg-color="white">
-      <ItemDetails></ItemDetails>
-    </DashboardSectionLayout>
-    <div class="col-7">
-      <DashboardSectionLayout bg-color="white">
-        <div class="row">
-          <div class="col-5 d-flex align-items-center">
-            <RadialBarChart />
-          </div>
-          <div class="col-7">
-            <RadarChart />
-          </div>
-        </div>
-      </DashboardSectionLayout>
-    </div>
-
-    <div class="col-5">
-      <DashboardSectionLayout bg-color="white">
-        <SparklineChart />
-      </DashboardSectionLayout>
-    </div>
-  </div>
-
-  <DashboardSectionLayout bg-color="white">
-    <TableChart />
-  </DashboardSectionLayout> -->
 </template>
 
 <script lang="ts">
@@ -237,3 +205,13 @@ export default {
   methods: {}
 }
 </script>
+
+<style scoped>
+table {
+  vertical-align: middle;
+}
+td, th {
+  border-left: unset;
+  border-right: unset;
+}
+</style>

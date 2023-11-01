@@ -46,7 +46,6 @@
       </div>
     </div>
   </NavFooterLayout>
-
 </template>
 
 <script lang="ts">
@@ -117,10 +116,10 @@ export default {
         this.application = resp.Submissions.filter(
           (res) => res.SubmissionID == this.submissionID
         )[0].Content
-        this.loading = false
-        console.log(this.application)
       }
     }
+
+    this.loading = false
   },
   methods: {
     toRaw: toRaw,
