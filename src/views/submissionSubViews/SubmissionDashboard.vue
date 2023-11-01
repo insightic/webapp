@@ -1,5 +1,8 @@
 <template>
   <div class="row">
+    <DashboardSectionLayout bg-color="white">
+      <ItemDetails></ItemDetails>
+    </DashboardSectionLayout>
     <div class="col-7">
       <DashboardSectionLayout bg-color="white">
         <div class="row">
@@ -31,6 +34,7 @@ import RadarChart from '@/components/graphs/RadarChart.vue'
 import RadialBarChart from '@/components/graphs/RadialBarChart.vue'
 import SparklineChart from '@/components/graphs/SparklineChart.vue'
 import TableChart from '@/components/graphs/TableChart.vue'
+import ItemDetails from '@/components/dashboard/ItemDetailsComponent.vue'
 
 export default {
   components: {
@@ -38,7 +42,8 @@ export default {
     RadarChart,
     RadialBarChart,
     SparklineChart,
-    TableChart
+    TableChart,
+    ItemDetails
   },
   async created() {},
   data() {

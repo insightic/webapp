@@ -1,7 +1,7 @@
 <template>
   <div class="container mt-5">
     <div class="row">
-      <div class="col-md-1">
+      <div class="col-md-3">
         <div class="text-center">
           <img src="../../../public/logo.png" class="rounded-circle" width="100" height="100" />
         </div>
