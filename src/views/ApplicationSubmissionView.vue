@@ -34,13 +34,7 @@
                   v-if="submission.Status != 'draft'"
                   class="btn btn-sm btn-outline-primary mx-2"
                   type="button"
-                  :href="
-                    '/applications/' +
-                    applicationID +
-                    '/' +
-                    submission.SubmissionID +
-                    '/view-submission'
-                  "
+                  :href="'/applications/' + applicationID + '/' + submission.SubmissionID"
                   >View</a
                 >
                 <a

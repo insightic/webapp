@@ -5,24 +5,13 @@
       <div class="text-secondary">Submission Details</div>
 
       <ul class="nav nav-pills my-3">
-        <li class="nav-item">
-          <div class="nav-link" :class="{ active: subViewIdx == 0 }" @click="subViewIdx = 0">
-            Details
-          </div>
-        </li>
-        <li class="nav-item">
-          <div class="nav-link" :class="{ active: subViewIdx == 1 }" @click="subViewIdx = 1">
-            Assessment
-          </div>
-        </li>
-        <li class="nav-item">
-          <div class="nav-link" :class="{ active: subViewIdx == 2 }" @click="subViewIdx = 2">
-            Code Validation
-          </div>
-        </li>
-        <li class="nav-item">
-          <div class="nav-link" :class="{ active: subViewIdx == 3 }" @click="subViewIdx = 3">
-            Dashboard
+        <li class="nav-item" v-for="(item, index) in topBarName">
+          <div
+            class="nav-link"
+            :class="{ active: subViewIdx == index }"
+            @click="subViewIdx = index"
+          >
+            {{ item }}
           </div>
         </li>
       </ul>
@@ -37,10 +26,9 @@
 <script lang="ts">
 import { toRaw, type Component } from 'vue'
 import BasicLayout from '@/layouts/BasicLayout.vue'
-import SubmissionDetailsView from '@/views/submissionSubViews/SubmissionDetailsView.vue'
+import SubmissionDashboard from '@/views/submissionSubViews/SubmissionDashboard.vue'
 import SubmissionCodeValidationView from '@/views/submissionSubViews/SubmissionCodeValidationView.vue'
 import ApplicationAutoAssessmentView from './submissionSubViews/ApplicationAutoAssessmentView_Backup.vue'
-import SubmissionDashboard from '@/views/submissionSubViews/SubmissionDashboard.vue'
 
 export default {
   components: {
@@ -50,10 +38,18 @@ export default {
     return {
       subViewIdx: 0,
       subViews: [
-        SubmissionDetailsView,
+        SubmissionDashboard,
         ApplicationAutoAssessmentView,
-        SubmissionCodeValidationView,
-        SubmissionDashboard
+        SubmissionCodeValidationView
+      ],
+      topBarName: [
+        'Overview',
+        'Company Profile',
+        'Change Log',
+        'Communication',
+        'Feedback',
+        'Alerts',
+        'Report'
       ]
     }
   },

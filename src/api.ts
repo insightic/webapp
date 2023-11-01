@@ -188,7 +188,7 @@ export async function getApplication(id: number | string): Promise<Application |
 
 export async function updateApplication(
   id: number | string,
-  project: NewApplication
+  project: {}
 ): Promise<Application | null> {
   const resp = await httpclient.put<Application>(`/applications/${id}`, project)
   return resp?.payload || null
