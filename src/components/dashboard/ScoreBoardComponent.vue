@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-4">
+  <div class="h-100 d-flex align-items-center">
     <table style="width: 350px;" class="custom-table"> 
       <tr>
         <th colspan="2">Score (1-100 Scale)</th>

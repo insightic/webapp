@@ -1,6 +1,6 @@
 import moment from 'moment'
 
-export function formatDateTime(date: string, fromNow: boolean = false): string {
+export function formatDateTime(date: string | Date, fromNow: boolean = false): string {
   const time = moment(date)
   if (!fromNow) {
     return `${time.format('YYYY/MM/DD HH:mm:ss')}`
@@ -8,7 +8,7 @@ export function formatDateTime(date: string, fromNow: boolean = false): string {
   return `${time.fromNow()}, ${time.format('YYYY/MM/DD HH:mm:ss')}`
 }
 
-export function formatDate(date: string, fromNow: boolean = false): string {
+export function formatDate(date: string | Date, fromNow: boolean = false): string {
   const time = moment(date)
   if (!fromNow) {
     return `${time.format('YYYY/MM/DD')}`
