@@ -14,18 +14,18 @@
         </div>
       </div>
       <ul class="nav nav-pills my-3">
-        <li class="nav-item" v-for="(item, index) in topBarName">
+        <li class="nav-item" v-for="(item, idx) in subViews" :key="idx">
           <div
             class="nav-link"
-            :class="{ active: subViewIdx == index }"
-            @click="subViewIdx = index"
+            :class="{ active: subViewIdx == idx }"
+            @click="subViewIdx = idx"
           >
-            {{ item }}
+            {{ item.name }}
           </div>
         </li>
       </ul>
       <hr />
-      <div>
+      <div v-if="activeSubView">
         <component :is="activeSubView"></component>
       </div>
     </div>
@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts">
-import { toRaw, type Component } from 'vue'
+import { toRaw } from 'vue'
 import BasicLayout from '@/layouts/BasicLayout.vue'
 import SubmissionDashboard from '@/views/submissionSubViews/SubmissionDashboard.vue'
 import CompanyProfile from '@/views/submissionSubViews/CompanyProfile.vue'
@@ -53,25 +53,19 @@ export default {
     return {
       subViewIdx: 0,
       subViews: [
-        SubmissionDashboard,
-        CompanyProfile,
-        ApplicationAutoAssessmentView,
-        SubmissionCodeValidationView
-      ],
-      topBarName: [
-        'Overview',
-        'Company Profile',
-        'Change Log',
-        'Communication',
-        'Feedback',
-        'Alerts',
-        'Report'
+        {name: 'Overview', component: SubmissionDashboard},
+        {name: 'Company Profile', component: CompanyProfile},
+        {name: 'Change Log', component: ApplicationAutoAssessmentView},
+        {name: 'Communication', component: SubmissionCodeValidationView},
+        {name: 'Feedback', component: null},
+        {name: 'Alerts', component: null},
+        {name: 'Report', component: null}
       ]
     }
   },
   computed: {
-    activeSubView(): Component {
-      return toRaw(this.subViews[this.subViewIdx])
+    activeSubView() {
+      return toRaw(this.subViews[this.subViewIdx].component)
     }
   }
 }
