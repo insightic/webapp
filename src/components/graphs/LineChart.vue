@@ -5,6 +5,7 @@
       type="line"
       :options="options"
       :series="series"
+      height="100%"
     ></apexchart>
   </div>
 </template>
@@ -26,8 +27,8 @@ export default {
       ],
       options: {
         chart: {
-          height: 350,
-          type: 'bar'
+          height: '100%',
+          type: 'line'
         },
         plotOptions: {
           bar: {

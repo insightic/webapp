@@ -1,6 +1,6 @@
 <template>
   <div class="h-100 d-flex align-items-center">
-    <table style="width: 350px;" class="custom-table"> 
+    <table style="width: 350px;" class="h-100 custom-table"> 
       <tr>
         <th colspan="2">Score (1-100 Scale)</th>
       </tr>
