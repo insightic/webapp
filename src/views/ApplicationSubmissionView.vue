@@ -87,20 +87,12 @@ export default {
       }
     },
     CreateSubmission() {
-      this.$router.push('/applications/' + this.applicationID + '/create-submission')
-      // if (this.draftExists) {
-      //   window.alert(
-      //     'You already have a draft submission. Please continue on the draft submission.'
-      //   )
-      // } else {
-      //   this.$router.push('/projects/' + this.applicationID + '/create-submission')
-      // }
+      this.$router.push(`/create-application?applicationID=${this.applicationID}`)
     },
     ContinueSubmission(submissionID: string) {
       this.$router.push(
-        '/applications/' + this.applicationID + '/' + submissionID + '/continue-submission'
+        `/create-application?applicationID=${this.applicationID}&submissionID=${submissionID}`
       )
-      // this.$router.push({name:'SubmissionView', query: {submissionID:submissionID, edit:'1'}})
     }
   }
 }

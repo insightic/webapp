@@ -79,7 +79,6 @@ export default {
     NavFooterLayout,
     FormNavButtons
   },
-  mounted() {},
   data() {
     return {
       loading: true,
@@ -102,20 +101,16 @@ export default {
         { name: 'Conflict of Interest', component: COI },
         { name: 'Confirmation', component: Confirmation }
       ],
-      application: {} as { [key: string]: any },
-      applicationID: this.$route.params?.applicationID?.toString() || '',
-      submissionID: this.$route.params?.submissionID?.toString() || ''
+      application: {} as { [key: string]: any }
     }
   },
   async created() {
-    this.applicationID = this.$route.params.applicationID as string
-    this.submissionID = this.$route.params.submissionID as string
-    if (this.applicationID && this.submissionID) {
-      const resp = await getApplication(this.applicationID)
+    if (this.applicationID() && this.submissionID()) {
+      const resp = await getApplication(this.applicationID())
       if (resp) {
         this.application = resp.Submissions.filter(
-          (res) => res.SubmissionID == this.submissionID
-        )[0].Content
+          (res) => res.SubmissionID == this.submissionID()
+        )[0]?.Content
       }
     }
 
@@ -136,6 +131,12 @@ export default {
       const tabName = this.tabs[idx].name
       return this.application[tabName] != null
     },
+    applicationID() {
+      return this.$route.query.applicationID as string
+    },
+    submissionID() {
+      return this.$route.query.submissionID as string
+    },
     async newOrSaveDraft(data: any): Promise<boolean> {
       const tabName = this.tabs[this.current].name
       this.application[tabName] = data
@@ -143,8 +144,8 @@ export default {
       this.application['OneLiner'] = this.application['Overview']['OneLiner']
       this.application['Website'] = this.application['Overview']['Website']
 
-      let applicationID = this.applicationID
-      let submissionID = this.submissionID
+      let applicationID = this.applicationID()
+      let submissionID = this.submissionID()
       if (!applicationID) {
         const res = await createApplication()
         if (!res) {
@@ -152,7 +153,6 @@ export default {
           return false
         }
         applicationID = res.ID
-        this.applicationID = res.ID
         this.$router.push({ query: { applicationID } })
       }
 
@@ -163,7 +163,6 @@ export default {
           return false
         }
         submissionID = res.SubmissionID
-        this.submissionID = res.SubmissionID
         this.$router.push({ query: { applicationID, submissionID } })
       }
 
@@ -185,13 +184,9 @@ export default {
         this.current = this.current + 1
         return
       } else {
-        if (this.applicationID && this.submissionID) {
-          const res = await submitSubmissionDraft(
-            this.applicationID,
-            this.submissionID,
-            this.application
-          )
-          console.log(res)
+        if (this.applicationID() && this.submissionID()) {
+          await submitSubmissionDraft(this.applicationID(), this.submissionID(), this.application)
+          this.$router.push(`/applications/${this.applicationID}`)
         }
       }
     }
