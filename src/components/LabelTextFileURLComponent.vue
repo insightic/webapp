@@ -10,7 +10,7 @@
     <div class="text-secondary small mb-1" v-html="description"></div>
     <div class="card w-100">
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">
+        <li :class="['list-group-item', { disabled: disabled }]">
           <textarea
             class="form-control px-1"
             style="border: 0px; resize: none; overflow: hidden"
@@ -22,7 +22,11 @@
             :disabled="disabled"
           />
         </li>
-        <li class="list-group-item" v-for="(file, idx) in files" :key="idx">
+        <li
+          :class="['list-group-item', { disabled: disabled }]"
+          v-for="(file, idx) in files"
+          :key="idx"
+        >
           <div class="d-flex flex-row align-items-center">
             <div class="me-2">
               <i class="text-primary bi bi-file-earmark" style="font-size: 1.6rem"></i>
@@ -52,7 +56,7 @@
           </div>
         </li>
 
-        <li class="list-group-item" v-if="uploadingFileObject">
+        <li :class="['list-group-item', { disabled: disabled }]" v-if="uploadingFileObject">
           <div class="d-flex my-3 flex-row align-items-center">
             <div class="me-2">
               <i class="text-primary bi bi-file-earmark" style="font-size: 1.6rem"></i>
@@ -82,7 +86,10 @@
           </div>
         </li>
 
-        <li class="list-group-item" v-if="!uploading && !uploadingFileObject">
+        <li
+          :class="['list-group-item', { disabled: disabled }]"
+          v-if="!uploading && !uploadingFileObject"
+        >
           <button class="btn btn-sm btn-outline-primary me-2" :disabled="disabled">
             <label class="d-flex align-items-center">
               <input type="file" style="display: none" @change="upload" ref="fileInput" />
@@ -174,7 +181,7 @@ const download = async function (idx: number) {
 </script>
 
 <style scoped>
-.list-group-item {
+.list-group-item.disabled {
   background-color: #e9ecef;
 }
 </style>

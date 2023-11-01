@@ -6,7 +6,11 @@
 
     <div class="card w-100">
       <ul class="list-group list-group-flush">
-        <li class="list-group-item" v-for="(p, idx) in people" :key="idx">
+        <li
+          :class="['list-group-item', { disabled: disabled }]"
+          v-for="(p, idx) in people"
+          :key="idx"
+        >
           <div class="d-flex my-3 flex-row align-items-center">
             <div class="me-2">
               <i class="text-primary bi bi-person" style="font-size: 1.6rem"></i>
@@ -49,6 +53,7 @@
                       class="btn btn-sm btn-outline-primary px-2"
                       v-if="p.cv"
                       @click="downloadFileObject(p.cv)"
+                    
                     >
                       <i class="bi bi-cloud-download"></i>
                     </button>
@@ -62,6 +67,7 @@
                 type="button"
                 class="btn btn-sm btn-outline-primary mx-2"
                 @click="showEditModal(idx)"
+                :disabled="disabled"
               >
                 Edit
               </button>
@@ -69,6 +75,7 @@
                 type="button"
                 class="btn btn-sm btn-outline-danger mx-2"
                 @click="showRemoveModal(idx)"
+                :disabled="disabled"
               >
                 Remove
               </button>
@@ -79,8 +86,8 @@
             Risk Score: <span>{{ p.score }}</span>
           </div>
         </li>
-        <li class="list-group-item d-flex">
-          <button class="btn btn btn-primary" @click="showAddModal()">
+        <li :class="['list-group-item', 'd-flex', { disabled: disabled }]">
+          <button class="btn btn btn-primary" @click="showAddModal()" :disabled="disabled">
             {{ addButtonName }}
           </button>
         </li>
@@ -115,7 +122,8 @@ export default {
   props: {
     label: { type: String, required: true },
     addButtonName: { type: String, default: 'Add' },
-    field: { type: Array<PeopleInfo> }
+    field: { type: Array<PeopleInfo> },
+    disabled: { type: Boolean, default: false }
   },
   emits: ['update:field'],
   data() {
@@ -180,5 +188,9 @@ td {
   padding: 0px;
   text-align: left;
   padding-left: 10px;
+}
+
+.list-group-item.disabled {
+  background-color: #e9ecef;
 }
 </style>

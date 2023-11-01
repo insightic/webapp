@@ -6,12 +6,14 @@
         description="
             Do any members of your core team have relationships, affiliations, or interactions with any regulators, organizations, or decision-makers that could potentially, or be perceived to, influence their judgment or actions in the execution of their roles and responsibilities?"
         v-model:field="regulatoryAffiliations"
+        :disabled="disabled"
       />
 
       <LabelTextFileURLComponent
         v-if="regulatoryAffiliations"
         label="Description of the nature of the relationship or interaction"
         v-model:field="relationshipDescription"
+        :disabled="disabled"
       />
 
       <SaveNextButtonComponent @save="save" @next="next" />

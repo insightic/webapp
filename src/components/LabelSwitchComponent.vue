@@ -10,13 +10,23 @@
     <div class="text-secondary small mb-1" v-html="description"></div>
     <div
       :class="['switch', { on: toggleState }]"
-      style="width: 100px; height: 40px; border-radius: 50px"
+      style="width: 160px; height: 50px; border-radius: 30px"
       @click="toggleSwitch"
     >
       <div
-        :class="['switch-button', { on: toggleState }]"
-        style="width: 50px; height: 38px; border-radius: 50px"
-      ></div>
+        :class="[
+          'switch-button',
+          { on: toggleState },
+          { disabled: disabled },
+          'd-flex',
+          'align-items-center',
+          'justify-content-center'
+        ]"
+        style="width: 80px; height: 48px; border-radius: 30px"
+      >
+        <div v-if="field">YES</div>
+        <div v-if="!field">NO</div>
+      </div>
     </div>
     <label class="text-secondary small" v-if="footnote">{{ footnote }}</label>
   </div>
@@ -44,6 +54,7 @@ export default {
   },
   methods: {
     toggleSwitch() {
+      if (this.disabled) return
       this.toggleState = !this.toggleState
       this.$emit('update:field', this.toggleState)
     }
@@ -53,13 +64,17 @@ export default {
 
 <style>
 .switch {
-  background-color: #ccc;
+  background-color: var(--bs-secondary);
   position: relative;
   cursor: pointer;
 }
 
 .switch.on {
-  background-color: #007bff;
+  background-color: var(--bs-success);
+}
+
+.switch-button.disabled {
+  background-color: #e9ecef !important;
 }
 
 .switch-button {
@@ -71,6 +86,6 @@ export default {
 }
 
 .switch-button.on {
-  transform: translateX(48px);
+  transform: translateX(78px);
 }
 </style>

@@ -5,18 +5,21 @@
         label="Security Assessment"
         description="Please upload Auditing report."
         v-model:field="securityAssessment"
+        :disabled="disabled"
       />
 
       <LabelTextFileURLComponent
         label="Bug Bounties"
         description="Please upload bug bounties."
         v-model:field="bugBounties"
+        :disabled="disabled"
       />
 
       <LabelSwitchComponent
         label="Superuser Privileges"
         description="Are there any roles in the asset that allow the holder “superuser” privileges, enabling an individual user, often with a single key, to affect the state of the entire asset (e.g. token upgrade roles, seize/destroy roles, mint roles)?"
         v-model:field="superuserPrivileges"
+        :disabled="disabled"
       />
 
       <LabelTextFileURLComponent
@@ -26,6 +29,7 @@
             of privileges management.<br/>(3) Execution Thresholds for Superuser Keys.<br/>(4) Management and
             Control of Superuser Keys.<br/>(5) Generation of Superuser Keys."
         v-model:field="superuserPrivilegesDetails"
+        :disabled="disabled"
       />
 
       <SaveNextButtonComponent @save="save" @next="next" />

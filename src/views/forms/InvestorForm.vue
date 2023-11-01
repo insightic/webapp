@@ -5,6 +5,7 @@
         label="Key Incubators, Advisors, and Major Investors/Partner"
         description="Please share a list of your key incubators, advisors, and major investors or partners, specifying involvement in tokens and equity."
         v-model:field="keyIncubators"
+        :disabled="disabled"
       />
 
       <LabelTextFileURLComponent
@@ -13,6 +14,7 @@
             Please share the valuation (Fully Diluted Valuation if possible) of each round of funding your project has undergone
             (Please provide detailed information)."
         v-model:field="valuation"
+        :disabled="disabled"
       />
 
       <SaveNextButtonComponent @save="save" @next="next" />

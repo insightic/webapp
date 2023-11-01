@@ -3,9 +3,21 @@
     <SectionLayout title="Registration Agreement">
       <PDFComponent src="../../../insightic.pdf" style="height: 480px" />
 
-      <LabelInputComponent label="Title" type="text" v-model:field="title" :required="true" />
+      <LabelInputComponent
+        label="Title"
+        type="text"
+        v-model:field="title"
+        :required="true"
+        :disabled="disabled"
+      />
 
-      <LabelInputComponent label="Name" type="text" v-model:field="name" :required="true" />
+      <LabelInputComponent
+        label="Name"
+        type="text"
+        v-model:field="name"
+        :required="true"
+        :disabled="disabled"
+      />
 
       <LabelSwitchComponent
         label="Accept the NDA agreement"
@@ -14,6 +26,7 @@
         height="40"
         v-model:field="acceptNDA"
         :required="true"
+        :disabled="disabled"
       />
 
       <SaveNextButtonComponent

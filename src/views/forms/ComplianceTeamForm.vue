@@ -6,6 +6,7 @@
         type="text"
         v-model:field="companyName"
         :required="true"
+        :disabled="disabled"
       />
 
       <LabelTextareaComponent
@@ -13,30 +14,35 @@
         type="text"
         v-model:field="companyAddress"
         :required="true"
+        :disabled="disabled"
       />
 
       <PeopleGroupComponent
         label="Executives"
         add-button-name="Add Executive"
         v-model:field="executives"
+        :disabled="disabled"
       />
 
       <PeopleGroupComponent
         label="Core Team Members"
         add-button-name="Add Core Team Member"
         v-model:field="coreMembers"
+        :disabled="disabled"
       />
 
       <PeopleGroupComponent
         label="Non-executive Beneficial Owners"
         add-button-name="Add Non-executive Beneficial Owner"
         v-model:field="beneficialOwners"
+        :disabled="disabled"
       />
 
       <LabelTextFileURLComponent
         label="Government Connections"
         description="Please state all connections you have with the government."
         v-model:field="governmentConnections"
+        :disabled="disabled"
       />
 
       <SaveNextButtonComponent

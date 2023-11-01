@@ -5,6 +5,7 @@
         label="Project Summary"
         description="Please provide a detailed summary of your project."
         :required="true"
+        :disabled="disabled"
       />
 
       <LabelSelectComponent
@@ -63,53 +64,62 @@
           'Sustainability'
         ]"
         v-model:field="projectCategory"
+        :disabled="disabled"
       />
 
       <LabelTextFileURLComponent
         label="Challenges and Roadblocks"
         description="Please describe the challenges and difficulties while developing the project."
         v-model:field="projectChallenges"
+        :disabled="disabled"
       />
 
       <LabelTextFileURLComponent
         label="Solutions and Innovation"
         description="Please describe the solutions that solves the business problem."
         v-model:field="projectInnovation"
+        :disabled="disabled"
       />
 
       <LabelTextFileURLComponent
         label="Target Audience"
         description="Please list down the target audience of your products."
         v-model:field="projectTargetAudience"
+        :disabled="disabled"
       />
 
       <LabelTextFileURLComponent
         label="Impacts / Benefits"
         description="Please provide a detailed summary on the impacts and benefits brought to the target audience listed down in question 5."
         v-model:field="projectImpacts"
+        :disabled="disabled"
       />
 
       <LabelTextFileURLComponent
         label="Business Model"
         description="Please provide a detailed summary on the following: a. Current and planned revenue streams and usage. b. Is the team working on multiple projects at the same time?"
         v-model:field="projectBusinessModel"
+        :disabled="disabled"
       />
 
       <LabelTextFileURLComponent
         label="Product Stage"
         description="Please list out the roadmap of your product."
         v-model:field="productStage"
+        :disabled="disabled"
       />
 
       <LabelTextFileURLComponent
         label="Roadmap"
         description="Please list out the roadmap of your company."
         v-model:field="projectRoadmap"
+        :disabled="disabled"
       />
 
       <LabelTextFileURLComponent
         label="Other Supporting Documents"
         v-model:field="otherSupportingDocuments"
+        :disabled="disabled"
       />
 
       <SaveNextButtonComponent @save="save" @next="next" />

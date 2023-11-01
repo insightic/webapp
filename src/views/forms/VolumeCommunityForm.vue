@@ -10,31 +10,36 @@
         2. [ platform2 ] [ URL ] [ size of community] <br/>
         "
         v-model:field="communitySize"
+        :disabled="disabled"
       />
 
       <LabelTextFileURLComponent
         label="Please provide rough statistics on the number of users, and include on-chain proof/reference sites if applicable."
         description="Please provide detailed information and links to reference sites"
         v-model:field="detailedInformation"
+        :disabled="disabled"
       />
 
-      <LabelInputComponent label="Total Value Locked (TVL)" v-model:field="totalValueLocked" />
+      <LabelInputComponent label="Total Value Locked (TVL)" v-model:field="totalValueLocked" :disabled="disabled"/>
 
       <LabelInputComponent
         label="Total Trading/Transaction Volume"
         v-model:field="totalTradingVolume"
+        :disabled="disabled"
       />
 
       <LabelTextareaComponent
         label="Geographical Demographic"
         description="Please describe the geographical demographic of your community"
         v-model:field="geographicalDemographic"
+        :disabled="disabled"
       />
 
       <LabelTextFileURLComponent
         label="User Acquisition Strategy"
         description="How do you plan to attract new users to your project?"
         v-model:field="userAcquisitionStrategy"
+        :disabled="disabled"
       />
 
       <SaveNextButtonComponent @save="save" @next="next" />

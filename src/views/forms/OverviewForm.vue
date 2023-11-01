@@ -5,6 +5,7 @@
         label="Project Name"
         description="Please enter the name of your project."
         :required="true"
+        :disabled="disabled"
         v-model:field="name"
       />
 
@@ -12,6 +13,7 @@
         label="Project One-liner"
         description="Please provide a one-sentence introduction to your project."
         :required="true"
+        :disabled="disabled"
         v-model:field="oneLiner"
       />
 
@@ -19,10 +21,11 @@
         label="Project Website"
         description="Please enter the URL of your official website."
         :required="true"
+        :disabled="disabled"
         v-model:field="website"
       />
 
-      <LabelTextFileURLComponent label="Pitch Deck" v-model:field="pitchDeck" />
+      <LabelTextFileURLComponent label="Pitch Deck" v-model:field="pitchDeck"  :disabled="disabled"/>
 
       <LabelSelectComponent
         label="Project Stage"
@@ -36,6 +39,7 @@
           'Mature'
         ]"
         v-model:field="projectStage"
+        :disabled="disabled"
       />
 
       <LabelSelectComponent
@@ -43,6 +47,7 @@
         description="Please select the current stage of your project."
         :options="['Yes', 'No', 'Not Sure']"
         v-model:field="tokenLaunch"
+        :disabled="disabled"
       />
 
       <LabelSwitchComponent
@@ -51,12 +56,14 @@
         description="Has the token been circulated?"
         :options="['Yes', 'No']"
         v-model:field="tokenCirculation"
+        :disabled="disabled"
       />
 
       <LabelSwitchComponent
         label="Prior Application"
         description="Have you applied before?"
         v-model:field="priorApplication"
+        :disabled="disabled"
       />
 
       <SaveNextButtonComponent

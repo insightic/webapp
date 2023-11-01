@@ -5,12 +5,14 @@
         label="Major Competitors"
         description="Please share a list of major competitors for the business that you are aware of."
         v-model:field="majorCompetitors"
+        :disabled="disabled"
       />
 
       <LabelTextFileURLComponent
         label="Main innovation / differentiation over the competitors?"
         description="Please share the difference in the business logic between your company and the competitors and what is your innovation / advantages over the competitors."
         v-model:field="mainInnovation"
+        :disabled="disabled"
       />
     </SectionLayout>
 

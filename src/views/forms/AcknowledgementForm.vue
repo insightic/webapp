@@ -10,6 +10,7 @@
             d. Have you published any research papers, articles, or works in collaboration with industry experts or reputed institutions? Please provide references or links to such works?
             "
         v-model:field="partnerships"
+        :disabled="disabled"
       />
 
       <LabelTextFileURLComponent
@@ -19,6 +20,7 @@
             b. Were the objectives of these projects met, and what were the measurable outcomes and impacts of these projects and client engagements?
             "
         v-model:field="clientele"
+        :disabled="disabled"
       />
 
       <LabelTextFileURLComponent
@@ -27,6 +29,7 @@
             a. Has your organization received any awards or recognitions from reputable bodies or organizations? If so, can you provide details of such awards and the criteria?
             "
         v-model:field="awards"
+        :disabled="disabled"
       />
 
       <SaveNextButtonComponent @save="save" @next="next" />
