@@ -19,6 +19,7 @@
             placeholder="Please describe in text or attach files by uploading or url..."
             ref="textarea"
             v-model="text"
+            :disabled="disabled"
           />
         </li>
         <li class="list-group-item" v-for="(file, idx) in files" :key="idx">
@@ -43,6 +44,7 @@
                 class="btn btn-sm btn-outline-danger mx-2"
                 @click="remove(idx)"
                 v-if="!uploading"
+                :disabled="disabled"
               >
                 Remove
               </button>
@@ -72,6 +74,7 @@
                 class="btn btn-sm btn-outline-danger mx-2"
                 v-if="uploading"
                 @click="cancelAbort.abort()"
+                :disabled="disabled"
               >
                 Cancel
               </button>
@@ -80,7 +83,7 @@
         </li>
 
         <li class="list-group-item" v-if="!uploading && !uploadingFileObject">
-          <button class="btn btn-sm btn-outline-primary me-2">
+          <button class="btn btn-sm btn-outline-primary me-2" :disabled="disabled">
             <label class="d-flex align-items-center">
               <input type="file" style="display: none" @change="upload" ref="fileInput" />
               <i class="bi bi-cloud-upload me-1"></i> Upload File
@@ -112,7 +115,8 @@ defineProps({
   description: { type: String },
   footnote: { type: String },
 
-  required: { type: Boolean, default: false }
+  required: { type: Boolean, default: false },
+  disabled: { type: Boolean, default: false }
 })
 
 const emit = defineEmits(['update:field'])
@@ -168,3 +172,9 @@ const download = async function (idx: number) {
   window.location.href = preSignedGet?.URL
 }
 </script>
+
+<style scoped>
+.list-group-item {
+  background-color: #e9ecef;
+}
+</style>

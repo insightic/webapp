@@ -33,7 +33,7 @@ import PDFComponent from '@/components/PDFComponent.vue'
 import SaveNextButtonComponent from '@/components/SaveNextButtonComponent.vue'
 
 export default {
-  props: ['data'],
+  props: ['data', 'disabled'],
   components: {
     SectionLayout,
     LabelInputComponent,

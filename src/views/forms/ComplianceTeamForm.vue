@@ -58,7 +58,7 @@ import type { PeopleInfo, TextFilesObject } from '@/api'
 import SaveNextButtonComponent from '@/components/SaveNextButtonComponent.vue'
 
 export default {
-  props: ['data'],
+  props: ['data', 'disabled'],
   components: {
     SectionLayout,
     LabelTextareaComponent,

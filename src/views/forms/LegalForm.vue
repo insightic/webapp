@@ -26,7 +26,7 @@ import SaveNextButtonComponent from '@/components/SaveNextButtonComponent.vue'
 import type { TextFilesObject } from '@/api'
 
 export default {
-  props: ['data'],
+  props: ['data', 'disabled'],
   components: {
     SectionLayout,
     LabelSwitchComponent,
