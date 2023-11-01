@@ -222,25 +222,13 @@
 </template>
 
 <script lang="ts">
-import DashboardSectionLayout from '@/layouts/DashboardSectionLayout.vue'
 import LineChart from '@/components/graphs/LineChart.vue'
-import RadarChart from '@/components/graphs/RadarChart.vue'
-import RadialBarChart from '@/components/graphs/RadialBarChart.vue'
-import SparklineChart from '@/components/graphs/SparklineChart.vue'
-import TableChart from '@/components/graphs/TableChart.vue'
-import ItemDetails from '@/components/dashboard/ItemDetailsComponent.vue'
 import ScoreBoard from '@/components/dashboard/ScoreBoardComponent.vue'
 
 export default {
   components: {
     ScoreBoard,
     LineChart
-    // DashboardSectionLayout,
-    // RadarChart,
-    // RadialBarChart,
-    // SparklineChart,
-    // TableChart,
-    // ItemDetails
   },
   async created() {},
   data() {
