@@ -122,7 +122,7 @@
         :disabled="disabled"
       />
 
-      <SaveNextButtonComponent @save="save" @next="next" />
+      <SaveNextButtonComponent @save="save" @next="next" v-if="!disabled" />
     </SectionLayout>
   </div>
 </template>

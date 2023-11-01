@@ -1,71 +1,59 @@
 <template>
-  <NavFooterLayout>
-    <div class="container-fluid p-3 mb-5" style="max-width: 1440px">
-      <h1 class="mb-4">
-        <strong>New Application</strong>
-      </h1>
-
-      <div class="row" v-if="!loading">
-        <div class="col-2">
-          <div v-for="(form, index) in tabs" :key="index">
-            <div @click="changePage(index)" class="nav-item" :class="formStepStyle(index)">
-              <div class="d-flex align-items-center">
-                <i
-                  class="bi bi-check-circle-fill me-3"
-                  v-if="hasData(index) || current == index"
-                ></i>
-                <i class="bi bi-check-circle me-3" v-else></i>
-                <div>
-                  {{ form.name }}
-                </div>
+  <div class="container-fluid p-3 mb-5" style="max-width: 1440px">
+    <div class="row" v-if="!loading">
+      <div class="col-2">
+        <div v-for="(form, index) in tabs" :key="index">
+          <div @click="changePage(index)" class="nav-item" :class="formStepStyle(index)">
+            <div class="d-flex align-items-center">
+              <i class="bi bi-check-circle-fill me-3" v-if="hasData(index) || current == index"></i>
+              <i class="bi bi-check-circle me-3" v-else></i>
+              <div>
+                {{ form.name }}
               </div>
-              <div
-                v-if="index + 1 != tabs.length"
-                style="height: 20px; border-left: 1px gray solid; margin-left: 7px"
-              ></div>
             </div>
-          </div>
-        </div>
-        <div class="col-10">
-          <div>
-            <keep-alive>
-              <component
-                :is="toRaw(tabs[current].component)"
-                @save="save"
-                @next="next"
-                :data="application[tabs[current].name]"
-              ></component>
-            </keep-alive>
+            <div
+              v-if="index + 1 != tabs.length"
+              style="height: 20px; border-left: 1px gray solid; margin-left: 7px"
+            ></div>
           </div>
         </div>
       </div>
-      <div v-if="loading" class="text-center w-100 my-5">
-        <div class="spinner-border" role="status">
-          <span class="visually-hidden">Loading...</span>
+      <div class="col-10">
+        <div>
+          <keep-alive>
+            <component
+              :is="toRaw(tabs[current].component)"
+              @save="save"
+              @next="next"
+              :data="application[tabs[current].name]"
+              :disabled="true"
+            ></component>
+          </keep-alive>
         </div>
       </div>
     </div>
-  </NavFooterLayout>
-
+    <div v-if="loading" class="text-center w-100 my-5">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
 import NavFooterLayout from '@/layouts/NavFooterLayout.vue'
 import FormNavButtons from '@/components/FormNavButtons.vue'
-import RegistrationAgreement from './forms/RegistrationAgreementForm.vue'
-import ComplianceTeam from './forms/ComplianceTeamForm.vue'
-import Legal from './forms/LegalForm.vue'
-import Overview from './forms/OverviewForm.vue'
-import ProjectDetails from './forms/ProjectDetailsForm.vue'
-// import DigitalAsset from './forms/DigitalAssetForm.vue'
-import TechnicalDetails from './forms/TechnicalDetailsForm.vue'
-import RiskManagement from './forms/RiskManagementForm.vue'
-import VolumeCommunity from './forms/VolumeCommunityForm.vue'
-import Acknowledgement from './forms/AcknowledgementForm.vue'
-import Competitiveness from './forms/CompetitivenessForm.vue'
-import Investors from './forms/InvestorForm.vue'
-import COI from './forms/COIForm.vue'
-import Confirmation from './forms/ConfirmationForm.vue'
+import RegistrationAgreement from '../forms/RegistrationAgreementForm.vue'
+import ComplianceTeam from '../forms/ComplianceTeamForm.vue'
+import Legal from '../forms/LegalForm.vue'
+import Overview from '../forms/OverviewForm.vue'
+import ProjectDetails from '../forms/ProjectDetailsForm.vue'
+import TechnicalDetails from '../forms/TechnicalDetailsForm.vue'
+import RiskManagement from '../forms/RiskManagementForm.vue'
+import VolumeCommunity from '../forms/VolumeCommunityForm.vue'
+import Acknowledgement from '../forms/AcknowledgementForm.vue'
+import Competitiveness from '../forms/CompetitivenessForm.vue'
+import Investors from '../forms/InvestorForm.vue'
 import {
   getApplication,
   createApplication,
@@ -93,15 +81,12 @@ export default {
         { name: 'Compliance & Team', component: ComplianceTeam },
         { name: 'Legal', component: Legal },
         { name: 'ProjectDetails', component: ProjectDetails },
-        // { name: 'Digital Asset', component: DigitalAsset },
         { name: 'Technical Details', component: TechnicalDetails },
         { name: 'Risk Management', component: RiskManagement },
         { name: 'Volume & Community', component: VolumeCommunity },
         { name: 'Acknowledgement', component: Acknowledgement },
         { name: 'Competitiveness', component: Competitiveness },
-        { name: 'Investors', component: Investors },
-        { name: 'Conflict of Interest', component: COI },
-        { name: 'Confirmation', component: Confirmation }
+        { name: 'Investors', component: Investors }
       ],
       application: {} as { [key: string]: any },
       applicationID: this.$route.params?.applicationID?.toString() || '',

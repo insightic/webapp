@@ -70,6 +70,7 @@
         :disabled="!name || !oneLiner || !website"
         @save="save"
         @next="next"
+        v-if="!disabled"
       />
     </SectionLayout>
   </div>

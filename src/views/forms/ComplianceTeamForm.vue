@@ -49,6 +49,7 @@
         :disabled="!companyName || !companyAddress"
         @save="save"
         @next="next"
+        v-if="!disabled"
       />
     </SectionLayout>
   </div>

@@ -36,6 +36,7 @@
 import { toRaw, type Component } from 'vue'
 import BasicLayout from '@/layouts/BasicLayout.vue'
 import SubmissionDashboard from '@/views/submissionSubViews/SubmissionDashboard.vue'
+import CompanyProfile from '@/views/submissionSubViews/CompanyProfile.vue'
 import SubmissionCodeValidationView from '@/views/submissionSubViews/SubmissionCodeValidationView.vue'
 import ApplicationAutoAssessmentView from './submissionSubViews/ApplicationAutoAssessmentView_Backup.vue'
 import ScoreBoard from '../components/dashboard/ScoreBoardComponent.vue'
@@ -45,12 +46,18 @@ export default {
   components: {
     BasicLayout,
     ScoreBoard,
-    CompanyInfo
+    CompanyInfo,
+    CompanyProfile
   },
   data() {
     return {
       subViewIdx: 0,
-      subViews: [SubmissionDashboard, ApplicationAutoAssessmentView, SubmissionCodeValidationView],
+      subViews: [
+        SubmissionDashboard,
+        CompanyProfile,
+        ApplicationAutoAssessmentView,
+        SubmissionCodeValidationView
+      ],
       topBarName: [
         'Overview',
         'Company Profile',

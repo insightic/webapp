@@ -33,6 +33,7 @@
         :disabled="!title || !name || !acceptNDA"
         @save="save"
         @next="next"
+        v-if="!disabled"
       />
     </SectionLayout>
   </div>

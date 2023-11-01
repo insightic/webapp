@@ -16,7 +16,7 @@
       />
     </SectionLayout>
 
-    <SaveNextButtonComponent @save="save" @next="next" />
+    <SaveNextButtonComponent @save="save" @next="next" v-if="!disabled" />
   </div>
 </template>
 
