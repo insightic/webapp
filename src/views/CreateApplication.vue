@@ -5,7 +5,7 @@
         <strong>New Application</strong>
       </h1>
 
-      <div class="row">
+      <div class="row" v-if="!loading">
         <div class="col-2">
           <div v-for="(form, index) in tabs" :key="index">
             <div @click="changePage(index)" class="nav-item" :class="formStepStyle(index)">
@@ -39,6 +39,11 @@
           </div>
         </div>
       </div>
+      <div v-if="loading" class="text-center w-100 my-5">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
     </div>
   </NavFooterLayout>
 </template>
@@ -51,7 +56,7 @@ import ComplianceTeam from './forms/ComplianceTeamForm.vue'
 import Legal from './forms/LegalForm.vue'
 import Overview from './forms/OverviewForm.vue'
 import ProjectDetails from './forms/ProjectDetailsForm.vue'
-import DigitalAsset from './forms/DigitalAssetForm.vue'
+// import DigitalAsset from './forms/DigitalAssetForm.vue'
 import TechnicalDetails from './forms/TechnicalDetailsForm.vue'
 import RiskManagement from './forms/RiskManagementForm.vue'
 import VolumeCommunity from './forms/VolumeCommunityForm.vue'
@@ -77,6 +82,7 @@ export default {
   mounted() {},
   data() {
     return {
+      loading: true,
       current: 0,
       pageFinishedNum: 0,
       currentTab: 'Overview',
@@ -110,18 +116,11 @@ export default {
         this.application = resp.Submissions.filter(
           (res) => res.SubmissionID == this.submissionID
         )[0].Content
+        this.loading = false
         console.log(this.application)
       }
     }
   },
-  // computed: {
-  //   applicationID: function () {
-  //     return this.$route.params?.applicationID?.toString() || ''
-  //   },
-  //   submissionID: function () {
-  //     return this.$route.params?.submissionID?.toString() || ''
-  //   }
-  // },
   methods: {
     toRaw: toRaw,
     formStepStyle(index: number) {
