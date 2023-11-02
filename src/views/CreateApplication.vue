@@ -113,15 +113,17 @@ export default {
         { name: 'Confirmation', hasData: false, component: Confirmation }
       ],
       application: {} as { [key: string]: any },
+      applicationID: this.$route.query.applicationID as string,
+      submissionID: this.$route.query.submissionID as string,
       optionName: ['Overview']
     }
   },
   async created() {
-    if (this.applicationID() && this.submissionID()) {
-      const resp = await getApplication(this.applicationID())
+    if (this.applicationID && this.submissionID) {
+      const resp = await getApplication(this.applicationID)
       if (resp) {
         this.application = resp.Submissions.filter(
-          (res) => res.SubmissionID == this.submissionID()
+          (res) => res.SubmissionID == this.submissionID
         )[0]?.Content
       }
     }
@@ -148,12 +150,6 @@ export default {
       const tabName = this.tabs[idx].name
       return this.application[tabName] != null
     },
-    applicationID() {
-      return this.$route.query.applicationID as string
-    },
-    submissionID() {
-      return this.$route.query.submissionID as string
-    },
     async newOrSaveDraft(data: any): Promise<boolean> {
       const tabName = this.tabs[this.current].name
       this.optionName = this.tabs.slice(0, this.pageFinishedNum + 1).map((tab) => tab.name)
@@ -162,39 +158,42 @@ export default {
       this.application['OneLiner'] = this.application['Overview']['OneLiner']
       this.application['Website'] = this.application['Overview']['Website']
 
-      let applicationID = this.applicationID()
-      let submissionID = this.submissionID()
-      if (!applicationID) {
+      if (!this.applicationID) {
         const res = await createApplication()
         if (!res) {
           alert('Error creating application')
           return false
         }
-        applicationID = res.ID
-        this.$router.push({ query: { applicationID } })
+        this.applicationID = res.ID
       }
 
-      if (!submissionID) {
-        const res = await createSubmission(applicationID, this.application)
+      if (!this.submissionID) {
+        const res = await createSubmission(this.applicationID, this.application)
         if (!res) {
           alert('Error creating submission')
           return false
         }
-        submissionID = res.SubmissionID
-        this.$router.push({ query: { applicationID, submissionID } })
+        this.submissionID = res.SubmissionID
       }
 
-      const res = await updateSubmission(applicationID, submissionID, this.application)
+      const res = await updateSubmission(this.applicationID, this.submissionID, this.application)
       if (!res) {
         alert('Error updating submission')
         return false
       }
-
       return true
     },
     async save(data: any) {
-      await this.newOrSaveDraft(data)
-      console.log(123)
+      const res = await this.newOrSaveDraft(data)
+      if (res) {
+        if (!this.applicationID && !this.submissionID) {
+          alert('Save draft successfully')
+          this.$router.push('/')
+        } else {
+          alert('Save draft successfully')
+          this.$router.push('/applications/' + this.applicationID)
+        }
+      }
     },
     async next(data: any) {
       await this.newOrSaveDraft(data)
@@ -203,8 +202,8 @@ export default {
         this.current = this.current + 1
         return
       } else {
-        if (this.applicationID() && this.submissionID()) {
-          await submitSubmissionDraft(this.applicationID(), this.submissionID(), this.application)
+        if (this.applicationID && this.submissionID) {
+          await submitSubmissionDraft(this.applicationID, this.submissionID, this.application)
           this.$router.push(`/applications/${this.applicationID}`)
         }
       }

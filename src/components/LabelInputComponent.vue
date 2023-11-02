@@ -47,7 +47,6 @@ export default {
       return true
     },
     onChange(e: any) {
-      console.log(123)
       this.$emit('update:field', e.target.value)
     }
   }
