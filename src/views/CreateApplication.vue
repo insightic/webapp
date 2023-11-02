@@ -11,7 +11,6 @@
             label="Choose Form"
             description="Please choose the form here"
             :options="optionName"
-            v-model:field="tabs[current].name"
             @change="changePageBySelect"
           />
         </div>
@@ -98,24 +97,43 @@ export default {
       pageFinishedNum: 0,
       currentTab: 'Overview',
       tabs: [
-        { name: 'Overview', hasData: false, component: Overview },
-        { name: 'Registration Agreement', hasData: false, component: RegistrationAgreement },
-        { name: 'Compliance & Team', hasData: false, component: ComplianceTeam },
-        { name: 'Legal', hasData: false, component: Legal },
-        { name: 'ProjectDetails', hasData: false, component: ProjectDetails },
-        { name: 'Technical Details', hasData: false, component: TechnicalDetails },
-        { name: 'Risk Management', hasData: false, component: RiskManagement },
-        { name: 'Volume & Community', hasData: false, component: VolumeCommunity },
-        { name: 'Acknowledgement', hasData: false, component: Acknowledgement },
-        { name: 'Competitiveness', hasData: false, component: Competitiveness },
-        { name: 'Investors', hasData: false, component: Investors },
-        { name: 'Conflict of Interest', hasData: false, component: COI },
-        { name: 'Confirmation', hasData: false, component: Confirmation }
+        { index: 0, name: 'Overview', component: Overview },
+        {
+          index: 1,
+          name: 'Registration Agreement',
+          component: RegistrationAgreement
+        },
+        { index: 2, name: 'Compliance & Team', component: ComplianceTeam },
+        { index: 3, name: 'Legal', component: Legal },
+        { index: 4, name: 'ProjectDetails', component: ProjectDetails },
+        { index: 5, name: 'Technical Details', component: TechnicalDetails },
+        { index: 6, name: 'Risk Management', component: RiskManagement },
+        { index: 7, name: 'Volume & Community', component: VolumeCommunity },
+        { index: 8, name: 'Acknowledgement', component: Acknowledgement },
+        { index: 9, name: 'Competitiveness', component: Competitiveness },
+        { index: 10, name: 'Investors', component: Investors },
+        { index: 11, name: 'Conflict of Interest', component: COI },
+        { index: 12, name: 'Confirmation', component: Confirmation }
       ],
       application: {} as { [key: string]: any },
       applicationID: this.$route.query.applicationID as string,
       submissionID: this.$route.query.submissionID as string,
-      optionName: ['Overview']
+      optionNameTotal: [
+        'Overview',
+        'RegistrationAgreement',
+        'ComplianceTeam',
+        'Legal',
+        'ProjectDetails',
+        'TechnicalDetails',
+        'RiskManagement',
+        'VolumeCommunity',
+        'Acknowledgement',
+        'Competitiveness',
+        'Investors',
+        'COI',
+        'Confirmation'
+      ],
+      optionName:['Overview']
     }
   },
   async created() {
@@ -137,12 +155,13 @@ export default {
       return 'text-secondary'
     },
     changePage(index: number) {
+      console.log(index, '111')
       if (this.hasData(index)) {
         this.current = index
       }
     },
-    changePageBySelect() {
-      const index = this.tabs.findIndex((tab) => tab.name === this.tabs[this.current].name)
+    changePageBySelect(e: any) {
+      const index = this.optionName.findIndex((tab) => tab === e.target.value)
       console.log(index)
       this.current = index
     },
@@ -152,7 +171,6 @@ export default {
     },
     async newOrSaveDraft(data: any): Promise<boolean> {
       const tabName = this.tabs[this.current].name
-      this.optionName = this.tabs.slice(0, this.pageFinishedNum + 1).map((tab) => tab.name)
       this.application[tabName] = data
       this.application['Name'] = this.application['Overview']['Name']
       this.application['OneLiner'] = this.application['Overview']['OneLiner']
@@ -198,6 +216,7 @@ export default {
     async next(data: any) {
       await this.newOrSaveDraft(data)
       this.pageFinishedNum = this.pageFinishedNum + 1
+      this.optionName = this.optionNameTotal.slice(0, this.pageFinishedNum + 1)
       if (this.current + 1 != this.tabs.length) {
         this.current = this.current + 1
         return
