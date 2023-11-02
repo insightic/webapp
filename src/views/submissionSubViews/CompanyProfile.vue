@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid p-3 mb-5" style="max-width: 1440px">
     <div class="row" v-if="!loading">
-      <div class="col-2">
+      <div class="col-lg-2">
         <div v-for="(form, index) in tabs" :key="index">
           <div @click="changePage(index)" class="nav-item" :class="formStepStyle(index)">
             <div class="d-flex align-items-center">
@@ -18,7 +18,7 @@
           </div>
         </div>
       </div>
-      <div class="col-10">
+      <div class="col-lg-10 col-sm-12">
         <div>
           <keep-alive>
             <component
@@ -90,7 +90,8 @@ export default {
       ],
       application: {} as { [key: string]: any },
       applicationID: this.$route.params?.applicationID?.toString() || '',
-      submissionID: this.$route.params?.submissionID?.toString() || ''
+      submissionID: this.$route.params?.submissionID?.toString() || '',
+      optionName:[]
     }
   },
   async created() {

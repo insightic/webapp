@@ -13,7 +13,7 @@
       :value="field"
       :placeholder="placeholder"
       :rows="rows"
-      @change="onChange"
+      @input="onChange"
       :disabled="disabled"
     />
     <label class="text-secondary small" v-if="footnote">{{ footnote }}</label>

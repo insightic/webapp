@@ -25,7 +25,11 @@
         v-model:field="website"
       />
 
-      <LabelTextFileURLComponent label="Pitch Deck" v-model:field="pitchDeck"  :disabled="disabled"/>
+      <LabelTextFileURLComponent
+        label="Pitch Deck"
+        v-model:field="pitchDeck"
+        :disabled="disabled"
+      />
 
       <LabelSelectComponent
         label="Project Stage"

@@ -15,7 +15,7 @@
         class="form-control"
         :value="field"
         :placeholder="placeholder"
-        @change="onChange"
+        @input="onChange"
         :disabled="disabled"
       />
     </div>
@@ -47,6 +47,7 @@ export default {
       return true
     },
     onChange(e: any) {
+      console.log(123)
       this.$emit('update:field', e.target.value)
     }
   }
