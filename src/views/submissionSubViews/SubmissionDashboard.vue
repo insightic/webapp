@@ -3,7 +3,7 @@
     <h3 class="my-3">Scores</h3>
     <div class="my-3 row">
       <div class="col-3">
-        <ScoreBoard />
+        <ScoreBoard :Grade="'A-'" :NowData="'95'" :PreviousData="'96'" :ChangeData="'-1'" />
       </div>
       <div class="col-7">
         <LineChart />
@@ -19,7 +19,7 @@
           <div style="position: relative; background-color:chocolate; height: 50%" class="w-100 p-2">
             <div class="small">Lowest</div>
             <div style="position: absolute; left: 50%; top: 50%; transform: translateX(-50%) translateY(-20%);">
-              <h4>10</h4>
+              <h4>40</h4>
             </div>
           </div>
         </div>
@@ -31,7 +31,7 @@
     <h3 class="my-3">Security Assurance</h3>
     <div class="row my-3">
       <div class="col-3">
-        <ScoreBoard />
+        <ScoreBoard :Grade="'B-'" :NowData="'71'" :PreviousData="'70'" :ChangeData="'+1'" />
       </div>
       <div class="col-9">
         <table class="w-100 h-100 table table-bordered text-center" style="border-color: black">
@@ -129,7 +129,7 @@
     <h3 class="my-3">Regulatory Compliance</h3>
     <div class="row my-3">
       <div class="col-3">
-        <ScoreBoard />
+        <ScoreBoard :Grade="'B+'" :NowData="'82'" :PreviousData="'80'" :ChangeData="'+2'"/>
       </div>
       <div class="col-9">
         <table class="w-100 h-100 table table-bordered text-center" style="border-color: black">

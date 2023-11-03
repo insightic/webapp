@@ -18,7 +18,7 @@
             </div>
             <div class="col-6 d-flex">
               <div class="ms-auto">
-                <ScoreBoard />
+                <ScoreBoard :Grade="'B+'" :NowData="'85'" :PreviousData="'80'" :ChangeData="'+5'" />
               </div>
             </div>
           </div>

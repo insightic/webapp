@@ -204,13 +204,7 @@ export default {
     async save(data: any) {
       const res = await this.newOrSaveDraft(data)
       if (res) {
-        if (!this.applicationID && !this.submissionID) {
-          alert('Save draft successfully')
-          this.$router.push('/')
-        } else {
-          alert('Save draft successfully')
-          this.$router.push('/applications/' + this.applicationID)
-        }
+        alert('Save draft successfully')
       }
     },
     async next(data: any) {
