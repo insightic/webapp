@@ -15,6 +15,7 @@
       :rows="rows"
       @input="onChange"
       :disabled="disabled"
+      :style="{ backgroundColor: disabled ? '#e9ecef' : 'white' }"
     />
     <label class="text-secondary small" v-if="footnote">{{ footnote }}</label>
   </div>

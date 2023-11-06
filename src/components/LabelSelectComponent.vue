@@ -8,7 +8,13 @@
     </div>
 
     <div class="text-secondary small mb-1" v-html="description"></div>
-    <select class="form-select" @change="onChange" :value="field" :disabled="disabled">
+    <select
+      class="form-select"
+      @change="onChange"
+      :value="field"
+      :disabled="disabled"
+      :style="{ backgroundColor: disabled ? '#e9ecef' : 'white' }"
+    >
       <option value="" selected disabled>{{ placeholder }}</option>
       <option
         v-for="(option, index) in options"

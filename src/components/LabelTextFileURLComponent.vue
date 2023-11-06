@@ -13,13 +13,14 @@
         <li :class="['list-group-item', { disabled: disabled }]">
           <textarea
             class="form-control px-1"
-            style="border: 0px; resize: none; overflow: hidden"
+            style="border: none; resize: none; overflow: hidden"
             @input="onInput"
             rows="1"
             placeholder="Please describe in text or attach files by uploading or url..."
             ref="textarea"
             v-model="text"
             :disabled="disabled"
+            :style="{ backgroundColor: disabled ? '#e9ecef' : 'white' }"
           />
         </li>
         <li

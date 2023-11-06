@@ -64,13 +64,13 @@ export default {
 
 <style>
 .switch {
-  background-color: var(--bs-secondary);
+  background-color: rgb(204, 204, 204);
   position: relative;
   cursor: pointer;
 }
 
 .switch.on {
-  background-color: var(--bs-success);
+  background-color: rgb(204, 204, 204);
 }
 
 .switch-button.disabled {

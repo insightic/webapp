@@ -17,6 +17,7 @@
         :placeholder="placeholder"
         @input="onChange"
         :disabled="disabled"
+        :style="{ backgroundColor: disabled ? '#e9ecef' : 'white' }"
       />
     </div>
 
