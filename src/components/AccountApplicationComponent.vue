@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex my-3 flex-row align-items-center">
     <div class="me-3">
-      <i class="text-primary bi bi-grid-1x2-fill" style="font-size: 2.2rem"></i>
+      <img src="https://via.placeholder.com/100" style="width: 100px; height: 100px" />
     </div>
     <div>
       <div class="mb-1">
