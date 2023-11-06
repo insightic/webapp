@@ -1,45 +1,30 @@
 <template>
-  <div class="d-flex justify-content-between align-items-center my-2">
-    <div class="text-secondary">Showing all applications</div>
-    <RouterLink class="btn btn-primary" to="/create-application">New Application</RouterLink>
-  </div>
+  <div class="w-100" style="max-width: 960px">
+    <div class="d-flex justify-content-between align-items-center my-2">
+      <div class="text-secondary">Showing all applications</div>
+      <RouterLink class="btn btn-primary" to="/create-application">New Application</RouterLink>
+    </div>
 
-  <div v-if="isloading" class="w-100 d-flex justify-content-center mt-5">
-    <div class="spinner-border"></div>
-  </div>
+    <div v-if="isloading" class="w-100 d-flex justify-content-center mt-5">
+      <div class="spinner-border"></div>
+    </div>
 
-  <div v-else class="w-100" style="overflow-x: auto">
-    <table class="table table-bordered">
-      <thead class="table-dark">
-        <tr>
-          <th scope="col" style="width: 40%">Project Name</th>
-          <th scope="col" style="width: 10%">Updated At</th>
-          <th scope="col" style="width: 10%">Created At</th>
-          <th scope="col" style="width: 12%; min-width: 200px">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="application in applications" :key="application.ID">
-          <td>{{ application.ApplicationName }}</td>
-          <td>{{ formatDate(application.UpdatedAt) }}</td>
-          <td>{{ formatDate(application.CreatedAt) }}</td>
-          <td>
-            <a
-              class="btn btn-sm btn-outline-primary mx-2"
-              type="button"
-              :href="'/applications/' + application.ID"
-              >View</a
-            >
-            <a
-              class="btn btn-sm btn-outline-danger mx-2"
-              type="button"
-              @click="deleteApplication(application.ID)"
-              >Delete</a
-            >
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div v-else class="w-100" style="overflow-x: auto">
+      <div class="card w-100">
+        <div class="card-header"><b>My Applications</b></div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" v-for="application in applications" :key="application.ID">
+            <AccountApplicationComponent
+              :name="application.ApplicationName"
+              :created-at="application.CreatedAt"
+              :updated-at="application.UpdatedAt"
+              @view="() => $router.push('/applications/' + application.ID)"
+              @delete="() => deleteApplication(application.ID)"
+            />
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -49,10 +34,12 @@ import { projectsStore } from '@/stores/projects'
 import { mapStores } from 'pinia'
 import { getApplications, deleteApplication, type Application, type Submission } from '@/api'
 import { formatDate } from '@/helpers'
+import AccountApplicationComponent from '@/components/AccountApplicationComponent.vue'
 
 export default {
   components: {
-    RouterLink
+    RouterLink,
+    AccountApplicationComponent
   },
   async created() {
     this.applications = await getApplications()
