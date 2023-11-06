@@ -1,6 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap'
 import 'bootstrap-icons/font/bootstrap-icons.css'
+
+import '@tabler/core'
+import '@tabler/core/dist/css/tabler.min.css'
+
 import 'prismjs'
 import 'prismjs/components/prism-solidity'
 import 'prismjs/themes/prism-tomorrow.css'
