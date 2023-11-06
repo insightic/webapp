@@ -77,12 +77,12 @@ export default {
   methods: {
     payload() {
       return {
-        communitySize: this.communitySize,
-        detailedInformation: this.detailedInformation,
-        totalValueLocked: this.totalValueLocked,
-        totalTradingVolume: this.totalTradingVolume,
-        geographicalDemographic: this.geographicalDemographic,
-        userAcquisitionStrategy: this.userAcquisitionStrategy
+        CommunitySize: this.communitySize,
+        DetailedInformation: this.detailedInformation,
+        TotalValueLocked: this.totalValueLocked,
+        TotalTradingVolume: this.totalTradingVolume,
+        GeographicalDemographic: this.geographicalDemographic,
+        UserAcquisitionStrategy: this.userAcquisitionStrategy
       }
     },
     save() {

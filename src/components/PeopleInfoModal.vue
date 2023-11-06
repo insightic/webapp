@@ -49,7 +49,6 @@
             label="CV"
             description="Please upload CV in PDF or DOCX format."
             accept=".pdf,.docx"
-            :required="true"
             v-model:field="cv"
           />
 

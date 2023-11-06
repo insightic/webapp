@@ -23,7 +23,7 @@
                   class="bi bi-check-circle-fill me-3"
                   v-if="hasData(index) || current == index"
                 ></i>
-                <i class="bi bi-check-circle me-3" v-else></i>
+                <i class="bi bi-circle me-3" v-else></i>
                 <div>
                   {{ form.name }}
                 </div>
@@ -133,8 +133,7 @@ export default {
         'Investors',
         'COI',
         'Confirmation'
-      ],
-      // optionName:['Overview']
+      ]
     }
   },
   async created() {
@@ -156,7 +155,6 @@ export default {
       return 'text-secondary'
     },
     changePage(index: number) {
-      console.log(index, '111')
       if (this.hasData(index)) {
         this.current = index
       }

@@ -4,14 +4,6 @@
       <PDFComponent src="../../../insightic.pdf" style="height: 480px" />
 
       <LabelInputComponent
-        label="Title"
-        type="text"
-        v-model:field="title"
-        :required="true"
-        :disabled="disabled"
-      />
-
-      <LabelInputComponent
         label="Name"
         type="text"
         v-model:field="name"
@@ -19,6 +11,14 @@
         :disabled="disabled"
       />
 
+      <LabelInputComponent
+        label="Title"
+        type="text"
+        v-model:field="title"
+        :required="true"
+        :disabled="disabled"
+      />
+      
       <LabelSwitchComponent
         label="Accept the NDA agreement"
         description="You must accept the NDA agreement to continue."
