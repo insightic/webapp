@@ -10,7 +10,14 @@
     <div class="text-secondary small mb-1" v-html="description"></div>
     <select class="form-select" @change="onChange" :value="field" :disabled="disabled">
       <option value="" selected disabled>{{ placeholder }}</option>
-      <option v-for="option in options" :key="option" :value="option">{{ option }}</option>
+      <option
+        v-for="(option, index) in options"
+        :key="option"
+        :value="option"
+        :disabled="index > pageFinishedNum"
+      >
+        {{ option }}
+      </option>
     </select>
     <label class="text-secondary small" v-if="footnote">{{ footnote }}</label>
   </div>
@@ -24,6 +31,7 @@ export default {
     options: { type: Array<string | number>, required: true },
     placeholder: { type: String, default: 'Options...' },
     footnote: { type: String },
+    pageFinishedNum: { type: Number, default: Number.MAX_VALUE },
 
     required: { type: Boolean, default: false },
     disabled: { type: Boolean, default: false },

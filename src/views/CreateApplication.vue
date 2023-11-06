@@ -11,6 +11,7 @@
             label="Choose Form"
             description="Please choose the form here"
             :options="optionName"
+            :pageFinishedNum="pageFinishedNum"
             @change="changePageBySelect"
           />
         </div>
@@ -118,7 +119,7 @@ export default {
       application: {} as { [key: string]: any },
       applicationID: this.$route.query.applicationID as string,
       submissionID: this.$route.query.submissionID as string,
-      optionNameTotal: [
+      optionName: [
         'Overview',
         'RegistrationAgreement',
         'ComplianceTeam',
@@ -133,7 +134,7 @@ export default {
         'COI',
         'Confirmation'
       ],
-      optionName:['Overview']
+      // optionName:['Overview']
     }
   },
   async created() {
@@ -210,7 +211,6 @@ export default {
     async next(data: any) {
       await this.newOrSaveDraft(data)
       this.pageFinishedNum = this.pageFinishedNum + 1
-      this.optionName = this.optionNameTotal.slice(0, this.pageFinishedNum + 1)
       if (this.current + 1 != this.tabs.length) {
         this.current = this.current + 1
         return
