@@ -7,46 +7,28 @@
         <button class="btn btn-primary" @click="CreateSubmission">New Submission</button>
       </div>
 
-      <div class="w-100 my-3" style="overflow-x: auto">
-        <table class="table table-bordered">
-          <thead class="table-dark">
-            <tr>
-              <th scope="col" style="width: 40%">Sumission ID</th>
-              <th scope="col" style="width: 10%">Created At</th>
-              <th scope="col" style="width: 8%">Status</th>
-              <th scope="col" style="width: 22%; min-width: 200px">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="submission in submissions" :key="submission.SubmissionID">
-              <td>{{ submission.SubmissionID }}</td>
-              <td>{{ formatDate(submission.CreatedAt) }}</td>
-              <td>{{ submission.Status }}</td>
-              <td>
-                <button
-                  v-if="submission.Status == 'draft'"
-                  class="btn btn-sm btn-outline-primary mx-2"
-                  @click="ContinueSubmission(submission.SubmissionID)"
-                >
-                  Continue Submission
-                </button>
-                <a
-                  v-if="submission.Status != 'draft'"
-                  class="btn btn-sm btn-outline-primary mx-2"
-                  type="button"
-                  :href="'/applications/' + applicationID + '/' + submission.SubmissionID"
-                  >View</a
-                >
-                <a
-                  class="btn btn-sm btn-outline-danger mx-2"
-                  type="button"
-                  @click="deleteSubmission(applicationID, submission.SubmissionID)"
-                  >Delete</a
-                >
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div v-if="isloading" class="w-100 d-flex justify-content-center mt-5">
+      <div class="spinner-border"></div>
+    </div>
+
+      <div v-if="!isloading" class="w-100 my-3" style="overflow-x: auto">
+        <div class="card w-100">
+          <div class="card-header"><b>My Submissions</b></div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"  v-for="submission in submissions" :key="submission.SubmissionID">
+              <AccountApplicationSubmissionComponent
+                :name="submission.Content?.Name"
+                :one-liner="submission.Content?.OneLiner"
+                :status="submission.Status"
+                :submission-id="submission.SubmissionID"
+                :created-at="submission.CreatedAt"
+                @continue="() => ContinueSubmission(submission.SubmissionID)"
+                @view="() => $router.push('/applications/' + applicationID + '/' + submission.SubmissionID)"
+                @delete="() => deleteSubmission(applicationID, submission.SubmissionID)"
+              />
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </NavFooterLayout>
@@ -56,10 +38,16 @@
 import NavFooterLayout from '@/layouts/NavFooterLayout.vue'
 import { getApplication, type Submission, deleteSubmission } from '@/api'
 import { formatDate } from '@/helpers'
+import AccountApplicationSubmissionComponent from '@/components/AccountApplicationSubmissionComponent.vue'
 
 export default {
+  components: {
+    NavFooterLayout,
+    AccountApplicationSubmissionComponent
+  },
   data() {
     return {
+      isloading: true,
       applicationID: '',
       submissions: [] as Array<Submission>,
       draftExists: false,
@@ -71,9 +59,7 @@ export default {
     const resp = await getApplication(this.applicationID)
     this.submissions = resp?.Submissions || []
     this.draftExists = resp!.Submissions.filter((item) => item.Status == 'draft').length > 0
-  },
-  components: {
-    NavFooterLayout
+    this.isloading = false
   },
   methods: {
     formatDate,

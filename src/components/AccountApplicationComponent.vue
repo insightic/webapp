@@ -9,10 +9,10 @@
       </div>
 
       <div class="text-secondary" style="font-size: 0.8rem">
-        Updated at {{ formatDateTime(updatedAt) }}
+        Updated at {{ formatDate(updatedAt) }}
       </div>
       <div class="text-secondary" style="font-size: 0.8rem">
-        Created at {{ formatDateTime(createdAt) }}
+        Created at {{ formatDate(createdAt) }}
       </div>
     </div>
     <div class="ms-auto">
@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import { formatDateTime } from '@/helpers'
+import { formatDate } from '@/helpers'
 
 export default {
   props: {
@@ -36,7 +36,7 @@ export default {
     createdAt: { type: String, required: true }
   },
   methods: {
-    formatDateTime
+    formatDate
   }
 }
 </script>
