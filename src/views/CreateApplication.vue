@@ -30,7 +30,7 @@
               </div>
               <div
                 v-if="index + 1 != tabs.length"
-                style="height: 20px; border-left: 1px gray solid; margin-left: 7px"
+                style="height: 20px; border-left: 1px gray solid; margin-left: 6px"
               ></div>
             </div>
           </div>

@@ -27,10 +27,10 @@ export default {
 }
 
 .sidebar-button:hover {
-  color: #0051ffc7;
+  color: var(--tblr-primary);
 }
 
 .sidebar-button-selected {
-  color: var(--bs-primary);
+  color: var(--tblr-primary);
 }
 </style>
