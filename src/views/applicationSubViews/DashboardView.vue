@@ -215,7 +215,8 @@
                   <div class="small text-secondary">in 6 months</div>
                 </td>
                 <td>
-                  <div class="h1 mb-0">23
+                  <div class="h1 mb-0">
+                    23
                     <span><IconTrendingUp stroke-width="1" class="text-danger" /></span>
                   </div>
                   <div class="small text-secondary">in 6 months</div>
@@ -228,7 +229,8 @@
                   <div class="small text-secondary">in 6 months</div>
                 </td>
                 <td>
-                  <div class="h1 mb-0">15
+                  <div class="h1 mb-0">
+                    15
                     <span><IconTrendingDown stroke-width="1" class="text-green" /></span>
                   </div>
                   <div class="small text-secondary">in 6 months</div>
@@ -279,7 +281,7 @@ export default {
     IconTrendingDown,
     ScoreBoard
   },
-  props: ['submission'],
+  props: ['application', 'submission'],
   async created() {},
   data() {
     return {}

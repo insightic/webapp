@@ -160,8 +160,6 @@
 </template>
 
 <script lang="ts">
-import ApplicationViewMixin from '@/views/submissionSubViews/ApplicationViewMixin'
-
 import { organizationsStore } from '@/stores/organizations'
 import { mapStores } from 'pinia'
 import { createProjectJob, getApplication } from '@/api'
@@ -196,10 +194,9 @@ export default {
       showIgnored: false
     }
   },
-  mixins: [ApplicationViewMixin],
   methods: {
     async submit() {
-      await createProjectJob(this.projectID)
+      // await createProjectJob(this.projectID)
       this.$router.push({ query: { view: 'Validations' } })
     },
     getVariant(result: CodeValidationResult) {

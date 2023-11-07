@@ -1,10 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import AccountView from '@/views/AccountView.vue'
-import ApplicationSubmissionView from '@/views/ApplicationSubmissionView.vue'
 import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import CreateApplication from '@/views/CreateApplication.vue'
-import SubmissionView from '@/views/SubmissionView.vue'
+import ApplicationView from '@/views/ApplicationView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,12 +32,7 @@ const router = createRouter({
     {
       path: '/applications/:applicationID',
       name: 'ApplicationView',
-      component: ApplicationSubmissionView
-    },
-    {
-      path: '/applications/:applicationID/:submissionID',
-      name: 'SubmissionView',
-      component: SubmissionView
+      component: ApplicationView
     }
   ]
 })

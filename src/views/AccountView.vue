@@ -5,9 +5,9 @@
 <script lang="ts">
 import SidebarLayout from '@/layouts/SidebarLayout.vue'
 
-import AccountApplicationsView from '@/views/accountSubViews/AccountApplicationsView.vue'
-import AccountUsersView from '@/views/accountSubViews/AccountUsersView.vue'
-import AccountProfileView from '@/views/accountSubViews/AccountProfileView.vue'
+import ApplicationsView from '@/views/ApplicationsView.vue'
+import UsersView from '@/views/UsersView.vue'
+import ProfileView from '@/views/ProfileView.vue'
 
 export default {
   components: {
@@ -19,17 +19,17 @@ export default {
         {
           name: 'Applications',
           icon: 'bi-card-checklist',
-          component: AccountApplicationsView
+          component: ApplicationsView
         },
         {
           name: 'Users',
           icon: 'bi-people',
-          component: AccountUsersView
+          component: UsersView
         },
         {
           name: 'Profile',
           icon: 'bi-info-circle',
-          component: AccountProfileView
+          component: ProfileView
         }
       ]
     }
