@@ -47,7 +47,7 @@ import BasicLayout from '@/layouts/BasicLayout.vue'
 import SubmissionDashboard from '@/views/submissionSubViews/SubmissionDashboard.vue'
 import CompanyProfile from '@/views/submissionSubViews/CompanyProfile.vue'
 import SubmissionCodeValidationView from '@/views/submissionSubViews/SubmissionCodeValidationView.vue'
-import ApplicationAutoAssessmentView from './submissionSubViews/ApplicationAutoAssessmentView_Backup.vue'
+import ApplicationSubmissionView from './ApplicationSubmissionView.vue'
 import ScoreBoard from '../components/dashboard/ScoreBoardComponent.vue'
 import CompanyInfo from '@/components/dashboard/CompanyInfoComponent.vue'
 import { formatDate } from '@/helpers'
@@ -65,15 +65,31 @@ export default {
       loading: true,
       subViewIdx: 0,
       subViews: [
-        { name: 'Dashboard', icon: 'bi-graph-up-arrow', component: SubmissionDashboard },
+        {
+          name: 'Dashboard',
+          icon: 'bi-graph-up-arrow',
+          component: SubmissionDashboard
+        },
         {
           name: 'Smart Contract Validator',
           icon: 'bi-code-square',
           component: SubmissionDashboard
         },
-        { name: 'Company Profile', icon: 'bi-kanban', component: CompanyProfile },
-        { name: 'Change Log', icon: 'bi-collection', component: SubmissionDashboard },
-        { name: 'Alerts', icon: 'bi-exclamation-circle', component: SubmissionCodeValidationView }
+        {
+          name: 'Company Profile',
+          icon: 'bi-kanban',
+          component: CompanyProfile
+        },
+        {
+          name: 'Alerts',
+          icon: 'bi-exclamation-circle',
+          component: SubmissionCodeValidationView
+        },
+        {
+          name: 'Change Log',
+          icon: 'bi-collection',
+          component: ApplicationSubmissionView
+        }
       ],
       submission: null as Submission | null
     }
