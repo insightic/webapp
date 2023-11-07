@@ -1,7 +1,7 @@
 <template>
   <BasicLayout>
-    <nav class="navbar navbar-expand">
-      <div class="tabNav container-xl">
+    <nav class="navbar navbar-expand" style="position: absolute; left: 0; right: 0; z-index: 1000;">
+      <div class="container-xl">
         <ul class="navbar-nav flex-row">
           <li
             class="nav-item"
@@ -26,7 +26,7 @@
       </div>
     </nav>
 
-    <div class="container-xl py-3">
+    <div class="container-xl py-3" style="margin-top: 56px;">
       <div class="page-pretitle">Last update at {{ formatDate(new Date()) }}</div>
       <h1>{{ subViews[subViewIdx].name }}</h1>
       <div v-if="!loading">

@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-md" data-bs-theme="dark">
+  <nav class="navbar navbar-expand-md fixed-top" data-bs-theme="dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">
         <div
