@@ -2,7 +2,7 @@
   <NavFooterLayout>
     <div class="container-fluid p-3 mb-5" style="max-width: 1440px">
       <h1 class="mb-4">
-        <strong>New Application</strong>
+        <strong>{{ tilte[formType] }}</strong>
       </h1>
 
       <div class="row" v-if="!loading">
@@ -133,10 +133,17 @@ export default {
         'Investors',
         'COI',
         'Confirmation'
-      ]
+      ],
+      tilte: ['New Application', 'New Submission', 'Continue Submission'],
+      formType: 0
     }
   },
   async created() {
+    if(this.applicationID != undefined && this.submissionID == undefined) {
+      this.formType = 1
+    }  else if(this.applicationID != undefined && this.submissionID != undefined) {
+      this.formType = 2
+    }
     if (this.applicationID && this.submissionID) {
       const resp = await getApplication(this.applicationID)
       if (resp) {
@@ -144,6 +151,7 @@ export default {
           (res) => res.SubmissionID == this.submissionID
         )[0]?.Content
       }
+      this.current = Object.keys(this.application).length - 4
     }
 
     this.loading = false

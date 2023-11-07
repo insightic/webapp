@@ -18,8 +18,8 @@
               :name="application.ApplicationName"
               :created-at="application.CreatedAt"
               :updated-at="application.UpdatedAt"
-              @view="() => $router.push('/applications/' + application.ID)"
-              @delete="() => deleteApplication(application.ID)"
+              @view="() => $router.push('/applications/' + application.ApplicationID)"
+              @delete="() => deleteApplication(application.ApplicationID)"
             />
           </li>
         </ul>
@@ -32,7 +32,13 @@
 import { RouterLink } from 'vue-router'
 import { projectsStore } from '@/stores/projects'
 import { mapStores } from 'pinia'
-import { getApplications, deleteApplication, type Application, type Submission } from '@/api'
+import {
+  getApplications,
+  deleteApplication,
+  type Application,
+  type Submission,
+  type Applications
+} from '@/api'
 import { formatDate } from '@/helpers'
 import AccountApplicationComponent from '@/components/AccountApplicationComponent.vue'
 
@@ -48,7 +54,7 @@ export default {
   },
   data() {
     return {
-      applications: [] as Application[],
+      applications: [] as Applications[] | null,
       isloading: true
     }
   },

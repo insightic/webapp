@@ -124,6 +124,19 @@ export interface Application {
   DataVersion: string
 }
 
+export interface Applications {
+  AccountID: string
+  ActiveSubmissionID: string
+  ApplicationID: string
+  ApplicationName: string
+  CreatedAt: string
+  DeletedAt: string
+  ID: number
+  LogoURL: string
+  OneLiner: string
+  UpdatedAt: string
+}
+
 export interface Founder {
   Name: string
   Position: string
@@ -169,16 +182,9 @@ export async function saveApplicationDraft(
   return resp?.payload || null
 }
 
-export async function getApplications(): Promise<Application[]> {
-  const resp = await httpclient.get<number[]>(`/applications`)
-  const applicationList = [] as Application[]
-  for (const applicationId of resp!.payload) {
-    const application = await getApplication(applicationId)
-    if (application) {
-      applicationList.push(application)
-    }
-  }
-  return applicationList
+export async function getApplications(): Promise<Applications[] | null> {
+  const resp = await httpclient.get<Applications[]>(`/applications`)
+  return resp?.payload || null
 }
 
 export async function getApplication(id: number | string): Promise<Application | null> {
