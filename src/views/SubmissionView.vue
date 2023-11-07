@@ -1,43 +1,37 @@
 <template>
   <BasicLayout>
-    <div class="container p-3 mb-5">
-      <h1>Application Dashboard</h1>
-      <div class="text-secondary">Last update at {{ formatDate(new Date()) }}</div>
-
-      <div v-if="!loading" class="container">
-        <div>
-          <div class="row">
-            <div class="col-6 d-flex">
-              <div>
-                <CompanyInfo
-                  :name="submission?.Content?.Name"
-                  :website="submission?.Content?.Website"
-                  :one-liner="submission?.Content?.OneLiner"
-                />
-              </div>
-            </div>
-            <div class="col-6 d-flex">
-              <div class="ms-auto">
-                <ScoreBoard :Grade="'B+'" :NowData="'85'" :PreviousData="'80'" :ChangeData="'+5'" />
-              </div>
-            </div>
-          </div>
-          <ul class="nav nav-pills my-3">
-            <li class="nav-item" v-for="(item, idx) in subViews" :key="idx">
-              <div
-                class="nav-link"
-                :class="{ active: subViewIdx == idx }"
-                @click="subViewIdx = idx"
+    <nav class="navbar navbar-expand">
+      <div class="tabNav container-xl">
+        <ul class="navbar-nav flex-row">
+          <li
+            class="nav-item"
+            v-for="(item, idx) in subViews"
+            :key="idx"
+            :class="{ active: idx == subViewIdx }"
+            @click="subViewIdx = idx"
+          >
+            <a class="nav-link">
+              <span class="nav-link-icon">
+                <i class="bi" :class="item.icon"></i>
+              </span>
+              <span
+                class="nav-link-title d-md-inline-block"
+                :class="{ 'd-none': idx != subViewIdx }"
               >
                 {{ item.name }}
-              </div>
-            </li>
-          </ul>
-        </div>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
-        <hr />
+    <div class="container-xl py-3">
+      <div class="page-pretitle">Last update at {{ formatDate(new Date()) }}</div>
+      <h1>{{ subViews[subViewIdx].name }}</h1>
+      <div v-if="!loading">
         <div v-if="activeSubView">
-          <component :is="activeSubView"></component>
+          <component :is="activeSubView" :submission="submission"></component>
         </div>
       </div>
       <div v-if="loading" class="container text-center">
@@ -71,13 +65,15 @@ export default {
       loading: true,
       subViewIdx: 0,
       subViews: [
-        { name: 'Overview', component: SubmissionDashboard },
-        { name: 'Company Profile', component: CompanyProfile },
-        { name: 'Change Log', component: ApplicationAutoAssessmentView },
-        { name: 'Communication', component: SubmissionCodeValidationView },
-        { name: 'Feedback', component: null },
-        { name: 'Alerts', component: null },
-        { name: 'Report', component: null }
+        { name: 'Dashboard', icon: 'bi-graph-up-arrow', component: SubmissionDashboard },
+        {
+          name: 'Smart Contract Validator',
+          icon: 'bi-code-square',
+          component: SubmissionDashboard
+        },
+        { name: 'Company Profile', icon: 'bi-kanban', component: CompanyProfile },
+        { name: 'Change Log', icon: 'bi-collection', component: SubmissionDashboard },
+        { name: 'Alerts', icon: 'bi-exclamation-circle', component: SubmissionCodeValidationView }
       ],
       submission: null as Submission | null
     }
@@ -107,5 +103,16 @@ export default {
 <style scoped>
 .nav-link {
   cursor: pointer;
+  /* white-space: nowrap; */
+}
+
+.hide-sm {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .hide-sm {
+    display: unset;
+  }
 }
 </style>
