@@ -59,7 +59,8 @@ import {
   createApplication,
   createSubmission,
   updateSubmission,
-  submitSubmissionDraft
+  submitSubmissionDraft,
+  type Submission
 } from '@/api'
 import { toRaw } from 'vue'
 
@@ -68,6 +69,7 @@ export default {
     NavFooterLayout,
     FormNavButtons
   },
+  props: ['submission'],
   mounted() {},
   data() {
     return {
@@ -95,18 +97,8 @@ export default {
     }
   },
   async created() {
-    this.applicationID = this.$route.params.applicationID as string
-    this.submissionID = this.$route.params.submissionID as string
-    if (this.applicationID && this.submissionID) {
-      const resp = await getApplication(this.applicationID)
-      if (resp) {
-        this.application = resp.Submissions.filter(
-          (res) => res.SubmissionID == this.submissionID
-        )[0].Content
-        this.loading = false
-        console.log(this.application)
-      }
-    }
+    this.application = this.submission.Content
+    this.loading = false
   },
   methods: {
     toRaw: toRaw,
