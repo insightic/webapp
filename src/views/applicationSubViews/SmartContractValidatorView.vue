@@ -1,10 +1,6 @@
 <template>
   <div class="container p-0 mb-5 d-flex justify-content-center">
     <div class="container p-0 mb-5">
-      <div class="d-flex justify-content-between mb-3" style="max-width: 960px">
-        <div class="text-secondary align-self-center">Submission Details</div>
-      </div>
-
       <div class="w-100 my-3 mx-auto">
         <div v-if="loading" class="text-center my-5">
           <div class="spinner-border"></div>
@@ -16,7 +12,7 @@
             </div>
 
             <div v-else>
-              <div class="w-100 my-2">
+              <!-- <div class="w-100 my-2">
                 <div class="row mx-auto" style="max-width: 320px">
                   <div class="col-6">
                     <div class="form-check">
@@ -46,10 +42,13 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
 
               <div>
-                <h4>Passed</h4>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" v-model="showPassed" />
+                  <h2 class="align-checkbox">Pass</h2>
+                </div>
                 <div class="row" v-if="showPassed">
                   <div class="col-md-6 col-lg-4 my-2" v-for="result in passed" :key="result.id">
                     <result-component
@@ -72,7 +71,10 @@
               </div>
 
               <div class="mt-3">
-                <h4>Risks</h4>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" v-model="showRisks" />
+                  <h2>Risks</h2>
+                </div>
                 <div class="row" v-if="showRisks">
                   <div class="col-md-6 col-lg-4 my-2" v-for="result in risks" :key="result.id">
                     <result-component
@@ -95,7 +97,10 @@
               </div>
 
               <div class="mt-3">
-                <h4>Warnings</h4>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" v-model="showWarnings" />
+                  <h2>Warnings</h2>
+                </div>
                 <div class="row" v-if="showWarnings">
                   <div class="col-md-6 col-lg-4 my-2" v-for="result in warnings" :key="result.id">
                     <result-component
@@ -121,7 +126,10 @@
               </div>
 
               <div class="mt-3">
-                <h4>Ignored</h4>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" v-model="showIgnored" />
+                  <h2>Ignored</h2>
+                </div>
                 <div class="row" v-if="showIgnored">
                   <div class="col-md-6 col-lg-4 my-2" v-for="result in ignored" :key="result.id">
                     <result-component
@@ -162,7 +170,6 @@
 <script lang="ts">
 import { organizationsStore } from '@/stores/organizations'
 import { mapStores } from 'pinia'
-import { createProjectJob, getApplication } from '@/api'
 import type { CodeValidationResult } from '@/api'
 import ResultComponent from '@/components/ResultComponent.vue'
 import CodeValidationModal from '@/components/CodeValidationModal.vue'
@@ -172,14 +179,10 @@ export default {
     ResultComponent,
     CodeValidationModal
   },
+  props: ['submission'],
   async created() {
-    this.loading = true
-    const projectInfo = await getApplication(this.$route.params.projectID as string).then(
-      (res) =>
-        res!.Submissions.filter((item) => item.SubmissionID == this.$route.params.submissionID)[0]
-    )
-
-    this.codeValidation = projectInfo?.Results?.CodeValidation || []
+    console.log(this.submission)
+    this.codeValidation = this.submission?.Results?.CodeValidation || []
     this.loading = false
   },
   data() {
@@ -190,8 +193,8 @@ export default {
       loading: true,
       showRisks: true,
       showWarnings: true,
-      showPassed: false,
-      showIgnored: false
+      showPassed: true,
+      showIgnored: true
     }
   },
   methods: {
@@ -247,3 +250,5 @@ export default {
 }
 </script>
 @/views/submissionSubViews/ApplicationViewMixin
+
+
