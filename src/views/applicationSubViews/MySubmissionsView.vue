@@ -17,7 +17,7 @@
           :submission-id="submission.SubmissionID"
           :created-at="submission.CreatedAt"
           @continue="() => continueSubmission(submission.SubmissionID)"
-          @view="() => $router.push('/applications/' + applicationID)"
+          @view="() => viewSubmission()"
           @delete="() => deleteSubmission(submission.SubmissionID)"
         />
       </li>
@@ -53,6 +53,9 @@ export default {
     },
     createSubmission() {
       this.$router.push(`/create-application?applicationID=${this.applicationID}`)
+    },
+    viewSubmission() {
+      this.$router.push('/applications/' + this.applicationID)
     },
     continueSubmission(submissionID: string) {
       this.$router.push(
