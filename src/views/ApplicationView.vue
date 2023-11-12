@@ -1,8 +1,8 @@
 <template>
   <BasicLayout>
-    <nav class="navbar navbar-expand" style="position: absolute; left: 0; right: 0; z-index: 1000;">
+    <nav class="navbar navbar-expand" style="position: absolute; left: 0; right: 0; z-index: 1000">
       <div class="container-xl">
-        <ul class="navbar-nav flex-row">
+        <ul class="navbar-nav flex-row subNav">
           <li
             class="nav-item"
             v-for="(item, idx) in subViews"
@@ -17,6 +17,7 @@
               <span
                 class="nav-link-title d-md-inline-block"
                 :class="{ 'd-none': idx != subViewIdx }"
+                style="white-space: nowrap"
               >
                 {{ item.name }}
               </span>
@@ -26,7 +27,7 @@
       </div>
     </nav>
 
-    <div class="container-xl py-3" style="margin-top: 56px;">
+    <div class="container-xl py-3" style="margin-top: 56px">
       <div class="page-pretitle">Last update at {{ formatDate(new Date()) }}</div>
       <h1>{{ subViews[subViewIdx].name }}</h1>
       <div v-if="!loading">
@@ -152,6 +153,23 @@ export default {
 </script>
 
 <style scoped>
+.subNav {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.subNav::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.subNav {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+
 .nav-link {
   cursor: pointer;
 }
