@@ -13,7 +13,7 @@
           class="p-1 rounded"
           style="font-size: 0.6rem; color: white"
           :style="{
-            'background-color': `var(--bs-${getStatusBackgroundColor(status)})`
+            'background-color': `var(--tblr-${getStatusBackgroundColor(status)})`
           }"
         >
           {{ status }}
@@ -36,15 +36,20 @@
       >
         Continue Submission
       </button>
-      <button
+      <!-- <button
         type="button"
         class="btn btn-sm btn-outline-primary mx-2 my-1"
         @click="$emit('view')"
         v-if="status == 'active'"
       >
         View
-      </button>
-      <button type="button" class="btn btn-sm btn-outline-danger mx-2 my-1" @click="$emit('delete')">
+      </button> -->
+      <button
+        type="button"
+        class="btn btn-sm btn-outline-danger mx-2 my-1"
+        @click="$emit('delete')"
+        v-if="status != 'active'"
+      >
         Delete
       </button>
     </div>
@@ -65,6 +70,7 @@ export default {
   methods: {
     formatDate,
     getStatusBackgroundColor(status: string) {
+      console.log(status)
       if (status == 'active') return 'success'
       if (status == 'inactive') return 'secondary'
       if (status == 'draft') return 'primary'
