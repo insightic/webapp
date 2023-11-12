@@ -1,7 +1,15 @@
 <template>
   <div class="container-fluid p-3 mb-5" style="max-width: 1440px">
     <div class="row" v-if="!loading">
-      <div class="col-lg-2">
+      <div class="d-block d-lg-none">
+        <LabelSelectComponent
+          label="Choose Form"
+          description="Please choose the form here"
+          :options="optionName"
+          @change="changePageBySelect"
+        />
+      </div>
+      <div class="col-lg-2 d-none d-lg-block">
         <div v-for="(form, index) in tabs" :key="index">
           <div @click="changePage(index)" class="nav-item" :class="formStepStyle(index)">
             <div class="d-flex align-items-center">
@@ -23,8 +31,6 @@
           <keep-alive>
             <component
               :is="toRaw(tabs[current].component)"
-              @save="save"
-              @next="next"
               :data="application[tabs[current].name]"
               :disabled="true"
             ></component>
@@ -42,6 +48,7 @@
 
 <script lang="ts">
 import NavFooterLayout from '@/layouts/NavFooterLayout.vue'
+import LabelSelectComponent from '@/components/LabelSelectComponent.vue'
 import FormNavButtons from '@/components/FormNavButtons.vue'
 import RegistrationAgreement from '../forms/RegistrationAgreementForm.vue'
 import ComplianceTeam from '../forms/ComplianceTeamForm.vue'
@@ -54,18 +61,14 @@ import VolumeCommunity from '../forms/VolumeCommunityForm.vue'
 import Acknowledgement from '../forms/AcknowledgementForm.vue'
 import Competitiveness from '../forms/CompetitivenessForm.vue'
 import Investors from '../forms/InvestorForm.vue'
-import {
-  createApplication,
-  createSubmission,
-  updateSubmission,
-  submitSubmissionDraft,
-} from '@/api'
+import { createApplication, createSubmission, updateSubmission } from '@/api'
 import { toRaw } from 'vue'
 
 export default {
   components: {
     NavFooterLayout,
-    FormNavButtons
+    FormNavButtons,
+    LabelSelectComponent
   },
   props: ['submission'],
   mounted() {},
@@ -73,7 +76,6 @@ export default {
     return {
       loading: true,
       current: 0,
-      pageFinishedNum: 0,
       currentTab: 'Overview',
       tabs: [
         { name: 'Overview', component: Overview },
@@ -91,7 +93,19 @@ export default {
       application: {} as { [key: string]: any },
       applicationID: this.$route.params?.applicationID?.toString() || '',
       submissionID: this.$route.params?.submissionID?.toString() || '',
-      optionName:[]
+      optionName: [
+        'Overview',
+        'Registration Agreement',
+        'Compliance & Team',
+        'Legal',
+        'ProjectDetails',
+        'Technical Details',
+        'Risk Management',
+        'Volume & Community',
+        'Acknowledgement',
+        'Competitiveness',
+        'Investors'
+      ]
     }
   },
   async created() {
@@ -108,6 +122,11 @@ export default {
       if (this.hasData(index)) {
         this.current = index
       }
+    },
+    changePageBySelect(e: any) {
+      const index = this.optionName.findIndex((tab) => tab === e.target.value)
+      console.log(index)
+      this.current = index
     },
     hasData(idx: number): boolean {
       const tabName = this.tabs[idx].name
@@ -151,26 +170,6 @@ export default {
       }
 
       return true
-    },
-    async save(data: any) {
-      await this.newOrSaveDraft(data)
-    },
-    async next(data: any) {
-      await this.newOrSaveDraft(data)
-      this.pageFinishedNum = this.pageFinishedNum + 1
-      if (this.current + 1 != this.tabs.length) {
-        this.current = this.current + 1
-        return
-      } else {
-        if (this.applicationID && this.submissionID) {
-          const res = await submitSubmissionDraft(
-            this.applicationID,
-            this.submissionID,
-            this.application
-          )
-          console.log(res)
-        }
-      }
     }
   }
 }
