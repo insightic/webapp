@@ -61,6 +61,11 @@ export async function getPreSignedGetUrl(
   return data?.payload || null
 }
 
+export async function getPreSignedPutPublic(): Promise<{ GetURL: string;  ObjectID: string; URL: string } | null> {
+  const data = await httpclient.post<{ GetURL: string; ObjectID: string; URL: string }>(`/preSignedPutPublic?extension=png`)
+  return data?.payload || null
+}
+
 export async function uploadFile(
   url: string,
   file: File,

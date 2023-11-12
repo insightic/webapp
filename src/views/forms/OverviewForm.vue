@@ -1,6 +1,14 @@
 <template>
   <div style="max-width: 960px">
     <SectionLayout title="Overview">
+      <LabelImageComponent
+        label="Project Picture"
+        description="Please Choose the picture of your project."
+        :required="true"
+        :disabled="disabled"
+        v-model:field="picture"
+      />
+
       <LabelInputComponent
         label="Project Name"
         description="Please enter the name of your project."
@@ -87,7 +95,8 @@ import LabelSelectComponent from '@/components/LabelSelectComponent.vue'
 import LabelSwitchComponent from '@/components/LabelSwitchComponent.vue'
 import LabelTextFileURLComponent from '@/components/LabelTextFileURLComponent.vue'
 import SaveNextButtonComponent from '@/components/SaveNextButtonComponent.vue'
-import type { TextFilesObject } from '@/api'
+import LabelImageComponent from '@/components/LabelImageComponent.vue'
+import type { FileObject, TextFilesObject } from '@/api'
 
 export default {
   props: ['data', 'disabled'],
@@ -97,10 +106,12 @@ export default {
     LabelSelectComponent,
     LabelSwitchComponent,
     LabelTextFileURLComponent,
-    SaveNextButtonComponent
+    SaveNextButtonComponent,
+    LabelImageComponent
   },
   data() {
     return {
+      picture: null as FileObject | null,
       name: '',
       oneLiner: '',
       website: '',
