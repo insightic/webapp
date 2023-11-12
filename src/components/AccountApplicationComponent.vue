@@ -16,10 +16,10 @@
       </div>
     </div>
     <div class="ms-auto">
-      <button type="button" class="btn btn-sm btn-outline-primary mx-2" @click="$emit('view')">
+      <button type="button" class="btn btn-sm btn-outline-primary mx-2 my-1" @click="$emit('view')">
         View
       </button>
-      <button type="button" class="btn btn-sm btn-outline-danger mx-2" @click="$emit('delete')">
+      <button type="button" class="btn btn-sm btn-outline-danger mx-2 my-1" @click="$emit('delete')">
         Delete
       </button>
     </div>

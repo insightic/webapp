@@ -38,13 +38,13 @@
       </button>
       <button
         type="button"
-        class="btn btn-sm btn-outline-primary mx-2"
+        class="btn btn-sm btn-outline-primary mx-2 my-1"
         @click="$emit('view')"
         v-if="status == 'active'"
       >
         View
       </button>
-      <button type="button" class="btn btn-sm btn-outline-danger mx-2" @click="$emit('delete')">
+      <button type="button" class="btn btn-sm btn-outline-danger mx-2 my-1" @click="$emit('delete')">
         Delete
       </button>
     </div>
