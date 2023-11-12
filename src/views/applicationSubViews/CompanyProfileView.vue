@@ -55,12 +55,10 @@ import Acknowledgement from '../forms/AcknowledgementForm.vue'
 import Competitiveness from '../forms/CompetitivenessForm.vue'
 import Investors from '../forms/InvestorForm.vue'
 import {
-  getApplication,
   createApplication,
   createSubmission,
   updateSubmission,
   submitSubmissionDraft,
-  type Submission
 } from '@/api'
 import { toRaw } from 'vue'
 
