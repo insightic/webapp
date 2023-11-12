@@ -48,7 +48,7 @@
         </div>
       </div>
     </div>
-    <div class="overflow-hidden" style="height: 58px">
+    <div style="height: 58px">
       <apexchart
         style="height: 60px"
         type="area"
