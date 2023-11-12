@@ -179,7 +179,7 @@ export default {
     ResultComponent,
     CodeValidationModal
   },
-  props: ['submission'],
+  props: ['application', 'submission'],
   async created() {
     console.log(this.submission)
     this.codeValidation = this.submission?.Results?.CodeValidation || []
