@@ -50,14 +50,14 @@
               </div>
               <div class="d-table-cell datagrid-item" style="vertical-align: middle">
                 <div class="datagrid-title">KYT SERVICE PROVIDERS</div>
-                <div class="datagrid-content">Internal Chainalysis Elliptic</div>
+                <div class="datagrid-content">Internal <br />Chainalysis <br />Elliptic</div>
               </div>
             </div>
 
             <div class="d-table-row">
               <div class="d-table-cell datagrid-item" style="vertical-align: middle">
                 <div class="datagrid-title">SECURITY AUDITORS</div>
-                <div class="datagrid-content">Certik Hacken</div>
+                <div class="datagrid-content">Certik <br />Hacken</div>
               </div>
               <div class="d-table-cell datagrid-item" style="vertical-align: middle">
                 <div class="datagrid-title">INCIDENT RESPONSE PLAN</div>
