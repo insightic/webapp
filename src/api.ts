@@ -61,8 +61,9 @@ export async function getPreSignedGetUrl(
   return data?.payload || null
 }
 
-export async function getPreSignedPutPublic(): Promise<{ GetURL: string;  ObjectID: string; URL: string } | null> {
-  const data = await httpclient.post<{ GetURL: string; ObjectID: string; URL: string }>(`/preSignedPutPublic?extension=png`)
+export async function getPreSignedPutPublic(extension?: string): Promise<{ GetURL: string;  ObjectID: string; URL: string } | null> {
+  const url = extension ? `/preSignedPutPublic?extension=${extension.toLowerCase()}` : `/preSignedPutPublic`
+  const data = await httpclient.post<{ GetURL: string; ObjectID: string; URL: string }>(url)
   return data?.payload || null
 }
 

@@ -54,14 +54,14 @@ const upload = async function () {
   console.log(file)
   if (!file) return
 
-  const preSignedPut = await getPreSignedPutPublic()
+  const ext = file.name.split('.')?.pop()
+  const preSignedPut = await getPreSignedPutPublic(ext)
   if (!preSignedPut?.ObjectID || !preSignedPut?.URL) return
-  console.log(preSignedPut.URL)
 
   uploadingFileObject.value = {
     Filename: file.name,
     ObjectID: preSignedPut.ObjectID,
-    URL: preSignedPut.URL
+    URL: preSignedPut.GetURL
   }
 
   try {
