@@ -179,6 +179,7 @@ export default {
     async newOrSaveDraft(data: any): Promise<boolean> {
       const tabName = this.tabs[this.current].name
       this.application[tabName] = data
+      this.application['Logo'] = this.application['Overview']['Logo']
       this.application['Name'] = this.application['Overview']['Name']
       this.application['OneLiner'] = this.application['Overview']['OneLiner']
       this.application['Website'] = this.application['Overview']['Website']
