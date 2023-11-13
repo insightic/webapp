@@ -16,6 +16,9 @@
           <li class="list-group-item" v-for="application in applications" :key="application.ID">
             <AccountApplicationComponent
               :name="application.ApplicationName"
+              :logo-url="application.LogoURL"
+              :one-liner="application.OneLiner"
+              :website="application.Website"
               :created-at="application.CreatedAt"
               :updated-at="application.UpdatedAt"
               @view="() => $router.push('/applications/' + application.ApplicationID)"

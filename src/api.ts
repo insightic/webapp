@@ -140,6 +140,7 @@ export interface Applications {
   ID: number
   LogoURL: string
   OneLiner: string
+  Website: string
   UpdatedAt: string
 }
 
