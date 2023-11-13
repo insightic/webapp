@@ -45,18 +45,14 @@
               </div> -->
 
               <div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" v-model="showPassed" />
-                  <h2 class="align-checkbox">Pass</h2>
+                <div class="d-flex align-items-center mb-2">
+                  <input class="form-check-input me-2" type="checkbox" v-model="showPassed" />
+                  <h2 class="align-checkbox m-0">Pass</h2>
                 </div>
                 <div class="row" v-if="showPassed">
                   <div class="col-md-6 col-lg-4 my-2" v-for="result in passed" :key="result.id">
-                    <result-component
-                      :result="result"
-                      :variant="getVariant(result)"
-                      style="cursor: pointer"
-                      @click="showResultModal(result)"
-                    >
+                    <result-component :result="result" :variant="getVariant(result)" style="cursor: pointer"
+                      @click="showResultModal(result)">
                     </result-component>
                   </div>
                 </div>
@@ -71,18 +67,14 @@
               </div>
 
               <div class="mt-3">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" v-model="showRisks" />
-                  <h2>Risks</h2>
+                <div class="d-flex align-items-center mb-2">
+                  <input class="form-check-input me-2" type="checkbox" v-model="showRisks" />
+                  <h2 class="m-0">Risks</h2>
                 </div>
                 <div class="row" v-if="showRisks">
                   <div class="col-md-6 col-lg-4 my-2" v-for="result in risks" :key="result.id">
-                    <result-component
-                      :result="result"
-                      :variant="getVariant(result)"
-                      style="cursor: pointer"
-                      @click="showResultModal(result)"
-                    >
+                    <result-component :result="result" :variant="getVariant(result)" style="cursor: pointer"
+                      @click="showResultModal(result)">
                     </result-component>
                   </div>
                 </div>
@@ -97,28 +89,21 @@
               </div>
 
               <div class="mt-3">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" v-model="showWarnings" />
-                  <h2>Warnings</h2>
+                <div class="d-flex align-items-center mb-2">
+                  <input class="form-check-input me-2" type="checkbox" v-model="showWarnings" />
+                  <h2 class="m-0">Warnings</h2>
                 </div>
                 <div class="row" v-if="showWarnings">
                   <div class="col-md-6 col-lg-4 my-2" v-for="result in warnings" :key="result.id">
-                    <result-component
-                      :result="result"
-                      :variant="getVariant(result)"
-                      style="cursor: pointer"
-                      @click="showResultModal(result)"
-                    >
+                    <result-component :result="result" :variant="getVariant(result)" style="cursor: pointer"
+                      @click="showResultModal(result)">
                     </result-component>
                   </div>
                 </div>
                 <div v-else>
                   <div class="text-secondary small">Hide {{ warnings.length }} items</div>
                   <div>
-                    <button
-                      class="btn btn-sm btn-outline-primary mt-2"
-                      @click="showWarnings = true"
-                    >
+                    <button class="btn btn-sm btn-outline-primary mt-2" @click="showWarnings = true">
                       Show
                     </button>
                   </div>
@@ -126,18 +111,14 @@
               </div>
 
               <div class="mt-3">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" v-model="showIgnored" />
-                  <h2>Ignored</h2>
+                <div class="d-flex align-items-center mb-2">
+                  <input class="form-check-input me-2" type="checkbox" v-model="showIgnored" />
+                  <h2 class="m-0">Ignored</h2>
                 </div>
                 <div class="row" v-if="showIgnored">
                   <div class="col-md-6 col-lg-4 my-2" v-for="result in ignored" :key="result.id">
-                    <result-component
-                      :result="result"
-                      :variant="getVariant(result)"
-                      style="cursor: pointer"
-                      @click="showResultModal(result)"
-                    >
+                    <result-component :result="result" :variant="getVariant(result)" style="cursor: pointer"
+                      @click="showResultModal(result)">
                     </result-component>
                   </div>
                 </div>
@@ -154,17 +135,14 @@
           </div>
         </div>
         <div v-else>
-          <div class="small text-secondary text-center">Results Not Found.</div>
+          <div class="small text-secondary text-center">Results Not Found</div>
         </div>
       </div>
     </div>
   </div>
 
-  <CodeValidationModal
-    :result="selectedCodeValidationResult"
-    :visible="showCodeValidationModal"
-    @close="showCodeValidationModal = false"
-  />
+  <CodeValidationModal :result="selectedCodeValidationResult" :visible="showCodeValidationModal"
+    @close="showCodeValidationModal = false" />
 </template>
 
 <script lang="ts">
@@ -173,6 +151,7 @@ import { mapStores } from 'pinia'
 import type { CodeValidationResult } from '@/api'
 import ResultComponent from '@/components/ResultComponent.vue'
 import CodeValidationModal from '@/components/CodeValidationModal.vue'
+import axios from 'axios'
 
 export default {
   components: {
@@ -181,8 +160,11 @@ export default {
   },
   props: ['application', 'submission'],
   async created() {
-    console.log(this.submission)
-    this.codeValidation = this.submission?.Results?.CodeValidation || []
+    const resp = await axios.get("https://scv.insightic.io/jobs/cbcf1154-5de2-4bac-9048-79adc650d49f")
+    this.codeValidation = resp?.data?.results || []
+    // console.log("test", resp.data)
+    // console.log(this.submission)
+    // this.codeValidation = this.submission?.Results?.CodeValidation || []
     this.loading = false
   },
   data() {
