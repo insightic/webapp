@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex my-3 flex-row align-items-center">
-    <div class="me-3">
-      <img :src="logoUrl" style="width: 100px; height: 100px" v-if="logoUrl" />
+    <div class="me-3" v-if="logoUrl">
+      <img :src="logoUrl" style="width: 100px;"  />
     </div>
     <div>
       <div class="mb-0">

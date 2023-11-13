@@ -5,7 +5,7 @@
         <div class="card-body d-flex align-items-center">
           <div class="row align-items-center w-100 h-100">
             <div class="col-3">
-              <img :src="submission?.Content?.Overview?.LogoUrl" class="rounded-circle" style="width: 60%" />
+              <img :src="submission?.Content?.LogoURL" class="rounded-circle" style="width: 60%" />
             </div>
             <div class="col">
               <div class="card-title mb-0">
