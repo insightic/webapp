@@ -11,8 +11,8 @@
     <div class="card w-100">
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
-          <img style="width: 100px; height: 100px" :src="src" v-if="src" />
-          <label class="btn btn-primary" style="margin-left: 30px">
+          <img style="width: 100px; height: 100px" class="me-2" :src="src" v-if="src" />
+          <label class="btn btn-primary" >
             <input type="file" style="display: none" @change="upload" ref="fileInput" :accept="accept" />
             <i class="bi bi-cloud-upload me-1"></i> Select Picture
           </label>
