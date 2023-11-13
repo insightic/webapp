@@ -2,11 +2,11 @@
   <div style="max-width: 960px">
     <SectionLayout title="Overview">
       <LabelImageComponent
-        label="Project Picture"
-        description="Please Choose the picture of your project."
+        label="Project Logo"
+        description="Please upload your project logo."
         :required="true"
         :disabled="disabled"
-        v-model:field="picture"
+        v-model:field="logo"
       />
 
       <LabelInputComponent
@@ -111,7 +111,7 @@ export default {
   },
   data() {
     return {
-      picture: null as FileObject | null,
+      logo: null as FileObject | null,
       name: '',
       oneLiner: '',
       website: '',
