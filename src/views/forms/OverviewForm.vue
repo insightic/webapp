@@ -79,7 +79,7 @@
       />
 
       <SaveNextButtonComponent
-        :disabled="!name || !oneLiner || !website"
+        :disabled="!logo || !name || !oneLiner || !website"
         @save="save"
         @next="next"
         v-if="!disabled"
@@ -96,7 +96,7 @@ import LabelSwitchComponent from '@/components/LabelSwitchComponent.vue'
 import LabelTextFileURLComponent from '@/components/LabelTextFileURLComponent.vue'
 import SaveNextButtonComponent from '@/components/SaveNextButtonComponent.vue'
 import LabelImageComponent from '@/components/LabelImageComponent.vue'
-import type { FileObject, TextFilesObject } from '@/api'
+import type { TextFilesObject } from '@/api'
 
 export default {
   props: ['data', 'disabled'],
@@ -111,7 +111,7 @@ export default {
   },
   data() {
     return {
-      logo: null as FileObject | null,
+      logo: '',
       name: '',
       oneLiner: '',
       website: '',
@@ -125,6 +125,7 @@ export default {
   methods: {
     payload() {
       return {
+        Logo: this.logo,
         Name: this.name,
         OneLiner: this.oneLiner,
         Website: this.website,
@@ -144,6 +145,7 @@ export default {
   },
   activated() {
     if (!this.data) return
+    this.logo = this.data['Logo']
     this.name = this.data['Name']
     this.oneLiner = this.data['OneLiner']
     this.website = this.data['Website']

@@ -12,10 +12,12 @@
       <ul class="list-group list-group-flush">
         <li :class="['list-group-item', { disabled: disabled }]">
           <img style="width: 100px; height: 100px" class="me-2" :src="src" v-if="src" />
-          <label class="btn btn-primary">
-            <input type="file" style="display: none" @change="upload" ref="fileInput" :accept="accept" />
-            <i class="bi bi-cloud-upload me-1"></i> Select Image
-          </label>
+          <button class="btn btn-primary me-2" :disabled="disabled">
+            <label class="d-flex align-items-center">
+              <input type="file" style="display: none" @change="upload" ref="fileInput" :accept="accept" />
+              <i class="bi bi-cloud-upload me-1"></i> Select Image
+            </label>
+          </button>
         </li>
       </ul>
     </div>
@@ -25,10 +27,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, type PropType } from 'vue'
+import { ref } from 'vue'
 import { getPreSignedPutPublic, uploadFile, type FileObject } from '@/api'
 
-defineProps({
+const props = defineProps({
   accept: { type: String, default: 'image/*' },
 
   label: { type: String, required: true },
@@ -38,14 +40,14 @@ defineProps({
   required: { type: Boolean, default: false },
   disabled: { type: Boolean, default: false },
 
-  field: { type: Object as PropType<FileObject | null>, default: null }
+  field: { type: String, default: '' }
 })
 
 const emit = defineEmits(['update:field'])
 
 const fileInput = ref<HTMLInputElement | null>(null)
 const uploadingFileObject = ref<FileObject | null>(null)
-const src = ref("")
+const src = ref(props.field)
 
 const upload = async function () {
   const file = fileInput.value?.files?.[0]
@@ -67,10 +69,10 @@ const upload = async function () {
       preSignedPut.URL,
       file,
     )
-    emit('update:field', uploadingFileObject.value)
+    emit('update:field', uploadingFileObject.value.URL)
   } finally {
+    src.value = uploadingFileObject.value.URL
     uploadingFileObject.value = null
-    src.value = preSignedPut.GetURL
   }
 }
 </script>
