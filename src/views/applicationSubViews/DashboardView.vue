@@ -95,7 +95,8 @@
                 </td>
                 <td>
                   <div class="h1 mb-0">
-                    28 <span><IconTrendingDown stroke-width="1" class="text-green" /></span>
+                    0
+                    <!-- 0 <span><IconTrendingDown stroke-width="1" class="text-green" /></span> -->
                   </div>
                   <div class="small text-secondary">in 6 months</div>
                 </td>
@@ -128,8 +129,8 @@
                 </td>
                 <td>
                   <div class="h1 mb-0">
-                    192
-                    <span><IconTrendingUp stroke-width="1" class="text-danger" /></span>
+                    0
+                    <!-- 192 <span><IconTrendingUp stroke-width="1" class="text-danger" /></span> -->
                   </div>
                   <div class="small text-secondary">in 2 years</div>
                 </td>
@@ -211,7 +212,7 @@
             <tbody>
               <tr>
                 <td>
-                  <div class="h1 mb-0">1</div>
+                  <div class="h1 mb-0">85</div>
                   <div class="small text-secondary">in 6 months</div>
                 </td>
                 <td>
@@ -223,14 +224,14 @@
                 </td>
                 <td>
                   <div class="h1 mb-0">
-                    5
+                    2
                     <span><IconTrendingDown stroke-width="1" class="text-danger" /></span>
                   </div>
                   <div class="small text-secondary">in 6 months</div>
                 </td>
                 <td>
                   <div class="h1 mb-0">
-                    15
+                    4
                     <span><IconTrendingDown stroke-width="1" class="text-green" /></span>
                   </div>
                   <div class="small text-secondary">in 6 months</div>
@@ -238,7 +239,7 @@
               </tr>
               <tr>
                 <td>
-                  <div class="h1 mb-0">1</div>
+                  <div class="h1 mb-0">85</div>
                   <div class="small text-secondary">in 2 years</div>
                 </td>
                 <td>
@@ -250,14 +251,14 @@
                 </td>
                 <td>
                   <div class="h1 mb-0">
-                    18
+                    3
                     <span><IconTrendingDown stroke-width="1" class="text-danger" /></span>
                   </div>
                   <div class="small text-secondary">in 2 years</div>
                 </td>
                 <td>
                   <div class="h1 mb-0">
-                    24
+                    6
                     <span><IconTrendingUp stroke-width="1" class="text-danger" /></span>
                   </div>
                   <div class="small text-secondary">in 2 years</div>
