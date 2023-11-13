@@ -13,13 +13,7 @@
         <li class="list-group-item">
           <img style="width: 100px; height: 100px" :src="src" v-if="src" />
           <label class="btn btn-primary" style="margin-left: 30px">
-            <input
-              type="file"
-              style="display: none"
-              @change="upload"
-              ref="fileInput"
-              :accept="accept"
-            />
+            <input type="file" style="display: none" @change="upload" ref="fileInput" :accept="accept" />
             <i class="bi bi-cloud-upload me-1"></i> Select Picture
           </label>
         </li>
@@ -32,9 +26,9 @@
 
 <script setup lang="ts">
 import { ref, type PropType } from 'vue'
-import { getPreSignedPutPublic, uploadFile, type FileObject, getPreSignedPutUrl } from '@/api'
+import { getPreSignedPutPublic, uploadFile, type FileObject } from '@/api'
 
-const props = defineProps({
+defineProps({
   accept: { type: String, default: '*' },
 
   label: { type: String, required: true },
