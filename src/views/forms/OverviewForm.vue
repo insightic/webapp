@@ -6,7 +6,7 @@
         description="Please upload your project logo."
         :required="true"
         :disabled="disabled"
-        v-model:field="logo"
+        v-model:field="logoUrl"
       />
 
       <LabelInputComponent
@@ -79,7 +79,7 @@
       />
 
       <SaveNextButtonComponent
-        :disabled="!logo || !name || !oneLiner || !website"
+        :disabled="!logoUrl || !name || !oneLiner || !website"
         @save="save"
         @next="next"
         v-if="!disabled"
@@ -111,7 +111,7 @@ export default {
   },
   data() {
     return {
-      logo: '',
+      logoUrl: '',
       name: '',
       oneLiner: '',
       website: '',
@@ -125,7 +125,7 @@ export default {
   methods: {
     payload() {
       return {
-        Logo: this.logo,
+        LogoURL: this.logoUrl,
         Name: this.name,
         OneLiner: this.oneLiner,
         Website: this.website,
@@ -145,7 +145,7 @@ export default {
   },
   activated() {
     if (!this.data) return
-    this.logo = this.data['Logo']
+    this.logoUrl = this.data['LogoURL']
     this.name = this.data['Name']
     this.oneLiner = this.data['OneLiner']
     this.website = this.data['Website']
