@@ -13,7 +13,7 @@
         <li :class="['list-group-item', { disabled: disabled }]">
           <textarea
             class="form-control px-1"
-            style="border: none; resize: none; overflow: hidden; box-shadow: none;"
+            style="border: none; resize: none; overflow: hidden; box-shadow: none"
             @input="onInput"
             rows="1"
             placeholder="Please describe in text or attach files by uploading or url..."

@@ -61,8 +61,12 @@ export async function getPreSignedGetUrl(
   return data?.payload || null
 }
 
-export async function getPreSignedPutPublic(extension?: string): Promise<{ GetURL: string;  ObjectID: string; URL: string } | null> {
-  const url = extension ? `/preSignedPutPublic?extension=${extension.toLowerCase()}` : `/preSignedPutPublic`
+export async function getPreSignedPutPublic(
+  extension?: string
+): Promise<{ GetURL: string; ObjectID: string; URL: string } | null> {
+  const url = extension
+    ? `/preSignedPutPublic?extension=${extension.toLowerCase()}`
+    : `/preSignedPutPublic`
   const data = await httpclient.post<{ GetURL: string; ObjectID: string; URL: string }>(url)
   return data?.payload || null
 }
@@ -111,7 +115,7 @@ export interface CodeValidationResult {
 }
 
 export interface Submission {
-  Content: { [key: string]: any}
+  Content: { [key: string]: any }
   SubmissionID: string
   ApplicationID: string
   Results: { CodeValidation: CodeValidationResult[] }
@@ -212,16 +216,25 @@ export async function deleteApplication(id: number | string): Promise<any | null
   return resp?.payload || null
 }
 
-export async function createSubmission(applicationID: number | string, data: { [key:string]: any}): Promise<Submission | null> {
+export async function createSubmission(
+  applicationID: number | string,
+  data: { [key: string]: any }
+): Promise<Submission | null> {
   const resp = await httpclient.post<Submission>(`/applications/${applicationID}/submissions`, data)
   return resp?.payload || null
 }
 
-export async function updateSubmission(applicationID: number | string, submissionID: number | string, data: { [key:string]: any}): Promise<Submission | null> {
-  const resp = await httpclient.put<Submission>(`/applications/${applicationID}/submissions/${submissionID}`, data)
+export async function updateSubmission(
+  applicationID: number | string,
+  submissionID: number | string,
+  data: { [key: string]: any }
+): Promise<Submission | null> {
+  const resp = await httpclient.put<Submission>(
+    `/applications/${applicationID}/submissions/${submissionID}`,
+    data
+  )
   return resp?.payload || null
 }
-
 
 // when there is application and submit submission draft
 export async function submitSubmissionDraft(
@@ -347,26 +360,26 @@ export interface filesInfo {
 }
 
 export interface AccountInformation {
-  AccountUUID: string,
-  CreatedAt: string,
-  DeletedAt: string,
-  Email: string,
-  FName: string,
-  ID: number,
-  LName: string,
-  PhoneNumber: string,
-  UpdatedAt: string,
+  AccountUUID: string
+  CreatedAt: string
+  DeletedAt: string
+  Email: string
+  FName: string
+  ID: number
+  LName: string
+  PhoneNumber: string
+  UpdatedAt: string
   Username: string
 }
 
 export interface subAccountInformation {
-  ID: number,
-  CreatedAt: string,
-  UpdatedAt: string,
-  DeletedAt: string,
-  MainAccountID: number,
-  MainAccountUUID: string,
-  AccountUUID: string,
+  ID: number
+  CreatedAt: string
+  UpdatedAt: string
+  DeletedAt: string
+  MainAccountID: number
+  MainAccountUUID: string
+  AccountUUID: string
   Username: string
 }
 
@@ -375,18 +388,32 @@ export async function getAccount(): Promise<AccountInformation | null> {
   return resp?.payload || null
 }
 
-export async function getSubAccount(mainAccountUUID: string | undefined): Promise<subAccountInformation[]> {
-  const resp = await httpclient.get<subAccountInformation[]>(`/accounts/${mainAccountUUID}/subaccounts`)
+export async function getSubAccount(
+  mainAccountUUID: string | undefined
+): Promise<subAccountInformation[]> {
+  const resp = await httpclient.get<subAccountInformation[]>(
+    `/accounts/${mainAccountUUID}/subaccounts`
+  )
   return resp?.payload || []
 }
 
-export async function addSubAccount(mainAccountUUID: string | undefined, subAccountInfo: string): Promise<subAccountInformation[]> {
-  const resp = await httpclient.post<subAccountInformation[]>(`/accounts/${mainAccountUUID}/subaccounts`, subAccountInfo)
+export async function addSubAccount(
+  mainAccountUUID: string | undefined,
+  subAccountInfo: string
+): Promise<subAccountInformation[]> {
+  const resp = await httpclient.post<subAccountInformation[]>(
+    `/accounts/${mainAccountUUID}/subaccounts`,
+    subAccountInfo
+  )
   return resp?.payload || []
 }
 
-export async function deleteSubAccount(mainAccountUUID: string | undefined, subAccountUUID: string | undefined): Promise<any | null> {
-  const resp = await httpclient.delete<any | null>(`/accounts/${mainAccountUUID}/subaccounts/${subAccountUUID}/delete`)
+export async function deleteSubAccount(
+  mainAccountUUID: string | undefined,
+  subAccountUUID: string | undefined
+): Promise<any | null> {
+  const resp = await httpclient.delete<any | null>(
+    `/accounts/${mainAccountUUID}/subaccounts/${subAccountUUID}/delete`
+  )
   return resp?.payload || []
 }
-

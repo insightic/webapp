@@ -53,7 +53,6 @@
                       class="btn btn-sm btn-outline-primary px-2"
                       v-if="p.cv"
                       @click="downloadFileObject(p.cv)"
-                    
                     >
                       <i class="bi bi-cloud-download"></i>
                     </button>

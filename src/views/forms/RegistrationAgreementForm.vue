@@ -18,7 +18,7 @@
         :required="true"
         :disabled="disabled"
       />
-      
+
       <LabelSwitchComponent
         label="Accept the NDA agreement"
         description="You must accept the NDA agreement to continue."

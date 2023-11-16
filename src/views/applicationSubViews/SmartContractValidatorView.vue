@@ -51,8 +51,12 @@
                 </div>
                 <div class="row" v-if="showPassed">
                   <div class="col-md-6 col-lg-4 my-2" v-for="result in passed" :key="result.id">
-                    <result-component :result="result" :variant="getVariant(result)" style="cursor: pointer"
-                      @click="showResultModal(result)">
+                    <result-component
+                      :result="result"
+                      :variant="getVariant(result)"
+                      style="cursor: pointer"
+                      @click="showResultModal(result)"
+                    >
                     </result-component>
                   </div>
                 </div>
@@ -73,8 +77,12 @@
                 </div>
                 <div class="row" v-if="showRisks">
                   <div class="col-md-6 col-lg-4 my-2" v-for="result in risks" :key="result.id">
-                    <result-component :result="result" :variant="getVariant(result)" style="cursor: pointer"
-                      @click="showResultModal(result)">
+                    <result-component
+                      :result="result"
+                      :variant="getVariant(result)"
+                      style="cursor: pointer"
+                      @click="showResultModal(result)"
+                    >
                     </result-component>
                   </div>
                 </div>
@@ -95,15 +103,22 @@
                 </div>
                 <div class="row" v-if="showWarnings">
                   <div class="col-md-6 col-lg-4 my-2" v-for="result in warnings" :key="result.id">
-                    <result-component :result="result" :variant="getVariant(result)" style="cursor: pointer"
-                      @click="showResultModal(result)">
+                    <result-component
+                      :result="result"
+                      :variant="getVariant(result)"
+                      style="cursor: pointer"
+                      @click="showResultModal(result)"
+                    >
                     </result-component>
                   </div>
                 </div>
                 <div v-else>
                   <div class="text-secondary small">Hide {{ warnings.length }} items</div>
                   <div>
-                    <button class="btn btn-sm btn-outline-primary mt-2" @click="showWarnings = true">
+                    <button
+                      class="btn btn-sm btn-outline-primary mt-2"
+                      @click="showWarnings = true"
+                    >
                       Show
                     </button>
                   </div>
@@ -117,8 +132,12 @@
                 </div>
                 <div class="row" v-if="showIgnored">
                   <div class="col-md-6 col-lg-4 my-2" v-for="result in ignored" :key="result.id">
-                    <result-component :result="result" :variant="getVariant(result)" style="cursor: pointer"
-                      @click="showResultModal(result)">
+                    <result-component
+                      :result="result"
+                      :variant="getVariant(result)"
+                      style="cursor: pointer"
+                      @click="showResultModal(result)"
+                    >
                     </result-component>
                   </div>
                 </div>
@@ -141,8 +160,11 @@
     </div>
   </div>
 
-  <CodeValidationModal :result="selectedCodeValidationResult" :visible="showCodeValidationModal"
-    @close="showCodeValidationModal = false" />
+  <CodeValidationModal
+    :result="selectedCodeValidationResult"
+    :visible="showCodeValidationModal"
+    @close="showCodeValidationModal = false"
+  />
 </template>
 
 <script lang="ts">
@@ -160,7 +182,9 @@ export default {
   },
   props: ['application', 'submission'],
   async created() {
-    const resp = await axios.get("https://scv.insightic.io/jobs/cbcf1154-5de2-4bac-9048-79adc650d49f")
+    const resp = await axios.get(
+      'https://scv.insightic.io/jobs/cbcf1154-5de2-4bac-9048-79adc650d49f'
+    )
     this.codeValidation = resp?.data?.results || []
     // console.log("test", resp.data)
     // console.log(this.submission)
@@ -232,5 +256,3 @@ export default {
 }
 </script>
 @/views/submissionSubViews/ApplicationViewMixin
-
-

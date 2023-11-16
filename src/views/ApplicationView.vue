@@ -165,10 +165,9 @@ export default {
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .subNav {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
-
 
 .nav-link {
   cursor: pointer;

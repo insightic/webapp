@@ -20,7 +20,11 @@
         :disabled="disabled"
       />
 
-      <LabelInputComponent label="Total Value Locked (TVL)" v-model:field="totalValueLocked" :disabled="disabled"/>
+      <LabelInputComponent
+        label="Total Value Locked (TVL)"
+        v-model:field="totalValueLocked"
+        :disabled="disabled"
+      />
 
       <LabelInputComponent
         label="Total Trading/Transaction Volume"

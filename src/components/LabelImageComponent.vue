@@ -11,10 +11,16 @@
     <div class="card w-100">
       <ul class="list-group list-group-flush">
         <li :class="['list-group-item', { disabled: disabled }]">
-          <img style="width: 100px;" class="me-2" :src="src" v-if="src" />
+          <img style="width: 100px" class="me-2" :src="src" v-if="src" />
           <button class="btn btn-primary me-2" :disabled="disabled">
             <label class="d-flex align-items-center">
-              <input type="file" style="display: none" @change="upload" ref="fileInput" :accept="accept" />
+              <input
+                type="file"
+                style="display: none"
+                @change="upload"
+                ref="fileInput"
+                :accept="accept"
+              />
               <i class="bi bi-cloud-upload me-1"></i> Select Image
             </label>
           </button>
@@ -65,10 +71,7 @@ const upload = async function () {
   }
 
   try {
-    await uploadFile(
-      preSignedPut.URL,
-      file,
-    )
+    await uploadFile(preSignedPut.URL, file)
     emit('update:field', uploadingFileObject.value.URL)
   } finally {
     src.value = uploadingFileObject.value.URL

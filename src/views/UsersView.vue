@@ -2,7 +2,9 @@
   <div class="text-secondary mb-4">Account User Management</div>
 
   <div style="max-width: 960px">
-    <button type="button" class="btn btn-primary mb-3" @click="showAccountModal()">Add Account Users</button>
+    <button type="button" class="btn btn-primary mb-3" @click="showAccountModal()">
+      Add Account Users
+    </button>
 
     <div class="card w-100">
       <div class="card-header"><b>Account Users</b></div>
@@ -31,7 +33,6 @@
 </template>
 
 <script lang="ts">
-import LabelInputComponent from '@/components/LabelInputComponent.vue'
 import AccountUserComponent from '@/components/AccountUserComponent.vue'
 import AddSubAccountModal from '@/components/AddSubAccountModal.vue'
 import AskRemoveModal from '@/components/AskRemoveModal.vue'
@@ -47,7 +48,6 @@ import {
 
 export default {
   components: {
-    LabelInputComponent,
     AccountUserComponent,
     AddSubAccountModal,
     AskRemoveModal
@@ -75,8 +75,8 @@ export default {
       this.showAskRemoveModal = true
     },
     async addSubAccount(username: string, password: string) {
-      if(this.subAccount.find(acc => acc.Username == username)) {
-        alert("You can not add a exieted account")
+      if (this.subAccount.find((acc) => acc.Username == username)) {
+        alert('You can not add a exieted account')
         return
       }
       const res = await addSubAccount(

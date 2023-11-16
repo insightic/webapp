@@ -24,11 +24,17 @@
 
       <div class="d-flex align-items-baseline">
         <div class="h1 mt-2 mb-0 me-2">
-          <span class="me-4" style="font-size: 2.5rem" :class="{
-            'text-green': grade[0] === 'A',
-            'text-warning': grade[0] === 'B',
-            'text-danger': grade[0] === 'C'
-          }">{{ grade }}</span> 85
+          <span
+            class="me-4"
+            style="font-size: 2.5rem"
+            :class="{
+              'text-green': grade[0] === 'A',
+              'text-warning': grade[0] === 'B',
+              'text-danger': grade[0] === 'C'
+            }"
+            >{{ grade }}</span
+          >
+          85
         </div>
         <div class="me-auto">
           <span class="text-green d-inline-flex align-items-center">
