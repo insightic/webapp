@@ -20,11 +20,12 @@
         <div class="modal-body">
           <LabelInputComponent label="Username" v-model:field="username" :required="true" />
           <LabelInputComponent label="Password" v-model:field="password" :required="true" />
-          <!-- <LabelInputComponent
+          <LabelInputComponent
             label="Confirm Password"
             v-model:field="confirmPassword"
             :required="true"
-          /> -->
+          />
+          <h3 v-if="!passwordIsSame" style="color: red">Password are not the same</h3>
         </div>
         <div class="modal-footer">
           <button
@@ -35,7 +36,14 @@
           >
             Close
           </button>
-          <button type="button" class="btn btn-primary" @click="submit">Submit</button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            @click="submit"
+            :disabled="hasFilledForm && !passwordIsSame"
+          >
+            Submit
+          </button>
         </div>
       </div>
     </div>
@@ -55,20 +63,26 @@ export default {
       if (!newValue) return
       this.username = ''
       this.password = ''
+      this.confirmPassword = ''
     }
   },
   data() {
     return {
       username: '',
-      password: ''
+      password: '',
+      confirmPassword: ''
+    }
+  },
+  computed: {
+    passwordIsSame() {
+      return this.password === this.confirmPassword
+    },
+    hasFilledForm() {
+      return this.username != null && this.password != null && this.confirmPassword != null
     }
   },
   methods: {
     async submit() {
-      if (!this.username || !this.password) {
-        alert('There is still some balnks in this page!')
-        return
-      }
       this.$emit('save', this.username, this.password)
     }
   }

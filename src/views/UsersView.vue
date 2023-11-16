@@ -2,7 +2,7 @@
   <div class="text-secondary mb-4">Account User Management</div>
 
   <div style="max-width: 960px">
-    <button type="button" class="btn btn-primary mb-3" @click="showAccountModal()">Add</button>
+    <button type="button" class="btn btn-primary mb-3" @click="showAccountModal()">Add Account Users</button>
 
     <div class="card w-100">
       <div class="card-header"><b>Account Users</b></div>
@@ -75,25 +75,34 @@ export default {
       this.showAskRemoveModal = true
     },
     async addSubAccount(username: string, password: string) {
+      if(this.subAccount.find(acc => acc.Username == username)) {
+        alert("You can not add a exieted account")
+        return
+      }
       const res = await addSubAccount(
         this.account?.AccountUUID,
         JSON.stringify({ Username: username, Password: password })
       )
-      if (res) {
-        alert('Add account successfully!')
+      console.log(res)
+      if ('Username' in res) {
         this.showSubAccountModal = false
+        alert('Add account successfully!')
         location.reload()
+      } else {
+        alert('Add account failed!')
       }
     },
     async deleteSubAccount() {
-      this.subAccount.splice(this.deleteIndex, 1)
       const res = await deleteSubAccount(
         this.subAccount[this.deleteIndex].MainAccountUUID,
         this.subAccount[this.deleteIndex].AccountUUID
       )
       if (res) {
-        alert('Delete account successfully!')
         this.showAskRemoveModal = false
+        alert('Delete account successfully!')
+        location.reload()
+      } else {
+        alert('Delete account failed!')
       }
     }
   }
