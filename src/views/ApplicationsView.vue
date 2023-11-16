@@ -52,7 +52,6 @@ export default {
   },
   async created() {
     this.applications = await getApplications()
-    console.log(this.applications)
     this.isloading = false
   },
   data() {

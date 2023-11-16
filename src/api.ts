@@ -345,3 +345,48 @@ export interface filesInfo {
   name: string
   objectID: string
 }
+
+export interface AccountInformation {
+  AccountUUID: string,
+  CreatedAt: string,
+  DeletedAt: string,
+  Email: string,
+  FName: string,
+  ID: number,
+  LName: string,
+  PhoneNumber: string,
+  UpdatedAt: string,
+  Username: string
+}
+
+export interface subAccountInformation {
+  ID: number,
+  CreatedAt: string,
+  UpdatedAt: string,
+  DeletedAt: string,
+  MainAccountID: number,
+  MainAccountUUID: string,
+  AccountUUID: string,
+  Username: string
+}
+
+export async function getAccount(): Promise<AccountInformation | null> {
+  const resp = await httpclient.get<AccountInformation>(`/accounts`)
+  return resp?.payload || null
+}
+
+export async function getSubAccount(mainAccountUUID: string | undefined): Promise<subAccountInformation[]> {
+  const resp = await httpclient.get<subAccountInformation[]>(`/accounts/${mainAccountUUID}/subaccounts`)
+  return resp?.payload || []
+}
+
+export async function addSubAccount(mainAccountUUID: string | undefined, subAccountInfo: string): Promise<subAccountInformation[]> {
+  const resp = await httpclient.post<subAccountInformation[]>(`/accounts/${mainAccountUUID}/subaccounts`, subAccountInfo)
+  return resp?.payload || []
+}
+
+export async function deleteSubAccount(mainAccountUUID: string | undefined, subAccountUUID: string | undefined): Promise<any | null> {
+  const resp = await httpclient.delete<any | null>(`/accounts/${mainAccountUUID}/subaccounts/${subAccountUUID}/delete`)
+  return resp?.payload || []
+}
+

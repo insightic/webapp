@@ -139,9 +139,9 @@ export default {
     }
   },
   async created() {
-    if(this.applicationID != undefined && this.submissionID == undefined) {
+    if (this.applicationID != undefined && this.submissionID == undefined) {
       this.formType = 1
-    }  else if(this.applicationID != undefined && this.submissionID != undefined) {
+    } else if (this.applicationID != undefined && this.submissionID != undefined) {
       this.formType = 2
     }
     if (this.applicationID && this.submissionID) {
@@ -216,7 +216,10 @@ export default {
       }
     },
     async next(data: any) {
-      await this.newOrSaveDraft(data)
+      const res = await this.newOrSaveDraft(data)
+      if (res) {
+        alert('Save draft successfully')
+      }
       this.pageFinishedNum = this.pageFinishedNum + 1
       if (this.current + 1 != this.tabs.length) {
         this.current = this.current + 1
