@@ -18,14 +18,21 @@
           ></button>
         </div>
         <div class="modal-body">
-          <LabelInputComponent label="Username" v-model:field="username" :required="true" />
-          <LabelInputComponent label="Password" v-model:field="password" :required="true" />
-          <LabelInputComponent
-            label="Confirm Password"
-            v-model:field="confirmPassword"
-            :required="true"
-          />
-          <h3 v-if="!passwordIsSame" style="color: red">Password are not the same</h3>
+          <div class="form-group my-3">
+            <label class="mb-2">Username</label>
+            <input type="text" class="form-control" v-model="username" />
+          </div>
+
+          <div class="form-group my-3">
+            <label class="mb-2">Password</label>
+            <input type="password" class="form-control" v-model="password" />
+          </div>
+
+          <div class="form-group my-3">
+            <label class="mb-2">Confirm password</label>
+            <input type="password" class="form-control" v-model="confirmPassword" />
+          </div>
+          <p v-if="!passwordIsSame" class="text-danger">Password are not the same</p>
         </div>
         <div class="modal-footer">
           <button
