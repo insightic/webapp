@@ -417,3 +417,15 @@ export async function deleteSubAccount(
   )
   return resp?.payload || []
 }
+
+export async function updateSubAccountPassword(
+  mainAccountUUID: string | undefined,
+  subAccountUUID: string | undefined,
+  newAndOldPassword: string
+): Promise<any | null> {
+  const resp = await httpclient.put<any | null>(
+    `/accounts/${mainAccountUUID}/subaccounts/${subAccountUUID}/password`,
+    newAndOldPassword
+  )
+  return resp?.payload || []
+}

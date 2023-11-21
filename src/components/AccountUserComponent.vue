@@ -23,6 +23,14 @@
     <div class="ms-auto">
       <button
         type="button"
+        class="btn btn-sm btn-outline-success mx-2"
+        v-if="role != 'admin'"
+        @click="changePassword()"
+      >
+        Change Password
+      </button>
+      <button
+        type="button"
         class="btn btn-sm btn-outline-danger mx-2"
         v-if="role != 'admin'"
         @click="askRemove()"
@@ -46,6 +54,9 @@ export default {
     formatDateTime,
     askRemove() {
       this.$emit('showAskModal')
+    },
+    changePassword() {
+      this.$emit('showChangePasswordModal')
     }
   }
 }
