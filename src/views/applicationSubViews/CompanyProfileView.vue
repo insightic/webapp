@@ -82,7 +82,7 @@ export default {
         { name: 'Registration Agreement', component: RegistrationAgreement },
         { name: 'Compliance & Team', component: ComplianceTeam },
         { name: 'Legal', component: Legal },
-        { name: 'ProjectDetails', component: ProjectDetails },
+        { name: 'Project Details', component: ProjectDetails },
         { name: 'Technical Details', component: TechnicalDetails },
         { name: 'Risk Management', component: RiskManagement },
         { name: 'Volume & Community', component: VolumeCommunity },
@@ -98,7 +98,7 @@ export default {
         'Registration Agreement',
         'Compliance & Team',
         'Legal',
-        'ProjectDetails',
+        'Project Details',
         'Technical Details',
         'Risk Management',
         'Volume & Community',
@@ -130,6 +130,7 @@ export default {
     },
     hasData(idx: number): boolean {
       const tabName = this.tabs[idx].name
+      console.log(this.application)
       return this.application[tabName] != null
     },
     async newOrSaveDraft(data: any): Promise<boolean> {

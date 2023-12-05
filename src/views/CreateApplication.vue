@@ -106,7 +106,7 @@ export default {
         },
         { index: 2, name: 'Compliance & Team', component: ComplianceTeam },
         { index: 3, name: 'Legal', component: Legal },
-        { index: 4, name: 'ProjectDetails', component: ProjectDetails },
+        { index: 4, name: 'Project Details', component: ProjectDetails },
         { index: 5, name: 'Technical Details', component: TechnicalDetails },
         { index: 6, name: 'Risk Management', component: RiskManagement },
         { index: 7, name: 'Volume & Community', component: VolumeCommunity },

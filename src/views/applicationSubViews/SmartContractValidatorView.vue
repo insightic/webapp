@@ -12,38 +12,6 @@
             </div>
 
             <div v-else>
-              <!-- <div class="w-100 my-2">
-                <div class="row mx-auto" style="max-width: 320px">
-                  <div class="col-6">
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" v-model="showPassed" />
-                      <label class="form-check-label"> Passed </label>
-                    </div>
-                  </div>
-
-                  <div class="col-6">
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" v-model="showRisks" />
-                      <label class="form-check-label"> Risks </label>
-                    </div>
-                  </div>
-
-                  <div class="col-6">
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" v-model="showWarnings" />
-                      <label class="form-check-label"> Warnings </label>
-                    </div>
-                  </div>
-
-                  <div class="col-6">
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" v-model="showIgnored" />
-                      <label class="form-check-label"> Ignored </label>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
-
               <div>
                 <div class="d-flex align-items-center mb-2">
                   <input class="form-check-input me-2" type="checkbox" v-model="showPassed" />
