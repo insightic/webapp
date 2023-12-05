@@ -10,7 +10,7 @@
     <div class="text-secondary small mb-1" v-html="description"></div>
     <div
       :class="['switch', { on: toggleState }]"
-      style="width: 160px; height: 50px; border-radius: 30px"
+      style="width: 140px; height: 50px; border-radius: 30px; margin-top: 20px;"
       @click="toggleSwitch"
     >
       <div
@@ -22,7 +22,7 @@
           'align-items-center',
           'justify-content-center'
         ]"
-        style="width: 80px; height: 48px; border-radius: 30px"
+        style="width: 70px; height: 48px; border-radius: 30px"
       >
         <div v-if="toggleState">YES</div>
         <div v-if="!toggleState">NO</div>
@@ -70,7 +70,7 @@ export default {
 }
 
 .switch.on {
-  background-color: var(--tblr-success);
+  background-color: rgb(51, 118, 184);
 }
 
 .switch-button.disabled {
@@ -86,6 +86,6 @@ export default {
 }
 
 .switch-button.on {
-  transform: translateX(78px);
+  transform: translateX(68px);
 }
 </style>

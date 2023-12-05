@@ -110,6 +110,7 @@ export default {
   },
   async created() {
     this.application = this.submission.Content
+    console.log(this.application)
     this.loading = false
   },
   methods: {
