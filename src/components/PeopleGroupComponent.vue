@@ -8,7 +8,7 @@
       <ul class="list-group list-group-flush">
         <li
           :class="['list-group-item', { disabled: disabled }]"
-          v-for="(p, idx) in people"
+          v-for="(p, idx) in field"
           :key="idx"
         >
           <div class="d-flex my-3 flex-row align-items-center">
@@ -169,6 +169,7 @@ export default {
         this.people[this.activeIdx] = peopleInfo
       }
       this.showPeopleInfoModal = false
+      this.$emit('update:field', this.people)
     },
     async downloadFileObject(f: FileObject) {
       const objectId = f.ObjectID
