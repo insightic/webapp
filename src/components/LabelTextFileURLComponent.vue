@@ -25,7 +25,7 @@
         </li>
         <li
           :class="['list-group-item', { disabled: disabled }]"
-          v-for="(file, idx) in files"
+          v-for="(file, idx) in field?.Files"
           :key="idx"
         >
           <div class="d-flex flex-row align-items-center">
@@ -106,8 +106,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, type Ref } from 'vue'
-import { getPreSignedGetUrl, getPreSignedPutUrl, uploadFile, type FileObject } from '@/api'
+import { ref, type PropType, type Ref } from 'vue'
+import {
+  getPreSignedGetUrl,
+  getPreSignedPutUrl,
+  uploadFile,
+  type FileObject,
+  type TextFilesObject
+} from '@/api'
 
 const textarea: Ref<HTMLElement | null> = ref(null)
 const fileInput = ref<HTMLInputElement | null>(null)
@@ -124,7 +130,9 @@ defineProps({
   footnote: { type: String },
 
   required: { type: Boolean, default: false },
-  disabled: { type: Boolean, default: false }
+  disabled: { type: Boolean, default: false },
+
+  field: { type: Object as PropType<TextFilesObject | null>, default: null }
 })
 
 const emit = defineEmits(['update:field'])

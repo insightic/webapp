@@ -110,7 +110,7 @@ export default {
   },
   async created() {
     this.application = this.submission.Content
-    console.log(this.application)
+    console.log(this.application[this.tabs[0].name])
     this.loading = false
   },
   methods: {
@@ -126,12 +126,10 @@ export default {
     },
     changePageBySelect(e: any) {
       const index = this.optionName.findIndex((tab) => tab === e.target.value)
-      console.log(index)
       this.current = index
     },
     hasData(idx: number): boolean {
       const tabName = this.tabs[idx].name
-      console.log(this.application)
       return this.application[tabName] != null
     },
     async newOrSaveDraft(data: any): Promise<boolean> {
