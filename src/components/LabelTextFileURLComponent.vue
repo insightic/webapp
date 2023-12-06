@@ -106,7 +106,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, type PropType, type Ref } from 'vue'
+import { ref, type PropType, type Ref, onMounted } from 'vue'
 import {
   getPreSignedGetUrl,
   getPreSignedPutUrl,
@@ -114,17 +114,18 @@ import {
   type FileObject,
   type TextFilesObject
 } from '@/api'
+import PropDisplayCard from './PropDisplayCard.vue'
 
 const textarea: Ref<HTMLElement | null> = ref(null)
 const fileInput = ref<HTMLInputElement | null>(null)
-const text = ref('')
+const text = ref<string | undefined>('')
 const files = ref<FileObject[]>([])
 const uploading = ref(false)
 const uploadingProgress = ref(0.0)
 const uploadingFileObject = ref<FileObject | null>(null)
 const cancelAbort = ref(new AbortController())
 
-defineProps({
+const props = defineProps({
   label: { type: String, required: true },
   description: { type: String },
   footnote: { type: String },
@@ -187,6 +188,11 @@ const download = async function (idx: number) {
   if (!preSignedGet?.URL) return
   window.location.href = preSignedGet?.URL
 }
+
+onMounted(() => {
+  console.log(props.field)
+  text.value = props.field?.Text
+})
 </script>
 
 <style scoped>
