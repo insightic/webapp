@@ -29,7 +29,7 @@ export default {
 
 <template>
   <RouterView />
-
+  <notifications />
   <div class="background"></div>
 </template>
 

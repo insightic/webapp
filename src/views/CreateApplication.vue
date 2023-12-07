@@ -196,7 +196,11 @@ export default {
       if (!this.submissionID) {
         const res = await createSubmission(this.applicationID, this.application)
         if (!res) {
-          alert('Error creating submission')
+          this.$notify({
+            title: 'Tips',
+            text: 'Error creating submission',
+            type: 'warn'
+          })
           return false
         }
         this.submissionID = res.SubmissionID
@@ -204,7 +208,11 @@ export default {
 
       const res = await updateSubmission(this.applicationID, this.submissionID, this.application)
       if (!res) {
-        alert('Error updating submission')
+        this.$notify({
+          title: 'Tips',
+          text: 'Error updating submission',
+          type: 'warn'
+        })
         return false
       }
       return true
@@ -212,13 +220,21 @@ export default {
     async save(data: any) {
       const res = await this.newOrSaveDraft(data)
       if (res) {
-        alert('Save draft successfully')
+        this.$notify({
+          title: 'Tips',
+          text: 'Form has been saved successfully.',
+          type: 'success'
+        })
       }
     },
     async next(data: any) {
       const res = await this.newOrSaveDraft(data)
       if (res) {
-        alert('Save draft successfully')
+        this.$notify({
+          title: 'Tips',
+          text: 'Form has been saved successfully.',
+          type: 'success'
+        })
       }
       this.pageFinishedNum = this.pageFinishedNum + 1
       if (this.current + 1 != this.tabs.length) {

@@ -12,6 +12,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@kyvg/vue3-notification": "^3.0.2",
     "@popperjs/core": "^2.11.8",
     "@tabler/core": "^1.0.0-beta20",
     "@tabler/icons-vue": "^2.40.0",
