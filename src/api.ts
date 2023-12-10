@@ -259,6 +259,16 @@ export async function deleteSubmission(
   return resp?.payload || null
 }
 
+export async function getJobResults(
+  applicationID: number | string,
+  submissionID: number | string
+): Promise<any | null> {
+  const resp = await httpclient.get<any>(
+    `/applications/${applicationID}/submissions/${submissionID}/jobresult`
+  )
+  return resp?.payload || null
+}
+
 export interface Job {
   ID: number
   CreatedAt: string

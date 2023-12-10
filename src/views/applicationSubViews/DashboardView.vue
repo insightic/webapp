@@ -433,6 +433,7 @@
 <script lang="ts">
 import { IconTrendingUp, IconTrendingDown } from '@tabler/icons-vue'
 import ScoreBoard from '@/components/dashboard/ScoreBoardComponent.vue'
+import { getJobResults } from '@/api'
 
 export default {
   components: {
@@ -442,6 +443,8 @@ export default {
   },
   props: ['application', 'submission'],
   async created() {
+    const resp = await getJobResults(this.submission.ApplicationID, this.submission.SubmissionID)
+    console.log(resp)
     console.log(this.submission)
   },
   data() {
