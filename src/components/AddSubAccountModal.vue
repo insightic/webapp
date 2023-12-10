@@ -58,12 +58,9 @@
 </template>
 
 <script lang="ts">
-import LabelInputComponent from '@/components/LabelInputComponent.vue'
-
 export default {
   props: ['visible'],
   components: {
-    LabelInputComponent
   },
   watch: {
     visible(newValue) {

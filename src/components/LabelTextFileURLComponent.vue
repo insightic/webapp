@@ -114,7 +114,6 @@ import {
   type FileObject,
   type TextFilesObject
 } from '@/api'
-import PropDisplayCard from './PropDisplayCard.vue'
 
 const textarea: Ref<HTMLElement | null> = ref(null)
 const fileInput = ref<HTMLInputElement | null>(null)
