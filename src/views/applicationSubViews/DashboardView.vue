@@ -27,17 +27,157 @@
     </div>
   </div>
 
+  <h2>General Information</h2>
+
+  <div class="row row-deck row-cards mb-3">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Whitepaper</h3>
+        </div>
+        <div class="table-responsive">
+          <table class="table card-table">
+            <thead>
+              <tr>
+                <th style="width: 168px;">Name</th>
+                <th>Information</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-secondary" style="vertical-align: top;">Title</td>
+                <td>Insightic - Web3 Compliance Made Easy</td>
+              </tr>
+              <tr>
+                <td class="text-secondary" style="vertical-align: top;">Summary</td>
+                <td>
+                  Preliminary assessment of virtual asset service providers, drastically
+                  reducing manual due diligence efforts.
+
+                  Leveraging on-chain background checks and a unique de-anonymization technique, it offers deep insights
+                  and thorough screening
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Smart Contract</h3>
+        </div>
+        <div class="table-responsive">
+          <table class="table card-table">
+            <thead>
+              <tr>
+                <th style="width: 168px;">Name</th>
+                <th>Information</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-secondary" style="vertical-align: top;">Title</td>
+                <td>Insightic - Web3 Compliance Made Easy</td>
+              </tr>
+              <tr>
+                <td class="text-secondary" style="vertical-align: top;">Summary</td>
+                <td>
+                  Preliminary assessment of virtual asset service providers, drastically
+                  reducing manual due diligence efforts.
+
+                  Leveraging on-chain background checks and a unique de-anonymization technique, it offers deep insights
+                  and thorough screening
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Website</h3>
+        </div>
+        <div class="table-responsive">
+          <table class="table card-table">
+            <thead>
+              <tr>
+                <th style="width: 168px;">Name</th>
+                <th>Information</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-secondary" style="vertical-align: top;">URL</td>
+                <td><a :href="submission?.Content?.Website">{{ submission?.Content?.Website }}</a></td>
+              </tr>
+              <tr>
+                <td class="text-secondary" style="vertical-align: top;">Title</td>
+                <td>Insightic - Web3 Compliance Made Easy</td>
+              </tr>
+              <tr>
+                <td class="text-secondary" style="vertical-align: top;">Summary</td>
+                <td>
+                  Preliminary assessment of virtual asset service providers, drastically
+                  reducing manual due diligence efforts.
+
+                  Leveraging on-chain background checks and a unique de-anonymization technique, it offers deep insights
+                  and thorough screening
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">On-Chain Stats</h3>
+        </div>
+        <div class="table-responsive">
+          <table class="table card-table">
+            <thead>
+              <tr>
+                <th style="width: 168px;">Name</th>
+                <th>Information</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-secondary" style="vertical-align: top;">Contract Address</td>
+                <td><a href="https://insightic.io">https://insightic.io</a></td>
+              </tr>
+              <tr>
+                <td class="text-secondary" style="vertical-align: top;">Title</td>
+                <td>Insightic - Web3 Compliance Made Easy</td>
+              </tr>
+              <tr>
+                <td class="text-secondary" style="vertical-align: top;">Summary</td>
+                <td>
+                  Preliminary assessment of virtual asset service providers, drastically
+                  reducing manual due diligence efforts.
+
+                  Leveraging on-chain background checks and a unique de-anonymization technique, it offers deep insights
+                  and thorough screening
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <h2>Security Assurance</h2>
 
   <div class="row row-deck row-cards mb-3">
     <div class="col-lg-4">
-      <ScoreBoard
-        title="Security Assurance"
-        grade="A-"
-        :NowData="'71'"
-        :PreviousData="'70'"
-        :ChangeData="'+1'"
-      />
+      <ScoreBoard title="Security Assurance" grade="A-" :NowData="'71'" :PreviousData="'70'" :ChangeData="'+1'" />
     </div>
     <div class="col-lg-8">
       <div class="card">
@@ -89,7 +229,9 @@
                 </td>
                 <td>
                   <div class="h1 mb-0">
-                    0 <span><IconTrendingDown stroke-width="1" class="text-green" /></span>
+                    0 <span>
+                      <IconTrendingDown stroke-width="1" class="text-green" />
+                    </span>
                   </div>
                   <div class="small text-secondary">in 6 months</div>
                 </td>
@@ -103,14 +245,18 @@
                 <td>
                   <div class="h1 mb-0">
                     1
-                    <span><IconTrendingDown stroke-width="1" class="text-green" /></span>
+                    <span>
+                      <IconTrendingDown stroke-width="1" class="text-green" />
+                    </span>
                   </div>
                   <div class="small text-secondary">in 6 months</div>
                 </td>
                 <td>
                   <div class="h1 mb-0">
                     6
-                    <span><IconTrendingUp stroke-width="1" class="text-danger" /></span>
+                    <span>
+                      <IconTrendingUp stroke-width="1" class="text-danger" />
+                    </span>
                   </div>
                   <div class="small text-secondary">in 6 months</div>
                 </td>
@@ -123,7 +269,9 @@
                 <td>
                   <div class="h1 mb-0">
                     5
-                    <span><IconTrendingDown stroke-width="1" class="text-green" /></span>
+                    <span>
+                      <IconTrendingDown stroke-width="1" class="text-green" />
+                    </span>
                   </div>
                   <div class="small text-secondary">in 2 years</div>
                 </td>
@@ -137,14 +285,18 @@
                 <td>
                   <div class="h1 mb-0">
                     4
-                    <span><IconTrendingDown stroke-width="1" class="text-green" /></span>
+                    <span>
+                      <IconTrendingDown stroke-width="1" class="text-green" />
+                    </span>
                   </div>
                   <div class="small text-secondary">in 2 years</div>
                 </td>
                 <td>
                   <div class="h1 mb-0">
                     29
-                    <span><IconTrendingDown stroke-width="1" class="text-green" /></span>
+                    <span>
+                      <IconTrendingDown stroke-width="1" class="text-green" />
+                    </span>
                   </div>
                   <div class="small text-secondary">in 2 years</div>
                 </td>
@@ -160,13 +312,7 @@
 
   <div class="row row-deck row-cards mb-3">
     <div class="col-lg-4">
-      <ScoreBoard
-        title="Regulatory Compliance"
-        grade="C+"
-        :NowData="'71'"
-        :PreviousData="'70'"
-        :ChangeData="'+1'"
-      />
+      <ScoreBoard title="Regulatory Compliance" grade="C+" :NowData="'71'" :PreviousData="'70'" :ChangeData="'+1'" />
     </div>
     <div class="col-lg-8">
       <div class="card">
@@ -218,21 +364,27 @@
                 <td>
                   <div class="h1 mb-0">
                     23
-                    <span><IconTrendingUp stroke-width="1" class="text-danger" /></span>
+                    <span>
+                      <IconTrendingUp stroke-width="1" class="text-danger" />
+                    </span>
                   </div>
                   <div class="small text-secondary">in 6 months</div>
                 </td>
                 <td>
                   <div class="h1 mb-0">
                     2
-                    <span><IconTrendingDown stroke-width="1" class="text-danger" /></span>
+                    <span>
+                      <IconTrendingDown stroke-width="1" class="text-danger" />
+                    </span>
                   </div>
                   <div class="small text-secondary">in 6 months</div>
                 </td>
                 <td>
                   <div class="h1 mb-0">
                     4
-                    <span><IconTrendingDown stroke-width="1" class="text-green" /></span>
+                    <span>
+                      <IconTrendingDown stroke-width="1" class="text-green" />
+                    </span>
                   </div>
                   <div class="small text-secondary">in 6 months</div>
                 </td>
@@ -245,21 +397,27 @@
                 <td>
                   <div class="h1 mb-0">
                     78
-                    <span><IconTrendingUp stroke-width="1" class="text-danger" /></span>
+                    <span>
+                      <IconTrendingUp stroke-width="1" class="text-danger" />
+                    </span>
                   </div>
                   <div class="small text-secondary">in 2 years</div>
                 </td>
                 <td>
                   <div class="h1 mb-0">
                     3
-                    <span><IconTrendingDown stroke-width="1" class="text-danger" /></span>
+                    <span>
+                      <IconTrendingDown stroke-width="1" class="text-danger" />
+                    </span>
                   </div>
                   <div class="small text-secondary">in 2 years</div>
                 </td>
                 <td>
                   <div class="h1 mb-0">
                     6
-                    <span><IconTrendingUp stroke-width="1" class="text-danger" /></span>
+                    <span>
+                      <IconTrendingUp stroke-width="1" class="text-danger" />
+                    </span>
                   </div>
                   <div class="small text-secondary">in 2 years</div>
                 </td>
@@ -283,7 +441,9 @@ export default {
     ScoreBoard
   },
   props: ['application', 'submission'],
-  async created() {},
+  async created() {
+    console.log(this.submission)
+  },
   data() {
     return {}
   },
@@ -295,6 +455,7 @@ export default {
 table {
   vertical-align: middle;
 }
+
 td,
 th {
   border-left: unset;
