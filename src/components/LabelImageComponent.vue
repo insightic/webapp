@@ -33,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { getPreSignedPutPublic, uploadFile, type FileObject } from '@/api'
 
 const props = defineProps({
@@ -57,7 +57,6 @@ const src = ref(props.field)
 
 const upload = async function () {
   const file = fileInput.value?.files?.[0]
-  console.log(file)
   if (!file) return
 
   const ext = file.name.split('.')?.pop()
@@ -78,6 +77,13 @@ const upload = async function () {
     uploadingFileObject.value = null
   }
 }
+
+watch(
+  () => props.field,
+  () => {
+    src.value = props.field
+  }
+)
 </script>
 
 <style scoped>

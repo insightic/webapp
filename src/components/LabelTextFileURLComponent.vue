@@ -106,7 +106,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, type PropType, type Ref, onMounted } from 'vue'
+import { ref, type PropType, type Ref, onMounted, watch } from 'vue'
 import {
   getPreSignedGetUrl,
   getPreSignedPutUrl,
@@ -134,6 +134,8 @@ const props = defineProps({
 
   field: { type: Object as PropType<TextFilesObject | null>, default: null }
 })
+
+text.value = props.field?.Text
 
 const emit = defineEmits(['update:field'])
 
@@ -188,10 +190,12 @@ const download = async function (idx: number) {
   window.location.href = preSignedGet?.URL
 }
 
-onMounted(() => {
-  console.log(props.field)
-  text.value = props.field?.Text
-})
+watch(
+  () => props.field,
+  () => {
+    text.value = props.field?.Text
+  }
+)
 </script>
 
 <style scoped>

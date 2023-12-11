@@ -5,6 +5,7 @@
         label="Project Summary"
         description="Please provide a detailed summary of your project."
         :required="true"
+        v-model:field="projectSummary"
         :disabled="disabled"
       />
 
