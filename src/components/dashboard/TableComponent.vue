@@ -1,0 +1,40 @@
+<template>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">{{ title }}</h3>
+        </div>
+        <div class="table-responsive">
+            <table class="table card-table">
+                <thead>
+                    <tr>
+                        <th v-for="(col, idx) in columns" :key="idx">{{ col }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(row, rowIdx) in data" :key="rowIdx">
+                        <td v-for="(col, colIdx) in row" :key="colIdx">{{ col }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</template>
+
+<script setup lang="ts">
+import { defineProps } from 'vue'
+
+defineProps({
+    title: {
+        type: String,
+        required: true
+    },
+    columns: {
+        type: Array,
+        required: true
+    },
+    data: {
+        type: Array,
+        required: true
+    }
+})
+</script>

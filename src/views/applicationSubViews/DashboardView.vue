@@ -64,37 +64,8 @@
       </div>
     </div>
     <div class="col-lg-6">
-      <div class="card">
-        <div class="card-header">
-          <h3 class="card-title">Smart Contract</h3>
-        </div>
-        <div class="table-responsive">
-          <table class="table card-table">
-            <thead>
-              <tr>
-                <th style="width: 168px;">Name</th>
-                <th>Information</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="text-secondary" style="vertical-align: top;">Title</td>
-                <td>Insightic - Web3 Compliance Made Easy</td>
-              </tr>
-              <tr>
-                <td class="text-secondary" style="vertical-align: top;">Summary</td>
-                <td>
-                  Preliminary assessment of virtual asset service providers, drastically
-                  reducing manual due diligence efforts.
-
-                  Leveraging on-chain background checks and a unique de-anonymization technique, it offers deep insights
-                  and thorough screening
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <TableComponent title="test" :columns="['Name', 'Information']"
+        :data="[['Title', 'Insightic - Web3 Compliance Made Easy']]" />
     </div>
     <div class="col-lg-6">
       <div class="card">
@@ -433,13 +404,15 @@
 <script lang="ts">
 import { IconTrendingUp, IconTrendingDown } from '@tabler/icons-vue'
 import ScoreBoard from '@/components/dashboard/ScoreBoardComponent.vue'
+import TableComponent from '@/components/dashboard/TableComponent.vue'
 import { getJobResults } from '@/api'
 
 export default {
   components: {
     IconTrendingUp,
     IconTrendingDown,
-    ScoreBoard
+    ScoreBoard,
+    TableComponent
   },
   props: ['application', 'submission'],
   async created() {
