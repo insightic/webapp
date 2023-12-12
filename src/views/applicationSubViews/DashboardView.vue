@@ -143,6 +143,16 @@
     </div>
   </div>
 
+  <h2>Transaction</h2>
+
+  <div class="row row-deck row-cards mb-3">
+    <div class="col-lg-6">
+      <TableComponent title="Average Rate" :columns="avgRate.columns" :data="avgRate.data"/>
+    </div>
+    <div class="col-lg-6">
+      <TableComponent title="Average Rate" :columns="avgRate.columns" :data="avgRate.data"/>
+    </div>
+  </div>
 
   <h2>Security Assurance</h2>
 
@@ -406,6 +416,7 @@ import { IconTrendingUp, IconTrendingDown } from '@tabler/icons-vue'
 import ScoreBoard from '@/components/dashboard/ScoreBoardComponent.vue'
 import TableComponent from '@/components/dashboard/TableComponent.vue'
 import { getJobResults } from '@/api'
+import sampleData from './sample_data.json'
 
 export default {
   components: {
@@ -421,7 +432,9 @@ export default {
     console.log(this.submission)
   },
   data() {
-    return {}
+    return {
+      avgRate: sampleData.avg_rate
+    }
   },
   methods: {}
 }
