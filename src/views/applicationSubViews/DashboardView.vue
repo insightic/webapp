@@ -142,7 +142,7 @@
     </div>
   </div>
 
-  <h2>Transaction</h2>
+  <h2>Transactions</h2>
 
   <div class="row row-deck row-cards mb-3">
     <div class="col-lg-6">
@@ -159,7 +159,7 @@
     <div class="col-lg-6">
       <LineChartComponent
         title="Hourly Frequency"
-        :labels="hourlyFrequency.data.map((d) => d[0])"
+        :labels="hourlyFrequency.data.map((d) => `${d[0]}:00`)"
         :data="hourlyFrequency.data.map((d) => Number(d[1]))"
       />
     </div>
