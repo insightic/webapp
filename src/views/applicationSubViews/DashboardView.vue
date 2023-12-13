@@ -195,15 +195,21 @@
   <h2>On Chain</h2>
 
   <div class="row row-deck row-cards mb-3">
-    <div class="col-lg-6">
+    <div class="col-lg-12">
       <TableComponent
         title="Total Supply"
         :columns="totalSupply.columns"
         :data="totalSupply.data"
       />
     </div>
-    <div class="col-lg-16">
+    <div class="col-lg-12">
       <TableComponent title="Top K Holders" :columns="topKHolder.columns" :data="topKHolder.data" />
+    </div>
+    <div class="col-lg-12">
+      <TableComponent title="Token Price" :columns="tokenPrice.columns" :data="tokenPrice.data" />
+    </div>
+    <div class="col-lg-6">
+      <TableComponent title="Mint/Burn" :columns="mintBurn.columns" :data="mintBurn.data" />
     </div>
   </div>
 
@@ -486,6 +492,8 @@ import { getJobResults } from '@/api'
 import sampleDataTransactions from './sample_data_transactions.json'
 import sampleDataTotalSupply from './sample_data_total_supply.json'
 import sampleDataTopKHolder from './sample_data_top_k_holder.json'
+import sampleDataTokenPrice from './sample_data_token_price.json'
+import sampleDataMintBurn from './sample_data_mint_burn.json'
 
 export default {
   components: {
@@ -513,7 +521,9 @@ export default {
       hourly_sold_vol: sampleDataTransactions.hourly_sold_vol,
       // total supply
       totalSupply: sampleDataTotalSupply,
-      topKHolder: sampleDataTopKHolder
+      topKHolder: sampleDataTopKHolder,
+      tokenPrice: sampleDataTokenPrice,
+      mintBurn: sampleDataMintBurn
     }
   },
   methods: {}
