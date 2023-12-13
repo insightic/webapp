@@ -145,10 +145,9 @@
   <h2>Transactions</h2>
 
   <div class="row row-deck row-cards mb-3">
-    <div class="col-lg-6">
+    <div class="col-lg-12">
       <TableComponent title="Average Rate" :columns="avgRate.columns" :data="avgRate.data" />
     </div>
-    <div class="col-lg-6"></div>
     <div class="col-lg-6">
       <ChartComponent
         type="bar"
@@ -189,6 +188,18 @@
           { name: 'Hourly Bought Volume', data: hourly_bought_vol.data.map((d) => Number(d[1])) },
           { name: 'Hourly Sold Volume', data: hourly_sold_vol.data.map((d) => Number(d[1])) }
         ]"
+      />
+    </div>
+  </div>
+
+  <h2>Total Supply</h2>
+
+  <div class="row row-deck row-cards mb-3">
+    <div class="col-lg-12">
+      <TableComponent
+        title="Total Supply"
+        :columns="totalSupply.columns"
+        :data="totalSupply.data"
       />
     </div>
   </div>
@@ -469,7 +480,8 @@ import ScoreBoard from '@/components/dashboard/ScoreBoardComponent.vue'
 import TableComponent from '@/components/dashboard/TableComponent.vue'
 import ChartComponent from '@/components/dashboard/ChartComponent.vue'
 import { getJobResults } from '@/api'
-import sampleData from './sample_data.json'
+import sampleDataTransactions from './sample_data_transactions.json'
+import sampleDataTotalSupply from './sample_data_total_supply.json'
 
 export default {
   components: {
@@ -487,13 +499,16 @@ export default {
   },
   data() {
     return {
-      avgRate: sampleData.avg_rate,
-      dailyFrequency: sampleData.daily_frequency,
-      hourlyFrequency: sampleData.hourly_frequency,
-      daily_bought_vol: sampleData.daily_bought_vol,
-      daily_sold_vol: sampleData.daily_sold_vol,
-      hourly_bought_vol: sampleData.hourly_bought_vol,
-      hourly_sold_vol: sampleData.hourly_sold_vol
+      // transcations
+      avgRate: sampleDataTransactions.avg_rate,
+      dailyFrequency: sampleDataTransactions.daily_frequency,
+      hourlyFrequency: sampleDataTransactions.hourly_frequency,
+      daily_bought_vol: sampleDataTransactions.daily_bought_vol,
+      daily_sold_vol: sampleDataTransactions.daily_sold_vol,
+      hourly_bought_vol: sampleDataTransactions.hourly_bought_vol,
+      hourly_sold_vol: sampleDataTransactions.hourly_sold_vol,
+      // total supply
+      totalSupply: sampleDataTotalSupply
     }
   },
   methods: {}

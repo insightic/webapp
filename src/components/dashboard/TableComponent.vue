@@ -3,9 +3,9 @@
     <div class="card-header">
       <h3 class="card-title">{{ title }}</h3>
     </div>
-    <div class="table-responsive">
+    <div class="table-responsive" style="max-height: 280px">
       <table class="table card-table">
-        <thead>
+        <thead class="sticky-top">
           <tr>
             <th v-for="(col, idx) in columns" :key="idx">{{ col }}</th>
           </tr>
