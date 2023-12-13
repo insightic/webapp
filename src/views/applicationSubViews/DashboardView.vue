@@ -192,15 +192,18 @@
     </div>
   </div>
 
-  <h2>Total Supply</h2>
+  <h2>On Chain</h2>
 
   <div class="row row-deck row-cards mb-3">
-    <div class="col-lg-12">
+    <div class="col-lg-6">
       <TableComponent
         title="Total Supply"
         :columns="totalSupply.columns"
         :data="totalSupply.data"
       />
+    </div>
+    <div class="col-lg-16">
+      <TableComponent title="Top K Holders" :columns="topKHolder.columns" :data="topKHolder.data" />
     </div>
   </div>
 
@@ -482,6 +485,7 @@ import ChartComponent from '@/components/dashboard/ChartComponent.vue'
 import { getJobResults } from '@/api'
 import sampleDataTransactions from './sample_data_transactions.json'
 import sampleDataTotalSupply from './sample_data_total_supply.json'
+import sampleDataTopKHolder from './sample_data_top_k_holder.json'
 
 export default {
   components: {
@@ -508,7 +512,8 @@ export default {
       hourly_bought_vol: sampleDataTransactions.hourly_bought_vol,
       hourly_sold_vol: sampleDataTransactions.hourly_sold_vol,
       // total supply
-      totalSupply: sampleDataTotalSupply
+      totalSupply: sampleDataTotalSupply,
+      topKHolder: sampleDataTopKHolder
     }
   },
   methods: {}

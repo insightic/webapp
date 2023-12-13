@@ -12,7 +12,7 @@
         </thead>
         <tbody>
           <tr v-for="(row, rowIdx) in data" :key="rowIdx">
-            <td v-for="(col, colIdx) in row" :key="colIdx">{{ col }}</td>
+            <td v-for="(col, colIdx) in row" :key="colIdx" v-html="col"></td>
           </tr>
         </tbody>
       </table>

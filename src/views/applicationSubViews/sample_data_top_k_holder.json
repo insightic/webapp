@@ -1,0 +1,66 @@
+{
+  "columns": ["holder_address", "wallet_details_all", "wallet_details_token", "token_balance"],
+  "index": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+  "data": [
+    [
+      "0x90f25dc48580503c6ce7735869965c4bc491797b",
+      "<a href=https://etherscan.io//address/0x90f25dc48580503c6ce7735869965c4bc491797b target=_blank\">0x90f25dc48580503c6ce7735869965c4bc491797b</a>",
+      "<a href=https://etherscan.io/token/0x70e8de73ce538da2beed35d14187f6959a8eca96?a=0x90f25dc48580503c6ce7735869965c4bc491797b target=_blank>0x90f25dc48580503c6ce7735869965c4bc491797b</a>",
+      5984776.645164013
+    ],
+    [
+      "0xd0c6f16cc58f1b23c51d1529b95fec2740218f0a",
+      "<a href=https://etherscan.io//address/0xd0c6f16cc58f1b23c51d1529b95fec2740218f0a target=_blank\">0xd0c6f16cc58f1b23c51d1529b95fec2740218f0a</a>",
+      "<a href=https://etherscan.io/token/0x70e8de73ce538da2beed35d14187f6959a8eca96?a=0xd0c6f16cc58f1b23c51d1529b95fec2740218f0a target=_blank>0xd0c6f16cc58f1b23c51d1529b95fec2740218f0a</a>",
+      4758027.5568780005
+    ],
+    [
+      "0xe093ac4096535809dfb7886388ddba6dbf194ab7",
+      "<a href=https://etherscan.io//address/0xe093ac4096535809dfb7886388ddba6dbf194ab7 target=_blank\">0xe093ac4096535809dfb7886388ddba6dbf194ab7</a>",
+      "<a href=https://etherscan.io/token/0x70e8de73ce538da2beed35d14187f6959a8eca96?a=0xe093ac4096535809dfb7886388ddba6dbf194ab7 target=_blank>0xe093ac4096535809dfb7886388ddba6dbf194ab7</a>",
+      1719980.3503890038
+    ],
+    [
+      "0x6279653c28f138c8b31b8a0f6f8cd2c58e8c1705",
+      "<a href=https://etherscan.io//address/0x6279653c28f138c8b31b8a0f6f8cd2c58e8c1705 target=_blank\">0x6279653c28f138c8b31b8a0f6f8cd2c58e8c1705</a>",
+      "<a href=https://etherscan.io/token/0x70e8de73ce538da2beed35d14187f6959a8eca96?a=0x6279653c28f138c8b31b8a0f6f8cd2c58e8c1705 target=_blank>0x6279653c28f138c8b31b8a0f6f8cd2c58e8c1705</a>",
+      1191743.7487658858
+    ],
+    [
+      "0x067306591dcdc297fd757596c408f17188e2dde0",
+      "<a href=https://etherscan.io//address/0x067306591dcdc297fd757596c408f17188e2dde0 target=_blank\">0x067306591dcdc297fd757596c408f17188e2dde0</a>",
+      "<a href=https://etherscan.io/token/0x70e8de73ce538da2beed35d14187f6959a8eca96?a=0x067306591dcdc297fd757596c408f17188e2dde0 target=_blank>0x067306591dcdc297fd757596c408f17188e2dde0</a>",
+      481679.868625
+    ],
+    [
+      "0xbae3d36e5fb173f8faedfcc7314f5204596ffcd2",
+      "<a href=https://etherscan.io//address/0xbae3d36e5fb173f8faedfcc7314f5204596ffcd2 target=_blank\">0xbae3d36e5fb173f8faedfcc7314f5204596ffcd2</a>",
+      "<a href=https://etherscan.io/token/0x70e8de73ce538da2beed35d14187f6959a8eca96?a=0xbae3d36e5fb173f8faedfcc7314f5204596ffcd2 target=_blank>0xbae3d36e5fb173f8faedfcc7314f5204596ffcd2</a>",
+      349219.821921
+    ],
+    [
+      "0xdea11d9f0fe0de4c11407d7a662c747a7389ad21",
+      "<a href=https://etherscan.io//address/0xdea11d9f0fe0de4c11407d7a662c747a7389ad21 target=_blank\">0xdea11d9f0fe0de4c11407d7a662c747a7389ad21</a>",
+      "<a href=https://etherscan.io/token/0x70e8de73ce538da2beed35d14187f6959a8eca96?a=0xdea11d9f0fe0de4c11407d7a662c747a7389ad21 target=_blank>0xdea11d9f0fe0de4c11407d7a662c747a7389ad21</a>",
+      318042.0969359996
+    ],
+    [
+      "0x18abf6f0a12ac840d5a24f6a69367290a44871fc",
+      "<a href=https://etherscan.io//address/0x18abf6f0a12ac840d5a24f6a69367290a44871fc target=_blank\">0x18abf6f0a12ac840d5a24f6a69367290a44871fc</a>",
+      "<a href=https://etherscan.io/token/0x70e8de73ce538da2beed35d14187f6959a8eca96?a=0x18abf6f0a12ac840d5a24f6a69367290a44871fc target=_blank>0x18abf6f0a12ac840d5a24f6a69367290a44871fc</a>",
+      215448.450000003
+    ],
+    [
+      "0x1d015ce42b9b92ce87441e1d49c29b51f8249b27",
+      "<a href=https://etherscan.io//address/0x1d015ce42b9b92ce87441e1d49c29b51f8249b27 target=_blank\">0x1d015ce42b9b92ce87441e1d49c29b51f8249b27</a>",
+      "<a href=https://etherscan.io/token/0x70e8de73ce538da2beed35d14187f6959a8eca96?a=0x1d015ce42b9b92ce87441e1d49c29b51f8249b27 target=_blank>0x1d015ce42b9b92ce87441e1d49c29b51f8249b27</a>",
+      210799.489395
+    ],
+    [
+      "0xcffad3200574698b78f32232aa9d63eabd290703",
+      "<a href=https://etherscan.io//address/0xcffad3200574698b78f32232aa9d63eabd290703 target=_blank\">0xcffad3200574698b78f32232aa9d63eabd290703</a>",
+      "<a href=https://etherscan.io/token/0x70e8de73ce538da2beed35d14187f6959a8eca96?a=0xcffad3200574698b78f32232aa9d63eabd290703 target=_blank>0xcffad3200574698b78f32232aa9d63eabd290703</a>",
+      175329.9350310061
+    ]
+  ]
+}
