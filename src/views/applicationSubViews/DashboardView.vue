@@ -39,23 +39,21 @@
           <table class="table card-table">
             <thead>
               <tr>
-                <th style="width: 168px;">Name</th>
+                <th style="width: 168px">Name</th>
                 <th>Information</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td class="text-secondary" style="vertical-align: top;">Title</td>
+                <td class="text-secondary" style="vertical-align: top">Title</td>
                 <td>Insightic - Web3 Compliance Made Easy</td>
               </tr>
               <tr>
-                <td class="text-secondary" style="vertical-align: top;">Summary</td>
+                <td class="text-secondary" style="vertical-align: top">Summary</td>
                 <td>
-                  Preliminary assessment of virtual asset service providers, drastically
-                  reducing manual due diligence efforts.
-
-                  Leveraging on-chain background checks and a unique de-anonymization technique, it offers deep insights
-                  and thorough screening
+                  Preliminary assessment of virtual asset service providers, drastically reducing
+                  manual due diligence efforts. Leveraging on-chain background checks and a unique
+                  de-anonymization technique, it offers deep insights and thorough screening
                 </td>
               </tr>
             </tbody>
@@ -64,8 +62,11 @@
       </div>
     </div>
     <div class="col-lg-6">
-      <TableComponent title="test" :columns="['Name', 'Information']"
-        :data="[['Title', 'Insightic - Web3 Compliance Made Easy']]" />
+      <TableComponent
+        title="test"
+        :columns="['Name', 'Information']"
+        :data="[['Title', 'Insightic - Web3 Compliance Made Easy']]"
+      />
     </div>
     <div class="col-lg-6">
       <div class="card">
@@ -76,27 +77,27 @@
           <table class="table card-table">
             <thead>
               <tr>
-                <th style="width: 168px;">Name</th>
+                <th style="width: 168px">Name</th>
                 <th>Information</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td class="text-secondary" style="vertical-align: top;">URL</td>
-                <td><a :href="submission?.Content?.Website">{{ submission?.Content?.Website }}</a></td>
+                <td class="text-secondary" style="vertical-align: top">URL</td>
+                <td>
+                  <a :href="submission?.Content?.Website">{{ submission?.Content?.Website }}</a>
+                </td>
               </tr>
               <tr>
-                <td class="text-secondary" style="vertical-align: top;">Title</td>
+                <td class="text-secondary" style="vertical-align: top">Title</td>
                 <td>Insightic - Web3 Compliance Made Easy</td>
               </tr>
               <tr>
-                <td class="text-secondary" style="vertical-align: top;">Summary</td>
+                <td class="text-secondary" style="vertical-align: top">Summary</td>
                 <td>
-                  Preliminary assessment of virtual asset service providers, drastically
-                  reducing manual due diligence efforts.
-
-                  Leveraging on-chain background checks and a unique de-anonymization technique, it offers deep insights
-                  and thorough screening
+                  Preliminary assessment of virtual asset service providers, drastically reducing
+                  manual due diligence efforts. Leveraging on-chain background checks and a unique
+                  de-anonymization technique, it offers deep insights and thorough screening
                 </td>
               </tr>
             </tbody>
@@ -113,27 +114,25 @@
           <table class="table card-table">
             <thead>
               <tr>
-                <th style="width: 168px;">Name</th>
+                <th style="width: 168px">Name</th>
                 <th>Information</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td class="text-secondary" style="vertical-align: top;">Contract Address</td>
+                <td class="text-secondary" style="vertical-align: top">Contract Address</td>
                 <td><a href="https://insightic.io">https://insightic.io</a></td>
               </tr>
               <tr>
-                <td class="text-secondary" style="vertical-align: top;">Title</td>
+                <td class="text-secondary" style="vertical-align: top">Title</td>
                 <td>Insightic - Web3 Compliance Made Easy</td>
               </tr>
               <tr>
-                <td class="text-secondary" style="vertical-align: top;">Summary</td>
+                <td class="text-secondary" style="vertical-align: top">Summary</td>
                 <td>
-                  Preliminary assessment of virtual asset service providers, drastically
-                  reducing manual due diligence efforts.
-
-                  Leveraging on-chain background checks and a unique de-anonymization technique, it offers deep insights
-                  and thorough screening
+                  Preliminary assessment of virtual asset service providers, drastically reducing
+                  manual due diligence efforts. Leveraging on-chain background checks and a unique
+                  de-anonymization technique, it offers deep insights and thorough screening
                 </td>
               </tr>
             </tbody>
@@ -147,10 +146,22 @@
 
   <div class="row row-deck row-cards mb-3">
     <div class="col-lg-6">
-      <TableComponent title="Average Rate" :columns="avgRate.columns" :data="avgRate.data"/>
+      <TableComponent title="Average Rate" :columns="avgRate.columns" :data="avgRate.data" />
+    </div>
+    <div class="col-lg-6"></div>
+    <div class="col-lg-6">
+      <LineChartComponent
+        title="Daily Frequency"
+        :labels="dailyFrequency.data.map((d) => d[0])"
+        :data="dailyFrequency.data.map((d) => Number(d[1]))"
+      />
     </div>
     <div class="col-lg-6">
-      <TableComponent title="Average Rate" :columns="avgRate.columns" :data="avgRate.data"/>
+      <LineChartComponent
+        title="Hourly Frequency"
+        :labels="hourlyFrequency.data.map((d) => d[0])"
+        :data="hourlyFrequency.data.map((d) => Number(d[1]))"
+      />
     </div>
   </div>
 
@@ -158,7 +169,13 @@
 
   <div class="row row-deck row-cards mb-3">
     <div class="col-lg-4">
-      <ScoreBoard title="Security Assurance" grade="A-" :NowData="'71'" :PreviousData="'70'" :ChangeData="'+1'" />
+      <ScoreBoard
+        title="Security Assurance"
+        grade="A-"
+        :NowData="'71'"
+        :PreviousData="'70'"
+        :ChangeData="'+1'"
+      />
     </div>
     <div class="col-lg-8">
       <div class="card">
@@ -210,7 +227,8 @@
                 </td>
                 <td>
                   <div class="h1 mb-0">
-                    0 <span>
+                    0
+                    <span>
                       <IconTrendingDown stroke-width="1" class="text-green" />
                     </span>
                   </div>
@@ -293,7 +311,13 @@
 
   <div class="row row-deck row-cards mb-3">
     <div class="col-lg-4">
-      <ScoreBoard title="Regulatory Compliance" grade="C+" :NowData="'71'" :PreviousData="'70'" :ChangeData="'+1'" />
+      <ScoreBoard
+        title="Regulatory Compliance"
+        grade="C+"
+        :NowData="'71'"
+        :PreviousData="'70'"
+        :ChangeData="'+1'"
+      />
     </div>
     <div class="col-lg-8">
       <div class="card">
@@ -415,6 +439,7 @@
 import { IconTrendingUp, IconTrendingDown } from '@tabler/icons-vue'
 import ScoreBoard from '@/components/dashboard/ScoreBoardComponent.vue'
 import TableComponent from '@/components/dashboard/TableComponent.vue'
+import LineChartComponent from '@/components/dashboard/LineChartComponent.vue'
 import { getJobResults } from '@/api'
 import sampleData from './sample_data.json'
 
@@ -423,7 +448,8 @@ export default {
     IconTrendingUp,
     IconTrendingDown,
     ScoreBoard,
-    TableComponent
+    TableComponent,
+    LineChartComponent
   },
   props: ['application', 'submission'],
   async created() {
@@ -433,7 +459,9 @@ export default {
   },
   data() {
     return {
-      avgRate: sampleData.avg_rate
+      avgRate: sampleData.avg_rate,
+      dailyFrequency: sampleData.daily_frequency,
+      hourlyFrequency: sampleData.hourly_frequency
     }
   },
   methods: {}

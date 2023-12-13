@@ -106,7 +106,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, type PropType, type Ref, onMounted, watch } from 'vue'
+import { ref, type PropType, type Ref, watch } from 'vue'
 import {
   getPreSignedGetUrl,
   getPreSignedPutUrl,

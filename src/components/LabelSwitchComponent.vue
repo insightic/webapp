@@ -10,7 +10,7 @@
     <div class="text-secondary small mb-1" v-html="description"></div>
     <div
       :class="['switch', { on: toggleState }]"
-      style="width: 140px; height: 50px; border-radius: 30px; margin-top: 20px;"
+      style="width: 140px; height: 50px; border-radius: 30px; margin-top: 20px"
       @click="toggleSwitch"
     >
       <div

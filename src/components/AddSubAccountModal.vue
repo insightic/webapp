@@ -60,8 +60,7 @@
 <script lang="ts">
 export default {
   props: ['visible'],
-  components: {
-  },
+  components: {},
   watch: {
     visible(newValue) {
       if (!newValue) return
