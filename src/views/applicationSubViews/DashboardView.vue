@@ -150,17 +150,45 @@
     </div>
     <div class="col-lg-6"></div>
     <div class="col-lg-6">
-      <LineChartComponent
+      <ChartComponent
+        type="bar"
         title="Daily Frequency"
-        :labels="dailyFrequency.data.map((d) => d[0])"
-        :data="dailyFrequency.data.map((d) => Number(d[1]))"
+        :labels="[dailyFrequency.data.map((d) => `${d[0]}`)]"
+        :data="[{ name: 'Daily Frequency', data: dailyFrequency.data.map((d) => Number(d[1])) }]"
       />
     </div>
     <div class="col-lg-6">
-      <LineChartComponent
+      <ChartComponent
+        type="bar"
         title="Hourly Frequency"
-        :labels="hourlyFrequency.data.map((d) => `${d[0]}:00`)"
-        :data="hourlyFrequency.data.map((d) => Number(d[1]))"
+        :labels="[hourlyFrequency.data.map((d) => `${d[0]}:00`)]"
+        :data="[{ name: 'Hourly Frequency', data: hourlyFrequency.data.map((d) => Number(d[1])) }]"
+      />
+    </div>
+    <div class="col-lg-6">
+      <ChartComponent
+        title="Daily Bought/Sold Volume"
+        :labels="[
+          daily_bought_vol.data.map((d) => `${d[0]}`),
+          daily_sold_vol.data.map((d) => `${d[0]}`)
+        ]"
+        :data="[
+          { name: 'Daily Bought Volume', data: daily_bought_vol.data.map((d) => Number(d[1])) },
+          { name: 'Daily Sold Volume', data: daily_sold_vol.data.map((d) => Number(d[1])) }
+        ]"
+      />
+    </div>
+    <div class="col-lg-6">
+      <ChartComponent
+        title="Hourly Bought/Sold Volume"
+        :labels="[
+          hourly_bought_vol.data.map((d) => `${d[0]}:00`),
+          hourly_sold_vol.data.map((d) => `${d[0]}:00`)
+        ]"
+        :data="[
+          { name: 'Hourly Bought Volume', data: hourly_bought_vol.data.map((d) => Number(d[1])) },
+          { name: 'Hourly Sold Volume', data: hourly_sold_vol.data.map((d) => Number(d[1])) }
+        ]"
       />
     </div>
   </div>
@@ -439,7 +467,7 @@
 import { IconTrendingUp, IconTrendingDown } from '@tabler/icons-vue'
 import ScoreBoard from '@/components/dashboard/ScoreBoardComponent.vue'
 import TableComponent from '@/components/dashboard/TableComponent.vue'
-import LineChartComponent from '@/components/dashboard/LineChartComponent.vue'
+import ChartComponent from '@/components/dashboard/ChartComponent.vue'
 import { getJobResults } from '@/api'
 import sampleData from './sample_data.json'
 
@@ -449,7 +477,7 @@ export default {
     IconTrendingDown,
     ScoreBoard,
     TableComponent,
-    LineChartComponent
+    ChartComponent
   },
   props: ['application', 'submission'],
   async created() {
@@ -461,7 +489,11 @@ export default {
     return {
       avgRate: sampleData.avg_rate,
       dailyFrequency: sampleData.daily_frequency,
-      hourlyFrequency: sampleData.hourly_frequency
+      hourlyFrequency: sampleData.hourly_frequency,
+      daily_bought_vol: sampleData.daily_bought_vol,
+      daily_sold_vol: sampleData.daily_sold_vol,
+      hourly_bought_vol: sampleData.hourly_bought_vol,
+      hourly_sold_vol: sampleData.hourly_sold_vol
     }
   },
   methods: {}

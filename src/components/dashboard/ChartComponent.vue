@@ -29,8 +29,8 @@
       <apexchart
         style="height: 196px"
         height="196px"
-        type="area"
-        :series="[{ name: title, data: data }]"
+        :type="type"
+        :series="data"
         :options="{
           chart: {
             sparkline: { enabled: true },
@@ -44,7 +44,7 @@
             curve: 'smooth'
           },
           labels: labels,
-          colors: ['#0054a6']
+          colors: ['#0054a6', '#43ff64']
         }"
       ></apexchart>
     </div>
@@ -60,28 +60,49 @@ export default {
     apexchart: VueApexCharts
   },
   props: {
+    type: { type: String, default: 'area' },
     title: { type: String, required: true },
-    labels: { type: Array, required: true },
-    data: { type: Array as PropType<number[]>, required: true }
+    labels: { type: Array as PropType<string[][]>, required: true },
+    data: { type: Array as PropType<{ name: string; data: number[] }[]>, required: true }
   },
   computed: {
     highest: function () {
-      return Math.max(...this.data)
+      const values = this.data
+        .map((d) => d.data)
+        .map((d) => Math.max(...d))
+        .map((d) => d.toFixed(2))
+      return values.join('/')
     },
     lowest: function () {
-      return Math.max(...this.data)
+      const values = this.data
+        .map((d) => d.data)
+        .map((d) => Math.min(...d))
+        .map((d) => d.toFixed(2))
+      return values.join('/')
     },
     mean: function () {
-      return this.data.reduce((a, b) => a + b) / this.data.length
+      const values = this.data
+        .map((d) => d.data)
+        .map((d) => d.reduce((a, b) => a + b) / d.length)
+        .map((d) => d.toFixed(2))
+      return values.join('/')
     },
     median: function () {
-      const sorted = Array.from(this.data).sort((a, b) => a - b)
-      const middle = Math.floor(sorted.length / 2)
+      const findMedian = function (array: Array<number>) {
+        const sorted = Array.from(array).sort((a, b) => a - b)
+        const middle = Math.floor(sorted.length / 2)
 
-      if (sorted.length % 2 === 0) {
-        return (sorted[middle - 1] + sorted[middle]) / 2
+        if (sorted.length % 2 === 0) {
+          return (sorted[middle - 1] + sorted[middle]) / 2
+        }
+        return sorted[middle]
       }
-      return sorted[middle]
+
+      const values = this.data
+        .map((d) => d.data)
+        .map((d) => findMedian(d))
+        .map((d) => d.toFixed(2))
+      return values.join('/')
     }
   }
 }
