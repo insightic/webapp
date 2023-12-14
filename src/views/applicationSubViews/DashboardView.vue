@@ -196,45 +196,65 @@
 
   <div class="row row-deck row-cards mb-3">
     <div class="col-lg-12">
-      <TableComponent
-        title="Total Supply"
-        :columns="totalSupply.columns"
-        :data="totalSupply.data"
+      <ChartComponent
+        title="Token Supply Over Time"
+        :labels="[totalSupply.data.map((d) => String(d[0]))]"
+        :data="[
+          { name: 'Token Supply Over Time', data: totalSupply.data.map((d) => Number(d[1])) }
+        ]"
       />
     </div>
-    <div class="col-lg-12">
-      <TableComponent title="Top K Holders" :columns="topKHolder.columns" :data="topKHolder.data" />
+    <div class="col-lg-6">
+      <ChartComponent
+        title="Token Price in USD over time"
+        :labels="[tokenPrice.data.map((d) => String(d[0]))]"
+        :data="[
+          { name: 'Token Price in USD over time', data: tokenPrice.data.map((d) => Number(d[1])) }
+        ]"
+      />
     </div>
-    <div class="col-lg-12">
-      <TableComponent title="Token Price" :columns="tokenPrice.columns" :data="tokenPrice.data" />
+    <div class="col-lg-6">
+      <ChartComponent
+        title="Token Price in ETH over time"
+        :labels="[tokenPrice.data.map((d) => String(d[0]))]"
+        :data="[
+          { name: 'Token Price in USD over time', data: tokenPrice.data.map((d) => Number(d[3])) }
+        ]"
+      />
     </div>
     <div class="col-lg-6">
       <TableComponent title="Mint/Burn" :columns="mintBurn.columns" :data="mintBurn.data" />
     </div>
+    <div class="col-lg-6">
+      <PieChartComponent
+        title="Top 10 holders"
+        :labels="topKHolder.data.map((d) => String(d[0]).substring(0, 10))"
+        :data="topKHolder.data.map((d) => d[3])"
+      />
+    </div>
   </div>
 
   <h2>MintholdAgeFreqPortfilio</h2>
-
   <div class="row row-deck row-cards mb-3">
     <div class="col-lg-6">
       <PieChartComponent
         title="Age Stats"
-        :labels="holdAgeFreqPortfilio['age_stats'].columns"
-        :data="holdAgeFreqPortfilio['age_stats'].data"
+        :labels="holdAgeFreqPortfilio['age_stats'].data.map((d) => String(d[1]))"
+        :data="holdAgeFreqPortfilio['age_stats'].data.map((d) => Number(d[2]))"
       />
     </div>
     <div class="col-lg-6">
       <PieChartComponent
         title="Freq Stats"
-        :labels="holdAgeFreqPortfilio['freq_stats'].columns"
-        :data="holdAgeFreqPortfilio['freq_stats'].data"
+        :labels="holdAgeFreqPortfilio['freq_stats'].data.map((d) => String(d[1]))"
+        :data="holdAgeFreqPortfilio['freq_stats'].data.map((d) => Number(d[2]))"
       />
     </div>
     <div class="col-lg-6">
       <PieChartComponent
         title="Portfolio Stats"
-        :labels="holdAgeFreqPortfilio['portfolio_stats'].columns"
-        :data="holdAgeFreqPortfilio['portfolio_stats'].data"
+        :labels="holdAgeFreqPortfilio['portfolio_stats'].data.map((d) => String(d[1]))"
+        :data="holdAgeFreqPortfilio['portfolio_stats'].data.map((d) => Number(d[2]))"
       />
     </div>
   </div>

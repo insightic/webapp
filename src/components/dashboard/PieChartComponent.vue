@@ -23,27 +23,28 @@ export default {
   props: {
     title: { type: String, required: true },
     labels: { type: Array as PropType<string[]>, required: true },
-    data: { type: Array as PropType<(string | number)[][]>, required: true }
+    data: { type: Array as PropType<(string | number)[]>, required: true }
   },
   data() {
     return {
       chartOptions: {
-        labels: this.data.map((d) => d[1]),
+        labels: this.labels,
         responsive: [
           {
             breakpoint: 480,
             options: {
               chart: {
-                width: 200
+                width: 100,
+                height: 100
               },
               legend: {
-                position: 'bottom'
+                position: 'middle'
               }
             }
           }
         ]
       },
-      series: this.data.map((d) => d[2])
+      series: this.data
     }
   }
 }

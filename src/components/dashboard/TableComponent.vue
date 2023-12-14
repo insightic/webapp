@@ -3,7 +3,7 @@
     <div class="card-header">
       <h3 class="card-title">{{ title }}</h3>
     </div>
-    <div class="table-responsive" style="max-height: 280px">
+    <div class="table-responsive" style="max-height: 500px">
       <table class="table card-table">
         <thead class="sticky-top">
           <tr>
