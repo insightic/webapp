@@ -213,6 +213,32 @@
     </div>
   </div>
 
+  <h2>MintholdAgeFreqPortfilio</h2>
+
+  <div class="row row-deck row-cards mb-3">
+    <div class="col-lg-6">
+      <TableComponent
+        title="Age Stats"
+        :columns="holdAgeFreqPortfilio['age_stats'].columns"
+        :data="holdAgeFreqPortfilio['age_stats'].data"
+      />
+    </div>
+    <div class="col-lg-6">
+      <TableComponent
+        title="Freq Stats"
+        :columns="holdAgeFreqPortfilio['freq_stats'].columns"
+        :data="holdAgeFreqPortfilio['freq_stats'].data"
+      />
+    </div>
+    <div class="col-lg-6">
+      <TableComponent
+        title="Portfolio Stats"
+        :columns="holdAgeFreqPortfilio['portfolio_stats'].columns"
+        :data="holdAgeFreqPortfilio['portfolio_stats'].data"
+      />
+    </div>
+  </div>
+
   <h2>Security Assurance</h2>
 
   <div class="row row-deck row-cards mb-3">
@@ -494,6 +520,7 @@ import sampleDataTotalSupply from './sample_data_total_supply.json'
 import sampleDataTopKHolder from './sample_data_top_k_holder.json'
 import sampleDataTokenPrice from './sample_data_token_price.json'
 import sampleDataMintBurn from './sample_data_mint_burn.json'
+import sampleDataHoldAgeFreqPortfolio from './sample_data_holder_age_freq_portfolio.json'
 
 export default {
   components: {
@@ -523,7 +550,8 @@ export default {
       totalSupply: sampleDataTotalSupply,
       topKHolder: sampleDataTopKHolder,
       tokenPrice: sampleDataTokenPrice,
-      mintBurn: sampleDataMintBurn
+      mintBurn: sampleDataMintBurn,
+      holdAgeFreqPortfilio: sampleDataHoldAgeFreqPortfolio
     }
   },
   methods: {}

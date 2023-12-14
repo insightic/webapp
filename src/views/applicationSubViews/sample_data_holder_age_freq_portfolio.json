@@ -1,0 +1,39 @@
+{
+  "age_stats": {
+    "columns": ["model_name", "size", "count_size"],
+    "index": [5, 7, 4, 2, 10, 1, 8, 18],
+    "data": [
+      ["trader_age", "3 months", 446],
+      ["trader_age", "1 year", 357],
+      ["trader_age", "less than 1 week", 316],
+      ["trader_age", "1 month", 167],
+      ["trader_age", "1 week", 97],
+      ["trader_age", "2 years", 74],
+      ["trader_age", "3 years", 10],
+      ["trader_age", "4 years", 1]
+    ]
+  },
+  "freq_stats": {
+    "columns": ["model_name", "size", "count_size"],
+    "index": [3, 16, 13, 14, 17],
+    "data": [
+      ["trader_frequencies", "Monthly Trader", 450],
+      ["trader_frequencies", "Weekly Trader", 400],
+      ["trader_frequencies", "Yearly Trader", 243],
+      ["trader_frequencies", "Daily Trader", 121],
+      ["trader_frequencies", "Sparse Trader", 1]
+    ]
+  },
+  "portfolio_stats": {
+    "columns": ["model_name", "size", "count_size"],
+    "index": [15, 11, 9, 0, 6, 12],
+    "data": [
+      ["trader_portfolios", "<=$100", 174],
+      ["trader_portfolios", "$100-$400", 24],
+      ["trader_portfolios", "$400-$2k", 21],
+      ["trader_portfolios", "$2k-$7k", 15],
+      ["trader_portfolios", "$7k-$90k", 8],
+      ["trader_portfolios", ">$90k", 1]
+    ]
+  }
+}
