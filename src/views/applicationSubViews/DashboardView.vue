@@ -217,23 +217,23 @@
 
   <div class="row row-deck row-cards mb-3">
     <div class="col-lg-6">
-      <TableComponent
+      <PieChartComponent
         title="Age Stats"
-        :columns="holdAgeFreqPortfilio['age_stats'].columns"
+        :labels="holdAgeFreqPortfilio['age_stats'].columns"
         :data="holdAgeFreqPortfilio['age_stats'].data"
       />
     </div>
     <div class="col-lg-6">
-      <TableComponent
+      <PieChartComponent
         title="Freq Stats"
-        :columns="holdAgeFreqPortfilio['freq_stats'].columns"
+        :labels="holdAgeFreqPortfilio['freq_stats'].columns"
         :data="holdAgeFreqPortfilio['freq_stats'].data"
       />
     </div>
     <div class="col-lg-6">
-      <TableComponent
+      <PieChartComponent
         title="Portfolio Stats"
-        :columns="holdAgeFreqPortfilio['portfolio_stats'].columns"
+        :labels="holdAgeFreqPortfilio['portfolio_stats'].columns"
         :data="holdAgeFreqPortfilio['portfolio_stats'].data"
       />
     </div>
@@ -514,6 +514,7 @@ import { IconTrendingUp, IconTrendingDown } from '@tabler/icons-vue'
 import ScoreBoard from '@/components/dashboard/ScoreBoardComponent.vue'
 import TableComponent from '@/components/dashboard/TableComponent.vue'
 import ChartComponent from '@/components/dashboard/ChartComponent.vue'
+import PieChartComponent from '@/components/dashboard/PieChartComponent.vue'
 import { getJobResults } from '@/api'
 import sampleDataTransactions from './sample_data_transactions.json'
 import sampleDataTotalSupply from './sample_data_total_supply.json'
@@ -528,7 +529,8 @@ export default {
     IconTrendingDown,
     ScoreBoard,
     TableComponent,
-    ChartComponent
+    ChartComponent,
+    PieChartComponent
   },
   props: ['application', 'submission'],
   async created() {
