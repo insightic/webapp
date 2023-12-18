@@ -9,8 +9,8 @@
     <div class="flex-grow-1">
       <div class="table-responsive"></div>
     </div>
-    <div style="height: 500px">
-      <apexchart type="pie" :options="chartOptions" :series="series"></apexchart>
+    <div>
+      <apexchart type="pie" max-height="300px" :options="chartOptions" :series="series"></apexchart>
     </div>
   </div>
 </template>
@@ -41,9 +41,6 @@ export default {
               chart: {
                 width: 100,
                 height: 100
-              },
-              legend: {
-                position: 'middle'
               }
             }
           }
