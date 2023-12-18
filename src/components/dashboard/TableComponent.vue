@@ -2,7 +2,9 @@
   <div class="card">
     <div class="card-header">
       <h3 class="card-title">{{ title }}</h3>
-      <div class="ms-auto text-secondary small" v-if="updateAt">Last Update: {{ updateAt }}</div>
+      <div class="ms-auto text-secondary small" v-if="updateAt">
+        Last Update: {{ formatDate(updateAt) }}
+      </div>
     </div>
     <div class="table-responsive" style="max-height: 500px">
       <table class="table card-table">
@@ -23,6 +25,7 @@
 
 <script setup lang="ts">
 import { defineProps } from 'vue'
+import { formatDate } from '@/helpers'
 
 defineProps({
   title: {
@@ -38,8 +41,8 @@ defineProps({
     required: true
   },
   updateAt: {
-    type: String,
-    default: ''
+    type: Date,
+    default: null
   }
 })
 </script>

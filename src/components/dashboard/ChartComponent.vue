@@ -2,6 +2,9 @@
   <div class="card overflow-hidden">
     <div class="card-header">
       <div class="card-title">{{ title }}</div>
+      <div class="ms-auto text-secondary small" v-if="updateAt">
+        Last Update: {{ formatDate(updateAt) }}
+      </div>
     </div>
     <div class="flex-grow-1">
       <div class="table-responsive">
@@ -54,6 +57,7 @@
 <script lang="ts">
 import type { PropType } from 'vue'
 import VueApexCharts from 'vue3-apexcharts'
+import { formatDate } from '@/helpers'
 
 export default {
   components: {
@@ -63,7 +67,8 @@ export default {
     type: { type: String, default: 'area' },
     title: { type: String, required: true },
     labels: { type: Array as PropType<string[][]>, required: true },
-    data: { type: Array as PropType<{ name: string; data: number[] }[]>, required: true }
+    data: { type: Array as PropType<{ name: string; data: number[] }[]>, required: true },
+    updateAt: { type: Date, default: null }
   },
   computed: {
     highest: function () {
@@ -104,6 +109,9 @@ export default {
         .map((d) => d.toFixed(2))
       return values.join('/')
     }
+  },
+  methods: {
+    formatDate
   }
 }
 </script>
