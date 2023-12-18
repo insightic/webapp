@@ -62,11 +62,8 @@
       </div>
     </div>
     <div class="col-lg-6">
-      <TableComponent
-        title="test"
-        :columns="['Name', 'Information']"
-        :data="[['Title', 'Insightic - Web3 Compliance Made Easy']]"
-      />
+      <TableComponent title="test" :columns="['Name', 'Information']"
+        :data="[['Title', 'Insightic - Web3 Compliance Made Easy']]" />
     </div>
     <div class="col-lg-6">
       <div class="card">
@@ -142,120 +139,79 @@
     </div>
   </div>
 
-  <h2>Transactions</h2>
+  <h2 v-if="transcations || totalSupply || topKHolder || tokenPrice || mintBurn || holdAgeFreqPortfilio">Stable Coin</h2>
 
   <div class="row row-deck row-cards mb-3">
-    <div class="col-lg-12">
-      <TableComponent title="Average Rate" :columns="avgRate.columns" :data="avgRate.data" />
+    <div v-if="transcations" class="col-lg-12">
+      <TableComponent title="Average Rate" :columns="transcations.avg_rate.columns" :data="transcations.avg_rate.data" />
     </div>
-    <div class="col-lg-6">
-      <ChartComponent
-        type="bar"
-        title="Daily Frequency"
-        :labels="[dailyFrequency.data.map((d) => `${d[0]}`)]"
-        :data="[{ name: 'Daily Frequency', data: dailyFrequency.data.map((d) => Number(d[1])) }]"
-      />
+    <div v-if="transcations" class="col-lg-6">
+      <ChartComponent type="bar" title="Daily Frequency"
+        :labels="[transcations.daily_frequency.data.map((d: any) => `${d[0]}`)]"
+        :data="[{ name: 'Daily Frequency', data: transcations.daily_frequency.data.map((d: any) => Number(d[1])) }]" />
     </div>
-    <div class="col-lg-6">
-      <ChartComponent
-        type="bar"
-        title="Hourly Frequency"
-        :labels="[hourlyFrequency.data.map((d) => `${d[0]}:00`)]"
-        :data="[{ name: 'Hourly Frequency', data: hourlyFrequency.data.map((d) => Number(d[1])) }]"
-      />
+    <div v-if="transcations" class="col-lg-6">
+      <ChartComponent type="bar" title="Hourly Frequency"
+        :labels="[transcations.hourly_frequency.data.map((d: any) => `${d[0]}:00`)]"
+        :data="[{ name: 'Hourly Frequency', data: transcations.hourly_frequency.data.map((d: any) => Number(d[1])) }]" />
     </div>
-    <div class="col-lg-6">
-      <ChartComponent
-        title="Daily Bought/Sold Volume"
-        :labels="[
-          daily_bought_vol.data.map((d) => `${d[0]}`),
-          daily_sold_vol.data.map((d) => `${d[0]}`)
-        ]"
-        :data="[
-          { name: 'Daily Bought Volume', data: daily_bought_vol.data.map((d) => Number(d[1])) },
-          { name: 'Daily Sold Volume', data: daily_sold_vol.data.map((d) => Number(d[1])) }
-        ]"
-      />
+    <div v-if="transcations" class="col-lg-6">
+      <ChartComponent title="Daily Bought/Sold Volume" :labels="[
+        transcations.daily_bought_vol.data.map((d: any) => `${d[0]}`),
+        transcations.daily_sold_vol.data.map((d: any) => `${d[0]}`)
+      ]" :data="[
+  { name: 'Daily Bought Volume', data: transcations.daily_bought_vol.data.map((d: any) => Number(d[1])) },
+  { name: 'Daily Sold Volume', data: transcations.daily_sold_vol.data.map((d: any) => Number(d[1])) }
+]" />
     </div>
-    <div class="col-lg-6">
-      <ChartComponent
-        title="Hourly Bought/Sold Volume"
-        :labels="[
-          hourly_bought_vol.data.map((d) => `${d[0]}:00`),
-          hourly_sold_vol.data.map((d) => `${d[0]}:00`)
-        ]"
-        :data="[
-          { name: 'Hourly Bought Volume', data: hourly_bought_vol.data.map((d) => Number(d[1])) },
-          { name: 'Hourly Sold Volume', data: hourly_sold_vol.data.map((d) => Number(d[1])) }
-        ]"
-      />
+    <div v-if="transcations" class="col-lg-6">
+      <ChartComponent title="Hourly Bought/Sold Volume" :labels="[
+        transcations.hourly_bought_vol.data.map((d: any) => `${d[0]}:00`),
+        transcations.hourly_sold_vol.data.map((d: any) => `${d[0]}:00`)
+      ]" :data="[
+  { name: 'Hourly Bought Volume', data: transcations.hourly_bought_vol.data.map((d: any) => Number(d[1])) },
+  { name: 'Hourly Sold Volume', data: transcations.hourly_sold_vol.data.map((d: any) => Number(d[1])) }
+]" />
     </div>
   </div>
 
-  <h2>On Chain</h2>
-
   <div class="row row-deck row-cards mb-3">
-    <div class="col-lg-12">
-      <ChartComponent
-        title="Token Supply Over Time"
-        :labels="[totalSupply.data.map((d) => String(d[0]))]"
-        :data="[
-          { name: 'Token Supply Over Time', data: totalSupply.data.map((d) => Number(d[1])) }
-        ]"
-      />
+    <div v-if="totalSupply" class="col-lg-12">
+      <ChartComponent title="Token Supply Over Time" :labels="[totalSupply.data.map((d: any) => String(d[0]))]" :data="[
+        { name: 'Token Supply Over Time', data: totalSupply.data.map((d: any) => Number(d[1])) }
+      ]" />
     </div>
-    <div class="col-lg-6">
-      <ChartComponent
-        title="Token Price in USD over time"
-        :labels="[tokenPrice.data.map((d) => String(d[0]))]"
+    <div v-if="tokenPrice" class="col-lg-6">
+      <ChartComponent title="Token Price in USD over time" :labels="[tokenPrice.data.map((d: any) => String(d[0]))]"
         :data="[
-          { name: 'Token Price in USD over time', data: tokenPrice.data.map((d) => Number(d[1])) }
-        ]"
-      />
+          { name: 'Token Price in USD over time', data: tokenPrice.data.map((d: any) => Number(d[1])) }
+        ]" />
     </div>
-    <div class="col-lg-6">
-      <ChartComponent
-        title="Token Price in ETH over time"
-        :labels="[tokenPrice.data.map((d) => String(d[0]))]"
+    <div v-if="tokenPrice" class="col-lg-6">
+      <ChartComponent title="Token Price in ETH over time" :labels="[tokenPrice.data.map((d: any) => String(d[0]))]"
         :data="[
-          { name: 'Token Price in USD over time', data: tokenPrice.data.map((d) => Number(d[3])) }
-        ]"
-      />
+          { name: 'Token Price in ETH over time', data: tokenPrice.data.map((d: any) => Number(d[3])) }
+        ]" />
     </div>
-    <div class="col-lg-6">
+    <div v-if="mintBurn" class="col-lg-6">
       <TableComponent title="Mint/Burn" :columns="mintBurn.columns" :data="mintBurn.data" />
     </div>
-    <div class="col-lg-6">
-      <PieChartComponent
-        title="Top 10 holders"
-        :labels="topKHolder.data.map((d) => String(d[0]).substring(0, 10))"
-        :data="topKHolder.data.map((d) => d[3])"
-      />
+    <div v-if="topKHolder" class="col-lg-6">
+      <PieChartComponent title="Top 10 holders" :labels="topKHolder.data.map((d: any) => String(d[0]).substring(0, 10))"
+        :data="topKHolder.data.map((d: any) => d[3])" />
     </div>
-  </div>
-
-  <h2>MintholdAgeFreqPortfilio</h2>
-  <div class="row row-deck row-cards mb-3">
-    <div class="col-lg-6">
-      <PieChartComponent
-        title="Age Stats"
-        :labels="holdAgeFreqPortfilio['age_stats'].data.map((d) => String(d[1]))"
-        :data="holdAgeFreqPortfilio['age_stats'].data.map((d) => Number(d[2]))"
-      />
+    <div v-if="holdAgeFreqPortfilio" class="col-lg-6">
+      <PieChartComponent title="Age Stats" :labels="holdAgeFreqPortfilio['age'].data.map((d: any) => String(d[1]))"
+        :data="holdAgeFreqPortfilio['age'].data.map((d: any) => Number(d[2]))" />
     </div>
-    <div class="col-lg-6">
-      <PieChartComponent
-        title="Freq Stats"
-        :labels="holdAgeFreqPortfilio['freq_stats'].data.map((d) => String(d[1]))"
-        :data="holdAgeFreqPortfilio['freq_stats'].data.map((d) => Number(d[2]))"
-      />
+    <div v-if="holdAgeFreqPortfilio" class="col-lg-6">
+      <PieChartComponent title="Freq Stats" :labels="holdAgeFreqPortfilio['freq'].data.map((d: any) => String(d[1]))"
+        :data="holdAgeFreqPortfilio['freq'].data.map((d: any) => Number(d[2]))" />
     </div>
-    <div class="col-lg-6">
-      <PieChartComponent
-        title="Portfolio Stats"
-        :labels="holdAgeFreqPortfilio['portfolio_stats'].data.map((d) => String(d[1]))"
-        :data="holdAgeFreqPortfilio['portfolio_stats'].data.map((d) => Number(d[2]))"
-      />
+    <div v-if="holdAgeFreqPortfilio" class="col-lg-6">
+      <PieChartComponent title="Portfolio Stats"
+        :labels="holdAgeFreqPortfilio['portfolio'].data.map((d: any) => String(d[1]))"
+        :data="holdAgeFreqPortfilio['portfolio'].data.map((d: any) => Number(d[2]))" />
     </div>
   </div>
 
@@ -263,13 +219,7 @@
 
   <div class="row row-deck row-cards mb-3">
     <div class="col-lg-4">
-      <ScoreBoard
-        title="Security Assurance"
-        grade="A-"
-        :NowData="'71'"
-        :PreviousData="'70'"
-        :ChangeData="'+1'"
-      />
+      <ScoreBoard title="Security Assurance" grade="A-" :NowData="'71'" :PreviousData="'70'" :ChangeData="'+1'" />
     </div>
     <div class="col-lg-8">
       <div class="card">
@@ -405,13 +355,7 @@
 
   <div class="row row-deck row-cards mb-3">
     <div class="col-lg-4">
-      <ScoreBoard
-        title="Regulatory Compliance"
-        grade="C+"
-        :NowData="'71'"
-        :PreviousData="'70'"
-        :ChangeData="'+1'"
-      />
+      <ScoreBoard title="Regulatory Compliance" grade="C+" :NowData="'71'" :PreviousData="'70'" :ChangeData="'+1'" />
     </div>
     <div class="col-lg-8">
       <div class="card">
@@ -536,12 +480,6 @@ import TableComponent from '@/components/dashboard/TableComponent.vue'
 import ChartComponent from '@/components/dashboard/ChartComponent.vue'
 import PieChartComponent from '@/components/dashboard/PieChartComponent.vue'
 import { getJobResults } from '@/api'
-import sampleDataTransactions from './sample_data_transactions.json'
-import sampleDataTotalSupply from './sample_data_total_supply.json'
-import sampleDataTopKHolder from './sample_data_top_k_holder.json'
-import sampleDataTokenPrice from './sample_data_token_price.json'
-import sampleDataMintBurn from './sample_data_mint_burn.json'
-import sampleDataHoldAgeFreqPortfolio from './sample_data_holder_age_freq_portfolio.json'
 
 export default {
   components: {
@@ -555,25 +493,24 @@ export default {
   props: ['application', 'submission'],
   async created() {
     const resp = await getJobResults(this.submission.ApplicationID, this.submission.SubmissionID)
-    console.log(resp)
-    console.log(this.submission)
+    if (!resp) { return }
+    const results = resp.filter((r: any) => r["job_name"] == "stablecoin")[0]
+    if (!results) { return }
+    this.transcations = results["job_results"]["transaction"]
+    this.totalSupply = results["job_results"]["supply"]
+    this.topKHolder = results["job_results"]["topKHolder"]
+    this.tokenPrice = results["job_results"]["price"]
+    this.mintBurn = results["job_results"]["mintBurn"]
+    this.holdAgeFreqPortfilio = results["job_results"]["holderAgeFreqPortfolio"]
   },
   data() {
     return {
-      // transcations
-      avgRate: sampleDataTransactions.avg_rate,
-      dailyFrequency: sampleDataTransactions.daily_frequency,
-      hourlyFrequency: sampleDataTransactions.hourly_frequency,
-      daily_bought_vol: sampleDataTransactions.daily_bought_vol,
-      daily_sold_vol: sampleDataTransactions.daily_sold_vol,
-      hourly_bought_vol: sampleDataTransactions.hourly_bought_vol,
-      hourly_sold_vol: sampleDataTransactions.hourly_sold_vol,
-      // total supply
-      totalSupply: sampleDataTotalSupply,
-      topKHolder: sampleDataTopKHolder,
-      tokenPrice: sampleDataTokenPrice,
-      mintBurn: sampleDataMintBurn,
-      holdAgeFreqPortfilio: sampleDataHoldAgeFreqPortfolio
+      transcations: null as any,
+      totalSupply: null as any,
+      topKHolder: null as any,
+      tokenPrice: null as any,
+      mintBurn: null as any,
+      holdAgeFreqPortfilio: null as any
     }
   },
   methods: {}
