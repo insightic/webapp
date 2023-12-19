@@ -73,9 +73,17 @@
 
       <LabelInputComponent
         v-if="tokenCirculation == true"
-        label="Contract Address"
-        description="Please add the small contract address."
-        v-model:field="contractAddress"
+        label="Token Address"
+        description="Please add the token address."
+        v-model:field="tokenAddress"
+        :disabled="disabled"
+      />
+
+      <LabelInputComponent
+        v-if="tokenCirculation == true"
+        label="Token Name"
+        description="Please add the token name."
+        v-model:field="tokenName"
         :disabled="disabled"
       />
 
@@ -127,7 +135,8 @@ export default {
       projectStage: '',
       tokenLaunch: '',
       tokenCirculation: false,
-      contractAddress: '',
+      tokenAddress: '',
+      tokenName: '',
       priorApplication: false
     }
   },
@@ -142,7 +151,8 @@ export default {
         ProjectStage: this.projectStage,
         TokenLaunch: this.tokenLaunch,
         TokenCirculation: this.tokenCirculation,
-        ContractAddress: this.contractAddress,
+        TokenAddress: this.tokenAddress,
+        TokenName: this.tokenName,
         PriorApplication: this.priorApplication
       }
     },
@@ -163,7 +173,8 @@ export default {
     this.projectStage = this.data['ProjectStage']
     this.tokenLaunch = this.data['TokenLaunch']
     this.tokenCirculation = this.data['TokenCirculation']
-    this.contractAddress = this.data['ContractAddress']
+    this.tokenAddress = this.data['TokenAddress']
+    this.tokenName = this.data['TokenName']
     this.priorApplication = this.data['PriorApplication']
   }
 }
