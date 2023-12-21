@@ -39,6 +39,13 @@
         :disabled="disabled"
       />
 
+      <LabelTextFileURLComponent
+        label="WhitePaper"
+        v-model:field="whitePaper"
+        :disabled="disabled"
+        :required="true"
+      />
+
       <LabelSelectComponent
         label="Project Stage"
         description="Please select the current stage of your project."
@@ -95,7 +102,7 @@
       />
 
       <SaveNextButtonComponent
-        :disabled="!logoUrl || !name || !oneLiner || !website"
+        :disabled="!logoUrl || !name || !oneLiner || !website || !whitePaper"
         @save="save"
         @next="next"
         v-if="!disabled"
@@ -132,6 +139,7 @@ export default {
       oneLiner: '',
       website: '',
       pitchDeck: null as TextFilesObject | null,
+      whitePaper: null as TextFilesObject | null,
       projectStage: '',
       tokenLaunch: '',
       tokenCirculation: false,
@@ -148,6 +156,7 @@ export default {
         OneLiner: this.oneLiner,
         Website: this.website,
         PitchDeck: this.pitchDeck,
+        WhitePaper: this.whitePaper,
         ProjectStage: this.projectStage,
         TokenLaunch: this.tokenLaunch,
         TokenCirculation: this.tokenCirculation,
@@ -170,6 +179,7 @@ export default {
     this.oneLiner = this.data['OneLiner']
     this.website = this.data['Website']
     this.pitchDeck = this.data['PitchDeck']
+    this.whitePaper = this.data['WhitePaper']
     this.projectStage = this.data['ProjectStage']
     this.tokenLaunch = this.data['TokenLaunch']
     this.tokenCirculation = this.data['TokenCirculation']
