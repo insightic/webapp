@@ -40,7 +40,7 @@
       />
 
       <LabelTextFileURLComponent
-        label="WhitePaper"
+        label="White Paper"
         v-model:field="whitePaper"
         :disabled="disabled"
         :required="true"
