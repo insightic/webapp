@@ -24,7 +24,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue'
 import { formatDate } from '@/helpers'
 
 defineProps({
