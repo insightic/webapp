@@ -475,7 +475,7 @@
             <div class="d-table-row">
               <div class="d-table-cell datagrid-item" style="vertical-align: middle">
                 <div class="datagrid-title">AUDITOR</div>
-                <div class="datagrid-content">Ernst & Young - Middle East</div>
+                <div class="datagrid-content">{{ submission.Content["Risk Management"]["Auditor"] }}</div>
               </div>
               <div class="d-table-cell datagrid-item" style="vertical-align: middle">
                 <div class="datagrid-title">AUDIT STATUS</div>
