@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 import { onMounted } from 'vue'
 import { RouterLink, useRouter, useRoute } from 'vue-router'
 import BackgroundImageComponent from '@/components/BackgroundImageComponent.vue'
@@ -13,7 +13,7 @@ onMounted(async () => {
     router.push('/')
   }
 })
-</script>
+</script> -->
 
 <template>
   <BackgroundImageComponent :src="'/public/backgrounds/ball.jpg'" />
@@ -91,8 +91,7 @@ onMounted(async () => {
 </template>
 
 <script lang="ts">
-let router = useRouter()
-let route = useRoute()
+import httpClient from '@/httpclient'
 
 export default {
   data() {
