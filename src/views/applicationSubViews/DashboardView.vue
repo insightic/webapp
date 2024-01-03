@@ -333,7 +333,9 @@
             <div class="d-table-row">
               <div class="d-table-cell datagrid-item" style="vertical-align: middle">
                 <div class="datagrid-title">SECURITY AUDITORS</div>
-                <div class="datagrid-content">Certik <br />Hacken</div>
+                <div class="datagrid-content">
+                  {{ submission.Content['Risk Management']['SecurityAuditor'] }}
+                </div>
               </div>
               <div class="d-table-cell datagrid-item" style="vertical-align: middle">
                 <div class="datagrid-title">INCIDENT RESPONSE PLAN</div>
@@ -475,9 +477,7 @@
             <div class="d-table-row">
               <div class="d-table-cell datagrid-item" style="vertical-align: middle">
                 <div class="datagrid-title">AUDITOR</div>
-                <div class="datagrid-content">
-                  {{ submission.Content['Risk Management']['Auditor'] }}
-                </div>
+                <div class="datagrid-content">-</div>
               </div>
               <div class="d-table-cell datagrid-item" style="vertical-align: middle">
                 <div class="datagrid-title">AUDIT STATUS</div>
