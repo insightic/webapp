@@ -333,8 +333,91 @@
             <div class="d-table-row">
               <div class="d-table-cell datagrid-item" style="vertical-align: middle">
                 <div class="datagrid-title">SECURITY AUDITORS</div>
-                <div class="datagrid-content">
-                  {{ submission.Content['Risk Management']['SecurityAuditor'] }}
+                <div class="datagrid-content d-flex align-items-center">
+                  <div>
+                    {{ submission.Content['Risk Management']['SecurityAuditor'] }}
+                  </div>
+
+                  <div
+                    v-if="
+                      submission.Content['Risk Management']['SecurityAuditor'] &&
+                      securityAuditorInfo
+                    "
+                    class="ms-2"
+                  >
+                    <VDropdown>
+                      <button class="btn btn-sm btn-primary">Know More</button>
+
+                      <template #popper>
+                        <div class="p-2" style="width: 480px">
+                          <table class="w-100 auditor-info-table">
+                            <tr>
+                              <td class="text-secondary" style="width: 160px">Tier:</td>
+                              <td>
+                                <span class="badge rounded-pill bg-success me-2 text-white"
+                                  >Tier {{ securityAuditorInfo['Tier'] }}</span
+                                >
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="text-secondary">Status:</td>
+                              <td>
+                                <span class="badge rounded-pill bg-success me-2 text-white"
+                                  >active</span
+                                >
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="text-secondary">Founded Year:</td>
+                              <td>{{ securityAuditorInfo['Founded Year'] }}</td>
+                            </tr>
+                            <tr>
+                              <td class="text-secondary">Number of Employees:</td>
+                              <td>{{ securityAuditorInfo['Number of Employees'] }}</td>
+                            </tr>
+                            <tr>
+                              <td class="text-secondary">Short Description:</td>
+                              <td>{{ securityAuditorInfo['Short Description'] }}</td>
+                            </tr>
+                            <tr>
+                              <td class="text-secondary">Contracts:</td>
+                              <td>
+                                <a class="me-2" :href="securityAuditorInfo['Contact Email']">
+                                  {{ securityAuditorInfo['Contact Email'] }}
+                                </a>
+                                <a class="me-2" :href="securityAuditorInfo['Twitter']">
+                                  <i class="bi bi-twitter"></i>
+                                </a>
+                                <a class="me-2" :href="securityAuditorInfo['LinkedIn']">
+                                  <i class="bi bi-linkedin"></i>
+                                </a>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="text-secondary">Website:</td>
+                              <td>
+                                <a :href="securityAuditorInfo['Website']">{{
+                                  securityAuditorInfo['Website']
+                                }}</a>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="text-secondary">Locations:</td>
+                              <td>{{ securityAuditorInfo['Locations'] }}</td>
+                            </tr>
+                            <tr>
+                              <td class="text-secondary">Monthly Visit:</td>
+                              <td>{{ securityAuditorInfo['Monthly Visit'] }}</td>
+                            </tr>
+                            <tr>
+                              <td class="text-secondary">Audits Completed:</td>
+                              <td>{{ securityAuditorInfo['Audits Completed'] }}</td>
+                            </tr>
+                          </table>
+                        </div>
+                      </template>
+                    </VDropdown>
+                  </div>
                 </div>
               </div>
               <div class="d-table-cell datagrid-item" style="vertical-align: middle">
@@ -582,6 +665,8 @@ import TableComponent from '@/components/dashboard/TableComponent.vue'
 import ChartComponent from '@/components/dashboard/ChartComponent.vue'
 import PieChartComponent from '@/components/dashboard/PieChartComponent.vue'
 import { getJobResults } from '@/api'
+import Papa from 'papaparse'
+import auditors from '@/assets/auditors.csv?raw'
 
 export default {
   components: {
@@ -594,6 +679,10 @@ export default {
   },
   props: ['application', 'submission'],
   async created() {
+    this.verifiedAuditors = Papa.parse(auditors, {
+      header: true
+    }).data
+
     const resp = await getJobResults(this.submission.ApplicationID, this.submission.SubmissionID)
     if (!resp) {
       return
@@ -612,6 +701,7 @@ export default {
   },
   data() {
     return {
+      verifiedAuditors: null as any,
       updateAt: null as any,
       transcations: null as any,
       totalSupply: null as any,
@@ -621,7 +711,16 @@ export default {
       holdAgeFreqPortfilio: null as any
     }
   },
-  methods: {}
+  methods: {},
+  computed: {
+    securityAuditorInfo() {
+      const auditors = this.verifiedAuditors.filter(
+        (v: any) =>
+          v['Auditor Name'] == this.submission.Content['Risk Management']['SecurityAuditor']
+      )
+      return auditors[0]
+    }
+  }
 }
 </script>
 
@@ -634,5 +733,9 @@ td,
 th {
   border-left: unset;
   border-right: unset;
+}
+
+.auditor-info-table > tr > td {
+  vertical-align: top;
 }
 </style>
