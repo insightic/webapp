@@ -1,11 +1,12 @@
 <template>
   <div style="max-width: 960px">
     <SectionLayout title="Risk Management">
-      <LabelSelectComponent
-        label="Auditor"
+      <LabelSelectionTextFileURLComponent
+        label="Security Auditors"
         description="Please select application auditor."
+        v-model:selection="securityAuditor"
+        v-model:field="securityAuditReport"
         :options="verifiedAuditors"
-        v-model:field="auditor"
         :disabled="disabled"
       />
 
@@ -47,11 +48,11 @@
 
 <script lang="ts">
 import SectionLayout from '@/layouts/SectionLayout.vue'
+import LabelSelectionTextFileURLComponent from '@/components/LabelSelectionTextFileURLComponent.vue'
 import LabelTextFileURLComponent from '@/components/LabelTextFileURLComponent.vue'
 import LabelSwitchComponent from '@/components/LabelSwitchComponent.vue'
 import SaveNextButtonComponent from '@/components/SaveNextButtonComponent.vue'
 import type { TextFilesObject } from '@/api'
-import LabelSelectComponent from '@/components/LabelSelectComponent.vue'
 import Papa from 'papaparse'
 import auditors from '@/assets/auditors.csv?raw'
 
@@ -59,10 +60,10 @@ export default {
   props: ['data', 'disabled'],
   components: {
     SectionLayout,
+    LabelSelectionTextFileURLComponent,
     LabelTextFileURLComponent,
     LabelSwitchComponent,
-    SaveNextButtonComponent,
-    LabelSelectComponent
+    SaveNextButtonComponent
   },
   created() {
     this.verifiedAuditors = Papa.parse(auditors, {
@@ -75,7 +76,8 @@ export default {
       bugBounties: null as TextFilesObject | null,
       superuserPrivileges: false,
       superuserPrivilegesDetails: null as TextFilesObject | null,
-      auditor: '',
+      securityAuditor: '',
+      securityAuditReport: null as TextFilesObject | null,
       verifiedAuditors: [] as string[]
     }
   },
@@ -86,7 +88,8 @@ export default {
         BugBounties: this.bugBounties,
         SuperuserPrivileges: this.superuserPrivileges,
         SuperuserPrivilegesDetails: this.superuserPrivilegesDetails,
-        Auditor: this.auditor
+        SecurityAuditor: this.securityAuditor,
+        SecurityAuditReport: this.securityAuditReport
       }
     },
     save() {
@@ -102,7 +105,8 @@ export default {
     this.bugBounties = this.data['BugBounties']
     this.superuserPrivileges = this.data['SuperuserPrivileges']
     this.superuserPrivilegesDetails = this.data['SuperuserPrivilegesDetails']
-    this.auditor = this.data['Auditor']
+    this.securityAuditor = this.data['SecurityAuditor']
+    this.securityAuditReport = this.data['SecurityAuditReport']
   }
 }
 </script>
