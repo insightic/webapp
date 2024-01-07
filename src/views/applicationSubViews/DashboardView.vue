@@ -330,17 +330,81 @@
     <div class="row row-deck row-cards mb-3">
       <div class="col-lg-6">
         <TwitterFollowers
+          title="Twitter Followers"
+          :labels="followers('Twitter Followers').label"
+          :data="followers('Twitter Followers').data"
+        />
+      </div>
+      <div class="col-lg-6">
+        <TwitterFollowers
           title="Reddit Subscribers"
           :labels="followers('Reddit Subscribers').label"
           :data="followers('Reddit Subscribers').data"
         />
       </div>
       <div class="col-lg-6">
-        <TwitterFollowers
-          title="Twitter Followers"
-          :labels="followers('Twitter Followers').label"
-          :data="followers('Twitter Followers').data"
-        />
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Twitter</h3>
+          </div>
+          <div class="table-responsive">
+            <table class="table card-table">
+              <thead>
+                <tr>
+                  <th style="width: 168px">Name</th>
+                  <th>Information</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-secondary" style="vertical-align: top">Profile</td>
+                  <td>
+                    <a :href="twitterInfo.profile_website"
+                      >{{ twitterInfo.profile_name }} - {{ twitterInfo.profile_handle }},
+                      {{ twitterInfo.profile_website }}</a
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-secondary" style="vertical-align: top">Bio</td>
+                  <td>{{ twitterInfo.profile_bio }}</td>
+                </tr>
+                <tr>
+                  <td class="text-secondary" style="vertical-align: top">Joining Date</td>
+                  <td>{{ twitterInfo.profile_joining_date }}</td>
+                </tr>
+                <tr>
+                  <td class="text-secondary" style="vertical-align: top">Following / Followers</td>
+                  <td>
+                    {{ twitterInfo.profile_following }} Followings /
+                    {{ twitterInfo.profile_followers }} Followers
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Most Recent Tweets</h3>
+          </div>
+          <div class="table-responsive">
+            <table class="table card-table">
+              <thead>
+                <tr>
+                  <th style="width: 168px">Tweets</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(tweet, idx) in twitterInfo.tweet_texts" :key="idx">
+                  <td class="text-secondary" style="vertical-align: top">{{ tweet }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -767,7 +831,8 @@ export default {
       topKHolder: null as any,
       tokenPrice: null as any,
       mintBurn: null as any,
-      holdAgeFreqPortfilio: null as any
+      holdAgeFreqPortfilio: null as any,
+      twitterInfo: SampleJSON.twitter_data
     }
   },
   methods: {
