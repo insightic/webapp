@@ -34,13 +34,24 @@
             }"
             >{{ grade }}</span
           >
-          85
+          {{ NowData }}
         </div>
-        <div class="me-auto">
+        <div>
           <span class="text-green d-inline-flex align-items-center">
             +5
             <IconTrendingUp stroke-width="1" class="me-2" />
           </span>
+        </div>
+        <div>
+          <VDropdown>
+            <button class="btn btn-sm btn-outline-primary rounded">?</button>
+
+            <template #popper>
+              <div class="p-2" style="width: 480px">
+                {{ details }}
+              </div>
+            </template>
+          </VDropdown>
         </div>
       </div>
       <div class="d-flex align-items-baseline">
@@ -145,7 +156,8 @@ export default {
     grade: { type: String, required: true },
     PreviousData: { type: String },
     NowData: { type: String },
-    ChangeData: { type: String }
+    ChangeData: { type: String },
+    details: { type: String }
   }
 }
 </script>

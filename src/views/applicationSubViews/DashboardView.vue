@@ -420,10 +420,11 @@
       <div class="col-lg-4">
         <ScoreBoard
           title="Security Assurance"
-          grade="A-"
-          :NowData="'71'"
+          grade="B+"
+          :NowData="securityReportInfo.final_score"
           :PreviousData="'70'"
           :ChangeData="'+1'"
+          :details="securityReportInfo.report_summary"
         />
       </div>
       <div class="col-lg-8">
@@ -788,6 +789,7 @@ import Papa from 'papaparse'
 import auditors from '@/assets/auditors.csv?raw'
 import { formatDateTime } from '@/helpers'
 import SampleJSON from '@/views/applicationSubViews/sample_twitter.json'
+import SampleReportJSON from '@/views/applicationSubViews/sample_report.json'
 import moment from 'moment'
 
 export default {
@@ -832,7 +834,8 @@ export default {
       tokenPrice: null as any,
       mintBurn: null as any,
       holdAgeFreqPortfilio: null as any,
-      twitterInfo: SampleJSON.twitter_data
+      twitterInfo: SampleJSON.twitter_data,
+      securityReportInfo: SampleReportJSON
     }
   },
   methods: {
