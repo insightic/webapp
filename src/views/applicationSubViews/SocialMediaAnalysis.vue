@@ -85,6 +85,14 @@
           </div>
         </div>
       </div>
+      <div class="col-lg-6">
+        <div class="card" style="overflow: hidden">
+          <div class="card-header">
+            <h3 class="card-title">LinkedIn Keywords</h3>
+          </div>
+          <div ref="wordcloud" style="width: 100%; height: 400px"></div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -92,9 +100,16 @@
 <script lang="ts" setup>
 import TwitterFollowers from '@/components/dashboard/TwitterFollowers.vue'
 import { formatDateTime } from '@/helpers'
+import WordCloud from 'WordCloud'
 import SampleJSON from '@/views/applicationSubViews/sample_twitter.json'
 import moment from 'moment'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+
+const wordcloud = ref(null)
+onMounted(() => {
+  const wf: { [key: string]: number } = SampleJSON.linkedin_data.word_frequencies
+  WordCloud(wordcloud.value!, { list: Object.keys(wf).map((k) => [k, wf[k]]) })
+})
 
 let twitterInfo = ref(SampleJSON.twitter_data)
 let followers = function (name: string) {
