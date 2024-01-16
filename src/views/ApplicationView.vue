@@ -80,6 +80,7 @@ import { toRaw } from 'vue'
 import BasicLayout from '@/layouts/BasicLayout.vue'
 
 import DashboardView from '@/views/applicationSubViews/DashboardView.vue'
+import SocialMediaAnalysis from '@/views/applicationSubViews/SocialMediaAnalysis.vue'
 import SmartContractValidatorView from '@/views/applicationSubViews/SmartContractValidatorView.vue'
 import CompanyProfileView from '@/views/applicationSubViews/CompanyProfileView.vue'
 import MySubmissionsView from '@/views/applicationSubViews/MySubmissionsView.vue'
@@ -104,6 +105,11 @@ export default {
           name: 'Dashboard',
           icon: 'bi-graph-up-arrow',
           component: DashboardView
+        },
+        {
+          name: 'Social Media Analysis',
+          icon: 'bi-globe2',
+          component: SocialMediaAnalysis
         },
         {
           name: 'Smart Contract Validator',
