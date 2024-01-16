@@ -698,9 +698,7 @@ import { getJobResults } from '@/api'
 import Papa from 'papaparse'
 import auditors from '@/assets/auditors.csv?raw'
 import { formatDateTime } from '@/helpers'
-import SampleJSON from '@/views/applicationSubViews/sample_twitter.json'
 import SampleReportJSON from '@/views/applicationSubViews/sample_report.json'
-import moment from 'moment'
 
 export default {
   components: {
