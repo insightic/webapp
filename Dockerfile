@@ -11,7 +11,7 @@ RUN apt-get install nodejs -y
 
 WORKDIR /app
 COPY . .
-RUN rm package-lock.json && npm i && npm i wordcloud && npm i -D @types/wordcloud
+RUN rm package-lock.json && npm i
 RUN npm run build-only -- --mode production
 
 COPY ./nginx.conf /etc/nginx/nginx.conf
