@@ -11,7 +11,7 @@ RUN apt-get install nodejs -y
 
 WORKDIR /app
 COPY . .
-RUN npm i
+RUN rm package-lock.json && npm i
 RUN npm run build-only -- --mode production
 
 COPY ./nginx.conf /etc/nginx/nginx.conf
