@@ -10,10 +10,8 @@ RUN apt-get update
 RUN apt-get install nodejs -y
 
 WORKDIR /app
-COPY package.json .
-COPY package-lock.json .
-RUN npm i
 COPY . .
+RUN npm i
 
 COPY ./nginx.conf /etc/nginx/nginx.conf
 CMD ["bash", "start.sh"]
