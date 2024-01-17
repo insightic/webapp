@@ -5,11 +5,9 @@
 <script lang="ts">
 import SidebarLayout from '@/layouts/SidebarLayout.vue'
 
-import AccountApplicationsView from '@/views/accountSubViews/AccountApplicationsView.vue'
-import AccountUsersView from '@/views/accountSubViews/AccountUsersView.vue'
-import AccountProfileView from '@/views/accountSubViews/AccountProfileView.vue'
-import AccountCreateProjectView from '@/views/accountSubViews/AccountCreateProjectView.vue'
-import FormView from '@/views/accountSubViews/FormView.vue'
+import ApplicationsView from '@/views/ApplicationsView.vue'
+import UsersView from '@/views/UsersView.vue'
+import ProfileView from '@/views/ProfileView.vue'
 
 export default {
   components: {
@@ -20,29 +18,18 @@ export default {
       subViews: [
         {
           name: 'Applications',
-          icon: 'bi-box',
-          component: AccountApplicationsView
-        },
-        {
-          name: 'Create Project',
-          icon: 'bi-plus-circle',
-          component: AccountCreateProjectView,
-          hidden: true
+          icon: 'bi-card-checklist',
+          component: ApplicationsView
         },
         {
           name: 'Users',
           icon: 'bi-people',
-          component: AccountUsersView
+          component: UsersView
         },
         {
           name: 'Profile',
-          icon: 'bi-diagram-3',
-          component: AccountProfileView
-        },
-        {
-          name: 'Forms',
-          icon: 'bi-diagram-3',
-          component: FormView
+          icon: 'bi-info-circle',
+          component: ProfileView
         }
       ]
     }

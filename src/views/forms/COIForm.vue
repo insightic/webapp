@@ -1,40 +1,65 @@
 <template>
-    <div style="max-width: 960px">
-      <SectionLayout title="COI">
-        <LabelRadioComponent
-            label="Regulatory and Organizational Affiliations"
-            hint="
-            Do any members of your core team have relationships, affiliations, or interactions with any regulators, organizations, or decision-makers that could potentially, or be perceived to, influence their judgment or actions in the execution of their roles and responsibilities?
-            "
-            :options="['Yes [please provide specific details, including names and a description of the nature of the relationship or interaction.]', 'no']"
-            class="mb-4 mt-3"
-         />
+  <div style="max-width: 960px">
+    <SectionLayout title="Conflict of Interest">
+      <LabelSwitchComponent
+        label="Regulatory and Organizational Affiliations"
+        description="
+            Do any members of your core team have relationships, affiliations, or interactions with any regulators, organizations, or decision-makers that could potentially, or be perceived to, influence their judgment or actions in the execution of their roles and responsibilities?"
+        v-model:field="regulatoryAffiliations"
+        :disabled="disabled"
+      />
 
-         <LabelTextareaComponent
-            label="Confirmation"
-            hint="
-            I hereby affirm that the information provided is accurate and complete to the best of my knowledge. I understand the obligation to disclose any potential conflicts of interest and will promptly update this declaration if any relevant changes occur.
-            "
-            type="text"
-            class="mb-4" 
-         />
+      <LabelTextFileURLComponent
+        v-if="regulatoryAffiliations"
+        label="Description of the nature of the relationship or interaction"
+        v-model:field="relationshipDescription"
+        :disabled="disabled"
+      />
 
-      </SectionLayout>
-    </div>
-  
-  </template>
-  
-  <script lang="ts">
-  import SectionLayout from '@/layouts/SectionLayout.vue'
-  import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
-  import LabelRadioComponent from '@/components/LabelRadioComponent.vue';
+      <SaveNextButtonComponent @save="save" @next="next" v-if="!disabled" />
+    </SectionLayout>
+  </div>
+</template>
 
-  export default {
-    components: {
-      SectionLayout,
-      LabelTextareaComponent,
-      LabelRadioComponent
+<script lang="ts">
+import SectionLayout from '@/layouts/SectionLayout.vue'
+import LabelSwitchComponent from '@/components/LabelSwitchComponent.vue'
+import LabelTextFileURLComponent from '@/components/LabelTextFileURLComponent.vue'
+import SaveNextButtonComponent from '@/components/SaveNextButtonComponent.vue'
+import type { TextFilesObject } from '@/api'
+
+export default {
+  props: ['data', 'disabled'],
+  components: {
+    SectionLayout,
+    LabelSwitchComponent,
+    LabelTextFileURLComponent,
+    SaveNextButtonComponent
+  },
+  data() {
+    return {
+      regulatoryAffiliations: false,
+      relationshipDescription: null as TextFilesObject | null
     }
+  },
+  methods: {
+    payload() {
+      return {
+        RegulatoryAffiliations: this.regulatoryAffiliations,
+        RelationshipDescription: this.relationshipDescription
+      }
+    },
+    save() {
+      this.$emit('save', this.payload())
+    },
+    next() {
+      this.$emit('next', this.payload())
+    }
+  },
+  activated() {
+    if (!this.data) return
+    this.regulatoryAffiliations = this.data['RegulatoryAffiliations']
+    this.relationshipDescription = this.data['RelationshipDescription']
   }
-  </script>
-  
+}
+</script>

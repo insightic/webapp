@@ -19,6 +19,7 @@ export default {
 
 <style scoped>
 .navbar {
+  z-index: 1000;
   position: fixed;
   top: 0;
   left: 0;
@@ -26,21 +27,16 @@ export default {
 }
 
 .content {
-  margin-top: 63px;
+  margin-top: 56px;
+  height: calc(100vh - 56px);
+  overflow-y: auto;
 }
 
-@media (min-width: 768px) {
-  .view {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
-
-  .content {
-    height: calc(100vh - 63px);
-    overflow-y: auto;
-  }
+.view {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 </style>

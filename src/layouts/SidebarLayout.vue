@@ -1,8 +1,8 @@
 <template>
   <BasicLayout>
-    <div class="d-flex flex-md-row flex-column-reverse" style="height: 100%">
+    <div class="content d-flex flex-md-row flex-column-reverse">
       <div class="sidebar p-3">
-        <h5 class="mb-4">{{ name }}</h5>
+        <h3>{{ name }}</h3>
 
         <SideBarButtonComponent
           v-for="(subView, idx) in subViews.filter((v) => !v.hidden)"
@@ -13,26 +13,29 @@
           @click="clickSideBar(subView.name)"
         />
 
-        <hr style="color: rgba(0, 0, 0, 0.2)" />
+        <hr class="my-4" />
 
-        <h5 class="mb-4">Support</h5>
+        <h3>Links</h3>
 
         <SideBarButtonComponent
-          name="Help Center"
+          name="Blog"
           icon="bi-info-circle"
           right-icon="bi-box-arrow-up-right"
+          @click="() => openUrl('https://insightic.io/blog')"
         />
 
         <SideBarButtonComponent
-          name="Terms & Conditions"
+          name="About"
           icon="bi-card-heading"
           right-icon="bi-box-arrow-up-right"
+          @click="() => openUrl('https://insightic.io/about')"
         />
 
         <SideBarButtonComponent
-          name="Privacy Policy"
+          name="Contact Us"
           icon="bi-shield-lock"
           right-icon="bi-box-arrow-up-right"
+          @click="() => openUrl('https://insightic.io/contact-us')"
         />
 
         <button
@@ -51,7 +54,7 @@
       <div class="main flex-grow-1 p-3">
         <h1>{{ selectedSubView?.name }}</h1>
         <component :is="selectedComponent" />
-        <div style="height: 120px"></div>
+        <div style="height: 60px"></div>
       </div>
     </div>
   </BasicLayout>
@@ -105,6 +108,9 @@ export default {
     clickSideBar(view: string) {
       this.$router.push({ query: { view: view } })
     },
+    openUrl(url: string) {
+      window.open(url)
+    },
     back() {
       this.$router.push(this.backButtonPath!)
     },
@@ -118,9 +124,9 @@ export default {
 
 <style scoped>
 .sidebar {
+  background-color: var(--tblr-blue-lt);
+  border-top: 1px solid var(--tblr-border-color);
   width: 100%;
-  border-right: 1px solid #e0e0e0;
-  background-color: #e9f2f8;
   min-width: 300px;
 }
 
@@ -129,7 +135,13 @@ export default {
 }
 
 @media (min-width: 768px) {
+  .content {
+    height: 100%;
+  }
+
   .sidebar {
+    background-color: var(--tblr-blue-lt);
+    border-right: 1px solid var(--tblr-border-color);
     overflow: auto;
     width: 300px;
   }

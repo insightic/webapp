@@ -8,11 +8,10 @@ interface Response<T> {
 }
 
 class HttpClient {
-
   public get baseUrl(): string {
     const url = import.meta.env.VITE_API_URL as string
     if (url) return url
-    return "https://staging-api.insightic.io"
+    return 'https://staging-api.insightic.io'
   }
 
   private _token: string = ''

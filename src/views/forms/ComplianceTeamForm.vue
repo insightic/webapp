@@ -1,98 +1,56 @@
 <template>
   <div style="max-width: 960px">
-    <SectionLayout title="ComplianceTeam">
-      <LabelTextareaComponent
+    <SectionLayout title="Compliance & Team">
+      <LabelInputComponent
         label="Company Name"
-        hint="Provide the full name of your company"
         type="text"
-        class="mb-4"
+        v-model:field="companyName"
+        :required="true"
+        :disabled="disabled"
       />
+
       <LabelTextareaComponent
         label="Company Address"
-        hint="Provide the company’s address of incorporation"
         type="text"
-        class="mb-4"
+        v-model:field="companyAddress"
+        :required="true"
+        :disabled="disabled"
       />
-      <LabelTextareaComponent
+
+      <PeopleGroupComponent
         label="Executives"
-        hint="Number of Executives"
-        type="text"
-        class="mb-4"
+        add-button-name="Add Executive"
+        v-model:field="executives"
+        :disabled="disabled"
       />
-      <LabelTextareaComponent label="Executives (Name)" hint="" type="text" class="mb-4" />
-      <LabelTextareaComponent label="Executives (Date of Birth)" hint="" type="text" class="mb-4" />
-      <LabelTextareaComponent
-        label="Executives (LinkedIn, GitHub, Twitter)"
-        hint="User may add additional link if they have more."
-        type="text"
-        class="mb-4"
-      />
-      <div class="col-md-12" style="margin-bottom: 40px;">
-        <div class="">
-          <label for="document" class="">Executives (CV) <span class="text-danger">*</span></label>
-          <input
-            type="file"
-            ref="whitepaper"
-            class="form-controls w-100"
-            id="document"
-          />
-          <div class="text-secondary small">
-            User may upload CV (in PDF format)
-          </div>
-        </div>
-      </div>
-      <LabelTextareaComponent
+
+      <PeopleGroupComponent
         label="Core Team Members"
-        hint="Number of Core Team Members"
-        type="text"
-        class="mb-4"
+        add-button-name="Add Core Team Member"
+        v-model:field="coreMembers"
+        :disabled="disabled"
       />
-      <LabelTextareaComponent label="Core Team Members (Name)" hint="" type="text" class="mb-4" />
-      <LabelTextareaComponent
-        label="Core Team Members (Date of Birth)"
-        hint=""
-        type="text"
-        class="mb-4"
-      />
-      <LabelTextareaComponent
+
+      <PeopleGroupComponent
         label="Non-executive Beneficial Owners"
-        hint="Number of Non-executive Beneficial Owners"
-        type="text"
-        class="mb-4"
+        add-button-name="Add Non-executive Beneficial Owner"
+        v-model:field="beneficialOwners"
+        :disabled="disabled"
       />
-      <LabelTextareaComponent
-        label="Non-executive Beneficial Owners (Name)"
-        hint=""
-        type="text"
-        class="mb-4"
+
+      <LabelTextFileURLComponent
+        label="Government Connections"
+        description="Please state all connections you have with the government."
+        v-model:field="governmentConnections"
+        :disabled="disabled"
       />
-      <LabelTextareaComponent
-        label="Non-executive Beneficial Owners (Share Percentage)"
-        hint=""
-        type="text"
-        class="mb-4"
+
+      <SaveNextButtonComponent
+        :disabled="!companyName || !companyAddress"
+        @save="save"
+        @next="next"
+        v-if="!disabled"
       />
-      <LabelTextareaComponent
-        label="Non-executive Beneficial Owners (Linkedin, GitHub, Twitter)"
-        hint=""
-        type="text"
-        class="mb-4"
-      />
-      <div class="col-md-12" style="margin-bottom: 40px;">
-        <div class="">
-          <label for="document" class="">Core Team Members (CV) <span class="text-danger">*</span></label>
-          <input
-            type="file"
-            ref="whitepaper"
-            class="form-controls w-100"
-            id="document"
-          />
-          <div class="text-secondary small">
-            User may upload CV (in PDF format)
-          </div>
-        </div>
-      </div>
-      <LabelTextareaComponent label="Government Connections" hint="" type="text" class="mb-4" />
     </SectionLayout>
   </div>
 </template>
@@ -100,13 +58,58 @@
 <script lang="ts">
 import SectionLayout from '@/layouts/SectionLayout.vue'
 import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
-import LabelRadioComponent from '@/components/LabelRadioComponent.vue'
+import LabelInputComponent from '@/components/LabelInputComponent.vue'
+import PeopleGroupComponent from '@/components/PeopleGroupComponent.vue'
+import LabelTextFileURLComponent from '@/components/LabelTextFileURLComponent.vue'
+import type { PeopleInfo, TextFilesObject } from '@/api'
+import SaveNextButtonComponent from '@/components/SaveNextButtonComponent.vue'
 
 export default {
+  props: ['data', 'disabled'],
   components: {
     SectionLayout,
     LabelTextareaComponent,
-    LabelRadioComponent
+    PeopleGroupComponent,
+    LabelInputComponent,
+    LabelTextFileURLComponent,
+    SaveNextButtonComponent
+  },
+  data() {
+    return {
+      companyName: '',
+      companyAddress: '',
+      executives: [] as Array<PeopleInfo>,
+      coreMembers: [] as Array<PeopleInfo>,
+      beneficialOwners: [] as Array<PeopleInfo>,
+      governmentConnections: null as TextFilesObject | null
+    }
+  },
+  methods: {
+    payload() {
+      return {
+        CompanyName: this.companyName,
+        CompanyAddress: this.companyAddress,
+        Executives: this.executives,
+        CoreMembers: this.coreMembers,
+        BeneficialOwners: this.beneficialOwners,
+        GovernmentConnections: this.governmentConnections
+      }
+    },
+    save() {
+      this.$emit('save', this.payload())
+    },
+    next() {
+      this.$emit('next', this.payload())
+    }
+  },
+  activated() {
+    if (!this.data) return
+    this.companyName = this.data['CompanyName']
+    this.companyAddress = this.data['CompanyAddress']
+    this.executives = this.data['Executives']
+    this.coreMembers = this.data['CoreMembers']
+    this.beneficialOwners = this.data['BeneficialOwners']
+    this.governmentConnections = this.data['GovernmentConnections']
   }
 }
 </script>

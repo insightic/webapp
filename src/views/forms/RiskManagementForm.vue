@@ -1,61 +1,112 @@
 <template>
   <div style="max-width: 960px">
-    <SectionLayout title="Legal">
-      <div class="col-md-12" style="margin-bottom: 40px">
-        <div class="">
-          <label for="document" class=""
-            >Security Assessment <span class="text-danger">*</span></label
-          >
-          <input type="file" ref="whitepaper" class="form-controls w-100" id="document" />
-          <div class="text-secondary small">Please upload Auditing report</div>
-        </div>
-      </div>
-      <div class="col-md-12" style="margin-bottom: 40px">
-        <div class="">
-          <label for="document" class="">Security risks <span class="text-danger">*</span></label>
-          <input type="file" ref="whitepaper" class="form-controls w-100" id="document" />
-          <div class="text-secondary small">Please upload Bug bounties</div>
-        </div>
-      </div>
-      <LabelRadioComponent
-        label="Are there any roles in the asset that allow the holder “superuser” privileges, enabling an individual user, often with a single key, to affect the state of the entire asset (e.g. token upgrade roles, seize/destroy roles, mint roles)?"
-        hint=""
-        :options="['Yes', 'no']"
-        class="mb-4 mt-3"
+    <SectionLayout title="Risk Management">
+      <LabelSelectionTextFileURLComponent
+        label="Security Auditors"
+        description="Please select application auditor."
+        v-model:selection="securityAuditor"
+        v-model:field="securityAuditReport"
+        :options="verifiedAuditors"
+        :disabled="disabled"
       />
-      <LabelTextareaComponent
-        label="Others"
-        hint="Based on the identified risks and security issues, illustrate the strategies and measures that have been instituted to mitigate these risks. Submit structured mitigation results or related documentation that outlines the adopted strategies, their effectiveness, and any additional steps planned or underway to address the remaining risks. If available, incorporate any third-party validations or attestations regarding the enacted mitigation strategies."
-        type="text"
-        class="mb-4"
+
+      <LabelTextFileURLComponent
+        label="Security Assessment"
+        description="Please upload Auditing report."
+        v-model:field="securityAssessment"
+        :disabled="disabled"
       />
-      <div class="col-md-12" style="margin-bottom: 40px">
-        <div class="">
-          <label for="document" class=""
-            >Enumeration of Superuser Privileges <span class="text-danger">*</span></label
-          >
-          <input type="file" ref="whitepaper" class="form-controls w-100" id="document" />
-          <div class="text-secondary small">
-            Request: (1)Enumerate all superuser privileges, accounts, and roles. (2)Decentralization
-            of privileges management. (3)Execution Thresholds for Superuser Keys. (4)Management and
-            Control of Superuser Keys. (5)Generation of Superuser Keys.
-          </div>
-        </div>
-      </div>
+
+      <LabelTextFileURLComponent
+        label="Bug Bounties"
+        description="Please upload bug bounties."
+        v-model:field="bugBounties"
+        :disabled="disabled"
+      />
+
+      <LabelSwitchComponent
+        label="Superuser Privileges"
+        description="Are there any roles in the asset that allow the holder “superuser” privileges, enabling an individual user, often with a single key, to affect the state of the entire asset (e.g. token upgrade roles, seize/destroy roles, mint roles)?"
+        v-model:field="superuserPrivileges"
+        :disabled="disabled"
+      />
+
+      <LabelTextFileURLComponent
+        v-if="superuserPrivileges"
+        label="Superuser Privileges Details"
+        description="Request: <br/><br/>(1) Enumerate all superuser privileges, accounts, and roles.<br/>(2) Decentralization
+            of privileges management.<br/>(3) Execution Thresholds for Superuser Keys.<br/>(4) Management and
+            Control of Superuser Keys.<br/>(5) Generation of Superuser Keys."
+        v-model:field="superuserPrivilegesDetails"
+        :disabled="disabled"
+      />
+
+      <SaveNextButtonComponent @save="save" @next="next" v-if="!disabled" />
     </SectionLayout>
   </div>
 </template>
 
 <script lang="ts">
 import SectionLayout from '@/layouts/SectionLayout.vue'
-import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
-import LabelRadioComponent from '@/components/LabelRadioComponent.vue'
+import LabelSelectionTextFileURLComponent from '@/components/LabelSelectionTextFileURLComponent.vue'
+import LabelTextFileURLComponent from '@/components/LabelTextFileURLComponent.vue'
+import LabelSwitchComponent from '@/components/LabelSwitchComponent.vue'
+import SaveNextButtonComponent from '@/components/SaveNextButtonComponent.vue'
+import type { TextFilesObject } from '@/api'
+import Papa from 'papaparse'
+import auditors from '@/assets/auditors.csv?raw'
 
 export default {
+  props: ['data', 'disabled'],
   components: {
     SectionLayout,
-    LabelTextareaComponent,
-    LabelRadioComponent
+    LabelSelectionTextFileURLComponent,
+    LabelTextFileURLComponent,
+    LabelSwitchComponent,
+    SaveNextButtonComponent
+  },
+  created() {
+    this.verifiedAuditors = Papa.parse(auditors, {
+      header: true
+    }).data.map((t: any) => t['Auditor Name'])
+  },
+  data() {
+    return {
+      securityAssessment: null as TextFilesObject | null,
+      bugBounties: null as TextFilesObject | null,
+      superuserPrivileges: false,
+      superuserPrivilegesDetails: null as TextFilesObject | null,
+      securityAuditor: '',
+      securityAuditReport: null as TextFilesObject | null,
+      verifiedAuditors: [] as string[]
+    }
+  },
+  methods: {
+    payload() {
+      return {
+        SecurityAssessment: this.securityAssessment,
+        BugBounties: this.bugBounties,
+        SuperuserPrivileges: this.superuserPrivileges,
+        SuperuserPrivilegesDetails: this.superuserPrivilegesDetails,
+        SecurityAuditor: this.securityAuditor,
+        SecurityAuditReport: this.securityAuditReport
+      }
+    },
+    save() {
+      this.$emit('save', this.payload())
+    },
+    next() {
+      this.$emit('next', this.payload())
+    }
+  },
+  activated() {
+    if (!this.data) return
+    this.securityAssessment = this.data['SecurityAssessment']
+    this.bugBounties = this.data['BugBounties']
+    this.superuserPrivileges = this.data['SuperuserPrivileges']
+    this.superuserPrivilegesDetails = this.data['SuperuserPrivilegesDetails']
+    this.securityAuditor = this.data['SecurityAuditor']
+    this.securityAuditReport = this.data['SecurityAuditReport']
   }
 }
 </script>

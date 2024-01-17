@@ -1,40 +1,64 @@
 <template>
   <div style="max-width: 960px">
     <SectionLayout title="Legal">
-        <div class="col-md-12" style="margin-bottom: 40px;">
-        <div class="">
-          <label for="document" class="">Regulatory Status <span class="text-danger">*</span></label>
-          <input
-            type="file"
-            ref="whitepaper"
-            class="form-controls w-100"
-            id="document"
-          />
-          <div class="text-secondary small">
-            Provide any third-party or internal legal opinion, memorandum or analysis (if available) on the regulatory status of the token/network, including under U.S. federal, state or foreign securities laws and other financial product-related laws relating to the token.
-          </div>
-        </div>
-      </div>
-      <LabelRadioComponent
-        label="Legal Action"
-        hint="Has the asset, network, organization, or any individuals associated ever been the subject of an investigation or action by a law enforcement or regulatory body?"
-        :options="['Yes', 'no']"
-        class="mb-4 mt-3"
+      <LabelTextFileURLComponent
+        label="Regulatory Status"
+        description="Provide any third-party or internal legal opinion, memorandum or analysis (if available) on the regulatory status of the token/network."
+        v-model:field="regulatoryStatus"
+        :disabled="disabled"
       />
+
+      <LabelSwitchComponent
+        label="Legal Action"
+        description="Has the asset, network, organization, or any individuals associated ever been the subject of an investigation or action by a law enforcement or regulatory body?"
+        v-model:field="legalAction"
+        :disabled="disabled"
+      />
+
+      <SaveNextButtonComponent @save="save" @next="next" v-if="!disabled" />
     </SectionLayout>
   </div>
 </template>
 
 <script lang="ts">
 import SectionLayout from '@/layouts/SectionLayout.vue'
-import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
-import LabelRadioComponent from '@/components/LabelRadioComponent.vue'
+import LabelSwitchComponent from '@/components/LabelSwitchComponent.vue'
+import LabelTextFileURLComponent from '@/components/LabelTextFileURLComponent.vue'
+import SaveNextButtonComponent from '@/components/SaveNextButtonComponent.vue'
+import type { TextFilesObject } from '@/api'
 
 export default {
+  props: ['data', 'disabled'],
   components: {
     SectionLayout,
-    LabelTextareaComponent,
-    LabelRadioComponent
+    LabelSwitchComponent,
+    LabelTextFileURLComponent,
+    SaveNextButtonComponent
+  },
+  data() {
+    return {
+      regulatoryStatus: null as TextFilesObject | null,
+      legalAction: false
+    }
+  },
+  methods: {
+    payload() {
+      return {
+        RegulatoryStatus: this.regulatoryStatus,
+        LegalAction: this.legalAction
+      }
+    },
+    save() {
+      this.$emit('save', this.payload())
+    },
+    next() {
+      this.$emit('next', this.payload())
+    }
+  },
+  activated() {
+    if (!this.data) return
+    this.regulatoryStatus = this.data['RegulatoryStatus']
+    this.legalAction = this.data['LegalAction']
   }
 }
 </script>

@@ -1,35 +1,34 @@
 <template>
-	<div id="app">
-		<apexchart class="chart rounded" width="120%" type="radar" :options="options" :series="series"></apexchart>
-	</div>
+  <div id="app">
+    <apexchart
+      class="chart rounded"
+      width="120%"
+      type="radar"
+      :options="options"
+      :series="series"
+    ></apexchart>
+  </div>
 </template>
 
 <script lang="ts">
-import VueApexCharts from "vue3-apexcharts";
+import VueApexCharts from 'vue3-apexcharts'
 
 export default {
   components: {
-    apexchart: VueApexCharts,
+    apexchart: VueApexCharts
   },
   data() {
     return {
       series: [
         {
-          name: "series",
-          data: [70, 98, 95.52, 96.04, 95.04, 80.12],
-        },
+          name: 'series',
+          data: [70, 98, 95.52, 96.04, 95.04, 80.12]
+        }
       ],
       options: {
         xaxis: {
-          categories:[
-            "Health",
-            "Resillience",
-            "Strength",
-            "Stability",
-            "Trust",
-            "Security"
-          ],
-          fontSize: '1rem',
+          categories: ['Health', 'Resillience', 'Strength', 'Stability', 'Trust', 'Security'],
+          fontSize: '1rem'
         },
         chart: {
           height: 350,
@@ -41,8 +40,8 @@ export default {
             top: 1
           },
           toolbar: {
-            show: false,
-          },
+            show: false
+          }
         },
         title: {
           text: 'Security Score',
@@ -57,15 +56,14 @@ export default {
         markers: {
           size: 0
         }
-      },
-    };
-  },
-};
-
+      }
+    }
+  }
+}
 </script>
 
 <style>
 .chart {
-    background-color: #fff;
+  background-color: #fff;
 }
 </style>

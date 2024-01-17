@@ -1,4 +1,17 @@
 import httpclient from './httpclient'
+import axios from 'axios'
+import { type AxiosProgressEvent } from 'axios'
+
+export interface FileObject {
+  Filename: string
+  ObjectID: string
+  URL: string
+}
+
+export interface TextFilesObject {
+  Text: string
+  Files: Array<FileObject>
+}
 
 export interface RuleParamDescription {
   Name: string
@@ -34,23 +47,42 @@ export async function createRule(rule: Rule) {
   await httpclient.post(`/rules`, rule)
 }
 
-export async function getPreSignedPutUrl() {
-  const data = await httpclient.post(`/preSignedPut`)
+export async function getPreSignedPutUrl(): Promise<{ ObjectID: string; URL: string } | null> {
+  const data = await httpclient.post<{ ObjectID: string; URL: string }>(`/preSignedPut`)
   return data?.payload || null
 }
 
-export async function getPreSignedGetUrl(id: string, filename: string) {
+export async function getPreSignedGetUrl(
+  id: string,
+  filename: string
+): Promise<{ URL: string } | null> {
   const body = { ObjectID: id, FileName: filename }
-  const data = await httpclient.post(`/preSignedGet`, body)
+  const data = await httpclient.post<{ URL: string }>(`/preSignedGet`, body)
   return data?.payload || null
 }
 
-export async function uploadFile(url: string, file: File) {
-  const resp = await fetch(url, {
-    method: 'PUT',
-    body: file
+export async function getPreSignedPutPublic(
+  extension?: string
+): Promise<{ GetURL: string; ObjectID: string; URL: string } | null> {
+  const url = extension
+    ? `/preSignedPutPublic?extension=${extension.toLowerCase()}`
+    : `/preSignedPutPublic`
+  const data = await httpclient.post<{ GetURL: string; ObjectID: string; URL: string }>(url)
+  return data?.payload || null
+}
+
+export async function uploadFile(
+  url: string,
+  file: File,
+  abortController?: AbortController,
+  onUploadProgress?: (evt: AxiosProgressEvent) => void
+) {
+  return await axios.put(url, file, {
+    signal: abortController?.signal,
+    onUploadProgress: (evt) => {
+      if (onUploadProgress) onUploadProgress(evt)
+    }
   })
-  return resp
 }
 
 export interface ProjectContent {
@@ -83,8 +115,9 @@ export interface CodeValidationResult {
 }
 
 export interface Submission {
-  Content: ProjectContent
+  Content: { [key: string]: any }
   SubmissionID: string
+  ApplicationID: string
   Results: { CodeValidation: CodeValidationResult[] }
   Status: string
   CreatedAt: string
@@ -99,6 +132,20 @@ export interface Application {
   CreatedAt: string
   UpdatedAt: string
   DataVersion: string
+}
+
+export interface Applications {
+  AccountID: string
+  ActiveSubmissionID: string
+  ApplicationID: string
+  ApplicationName: string
+  CreatedAt: string
+  DeletedAt: string
+  ID: number
+  LogoURL: string
+  OneLiner: string
+  Website: string
+  UpdatedAt: string
 }
 
 export interface Founder {
@@ -124,50 +171,31 @@ export interface S3File {
   FileLink: string
 }
 
-export interface NewApplication {
-  Name: string
-  Twitter: string
-  Website: string
-  Whitepaper: string
-  WhitepaperFile: S3File
-  CodeFiles: S3File
-  WhitepaperFileLink: string
-  NumFounders: number
-  Founders: Founder[]
-  NumMembers: number
-  Members: Member[]
-  Objective: string
-  Motivation: string
-  Assets: string
-}
-
-export async function createProject(project: NewApplication): Promise<Application> {
-  const resp = await httpclient.post<Application>(`/applications`, project)
-  return resp?.payload || ({} as Application)
+export async function createApplication(): Promise<Application | null> {
+  const resp = await httpclient.post<Application>(`/applications`)
+  return resp?.payload || null
 }
 
 // submit new draft application
-export async function submitApplicationDraft(project: NewApplication): Promise<Application> {
-  const resp = await httpclient.post<Application>(`/applications/drafts`, project)
-  return resp?.payload || ({} as Application)
+export async function submitApplicationDraft(project: string): Promise<string> {
+  const resp = await httpclient.post<string>(`/applications/drafts`, project)
+  return resp?.payload || ''
 }
 
 // save new application without any submission
-export async function saveApplicationDraft(project: NewApplication): Promise<Application> {
-  const resp = await httpclient.post<Application>(`/applications/drafts`, project)
-  return resp?.payload || ({} as Application)
+export async function saveApplicationDraft(
+  project: any
+): Promise<{ applicationID: string; submissionID: string } | null> {
+  const resp = await httpclient.post<{ applicationID: string; submissionID: string }>(
+    `/applications/drafts`,
+    project
+  )
+  return resp?.payload || null
 }
 
-export async function getApplications(): Promise<Application[]> {
-  const resp = await httpclient.get<number[]>(`/applications`)
-  const applicationList = [] as Application[]
-  for (const applicationId of resp!.payload) {
-    const application = await getApplication(applicationId)
-    if (application) {
-      applicationList.push(application)
-    }
-  }
-  return applicationList
+export async function getApplications(): Promise<Applications[] | null> {
+  const resp = await httpclient.get<Applications[]>(`/applications`)
+  return resp?.payload || null
 }
 
 export async function getApplication(id: number | string): Promise<Application | null> {
@@ -177,7 +205,7 @@ export async function getApplication(id: number | string): Promise<Application |
 
 export async function updateApplication(
   id: number | string,
-  project: NewApplication
+  project: {}
 ): Promise<Application | null> {
   const resp = await httpclient.put<Application>(`/applications/${id}`, project)
   return resp?.payload || null
@@ -188,23 +216,22 @@ export async function deleteApplication(id: number | string): Promise<any | null
   return resp?.payload || null
 }
 
-// when there is application and save new submission as draft
-export async function saveSubmissionDraft(
+export async function createSubmission(
   applicationID: number | string,
-  project: NewApplication
-): Promise<Application | null> {
-  const resp = await httpclient.post<Application>(`/applications/${applicationID}/drafts`, project)
+  data: { [key: string]: any }
+): Promise<Submission | null> {
+  const resp = await httpclient.post<Submission>(`/applications/${applicationID}/submissions`, data)
   return resp?.payload || null
 }
 
-export async function updateSubmissionDraft(
+export async function updateSubmission(
   applicationID: number | string,
   submissionID: number | string,
-  project: NewApplication
-): Promise<Application | null> {
-  const resp = await httpclient.put<Application>(
-    `/applications/${applicationID}/submissions/${submissionID}/drafts`,
-    project
+  data: { [key: string]: any }
+): Promise<Submission | null> {
+  const resp = await httpclient.put<Submission>(
+    `/applications/${applicationID}/submissions/${submissionID}`,
+    data
   )
   return resp?.payload || null
 }
@@ -213,7 +240,7 @@ export async function updateSubmissionDraft(
 export async function submitSubmissionDraft(
   applicationID: number | string,
   submissionID: number | string,
-  project: NewApplication
+  project: {}
 ): Promise<Application | null> {
   const resp = await httpclient.post<Application>(
     `/applications/${applicationID}/submissions/${submissionID}/submit`,
@@ -228,6 +255,16 @@ export async function deleteSubmission(
 ): Promise<any | null> {
   const resp = await httpclient.delete<any>(
     `/applications/${applicationID}/submissions/${submissionID}`
+  )
+  return resp?.payload || null
+}
+
+export async function getJobResults(
+  applicationID: number | string,
+  submissionID: number | string
+): Promise<any | null> {
+  const resp = await httpclient.get<any>(
+    `/applications/${applicationID}/submissions/${submissionID}/jobresult`
   )
   return resp?.payload || null
 }
@@ -253,6 +290,13 @@ export async function getProjectJobs(projectID: number | string): Promise<Job[]>
 export async function createProjectJob(projectID: number | string): Promise<Job | null> {
   const resp = await httpclient.post<Job>(`/applications/${projectID}/jobs`)
   return resp?.payload || null
+}
+
+export async function getZanScore(address: string): Promise<number | undefined> {
+  const resp = await axios.post(`https://staging-api.insightic.io/kyt/score`, {
+    objectId: `0x${address}`
+  })
+  return resp?.data?.data?.score?.riskScore
 }
 
 export interface JobRunResult {
@@ -281,31 +325,117 @@ export async function getJobRunResults(
 }
 
 export interface AssessmentResultsItem {
-  title: string,
-  information: string,
-  dataReceived: string,
+  title: string
+  information: string
+  dataReceived: string
   status: string
 }
 
 export interface AssessmentResultsFounder {
-  name: string,
+  name: string
   item: {
-    founder: string,
+    founder: string
     data: AssessmentResultsItem[]
   }[]
-} 
+}
 
 export interface AssessmentResults {
-  name: string,
+  name: string
   item: AssessmentResultsItem[]
 }
 
-
 export async function getAssessmentResults(
   applicationID: number | string
-  ): Promise<AssessmentResults[] | AssessmentResultsFounder[]> {
-    const resp = await httpclient.get<AssessmentResults[] | AssessmentResultsFounder[]>(
-      `/applications/${applicationID}/assessment`
-    )
+): Promise<AssessmentResults[] | AssessmentResultsFounder[]> {
+  const resp = await httpclient.get<AssessmentResults[] | AssessmentResultsFounder[]>(
+    `/applications/${applicationID}/assessment`
+  )
+  return resp?.payload || []
+}
+
+export interface PeopleInfo {
+  name: string
+  birthday: string
+  cv: FileObject
+  address: string
+  twitter: string
+  github: string
+  linkedin: string
+  score: string
+}
+
+export interface filesInfo {
+  name: string
+  objectID: string
+}
+
+export interface AccountInformation {
+  AccountUUID: string
+  CreatedAt: string
+  DeletedAt: string
+  Email: string
+  FName: string
+  ID: number
+  LName: string
+  PhoneNumber: string
+  UpdatedAt: string
+  Username: string
+}
+
+export interface subAccountInformation {
+  ID: number
+  CreatedAt: string
+  UpdatedAt: string
+  DeletedAt: string
+  MainAccountID: number
+  MainAccountUUID: string
+  AccountUUID: string
+  Username: string
+}
+
+export async function getAccount(): Promise<AccountInformation | null> {
+  const resp = await httpclient.get<AccountInformation>(`/accounts`)
+  return resp?.payload || null
+}
+
+export async function getSubAccount(
+  mainAccountUUID: string | undefined
+): Promise<subAccountInformation[]> {
+  const resp = await httpclient.get<subAccountInformation[]>(
+    `/accounts/${mainAccountUUID}/subaccounts`
+  )
+  return resp?.payload || []
+}
+
+export async function addSubAccount(
+  mainAccountUUID: string | undefined,
+  subAccountInfo: string
+): Promise<subAccountInformation[]> {
+  const resp = await httpclient.post<subAccountInformation[]>(
+    `/accounts/${mainAccountUUID}/subaccounts`,
+    subAccountInfo
+  )
+  return resp?.payload || []
+}
+
+export async function deleteSubAccount(
+  mainAccountUUID: string | undefined,
+  subAccountUUID: string | undefined
+): Promise<any | null> {
+  const resp = await httpclient.delete<any | null>(
+    `/accounts/${mainAccountUUID}/subaccounts/${subAccountUUID}/delete`
+  )
+  return resp?.payload || []
+}
+
+export async function updateSubAccountPassword(
+  mainAccountUUID: string | undefined,
+  subAccountUUID: string | undefined,
+  newAndOldPassword: string
+): Promise<any | null> {
+  const resp = await httpclient.put<any | null>(
+    `/accounts/${mainAccountUUID}/subaccounts/${subAccountUUID}/password`,
+    newAndOldPassword
+  )
   return resp?.payload || []
 }

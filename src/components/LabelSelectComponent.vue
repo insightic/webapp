@@ -1,13 +1,29 @@
 <template>
-  <div class="mb-2">
-    <label class="form-label">
-      {{ label }}
-    </label>
-    <span v-show="required" class="ms-1 text-danger">*</span> <br />
-    <label class="text-secondary small" v-html="hint"></label>
-    <select class="form-select" @change="onChange">
+  <div class="mb-3">
+    <div class="d-flex">
+      <div>
+        {{ label }}
+      </div>
+      <span v-show="required" class="text-danger">*</span>
+    </div>
+
+    <div class="text-secondary small mb-1" v-html="description"></div>
+    <select
+      class="form-select"
+      @change="onChange"
+      :value="field"
+      :disabled="disabled"
+      :style="{ backgroundColor: disabled ? '#e9ecef' : 'white' }"
+    >
       <option value="" selected disabled>{{ placeholder }}</option>
-      <option v-for="option in options" :key="option" :value="option">{{ option }}</option>
+      <option
+        v-for="(option, index) in options"
+        :key="option"
+        :value="option"
+        :disabled="index > pageFinishedNum"
+      >
+        {{ option }}
+      </option>
     </select>
     <label class="text-secondary small" v-if="footnote">{{ footnote }}</label>
   </div>
@@ -17,12 +33,16 @@
 export default {
   props: {
     label: { type: String, required: true },
-    options: { type: Array<string>, required: true },
-    field: { type: String },
-    placeholder: { type: String, default: 'Please select project type' },
-    hint: { type: String },
+    description: { type: String },
+    options: { type: Array<string | number>, required: true },
+    placeholder: { type: String, default: 'Options...' },
     footnote: { type: String },
-    required: { type: Boolean, default: false }
+    pageFinishedNum: { type: Number, default: Number.MAX_VALUE },
+
+    required: { type: Boolean, default: false },
+    disabled: { type: Boolean, default: false },
+
+    field: { type: [String, Number] }
   },
   emits: ['update:field'],
   methods: {

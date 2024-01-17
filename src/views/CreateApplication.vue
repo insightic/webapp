@@ -1,418 +1,56 @@
 <template>
   <NavFooterLayout>
-    <div class="container p-3 mb-5">
-      <h1>Create New Application</h1>
+    <div class="container-fluid p-3 mb-5" style="max-width: 1440px">
+      <h1 class="mb-4">
+        <strong>{{ tilte[formType] }}</strong>
+      </h1>
 
-      <div class="d-flex align-items-center align-items-start mb-3">
-        <div
-          class="me-2 nav-item"
-          @click="current = 1"
-          :class="
-            current != 1 && complete1
-              ? 'text-success'
-              : current != 1 && !complete1
-              ? 'text-secondary'
-              : 'text-secondary'
-          "
-        >
-          <i v-if="current == 1" class="bi bi-1-square-fill"></i>
-          <i v-else class="bi bi-1-square"></i>
-          <span class="ms-2">Basic Information</span>
+      <div class="row" v-if="!loading">
+        <div class="d-block d-lg-none">
+          <LabelSelectComponent
+            label="Choose Form"
+            description="Please choose the form here"
+            :options="optionName"
+            :pageFinishedNum="pageFinishedNum"
+            @change="changePageBySelect"
+          />
         </div>
-        <span><i class="bi bi-chevron-right"></i></span>
-        <div
-          class="mx-2 nav-item"
-          @click="current = 2"
-          :class="
-            current != 2 && complete2
-              ? 'text-success'
-              : current != 2 && !complete2
-              ? 'text-secondary'
-              : 'text-secondary'
-          "
-        >
-          <i v-if="current == 2" class="bi bi-2-square-fill"></i>
-          <i v-else class="bi bi-2-square"></i>
-          <span class="ms-2">Objective</span>
+        <div class="col-lg-2 d-none d-lg-block">
+          <div v-for="(form, index) in tabs" :key="index">
+            <div @click="changePage(index)" class="nav-item" :class="formStepStyle(index)">
+              <div class="d-flex align-items-center">
+                <i
+                  class="bi bi-check-circle-fill me-3"
+                  v-if="hasData(index) || current == index"
+                ></i>
+                <i class="bi bi-circle me-3" v-else></i>
+                <div>
+                  {{ form.name }}
+                </div>
+              </div>
+              <div
+                v-if="index + 1 != tabs.length"
+                style="height: 20px; border-left: 1px gray solid; margin-left: 6px"
+              ></div>
+            </div>
+          </div>
         </div>
-        <span><i class="bi bi-chevron-right"></i></span>
-        <div
-          class="mx-2 nav-item"
-          @click="current = 3"
-          :class="
-            current != 3 && complete3
-              ? 'text-success'
-              : current != 3 && !complete3
-              ? 'text-secondary'
-              : 'text-secondary'
-          "
-        >
-          <i v-if="current == 3" class="bi bi-3-square-fill"></i>
-          <i v-else class="bi bi-3-square"></i>
-          <span class="ms-2">Assets</span>
-        </div>
-        <span><i class="bi bi-chevron-right"></i></span>
-        <div
-          class="mx-2 nav-item"
-          @click="current = 4"
-          :class="
-            current != 4 && complete4
-              ? 'text-success'
-              : current != 4 && !complete4
-              ? 'text-secondary'
-              : 'text-secondary'
-          "
-        >
-          <i v-if="current == 4" class="bi bi-4-square-fill"></i>
-          <i v-else class="bi bi-4-square"></i>
-          <span class="ms-2">Upload Documents</span>
-        </div>
-        <span><i class="bi bi-chevron-right"></i></span>
-        <div class="ms-2 nav-item text-secondary" @click="current = 5">
-          <i v-if="current == 5" class="bi bi-5-square-fill"></i>
-          <i v-else class="bi bi-5-square"></i>
-          <span class="ms-2">Submit</span>
+        <div class="col-lg-10 col-sm-12">
+          <div>
+            <keep-alive>
+              <component
+                :is="toRaw(tabs[current].component)"
+                @save="save"
+                @next="next"
+                :data="application[tabs[current].name]"
+              ></component>
+            </keep-alive>
+          </div>
         </div>
       </div>
-
-      <div>
-        <div v-if="current == 1">
-          <SectionLayout title="Overview">
-            <div class="row">
-              <div class="col-md-12">
-                <LabelInputComponent
-                  label="Project Name"
-                  type="text"
-                  v-model:field="name"
-                  :required="true"
-                />
-              </div>
-              <div class="col-md-6">
-                <LabelInputComponent
-                  label="Twitter (URL)"
-                  type="text"
-                  v-model:field="twitter"
-                  :required="true"
-                />
-              </div>
-              <div class="col-md-6">
-                <LabelInputComponent
-                  label="Website (URL)"
-                  type="text"
-                  v-model:field="website"
-                  :required="true"
-                />
-              </div>
-            </div>
-          </SectionLayout>
-
-          <SectionLayout title="Founders">
-            <LabelInputComponent
-              label="Number of Founders"
-              type="text"
-              v-model:field="numFounders"
-              :required="true"
-            />
-            <div class="mb-4" v-for="(founder, counter) in founders" v-bind:key="counter">
-              <h6>Founder {{ counter + 1 }}</h6>
-              <div class="row">
-                <div class="col-md-6">
-                  <LabelInputComponent
-                    label="Name"
-                    type="text"
-                    v-model:field="founder.Name"
-                    :required="true"
-                  />
-                </div>
-                <div class="col-md-6">
-                  <LabelInputComponent
-                    label="Position"
-                    type="text"
-                    v-model:field="founder.Position"
-                    :required="true"
-                  />
-                </div>
-                <div class="col-md-12">
-                  <LabelInputComponent
-                    label="KYC Verification"
-                    type="text"
-                    v-model:field="founder.Kyc"
-                  />
-                </div>
-                <div class="col-md-6">
-                  <LabelInputComponent
-                    label="Twitter (URL)"
-                    type="text"
-                    v-model:field="founder.Twitter"
-                  />
-                </div>
-                <div class="col-md-6">
-                  <LabelInputComponent
-                    label="LinkedIn (URL)"
-                    type="text"
-                    v-model:field="founder.Linkedin"
-                  />
-                </div>
-                <div class="col-md-6">
-                  <LabelInputComponent label="Email" type="text" v-model:field="founder.Email" />
-                </div>
-                <div class="col-md-6">
-                  <LabelInputComponent
-                    label="Ethereum Address"
-                    type="text"
-                    v-model:field="founder.Ethereum"
-                  />
-                </div>
-
-                <!-- <div class="">
-                  <label for="document" class="">CV</label>
-                  <input
-                    type="file"
-                    class="form-controls w-100"
-                    id="document"
-                    @change="onFileChangeCV($event, counter)"
-                  />
-                  <div class="text-secondary small">
-                    Brief CV or Biography (Please attach separate sheets if necessary)
-                  </div>
-                </div> -->
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <button
-                  class="btn btn-sm btn-outline-primary"
-                  @click="numFounders = parseInt(numFounders) + 1 + ''"
-                >
-                  Add Another Founder
-                </button>
-              </div>
-            </div>
-          </SectionLayout>
-
-          <SectionLayout title="Team Members">
-            <LabelInputComponent
-              label="Number of Team Members"
-              type="text"
-              v-model:field="numTeamMembers"
-              :required="true"
-            />
-            <div class="mb-2" v-for="(member, counter) in teamMembers" v-bind:key="counter">
-              <div class="row">
-                <h6>Member {{ counter + 1 }}</h6>
-                <div class="col-md-6">
-                  <LabelInputComponent
-                    label="Name"
-                    type="text"
-                    v-model:field="member.Name"
-                    :required="true"
-                  />
-                </div>
-                <div class="col-md-6">
-                  <LabelInputComponent
-                    label="Role"
-                    type="text"
-                    v-model:field="member.Position"
-                    :required="true"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <button
-                  class="btn btn-sm btn-outline-primary"
-                  @click="numTeamMembers = parseInt(numTeamMembers) + 1 + ''"
-                >
-                  Add Another Team Member
-                </button>
-              </div>
-            </div>
-          </SectionLayout>
-
-          <FormNavButtons
-            :prevBtn="false"
-            :saveBtn="true"
-            :nextBtn="true"
-            @save="save"
-            @next="nextStep(1)"
-          />
-        </div>
-        <div v-if="current == 2">
-          <SectionLayout title="Objective">
-            <div class="row">
-              <div class="col-md-12">
-                <LabelTextareaComponent
-                  label="Objectives of your DLT Foundation"
-                  footnote="Please provide a detailed description of the objectives of your DLT Foundation (max. 5000 characters)"
-                  type="text"
-                  v-model:field="objective"
-                  :required="true"
-                />
-              </div>
-              <div class="col-md-12">
-                <LabelTextareaComponent
-                  label="Motivation of your DLT Foundation"
-                  footnote="If your DLT Foundation has been established for a specific purpose, please detail the purpose (max. 5000 characters)"
-                  type="text"
-                  v-model:field="motivation"
-                  :required="true"
-                />
-              </div>
-            </div>
-          </SectionLayout>
-
-          <FormNavButtons
-            :prevBtn="false"
-            :saveBtn="true"
-            :nextBtn="true"
-            @save="save"
-            @next="nextStep(2)"
-          />
-        </div>
-        <div v-if="current == 3">
-          <SectionLayout title="Initial Assets">
-            <div class="row">
-              <div class="col-md-12">
-                <LabelTextareaComponent
-                  label="Initial Assets of your DLT Foundation"
-                  footnote="Please provide a detailed description of the initial assets of your DLT Foundation (max. 5000 characters):"
-                  type="text"
-                  v-model:field="assets"
-                  :required="true"
-                />
-              </div>
-            </div>
-          </SectionLayout>
-
-          <FormNavButtons
-            :prevBtn="false"
-            :saveBtn="true"
-            :nextBtn="true"
-            @save="save"
-            @next="nextStep(3)"
-          />
-        </div>
-
-        <div v-show="current == 4">
-          <SectionLayout title="Documents">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="">
-                  <label for="document" class=""
-                    >Whitepaper File <span class="text-danger">*</span></label
-                  >
-                  <input
-                    type="file"
-                    ref="whitepaper"
-                    class="form-controls w-100"
-                    id="document"
-                    @change="onFileChange"
-                  />
-                  <div class="text-secondary small">
-                    Please attach a quality version of the whitepaper document.
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-12">
-                <div class="mt-3">
-                  <label for="document" class=""
-                    >Code Files <span class="text-danger">*</span></label
-                  >
-                  <input
-                    type="file"
-                    ref="codes"
-                    class="form-controls w-100"
-                    id="document"
-                    @change="onFileChangeCodes"
-                  />
-                  <div class="text-secondary small">
-                    Please attach a zipped folder containing the code files.
-                  </div>
-                </div>
-              </div>
-            </div>
-          </SectionLayout>
-
-          <FormNavButtons
-            :prevBtn="false"
-            :saveBtn="true"
-            :nextBtn="true"
-            @save="save"
-            @next="nextStep(4)"
-          />
-        </div>
-
-        <div v-if="current == 5">
-          <SectionLayout title="Term and Conditions">
-            <div class="row">
-              <div class="col-md-12">
-                <div
-                  style="height: 256px; overflow-y: auto; border: 1px solid #ccc"
-                  class="rounded p-2"
-                >
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                  incididunt ut labore et dolore magna aliqua. Sit amet facilisis magna etiam
-                  tempor. At erat pellentesque adipiscing commodo elit at. Vivamus arcu felis
-                  bibendum ut tristique et. Nulla facilisi nullam vehicula ipsum a arcu cursus vitae
-                  congue. Ornare lectus sit amet est placerat. Leo vel fringilla est ullamcorper
-                  eget nulla facilisi. Tellus pellentesque eu tincidunt tortor. Placerat vestibulum
-                  lectus mauris ultrices eros. Amet commodo nulla facilisi nullam vehicula ipsum a
-                  arcu cursus. Laoreet suspendisse interdum consectetur libero id. Id donec ultrices
-                  tincidunt arcu non sodales neque sodales. Et netus et malesuada fames. Adipiscing
-                  elit pellentesque habitant morbi tristique senectus et netus. Neque vitae tempus
-                  quam pellentesque nec nam aliquam sem et. Pretium aenean pharetra magna ac
-                  placerat. Semper auctor neque vitae tempus quam pellentesque nec nam aliquam.
-                  Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit amet. Tortor
-                  dignissim convallis aenean et tortor. Velit ut tortor pretium viverra suspendisse
-                  potenti nullam. Urna et pharetra pharetra massa massa ultricies mi quis. Et
-                  pharetra pharetra massa massa ultricies mi. Id nibh tortor id aliquet. Amet massa
-                  vitae tortor condimentum lacinia quis vel. Integer quis auctor elit sed vulputate.
-                  Quam vulputate dignissim suspendisse in est ante in nibh mauris. Parturient montes
-                  nascetur ridiculus mus mauris vitae ultricies leo integer. Sodales ut eu sem
-                  integer vitae. Orci a scelerisque purus semper eget duis at. Egestas dui id ornare
-                  arcu. Sodales ut etiam sit amet nisl purus in mollis. Nec ullamcorper sit amet
-                  risus nullam eget felis eget nunc. Diam quis enim lobortis scelerisque. Commodo
-                  nulla facilisi nullam vehicula ipsum a. Quis risus sed vulputate odio ut.
-                  Condimentum vitae sapien pellentesque habitant morbi. Venenatis a condimentum
-                  vitae sapien pellentesque habitant morbi. Lacus luctus accumsan tortor posuere ac
-                  ut. Neque vitae tempus quam pellentesque nec nam aliquam sem et. Cursus sit amet
-                  dictum sit amet. Sodales ut eu sem integer vitae justo eget magna fermentum.
-                  Imperdiet massa tincidunt nunc pulvinar sapien. Massa tempor nec feugiat nisl
-                  pretium fusce id velit ut. Nibh sed pulvinar proin gravida. Et netus et malesuada
-                  fames ac turpis. Dui vivamus arcu felis bibendum ut tristique. Nullam eget felis
-                  eget nunc lobortis mattis aliquam faucibus. Semper viverra nam libero justo. Eget
-                  nulla facilisi etiam dignissim diam quis enim lobortis. Diam maecenas ultricies mi
-                  eget mauris pharetra et. Aliquam ultrices sagittis orci a scelerisque purus.
-                  Semper viverra nam libero justo laoreet. Ut aliquam purus sit amet luctus
-                  venenatis lectus magna. Proin fermentum leo vel orci porta non. Vitae sapien
-                  pellentesque habitant morbi tristique senectus et. Malesuada proin libero nunc
-                  consequat interdum varius sit amet. Quis hendrerit dolor magna eget est lorem.
-                  Posuere urna nec tincidunt praesent semper feugiat nibh sed pulvinar. Hac
-                  habitasse platea dictumst vestibulum rhoncus est pellentesque elit. Faucibus purus
-                  in massa tempor nec feugiat nisl. Nunc eget lorem dolor sed viverra ipsum nunc
-                  aliquet. Fringilla urna porttitor rhoncus dolor purus non enim. Donec et odio
-                  pellentesque diam volutpat commodo sed egestas.
-                </div>
-              </div>
-            </div>
-          </SectionLayout>
-
-          <div class="text-nowrap my-2">
-            <input type="checkbox" id="terms" name="terms" value="terms" ref="terms" class="me-2" />
-            <label for="terms" class="text-wrap align-top">
-              By submitting this form, I/we confirm that the provided information is true and
-              accurate to the best of my/our knowledge.
-            </label>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <button class="btn btn-success" @click="submit">Submit</button>
-            </div>
-          </div>
+      <div v-if="loading" class="text-center w-100 my-5">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
         </div>
       </div>
     </div>
@@ -421,276 +59,192 @@
 
 <script lang="ts">
 import NavFooterLayout from '@/layouts/NavFooterLayout.vue'
-import SectionLayout from '@/layouts/SectionLayout.vue'
-import LabelInputComponent from '@/components/LabelInputComponent.vue'
-import LabelTextareaComponent from '@/components/LabelTextareaComponent.vue'
-import { createProject, saveApplicationDraft, getPreSignedPutUrl, uploadFile } from '@/api'
-import type { NewApplication } from '@/api'
 import FormNavButtons from '@/components/FormNavButtons.vue'
+import LabelSelectComponent from '@/components/LabelSelectComponent.vue'
+import RegistrationAgreement from './forms/RegistrationAgreementForm.vue'
+import ComplianceTeam from './forms/ComplianceTeamForm.vue'
+import Legal from './forms/LegalForm.vue'
+import Overview from './forms/OverviewForm.vue'
+import ProjectDetails from './forms/ProjectDetailsForm.vue'
+// import DigitalAsset from './forms/DigitalAssetForm.vue'
+import TechnicalDetails from './forms/TechnicalDetailsForm.vue'
+import RiskManagement from './forms/RiskManagementForm.vue'
+import VolumeCommunity from './forms/VolumeCommunityForm.vue'
+import Acknowledgement from './forms/AcknowledgementForm.vue'
+import Competitiveness from './forms/CompetitivenessForm.vue'
+import Investors from './forms/InvestorForm.vue'
+import COI from './forms/COIForm.vue'
+import Confirmation from './forms/ConfirmationForm.vue'
+
+import {
+  getApplication,
+  createApplication,
+  createSubmission,
+  updateSubmission,
+  submitSubmissionDraft
+} from '@/api'
+import { toRaw } from 'vue'
 
 export default {
   components: {
     NavFooterLayout,
-    SectionLayout,
-    LabelInputComponent,
-    LabelTextareaComponent,
-    FormNavButtons
+    FormNavButtons,
+    LabelSelectComponent
   },
-  mounted() {},
   data() {
     return {
-      show1: true,
-      show2: true,
-      show3: true,
-      show4: true,
-      show5: true,
-      current: 1,
-      name: '',
-      twitter: '',
-      website: '',
-      whitepaper: '',
-      whitepaperFile: File,
-      whitepaperFileId: '',
-      codeFiles: File,
-      codeFilesId: '',
-      whitepaperUploadLink: '',
-      codesUploadLink: '',
-      teamMembers: [
+      loading: true,
+      current: 0,
+      pageFinishedNum: 0,
+      currentTab: 'Overview',
+      tabs: [
+        { index: 0, name: 'Overview', component: Overview },
         {
-          Name: '',
-          Position: ''
-        }
+          index: 1,
+          name: 'Registration Agreement',
+          component: RegistrationAgreement
+        },
+        { index: 2, name: 'Compliance & Team', component: ComplianceTeam },
+        { index: 3, name: 'Legal', component: Legal },
+        { index: 4, name: 'Project Details', component: ProjectDetails },
+        { index: 5, name: 'Technical Details', component: TechnicalDetails },
+        { index: 6, name: 'Risk Management', component: RiskManagement },
+        { index: 7, name: 'Volume & Community', component: VolumeCommunity },
+        { index: 8, name: 'Acknowledgement', component: Acknowledgement },
+        { index: 9, name: 'Competitiveness', component: Competitiveness },
+        { index: 10, name: 'Investors', component: Investors },
+        { index: 11, name: 'Conflict of Interest', component: COI },
+        { index: 12, name: 'Confirmation', component: Confirmation }
       ],
-      founders: [
-        {
-          Name: '',
-          Position: '',
-          Kyc: '',
-          Twitter: '',
-          Linkedin: '',
-          Ethereum: '',
-          Email: '',
-          CV: '',
-          cvFile: File,
-          cvUploadLink: '',
-          CVFilename: ''
-        }
+      application: {} as { [key: string]: any },
+      applicationID: this.$route.query.applicationID as string,
+      submissionID: this.$route.query.submissionID as string,
+      optionName: [
+        'Overview',
+        'RegistrationAgreement',
+        'Compliance & Team',
+        'Legal',
+        'Project Details',
+        'Technical Details',
+        'Risk Management',
+        'Volume & Community',
+        'Acknowledgement',
+        'Competitiveness',
+        'Investors',
+        'COI',
+        'Confirmation'
       ],
-      objective: '',
-      motivation: '',
-      assets: '',
-      numFounders: '1',
-      numTeamMembers: '1'
+      tilte: ['New Application', 'New Submission', 'Continue Submission'],
+      formType: 0
     }
   },
-  computed: {
-    complete1() {
-      let info = this.name !== '' && this.twitter !== '' && this.website !== ''
-      let founder = true
-      if (this.founders.length != 0 && this.teamMembers.length != 0) {
-        for (let i = 0; i < this.founders.length; i++) {
-          if (this.founders[i].Name === '' || this.founders[i].Position === '') {
-            founder = false
-          }
-        }
-      }
-      let teamMember = true
-      if (this.teamMembers.length != 0) {
-        for (let i = 0; i < this.teamMembers.length; i++) {
-          if (this.teamMembers[i].Name === '' || this.teamMembers[i].Position === '') {
-            teamMember = false
-          }
-        }
-      }
-      return info && founder && teamMember
-    },
-    complete2() {
-      return this.objective !== '' && this.motivation !== ''
-    },
-    complete3() {
-      return this.assets !== ''
-    },
-    complete4() {
-      return (this.whitepaperFile as any).size > 0 && (this.codeFiles as any).size > 0
+  async created() {
+    if (this.applicationID != undefined && this.submissionID == undefined) {
+      this.formType = 1
+    } else if (this.applicationID != undefined && this.submissionID != undefined) {
+      this.formType = 2
     }
+    if (this.applicationID && this.submissionID) {
+      const resp = await getApplication(this.applicationID)
+      if (resp) {
+        this.application = resp.Submissions.filter(
+          (res) => res.SubmissionID == this.submissionID
+        )[0]?.Content
+      }
+      this.current = Object.keys(this.application).length - 4
+    }
+
+    this.loading = false
   },
   methods: {
-    async onFileChange(e: any) {
-      this.whitepaperFile = e.target.files[0]
-      console.log(this.whitepaperFile)
-      console.log((this.$refs.whitepaper as any)?.files.length)
+    toRaw: toRaw,
+    formStepStyle(index: number) {
+      if (this.current == index) return 'text-primary'
+      return 'text-secondary'
     },
-    async onFileChangeCodes(e: any) {
-      this.codeFiles = e.target.files[0]
-      console.log((this.$refs.codes as any)?.files.length)
+    changePage(index: number) {
+      if (this.hasData(index)) {
+        this.current = index
+      }
     },
-    async onFileChangeCV(e: any, index: number) {
-      console.log(e.target)
-      this.founders[index].cvFile = e.target.files[0]
-      console.log(this.founders[index].cvFile)
+    changePageBySelect(e: any) {
+      const index = this.optionName.findIndex((tab) => tab === e.target.value)
+      console.log(index)
+      this.current = index
     },
-    async prepareData() {
-      if ((this.whitepaperFile as any).size > 0) {
-        const preSignedPutUrl: any = await getPreSignedPutUrl()
-        if (preSignedPutUrl) {
-          const fileResp = await uploadFile(preSignedPutUrl.URL, this.whitepaperFile as any)
-          if (fileResp.ok) {
-            this.whitepaperFileId = preSignedPutUrl.ObjectID
-            this.whitepaperUploadLink = preSignedPutUrl.URL
-          }
+    hasData(idx: number): boolean {
+      const tabName = this.tabs[idx].name
+      return this.application[tabName] != null
+    },
+    async newOrSaveDraft(data: any): Promise<boolean> {
+      const tabName = this.tabs[this.current].name
+      this.application[tabName] = data
+      this.application['LogoURL'] = this.application['Overview']['LogoURL']
+      this.application['Name'] = this.application['Overview']['Name']
+      this.application['OneLiner'] = this.application['Overview']['OneLiner']
+      this.application['Website'] = this.application['Overview']['Website']
+
+      if (!this.applicationID) {
+        const res = await createApplication()
+        if (!res) {
+          alert('Error creating application')
+          return false
         }
+        this.applicationID = res.ID
       }
 
-      if ((this.codeFiles as any).size > 0) {
-        const preSignedPutUrl: any = await getPreSignedPutUrl()
-        if (preSignedPutUrl) {
-          const fileResp = await uploadFile(preSignedPutUrl.URL, this.codeFiles as any)
-          if (fileResp.ok) {
-            this.codeFilesId = preSignedPutUrl.ObjectID
-            this.codesUploadLink = preSignedPutUrl.URL
-          }
-        }
-      }
-
-      // for (let i = 0; i < this.founders.length; i++) {
-      //   if (this.founders[i].cvFile) {
-      //     const preSignedPutUrl: any = await getPreSignedPutUrl()
-      //     if (preSignedPutUrl) {
-      //       const fileResp = await uploadFile(preSignedPutUrl.URL, this.founders[i].cvFile as any)
-      //       if (fileResp.ok) {
-      //         this.founders[i].CV = preSignedPutUrl.ObjectID
-      //         this.founders[i].cvUploadLink = preSignedPutUrl.URL
-      //         this.founders[i].CVFilename = this.founders[i].cvFile.name
-      //       }
-      //     }
-      //   }
-      // }
-      let data = {
-        Name: this.name,
-        Twitter: this.twitter,
-        Website: this.website,
-        Whitepaper: this.whitepaper,
-        WhitepaperFile: {
-          ID: this.whitepaperFileId,
-          Filename: this.whitepaperFile.name,
-          URL: this.whitepaperUploadLink
-        },
-        CodeFiles: {
-          ID: this.codeFilesId,
-          Filename: this.codeFiles.name,
-          URL: this.codesUploadLink
-        },
-        NumFounders: parseInt(this.numFounders) ? parseInt(this.numFounders) : 0,
-        Founders: this.founders,
-        NumMembers: parseInt(this.numTeamMembers) ? parseInt(this.numTeamMembers) : 0,
-        Members: this.teamMembers,
-        Objective: this.objective,
-        Motivation: this.motivation,
-        Assets: this.assets
-      } as unknown as NewApplication
-      return data
-    },
-    async submit() {
-      if (!this.complete1 || !this.complete2 || !this.complete3 || !this.complete4) {
-        window.alert('Please fill in all required fields')
-        return
-      } else if (!(this.$refs.terms as any).checked) {
-        window.alert('Please agree to the terms and conditions')
-        return
-      } else {
-        let data = await this.prepareData()
-        console.log(data)
-
-        const resp = await createProject(data)
-        console.log(resp)
-        window.alert('Your response has been submitted')
-        this.$router.push({ path: '/', query: { view: 'Applications' } })
-      }
-    },
-    async save() {
-      let data = await this.prepareData()
-
-      console.log(data)
-
-      const resp = await saveApplicationDraft(data)
-      console.log(resp)
-      window.alert('Your response has been saved')
-      this.$router.push({ path: '/', query: { view: 'Applications' } })
-    },
-
-    addMember() {
-      this.teamMembers.push({
-        Name: '',
-        Position: ''
-      })
-    },
-    addFounder() {
-      this.founders.push({
-        Name: '',
-        Position: '',
-        Kyc: '',
-        Twitter: '',
-        Linkedin: '',
-        Ethereum: '',
-        Email: '',
-        CV: '',
-        cvFile: File,
-        cvUploadLink: '',
-        CVFilename: ''
-      })
-    },
-    deleteMember(counter: number) {
-      this.teamMembers.splice(counter, 1)
-    },
-    deleteFounder(counter: number) {
-      this.founders.splice(counter, 1)
-    },
-    alert() {
-      window.alert(this.name)
-    },
-    nextStep(curr: number) {
-      const mapping = {
-        1: this.complete1,
-        2: this.complete2,
-        3: this.complete3,
-        4: this.complete4
-      }
-      if (mapping[curr as keyof typeof mapping]) {
-        this.current = curr + 1
-      } else {
-        window.alert('Please fill in all required fields')
-      }
-    }
-  },
-  watch: {
-    numFounders: function (val: string) {
-      if (this.founders.length > parseInt(val)) {
-        this.founders.splice(parseInt(val), this.founders.length - parseInt(val))
-      } else {
-        while (this.founders.length < parseInt(val)) {
-          this.founders.push({
-            Name: '',
-            Position: '',
-            Kyc: '',
-            Twitter: '',
-            Linkedin: '',
-            Ethereum: '',
-            Email: '',
-            CV: '',
-            cvFile: File,
-            cvUploadLink: '',
-            CVFilename: ''
+      if (!this.submissionID) {
+        const res = await createSubmission(this.applicationID, this.application)
+        if (!res) {
+          this.$notify({
+            title: 'Tips',
+            text: 'Error creating submission',
+            type: 'warn'
           })
+          return false
         }
+        this.submissionID = res.SubmissionID
+      }
+
+      const res = await updateSubmission(this.applicationID, this.submissionID, this.application)
+      if (!res) {
+        this.$notify({
+          title: 'Tips',
+          text: 'Error updating submission',
+          type: 'warn'
+        })
+        return false
+      }
+      return true
+    },
+    async save(data: any) {
+      const res = await this.newOrSaveDraft(data)
+      if (res) {
+        this.$notify({
+          title: 'Tips',
+          text: 'Form has been saved successfully.',
+          type: 'success'
+        })
       }
     },
-    numTeamMembers: function (val: string) {
-      this.teamMembers = []
-      for (let i = 0; i < parseInt(val); i++) {
-        this.teamMembers.push({
-          Name: '',
-          Position: ''
+    async next(data: any) {
+      const res = await this.newOrSaveDraft(data)
+      if (res) {
+        this.$notify({
+          title: 'Tips',
+          text: 'Form has been saved successfully.',
+          type: 'success'
         })
+      }
+      this.pageFinishedNum = this.pageFinishedNum + 1
+      if (this.current + 1 != this.tabs.length) {
+        this.current = this.current + 1
+        return
+      } else {
+        if (this.applicationID && this.submissionID) {
+          await submitSubmissionDraft(this.applicationID, this.submissionID, this.application)
+          this.$router.push(`/applications/${this.applicationID}`)
+        }
       }
     }
   }
@@ -700,5 +254,10 @@ export default {
 <style scoped>
 .nav-item {
   cursor: pointer;
+}
+
+.dot {
+  width: 16px;
+  height: 16px;
 }
 </style>

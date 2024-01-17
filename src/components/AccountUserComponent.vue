@@ -21,7 +21,20 @@
       <div class="text-secondary small">Added on {{ formatDateTime(createdAt) }}</div>
     </div>
     <div class="ms-auto">
-      <button type="button" class="btn btn-sm btn-outline-danger mx-2" v-if="role != 'admin'">
+      <button
+        type="button"
+        class="btn btn-sm btn-outline-success mx-2"
+        v-if="role != 'admin'"
+        @click="changePassword()"
+      >
+        Change Password
+      </button>
+      <button
+        type="button"
+        class="btn btn-sm btn-outline-danger mx-2"
+        v-if="role != 'admin'"
+        @click="askRemove()"
+      >
         Remove
       </button>
     </div>
@@ -38,7 +51,13 @@ export default {
     createdAt: { type: String, required: true }
   },
   methods: {
-    formatDateTime
+    formatDateTime,
+    askRemove() {
+      this.$emit('showAskModal')
+    },
+    changePassword() {
+      this.$emit('showChangePasswordModal')
+    }
   }
 }
 </script>

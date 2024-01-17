@@ -62,7 +62,7 @@
 <script lang="ts">
 import { formatDateTime } from '@/helpers'
 import type { PropType } from 'vue'
-import { deleteSubmission, type Submission } from '@/api'
+import { type Submission } from '@/api'
 
 export default {
   props: {
@@ -88,7 +88,7 @@ export default {
       if (this.isAdmin) this.$router.push(`/admin/projects/${projectID}`)
       else this.$router.push(`/projects/${projectID}`)
     },
-    async deleteSubmission(projectID: number) {
+    async deleteSubmission() {
       alert(this.$route.params.projectID)
       if (confirm('Are you sure to delete this submission?') == false) {
         return

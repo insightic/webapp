@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-md fixed-top" data-bs-theme="dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">
         <div
@@ -65,10 +65,6 @@ export default {
 </script>
 
 <style scoped>
-nav {
-  background-color: rgba(39, 50, 131, 0.8);
-}
-
 .admin {
   color: white;
   font-size: 1rem;
