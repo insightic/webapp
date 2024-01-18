@@ -113,7 +113,30 @@
     </div>
 
     <div class="d-flex align-items-center" style="cursor: pointer">
-      <h2>Social Media</h2>
+      <h2>Posts / Articles Analysis</h2>
+      <div class="ms-auto">Last Update {{ formatDateTime(new Date()) }}</div>
+    </div>
+
+    <div class="row row-deck row-cards mb-3">
+      <div class="col-lg-6">
+        <PieChartComponent title="Sentiment Analysis" :labels="['Positive', 'Neutral', 'Negative']" :data="[
+          linkedinInfo.overall_sentiment_analysis.positive,
+          linkedinInfo.overall_sentiment_analysis.neutral,
+          linkedinInfo.overall_sentiment_analysis.negative
+        ]" />
+      </div>
+      <div class="col-lg-6">
+        <div class="card" style="overflow: hidden">
+          <div class="card-header">
+            <h3 class="card-title">Keywords</h3>
+          </div>
+          <div ref="wordcloud" style="width: 100%; height: 100%; min-height: 400px"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex align-items-center" style="cursor: pointer">
+      <h2>Sentiment Analysis</h2>
       <div class="ms-auto">Last Update {{ formatDateTime(new Date()) }}</div>
     </div>
 
@@ -219,12 +242,7 @@
         </div>
       </div>
       <div class="col-lg-6">
-        <div class="card" style="overflow: hidden">
-          <div class="card-header">
-            <h3 class="card-title">LinkedIn Keywords</h3>
-          </div>
-          <div ref="wordcloud" style="width: 100%; height: 100%; min-height: 400px"></div>
-        </div>
+
       </div>
     </div>
   </div>
@@ -234,15 +252,19 @@
 import { IconBrandX, IconBrandLinkedin } from '@tabler/icons-vue'
 import TwitterFollowers from '@/components/dashboard/TwitterFollowers.vue'
 import { formatDateTime } from '@/helpers'
-import WordCloud from 'wordcloud'
+import WordCloud, { type ListEntry } from 'wordcloud'
 import SampleJSON from '@/views/applicationSubViews/sample_twitter.json'
+import PieChartComponent from '@/components/dashboard/PieChartComponent.vue'
 import moment from 'moment'
 import { ref, onMounted, computed } from 'vue'
 
 const wordcloud = ref(null)
 onMounted(() => {
   const wf: { [key: string]: number } = SampleJSON.linkedin_data.word_frequencies
-  WordCloud(wordcloud.value!, { list: Object.keys(wf).map((k) => [k, wf[k]]) })
+  let wlist: ListEntry[] = Object.keys(wf).map((k) => [k, wf[k]])
+  wlist.sort((a: any, b: any) => b[1] - a[1])
+  wlist = wlist.slice(0, Math.min(50, wlist.length));
+  WordCloud(wordcloud.value!, { list: wlist })
 })
 
 let twitterInfo = ref(SampleJSON.twitter_data)
