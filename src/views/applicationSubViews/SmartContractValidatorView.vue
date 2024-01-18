@@ -151,7 +151,7 @@ export default {
   props: ['application', 'submission'],
   async created() {
     const resp = await axios.get(
-      'https://scv.insightic.io/jobs/cbcf1154-5de2-4bac-9048-79adc650d49f'
+      'https://scv.insightic.io/jobs/3508dfbb-25aa-4086-9a1f-6854b73eb1e8'
     )
     this.codeValidation = resp?.data?.results || []
     // console.log("test", resp.data)
