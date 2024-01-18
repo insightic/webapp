@@ -8,11 +8,8 @@
             <div class="row w-100 h-100">
               <div class="col-6 d-flex flex-column text-center">
                 <a class="my-auto" :href="twitterInfo.profile_website">
-                  <img
-                    src="https://avatars.githubusercontent.com/u/2292644?v=4"
-                    class="rounded-circle"
-                    style="width: 60%"
-                  />
+                  <img src="https://pbs.twimg.com/profile_images/1267400480734490624/uq3Cten-_400x400.jpg"
+                    class="rounded-circle" style="width: 60%" />
                 </a>
               </div>
               <div class="col-6">
@@ -28,7 +25,7 @@
                 </div>
                 <div class="mb-2">
                   <div class="text-secondary" style="font-size: 0.6rem">BIO</div>
-                  <div>{{ twitterInfo.profile_bio }}</div>
+                  <div class="text-5">{{ twitterInfo.profile_bio }}</div>
                 </div>
                 <div class="mb-2">
                   <div class="text-secondary" style="font-size: 0.6rem">JOINING DATE</div>
@@ -45,6 +42,74 @@
           </div>
         </div>
       </div>
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <div class="row w-100 h-100">
+              <div class="col-6">
+                <div class="mb-2 d-flex align-items-center">
+                  <span>
+                    <IconBrandLinkedin class="mr-2" />
+                  </span>
+                  <span>
+                    <a :href="linkedinInfo.website">
+                      {{ linkedinInfo.profile_title }}
+                    </a>
+                  </span>
+                </div>
+                <div class="mb-2">
+                  <div class="text-secondary" style="font-size: 0.6rem">OVERVIEW</div>
+                  <div>{{ linkedinInfo.profile_overview }}</div>
+                </div>
+                <div class="mb-2">
+                  <div class="text-secondary" style="font-size: 0.6rem">LOCATION</div>
+                  <div>{{ linkedinInfo.profile_location }}</div>
+                </div>
+                <div class="mb-2">
+                  <div class="text-secondary" style="font-size: 0.6rem">INDUSTRY</div>
+                  <div>
+                    {{ linkedinInfo.industry }}
+                  </div>
+                </div>
+                <div class="mb-2">
+                  <div class="text-secondary" style="font-size: 0.6rem">COMPANY SIZE</div>
+                  <div>
+                    {{ linkedinInfo.company_size }}
+                  </div>
+                </div>
+                <div class="mb-2">
+                  <div class="text-secondary" style="font-size: 0.6rem">FOUNDED YEAR</div>
+                  <div>
+                    {{ linkedinInfo.founded_year }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="mb-2">
+                  <div class="text-secondary" style="font-size: 0.6rem">BIO</div>
+                  <div class="text-5">{{ linkedinInfo.profile_bio }}</div>
+                </div>
+                <div class="mb-2">
+                  <div class="text-secondary" style="font-size: 0.6rem">ORGANIZATION TYPE</div>
+                  <div>{{ linkedinInfo.organization_type }}</div>
+                </div>
+                <div class="mb-2">
+                  <div class="text-secondary" style="font-size: 0.6rem">COMPANY SIZE</div>
+                  <div>
+                    {{ linkedinInfo.company_size }}
+                  </div>
+                </div>
+                <div class="mb-2">
+                  <div class="text-secondary" style="font-size: 0.6rem">FOLLOWERS</div>
+                  <div>
+                    {{ linkedinInfo.profile_followers }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="d-flex align-items-center" style="cursor: pointer">
@@ -54,18 +119,12 @@
 
     <div class="row row-deck row-cards mb-3">
       <div class="col-lg-6">
-        <TwitterFollowers
-          title="Twitter Followers"
-          :labels="followers('Twitter Followers').label"
-          :data="followers('Twitter Followers').data"
-        />
+        <TwitterFollowers title="Twitter Followers" :labels="followers('Twitter Followers').label"
+          :data="followers('Twitter Followers').data" />
       </div>
       <div class="col-lg-6">
-        <TwitterFollowers
-          title="Reddit Subscribers"
-          :labels="followers('Reddit Subscribers').label"
-          :data="followers('Reddit Subscribers').data"
-        />
+        <TwitterFollowers title="Reddit Subscribers" :labels="followers('Reddit Subscribers').label"
+          :data="followers('Reddit Subscribers').data" />
       </div>
       <div class="col-lg-6">
         <div class="card">
@@ -84,10 +143,9 @@
                 <tr>
                   <td class="text-secondary" style="vertical-align: top">Profile</td>
                   <td>
-                    <a :href="twitterInfo.profile_website"
-                      >{{ twitterInfo.profile_name }} - {{ twitterInfo.profile_handle }},
-                      {{ twitterInfo.profile_website }}</a
-                    >
+                    <a :href="twitterInfo.profile_website">{{ twitterInfo.profile_name }} - {{ twitterInfo.profile_handle
+                    }},
+                      {{ twitterInfo.profile_website }}</a>
                   </td>
                 </tr>
                 <tr>
@@ -173,7 +231,7 @@
 </template>
 
 <script lang="ts" setup>
-import { IconBrandX } from '@tabler/icons-vue'
+import { IconBrandX, IconBrandLinkedin } from '@tabler/icons-vue'
 import TwitterFollowers from '@/components/dashboard/TwitterFollowers.vue'
 import { formatDateTime } from '@/helpers'
 import WordCloud from 'wordcloud'
@@ -188,6 +246,7 @@ onMounted(() => {
 })
 
 let twitterInfo = ref(SampleJSON.twitter_data)
+let linkedinInfo = ref(SampleJSON.linkedin_data)
 let followers = function (name: string) {
   const sample = SampleJSON.followers_data.filter((f) => f.name == name)[0].data
   return {
@@ -212,6 +271,14 @@ let linkedin_posts = computed(() => {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.text-5 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
   -webkit-box-orient: vertical;
 }
 </style>
