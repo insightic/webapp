@@ -1,6 +1,52 @@
 <template>
   <!-- Social Media -->
   <div>
+    <div class="row row-deck row-cards mb-3">
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <div class="row w-100 h-100">
+              <div class="col-6 d-flex flex-column text-center">
+                <a class="my-auto" :href="twitterInfo.profile_website">
+                  <img
+                    src="https://avatars.githubusercontent.com/u/2292644?v=4"
+                    class="rounded-circle"
+                    style="width: 60%"
+                  />
+                </a>
+              </div>
+              <div class="col-6">
+                <div class="mb-2 d-flex align-items-center">
+                  <span>
+                    <IconBrandX class="mr-2" />
+                  </span>
+                  <span>
+                    <a :href="twitterInfo.profile_website">
+                      {{ twitterInfo.profile_name }} - {{ twitterInfo.profile_handle }}
+                    </a>
+                  </span>
+                </div>
+                <div class="mb-2">
+                  <div class="text-secondary" style="font-size: 0.6rem">BIO</div>
+                  <div>{{ twitterInfo.profile_bio }}</div>
+                </div>
+                <div class="mb-2">
+                  <div class="text-secondary" style="font-size: 0.6rem">JOINING DATE</div>
+                  <div>{{ twitterInfo.profile_joining_date }}</div>
+                </div>
+                <div class="mb-2">
+                  <div class="text-secondary" style="font-size: 0.6rem">FOLLOWING / FOLLOWERS</div>
+                  <div>
+                    {{ twitterInfo.profile_following }} / {{ twitterInfo.profile_followers }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="d-flex align-items-center" style="cursor: pointer">
       <h2>Social Media</h2>
       <div class="ms-auto">Last Update {{ formatDateTime(new Date()) }}</div>
@@ -127,6 +173,7 @@
 </template>
 
 <script lang="ts" setup>
+import { IconBrandX } from '@tabler/icons-vue'
 import TwitterFollowers from '@/components/dashboard/TwitterFollowers.vue'
 import { formatDateTime } from '@/helpers'
 import WordCloud from 'wordcloud'
