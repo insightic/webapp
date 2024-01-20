@@ -17,8 +17,8 @@
               </div>
               <div class="col-6">
                 <div class="mb-2 d-flex align-items-center">
-                  <span>
-                    <IconBrandX class="mr-2" />
+                  <span class="me-2">
+                    <IconBrandX />
                   </span>
                   <span>
                     <a :href="twitterInfo.profile_website">
@@ -51,8 +51,8 @@
             <div class="row w-100 h-100">
               <div class="col-6">
                 <div class="mb-2 d-flex align-items-center">
-                  <span>
-                    <IconBrandLinkedin class="mr-2" />
+                  <span class="me-2">
+                    <IconBrandLinkedin />
                   </span>
                   <span>
                     <a :href="linkedinInfo.website">
@@ -161,49 +161,6 @@
           :labels="followers('Reddit Subscribers').label"
           :data="followers('Reddit Subscribers').data"
         />
-      </div>
-      <div class="col-lg-6">
-        <div class="card">
-          <div class="card-header">
-            <h3 class="card-title">Twitter</h3>
-          </div>
-          <div class="table-responsive">
-            <table class="table card-table">
-              <thead>
-                <tr>
-                  <th style="width: 168px">Name</th>
-                  <th>Information</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="text-secondary" style="vertical-align: top">Profile</td>
-                  <td>
-                    <a :href="twitterInfo.profile_website"
-                      >{{ twitterInfo.profile_name }} - {{ twitterInfo.profile_handle }},
-                      {{ twitterInfo.profile_website }}</a
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td class="text-secondary" style="vertical-align: top">Bio</td>
-                  <td>{{ twitterInfo.profile_bio }}</td>
-                </tr>
-                <tr>
-                  <td class="text-secondary" style="vertical-align: top">Joining Date</td>
-                  <td>{{ twitterInfo.profile_joining_date }}</td>
-                </tr>
-                <tr>
-                  <td class="text-secondary" style="vertical-align: top">Following / Followers</td>
-                  <td>
-                    {{ twitterInfo.profile_following }} Followings /
-                    {{ twitterInfo.profile_followers }} Followers
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
       </div>
       <div class="col-lg-6">
         <div class="card">
