@@ -71,7 +71,7 @@ class HttpClient {
       console.log(e)
 
       const data = e?.response?.data as Response<T>
-      if (autoRefresh && data.code == 401) {
+      if (autoRefresh && data.code == 401 && !url.endsWith('/auth/login')) {
         const tokenResp = await this.refreshToken()
         return tokenResp?.code == 200 ? await this.post<T>(url, data, false) : data
       }
