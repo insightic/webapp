@@ -1,7 +1,8 @@
 <template>
   <div class="d-flex my-3 flex-row align-items-center">
     <div class="me-3">
-      <img src="https://via.placeholder.com/100" style="width: 100px; height: 100px" />
+      <img v-if="logoUrl" :src="logoUrl" style="width: 100px; height: 100px" />
+      <img v-else src="https://via.placeholder.com/100" style="width: 100px; height: 100px" />
     </div>
     <div>
       <div class="d-flex align-items-center">
@@ -63,6 +64,7 @@ export default {
   props: {
     name: { type: String, required: true },
     oneLiner: { type: String, required: true },
+    logoUrl: { type: String, required: true },
     status: { type: String, default: 'inactive' },
     submissionId: { type: String, required: true },
     createdAt: { type: String, required: true }
@@ -70,7 +72,6 @@ export default {
   methods: {
     formatDate,
     getStatusBackgroundColor(status: string) {
-      console.log(status)
       if (status == 'active') return 'success'
       if (status == 'inactive') return 'secondary'
       if (status == 'draft') return 'primary'

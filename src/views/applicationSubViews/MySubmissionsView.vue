@@ -13,6 +13,7 @@
         <AccountApplicationSubmissionComponent
           :name="submission.Content?.Name"
           :one-liner="submission.Content?.OneLiner"
+          :logo-url="submission.Content?.LogoURL"
           :status="submission.Status"
           :submission-id="submission.SubmissionID"
           :created-at="submission.CreatedAt"
@@ -35,6 +36,9 @@ export default {
     AccountApplicationSubmissionComponent
   },
   props: ['application', 'submission'],
+  created() {
+    console.log(this.submission)
+  },
   computed: {
     applicationID() {
       return this.$route.params.applicationID as string
@@ -46,8 +50,7 @@ export default {
       if (confirm('Are you sure to delete this submission?') == false) {
         return
       } else {
-        const res = await deleteSubmission(this.applicationID, submissionID)
-        console.log(res)
+        await deleteSubmission(this.applicationID, submissionID)
         location.reload()
       }
     },
