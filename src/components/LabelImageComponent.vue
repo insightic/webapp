@@ -92,8 +92,4 @@ td {
   text-align: left;
   padding-left: 10px;
 }
-
-.list-group-item.disabled {
-  background-color: #e9ecef;
-}
 </style>

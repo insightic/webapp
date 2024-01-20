@@ -8,7 +8,7 @@
     </div>
 
     <div class="text-secondary small mb-1" v-html="description"></div>
-    <div class="card w-100">
+    <div class="card w-100" :style="{ backgroundColor: disabled ? '#1d273b' : '' }">
       <ul class="list-group list-group-flush">
         <li :class="['list-group-item', { disabled: disabled }]">
           <textarea
@@ -201,9 +201,5 @@ watch(
 <style scoped>
 .card {
   background-color: var(--tblr-bg-forms);
-}
-
-.list-group-item.disabled {
-  background-color: #e9ecef;
 }
 </style>
