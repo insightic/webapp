@@ -83,6 +83,7 @@ import DashboardView from '@/views/applicationSubViews/DashboardView.vue'
 import SocialMediaAnalysis from '@/views/applicationSubViews/SocialMediaAnalysis.vue'
 import SmartContractValidatorView from '@/views/applicationSubViews/SmartContractValidatorView.vue'
 import CompanyProfileView from '@/views/applicationSubViews/CompanyProfileView.vue'
+import AlertView from '@/views/applicationSubViews/AlertView.vue'
 import MySubmissionsView from '@/views/applicationSubViews/MySubmissionsView.vue'
 
 import ScoreBoard from '../components/dashboard/ScoreBoardComponent.vue'
@@ -124,7 +125,7 @@ export default {
         {
           name: 'Alerts',
           icon: 'bi-exclamation-circle',
-          component: null
+          component: AlertView
         },
         {
           name: 'My Submissions',
