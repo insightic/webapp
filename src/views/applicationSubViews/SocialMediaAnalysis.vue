@@ -8,8 +8,11 @@
             <div class="row w-100 h-100">
               <div class="col-6 d-flex flex-column text-center">
                 <a class="my-auto" :href="twitterInfo.profile_website">
-                  <img src="https://pbs.twimg.com/profile_images/1267400480734490624/uq3Cten-_400x400.jpg"
-                    class="rounded-circle" style="width: 60%" />
+                  <img
+                    src="https://pbs.twimg.com/profile_images/1267400480734490624/uq3Cten-_400x400.jpg"
+                    class="rounded-circle"
+                    style="width: 60%"
+                  />
                 </a>
               </div>
               <div class="col-6">
@@ -119,11 +122,15 @@
 
     <div class="row row-deck row-cards mb-3">
       <div class="col-lg-6">
-        <PieChartComponent title="Sentiment Analysis" :labels="['Positive', 'Neutral', 'Negative']" :data="[
-          linkedinInfo.overall_sentiment_analysis.positive,
-          linkedinInfo.overall_sentiment_analysis.neutral,
-          linkedinInfo.overall_sentiment_analysis.negative
-        ]" />
+        <PieChartComponent
+          title="Sentiment Analysis"
+          :labels="['Positive', 'Neutral', 'Negative']"
+          :data="[
+            linkedinInfo.overall_sentiment_analysis.positive,
+            linkedinInfo.overall_sentiment_analysis.neutral,
+            linkedinInfo.overall_sentiment_analysis.negative
+          ]"
+        />
       </div>
       <div class="col-lg-6">
         <div class="card" style="overflow: hidden">
@@ -142,12 +149,18 @@
 
     <div class="row row-deck row-cards mb-3">
       <div class="col-lg-6">
-        <TwitterFollowers title="Twitter Followers" :labels="followers('Twitter Followers').label"
-          :data="followers('Twitter Followers').data" />
+        <TwitterFollowers
+          title="Twitter Followers"
+          :labels="followers('Twitter Followers').label"
+          :data="followers('Twitter Followers').data"
+        />
       </div>
       <div class="col-lg-6">
-        <TwitterFollowers title="Reddit Subscribers" :labels="followers('Reddit Subscribers').label"
-          :data="followers('Reddit Subscribers').data" />
+        <TwitterFollowers
+          title="Reddit Subscribers"
+          :labels="followers('Reddit Subscribers').label"
+          :data="followers('Reddit Subscribers').data"
+        />
       </div>
       <div class="col-lg-6">
         <div class="card">
@@ -166,9 +179,10 @@
                 <tr>
                   <td class="text-secondary" style="vertical-align: top">Profile</td>
                   <td>
-                    <a :href="twitterInfo.profile_website">{{ twitterInfo.profile_name }} - {{ twitterInfo.profile_handle
-                    }},
-                      {{ twitterInfo.profile_website }}</a>
+                    <a :href="twitterInfo.profile_website"
+                      >{{ twitterInfo.profile_name }} - {{ twitterInfo.profile_handle }},
+                      {{ twitterInfo.profile_website }}</a
+                    >
                   </td>
                 </tr>
                 <tr>
@@ -241,9 +255,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-6">
-
-      </div>
+      <div class="col-lg-6"></div>
     </div>
   </div>
 </template>
@@ -263,7 +275,7 @@ onMounted(() => {
   const wf: { [key: string]: number } = SampleJSON.linkedin_data.word_frequencies
   let wlist: ListEntry[] = Object.keys(wf).map((k) => [k, wf[k]])
   wlist.sort((a: any, b: any) => b[1] - a[1])
-  wlist = wlist.slice(0, Math.min(50, wlist.length));
+  wlist = wlist.slice(0, Math.min(50, wlist.length))
   WordCloud(wordcloud.value!, { list: wlist })
 })
 
