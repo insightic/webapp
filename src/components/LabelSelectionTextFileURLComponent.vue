@@ -9,7 +9,7 @@
 
     <div class="text-secondary small mb-1" v-html="description"></div>
 
-    <div class="card w-100">
+    <div class="card w-100" :style="{ backgroundColor: disabled ? '#1d273b' : '' }">
       <ul class="list-group list-group-flush">
         <li :class="['list-group-item', { disabled: disabled }]">
           <select
@@ -17,7 +17,7 @@
             @change="onSelectionChange"
             :value="selection"
             :disabled="disabled"
-            :style="{ backgroundColor: disabled ? '#e9ecef' : 'white' }"
+            :style="{ backgroundColor: disabled ? '#1d273b' : '' }"
           >
             <option value="" selected disabled>Options...</option>
             <option v-for="option in options" :key="option" :value="option" :disabled="disabled">
@@ -35,7 +35,7 @@
             ref="textarea"
             v-model="text"
             :disabled="disabled"
-            :style="{ backgroundColor: disabled ? '#e9ecef' : 'white' }"
+            :style="{ backgroundColor: disabled ? '#1d273b' : '' }"
           />
         </li>
         <li
@@ -218,9 +218,3 @@ watch(
   }
 )
 </script>
-
-<style scoped>
-.list-group-item.disabled {
-  background-color: #e9ecef;
-}
-</style>

@@ -77,7 +77,7 @@ export default {
       this.$emit('next', this.payload())
     }
   },
-  activated() {
+  created() {
     if (!this.data) return
     this.title = this.data['Title']
     this.name = this.data['Name']

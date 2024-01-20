@@ -73,10 +73,6 @@ export default {
   background-color: var(--tblr-primary);
 }
 
-.switch-button.disabled {
-  background-color: #e9ecef !important;
-}
-
 .switch-button {
   background-color: var(--tblr-gray-800);
   position: absolute;
