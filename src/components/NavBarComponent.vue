@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-md fixed-top" data-bs-theme="dark">
+  <nav class="navbar navbar-expand-md fixed-top" data-bs-theme="dark" style="z-index: 2000">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">
         <div
@@ -18,17 +18,19 @@
         <span class="ms-2">Insightic</span>
       </a>
 
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      <div class="d-flex flex-column align-items-center" style="height: 48px">
+        <button
+          class="navbar-toggler my-auto"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
 
       <div class="collapse navbar-collapse" id="navbarNav">
         <div class="me-auto"></div>
@@ -50,27 +52,3 @@
     </div>
   </nav>
 </template>
-
-<script lang="ts">
-export default {
-  computed: {
-    isAdmin() {
-      return this.$route.path.startsWith('/admin')
-    },
-    bgColor() {
-      return this.isAdmin ? 'rgba(23, 106, 184, 0.8)' : 'rgba(39, 50, 131, 0.8)'
-    }
-  }
-}
-</script>
-
-<style scoped>
-.admin {
-  color: white;
-  font-size: 1rem;
-  font-weight: 400;
-  margin-left: auto;
-  margin-right: 1rem;
-  padding: 0.5rem;
-}
-</style>
