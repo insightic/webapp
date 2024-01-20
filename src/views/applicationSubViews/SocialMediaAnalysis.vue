@@ -232,8 +232,8 @@ onMounted(() => {
   const wf: { [key: string]: number } = SampleJSON.linkedin_data.word_frequencies
   let wlist: ListEntry[] = Object.keys(wf).map((k) => [k, wf[k]])
   wlist.sort((a: any, b: any) => b[1] - a[1])
-  wlist = wlist.slice(0, Math.min(50, wlist.length))
-  WordCloud(wordcloud.value!, { list: wlist })
+  wlist = wlist.slice(0, Math.min(100, wlist.length))
+  WordCloud(wordcloud.value!, { list: wlist, backgroundColor: '' })
 })
 
 let twitterInfo = ref(SampleJSON.twitter_data)
