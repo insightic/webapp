@@ -11,12 +11,12 @@
             @click="subViewIdx = idx"
           >
             <a class="nav-link">
-              <span class="nav-link-icon">
+              <span class="nav-link-icon" :class="{ 'text-secondary': idx != subViewIdx }">
                 <i class="bi" :class="item.icon"></i>
               </span>
               <span
-                class="nav-link-title d-md-inline-block"
-                :class="{ 'd-none': idx != subViewIdx }"
+                class="nav-link-title d-lg-inline-block"
+                :class="{ 'd-none': idx != subViewIdx, 'text-secondary': idx != subViewIdx }"
                 style="white-space: nowrap"
               >
                 {{ item.name }}
@@ -159,6 +159,10 @@ export default {
 </script>
 
 <style scoped>
+.active {
+  border-bottom: 1px solid var(--tblr-linkedin);
+}
+
 .subNav {
   overflow-x: auto;
   overflow-y: hidden;
@@ -171,8 +175,10 @@ export default {
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .subNav {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 .nav-link {
