@@ -5,21 +5,16 @@
 
   <div class="card w-100">
     <ul class="list-group list-group-flush">
-      <li
-        class="list-group-item"
-        v-for="submission in application.Submissions"
-        :key="submission.SubmissionID"
-      >
+      <li class="list-group-item" v-for="s in application.Submissions" :key="s.SubmissionID">
         <AccountApplicationSubmissionComponent
-          :name="submission.Content?.Name"
-          :one-liner="submission.Content?.OneLiner"
-          :logo-url="submission.Content?.LogoURL"
-          :status="submission.Status"
-          :submission-id="submission.SubmissionID"
-          :created-at="submission.CreatedAt"
-          @continue="() => continueSubmission(submission.SubmissionID)"
-          @view="() => viewSubmission()"
-          @delete="() => deleteSubmission(submission.SubmissionID)"
+          :name="s.Content?.Name"
+          :one-liner="s.Content?.OneLiner"
+          :logo-url="s.Content?.LogoURL"
+          :status="s.Status"
+          :submission-id="s.SubmissionID"
+          :created-at="s.CreatedAt"
+          @continue="() => continueSubmission(s.SubmissionID)"
+          @delete="() => deleteSubmission(s.SubmissionID)"
         />
       </li>
     </ul>
@@ -36,9 +31,6 @@ export default {
     AccountApplicationSubmissionComponent
   },
   props: ['application', 'submission'],
-  created() {
-    console.log(this.submission)
-  },
   computed: {
     applicationID() {
       return this.$route.params.applicationID as string
@@ -56,9 +48,6 @@ export default {
     },
     createSubmission() {
       this.$router.push(`/create-application?applicationID=${this.applicationID}`)
-    },
-    viewSubmission() {
-      this.$router.push('/applications/' + this.applicationID)
     },
     continueSubmission(submissionID: string) {
       this.$router.push(
