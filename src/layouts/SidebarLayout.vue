@@ -124,10 +124,10 @@ export default {
 
 <style scoped>
 .sidebar {
-  background-color: var(--tblr-blue-lt);
+  background-color: var(--tblr-gray-800);
   border-top: 1px solid var(--tblr-border-color);
   width: 100%;
-  min-width: 300px;
+  min-width: 280px;
 }
 
 .main {
@@ -140,10 +140,10 @@ export default {
   }
 
   .sidebar {
-    background-color: var(--tblr-blue-lt);
+    background-color: var(--tblr-gray-800);
     border-right: 1px solid var(--tblr-border-color);
     overflow: auto;
-    width: 300px;
+    width: 280px;
   }
 
   .main {

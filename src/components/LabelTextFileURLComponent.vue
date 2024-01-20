@@ -20,7 +20,7 @@
             ref="textarea"
             v-model="text"
             :disabled="disabled"
-            :style="{ backgroundColor: disabled ? '#e9ecef' : 'white' }"
+            :style="{ backgroundColor: disabled ? '#1d273b' : '' }"
           />
         </li>
         <li
@@ -199,6 +199,10 @@ watch(
 </script>
 
 <style scoped>
+.card {
+  background-color: var(--tblr-bg-forms);
+}
+
 .list-group-item.disabled {
   background-color: #e9ecef;
 }

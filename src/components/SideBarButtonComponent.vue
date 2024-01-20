@@ -22,15 +22,16 @@ export default {
 <style scoped>
 .sidebar-button {
   cursor: pointer;
-  font-size: 1.05rem;
+  font-size: 1rem;
   margin: 15px 0px;
+  color: var(--tblr-gray-400);
 }
 
 .sidebar-button:hover {
-  color: var(--tblr-primary);
+  color: var(--tblr-linkedin);
 }
 
 .sidebar-button-selected {
-  color: var(--tblr-primary);
+  color: var(--tblr-linkedin);
 }
 </style>
