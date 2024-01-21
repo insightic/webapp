@@ -81,6 +81,7 @@ import BasicLayout from '@/layouts/BasicLayout.vue'
 
 import DashboardView from '@/views/applicationSubViews/DashboardView.vue'
 import SocialMediaAnalysis from '@/views/applicationSubViews/SocialMediaAnalysis.vue'
+import StableCoin from './applicationSubViews/StableCoinView.vue'
 import SmartContractValidatorView from '@/views/applicationSubViews/SmartContractValidatorView.vue'
 import CompanyProfileView from '@/views/applicationSubViews/CompanyProfileView.vue'
 import AlertView from '@/views/applicationSubViews/AlertView.vue'
@@ -111,6 +112,11 @@ export default {
           name: 'Social Media Analysis',
           icon: 'bi-globe2',
           component: SocialMediaAnalysis
+        },
+        {
+          name: 'Stable Coin',
+          icon: 'bi-arrow-left-right',
+          component: StableCoin
         },
         {
           name: 'Smart Contract Validator',
