@@ -24,14 +24,18 @@
                 <div class="text-secondary mb-2" style="font-size: 0.6rem">OFFICIAL LINKS</div>
                 <div class="d-flex mb-2">
                   <div class="me-2 badge bg-secondary">
-                    <a :href="submission?.Content?.Website"
-                      style="color: white; text-decoration: none; font-size: 0.6rem">
+                    <a
+                      :href="submission?.Content?.Website"
+                      style="color: white; text-decoration: none; font-size: 0.6rem"
+                    >
                       Whitepaper
                     </a>
                   </div>
                   <div class="me-2 badge bg-secondary">
-                    <a :href="submission?.Content?.Website"
-                      style="color: white; text-decoration: none; font-size: 0.6rem">
+                    <a
+                      :href="submission?.Content?.Website"
+                      style="color: white; text-decoration: none; font-size: 0.6rem"
+                    >
                       Contract
                     </a>
                   </div>
@@ -48,9 +52,9 @@
                 <div class="mb-2">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                   incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                  exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet,
-                  consectetur adipiscing elit, sed do eiusmod tempor
-                  incididunt ut labore et dolore magna aliqua.
+                  exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum
+                  dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                  labore et dolore magna aliqua.
                 </div>
               </div>
             </div>
@@ -59,6 +63,23 @@
       </div>
       <div class="col-lg-4">
         <ScoreBoard title="score" grade="B+" />
+      </div>
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="mx-auto my-5" style="max-width: 960px">
+              <div class="text-secondary mb-2">SUMMARY</div>
+              <div class="mb-2">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -193,8 +214,14 @@
 
     <div class="row row-deck row-cards mb-3">
       <div class="col-lg-4">
-        <ScoreBoard title="Security Assurance" grade="B+" :NowData="securityReportInfo.final_score" :PreviousData="'70'"
-          :ChangeData="'+1'" :details="securityReportInfo.report_summary" />
+        <ScoreBoard
+          title="Security Assurance"
+          grade="B+"
+          :NowData="securityReportInfo.final_score"
+          :PreviousData="'70'"
+          :ChangeData="'+1'"
+          :details="securityReportInfo.report_summary"
+        />
       </div>
       <div class="col-lg-8">
         <div class="card">
@@ -219,9 +246,13 @@
                       {{ submission.Content['Risk Management']['SecurityAuditor'] }}
                     </div>
 
-                    <div v-if="submission.Content['Risk Management']['SecurityAuditor'] &&
-                      securityAuditorInfo
-                      " class="ms-2">
+                    <div
+                      v-if="
+                        submission.Content['Risk Management']['SecurityAuditor'] &&
+                        securityAuditorInfo
+                      "
+                      class="ms-2"
+                    >
                       <VDropdown>
                         <button class="btn btn-sm btn-outline-primary rounded">?</button>
 
@@ -231,14 +262,17 @@
                               <tr>
                                 <td class="text-secondary" style="width: 160px">Tier:</td>
                                 <td>
-                                  <span class="badge rounded-pill bg-success me-2 text-white">Tier {{
-                                    securityAuditorInfo['Tier'] }}</span>
+                                  <span class="badge rounded-pill bg-success me-2 text-white"
+                                    >Tier {{ securityAuditorInfo['Tier'] }}</span
+                                  >
                                 </td>
                               </tr>
                               <tr>
                                 <td class="text-secondary">Status:</td>
                                 <td>
-                                  <span class="badge rounded-pill bg-success me-2 text-white">active</span>
+                                  <span class="badge rounded-pill bg-success me-2 text-white"
+                                    >active</span
+                                  >
                                 </td>
                               </tr>
                               <tr>
@@ -414,7 +448,13 @@
 
     <div class="row row-deck row-cards mb-3">
       <div class="col-lg-4">
-        <ScoreBoard title="Regulatory Compliance" grade="C+" :NowData="'71'" :PreviousData="'70'" :ChangeData="'+1'" />
+        <ScoreBoard
+          title="Regulatory Compliance"
+          grade="C+"
+          :NowData="'71'"
+          :PreviousData="'70'"
+          :ChangeData="'+1'"
+        />
       </div>
       <div class="col-lg-8">
         <div class="card">
@@ -594,7 +634,7 @@ th {
   border-right: unset;
 }
 
-.auditor-info-table>tr>td {
+.auditor-info-table > tr > td {
   vertical-align: top;
 }
 </style>
