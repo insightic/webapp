@@ -2,33 +2,62 @@
   <!-- Dashboard Header -->
   <div>
     <div class="row row-deck row-cards mb-3">
-      <div class="col-lg-6">
+      <div class="col-lg-8">
         <div class="card">
           <div class="card-body d-flex align-items-center">
-            <div class="row align-items-center w-100 h-100">
-              <div class="col-3">
-                <img
-                  :src="submission?.Content?.LogoURL"
-                  class="rounded-circle"
-                  style="width: 60%"
-                />
+            <div class="row w-100 h-100">
+              <div class="col-3 d-flex align-items-center">
+                <img :src="submission?.Content?.LogoURL" class="mx-auto" style="width: 60%" />
               </div>
-              <div class="col">
+              <div class="col-4">
                 <div class="card-title mb-0">
                   {{ submission?.Content?.Name }}
                 </div>
-                <div class="text-secondary mb-2">
+                <div class="text-secondary mb-0">
                   {{ submission?.Content?.OneLiner }}
                 </div>
-                <div class="text-secondary">
-                  <a :href="submission?.Content?.Website">{{ submission?.Content?.Website }}</a>
+                <div class="mb-3">
+                  <a :href="submission?.Content?.Website">
+                    {{ submission?.Content?.Website }}
+                  </a>
+                </div>
+                <div class="text-secondary mb-2" style="font-size: 0.6rem">OFFICIAL LINKS</div>
+                <div class="d-flex mb-2">
+                  <div class="me-2 badge bg-secondary">
+                    <a :href="submission?.Content?.Website"
+                      style="color: white; text-decoration: none; font-size: 0.6rem">
+                      Whitepaper
+                    </a>
+                  </div>
+                  <div class="me-2 badge bg-secondary">
+                    <a :href="submission?.Content?.Website"
+                      style="color: white; text-decoration: none; font-size: 0.6rem">
+                      Contract
+                    </a>
+                  </div>
+                </div>
+                <div class="text-secondary mb-2" style="font-size: 0.6rem">SOCIAL MEDIAS</div>
+                <div class="d-flex mb-2">
+                  <IconBrandX class="me-2" :size="24" />
+                  <IconBrandGithub class="me-2" :size="24" />
+                  <IconBrandLinkedin :size="24" />
+                </div>
+              </div>
+              <div class="col-5">
+                <div class="text-secondary" style="font-size: 0.6rem">OVERVIEW</div>
+                <div class="mb-2">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                  incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                  exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet,
+                  consectetur adipiscing elit, sed do eiusmod tempor
+                  incididunt ut labore et dolore magna aliqua.
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-lg-6">
+      <div class="col-lg-4">
         <ScoreBoard title="score" grade="B+" />
       </div>
     </div>
@@ -164,14 +193,8 @@
 
     <div class="row row-deck row-cards mb-3">
       <div class="col-lg-4">
-        <ScoreBoard
-          title="Security Assurance"
-          grade="B+"
-          :NowData="securityReportInfo.final_score"
-          :PreviousData="'70'"
-          :ChangeData="'+1'"
-          :details="securityReportInfo.report_summary"
-        />
+        <ScoreBoard title="Security Assurance" grade="B+" :NowData="securityReportInfo.final_score" :PreviousData="'70'"
+          :ChangeData="'+1'" :details="securityReportInfo.report_summary" />
       </div>
       <div class="col-lg-8">
         <div class="card">
@@ -196,13 +219,9 @@
                       {{ submission.Content['Risk Management']['SecurityAuditor'] }}
                     </div>
 
-                    <div
-                      v-if="
-                        submission.Content['Risk Management']['SecurityAuditor'] &&
-                        securityAuditorInfo
-                      "
-                      class="ms-2"
-                    >
+                    <div v-if="submission.Content['Risk Management']['SecurityAuditor'] &&
+                      securityAuditorInfo
+                      " class="ms-2">
                       <VDropdown>
                         <button class="btn btn-sm btn-outline-primary rounded">?</button>
 
@@ -212,17 +231,14 @@
                               <tr>
                                 <td class="text-secondary" style="width: 160px">Tier:</td>
                                 <td>
-                                  <span class="badge rounded-pill bg-success me-2 text-white"
-                                    >Tier {{ securityAuditorInfo['Tier'] }}</span
-                                  >
+                                  <span class="badge rounded-pill bg-success me-2 text-white">Tier {{
+                                    securityAuditorInfo['Tier'] }}</span>
                                 </td>
                               </tr>
                               <tr>
                                 <td class="text-secondary">Status:</td>
                                 <td>
-                                  <span class="badge rounded-pill bg-success me-2 text-white"
-                                    >active</span
-                                  >
+                                  <span class="badge rounded-pill bg-success me-2 text-white">active</span>
                                 </td>
                               </tr>
                               <tr>
@@ -398,13 +414,7 @@
 
     <div class="row row-deck row-cards mb-3">
       <div class="col-lg-4">
-        <ScoreBoard
-          title="Regulatory Compliance"
-          grade="C+"
-          :NowData="'71'"
-          :PreviousData="'70'"
-          :ChangeData="'+1'"
-        />
+        <ScoreBoard title="Regulatory Compliance" grade="C+" :NowData="'71'" :PreviousData="'70'" :ChangeData="'+1'" />
       </div>
       <div class="col-lg-8">
         <div class="card">
@@ -524,7 +534,13 @@
 </template>
 
 <script lang="ts">
-import { IconTrendingUp, IconTrendingDown } from '@tabler/icons-vue'
+import {
+  IconTrendingUp,
+  IconTrendingDown,
+  IconBrandX,
+  IconBrandLinkedin,
+  IconBrandGithub
+} from '@tabler/icons-vue'
 import ScoreBoard from '@/components/dashboard/ScoreBoardComponent.vue'
 import Papa from 'papaparse'
 import auditors from '@/assets/auditors.csv?raw'
@@ -535,6 +551,9 @@ export default {
   components: {
     IconTrendingUp,
     IconTrendingDown,
+    IconBrandX,
+    IconBrandGithub,
+    IconBrandLinkedin,
     ScoreBoard
   },
   props: ['application', 'submission'],
@@ -575,7 +594,7 @@ th {
   border-right: unset;
 }
 
-.auditor-info-table > tr > td {
+.auditor-info-table>tr>td {
   vertical-align: top;
 }
 </style>
