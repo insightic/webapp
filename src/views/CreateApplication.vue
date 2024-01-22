@@ -2,7 +2,7 @@
   <NavFooterLayout>
     <div class="container-fluid p-3 mb-5" style="max-width: 1440px">
       <h1 class="mb-4">
-        <strong>{{ tilte[formType] }}</strong>
+        <strong>{{ tilte }}</strong>
       </h1>
 
       <div class="row" v-if="!loading">
@@ -96,7 +96,6 @@ export default {
       loading: true,
       current: 0,
       pageFinishedNum: 0,
-      currentTab: 'Overview',
       tabs: [
         { index: 0, name: 'Overview', component: Overview },
         {
@@ -134,24 +133,37 @@ export default {
         'COI',
         'Confirmation'
       ],
-      tilte: ['New Application', 'New Submission', 'Continue Submission'],
-      formType: 0
+      tilte: 'New Application'
     }
   },
   async created() {
     if (this.applicationID != undefined && this.submissionID == undefined) {
-      this.formType = 1
+      this.tilte = 'New Submission'
     } else if (this.applicationID != undefined && this.submissionID != undefined) {
-      this.formType = 2
+      this.tilte = 'Continue Submission'
     }
-    if (this.applicationID && this.submissionID) {
+
+    if (this.applicationID) {
       const resp = await getApplication(this.applicationID)
       if (resp) {
-        this.application = resp.Submissions.filter(
-          (res) => res.SubmissionID == this.submissionID
-        )[0]?.Content
+        if (this.submissionID) {
+          this.application = resp.Submissions.filter(
+            (res) => res.SubmissionID == this.submissionID
+          )[0]?.Content
+        } else {
+          this.application = resp.Submissions.filter((res) => res.Status == 'active')[0]?.Content
+
+          if (!this.application) {
+            this.application = resp.Submissions.filter((res) => res.Status == 'draft')[0]?.Content
+          }
+          if (!this.application) {
+            this.application = resp.Submissions[0]?.Content
+          }
+          if (!this.application) {
+            this.application = {}
+          }
+        }
       }
-      this.current = Object.keys(this.application).length - 4
     }
 
     this.loading = false
@@ -174,6 +186,7 @@ export default {
     },
     hasData(idx: number): boolean {
       const tabName = this.tabs[idx].name
+      if (!this.application) return false
       return this.application[tabName] != null
     },
     async newOrSaveDraft(data: any): Promise<boolean> {
