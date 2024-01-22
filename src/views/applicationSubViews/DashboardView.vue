@@ -9,7 +9,7 @@
               <div class="col-3 d-flex align-items-center">
                 <img :src="submission?.Content?.LogoURL" class="mx-auto" style="width: 60%" />
               </div>
-              <div class="col-4">
+              <div class="col-6">
                 <div class="card-title mb-0">
                   {{ submission?.Content?.Name }}
                 </div>
@@ -45,16 +45,6 @@
                   <IconBrandX class="me-2" :size="24" />
                   <IconBrandGithub class="me-2" :size="24" />
                   <IconBrandLinkedin :size="24" />
-                </div>
-              </div>
-              <div class="col-5">
-                <div class="text-secondary" style="font-size: 0.6rem">OVERVIEW</div>
-                <div class="mb-2">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                  incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                  exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum
-                  dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                  labore et dolore magna aliqua.
                 </div>
               </div>
             </div>
