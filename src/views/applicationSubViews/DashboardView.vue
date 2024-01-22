@@ -42,7 +42,15 @@
                 </div>
                 <div class="text-secondary mb-2" style="font-size: 0.6rem">SOCIAL MEDIAS</div>
                 <div class="d-flex mb-2">
-                  <IconBrandX class="me-2" :size="24" />
+                  <a
+                    v-if="submission?.Content.Overview?.TwitterHandle"
+                    :href="'https://twitter.com/' + submission?.Content.Overview?.TwitterHandle"
+                    class="me-2 text-white"
+                    target="_blank"
+                  >
+                    <IconBrandX :size="24" />
+                  </a>
+
                   <IconBrandGithub class="me-2" :size="24" />
                   <IconBrandLinkedin :size="24" />
                 </div>
@@ -591,6 +599,7 @@ export default {
     this.verifiedAuditors = Papa.parse(auditors, {
       header: true
     }).data
+    console.log(this.submission)
   },
   data() {
     return {
