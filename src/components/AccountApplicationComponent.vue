@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex my-3 flex-row align-items-center">
-    <div class="me-3" v-if="logoUrl">
+    <div style="min-width: 100px" class="me-3" v-if="logoUrl">
       <img :src="logoUrl" style="width: 100px" />
     </div>
     <div>

@@ -227,6 +227,19 @@ import PieChartComponent from '@/components/dashboard/PieChartComponent.vue'
 import moment from 'moment'
 import { ref, onMounted, computed } from 'vue'
 
+const props = defineProps({
+  application: {
+    type: Object,
+    required: true
+  },
+  submission: {
+    type: Object,
+    required: true
+  }
+})
+
+console.log(props.submission)
+
 const wordcloud = ref(null)
 onMounted(() => {
   const wf: { [key: string]: number } = SampleJSON.linkedin_data.word_frequencies
