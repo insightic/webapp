@@ -49,6 +49,14 @@
         v-model:field="linkedinURL"
       />
 
+      <LabelInputComponent
+        label="Project GitHub Handle"
+        description="Please enter the GitHub handle of your GitHub account."
+        :required="true"
+        :disabled="disabled"
+        v-model:field="githubHandle"
+      />
+
       <LabelTextFileURLComponent
         label="Pitch Deck"
         v-model:field="pitchDeck"
@@ -156,6 +164,7 @@ export default {
       website: '',
       twitterHandle: '',
       linkedinURL: '',
+      githubHandle: '',
       pitchDeck: null as TextFilesObject | null,
       whitePaper: null as TextFilesObject | null,
       projectStage: '',
@@ -175,6 +184,7 @@ export default {
         Website: this.website,
         TwitterHandle: this.twitterHandle,
         LinkedinURL: this.linkedinURL,
+        GitHubHandle: this.githubHandle,
         PitchDeck: this.pitchDeck,
         WhitePaper: this.whitePaper,
         ProjectStage: this.projectStage,
@@ -200,6 +210,7 @@ export default {
     this.website = this.data['Website']
     this.twitterHandle = this.data['TwitterHandle']
     this.linkedinURL = this.data['LinkedinURL']
+    this.githubHandle = this.data['GitHubHandle']
     this.pitchDeck = this.data['PitchDeck']
     this.whitePaper = this.data['WhitePaper']
     this.projectStage = this.data['ProjectStage']
