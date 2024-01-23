@@ -119,7 +119,8 @@ export default {
         {
           name: 'Stable Coin',
           icon: 'bi-arrow-left-right',
-          component: StableCoin
+          component: StableCoin,
+          resultKey: 'stablecoin'
         },
         {
           name: 'Smart Contract Validator',
@@ -158,6 +159,7 @@ export default {
     this.submission = resp.Submissions.filter((s) => s.Status == 'active')[0]
 
     this.jobResults = await getJobResults(applicationID, this.submission.SubmissionID)
+    console.log(this.jobResults)
     this.loading = false
   },
   computed: {

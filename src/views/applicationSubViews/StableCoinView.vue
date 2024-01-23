@@ -156,18 +156,30 @@
 </template>
 
 <script setup lang="ts">
-import { formatDateTime } from '@/helpers'
 import { ref, onMounted } from 'vue'
 import { getJobResults } from '@/api'
 import ChartComponent from '@/components/dashboard/ChartComponent.vue'
 import PieChartComponent from '@/components/dashboard/PieChartComponent.vue'
+import TableComponent from '@/components/dashboard/TableComponent.vue'
 
 const props = defineProps({
+  application: {
+    type: Object,
+    required: true
+  },
   submission: {
     type: Object,
     required: true
+  },
+  jobResults: {
+    type: Array,
+    required: true
   }
 })
+
+const jobResults = (props.jobResults.filter((r: any) => r.job_name == 'stablecoin')[0] as any)
+  .job_results
+console.log(jobResults)
 
 let updateAt = ref()
 let transcations = ref()
@@ -178,20 +190,12 @@ let mintBurn = ref()
 let holdAgeFreqPortfilio = ref()
 
 onMounted(async () => {
-  const resp = await getJobResults(props.submission.ApplicationID, props.submission.SubmissionID)
-  if (!resp) {
-    return
-  }
-  const results = resp.filter((r: any) => r['job_name'] == 'stablecoin')[0]
-  if (!results) {
-    return
-  }
-  updateAt.value = new Date(results['UpdatedAt'])
-  transcations.value = results['job_results']['transaction']
-  totalSupply.value = results['job_results']['supply']
-  topKHolder.value = results['job_results']['topKHolder']
-  tokenPrice.value = results['job_results']['price']
-  mintBurn.value = results['job_results']['mintBurn']
-  holdAgeFreqPortfilio.value = results['job_results']['holderAgeFreqPortfolio']
+  updateAt.value = new Date()
+  transcations.value = jobResults['transaction']
+  totalSupply.value = jobResults['supply']
+  topKHolder.value = jobResults['topKHolder']
+  tokenPrice.value = jobResults['price']
+  mintBurn.value = jobResults['mintBurn']
+  holdAgeFreqPortfilio.value = jobResults['holderAgeFreqPortfolio']
 })
 </script>

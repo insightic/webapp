@@ -245,8 +245,6 @@ const job_results = (props.jobResults.filter((r: any) => r.job_name == 'social')
 let twitterInfo = ref(job_results.twitter_data.twitter_data)
 let linkedinInfo = ref(job_results.linkedin_data.linkedin_data)
 
-console.log(job_results)
-
 const wordcloud = ref(null)
 onMounted(() => {
   const wf: { [key: string]: number } = linkedinInfo.value.word_frequencies
