@@ -37,6 +37,9 @@ export default {
         tooltip: {
           theme: 'dark'
         },
+        legend: {
+          show: false
+        },
         responsive: [
           {
             breakpoint: 480,

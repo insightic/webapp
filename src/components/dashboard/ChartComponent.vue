@@ -43,6 +43,9 @@
           tooltip: {
             theme: 'dark'
           },
+          legend: {
+            show: false
+          },
           dataLabels: { enabled: false },
           fill: { opacity: 0.16, type: 'solid' },
           stroke: {
