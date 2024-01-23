@@ -224,7 +224,7 @@
     </div>
 
     <div class="row row-deck row-cards mb-3">
-      <div class="col-lg-4">
+      <div class="col-lg-3">
         <ScoreBoard
           title="Security Assurance"
           grade="B+"
@@ -234,7 +234,46 @@
           :details="securityReportInfo.report_summary"
         />
       </div>
-      <div class="col-lg-8">
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="subheader">asdf</div>
+            <div class="d-flex flex-column align-items-center">
+              <VueApexCharts
+                style="margin-top: -10px; margin-bottom: -40px"
+                :height="200"
+                :width="200"
+                type="radar"
+                :options="{
+                  // labels: ['April', 'May', 'June', 'July', 'August', 'September'],
+                  labels: ['Biz Content', 'Content', 'Impact', 'Presentation', 'Relevance', 'Risk'],
+                  chart: {
+                    toolbar: {
+                      show: false
+                    }
+                  },
+                  legend: {
+                    show: false
+                  },
+                  tooltip: {
+                    theme: 'dark'
+                  }
+                }"
+                :series="[
+                  {
+                    name: 'Scores',
+                    data: [2, 3.7, 0.1, 2.5, 0.2, 2.5]
+                  },{
+                    name: 'Scores 2',
+                    data: [2, 3.5, 0.1, 2.5, 0.2, 2.5]
+                  }
+                ]"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5">
         <div class="card">
           <div class="card-body d-flex align-items-center">
             <div class="d-table h-100 w-100">
@@ -597,6 +636,7 @@ import Papa from 'papaparse'
 import auditors from '@/assets/auditors.csv?raw'
 import { formatDateTime } from '@/helpers'
 import SampleReportJSON from '@/views/applicationSubViews/sample_report.json'
+import VueApexCharts from 'vue3-apexcharts'
 
 export default {
   components: {
@@ -605,13 +645,15 @@ export default {
     IconBrandX,
     IconBrandGithub,
     IconBrandLinkedin,
-    ScoreBoard
+    ScoreBoard,
+    VueApexCharts
   },
   props: ['application', 'submission', 'jobResults'],
   async created() {
     this.verifiedAuditors = Papa.parse(auditors, {
       header: true
     }).data
+    console.log(this.jobResults)
   },
   data() {
     return {
