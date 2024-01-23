@@ -179,7 +179,6 @@ const props = defineProps({
 
 const jobResults = (props.jobResults.filter((r: any) => r.job_name == 'stablecoin')[0] as any)
   .job_results
-console.log(jobResults)
 
 let updateAt = ref()
 let transcations = ref()
