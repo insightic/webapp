@@ -45,7 +45,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-6">
+      <div class="col-lg-6" v-if="linkedinInfo && linkedinInfo.profile_title">
         <div class="card">
           <div class="card-body">
             <div class="row w-100 h-100">
@@ -115,13 +115,19 @@
       </div>
     </div>
 
-    <div class="d-flex align-items-center" style="cursor: pointer">
+    <div
+      class="d-flex align-items-center"
+      style="cursor: pointer"
+      v-if="
+        linkedinInfo && linkedinInfo.overall_sentiment_analysis && linkedinInfo.word_frequencies
+      "
+    >
       <h2>Posts / Articles Analysis</h2>
       <div class="ms-auto">Last Update {{ formatDateTime(new Date()) }}</div>
     </div>
 
     <div class="row row-deck row-cards mb-3">
-      <div class="col-lg-6">
+      <div class="col-lg-6" v-if="linkedinInfo && linkedinInfo.overall_sentiment_analysis">
         <PieChartComponent
           title="Sentiment Analysis"
           :labels="['Positive', 'Neutral', 'Negative']"
@@ -132,7 +138,7 @@
           ]"
         />
       </div>
-      <div class="col-lg-6">
+      <div class="col-lg-6" v-if="linkedinInfo && linkedinInfo.word_frequencies">
         <div class="card" style="overflow: hidden">
           <div class="card-header">
             <h3 class="card-title">Keywords</h3>
@@ -187,7 +193,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-6">
+      <div class="col-lg-6" v-if="linkedinInfo && linkedin_posts.length > 0">
         <div class="card">
           <div class="card-header">
             <h3 class="card-title">Most Recent LinkedIn Posts</h3>
@@ -249,6 +255,8 @@ let linkedinInfo = ref(job_results.linkedin_data)
 
 const wordcloud = ref(null)
 onMounted(() => {
+  if (!linkedinInfo.value) return
+  if (!linkedinInfo.value.word_frequencies) return
   const wf: { [key: string]: number } = linkedinInfo.value.word_frequencies
   let wlist: ListEntry[] = Object.keys(wf).map((k) => [k, wf[k]])
   wlist.sort((a: any, b: any) => b[1] - a[1])
@@ -273,6 +281,8 @@ let followers = function (name: string) {
 }
 
 let linkedin_posts = computed(() => {
+  if (!linkedinInfo.value) return []
+  if (!linkedinInfo.value.extracted_posts) return []
   return linkedinInfo.value.extracted_posts.map((p: any) => p.post_content).slice(0, 6)
 })
 </script>
