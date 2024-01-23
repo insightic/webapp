@@ -141,19 +141,15 @@ import { mapStores } from 'pinia'
 import type { CodeValidationResult } from '@/api'
 import ResultComponent from '@/components/ResultComponent.vue'
 import CodeValidationModal from '@/components/CodeValidationModal.vue'
-import axios from 'axios'
 
 export default {
   components: {
     ResultComponent,
     CodeValidationModal
   },
-  props: ['application', 'submission'],
+  props: ['application', 'submission', 'jobResults'],
   async created() {
-    const resp = await axios.get(
-      'https://scv.insightic.io/jobs/3508dfbb-25aa-4086-9a1f-6854b73eb1e8'
-    )
-    this.codeValidation = resp?.data?.results || []
+    this.codeValidation = this.submission?.Results?.CodeValidation || []
     this.loading = false
   },
   data() {

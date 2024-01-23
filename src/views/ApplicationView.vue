@@ -157,9 +157,7 @@ export default {
     }
     this.application = resp
     this.submission = resp.Submissions.filter((s) => s.Status == 'active')[0]
-
     this.jobResults = await getJobResults(applicationID, this.submission.SubmissionID)
-    console.log(this.jobResults)
     this.loading = false
   },
   computed: {
@@ -170,6 +168,13 @@ export default {
   methods: {
     formatDate,
     isVissible(subView: any): boolean {
+      if (subView.name == 'Smart Contract Validator') {
+        const length = this.submission?.Results?.CodeValidation?.length
+        if (length && length > 0) {
+          return true
+        }
+        return false
+      }
       if (!subView.resultKey) return true
       if (!this.jobResults) return false
       const result = this.jobResults.filter((r: any) => r.job_name == subView.resultKey)[0]
