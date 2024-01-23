@@ -157,7 +157,6 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { getJobResults } from '@/api'
 import ChartComponent from '@/components/dashboard/ChartComponent.vue'
 import PieChartComponent from '@/components/dashboard/PieChartComponent.vue'
 import TableComponent from '@/components/dashboard/TableComponent.vue'
