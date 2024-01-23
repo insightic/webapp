@@ -181,7 +181,6 @@ export default {
     },
     changePageBySelect(e: any) {
       const index = this.optionName.findIndex((tab) => tab === e.target.value)
-      console.log(index)
       this.current = index
     },
     hasData(idx: number): boolean {

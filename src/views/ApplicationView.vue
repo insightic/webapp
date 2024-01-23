@@ -10,7 +10,7 @@
             :class="{ active: idx == subViewIdx }"
             @click="subViewIdx = idx"
           >
-            <a class="nav-link">
+            <a v-if="isVissible(item)" class="nav-link">
               <span class="nav-link-icon" :class="{ 'text-secondary': idx != subViewIdx }">
                 <i class="bi" :class="item.icon"></i>
               </span>
@@ -36,7 +36,9 @@
             :is="activeSubView"
             :submission="submission"
             :application="application"
-          ></component>
+            :jobResults="jobResults"
+          >
+          </component>
         </div>
 
         <div v-else>
@@ -90,7 +92,7 @@ import MySubmissionsView from '@/views/applicationSubViews/MySubmissionsView.vue
 import ScoreBoard from '../components/dashboard/ScoreBoardComponent.vue'
 import CompanyInfo from '@/components/dashboard/CompanyInfoComponent.vue'
 import { formatDate } from '@/helpers'
-import { getApplication, type Application, type Submission } from '@/api'
+import { getApplication, getJobResults, type Application, type Submission } from '@/api'
 
 export default {
   components: {
@@ -111,7 +113,8 @@ export default {
         {
           name: 'Social Media Analysis',
           icon: 'bi-globe2',
-          component: SocialMediaAnalysis
+          component: SocialMediaAnalysis,
+          resultKey: 'social'
         },
         {
           name: 'Stable Coin',
@@ -140,7 +143,8 @@ export default {
         }
       ],
       application: null as Application | null,
-      submission: null as Submission | null
+      submission: null as Submission | null,
+      jobResults: null as any | null
     }
   },
   async created() {
@@ -152,6 +156,8 @@ export default {
     }
     this.application = resp
     this.submission = resp.Submissions.filter((s) => s.Status == 'active')[0]
+
+    this.jobResults = await getJobResults(applicationID, this.submission.SubmissionID)
     this.loading = false
   },
   computed: {
@@ -160,7 +166,13 @@ export default {
     }
   },
   methods: {
-    formatDate
+    formatDate,
+    isVissible(subView: any): boolean {
+      if (!subView.resultKey) return true
+      if (!this.jobResults) return false
+      const result = this.jobResults.filter((r: any) => r.job_name == subView.resultKey)[0]
+      return result != null && result != undefined
+    }
   }
 }
 </script>

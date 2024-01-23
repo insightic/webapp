@@ -607,12 +607,11 @@ export default {
     IconBrandLinkedin,
     ScoreBoard
   },
-  props: ['application', 'submission'],
+  props: ['application', 'submission', 'jobResults'],
   async created() {
     this.verifiedAuditors = Papa.parse(auditors, {
       header: true
     }).data
-    console.log(this.submission)
   },
   data() {
     return {

@@ -107,6 +107,7 @@ class HttpClient {
       return resp?.data
     } catch (e: any) {
       console.log(e)
+
       const data = e?.response?.data as Response<T>
       if (autoRefresh && data.code == 401) {
         const tokenResp = await this.refreshToken()

@@ -7,9 +7,9 @@
           <div class="card-body">
             <div class="row w-100 h-100">
               <div class="col-6 d-flex flex-column text-center">
-                <a class="my-auto" :href="twitterInfo.profile_website">
+                <a class="my-auto" :href="twitterInfo.profile_imageURL">
                   <img
-                    src="https://pbs.twimg.com/profile_images/1267400480734490624/uq3Cten-_400x400.jpg"
+                    :src="twitterInfo.profile_imageURL"
                     class="rounded-circle"
                     style="width: 60%"
                   />
@@ -235,10 +235,15 @@ const props = defineProps({
   submission: {
     type: Object,
     required: true
+  },
+  jobResults: {
+    type: Array,
+    required: true
   }
 })
 
-console.log(props.submission)
+const job_results = (props.jobResults.filter((r: any) => r.job_name == 'social')[0] as any)
+  .job_results
 
 const wordcloud = ref(null)
 onMounted(() => {
@@ -249,23 +254,26 @@ onMounted(() => {
   WordCloud(wordcloud.value!, { list: wlist, backgroundColor: '' })
 })
 
-let twitterInfo = ref(SampleJSON.twitter_data)
-let linkedinInfo = ref(SampleJSON.linkedin_data)
+let twitterInfo = ref(job_results.twitter_data.twitter_data)
+let linkedinInfo = ref(job_results.linkedin_data.linkedin_data)
+
 let followers = function (name: string) {
-  const sample = SampleJSON.followers_data.filter((f) => f.name == name)[0].data
-  return {
-    label: sample.map((s) => moment(s[0]).format('YYYY-MM-DD')),
-    data: [
-      {
-        name: 'Twitter Followers',
-        data: sample.map((s) => s[1])
-      }
-    ]
-  }
+  return { label: [], data: [] }
+  // const sample = job_results.followers_data.filter((f: any) => f.name == name)[0]?.data
+  // if (!sample) { return { label: [], data: [] } }
+  // return {
+  //   label: sample.map((s: any) => moment(s[0]).format('YYYY-MM-DD')),
+  //   data: [
+  //     {
+  //       name: 'Twitter Followers',
+  //       data: sample.map((s: any) => s[1])
+  //     }
+  //   ]
+  // }
 }
 
 let linkedin_posts = computed(() => {
-  return SampleJSON.linkedin_data.extracted_posts.map((p) => p.post_content).slice(0, 6)
+  return linkedinInfo.value.extracted_posts.map((p: any) => p.post_content).slice(0, 6)
 })
 </script>
 

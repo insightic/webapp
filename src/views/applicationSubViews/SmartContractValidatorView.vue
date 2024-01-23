@@ -154,9 +154,6 @@ export default {
       'https://scv.insightic.io/jobs/3508dfbb-25aa-4086-9a1f-6854b73eb1e8'
     )
     this.codeValidation = resp?.data?.results || []
-    // console.log("test", resp.data)
-    // console.log(this.submission)
-    // this.codeValidation = this.submission?.Results?.CodeValidation || []
     this.loading = false
   },
   data() {
