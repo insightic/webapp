@@ -49,8 +49,10 @@
                     <IconBrandLinkedin :size="24" />
                   </a>
 
-                  <IconBrandGithub class="me-2" :size="24" />
-
+                  <a v-if="submission?.Content?.Overview?.GitHubHandle"
+                    :href="'https://github.com/' + submission?.Content?.Overview?.GitHubHandle" class="me-2 text-white">
+                    <IconBrandGithub class="me-2" :size="24" />
+                  </a>
                 </div>
               </div>
             </div>
