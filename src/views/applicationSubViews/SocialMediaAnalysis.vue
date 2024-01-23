@@ -222,9 +222,7 @@ import { IconBrandX, IconBrandLinkedin } from '@tabler/icons-vue'
 import TwitterFollowers from '@/components/dashboard/TwitterFollowers.vue'
 import { formatDateTime } from '@/helpers'
 import WordCloud, { type ListEntry } from 'wordcloud'
-import SampleJSON from '@/views/applicationSubViews/sample_twitter.json'
 import PieChartComponent from '@/components/dashboard/PieChartComponent.vue'
-import moment from 'moment'
 import { ref, onMounted, computed } from 'vue'
 
 const props = defineProps({
@@ -244,18 +242,19 @@ const props = defineProps({
 
 const job_results = (props.jobResults.filter((r: any) => r.job_name == 'social')[0] as any)
   .job_results
+let twitterInfo = ref(job_results.twitter_data.twitter_data)
+let linkedinInfo = ref(job_results.linkedin_data.linkedin_data)
+
+console.log(job_results)
 
 const wordcloud = ref(null)
 onMounted(() => {
-  const wf: { [key: string]: number } = SampleJSON.linkedin_data.word_frequencies
+  const wf: { [key: string]: number } = linkedinInfo.value.word_frequencies
   let wlist: ListEntry[] = Object.keys(wf).map((k) => [k, wf[k]])
   wlist.sort((a: any, b: any) => b[1] - a[1])
   wlist = wlist.slice(0, Math.min(100, wlist.length))
   WordCloud(wordcloud.value!, { list: wlist, backgroundColor: '' })
 })
-
-let twitterInfo = ref(job_results.twitter_data.twitter_data)
-let linkedinInfo = ref(job_results.linkedin_data.linkedin_data)
 
 let followers = function (name: string) {
   return { label: [], data: [] }
