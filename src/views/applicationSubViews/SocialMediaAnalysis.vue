@@ -224,6 +224,8 @@ import { formatDateTime } from '@/helpers'
 import WordCloud, { type ListEntry } from 'wordcloud'
 import PieChartComponent from '@/components/dashboard/PieChartComponent.vue'
 import { ref, onMounted, computed } from 'vue'
+import moment from 'moment'
+import SampleJSON from './sample_twitter.json'
 
 const props = defineProps({
   application: {
@@ -242,8 +244,8 @@ const props = defineProps({
 
 const job_results = (props.jobResults.filter((r: any) => r.job_name == 'social')[0] as any)
   .job_results
-let twitterInfo = ref(job_results.twitter_data.twitter_data)
-let linkedinInfo = ref(job_results.linkedin_data.linkedin_data)
+let twitterInfo = ref(job_results.twitter_data)
+let linkedinInfo = ref(job_results.linkedin_data)
 
 const wordcloud = ref(null)
 onMounted(() => {
@@ -255,18 +257,19 @@ onMounted(() => {
 })
 
 let followers = function (name: string) {
-  return { label: [], data: [] }
-  // const sample = job_results.followers_data.filter((f: any) => f.name == name)[0]?.data
-  // if (!sample) { return { label: [], data: [] } }
-  // return {
-  //   label: sample.map((s: any) => moment(s[0]).format('YYYY-MM-DD')),
-  //   data: [
-  //     {
-  //       name: 'Twitter Followers',
-  //       data: sample.map((s: any) => s[1])
-  //     }
-  //   ]
-  // }
+  const sample = SampleJSON.followers_data.filter((f: any) => f.name == name)[0]?.data
+  if (!sample) {
+    return { label: [], data: [] }
+  }
+  return {
+    label: sample.map((s: any) => moment(s[0]).format('YYYY-MM-DD')),
+    data: [
+      {
+        name: 'Twitter Followers',
+        data: sample.map((s: any) => s[1])
+      }
+    ]
+  }
 }
 
 let linkedin_posts = computed(() => {
