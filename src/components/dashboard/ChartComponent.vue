@@ -40,6 +40,9 @@
             sparkline: { enabled: true },
             animations: { enabled: false }
           },
+          tooltip: {
+            theme: 'dark'
+          },
           dataLabels: { enabled: false },
           fill: { opacity: 0.16, type: 'solid' },
           stroke: {

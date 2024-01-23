@@ -34,6 +34,9 @@ export default {
     return {
       chartOptions: {
         labels: this.labels,
+        tooltip: {
+          theme: 'dark'
+        },
         responsive: [
           {
             breakpoint: 480,
