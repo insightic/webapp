@@ -2,39 +2,100 @@
   <!-- Dashboard Header -->
   <div>
     <div class="row row-deck row-cards mb-3">
-      <div class="col-lg-6">
+      <div class="col-lg-8">
         <div class="card">
           <div class="card-body d-flex align-items-center">
-            <div class="row align-items-center w-100 h-100">
-              <div class="col-3">
-                <img
-                  :src="submission?.Content?.LogoURL"
-                  class="rounded-circle"
-                  style="width: 60%"
-                />
+            <div class="row w-100 h-100">
+              <div class="col-3 d-flex align-items-center">
+                <img :src="submission?.Content?.LogoURL" class="mx-auto" style="width: 60%" />
               </div>
-              <div class="col">
+              <div class="col-6">
                 <div class="card-title mb-0">
                   {{ submission?.Content?.Name }}
                 </div>
-                <div class="text-secondary mb-2">
+                <div class="text-secondary mb-0">
                   {{ submission?.Content?.OneLiner }}
                 </div>
-                <div class="text-secondary">
-                  <a :href="submission?.Content?.Website">{{ submission?.Content?.Website }}</a>
+                <div class="mb-3">
+                  <a :href="submission?.Content?.Website">
+                    {{ submission?.Content?.Website }}
+                  </a>
+                </div>
+                <div class="text-secondary mb-2" style="font-size: 0.6rem">OFFICIAL LINKS</div>
+                <div class="d-flex mb-2">
+                  <div class="me-2 badge bg-secondary">
+                    <a
+                      :href="submission?.Content?.Website"
+                      style="color: white; text-decoration: none; font-size: 0.6rem"
+                    >
+                      Whitepaper
+                    </a>
+                  </div>
+                  <div class="me-2 badge bg-secondary">
+                    <a
+                      :href="submission?.Content?.Website"
+                      style="color: white; text-decoration: none; font-size: 0.6rem"
+                    >
+                      Contract
+                    </a>
+                  </div>
+                </div>
+                <div class="text-secondary mb-2" style="font-size: 0.6rem">SOCIAL MEDIAS</div>
+                <div class="d-flex mb-2">
+                  <a
+                    v-if="submission?.Content?.Overview?.TwitterHandle"
+                    :href="'https://twitter.com/' + submission?.Content.Overview?.TwitterHandle"
+                    class="me-2 text-white"
+                    target="_blank"
+                  >
+                    <IconBrandX :size="24" />
+                  </a>
+
+                  <a
+                    v-if="submission?.Content?.Overview?.LinkedinURL"
+                    :href="submission?.Content?.Overview?.LinkedinURL"
+                    class="me-2 text-white"
+                  >
+                    <IconBrandLinkedin :size="24" />
+                  </a>
+
+                  <a
+                    v-if="submission?.Content?.Overview?.GitHubHandle"
+                    :href="'https://github.com/' + submission?.Content?.Overview?.GitHubHandle"
+                    class="me-2 text-white"
+                  >
+                    <IconBrandGithub class="me-2" :size="24" />
+                  </a>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-lg-6">
+      <div class="col-lg-4">
         <ScoreBoard title="score" grade="B+" />
+      </div>
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="mx-auto my-5" style="max-width: 960px">
+              <div class="text-secondary mb-2">SUMMARY</div>
+              <div class="mb-2">
+                Our analysis concludes that the project demonstrates a significant level of
+                responsibility and a high degree of accountability. The assessment would be more
+                precise with the addition of missing critical documents. The main issues identified
+                at present are some dubious operations in blockchain transactions and the average
+                quality of social media posts, which appear to be aimed at manipulation schemes and
+                directing traffic for more followers.
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- General Information -->
+  <!-- General Information
   <div>
     <div class="d-flex align-items-center" style="cursor: pointer">
       <h2>General Information</h2>
@@ -153,172 +214,7 @@
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- Stable Coin -->
-  <div
-    v-if="
-      transcations || totalSupply || topKHolder || tokenPrice || mintBurn || holdAgeFreqPortfilio
-    "
-  >
-    <div class="d-flex align-items-center" style="cursor: pointer">
-      <h2>Stable Coin</h2>
-      <div class="ms-auto">Last Update {{ formatDateTime(new Date()) }}</div>
-    </div>
-
-    <div class="row row-deck row-cards mb-3">
-      <div v-if="transcations" class="col-lg-12">
-        <TableComponent
-          title="Average Rate"
-          :columns="transcations.avg_rate.columns"
-          :data="transcations.avg_rate.data"
-          :update-at="updateAt"
-        />
-      </div>
-      <div v-if="transcations" class="col-lg-6">
-        <ChartComponent
-          type="bar"
-          title="Daily Frequency"
-          :labels="[transcations.daily_frequency.data.map((d: any) => `${d[0]}`)]"
-          :data="[
-            {
-              name: 'Daily Frequency',
-              data: transcations.daily_frequency.data.map((d: any) => Number(d[1]))
-            }
-          ]"
-          :update-at="updateAt"
-        />
-      </div>
-      <div v-if="transcations" class="col-lg-6">
-        <ChartComponent
-          type="bar"
-          title="Hourly Frequency"
-          :labels="[transcations.hourly_frequency.data.map((d: any) => `${d[0]}:00`)]"
-          :data="[
-            {
-              name: 'Hourly Frequency',
-              data: transcations.hourly_frequency.data.map((d: any) => Number(d[1]))
-            }
-          ]"
-          :update-at="updateAt"
-        />
-      </div>
-      <div v-if="transcations" class="col-lg-6">
-        <ChartComponent
-          title="Daily Bought/Sold Volume"
-          :labels="[
-            transcations.daily_bought_vol.data.map((d: any) => `${d[0]}`),
-            transcations.daily_sold_vol.data.map((d: any) => `${d[0]}`)
-          ]"
-          :data="[
-            {
-              name: 'Daily Bought Volume',
-              data: transcations.daily_bought_vol.data.map((d: any) => Number(d[1]))
-            },
-            {
-              name: 'Daily Sold Volume',
-              data: transcations.daily_sold_vol.data.map((d: any) => Number(d[1]))
-            }
-          ]"
-          :update-at="updateAt"
-        />
-      </div>
-      <div v-if="transcations" class="col-lg-6">
-        <ChartComponent
-          title="Hourly Bought/Sold Volume"
-          :labels="[
-            transcations.hourly_bought_vol.data.map((d: any) => `${d[0]}:00`),
-            transcations.hourly_sold_vol.data.map((d: any) => `${d[0]}:00`)
-          ]"
-          :data="[
-            {
-              name: 'Hourly Bought Volume',
-              data: transcations.hourly_bought_vol.data.map((d: any) => Number(d[1]))
-            },
-            {
-              name: 'Hourly Sold Volume',
-              data: transcations.hourly_sold_vol.data.map((d: any) => Number(d[1]))
-            }
-          ]"
-          :update-at="updateAt"
-        />
-      </div>
-    </div>
-
-    <div class="row row-deck row-cards mb-3">
-      <div v-if="totalSupply" class="col-lg-12">
-        <ChartComponent
-          title="Token Supply Over Time"
-          :labels="[totalSupply.data.map((d: any) => String(d[0]))]"
-          :data="[
-            { name: 'Token Supply Over Time', data: totalSupply.data.map((d: any) => Number(d[1])) }
-          ]"
-          :update-at="updateAt"
-        />
-      </div>
-      <div v-if="tokenPrice" class="col-lg-6">
-        <ChartComponent
-          title="Token Price in USD over time"
-          :labels="[tokenPrice.data.map((d: any) => String(d[0]))]"
-          :data="[
-            {
-              name: 'Token Price in USD over time',
-              data: tokenPrice.data.map((d: any) => Number(d[1]))
-            }
-          ]"
-          :update-at="updateAt"
-        />
-      </div>
-      <div v-if="tokenPrice" class="col-lg-6">
-        <ChartComponent
-          title="Token Price in ETH over time"
-          :labels="[tokenPrice.data.map((d: any) => String(d[0]))]"
-          :data="[
-            {
-              name: 'Token Price in ETH over time',
-              data: tokenPrice.data.map((d: any) => Number(d[3]))
-            }
-          ]"
-          :update-at="updateAt"
-        />
-      </div>
-      <div v-if="mintBurn" class="col-lg-6">
-        <TableComponent title="Mint/Burn" :columns="mintBurn.columns" :data="mintBurn.data" />
-      </div>
-      <div v-if="topKHolder" class="col-lg-6">
-        <PieChartComponent
-          title="Top 10 holders"
-          :labels="topKHolder.data.map((d: any) => String(d[0]).substring(0, 10))"
-          :data="topKHolder.data.map((d: any) => d[3])"
-          :update-at="updateAt"
-        />
-      </div>
-      <div v-if="holdAgeFreqPortfilio" class="col-lg-6">
-        <PieChartComponent
-          title="Age Stats"
-          :labels="holdAgeFreqPortfilio['age'].data.map((d: any) => String(d[1]))"
-          :data="holdAgeFreqPortfilio['age'].data.map((d: any) => Number(d[2]))"
-          :update-at="updateAt"
-        />
-      </div>
-      <div v-if="holdAgeFreqPortfilio" class="col-lg-6">
-        <PieChartComponent
-          title="Freq Stats"
-          :labels="holdAgeFreqPortfilio['freq'].data.map((d: any) => String(d[1]))"
-          :data="holdAgeFreqPortfilio['freq'].data.map((d: any) => Number(d[2]))"
-          :update-at="updateAt"
-        />
-      </div>
-      <div v-if="holdAgeFreqPortfilio" class="col-lg-6">
-        <PieChartComponent
-          title="Portfolio Stats"
-          :labels="holdAgeFreqPortfilio['portfolio'].data.map((d: any) => String(d[1]))"
-          :data="holdAgeFreqPortfilio['portfolio'].data.map((d: any) => Number(d[2]))"
-          :update-at="updateAt"
-        />
-      </div>
-    </div>
-  </div>
+  </div> -->
 
   <!-- Security Assurance -->
   <div>
@@ -328,7 +224,7 @@
     </div>
 
     <div class="row row-deck row-cards mb-3">
-      <div class="col-lg-4">
+      <div class="col-lg-3">
         <ScoreBoard
           title="Security Assurance"
           grade="B+"
@@ -338,7 +234,46 @@
           :details="securityReportInfo.report_summary"
         />
       </div>
-      <div class="col-lg-8">
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="subheader">asdf</div>
+            <div class="d-flex flex-column align-items-center">
+              <VueApexCharts
+                style="margin-top: -10px; margin-bottom: -40px"
+                :height="200"
+                :width="200"
+                type="radar"
+                :options="{
+                  // labels: ['April', 'May', 'June', 'July', 'August', 'September'],
+                  labels: ['Biz Content', 'Content', 'Impact', 'Presentation', 'Relevance', 'Risk'],
+                  chart: {
+                    toolbar: {
+                      show: false
+                    }
+                  },
+                  legend: {
+                    show: false
+                  },
+                  tooltip: {
+                    theme: 'dark'
+                  }
+                }"
+                :series="[
+                  {
+                    name: 'Scores',
+                    data: [2, 3.7, 0.1, 2.5, 0.2, 2.5]
+                  },{
+                    name: 'Scores 2',
+                    data: [2, 3.5, 0.1, 2.5, 0.2, 2.5]
+                  }
+                ]"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5">
         <div class="card">
           <div class="card-body d-flex align-items-center">
             <div class="d-table h-100 w-100">
@@ -689,58 +624,40 @@
 </template>
 
 <script lang="ts">
-import { IconTrendingUp, IconTrendingDown } from '@tabler/icons-vue'
+import {
+  IconTrendingUp,
+  IconTrendingDown,
+  IconBrandX,
+  IconBrandLinkedin,
+  IconBrandGithub
+} from '@tabler/icons-vue'
 import ScoreBoard from '@/components/dashboard/ScoreBoardComponent.vue'
-import TableComponent from '@/components/dashboard/TableComponent.vue'
-import ChartComponent from '@/components/dashboard/ChartComponent.vue'
-import PieChartComponent from '@/components/dashboard/PieChartComponent.vue'
-import { getJobResults } from '@/api'
 import Papa from 'papaparse'
 import auditors from '@/assets/auditors.csv?raw'
 import { formatDateTime } from '@/helpers'
 import SampleReportJSON from '@/views/applicationSubViews/sample_report.json'
+import VueApexCharts from 'vue3-apexcharts'
 
 export default {
   components: {
     IconTrendingUp,
     IconTrendingDown,
+    IconBrandX,
+    IconBrandGithub,
+    IconBrandLinkedin,
     ScoreBoard,
-    TableComponent,
-    ChartComponent,
-    PieChartComponent
+    VueApexCharts
   },
-  props: ['application', 'submission'],
+  props: ['application', 'submission', 'jobResults'],
   async created() {
     this.verifiedAuditors = Papa.parse(auditors, {
       header: true
     }).data
-
-    const resp = await getJobResults(this.submission.ApplicationID, this.submission.SubmissionID)
-    if (!resp) {
-      return
-    }
-    const results = resp.filter((r: any) => r['job_name'] == 'stablecoin')[0]
-    if (!results) {
-      return
-    }
-    this.updateAt = new Date(results['UpdatedAt'])
-    this.transcations = results['job_results']['transaction']
-    this.totalSupply = results['job_results']['supply']
-    this.topKHolder = results['job_results']['topKHolder']
-    this.tokenPrice = results['job_results']['price']
-    this.mintBurn = results['job_results']['mintBurn']
-    this.holdAgeFreqPortfilio = results['job_results']['holderAgeFreqPortfolio']
+    console.log(this.jobResults)
   },
   data() {
     return {
       verifiedAuditors: null as any,
-      updateAt: null as any,
-      transcations: null as any,
-      totalSupply: null as any,
-      topKHolder: null as any,
-      tokenPrice: null as any,
-      mintBurn: null as any,
-      holdAgeFreqPortfilio: null as any,
       securityReportInfo: SampleReportJSON
     }
   },

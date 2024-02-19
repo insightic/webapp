@@ -13,7 +13,7 @@
       @change="onChange"
       :value="field"
       :disabled="disabled"
-      :style="{ backgroundColor: disabled ? '#e9ecef' : 'white' }"
+      :style="{ backgroundColor: disabled ? '#1d273b' : '' }"
     >
       <option value="" selected disabled>{{ placeholder }}</option>
       <option

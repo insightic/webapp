@@ -30,6 +30,7 @@
     </div>
     <div style="height: 192px">
       <apexchart
+        v-if="data.length > 0 && data[0].data.length > 0"
         style="height: 196px"
         height="196px"
         :type="type"
@@ -38,6 +39,12 @@
           chart: {
             sparkline: { enabled: true },
             animations: { enabled: false }
+          },
+          tooltip: {
+            theme: 'dark'
+          },
+          legend: {
+            show: false
           },
           dataLabels: { enabled: false },
           fill: { opacity: 0.16, type: 'solid' },
@@ -74,21 +81,21 @@ export default {
     highest: function () {
       const values = this.data
         .map((d) => d.data)
-        .map((d) => Math.max(...d))
+        .map((d) => (d.length > 0 ? Math.max(...d) : 0))
         .map((d) => d.toFixed(2))
       return values.join('/')
     },
     lowest: function () {
       const values = this.data
         .map((d) => d.data)
-        .map((d) => Math.min(...d))
+        .map((d) => (d.length > 0 ? Math.min(...d) : 0))
         .map((d) => d.toFixed(2))
       return values.join('/')
     },
     mean: function () {
       const values = this.data
         .map((d) => d.data)
-        .map((d) => d.reduce((a, b) => a + b) / d.length)
+        .map((d) => (d.length > 0 ? d.reduce((a, b) => a + b) / d.length : 0))
         .map((d) => d.toFixed(2))
       return values.join('/')
     },
@@ -105,7 +112,7 @@ export default {
 
       const values = this.data
         .map((d) => d.data)
-        .map((d) => findMedian(d))
+        .map((d) => (d.length > 0 ? findMedian(d) : 0))
         .map((d) => d.toFixed(2))
       return values.join('/')
     }

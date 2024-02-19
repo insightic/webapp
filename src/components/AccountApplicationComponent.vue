@@ -1,9 +1,9 @@
 <template>
   <div class="d-flex my-3 flex-row align-items-center">
-    <div class="me-3" v-if="logoUrl">
+    <div style="min-width: 100px" class="me-3" v-if="logoUrl">
       <img :src="logoUrl" style="width: 100px" />
     </div>
-    <div>
+    <div class="flex-grow-1">
       <div class="mb-0">
         {{ name }}
       </div>
@@ -19,7 +19,7 @@
         Created at {{ formatDate(createdAt) }}
       </div>
     </div>
-    <div class="ms-auto">
+    <div class="ms-auto" style="min-width: 120px">
       <button type="button" class="btn btn-sm btn-outline-primary mx-2 my-1" @click="$emit('view')">
         View
       </button>

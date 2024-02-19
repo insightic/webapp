@@ -37,6 +37,9 @@ const chartOptions = ref({
     },
     stacked: true
   },
+  tooltip: {
+    theme: 'dark'
+  },
   plotOptions: {
     bar: {
       columnWidth: '50%'

@@ -10,13 +10,13 @@
             :class="{ active: idx == subViewIdx }"
             @click="subViewIdx = idx"
           >
-            <a class="nav-link">
-              <span class="nav-link-icon">
+            <a v-if="isVissible(item)" class="nav-link">
+              <span class="nav-link-icon" :class="{ 'text-secondary': idx != subViewIdx }">
                 <i class="bi" :class="item.icon"></i>
               </span>
               <span
-                class="nav-link-title d-md-inline-block"
-                :class="{ 'd-none': idx != subViewIdx }"
+                class="nav-link-title d-lg-inline-block"
+                :class="{ 'd-none': idx != subViewIdx, 'text-secondary': idx != subViewIdx }"
                 style="white-space: nowrap"
               >
                 {{ item.name }}
@@ -36,7 +36,9 @@
             :is="activeSubView"
             :submission="submission"
             :application="application"
-          ></component>
+            :jobResults="jobResults"
+          >
+          </component>
         </div>
 
         <div v-else>
@@ -81,14 +83,16 @@ import BasicLayout from '@/layouts/BasicLayout.vue'
 
 import DashboardView from '@/views/applicationSubViews/DashboardView.vue'
 import SocialMediaAnalysis from '@/views/applicationSubViews/SocialMediaAnalysis.vue'
+import StableCoin from './applicationSubViews/StableCoinView.vue'
 import SmartContractValidatorView from '@/views/applicationSubViews/SmartContractValidatorView.vue'
 import CompanyProfileView from '@/views/applicationSubViews/CompanyProfileView.vue'
+import AlertView from '@/views/applicationSubViews/AlertView.vue'
 import MySubmissionsView from '@/views/applicationSubViews/MySubmissionsView.vue'
 
 import ScoreBoard from '../components/dashboard/ScoreBoardComponent.vue'
 import CompanyInfo from '@/components/dashboard/CompanyInfoComponent.vue'
 import { formatDate } from '@/helpers'
-import { getApplication, type Application, type Submission } from '@/api'
+import { getApplication, getJobResults, type Application, type Submission } from '@/api'
 
 export default {
   components: {
@@ -109,7 +113,14 @@ export default {
         {
           name: 'Social Media Analysis',
           icon: 'bi-globe2',
-          component: SocialMediaAnalysis
+          component: SocialMediaAnalysis,
+          resultKey: 'social'
+        },
+        {
+          name: 'Stable Coin',
+          icon: 'bi-arrow-left-right',
+          component: StableCoin,
+          resultKey: 'stablecoin'
         },
         {
           name: 'Smart Contract Validator',
@@ -124,7 +135,7 @@ export default {
         {
           name: 'Alerts',
           icon: 'bi-exclamation-circle',
-          component: null
+          component: AlertView
         },
         {
           name: 'My Submissions',
@@ -133,7 +144,8 @@ export default {
         }
       ],
       application: null as Application | null,
-      submission: null as Submission | null
+      submission: null as Submission | null,
+      jobResults: null as any | null
     }
   },
   async created() {
@@ -145,6 +157,7 @@ export default {
     }
     this.application = resp
     this.submission = resp.Submissions.filter((s) => s.Status == 'active')[0]
+    this.jobResults = await getJobResults(applicationID, this.submission.SubmissionID)
     this.loading = false
   },
   computed: {
@@ -153,12 +166,29 @@ export default {
     }
   },
   methods: {
-    formatDate
+    formatDate,
+    isVissible(subView: any): boolean {
+      if (subView.name == 'Smart Contract Validator') {
+        const length = this.submission?.Results?.CodeValidation?.length
+        if (length && length > 0) {
+          return true
+        }
+        return false
+      }
+      if (!subView.resultKey) return true
+      if (!this.jobResults) return false
+      const result = this.jobResults.filter((r: any) => r.job_name == subView.resultKey)[0]
+      return result != null && result != undefined
+    }
   }
 }
 </script>
 
 <style scoped>
+.active {
+  border-bottom: 1px solid var(--tblr-linkedin);
+}
+
 .subNav {
   overflow-x: auto;
   overflow-y: hidden;
@@ -171,8 +201,10 @@ export default {
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .subNav {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 .nav-link {

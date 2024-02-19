@@ -110,7 +110,6 @@ export default {
   },
   async created() {
     this.application = this.submission.Content
-    console.log(this.application[this.tabs[0].name])
     this.loading = false
   },
   methods: {

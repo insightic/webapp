@@ -1,24 +1,6 @@
-<!-- <script setup lang="ts">
-import { onMounted } from 'vue'
-import { RouterLink, useRouter, useRoute } from 'vue-router'
-import BackgroundImageComponent from '@/components/BackgroundImageComponent.vue'
-import httpClient from '@/httpclient'
-
-router = useRouter()
-route = useRoute()
-
-onMounted(async () => {
-  const isAuthorized = await httpClient.isAuthorized()
-  if (isAuthorized && route.path !== '/login') {
-    router.push('/')
-  }
-})
-</script> -->
-
 <template>
-  <BackgroundImageComponent :src="'/public/backgrounds/ball.jpg'" />
   <div class="container">
-    <div class="mx-auto my-5 login py-3 px-5">
+    <div class="mx-auto my-5 card py-3 px-5" style="max-width: 480px">
       <div>
         <img class="logo" src="/logo.png" />
       </div>
@@ -46,17 +28,14 @@ onMounted(async () => {
         </div>
 
         <!-- check password match-->
-        <div v-show="password != ''" class="msg">
-          <p v-if="passwordMatch" class="text-success">Password match</p>
+        <div v-show="password != ''" class="small">
+          <p v-if="passwordMatch" class="text-success">Password matches</p>
           <p v-else class="text-danger">Password not match</p>
         </div>
 
         <button type="submit" class="mt-3 w-100 btn btn-lg btn-primary">Register</button>
 
-        <div
-          class="mt-5 d-flex justify-content-between mb-2"
-          style="color: rgba(0, 0, 0, 0.5); font-size: 0.99rem"
-        >
+        <div class="mt-5 d-flex justify-content-between mb-2">
           <div>
             <a
               href="https://insightic.io"
@@ -110,9 +89,9 @@ export default {
     async register(username: string, password: string) {
       const resp = await httpClient.register(username, password)
       if (resp?.code == 200) {
-        this.$router.push('/login')
+        this.$router.push('/')
       } else {
-        alert('Login failed')
+        alert('Register failed')
       }
     },
     handleSubmit() {
@@ -127,26 +106,9 @@ export default {
 </script>
 
 <style scoped>
-.login {
-  width: 100%;
-  max-width: 480px;
-  background-color: whitesmoke;
-  border-radius: 4px;
-}
-
 .logo {
   width: 72px;
   margin: 20px auto;
   display: block;
-}
-
-.register-link {
-  color: #007bff;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-input {
-  background-color: rgb(243, 247, 251);
 }
 </style>

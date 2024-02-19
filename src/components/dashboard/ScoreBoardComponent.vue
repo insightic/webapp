@@ -80,6 +80,9 @@
           }
         ]"
         :options="{
+          tooltip: {
+            theme: 'dark'
+          },
           chart: {
             sparkline: { enabled: true },
             animations: { enabled: false }

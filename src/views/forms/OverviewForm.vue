@@ -33,6 +33,30 @@
         v-model:field="website"
       />
 
+      <LabelInputComponent
+        label="Project Twitter Handle"
+        description="Please enter the twitter handle of your twitter account."
+        :required="true"
+        :disabled="disabled"
+        v-model:field="twitterHandle"
+      />
+
+      <LabelInputComponent
+        label="Project Linkedin URL"
+        description="Please enter the URL of your Linkedin page."
+        :required="true"
+        :disabled="disabled"
+        v-model:field="linkedinURL"
+      />
+
+      <LabelInputComponent
+        label="Project GitHub Handle"
+        description="Please enter the GitHub handle of your GitHub account."
+        :required="true"
+        :disabled="disabled"
+        v-model:field="githubHandle"
+      />
+
       <LabelTextFileURLComponent
         label="Pitch Deck"
         v-model:field="pitchDeck"
@@ -138,6 +162,9 @@ export default {
       name: '',
       oneLiner: '',
       website: '',
+      twitterHandle: '',
+      linkedinURL: '',
+      githubHandle: '',
       pitchDeck: null as TextFilesObject | null,
       whitePaper: null as TextFilesObject | null,
       projectStage: '',
@@ -155,6 +182,9 @@ export default {
         Name: this.name,
         OneLiner: this.oneLiner,
         Website: this.website,
+        TwitterHandle: this.twitterHandle,
+        LinkedinURL: this.linkedinURL,
+        GitHubHandle: this.githubHandle,
         PitchDeck: this.pitchDeck,
         WhitePaper: this.whitePaper,
         ProjectStage: this.projectStage,
@@ -178,6 +208,9 @@ export default {
     this.name = this.data['Name']
     this.oneLiner = this.data['OneLiner']
     this.website = this.data['Website']
+    this.twitterHandle = this.data['TwitterHandle']
+    this.linkedinURL = this.data['LinkedinURL']
+    this.githubHandle = this.data['GitHubHandle']
     this.pitchDeck = this.data['PitchDeck']
     this.whitePaper = this.data['WhitePaper']
     this.projectStage = this.data['ProjectStage']
